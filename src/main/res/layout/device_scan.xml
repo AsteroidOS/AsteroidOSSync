@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin">
+
+    <View
+        android:id="@+id/holder_view"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="?android:colorPrimary" />
+
+    <ImageButton
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fab_button"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/ripple_round"
+        android:stateListAnimator="@anim/fab_anim"
+        android:elevation="5dp"
+        android:layout_below="@+id/holder_view"
+        android:layout_marginTop="-26dp"
+        android:layout_alignParentEnd="true"
+        android:adjustViewBounds="true"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/refresh" />
+
+    <ListView
+        android:id="@+id/scanList"
+        android:layout_below="@id/holder_view"
+        android:layout_margin="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connect to..."
+        android:id="@+id/textView"
+        android:textSize="40dp"
+        android:layout_above="@+id/scanList"
+        android:layout_alignStart="@+id/scanList"
+        android:layout_marginBottom="47dp"
+        android:textColor="@color/material_grey_100" />
+
+</RelativeLayout>
