@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">AsteroidOS Sync</string>
+    <string name="connect">Connect:</string>
+
+    <string name="scanning">ON</string>
+    <string name="not_scanning">OFF</string>
+
+    <string name="generic_ok">OK</string>
+    <string name="ble_not_supported">It does not appear that Bluetooth Low Energy is supported on this device.</string>
+
+    <string name="uhoh_message_nuke">It appears that Android\'s less-than-perfect bluetooth stack has gone astray. It is suggested that you drop a nuke to perhaps alleviate the problem.</string>
+    <string name="uhoh_message_nuke_drop">Drop Nuke</string>
+    <string name="uhoh_message_nuke_cancel">Cancel</string>
+    <string name="uhoh_message_phone_restart">It appears that Android\'s bluetooth stack is completely broken. A phone restart may be required.</string>
+    <string name="uhoh_message_phone_restart_ok">OK</string>
+    <string name="uhoh_message_weirdness">Something weird happened with the underlying ble stack. It will probably recover but you may have to nuke the stack or restart your phone if you keep seeing this.</string>
+    <string name="uhoh_message_weirdness_ok">OK</string>
+    <string name="title_device_list">Devices</string>
+    <string name="title_device_detail">Device Detail</string>
+    <string name="unknown_device">Unknown</string>
+</resources>

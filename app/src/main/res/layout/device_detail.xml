@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/detail_horizontal_margin"
+    android:paddingRight="@dimen/detail_horizontal_margin"
+    android:paddingTop="@dimen/detail_vertical_margin"
+    android:paddingBottom="@dimen/detail_vertical_margin">
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_view1"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        card_view:cardCornerRadius="4dp">
+
+        <TextView
+            android:id="@+id/info_text1"
+            android:paddingTop="6dp"
+            android:paddingLeft="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Grab a screenshot (not working yet)" />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_view2"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        card_view:cardCornerRadius="4dp">
+
+        <TextView
+            android:id="@+id/info_text2"
+            android:paddingTop="6dp"
+            android:paddingLeft="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Find my watch (not working yet)"/>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_view3"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        card_view:cardCornerRadius="4dp">
+
+        <TextView
+            android:id="@+id/info_text3"
+            android:paddingTop="6dp"
+            android:paddingLeft="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Notifications settings (not working yet)"/>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>
+
