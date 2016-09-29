@@ -39,6 +39,7 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
 
     private WeatherService mWeatherService;
     private NotificationService mNotificationService;
+    private MediaService mMediaService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
 
             mWeatherService = new WeatherService(getActivity(), device);
             mNotificationService = new NotificationService(getActivity(), device);
+            mMediaService = new MediaService(getActivity(), device);
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
@@ -93,6 +95,8 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
                 mWeatherService.sync();
             if (mNotificationService != null)
                 mNotificationService.sync();
+            if (mMediaService != null)
+                mMediaService.sync();
         } else if (event.didEnter(BleDeviceState.DISCONNECTED)) {
             Log.i("DeviceDetailFragment", event.device().getName_debug() + " just disconnected!");
 
@@ -100,6 +104,8 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
                 mWeatherService.unsync();
             if (mNotificationService != null)
                 mNotificationService.unsync();
+            if (mMediaService != null)
+                mMediaService.unsync();
         }
     }
 }
