@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    buildToolsVersion "24.0.1"
 
     defaultConfig {
         applicationId "org.asteroidos.sync"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -18,8 +18,8 @@ android {
         }
     }
     sourceSets {
-        main.java.srcDirs += 'src/main/lib/sweetblue/app/src/main/java'
-        main.res.srcDirs += 'src/main/lib/sweetblue/app/src/main/res'
+        main.java.srcDirs += 'src/main/lib/sweetblue/app/src/main/java/'
+        main.res.srcDirs += 'src/main/lib/sweetblue/app/src/main/res/'
     }
 }
 
