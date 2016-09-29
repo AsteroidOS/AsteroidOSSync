@@ -93,6 +93,13 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
                 mWeatherService.sync();
             if (mNotificationService != null)
                 mNotificationService.sync();
+        } else if (event.didEnter(BleDeviceState.DISCONNECTED)) {
+            Log.i("DeviceDetailFragment", event.device().getName_debug() + " just disconnected!");
+
+            if (mWeatherService != null)
+                mWeatherService.unsync();
+            if (mNotificationService != null)
+                mNotificationService.unsync();
         }
     }
 }

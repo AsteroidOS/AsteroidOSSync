@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2016 - Florent Revest <revestflo@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.asteroidos.sync;
 
 import android.content.BroadcastReceiver;
@@ -19,6 +36,8 @@ public class NotificationService implements BleDevice.ReadWriteListener {
     private Context mCtx;
     private BleDevice mDevice;
 
+    private NotificationReceiver mNReceiver;
+
     public NotificationService(Context ctx, BleDevice device)
     {
         mDevice = device;
@@ -28,16 +47,21 @@ public class NotificationService implements BleDevice.ReadWriteListener {
     public void sync() {
         mDevice.enableNotify(notificationFeedbackCharac);
 
-        NotificationReceiver nReceiver = new NotificationReceiver();
+        mNReceiver = new NotificationReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction("org.asteroidos.sync.NOTIFICATION_LISTENER");
-        mCtx.registerReceiver(nReceiver, filter);
+        mCtx.registerReceiver(mNReceiver, filter);
+    }
+
+    public void unsync() {
+        mDevice.disableNotify(notificationFeedbackCharac);
+        mCtx.unregisterReceiver(mNReceiver);
     }
 
     @Override
     public void onEvent(ReadWriteEvent e) {
         if(!e.wasSuccess())
-            Log.e("WeatherService", e.status().toString());
+            Log.e("NotificationService", e.status().toString());
     }
 
     class NotificationReceiver extends BroadcastReceiver {
@@ -48,6 +72,7 @@ public class NotificationService implements BleDevice.ReadWriteListener {
                 String title = intent.getStringExtra("title");
                 byte[] data = title.getBytes(StandardCharsets.UTF_8);
                 mDevice.write(notificationUpdateCharac, data, NotificationService.this);
+                Log.i("NotificationService", "Notification written");
             }
         }
     }
