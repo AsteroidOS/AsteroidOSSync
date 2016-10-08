@@ -17,12 +17,16 @@
 
 package org.asteroidos.sync;
 
+import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
+import android.util.Log;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -124,14 +128,43 @@ public class NLService extends NotificationListenerService {
     public void onDestroy() {
         super.onDestroy();
         unregisterReceiver(nlServiceReceiver);
+        iconFromPackage.clear();
     }
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
+        Notification n = sbn.getNotification();
+        String packageName = sbn.getPackageName();
+        int id = sbn.getId();
+        String summary = n.extras.getString("android.title");
+        String body = n.extras.getString("android.text");
+        if(body == null)
+            body = n.extras.getString("android.summaryText");
+
+        final PackageManager pm = getApplicationContext().getPackageManager();
+        ApplicationInfo ai;
+        try {
+            ai = pm.getApplicationInfo(packageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            ai = null;
+        }
+        String appName = pm.getApplicationLabel(ai).toString();
+        String appIcon = iconFromPackage.get(appName);
+
+        if(summary == null) summary = "";
+        if(body == null) body = "";
+        if(packageName == null) packageName = "";
+        if(appName == null) appName = "";
+        if(appIcon == null) appIcon = "";
+
         Intent i = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
         i.putExtra("event", "posted");
-        i.putExtra("packageName", sbn.getPackageName());
-        i.putExtra("title", sbn.getNotification().extras.getString("android.title"));
+        i.putExtra("packageName", packageName);
+        i.putExtra("id", id);
+        i.putExtra("appName", appName);
+        i.putExtra("appIcon", appIcon);
+        i.putExtra("summary", summary);
+        i.putExtra("body", body);
 
         sendBroadcast(i);
     }

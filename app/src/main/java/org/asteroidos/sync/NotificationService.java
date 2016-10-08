@@ -69,10 +69,25 @@ public class NotificationService implements BleDevice.ReadWriteListener {
         public void onReceive(Context context, Intent intent) {
             String event = intent.getStringExtra("event");
             if (Objects.equals(event, "posted")) {
-                String title = intent.getStringExtra("title");
-                byte[] data = title.getBytes(StandardCharsets.UTF_8);
+                String packageName = intent.getStringExtra("packageName");
+                int id = intent.getIntExtra("id", 0);
+                String appName = intent.getStringExtra("appName");
+                String appIcon = intent.getStringExtra("appIcon");
+                String summary = intent.getStringExtra("summary");
+                String body = intent.getStringExtra("body");
+
+                StringBuilder xmlRequest = new StringBuilder();
+                xmlRequest.append("<insert>"); // insert
+                xmlRequest.append("<pn>").append(packageName).append("</pn>");
+                xmlRequest.append("<id>").append(id).append("</id>");
+                xmlRequest.append("<an>").append(appName).append("</an>");
+                xmlRequest.append("<ai>").append(appIcon).append("</ai>");
+                xmlRequest.append("<su>").append(summary).append("</su>");
+                xmlRequest.append("<bo>").append(body).append("</bo>");
+                xmlRequest.append("</insert>");
+
+                byte[] data = xmlRequest.toString().getBytes(StandardCharsets.UTF_8);
                 mDevice.write(notificationUpdateCharac, data, NotificationService.this);
-                Log.i("NotificationService", "Notification written");
             }
         }
     }
