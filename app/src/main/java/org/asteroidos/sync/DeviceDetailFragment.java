@@ -18,6 +18,7 @@
 
 package org.asteroidos.sync;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -121,8 +122,18 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
         mFindCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(getContext() != null)
-                    Toast.makeText(getContext(), "Not supported yet", Toast.LENGTH_SHORT).show();
+                if(getContext() != null) {
+                    Intent i = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
+                    i.putExtra("event", "posted");
+                    i.putExtra("packageName", "org.asteroidos.sync");
+                    i.putExtra("id", 0);
+                    i.putExtra("appName", getString(R.string.app_name));
+                    i.putExtra("appIcon", "");
+                    i.putExtra("summary", getString(R.string.watch_finder));
+                    i.putExtra("body", getString(R.string.phone_is_searching));
+
+                    getActivity().sendBroadcast(i);
+                }
             }
         });
         mNotifSettCard = (CardView)getActivity().findViewById(R.id.card_view3);

@@ -24,4 +24,6 @@
     <string name="n_found">watches found</string>
     <string name="disconnected">Disconnected</string>
     <string name="connected">Connected</string>
+    <string name="watch_finder">Watch finder</string>
+    <string name="phone_is_searching">Phone is searching for you!</string>
 </resources>
