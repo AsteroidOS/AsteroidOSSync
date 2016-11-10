@@ -20,6 +20,7 @@ package org.asteroidos.sync;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,10 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
 
     private TextView mConnectedText;
     private ImageView mConnectedImage;
+
+    private CardView mScreenshotCard;
+    private CardView mFindCard;
+    private CardView mNotifSettCard;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,8 +106,33 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
     @Override
     public void onActivityCreated(Bundle b) {
         super.onActivityCreated(b);
-        mConnectedText = (TextView) getActivity().findViewById(R.id.info_connected);
+        mConnectedText = (TextView)getActivity().findViewById(R.id.info_connected);
         mConnectedImage = (ImageView)getActivity().findViewById(R.id.info_icon_connected);
+
+        mScreenshotCard = (CardView)getActivity().findViewById(R.id.card_view1);
+        mScreenshotCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(getContext() != null)
+                    Toast.makeText(getContext(), "Not supported yet", Toast.LENGTH_SHORT).show();
+            }
+        });
+        mFindCard = (CardView)getActivity().findViewById(R.id.card_view2);
+        mFindCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(getContext() != null)
+                    Toast.makeText(getContext(), "Not supported yet", Toast.LENGTH_SHORT).show();
+            }
+        });
+        mNotifSettCard = (CardView)getActivity().findViewById(R.id.card_view3);
+        mNotifSettCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(getContext() != null)
+                    Toast.makeText(getContext(), "Not supported yet", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
