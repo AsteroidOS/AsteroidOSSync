@@ -22,14 +22,14 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:gravity="left"
-            android:src="@mipmap/android_cloud_done"/>
+            android:src="@mipmap/android_cloud"/>
 
         <TextView
             android:id="@+id/info_connected"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="20dp"
-            android:text="Connected"
+            android:text="@string/disconnected"
             android:layout_gravity="left"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/info_icon_connected"

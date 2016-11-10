@@ -18,14 +18,14 @@
 
 package org.asteroidos.sync;
 
-import android.app.Activity;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.idevicesinc.sweetblue.BleDevice;
@@ -40,6 +40,9 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
     private WeatherService mWeatherService;
     private NotificationService mNotificationService;
     private MediaService mMediaService;
+
+    private TextView mConnectedText;
+    private ImageView mConnectedImage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,9 +99,21 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
     }
 
     @Override
+    public void onActivityCreated(Bundle b) {
+        super.onActivityCreated(b);
+        mConnectedText = (TextView) getActivity().findViewById(R.id.info_connected);
+        mConnectedImage = (ImageView)getActivity().findViewById(R.id.info_icon_connected);
+    }
+
+    @Override
     public void onEvent(StateEvent event) {
         if (event.didEnter(BleDeviceState.INITIALIZED)) {
             Log.i("DeviceDetailFragment", event.device().getName_debug() + " just initialized!");
+
+            if(mConnectedText != null)
+                mConnectedText.setText(R.string.connected);
+            if(mConnectedImage != null)
+                mConnectedImage.setImageResource(R.mipmap.android_cloud);
 
             if (mWeatherService != null)
                 mWeatherService.sync();
@@ -108,6 +123,11 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
                 mMediaService.sync();
         } else if (event.didEnter(BleDeviceState.DISCONNECTED)) {
             Log.i("DeviceDetailFragment", event.device().getName_debug() + " just disconnected!");
+
+            if(mConnectedText != null)
+                mConnectedText.setText(R.string.disconnected);
+            if(mConnectedImage != null)
+                mConnectedImage.setImageResource(R.mipmap.android_cloud);
 
             if (mWeatherService != null)
                 mWeatherService.unsync();

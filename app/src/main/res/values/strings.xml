@@ -22,4 +22,6 @@
     <string name="nothing_found">No watch found</string>
     <string name="one_found">1 watch found</string>
     <string name="n_found">watches found</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="connected">Connected</string>
 </resources>
