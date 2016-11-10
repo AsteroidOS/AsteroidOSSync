@@ -27,8 +27,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".DeviceListActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,8 +48,7 @@
         <activity
             android:name=".DeviceDetailActivity"
             android:label="@string/title_device_detail"
-            android:parentActivityName=".DeviceListActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:parentActivityName=".DeviceListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.asteroidos.sync.DeviceListActivity" />

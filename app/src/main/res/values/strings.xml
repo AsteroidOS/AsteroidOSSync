@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AsteroidOS Sync</string>
-    <string name="connect">Connect:</string>
+    <string name="searching">Searching for watches</string>
 
     <string name="scanning">ON</string>
     <string name="not_scanning">OFF</string>
@@ -18,4 +18,8 @@
     <string name="title_device_list">Devices</string>
     <string name="title_device_detail">Device Detail</string>
     <string name="unknown_device">Unknown</string>
+    <string name="ok">Ok</string>
+    <string name="nothing_found">No watch found</string>
+    <string name="one_found">1 watch found</string>
+    <string name="n_found">watches found</string>
 </resources>

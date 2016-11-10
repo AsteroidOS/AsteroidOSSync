@@ -6,7 +6,9 @@
     android:name="org.asteroidos.sync.DeviceListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/device_list_margin"
+    android:layout_marginRight="@dimen/device_list_margin"
+    android:layout_marginTop="@dimen/device_list_margin"
+    android:layout_marginLeft="@dimen/device_list_margin"
     app:layoutManager="LinearLayoutManager"
     tools:context="org.asteroidos.sync.DeviceListActivity"
     />

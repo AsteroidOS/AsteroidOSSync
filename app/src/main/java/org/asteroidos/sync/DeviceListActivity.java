@@ -20,13 +20,16 @@ package org.asteroidos.sync;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +45,7 @@ import com.idevicesinc.sweetblue.BleManagerConfig;
 import com.idevicesinc.sweetblue.BleManagerState;
 import com.idevicesinc.sweetblue.utils.BluetoothEnabler;
 import com.idevicesinc.sweetblue.utils.Interval;
+import com.skyfishjy.library.RippleBackground;
 
 import java.util.ArrayList;
 
@@ -59,6 +63,9 @@ public class DeviceListActivity extends AppCompatActivity implements BleManager.
 
     private LeDeviceListAdapter mLeDeviceListAdapter;
 
+    private RippleBackground mRippleBackground;
+    private TextView searchingText;
+
     private boolean mTwoPane;
 
     @Override
@@ -66,10 +73,9 @@ public class DeviceListActivity extends AppCompatActivity implements BleManager.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        assert toolbar != null;
-        toolbar.setTitle(R.string.connect);
-        setSupportActionBar(toolbar);
+        searchingText = (TextView)findViewById(R.id.searchingText);
+
+        mRippleBackground = (RippleBackground)findViewById(R.id.content);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assert fab != null;
@@ -78,7 +84,7 @@ public class DeviceListActivity extends AppCompatActivity implements BleManager.
             public void onClick(View view) {
                 mBleMngr.turnOn();
                 mBleMngr.startScan(SCAN_TIMEOUT);
-                Snackbar.make(view, "Refreshing", Snackbar.LENGTH_LONG).show();
+                mRippleBackground.startRippleAnimation();
             }
         });
 
@@ -131,8 +137,16 @@ public class DeviceListActivity extends AppCompatActivity implements BleManager.
         ComponentName cn = new ComponentName(this, NLService.class);
         String flat = Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners");
         if (!(flat != null && flat.contains(cn.flattenToString()))) {
-            Intent intent=new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
-            startActivity(intent);
+            new AlertDialog.Builder(this)
+                    .setTitle("Notifications")
+                    .setMessage("To enable notifications synchronization, you need to allow AsteroidOS Sync in the following scren.")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent=new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+                            startActivity(intent);
+                        }
+                    })
+                    .show();
         }
     }
 
@@ -148,27 +162,33 @@ public class DeviceListActivity extends AppCompatActivity implements BleManager.
         mBleMngr.onPause();
     }
 
-    private void updateStatus() {
-    }
-
     @Override
     public void onEvent(BleManager.StateListener.StateEvent event) {
-        updateStatus();
+        if(event.didExit(BleManagerState.SCANNING)) {
+            mRippleBackground.stopRippleAnimation();
+            int deviceCount = mLeDeviceListAdapter.getCount();
+            if(deviceCount == 0)
+                searchingText.setText(R.string.nothing_found);
+            else if(deviceCount == 1)
+                searchingText.setText(R.string.one_found);
+            else
+                searchingText.setText(String.valueOf(deviceCount) + R.string.n_found);
+        }
+        else if(event.didEnter(BleManagerState.SCANNING)) {
+            mRippleBackground.startRippleAnimation();
+            searchingText.setText(R.string.searching);
+        }
     }
 
     @Override
-    public void onEvent(BleManager.NativeStateListener.NativeStateEvent event) {
-        updateStatus();
-    }
+    public void onEvent(BleManager.NativeStateListener.NativeStateEvent event) {}
 
     @Override
     public void onEvent(BleManager.DiscoveryListener.DiscoveryEvent event) {
         if (event.was(BleManager.DiscoveryListener.LifeCycle.DISCOVERED)) {
             mLeDeviceListAdapter.addDevice(event.device());
             mLeDeviceListAdapter.notifyDataSetChanged();
-
         } else if (event.was(BleManager.DiscoveryListener.LifeCycle.UNDISCOVERED)) {
-
             mLeDeviceListAdapter.removeDevice(event.device());
             mLeDeviceListAdapter.notifyDataSetChanged();
         }
