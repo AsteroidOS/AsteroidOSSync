@@ -55,7 +55,9 @@ public class NotificationService implements BleDevice.ReadWriteListener {
 
     public void unsync() {
         mDevice.disableNotify(notificationFeedbackCharac);
-        mCtx.unregisterReceiver(mNReceiver);
+        try {
+            mCtx.unregisterReceiver(mNReceiver);
+        } catch(IllegalArgumentException e) {}
     }
 
     @Override

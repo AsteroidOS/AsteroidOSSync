@@ -73,9 +73,12 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
     public void unsync() {
         mDevice.disableNotify(mediaCommandsCharac);
 
-        mMediaSessionManager.removeOnActiveSessionsChangedListener(this);
+        if(mMediaSessionManager != null)
+            mMediaSessionManager.removeOnActiveSessionsChangedListener(this);
         if (mMediaController != null) {
-            mMediaController.unregisterCallback(mMediaCallback);
+            try {
+                mMediaController.unregisterCallback(mMediaCallback);
+            } catch(IllegalArgumentException e) {}
             Log.d("MediaService", "MediaController removed");
         }
     }

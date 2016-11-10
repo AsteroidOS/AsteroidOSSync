@@ -58,8 +58,9 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
 
                     if( !please.isRetry() )
                     {
-                        final String toast =  event.device().getName_debug() + " connection failed with " + event.failureCountSoFar() + " retries - " + event.status();
-                        Toast.makeText(getContext(), toast, Toast.LENGTH_LONG).show();
+                        final String toast = event.device().getName_debug() + " connection failed with " + event.failureCountSoFar() + " retries - " + event.status();
+                        if(getContext() != null)
+                            Toast.makeText(getContext(), toast, Toast.LENGTH_LONG).show();
                     }
 
                     return please;
@@ -70,14 +71,22 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
             mNotificationService = new NotificationService(getActivity(), device);
             mMediaService = new MediaService(getActivity(), device);
 
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(device.getName_normalized());
-            }
+            getActivity().setTitle(device.getName_normalized());
 
             device.connect();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (mWeatherService != null)
+            mWeatherService.unsync();
+        if (mNotificationService != null)
+            mNotificationService.unsync();
+        if (mMediaService != null)
+            mMediaService.unsync();
     }
 
     @Override
