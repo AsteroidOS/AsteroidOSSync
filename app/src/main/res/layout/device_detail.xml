@@ -42,19 +42,20 @@
             android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:gravity="right"
-            android:src="@mipmap/battery_full"/>
+            android:src="@mipmap/battery_full"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/info_battery"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="20dp"
-            android:text="100%"
             android:layout_gravity="right"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/info_icon_battery"
             android:layout_marginLeft="10dp"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
