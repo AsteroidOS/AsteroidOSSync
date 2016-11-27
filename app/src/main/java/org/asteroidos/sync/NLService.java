@@ -134,6 +134,9 @@ public class NLService extends NotificationListenerService {
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         Notification n = sbn.getNotification();
+        if(n.priority < Notification.PRIORITY_DEFAULT)
+            return;
+
         String packageName = sbn.getPackageName();
         int id = sbn.getId();
         String summary = n.extras.getString("android.title");
