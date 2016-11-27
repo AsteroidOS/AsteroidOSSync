@@ -26,4 +26,9 @@
     <string name="connected">Connected</string>
     <string name="watch_finder">Watch finder</string>
     <string name="phone_is_searching">Phone is searching for you!</string>
+    <string name="local_service_started">SynchronizationServiceNotifcation</string>
+    <string name="connecting">Connecting</string>
+    <string name="percentage">%d %%</string>
+    <string name="connected_formatted">Connected to %s</string>
+    <string name="connecting_formatted">Connecting to %s</string>
 </resources>

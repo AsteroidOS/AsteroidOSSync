@@ -59,6 +59,11 @@
                 <action android:name="android.service.notification.NotificationListenerService" />
             </intent-filter>
         </service>
+        <service android:enabled="true"
+            android:exported="false"
+            android:label="SynchronizationService"
+            android:name=".SynchronizationService">
+        </service>
     </application>
 
 </manifest>

@@ -18,11 +18,18 @@
 
 package org.asteroidos.sync;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,72 +37,111 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.idevicesinc.sweetblue.BleDevice;
-import com.idevicesinc.sweetblue.BleDeviceState;
-import com.idevicesinc.sweetblue.BleManager;
-
-import static com.idevicesinc.sweetblue.BleManager.get;
-
-public class DeviceDetailFragment extends Fragment implements BleDevice.StateListener {
+public class DeviceDetailFragment extends Fragment {
     public static final String ARG_DEVICE_ADDRESS = "device_address";
-
-    private WeatherService mWeatherService;
-    private NotificationService mNotificationService;
-    private MediaService mMediaService;
+    private String mDeviceAddress;
 
     private TextView mConnectedText;
     private ImageView mConnectedImage;
 
-    private CardView mScreenshotCard;
-    private CardView mFindCard;
-    private CardView mNotifSettCard;
+    private TextView mBatteryText;
+    private ImageView mBatteryImage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_DEVICE_ADDRESS)) {
-            BleManager bleMngr = get(getActivity().getApplication());
+        getContext().bindService(new Intent(getContext(),
+                SynchronizationService.class), mConnection, Context.BIND_AUTO_CREATE);
+        mIsBound = true;
 
-            BleDevice device = bleMngr.getDevice(getArguments().getString(ARG_DEVICE_ADDRESS));
-            device.setListener_State(this);
-            device.setListener_ConnectionFail(new BleDevice.DefaultConnectionFailListener()
-            {
-                @Override public Please onEvent(ConnectionFailEvent event)
-                {
-                    Please please = super.onEvent(event);
+        mDeviceAddress = getArguments().getString(ARG_DEVICE_ADDRESS, "");
+    }
 
-                    if( !please.isRetry() )
-                    {
-                        final String toast = event.device().getName_debug() + " connection failed with " + event.failureCountSoFar() + " retries - " + event.status();
-                        if(getContext() != null)
-                            Toast.makeText(getContext(), toast, Toast.LENGTH_LONG).show();
+    class SynchronizationHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SynchronizationService.MSG_SET_LOCAL_NAME:
+                    getActivity().setTitle((String)msg.obj);
+                    break;
+                case SynchronizationService.MSG_SET_STATUS:
+                    switch(msg.arg1) {
+                        case SynchronizationService.STATUS_CONNECTED:
+                            if(mConnectedText != null)
+                                mConnectedText.setText(R.string.connected);
+                            if(mConnectedImage != null)
+                                mConnectedImage.setImageResource(R.mipmap.android_cloud_done);
+                            break;
+                        case SynchronizationService.STATUS_DISCONNECTED:
+                            if(mConnectedText != null)
+                                mConnectedText.setText(R.string.disconnected);
+                            if(mConnectedImage != null)
+                                mConnectedImage.setImageResource(R.mipmap.android_cloud);
+                            if(mBatteryText != null)
+                                mBatteryText.setVisibility(View.INVISIBLE);
+                            if(mBatteryImage != null)
+                                mBatteryImage.setVisibility(View.INVISIBLE);
+                            break;
+                        case SynchronizationService.STATUS_CONNECTING:
+                            if(mConnectedText != null)
+                                mConnectedText.setText(R.string.connecting);
+                            if(mConnectedImage != null)
+                                mConnectedImage.setImageResource(R.mipmap.android_cloud);
+                            break;
+                        default:
+                            break;
                     }
-
-                    return please;
-                }
-            });
-
-            mWeatherService = new WeatherService(getActivity(), device);
-            mNotificationService = new NotificationService(getActivity(), device);
-            mMediaService = new MediaService(getActivity(), device);
-
-            getActivity().setTitle(device.getName_normalized());
-
-            device.connect();
+                    break;
+                case SynchronizationService.MSG_SET_BATTERY_PERCENTAGE:
+                    if(mBatteryText != null)
+                        mBatteryText.setVisibility(View.VISIBLE);
+                    if(mBatteryImage != null)
+                        mBatteryImage.setVisibility(View.VISIBLE);
+                    mBatteryText.setText(getString(R.string.percentage, msg.arg1));
+                    break;
+                default:
+                    super.handleMessage(msg);
+            }
         }
     }
+    final Messenger mMessenger = new Messenger(new SynchronizationHandler());
+    Messenger mService = null;
+    boolean mIsBound;
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            mService = new Messenger(service);
+            try {
+                Message msg = Message.obtain(null, SynchronizationService.MSG_CONNECT);
+                msg.obj = mDeviceAddress;
+                msg.replyTo = mMessenger;
+                mService.send(msg);
+            } catch (RemoteException ignored) {}
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            mService = null;
+        }
+    };
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (mIsBound) {
+            if (mService != null) {
+                try {
+                    Message msg = Message.obtain(null, SynchronizationService.MSG_DISCONNECT);
+                    msg.obj = mDeviceAddress;
+                    msg.replyTo = mMessenger;
+                    mService.send(msg);
+                } catch (RemoteException ignored) {}
+            }
 
-        if (mWeatherService != null)
-            mWeatherService.unsync();
-        if (mNotificationService != null)
-            mNotificationService.unsync();
-        if (mMediaService != null)
-            mMediaService.unsync();
+            getContext().unbindService(mConnection);
+            mIsBound = false;
+        }
     }
 
     @Override
@@ -110,7 +156,10 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
         mConnectedText = (TextView)getActivity().findViewById(R.id.info_connected);
         mConnectedImage = (ImageView)getActivity().findViewById(R.id.info_icon_connected);
 
-        mScreenshotCard = (CardView)getActivity().findViewById(R.id.card_view1);
+        mBatteryText = (TextView)getActivity().findViewById(R.id.info_battery);
+        mBatteryImage = (ImageView)getActivity().findViewById(R.id.info_icon_battery);
+
+        CardView mScreenshotCard = (CardView) getActivity().findViewById(R.id.card_view1);
         mScreenshotCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +167,7 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
                     Toast.makeText(getContext(), "Not supported yet", Toast.LENGTH_SHORT).show();
             }
         });
-        mFindCard = (CardView)getActivity().findViewById(R.id.card_view2);
+        CardView mFindCard = (CardView) getActivity().findViewById(R.id.card_view2);
         mFindCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,7 +185,7 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
                 }
             }
         });
-        mNotifSettCard = (CardView)getActivity().findViewById(R.id.card_view3);
+        CardView mNotifSettCard = (CardView) getActivity().findViewById(R.id.card_view3);
         mNotifSettCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,38 +193,5 @@ public class DeviceDetailFragment extends Fragment implements BleDevice.StateLis
                     Toast.makeText(getContext(), "Not supported yet", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    @Override
-    public void onEvent(StateEvent event) {
-        if (event.didEnter(BleDeviceState.INITIALIZED)) {
-            Log.i("DeviceDetailFragment", event.device().getName_debug() + " just initialized!");
-
-            if(mConnectedText != null)
-                mConnectedText.setText(R.string.connected);
-            if(mConnectedImage != null)
-                mConnectedImage.setImageResource(R.mipmap.android_cloud);
-
-            if (mWeatherService != null)
-                mWeatherService.sync();
-            if (mNotificationService != null)
-                mNotificationService.sync();
-            if (mMediaService != null)
-                mMediaService.sync();
-        } else if (event.didEnter(BleDeviceState.DISCONNECTED)) {
-            Log.i("DeviceDetailFragment", event.device().getName_debug() + " just disconnected!");
-
-            if(mConnectedText != null)
-                mConnectedText.setText(R.string.disconnected);
-            if(mConnectedImage != null)
-                mConnectedImage.setImageResource(R.mipmap.android_cloud);
-
-            if (mWeatherService != null)
-                mWeatherService.unsync();
-            if (mNotificationService != null)
-                mNotificationService.unsync();
-            if (mMediaService != null)
-                mMediaService.unsync();
-        }
     }
 }
