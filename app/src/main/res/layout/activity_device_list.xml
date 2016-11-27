@@ -16,10 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/searching"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:gravity="center"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginBottom="50dp"
         android:layout_above="@id/fab" >
     </TextView>
@@ -37,10 +37,21 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/fab"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="40dp" >
 
-        <include layout="@layout/device_list" />
+        <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/device_list"
+            android:name="org.asteroidos.sync.DeviceListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/device_list_margin"
+            android:layout_marginTop="@dimen/device_list_margin"
+            android:layout_marginLeft="@dimen/device_list_margin"
+            tools:context="org.asteroidos.sync.DeviceListActivity"
+            />
 
     </FrameLayout>
 

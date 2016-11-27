@@ -15,7 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.asteroidos.sync;
+package org.asteroidos.sync.ble;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -57,7 +57,7 @@ public class NotificationService implements BleDevice.ReadWriteListener {
         mDevice.disableNotify(notificationFeedbackCharac);
         try {
             mCtx.unregisterReceiver(mNReceiver);
-        } catch(IllegalArgumentException e) {}
+        } catch (IllegalArgumentException ignored) {}
     }
 
     @Override

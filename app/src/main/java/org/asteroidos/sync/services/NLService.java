@@ -15,7 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.asteroidos.sync;
+package org.asteroidos.sync.services;
 
 import android.app.Notification;
 import android.content.BroadcastReceiver;
@@ -26,7 +26,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
-import android.util.Log;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -157,7 +156,6 @@ public class NLService extends NotificationListenerService {
         if(summary == null) summary = "";
         if(body == null) body = "";
         if(packageName == null) packageName = "";
-        if(appName == null) appName = "";
         if(appIcon == null) appIcon = "";
 
         Intent i = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");

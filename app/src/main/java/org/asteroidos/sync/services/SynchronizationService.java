@@ -1,4 +1,21 @@
-package org.asteroidos.sync;
+/*
+ * Copyright (C) 2016 - Florent Revest <revestflo@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package org.asteroidos.sync.services;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -17,6 +34,12 @@ import com.idevicesinc.sweetblue.BleDeviceState;
 import com.idevicesinc.sweetblue.BleManager;
 import com.idevicesinc.sweetblue.BleNode;
 
+import org.asteroidos.sync.DeviceDetailActivity;
+import org.asteroidos.sync.R;
+import org.asteroidos.sync.ble.MediaService;
+import org.asteroidos.sync.ble.NotificationService;
+import org.asteroidos.sync.ble.WeatherService;
+
 import java.util.UUID;
 
 import static com.idevicesinc.sweetblue.BleManager.get;
@@ -32,16 +55,16 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
 
     public static final UUID batteryLevelCharac = UUID.fromString("0000180F-0000-1000-8000-00805f9b34fb");
 
-    static final int MSG_CONNECT = 1;
-    static final int MSG_DISCONNECT = 2;
+    public static final int MSG_CONNECT = 1;
+    public static final int MSG_DISCONNECT = 2;
 
-    static final int MSG_SET_LOCAL_NAME = 3;
-    static final int MSG_SET_STATUS = 4;
-    static final int MSG_SET_BATTERY_PERCENTAGE = 5;
+    public static final int MSG_SET_LOCAL_NAME = 3;
+    public static final int MSG_SET_STATUS = 4;
+    public static final int MSG_SET_BATTERY_PERCENTAGE = 5;
 
-    static final int STATUS_CONNECTED = 1;
-    static final int STATUS_DISCONNECTED = 2;
-    static final int STATUS_CONNECTING = 3;
+    public static final int STATUS_CONNECTED = 1;
+    public static final int STATUS_DISCONNECTED = 2;
+    public static final int STATUS_CONNECTING = 3;
 
     private WeatherService mWeatherService;
     private NotificationService mNotificationService;

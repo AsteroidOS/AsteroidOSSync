@@ -1,13 +1,10 @@
 <resources>
     <string name="app_name">AsteroidOS Sync</string>
     <string name="searching">Searching for watches</string>
-
     <string name="scanning">ON</string>
     <string name="not_scanning">OFF</string>
-
     <string name="generic_ok">OK</string>
     <string name="ble_not_supported">It does not appear that Bluetooth Low Energy is supported on this device.</string>
-
     <string name="uhoh_message_nuke">It appears that Android\'s less-than-perfect bluetooth stack has gone astray. It is suggested that you drop a nuke to perhaps alleviate the problem.</string>
     <string name="uhoh_message_nuke_drop">Drop Nuke</string>
     <string name="uhoh_message_nuke_cancel">Cancel</string>
@@ -18,17 +15,28 @@
     <string name="title_device_list">Devices</string>
     <string name="title_device_detail">Device Detail</string>
     <string name="unknown_device">Unknown</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="nothing_found">No watch found</string>
     <string name="one_found">1 watch found</string>
-    <string name="n_found">watches found</string>
+    <string name="n_found">%d watches found</string>
     <string name="disconnected">Disconnected</string>
     <string name="connected">Connected</string>
     <string name="watch_finder">Watch finder</string>
     <string name="phone_is_searching">Phone is searching for you!</string>
     <string name="local_service_started">SynchronizationServiceNotifcation</string>
-    <string name="connecting">Connecting</string>
+    <string name="connecting">Connecting…</string>
     <string name="percentage">%d %%</string>
     <string name="connected_formatted">Connected to %s</string>
     <string name="connecting_formatted">Connecting to %s</string>
+    <string name="not_supported">Not supported yet</string>
+    <string name="notifications_settings">Notifications settings</string>
+    <string name="find_my_watch">Find my watch</string>
+    <string name="grab_a_screenshot">Grab a screenshot</string>
+    <string name="connected_icon">Connected icon</string>
+    <string name="battery_info_icon">Battery info icon</string>
+    <string name="screenshot_icon">Screenshot icon</string>
+    <string name="finder_icon">Finder icon</string>
+    <string name="settings_icon">Settings icon</string>
+    <string name="notifications">Notifications</string>
+    <string name="notifications_enablement">In order to enable notifications synchronization, you need to allow AsteroidOS Sync in the following menu.</string>
 </resources>

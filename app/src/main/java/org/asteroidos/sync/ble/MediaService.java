@@ -15,7 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.asteroidos.sync;
+package org.asteroidos.sync.ble;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -29,6 +29,8 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
+
+import org.asteroidos.sync.services.NLService;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -78,7 +80,7 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
         if (mMediaController != null) {
             try {
                 mMediaController.unregisterCallback(mMediaCallback);
-            } catch(IllegalArgumentException e) {}
+            } catch(IllegalArgumentException ignored) {}
             Log.d("MediaService", "MediaController removed");
         }
     }
