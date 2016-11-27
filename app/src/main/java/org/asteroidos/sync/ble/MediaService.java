@@ -132,14 +132,17 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
             if (metadata != null) {
                 String artist = metadata.getText(MediaMetadata.METADATA_KEY_ARTIST).toString();
                 byte[] data = artist.getBytes(StandardCharsets.UTF_8);
+                if(data.length == 0) data = new byte[]{0};
                 mDevice.write(mediaArtistCharac, data, MediaService.this);
 
                 String album = metadata.getText(MediaMetadata.METADATA_KEY_ALBUM).toString();
                 data = album.getBytes(StandardCharsets.UTF_8);
+                if(data.length == 0) data = new byte[]{0};
                 mDevice.write(mediaAlbumCharac, data, MediaService.this);
 
                 String title = metadata.getText(MediaMetadata.METADATA_KEY_TITLE).toString();
                 data = title.getBytes(StandardCharsets.UTF_8);
+                if(data.length == 0) data = new byte[]{0};
                 mDevice.write(mediaTitleCharac, data, MediaService.this);
             }
         }
@@ -190,7 +193,7 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
                 Log.d("MediaService", "MediaController set: " + mMediaController.getPackageName());
             }
         } else {
-            byte[] data = "".getBytes(StandardCharsets.UTF_8);
+            byte[] data = new byte[]{0};
             mDevice.write(mediaArtistCharac, data, MediaService.this);
             mDevice.write(mediaAlbumCharac, data, MediaService.this);
             mDevice.write(mediaTitleCharac, data, MediaService.this);
