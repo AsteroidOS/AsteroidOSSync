@@ -39,4 +39,7 @@
     <string name="settings_icon">Settings icon</string>
     <string name="notifications">Notifications</string>
     <string name="notifications_enablement">In order to enable notifications synchronization, you need to allow AsteroidOS Sync in the following menu.</string>
+    <string name="weather_icon">Weather icon</string>
+    <string name="weather_settings">Weather settings</string>
+    <string name="enter_city_name">Enter a city name:</string>
 </resources>

@@ -17,15 +17,8 @@
 
 package org.asteroidos.sync.ble;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
@@ -39,45 +32,44 @@ import github.vatsal.easyweather.WeatherMap;
 import github.vatsal.easyweather.retrofit.models.ForecastResponseModel;
 import github.vatsal.easyweather.retrofit.models.List;
 
-public class WeatherService implements BleDevice.ReadWriteListener, LocationListener {
+public class WeatherService implements BleDevice.ReadWriteListener {
     public static final UUID weatherCityCharac     = UUID.fromString("00008001-0000-0000-0000-00a57e401d05");
     public static final UUID weatherIdsCharac      = UUID.fromString("00008002-0000-0000-0000-00a57e401d05");
     public static final UUID weatherMinTempsCharac = UUID.fromString("00008003-0000-0000-0000-00a57e401d05");
     public static final UUID weatherMaxTempsCharac = UUID.fromString("00008004-0000-0000-0000-00a57e401d05");
 
     public static final String owmApiKey = "ffcb5a7ed134aac3d095fa628bc46c65";
+    public static final String PREFS_NAME = "WeatherPreferences";
+    public static final String PREFS_CITY_NAME = "cityName";
+    public static final String PREFS_CITY_NAME_DEFAULT = "NewYork";
+    // TODO: Should we fallback to a better default value?
 
     private BleDevice mDevice;
     private Context mCtx;
+    SharedPreferences mSettings;
 
     public WeatherService(Context ctx, BleDevice device) {
         mDevice = device;
         mCtx = ctx;
+
+        mSettings = mCtx.getSharedPreferences(PREFS_NAME, 0);
+        mSettings.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                updateWeather();
+            }});
     }
 
     public void sync() {
-        LocationManager lm = (LocationManager) mCtx.getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(mCtx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mCtx, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            return;
-
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
-        criteria.setPowerRequirement(Criteria.POWER_LOW);
-        criteria.setAltitudeRequired(false);
-        criteria.setBearingRequired(false);
-        criteria.setSpeedRequired(false);
-        criteria.setCostAllowed(true);
-        criteria.setHorizontalAccuracy(Criteria.ACCURACY_LOW);
-        criteria.setVerticalAccuracy(Criteria.ACCURACY_LOW);
-        lm.requestSingleUpdate(lm.getBestProvider(criteria, false), this, null);
+        updateWeather();
     }
 
     public void unsync() {}
 
-    @Override
-    public void onLocationChanged(Location location) {
+    public void updateWeather() {
+        String cityName = mSettings.getString(PREFS_CITY_NAME, PREFS_CITY_NAME_DEFAULT);
         WeatherMap weatherMap = new WeatherMap(mCtx, owmApiKey);
-        weatherMap.getLocationForecast(String.valueOf(location.getLongitude()), String.valueOf(location.getLatitude()), new ForecastCallback() {
+        weatherMap.getCityForecast (cityName, new ForecastCallback() {
             @Override
             public void success(ForecastResponseModel response) {
                 List[] l = response.getList();
@@ -125,10 +117,6 @@ public class WeatherService implements BleDevice.ReadWriteListener, LocationList
             }
         });
     }
-
-    @Override public void onStatusChanged(String s, int i, Bundle bundle) {}
-    @Override public void onProviderEnabled(String s) {}
-    @Override public void onProviderDisabled(String s) {}
 
     private int dayOfTimestamp(long timestamp) {
         Calendar cal = Calendar.getInstance();

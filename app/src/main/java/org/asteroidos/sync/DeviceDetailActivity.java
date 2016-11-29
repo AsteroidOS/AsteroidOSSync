@@ -20,8 +20,10 @@ package org.asteroidos.sync;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -29,14 +31,17 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.asteroidos.sync.ble.WeatherService;
 import org.asteroidos.sync.services.SynchronizationService;
 
 public class DeviceDetailActivity extends AppCompatActivity {
@@ -76,15 +81,36 @@ public class DeviceDetailActivity extends AppCompatActivity {
         mBatteryText = (TextView)findViewById(R.id.info_battery);
         mBatteryImage = (ImageView)findViewById(R.id.info_icon_battery);
 
-        CardView mScreenshotCard = (CardView)findViewById(R.id.card_view1);
-        mScreenshotCard.setOnClickListener(new View.OnClickListener() {
+        CardView weatherCard = (CardView)findViewById(R.id.card_view1);
+        weatherCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(DeviceDetailActivity.this, R.string.not_supported, Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alert = new AlertDialog.Builder(DeviceDetailActivity.this);
+                alert.setTitle(R.string.weather_settings);
+                alert.setMessage(R.string.enter_city_name);
+
+                final SharedPreferences settings = getSharedPreferences(WeatherService.PREFS_NAME, 0);
+                final EditText edittext = new EditText(DeviceDetailActivity.this);
+                int padding = (int)DeviceDetailActivity.this.getResources().getDisplayMetrics().density*15;
+                edittext.setPadding(padding, padding, padding, padding);
+                edittext.setText(settings.getString(WeatherService.PREFS_CITY_NAME, WeatherService.PREFS_CITY_NAME_DEFAULT));
+                alert.setView(edittext);
+
+                alert.setPositiveButton(getString(R.string.generic_ok), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String cityName = edittext.getText().toString();
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putString(WeatherService.PREFS_CITY_NAME, cityName);
+                        editor.apply();
+                    }
+                });
+
+                alert.show();
             }
         });
-        CardView mFindCard = (CardView)findViewById(R.id.card_view2);
-        mFindCard.setOnClickListener(new View.OnClickListener() {
+
+        CardView findCard = (CardView)findViewById(R.id.card_view2);
+        findCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
@@ -98,8 +124,17 @@ public class DeviceDetailActivity extends AppCompatActivity {
                 sendBroadcast(i);
             }
         });
-        CardView mNotifSettCard = (CardView) findViewById(R.id.card_view3);
-        mNotifSettCard.setOnClickListener(new View.OnClickListener() {
+
+        CardView screenshotCard = (CardView)findViewById(R.id.card_view3);
+        screenshotCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DeviceDetailActivity.this, R.string.not_supported, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        CardView notifSettCard = (CardView) findViewById(R.id.card_view4);
+        notifSettCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(DeviceDetailActivity.this, R.string.not_supported, Toast.LENGTH_SHORT).show();
