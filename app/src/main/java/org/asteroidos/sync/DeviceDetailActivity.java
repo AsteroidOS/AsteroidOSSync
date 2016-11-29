@@ -54,9 +54,12 @@ public class DeviceDetailActivity extends AppCompatActivity {
     private TextView mBatteryText;
     private ImageView mBatteryImage;
 
+    FloatingActionButton mFab;
+
     final Messenger mMessenger = new Messenger(new SynchronizationHandler());
     Messenger mService = null;
     boolean mIsBound;
+    boolean mConnected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +71,20 @@ public class DeviceDetailActivity extends AppCompatActivity {
 
         mDeviceAddress = getIntent().getStringExtra(ARG_DEVICE_ADDRESS);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    Message msg;
+                    if(!mConnected) msg = Message.obtain(null, SynchronizationService.MSG_CONNECT);
+                    else msg = Message.obtain(null, SynchronizationService.MSG_DISCONNECT);
+                    msg.obj = mDeviceAddress;
+                    msg.replyTo = mMessenger;
+                    mService.send(msg);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -154,12 +167,16 @@ public class DeviceDetailActivity extends AppCompatActivity {
                         case SynchronizationService.STATUS_CONNECTED:
                             mConnectedText.setText(R.string.connected);
                             mConnectedImage.setImageResource(R.mipmap.android_cloud_done);
+                            mFab.setImageResource(R.mipmap.android_bluetooth_disconnect);
+                            mConnected = true;
                             break;
                         case SynchronizationService.STATUS_DISCONNECTED:
                             mConnectedText.setText(R.string.disconnected);
                             mConnectedImage.setImageResource(R.mipmap.android_cloud);
                             mBatteryText.setVisibility(View.INVISIBLE);
                             mBatteryImage.setVisibility(View.INVISIBLE);
+                            mFab.setImageResource(R.mipmap.android_bluetooth_connect);
+                            mConnected = false;
                             break;
                         case SynchronizationService.STATUS_CONNECTING:
                             mConnectedText.setText(R.string.connecting);

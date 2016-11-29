@@ -234,7 +234,7 @@
         app:layout_anchorGravity="bottom|right|end"
         app:elevation="8dp"
         app:fabSize="normal"
-        android:src="@android:drawable/stat_notify_chat"
+        android:src="@mipmap/android_bluetooth_connect"
         android:layout_margin="16dp" />
 
 </android.support.design.widget.CoordinatorLayout>
