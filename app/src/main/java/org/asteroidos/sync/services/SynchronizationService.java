@@ -176,6 +176,18 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_CONNECTED, 0));
             } catch (RemoteException ignored) {}
 
+            event.device().enableNotify(batteryLevelCharac, new BleDevice.ReadWriteListener() {
+                @Override
+                public void onEvent(ReadWriteEvent e) {
+                    try {
+                        if (e.isNotification() && e.charUuid().equals(batteryLevelCharac)) {
+                            byte data[] = e.data();
+                            if (replyTo != null)
+                                replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, data[0], 0));
+                        }
+                    } catch(RemoteException ignored) {}
+                }
+            });
             event.device().read(batteryLevelCharac, new BleDevice.ReadWriteListener()
             {
                 @Override public void onEvent(ReadWriteEvent result)
