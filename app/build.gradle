@@ -21,6 +21,10 @@ android {
         main.java.srcDirs += 'src/main/lib/sweetblue/app/src/main/java/'
         main.res.srcDirs += 'src/main/lib/sweetblue/app/src/main/res/'
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
 }
 
 dependencies {
