@@ -1,2 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">AsteroidOS Sync</string>
+    <string name="searching">Naar horloges aan het zoeken</string>
+    <string name="scanning">AAN</string>
+    <string name="not_scanning">UIT</string>
+    <string name="generic_ok">OK</string>
+    <string name="ble_not_supported">Het lijkt erop dat Bluetooth Low Energy niet op dit apparaat ondersteund is.</string>
+    <string name="uhoh_message_nuke_cancel">Annuleer</string>
+    <string name="uhoh_message_phone_restart">Het lijkt erop dat Android\'s bluetooth stack niet meer werkt. Het kan nodig zijn de telefoon te herstarten.</string>
+    <string name="uhoh_message_phone_restart_ok">OK</string>
+    <string name="ok">OK</string>
+    <string name="nothing_found">Geen horloge gevonden</string>
+    <string name="one_found">1 horloge gevonden</string>
+    <string name="n_found">%d horloges gevonden</string>
+    <string name="disconnected">Niet verbonden</string>
+    <string name="connected">Verbonden</string>
+    <string name="watch_finder">Horlogevinder</string>
+    <string name="phone_is_searching">Telefoon is naar je op zoek!</string>
+    <string name="connecting">Verbinden…</string>
+    <string name="connected_formatted">Verbonden met %s</string>
+    <string name="connecting_formatted">Verbinden met %s</string>
+    <string name="not_supported">Nog niet ondersteund</string>
+    <string name="notifications_settings">Notificatieinstellingen</string>
+    <string name="find_my_watch">Vind mijn horloge</string>
+    <string name="grab_a_screenshot">Neem een schermafbeelding</string>
+    <string name="notifications">Notificaties</string>
+    <string name="notifications_enablement">On notificatiesynchronisatie in te schakelen, moet je AsteroidOS Sync toestaan in het volgende menu.</string>
+    <string name="weather_settings">Weerinstellingen</string>
+    <string name="enter_city_name">Voer een stadsnaam in:</string>
+</resources>
