@@ -124,7 +124,7 @@ public class DeviceListActivity extends AppCompatActivity implements BleManager.
             new AlertDialog.Builder(this)
                     .setTitle(R.string.notifications)
                     .setMessage(R.string.notifications_enablement)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent=new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
                             startActivity(intent);
@@ -271,19 +271,19 @@ public class DeviceListActivity extends AppCompatActivity implements BleManager.
             dialog.setButton(DialogInterface.BUTTON_POSITIVE,
                     getString(R.string.uhoh_message_nuke_drop), clickListener);
             dialog.setButton(DialogInterface.BUTTON_NEGATIVE,
-                    getString(R.string.uhoh_message_nuke_cancel), clickListener);
+                    getString(R.string.generic_cancel), clickListener);
         }
         else if( event.uhOh().getRemedy() == Remedy.RESTART_PHONE )
         {
             dialog.setMessage(getString(R.string.uhoh_message_phone_restart));
             dialog.setButton(DialogInterface.BUTTON_NEUTRAL,
-                    getString(R.string.uhoh_message_phone_restart_ok), clickListener);
+                    getString(R.string.generic_ok), clickListener);
         }
         else if( event.uhOh().getRemedy() == Remedy.WAIT_AND_SEE )
         {
             dialog.setMessage(getString(R.string.uhoh_message_weirdness));
             dialog.setButton(DialogInterface.BUTTON_NEUTRAL,
-                    getString(R.string.uhoh_message_weirdness_ok), clickListener);
+                    getString(R.string.generic_ok), clickListener);
         }
 
         dialog.show();
