@@ -46,7 +46,7 @@ import static com.idevicesinc.sweetblue.BleManager.get;
 
 public class SynchronizationService extends Service implements BleDevice.StateListener {
     private NotificationManager mNM;
-    private int NOTIFICATION = R.string.local_service_started;
+    private int NOTIFICATION = 2725;
     private BleManager mBleMngr;
     private BleDevice mDevice;
     private int mState = STATUS_DISCONNECTED;
