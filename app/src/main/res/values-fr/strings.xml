@@ -8,13 +8,13 @@
     <string name="unknown_device">Périphérique inconnu</string>
     <string name="nothing_found">Pas trouvé de montre</string>
     <string name="one_found">1 montre trouvée</string>
-    <string name="n_found">%d montres trouvée</string>
+    <string name="n_found">%d montres trouvées</string>
 
     <string name="ble_not_supported">Il semble que le Bluetooth Low Energy ne soit pas pris en charge sur cet appareil.</string>
-    <string name="uhoh_message_nuke">Il semble que le Bluetooth stack d\'Android a des problèmes. Il est proposé de redémarrer le Bluetooth.</string>
+    <string name="uhoh_message_nuke">Il semble que le Bluetooth stack d\'Android a des problèmes. Il est recommandé de redémarrer le Bluetooth stack.</string>
     <string name="uhoh_message_nuke_drop">Réinitialiser le Bluetooth</string>
-    <string name="uhoh_message_phone_restart">Il semble que le Bluetooth stack d\'Android soit complètement interrompu. Un redémarrage du téléphone peut être nécessaire.</string>
-    <string name="uhoh_message_weirdness">Quelque chose d’étrange s’est passé avec le ble stack sous-jacente. Il va sans doute se rétablir, mais vous devrez peut-être redémarrer votre téléphone si vous continuez à voir cela.</string>
+    <string name="uhoh_message_phone_restart">Il semble que le Bluetooth stack d\'Android soit complètement interrompu. Un redémarrage du téléphone est peut-être nécessaire.</string>
+    <string name="uhoh_message_weirdness">Quelque chose d’étrange s’est passé avec le BLE stack sous-jacente. Il va sans doute se rétablir, mais vous devriez peut-être redémarrer votre téléphone si vous continuez à voir ceci.</string>
 
     <string name="disconnected">Déconnecté</string>
     <string name="connected">Connecté</string>
@@ -31,14 +31,14 @@
     <string name="notifications">Notifications</string>
     <string name="notifications_enablement">Pour activer la synchronisation des notifications, vous devez autoriser AsteroidOS Sync dans le menu suivant.</string>
 
-    <string name="weather_settings">Paramètres Météo</string>
-    <string name="enter_city_name">Entrez un nom d\'une ville :</string>
+    <string name="weather_settings">Paramètres météo</string>
+    <string name="enter_city_name">Entrez le nom d\'une ville :</string>
 <string name="battery_info_icon">Icône d\'info batterie</string>
     <string name="screenshot_icon">Icône de capture d’écran</string>
     <string name="settings_icon">Icône des paramètres</string>
     <string name="weather_icon">Icône de la météo</string>
 
-    <string name="watch_finder">Trouveur de montre</string>
+    <string name="watch_finder">Trouver ma montre</string>
     <string name="phone_is_searching">Votre téléphone recherche pour vous !</string>
 
     <string name="connected_icon">Icône de connexion</string>
