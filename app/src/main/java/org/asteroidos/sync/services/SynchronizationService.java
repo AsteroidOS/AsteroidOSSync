@@ -35,6 +35,7 @@ import com.idevicesinc.sweetblue.BleManager;
 import com.idevicesinc.sweetblue.BleNode;
 
 import org.asteroidos.sync.DeviceDetailActivity;
+import org.asteroidos.sync.DeviceListActivity;
 import org.asteroidos.sync.R;
 import org.asteroidos.sync.ble.MediaService;
 import org.asteroidos.sync.ble.NotificationService;
@@ -139,10 +140,14 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 status = getString(R.string.connected_formatted, mDevice.getName_normalized());
         }
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, DeviceDetailActivity.class), 0);
+        if(mDevice != null) {
+            Intent intent = new Intent(this, DeviceDetailActivity.class);
+            intent.putExtra(DeviceDetailActivity.ARG_DEVICE_ADDRESS, mDevice.getMacAddress());
 
-        Notification notification = new Notification.Builder(this)
+            PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            Notification notification = new Notification.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(getText(R.string.app_name))
                 .setContentText(status)
@@ -152,7 +157,9 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 .setShowWhen(false)
                 .build();
 
-        mNM.notify(NOTIFICATION, notification);
+            mNM.notify(NOTIFICATION, notification);
+        }
+
     }
 
     @Override
