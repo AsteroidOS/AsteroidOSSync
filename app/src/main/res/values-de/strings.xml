@@ -1,2 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="not_supported">Diese Funktion wird bisher noch nicht unterstützt</string>
+
+    <string name="generic_cancel">Abbrechen</string>
+    <string name="generic_ok">Ok</string>
+    <string name="app_name">AsteroidOS Sync</string>
+    <string name="searching">Suche nach Uhren</string>
+    <string name="unknown_device">Unbekanntes Gerät</string>
+    <string name="nothing_found">Keine Uhr gefunden</string>
+    <string name="one_found">1 Uhr gefunden</string>
+    <string name="n_found">%d Uhren gefunden</string>
+
+    <string name="ble_not_supported">Es sieht so aus als würde dieses Gerät Bluetooth Low Energy nicht unterstützen.</string>
+    <string name="connected">Verbunden</string>
+    <string name="disconnected">Verbindung getrennt</string>
+    <string name="connecting">Verbinde…</string>
+    <string name="connected_formatted">Verbunden mit %s</string>
+    <string name="connecting_formatted">Verbinde mit %s</string>
+    </resources>
