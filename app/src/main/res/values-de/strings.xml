@@ -16,4 +16,31 @@
     <string name="connecting">Verbinde…</string>
     <string name="connected_formatted">Verbunden mit %s</string>
     <string name="connecting_formatted">Verbinde mit %s</string>
+    <string name="uhoh_message_nuke">Android hat offenbar Probleme mit Bluetooth. Es wird empfohlen, Bluetooth in Android neu zu starten.</string>
+    <string name="uhoh_message_nuke_drop">Bluetooth zurücksetzen</string>
+    <string name="uhoh_message_phone_restart">Offenbar ist Bluetooth auf Android nicht mehr funktionsfähig. Ein Neustart des Telefons ist vermutlich nötig.</string>
+    <string name="uhoh_message_weirdness">Im BLE-Modul ist etwas schief gelaufen. Es wird sich vermutlich wieder erholen, aber wenn Sie diese Meldung öfter sehen, sollten Sie Ihr Telefon neu starten.</string>
+
+    <string name="percentage">%d %%</string>
+
+    <string name="find_my_watch">Finde meine Uhr</string>
+
+    <string name="watch_finder">Uhr-Finder</string>
+    <string name="phone_is_searching">Das Telefon sucht nach Ihnen!</string>
+
+    <string name="notifications_settings">Mitteilungseinstellungen</string>
+    <string name="notifications">Mitteilungen</string>
+    <string name="notifications_enablement">Um die Synchronisierung von Mitteilungen zu aktivieren, müssen Sie AsteroidOS Sync dies im folgenden Menü erlauben.</string>
+
+    <string name="weather_settings">Wettereinstellungen</string>
+    <string name="enter_city_name">Geben Sie eine Stadt an:</string>
+<string name="connected_icon">\"Verbunden\"-Icon</string>
+    <string name="battery_info_icon">\"Akku\"-Icon</string>
+    <string name="screenshot_icon">\"Bildschirmfoto\"-Icon</string>
+    <string name="settings_icon">\"Einstellungen\"-Icon</string>
+    <string name="weather_icon">\"Wetter\"-Icon</string>
+
+    <string name="grab_a_screenshot">Bildschirmfoto anfertigen</string>
+
+    <string name="finder_icon">\"Finden\"-Icon</string>
     </resources>
