@@ -25,7 +25,7 @@
     <string name="notifications">Сповіщення</string>
     <string name="weather_settings">Налаштування погоди</string>
     <string name="enter_city_name">Введіть назву міста:</string>
-<string name="uhoh_message_nuke">Виявляється, що стек Bluetooth Android, має проблеми. Пропонується до перезапуску стека Bluetooth.</string>
+<string name="uhoh_message_nuke">Виявляється, що стек Bluetooth Android, має проблеми. Пропонується перезапуск стека Bluetooth.</string>
     <string name="uhoh_message_nuke_drop">Скинути Bluetooth</string>
     <string name="uhoh_message_phone_restart">Виявляється, що стек Bluetooth Android, повністю порушений. Перезавантаження телефону може знадобитися.</string>
     <string name="ble_not_supported">Не схоже, що Bluetooth Low Energy підтримується на цьому пристрої.</string>
