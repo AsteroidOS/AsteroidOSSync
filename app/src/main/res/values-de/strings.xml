@@ -34,13 +34,13 @@
 
     <string name="weather_settings">Wettereinstellungen</string>
     <string name="enter_city_name">Geben Sie eine Stadt an:</string>
-<string name="connected_icon">\"Verbunden\"-Icon</string>
-    <string name="battery_info_icon">\"Akku\"-Icon</string>
-    <string name="screenshot_icon">\"Bildschirmfoto\"-Icon</string>
-    <string name="settings_icon">\"Einstellungen\"-Icon</string>
-    <string name="weather_icon">\"Wetter\"-Icon</string>
+<string name="connected_icon">„Verbunden“-Icon</string>
+    <string name="battery_info_icon">„Akku“-Icon</string>
+    <string name="screenshot_icon">„Bildschirmfoto“-Icon</string>
+    <string name="settings_icon">„Einstellungen“-Icon</string>
+    <string name="weather_icon">„Wetter“-Icon</string>
 
     <string name="grab_a_screenshot">Bildschirmfoto anfertigen</string>
 
-    <string name="finder_icon">\"Finden\"-Icon</string>
+    <string name="finder_icon">„Finden“-Icon</string>
     </resources>
