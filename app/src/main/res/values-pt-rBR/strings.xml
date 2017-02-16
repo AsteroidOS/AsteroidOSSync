@@ -11,7 +11,7 @@
     <string name="n_found">%d relógios encontrados</string>
 
     <string name="ble_not_supported">Parece que o Bluetooth Low Energy não é suportado por estes dispositivo.</string>
-    <string name="uhoh_message_nuke">Parece que a o Bluetooth do Android tem problemas. Sugere-se reiniciar o Bluetooth</string>
+    <string name="uhoh_message_nuke">Parece que a o Bluetooth do Android tem problemas. Sugere-se reiniciar o Bluetooth.</string>
     <string name="uhoh_message_nuke_drop">Reiniciar o Bluetooth</string>
     <string name="uhoh_message_phone_restart">Parece que o Bluetooth do Android está completamente quebrado. Um reinício do telefone pode ser necessário.</string>
     <string name="uhoh_message_weirdness">Algo estranho ocorreu por baixo do Bluetooth. Ele provavelmente vai se recuperar mas você pode ter que reiniciar o telefone se continuar vendo isto.</string>
