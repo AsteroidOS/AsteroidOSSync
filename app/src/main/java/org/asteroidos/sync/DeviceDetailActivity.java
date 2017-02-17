@@ -129,7 +129,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
                 Intent i = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
                 i.putExtra("event", "posted");
                 i.putExtra("packageName", "org.asteroidos.sync");
-                i.putExtra("id", 0);
+                i.putExtra("id", 0xa57e401d);
                 i.putExtra("appName", getString(R.string.app_name));
                 i.putExtra("appIcon", "");
                 i.putExtra("summary", getString(R.string.watch_finder));
