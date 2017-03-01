@@ -1,2 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">AsteroidOS Sync</string>
+    <string name="generic_ok">IH</string>
+    <string name="generic_cancel">Sefsex</string>
+    <string name="searching">Anadi n temrilin</string>
+    <string name="unknown_device">Ibenk arussin</string>
+    <string name="nothing_found">Ulac tamrilt yettwafen</string>
+    <string name="one_found">1 n temrilt tettwaf</string>
+    <string name="n_found">%d temrilin ttwafent</string>
+
+    <string name="ble_not_supported">Yetttban d akken Bluetooth Low Energy ur ittusefrak ara ɣef yibenk-agi.</string>
+    <string name="uhoh_message_nuke">Yettban d akken Bluetooth stack n Android ɣur-s uguren. Yelha limer ad talsed tanekra n Bluetooth stack.</string>
+    <string name="uhoh_message_nuke_drop">Ales awennez n Bluetooth</string>
+    <string name="uhoh_message_phone_restart">Yettban d akken Bluetooth stack n Android yeḥbes. Ales tanekra n tiliɣri inek ahat.</string>
+    <string name="uhoh_message_weirdness">Yella wayen ur nu q ara tanumi nettwalit di BLE stack tuqribt. Ahat yessefk ad tuɣalḍ ar lqem yezrin, acu kan yessefk ad talseḍ tanekra n tiliɣri yinek ma tebɣiḍ ad walit aya tikelt-nniḍen.</string>
+
+    <string name="disconnected">Ur iqqin ara</string>
+    <string name="connected">Yeqqen</string>
+    <string name="connecting">Tuqqna…</string>
+    <string name="connected_formatted">Yeqqen ar %s</string>
+    <string name="connecting_formatted">Tuqqna ar %s</string>
+    <string name="percentage">%d %%</string>
+
+    <string name="connected_icon">Tignit n tuqqna</string>
+    <string name="battery_info_icon">Tignit n telɣut n uẓru</string>
+    <string name="screenshot_icon">Tignit n tuṭṭfa n ugdil</string>
+    <string name="finder_icon">Tignit n \"Af-d tamrilt-inu\"</string>
+    <string name="settings_icon">Tignit n iɣewwaṛen</string>
+    <string name="weather_icon">Tignit n tegnawt</string>
+
+    <string name="grab_a_screenshot">Ṭṭef agdil</string>
+
+    <string name="find_my_watch">Af-d tamrilt inu</string>
+
+    <string name="watch_finder">Af-d tamrilt-inu</string>
+    <string name="phone_is_searching">Tiliɣri yettnadi-ak-d!</string>
+
+    <string name="notifications_settings">Iɣewwaṛen n ulɣu</string>
+    <string name="notifications">Ilɣuten</string>
+    <string name="notifications_enablement">"Akken ad tremdeḍ amtawi n ilɣuten, yessefk ad tsirgeḍ  AsteroidOS Sync deg umuɣ-agi."</string>
+
+    <string name="weather_settings">Iɣewwaṛen n tegnawt</string>
+    <string name="enter_city_name">Sekcem isem n uɣrem:</string>
+<string name="not_supported">Tamahilt-agi ur tettusefrak ara yakan</string>
+
+    </resources>
