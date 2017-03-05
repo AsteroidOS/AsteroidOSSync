@@ -1,2 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">AsteriodOS 同步</string>
+    <string name="generic_cancel">取消</string>
+    <string name="generic_ok">确认</string>
+    <string name="not_supported">暂时不支持此功能</string>
+
+    <string name="searching">正在寻找手表</string>
+    <string name="unknown_device">未知设备</string>
+    <string name="nothing_found">未找到手表</string>
+    <string name="one_found">找到 1 个手表</string>
+    <string name="n_found">找到 %d 个手表</string>
+
+    <string name="ble_not_supported">似乎在这个设备上蓝牙4.0（BLE）不被支持.</string>
+    <string name="uhoh_message_nuke">Android 蓝牙协议似乎出了问题。建议重启蓝牙。</string>
+    <string name="uhoh_message_nuke_drop">重置蓝牙</string>
+    <string name="uhoh_message_phone_restart">Android 蓝牙协议似乎完全损坏。可能需要重启您的手机。</string>
+    <string name="uhoh_message_weirdness">底层蓝牙协议发生了错误。它可能会恢复，但如果您一直看见这条消息，请重启手机。</string>
+
+    <string name="disconnected">连接已断开</string>
+    <string name="connected">已连接</string>
+    <string name="connecting">正在连接…</string>
+    <string name="connected_formatted">已连接到 %s</string>
+    <string name="connecting_formatted">正在连接到 %s</string>
+    <string name="percentage">%d %%</string>
+
+    <string name="connected_icon">已连接图标</string>
+    <string name="battery_info_icon">电池信息图标</string>
+    <string name="screenshot_icon">截图图标</string>
+    <string name="finder_icon">寻找手表图标</string>
+    <string name="settings_icon">设置图标</string>
+    <string name="weather_icon">天气图标</string>
+
+    <string name="grab_a_screenshot">抓取屏幕截图</string>
+
+    <string name="find_my_watch">寻找我的手表</string>
+
+    <string name="watch_finder">寻找手表</string>
+    <string name="phone_is_searching">手机正在寻找你！</string>
+
+    <string name="notifications_settings">通知设置</string>
+    <string name="notifications">通知</string>
+    <string name="notifications_enablement">为了开启通知同步，您需要在接下来的菜单中允许AsteroidOS 同步。</string>
+
+    <string name="weather_settings">天气设置</string>
+    <string name="enter_city_name">输入一个城市名称：</string>
+</resources>
