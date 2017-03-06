@@ -125,25 +125,46 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
             super.onAudioInfoChanged(playbackInfo);
         }
 
+        /**
+         * Helper method to safely get a text value from a {@link MediaMetadata} as a byte array
+         * (UTF-8 encoded).
+         *
+         * <p>If the field is null, a zero length byte array will be returned.</p>
+         *
+         * @param metadata the MediaMetadata (assumed to be non-null)
+         * @param fieldName the field name
+         * @return the field value as a byte array
+         */
+        private byte[] getTextAsBytes(MediaMetadata metadata, String fieldName) {
+            byte [] result;
+
+            CharSequence text = metadata.getText(fieldName);
+
+            if (text != null) {
+                result = text.toString().getBytes(StandardCharsets.UTF_8);
+            } else {
+                result = new byte[]{0};
+            }
+
+            return result;
+        }
+
         @Override
         public void onMetadataChanged(MediaMetadata metadata) {
             super.onMetadataChanged(metadata);
 
             if (metadata != null) {
-                String artist = metadata.getText(MediaMetadata.METADATA_KEY_ARTIST).toString();
-                byte[] data = artist.getBytes(StandardCharsets.UTF_8);
-                if(data.length == 0) data = new byte[]{0};
-                mDevice.write(mediaArtistCharac, data, MediaService.this);
+                mDevice.write(mediaArtistCharac,
+                        getTextAsBytes(metadata, MediaMetadata.METADATA_KEY_ARTIST),
+                        MediaService.this);
 
-                String album = metadata.getText(MediaMetadata.METADATA_KEY_ALBUM).toString();
-                data = album.getBytes(StandardCharsets.UTF_8);
-                if(data.length == 0) data = new byte[]{0};
-                mDevice.write(mediaAlbumCharac, data, MediaService.this);
+                mDevice.write(mediaAlbumCharac,
+                        getTextAsBytes(metadata, MediaMetadata.METADATA_KEY_ALBUM),
+                        MediaService.this);
 
-                String title = metadata.getText(MediaMetadata.METADATA_KEY_TITLE).toString();
-                data = title.getBytes(StandardCharsets.UTF_8);
-                if(data.length == 0) data = new byte[]{0};
-                mDevice.write(mediaTitleCharac, data, MediaService.this);
+                mDevice.write(mediaTitleCharac,
+                        getTextAsBytes(metadata, MediaMetadata.METADATA_KEY_TITLE),
+                        MediaService.this);
             }
         }
 
