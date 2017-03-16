@@ -42,11 +42,11 @@ import com.idevicesinc.sweetblue.annotations.Nullable;
 /**
  * Some utilities for dealing with raw byte array scan records.
  * Most of the code herein is slightly modified from Android's 21-and-up scan record parsing API,
- * with code copy/pasted from various static methods of {@link ScanRecord} and {@link android.bluetooth.BluetoothUuid}.
+ * with code copy/pasted from various static methods of {@link ScanRecord} and android.bluetooth.BluetoothUuid.
  *
  * Why not use these classes directly? So that the same code can be used if you're targeting < 21.
  */
-public class Utils_ScanRecord extends Utils
+public final class Utils_ScanRecord extends Utils
 {
 	private Utils_ScanRecord(){super();}
 
