@@ -35,6 +35,8 @@ public class NLService extends NotificationListenerService {
 
     private Map<String, String> iconFromPackage;
 
+    private Map<String, Set<int>> activeNotifications;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -121,6 +123,8 @@ public class NLService extends NotificationListenerService {
         iconFromPackage.put("com.sonyericsson.conversations", "ios-text");
         iconFromPackage.put("com.android.vending", "md-appstore");
         iconFromPackage.put("com.google.android.dialer", "ios-call");
+
+        activeNotifications = new HashMap<String, Set<int>>();
     }
 
     @Override
@@ -128,6 +132,7 @@ public class NLService extends NotificationListenerService {
         super.onDestroy();
         unregisterReceiver(nlServiceReceiver);
         iconFromPackage.clear();
+        activeNotifications.clear();
     }
 
     @Override
@@ -138,6 +143,16 @@ public class NLService extends NotificationListenerService {
 
         String packageName = sbn.getPackageName();
         int id = sbn.getId();
+
+        // Don't notify for updated notifications, only new ones
+        Set<int> activeNotificationsFromPackage = activeNotifications.get(packageName);
+        if(activeNotificationsFromPackage == null)
+            activeNotificationsFromPackage.put(packageName, Set<int>(id));
+        else if(activeNotificationsFromPackage.contains(id))
+            return;
+        else
+            activeNotificationsFromPackage.add(id);
+
         String summary = n.extras.getString("android.title");
         String body = n.extras.getString("android.text");
         if(body == null)
@@ -172,9 +187,17 @@ public class NLService extends NotificationListenerService {
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
+        String packageName = sbn.getPackageName();
+        int id = sbn.getId();
+
+        // Free the notification ID to not filter new notifications
+        Set<int> activeNotificationsFromPackage = activeNotifications.get(packageName);
+        if(activeNotificationsFromPackage != null)
+            activeNotificationsFromPackage.remove(id);
+
         Intent i = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
         i.putExtra("event", "removed");
-        i.putExtra("packageName", sbn.getPackageName());
+        i.putExtra("packageName", packageName);
         i.putExtra("title", sbn.getNotification().extras.getString("android.title"));
 
         sendBroadcast(i);
