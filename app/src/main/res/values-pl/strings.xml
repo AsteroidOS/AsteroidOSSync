@@ -1,9 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="uhoh_message_nuke_cancel">Anuluj</string>
+<resources>
     <string name="connecting">Łączenie…</string>
     <string name="notifications_settings">Ustawienia powiadomień</string>
     <string name="notifications">Powiadomienia</string>
-    <string name="title_device_list">Urządzenia</string>
     <string name="searching">Wyszukiwanie zegarków</string>
     <string name="unknown_device">Nieznany</string>
     <string name="nothing_found">Nie znaleziono zegarków</string>
@@ -15,7 +14,6 @@
     <string name="notifications_enablement">Jeżeli chcesz synchronizować powiadomienia ze swoim zegarkiem, aplikacja musi otrzymać od ciebie zezwolenie na dostęp do nich.</string>
     <string name="not_supported">Ta funkcja nie została jeszcze ukończona</string>
     <string name="connecting_formatted">Trwa łączenie z %s</string>
-    <string name="ok">OK</string>
     <string name="disconnected">Rozłączono</string>
     <string name="connected">Połączono</string>
     <string name="connected_icon">Ikona połączenia</string>
