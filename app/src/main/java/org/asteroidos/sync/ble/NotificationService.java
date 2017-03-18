@@ -90,6 +90,8 @@ public class NotificationService implements BleDevice.ReadWriteListener {
 
                 byte[] data = xmlRequest.toString().getBytes(StandardCharsets.UTF_8);
                 mDevice.write(notificationUpdateCharac, data, NotificationService.this);
+            } else if (Objects.equals(event, "removed")) {
+                // TODO: removed event
             }
         }
     }

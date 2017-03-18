@@ -43,4 +43,6 @@
 
     <string name="weather_settings">Weather settings</string>
     <string name="enter_city_name">Enter a city name:</string>
+    <string name="unpair">Unpair</string>
+    <string name="scanning">Scanning...</string>
 </resources>

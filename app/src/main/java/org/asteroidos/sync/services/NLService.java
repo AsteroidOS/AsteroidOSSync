@@ -32,7 +32,6 @@ import java.util.Map;
 
 public class NLService extends NotificationListenerService {
     private NLServiceReceiver nlServiceReceiver;
-
     private Map<String, String> iconFromPackage;
 
     @Override
@@ -174,33 +173,15 @@ public class NLService extends NotificationListenerService {
     public void onNotificationRemoved(StatusBarNotification sbn) {
         Intent i = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
         i.putExtra("event", "removed");
-        i.putExtra("packageName", sbn.getPackageName());
-        i.putExtra("title", sbn.getNotification().extras.getString("android.title"));
-
+        i.putExtra("id", sbn.getId());
         sendBroadcast(i);
     }
 
     class NLServiceReceiver extends BroadcastReceiver{
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getStringExtra("command").equals("clearall")){
-                NLService.this.cancelAllNotifications();
-            }
-            else if(intent.getStringExtra("command").equals("list")){
-                Intent i1 = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
-                i1.putExtra("notification_event","=====================");
-                sendBroadcast(i1);
-                int i=1;
-                for (StatusBarNotification sbn : NLService.this.getActiveNotifications()) {
-                    Intent i2 = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
-                    i2.putExtra("notification_event",i +" " + sbn.getPackageName() + "n");
-                    sendBroadcast(i2);
-                    i++;
-                }
-                Intent i3 = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
-                i3.putExtra("notification_event","===== Notification List ====");
-                sendBroadcast(i3);
-            }
+            if(intent.getStringExtra("command").equals("clearall"))
+                cancelAllNotifications();
         }
     }
 }
