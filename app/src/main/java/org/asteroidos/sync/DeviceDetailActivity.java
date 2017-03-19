@@ -189,7 +189,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
                 case SynchronizationService.MSG_SET_BATTERY_PERCENTAGE:
                     mBatteryText.setVisibility(View.VISIBLE);
                     mBatteryImage.setVisibility(View.VISIBLE);
-                    mBatteryText.setText(getString(R.string.percentage, msg.arg1));
+                    mBatteryText.setText(String.valueOf(msg.arg1)+" %");
                     break;
                 default:
                     super.handleMessage(msg);
