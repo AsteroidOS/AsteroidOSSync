@@ -150,7 +150,7 @@ public class NLService extends NotificationListenerService {
             ai = null;
         }
         String appName = pm.getApplicationLabel(ai).toString();
-        String appIcon = iconFromPackage.get(appName);
+        String appIcon = iconFromPackage.get(packageName);
 
         if(summary == null) summary = "";
         if(body == null) body = "";
