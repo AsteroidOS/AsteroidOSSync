@@ -22,6 +22,7 @@ import android.view.Window;
 import com.idevicesinc.sweetblue.BleManager;
 import com.idevicesinc.sweetblue.BleManagerState;
 import com.idevicesinc.sweetblue.ManagerStateListener;
+import com.idevicesinc.sweetblue.utils.BluetoothEnabler;
 import com.idevicesinc.sweetblue.utils.Interval;
 
 import org.asteroidos.sync.fragments.DeviceListFragment;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         mSyncServiceIntent = new Intent(this, SynchronizationService.class);
         startService(mSyncServiceIntent);
 
+        BluetoothEnabler.start(this);
         mBleMngr = get(getApplication());
         mBleMngr.setListener_State(this);
         mBleMngr.setListener_Discovery(this);
