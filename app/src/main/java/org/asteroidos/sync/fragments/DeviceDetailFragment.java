@@ -125,7 +125,7 @@ public class DeviceDetailFragment extends Fragment {
         screenshotCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), R.string.not_supported, Toast.LENGTH_SHORT).show();
+                getActivity().sendBroadcast(new  Intent("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER"));
             }
         });
 

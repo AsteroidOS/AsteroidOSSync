@@ -44,4 +44,7 @@
     <string name="enter_city_name">Enter a city name:</string>
     <string name="unpair">Unpair</string>
     <string name="scanning">Scanning...</string>
+    <string name="downloading">Downloading...</string>
+    <string name="downloaded">Downloaded</string>
+    <string name="screenshot">Screenshot</string>
 </resources>

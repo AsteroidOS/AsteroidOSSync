@@ -38,6 +38,7 @@ import org.asteroidos.sync.MainActivity;
 import org.asteroidos.sync.R;
 import org.asteroidos.sync.ble.MediaService;
 import org.asteroidos.sync.ble.NotificationService;
+import org.asteroidos.sync.ble.ScreenshotService;
 import org.asteroidos.sync.ble.WeatherService;
 
 import java.util.UUID;
@@ -68,6 +69,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     public static final int STATUS_DISCONNECTED = 2;
     public static final int STATUS_CONNECTING = 3;
 
+    private ScreenshotService mScreenshotService;
     private WeatherService mWeatherService;
     private NotificationService mNotificationService;
     private MediaService mMediaService;
@@ -100,12 +102,14 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                     mWeatherService = new WeatherService(getApplicationContext(), mDevice);
                     mNotificationService = new NotificationService(getApplicationContext(), mDevice);
                     mMediaService = new MediaService(getApplicationContext(), mDevice);
+                    mScreenshotService = new ScreenshotService(getApplicationContext(), mDevice);
 
                     mDevice.connect();
                     break;
                 case MSG_DISCONNECT:
                     if(mDevice == null) return;
                     if(mState == STATUS_DISCONNECTED) return;
+                    mScreenshotService.unsync();
                     mWeatherService.unsync();
                     mNotificationService.unsync();
                     mMediaService.unsync();
@@ -129,6 +133,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                     String macAddress = (String)msg.obj;
                     if(macAddress.isEmpty()) {
                         if(mState != STATUS_DISCONNECTED) {
+                            mScreenshotService.unsync();
                             mWeatherService.unsync();
                             mNotificationService.unsync();
                             mMediaService.unsync();
@@ -230,6 +235,8 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 }
             });
 
+            if(mScreenshotService != null)
+                mScreenshotService.sync();
             if (mWeatherService != null)
                 mWeatherService.sync();
             if (mNotificationService != null)
@@ -243,6 +250,8 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_DISCONNECTED, 0));
             } catch (RemoteException ignored) {}
 
+            if(mScreenshotService != null)
+                mScreenshotService.sync();
             if (mWeatherService != null)
                 mWeatherService.unsync();
             if (mNotificationService != null)
