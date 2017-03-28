@@ -79,7 +79,7 @@ public class NotificationService implements BleDevice.ReadWriteListener {
                 String body = intent.getStringExtra("body");
 
                 StringBuilder xmlRequest = new StringBuilder();
-                xmlRequest.append("<insert>"); // insert
+                xmlRequest.append("<insert>");
                 xmlRequest.append("<pn>").append(packageName).append("</pn>");
                 xmlRequest.append("<id>").append(id).append("</id>");
                 xmlRequest.append("<an>").append(appName).append("</an>");
@@ -87,6 +87,16 @@ public class NotificationService implements BleDevice.ReadWriteListener {
                 xmlRequest.append("<su>").append(summary).append("</su>");
                 xmlRequest.append("<bo>").append(body).append("</bo>");
                 xmlRequest.append("</insert>");
+
+                byte[] data = xmlRequest.toString().getBytes(StandardCharsets.UTF_8);
+                mDevice.write(notificationUpdateCharac, data, NotificationService.this);
+            } else if (Objects.equals(event, "removed")) {
+                int id = intent.getIntExtra("id", 0);
+
+                StringBuilder xmlRequest = new StringBuilder();
+                xmlRequest.append("<removed>");
+                xmlRequest.append("<id>").append(id).append("</id>");
+                xmlRequest.append("</removed>");
 
                 byte[] data = xmlRequest.toString().getBytes(StandardCharsets.UTF_8);
                 mDevice.write(notificationUpdateCharac, data, NotificationService.this);

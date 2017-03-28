@@ -34,11 +34,11 @@ import com.idevicesinc.sweetblue.BleDeviceState;
 import com.idevicesinc.sweetblue.BleManager;
 import com.idevicesinc.sweetblue.BleNode;
 
-import org.asteroidos.sync.DeviceDetailActivity;
-import org.asteroidos.sync.DeviceListActivity;
+import org.asteroidos.sync.MainActivity;
 import org.asteroidos.sync.R;
 import org.asteroidos.sync.ble.MediaService;
 import org.asteroidos.sync.ble.NotificationService;
+import org.asteroidos.sync.ble.ScreenshotService;
 import org.asteroidos.sync.ble.WeatherService;
 
 import java.util.UUID;
@@ -62,11 +62,14 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     public static final int MSG_SET_LOCAL_NAME = 3;
     public static final int MSG_SET_STATUS = 4;
     public static final int MSG_SET_BATTERY_PERCENTAGE = 5;
+    public static final int MSG_REQUEST_BATTERY_LIFE = 6;
+    public static final int MSG_SET_DEVICE = 7;
 
     public static final int STATUS_CONNECTED = 1;
     public static final int STATUS_DISCONNECTED = 2;
     public static final int STATUS_CONNECTING = 3;
 
+    private ScreenshotService mScreenshotService;
     private WeatherService mWeatherService;
     private NotificationService mNotificationService;
     private MediaService mMediaService;
@@ -76,7 +79,8 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_CONNECT:
-                    mDevice = mBleMngr.getDevice((String)msg.obj);
+                    if(mDevice == null) return;
+                    if(mState == STATUS_CONNECTED || mState == STATUS_CONNECTING) return;
                     replyTo = msg.replyTo;
                     mDevice.setListener_State(SynchronizationService.this);
                     mDevice.setListener_ConnectionFail(new BleDevice.DefaultConnectionFailListener() {
@@ -98,24 +102,56 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                     mWeatherService = new WeatherService(getApplicationContext(), mDevice);
                     mNotificationService = new NotificationService(getApplicationContext(), mDevice);
                     mMediaService = new MediaService(getApplicationContext(), mDevice);
-
-                    try {
-                        Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
-                        answer.obj = mDevice.getName_normalized();
-                        replyTo.send(answer);
-                    } catch (RemoteException ignored) {}
+                    mScreenshotService = new ScreenshotService(getApplicationContext(), mDevice);
 
                     mDevice.connect();
                     break;
                 case MSG_DISCONNECT:
-                    if (mWeatherService != null)
-                        mWeatherService.unsync();
-                    if (mNotificationService != null)
-                        mNotificationService.unsync();
-                    if (mMediaService != null)
-                        mMediaService.unsync();
-
+                    if(mDevice == null) return;
+                    if(mState == STATUS_DISCONNECTED) return;
+                    mScreenshotService.unsync();
+                    mWeatherService.unsync();
+                    mNotificationService.unsync();
+                    mMediaService.unsync();
                     mDevice.disconnect();
+                    break;
+                case MSG_REQUEST_BATTERY_LIFE:
+                    if(mDevice == null) return;
+                    if(mState == STATUS_DISCONNECTED) return;
+                    replyTo = msg.replyTo;
+                    mDevice.read(batteryLevelCharac, new BleDevice.ReadWriteListener()
+                    {
+                        @Override public void onEvent(ReadWriteEvent result)
+                        {
+                            if(result.wasSuccess()) try {
+                                replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
+                            } catch (RemoteException ignored) {}
+                        }
+                    });
+                    break;
+                case MSG_SET_DEVICE:
+                    String macAddress = (String)msg.obj;
+                    if(macAddress.isEmpty()) {
+                        if(mState != STATUS_DISCONNECTED) {
+                            mScreenshotService.unsync();
+                            mWeatherService.unsync();
+                            mNotificationService.unsync();
+                            mMediaService.unsync();
+                            mDevice.disconnect();
+                        }
+                        mDevice = null;
+                    } else {
+                        mDevice = mBleMngr.getDevice(macAddress);
+                        replyTo = msg.replyTo;
+
+                        try {
+                            Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
+                            answer.obj = mDevice.getName_normalized();
+                            replyTo.send(answer);
+
+                            replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
+                        } catch (RemoteException ignored) {}
+                    }
                     break;
                 default:
                     super.handleMessage(msg);
@@ -131,6 +167,11 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         updateNotification();
     }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_STICKY;
+    }
+
     private void updateNotification() {
         String status = getString(R.string.disconnected);
         if(mDevice != null) {
@@ -141,9 +182,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         }
 
         if(mDevice != null) {
-            Intent intent = new Intent(this, DeviceDetailActivity.class);
-            intent.putExtra(DeviceDetailActivity.ARG_DEVICE_ADDRESS, mDevice.getMacAddress());
-
+            Intent intent = new Intent(this, MainActivity.class);
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -159,7 +198,6 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
 
             mNM.notify(NOTIFICATION, notification);
         }
-
     }
 
     @Override
@@ -174,6 +212,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         return mMessenger.getBinder();
     }
 
+    /* Bluetooth events handling */
     @Override
     public void onEvent(StateEvent event) {
         if (event.didEnter(BleDeviceState.INITIALIZED)) {
@@ -195,16 +234,9 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                     } catch(RemoteException ignored) {}
                 }
             });
-            event.device().read(batteryLevelCharac, new BleDevice.ReadWriteListener()
-            {
-                @Override public void onEvent(ReadWriteEvent result)
-                {
-                    if(result.wasSuccess()) try {
-                        replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
-                    } catch (RemoteException ignored) {}
-                }
-            });
 
+            if(mScreenshotService != null)
+                mScreenshotService.sync();
             if (mWeatherService != null)
                 mWeatherService.sync();
             if (mNotificationService != null)
@@ -218,6 +250,8 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_DISCONNECTED, 0));
             } catch (RemoteException ignored) {}
 
+            if(mScreenshotService != null)
+                mScreenshotService.sync();
             if (mWeatherService != null)
                 mWeatherService.unsync();
             if (mNotificationService != null)

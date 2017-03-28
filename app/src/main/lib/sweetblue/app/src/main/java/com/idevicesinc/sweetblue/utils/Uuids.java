@@ -6,7 +6,7 @@ import java.util.UUID;
  * A collection of standard {@link UUID}s for services, characteristics, and descriptors.
  * Some convenience methods for creating {@link UUID}s also.
  */
-public class Uuids
+public final class Uuids
 {
 	/**
 	 * A {@link UUID} instance composed of all zeros and used instead of <code>null</code> in various places.
@@ -53,18 +53,12 @@ public class Uuids
 	public static final UUID CURRENT_TIME_SERVICE__CURRENT_TIME = Uuids.fromShort(0x2a2b);
 	public static final UUID CURRENT_TIME_SERVICE__LOCAL_TIME_INFO = Uuids.fromShort(0x2a0f);
 
-
-
-//	public static final UUID MODEL_NUMBER											= fromShort("2a27");
-//	public static final UUID MANUFACTURER_NAME										= fromShort("2a27");
-//	public static final UUID MANUFACTURER_NAME										= fromShort("2a27");
-//	public static final UUID MANUFACTURER_NAME										= fromShort("2a27");
-//	public static final UUID MANUFACTURER_NAME										= fromShort("2a27");
-	
+	public static final UUID CHARACTERISTIC_USER_DESCRIPTION_DESCRIPTOR_UUID		= fromShort("2901");
 	public static final UUID CLIENT_CHARACTERISTIC_CONFIGURATION_DESCRIPTOR_UUID	= fromShort("2902");
+	public static final UUID CHARACTERISTIC_PRESENTATION_FORMAT_DESCRIPTOR_UUID		= fromShort("2904");
 	
 
-	protected final static String BLUETOOTH_CONNECTED_HASH = "6c29226cccbb5c1dc7ff5f1a262bc13f55383a9a";
+	protected final static String BLUETOOTH_CONNECTED_HASH = "06c4938be8e598602770461061af590f85a5cc8d";
 
 	
 	/**

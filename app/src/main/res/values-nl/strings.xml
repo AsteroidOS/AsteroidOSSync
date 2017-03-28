@@ -1,14 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="app_name">AsteroidOS-synchronisatie</string>
     <string name="searching">Naar horloges aan het zoeken</string>
-    <string name="scanning">AAN</string>
-    <string name="not_scanning">UIT</string>
     <string name="generic_ok">Oké</string>
     <string name="ble_not_supported">Het lijkt erop dat Bluetooth Low Energy niet op dit apparaat ondersteund is.</string>
-    <string name="uhoh_message_nuke_cancel">Annuleer</string>
     <string name="uhoh_message_phone_restart">Het lijkt erop dat Android\'s Bluetooth stack niet meer werkt. Het kan nodig zijn de telefoon te herstarten.</string>
-    <string name="uhoh_message_phone_restart_ok">OK</string>
-    <string name="ok">OK</string>
     <string name="nothing_found">Geen horloge gevonden</string>
     <string name="one_found">1 horloge gevonden</string>
     <string name="n_found">%d horloges gevonden</string>

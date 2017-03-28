@@ -16,7 +16,7 @@ import com.idevicesinc.sweetblue.utils.ForEach_Void;
 import com.idevicesinc.sweetblue.utils.Interval;
 import com.idevicesinc.sweetblue.utils.State;
 
-class P_DeviceManager
+final class P_DeviceManager
 {
     private final HashMap<String, BleDevice> m_map = new HashMap<String, BleDevice>();
     private final ArrayList<BleDevice> m_list = new ArrayList<BleDevice>();
@@ -434,7 +434,7 @@ class P_DeviceManager
 
             if (!device.is(BleDeviceState.DISCOVERED))
             {
-                device.onNewlyDiscovered(device.getNative(), null, device.getRssi(), null, device.getOrigin());
+                device.onNewlyDiscovered(device.layerManager().getDeviceLayer(), null, device.getRssi(), null, device.getOrigin());
 
                 if (m_mngr.m_discoveryListener != null)
                 {
@@ -467,6 +467,11 @@ class P_DeviceManager
         for (int i = m_list.size() - 1; i >= 0; i--)
         {
             final BleDevice device_ith = m_list.get(i);
+
+            if (device_ith.is(BleDeviceState.CONNECTED))
+            {
+                device_ith.m_nativeWrapper.updateNativeConnectionState(device_ith.getNativeGatt());
+            }
 
             final boolean retainDeviceWhenBleTurnsOff = BleDeviceConfig.bool(device_ith.conf_device().retainDeviceWhenBleTurnsOff, device_ith.conf_mngr().retainDeviceWhenBleTurnsOff);
 

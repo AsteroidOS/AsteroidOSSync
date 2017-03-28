@@ -5,7 +5,7 @@
 <b>|</b>&nbsp;<a href="https://github.com/iDevicesInc/SweetBlue/wiki">Wiki</a>
 <b>|</b>
 <a href="https://travis-ci.org/iDevicesInc/SweetBlue">
-  <img align="right" src="https://img.shields.io/badge/version-2.51.48-blue.svg" />
+  <img align="right" src="https://img.shields.io/badge/version-2.52.01-blue.svg" />
   <img align="right" src="https://travis-ci.org/iDevicesInc/SweetBlue.svg?branch=master"/>
 </a>
 <p align="center">
@@ -43,7 +43,7 @@ Features
 *	Highly configurable scanning with min/max time limits, periodic bursts, advanced filtering, and more.
 *	Continuous scanning mode that saves battery and defers to more important operations by stopping and starting as needed under the hood.
 *	Atomic transactions for easily coordinating authentication handshakes, initialization, and firmware updates.
-*	Automatic striping of characteristic writes greater than [MTU](http://en.wikipedia.org/wiki/Maximum_transmission_unit) size of 20 bytes.
+* 	Automatic striping of characteristic writes greater than [MTU](http://en.wikipedia.org/wiki/Maximum_transmission_unit) size of 20 bytes. (Coming in a future version).
 *	Undiscovery based on last time seen.
 *	Clean leakage of underlying native stack objects in case of emergency.
 *	Wraps Android API level checks that gate certain methods.

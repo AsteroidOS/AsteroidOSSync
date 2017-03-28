@@ -1,26 +1,19 @@
 package com.idevicesinc.sweetblue;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
-import android.bluetooth.BluetoothGattServer;
 import android.bluetooth.BluetoothGattService;
-
 import com.idevicesinc.sweetblue.BleDevice.ReadWriteListener.ReadWriteEvent;
 import com.idevicesinc.sweetblue.BleDevice.ReadWriteListener.Status;
 import com.idevicesinc.sweetblue.BleDevice.ReadWriteListener.Target;
 import com.idevicesinc.sweetblue.BleDevice.ReadWriteListener.Type;
-import com.idevicesinc.sweetblue.BleManager.UhOhListener.UhOh;
 import com.idevicesinc.sweetblue.utils.FutureData;
 
-class P_DeviceServiceManager extends PA_ServiceManager
+
+final class P_DeviceServiceManager extends PA_ServiceManager
 {
 	private final BleDevice m_device;
 	
@@ -36,7 +29,7 @@ class P_DeviceServiceManager extends PA_ServiceManager
 		return new ReadWriteEvent(m_device, serviceUuid, characteristicUuid, descriptorUuid, type, target, data, Status.NO_MATCHING_TARGET, gattStatus, 0.0, 0.0, /*solicited=*/true);
 	}
 	
-	BleDevice.ReadWriteListener.ReadWriteEvent getEarlyOutEvent(UUID serviceUuid, UUID characteristicUuid, UUID descriptorUuid, FutureData futureData, BleDevice.ReadWriteListener.Type type, final Target target)
+	final BleDevice.ReadWriteListener.ReadWriteEvent getEarlyOutEvent(UUID serviceUuid, UUID characteristicUuid, UUID descriptorUuid, FutureData futureData, BleDevice.ReadWriteListener.Type type, final Target target)
 	{
 		final int gattStatus = BleStatuses.GATT_STATUS_NOT_APPLICABLE;
 		
@@ -151,36 +144,15 @@ class P_DeviceServiceManager extends PA_ServiceManager
 		return 0x0;
 	}
 
-	@Override public BluetoothGattService getServiceDirectlyFromNativeNode(UUID serviceUuid)
+	@Override public final BluetoothGattService getServiceDirectlyFromNativeNode(UUID serviceUuid)
 	{
-		final BluetoothGatt gatt = m_device.getNativeGatt();
-
-		if( gatt == null )
-		{
-			return null;
-		}
-		else
-		{
-			final BluetoothGattService service = gatt.getService(serviceUuid);
-
-			return service;
-		}
+		return m_device.layerManager().getService(serviceUuid);
 	}
 
-	@Override protected List<BluetoothGattService> getNativeServiceList_original()
+	@Override protected final List<BluetoothGattService> getNativeServiceList_original()
 	{
-		final BluetoothGatt gatt = m_device.getNativeGatt();
-
-		if( gatt == null )
-		{
-			return EMPTY_SERVICE_LIST;
-		}
-		else
-		{
-			final List<BluetoothGattService> list_native = gatt.getServices();
-
-			return list_native == null ? EMPTY_SERVICE_LIST : list_native;
-		}
+		List<BluetoothGattService> list_native = m_device.layerManager().getNativeServiceList();
+		return list_native == null ? EMPTY_SERVICE_LIST : list_native;
 	}
 }
 
