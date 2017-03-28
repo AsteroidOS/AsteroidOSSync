@@ -1,2 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">AsteroidOS Synkronointi</string>
+    <string name="generic_ok">OK</string>
+    <string name="generic_cancel">Peruuta</string>
+    <string name="not_supported">Tämä ominaisuus ei ole tuettu</string>
+
+    <string name="searching">Etsitään kelloja</string>
+    <string name="unknown_device">Tuntematon Laite</string>
+    <string name="nothing_found">Kelloa ei löydetty</string>
+    <string name="one_found">1 Kello löydetty</string>
+    <string name="n_found">%d kelloa löydetty</string>
+
+    <string name="ble_not_supported">Tämä laite ei tue Bluetooth Low Energy ominaisuutta.</string>
+    <string name="uhoh_message_nuke">Vaikuttaa siltä, että Androidin Bluetooth sovelluksella on ongelmia. Bluetoothin uudelleenkäynnistys on suositeltavaa.</string>
+    <string name="uhoh_message_nuke_drop">Resetoi Bluetooth</string>
+    <string name="uhoh_message_phone_restart">Vaikuttaa siltä, että Androidin Bluetooth sovellus on kokonaan rikki. Laite voi vaatia uudelleenkäynnistyksen.</string>
+    <string name="uhoh_message_weirdness">Jotakin outoa tapahtui taustalla olevalle bluetooth sovellukselle. Se todennäköisesti palautuu, mutta sinun ehkä täytyy käynnistää laite uudelleen, jos näet tämän toistuvasti.</string>
+
+    <string name="disconnected">Ei yhdistetty</string>
+    <string name="connected">Yhdistetty</string>
+    <string name="connecting">Yhdistetään…</string>
+    <string name="connected_formatted">Yhdistetty kohteeseen %s</string>
+    <string name="connecting_formatted">Yhdistetään kohteeseen %s</string>
+
+    <string name="connected_icon">Yhdistetty kuvake</string>
+    <string name="battery_info_icon">Akun info kuvake</string>
+    <string name="screenshot_icon">Kuvankaappauksen kuvake</string>
+    <string name="finder_icon">Etsijän kuvake</string>
+    <string name="settings_icon">Asetuksien kuvake</string>
+    <string name="weather_icon">Sään kuvake</string>
+
+    <string name="grab_a_screenshot">Ota kuvankaappaus</string>
+
+    <string name="find_my_watch">Etsi kelloni</string>
+
+    <string name="watch_finder">Kellon paikantaja</string>
+    <string name="phone_is_searching">Puhelin etsii sinua!</string>
+
+    <string name="notifications_settings">Ilmoituksien asetukset</string>
+    <string name="notifications">Ilmoitukset</string>
+    <string name="notifications_enablement">Jotta voit mahdollistaa ilmoituksien synkronoinnin, sinun täytyy sallia AsteroidOS Synkronointi seuraavassa valikossa.</string>
+
+    <string name="weather_settings">Sään asetukset</string>
+    <string name="enter_city_name">Syötä kaupunki:</string>
+    <string name="unpair">Irroita</string>
+    <string name="scanning">Etsitään...</string>
+    <string name="downloading">Ladataan...</string>
+    <string name="downloaded">Ladattu</string>
+    <string name="screenshot">Kuvankaappaus</string>
+</resources>
