@@ -28,6 +28,7 @@
     <string name="finder_icon">Finder icon</string>
     <string name="settings_icon">Settings icon</string>
     <string name="weather_icon">Weather icon</string>
+    <string name="time_icon">Time icon</string>
 
     <string name="grab_a_screenshot">Grab a screenshot</string>
 
@@ -47,4 +48,5 @@
     <string name="downloading">Downloading...</string>
     <string name="downloaded">Downloaded</string>
     <string name="screenshot">Screenshot</string>
+    <string name="synchronize_time">Synchronize time</string>
 </resources>
