@@ -226,6 +226,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             try {
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_CONNECTED, 0));
             } catch (RemoteException ignored) {}
+            mDevice.setMtu(256);
 
             event.device().enableNotify(batteryLevelCharac, new BleDevice.ReadWriteListener() {
                 @Override
