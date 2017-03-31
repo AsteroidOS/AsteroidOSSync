@@ -80,31 +80,33 @@ public class WeatherService implements BleDevice.ReadWriteListener {
 
                 int currentDay, i=0;
 
-                for (int j = 0; j < 5; j++) { // For each day of forecast
-                    currentDay = dayOfTimestamp(Long.parseLong(l[i].getDt()));
-                    short min = Short.MAX_VALUE;
-                    short max = Short.MIN_VALUE;
-                    int id = 0;
-                    while(i < l.length && dayOfTimestamp(Long.parseLong(l[i].getDt())) == currentDay) { // For each data point of the day
-                        // TODO is there a better way to select the most significant ID than the first of the afternoon ?
-                        if(hourOfTimestamp(Long.parseLong(l[i].getDt())) >= 12 && id == 0)
-                            id = Short.parseShort(l[i].getWeather()[0].getId());
-
-                        short currentTemp = (short)Math.round(Float.parseFloat(l[i].getMain().getTemp()));
-                        if (currentTemp > max) max = currentTemp;
-                        if (currentTemp < min) min = currentTemp;
-
+                try {
+                    for (int j = 0; j < 5; j++) { // For each day of forecast
                         currentDay = dayOfTimestamp(Long.parseLong(l[i].getDt()));
-                        i = i+1;
-                    }
+                        short min = Short.MAX_VALUE;
+                        short max = Short.MIN_VALUE;
+                        int id = 0;
+                        while (i < l.length && dayOfTimestamp(Long.parseLong(l[i].getDt())) == currentDay) { // For each data point of the day
+                            // TODO is there a better way to select the most significant ID than the first of the afternoon ?
+                            if (hourOfTimestamp(Long.parseLong(l[i].getDt())) >= 12 && id == 0)
+                                id = Short.parseShort(l[i].getWeather()[0].getId());
 
-                    ids[2*j] = (byte)(id >> 8);
-                    ids[2*j+1] = (byte)id;
-                    maxTemps[2*j] = (byte)(max >> 8);
-                    maxTemps[2*j+1] = (byte)max;
-                    minTemps[2*j] = (byte)(min >> 8);
-                    minTemps[2*j+1] = (byte)min;
-                }
+                            short currentTemp = (short) Math.round(Float.parseFloat(l[i].getMain().getTemp()));
+                            if (currentTemp > max) max = currentTemp;
+                            if (currentTemp < min) min = currentTemp;
+
+                            currentDay = dayOfTimestamp(Long.parseLong(l[i].getDt()));
+                            i = i + 1;
+                        }
+
+                        ids[2 * j] = (byte) (id >> 8);
+                        ids[2 * j + 1] = (byte) id;
+                        maxTemps[2 * j] = (byte) (max >> 8);
+                        maxTemps[2 * j + 1] = (byte) max;
+                        minTemps[2 * j] = (byte) (min >> 8);
+                        minTemps[2 * j + 1] = (byte) min;
+                    }
+                } catch(java.lang.ArrayIndexOutOfBoundsException ignored) {}
 
                 mDevice.write(weatherCityCharac, city, WeatherService.this);
                 mDevice.write(weatherIdsCharac, ids, WeatherService.this);
