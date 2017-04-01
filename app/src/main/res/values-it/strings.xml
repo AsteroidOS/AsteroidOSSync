@@ -1,2 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="generic_ok">OK</string>
+    <string name="generic_cancel">Annulla</string>
+    <string name="not_supported">Questa funzionalità non è ancora disponibile</string>
+
+    <string name="searching">Ricerca orologi</string>
+    <string name="unknown_device">Dispositivo Sconosciuto</string>
+    <string name="nothing_found">Nessun orologio trovato</string>
+    <string name="one_found">1 orologio trovato</string>
+    <string name="n_found">Trovati %d orologi</string>
+
+    <string name="ble_not_supported">La modalità Bluetooth Low Energy non è disponibile su questo dispositivo.</string>
+    <string name="uhoh_message_nuke_drop">Resetta Bluetooth</string>
+    <string name="disconnected">Disconnesso</string>
+    <string name="connected">Connesso</string>
+    <string name="connecting">Mi sto collegando…</string>
+    <string name="connected_formatted">Connesso a %s</string>
+    <string name="connecting_formatted">Mi sto collegando a %s%</string>
+
+    <string name="connected_icon">Icona connesso</string>
+    <string name="battery_info_icon">Icona batteria</string>
+    <string name="screenshot_icon">Icona cattura schermo</string>
+    <string name="finder_icon">Icona cerca</string>
+    <string name="settings_icon">Icona Impostazioni</string>
+    <string name="weather_icon">Icona meteo</string>
+    <string name="time_icon">Icona ora</string>
+
+    <string name="grab_a_screenshot">Cattura schermo</string>
+
+    <string name="find_my_watch">Trova il mio orologio</string>
+
+    <string name="notifications_settings">Impostazioni notifiche</string>
+    <string name="notifications">Notifiche</string>
+    <string name="weather_settings">Impostazioni meteo</string>
+    <string name="downloaded">Scaricato</string>
+    <string name="synchronize_time">Sincronizza ora</string>
+</resources>
