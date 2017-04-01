@@ -137,6 +137,14 @@ public class DeviceDetailFragment extends Fragment {
             }
         });
 
+        CardView timeSyncCard = (CardView) view.findViewById(R.id.card_view5);
+        timeSyncCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().sendBroadcast(new  Intent("org.asteroidos.sync.TIME_SYNC_LISTENER"));
+            }
+        });
+
         TextView unpairTextView = (TextView) view.findViewById(R.id.unpairTextView);
         unpairTextView.setOnClickListener(new View.OnClickListener() {
             @Override

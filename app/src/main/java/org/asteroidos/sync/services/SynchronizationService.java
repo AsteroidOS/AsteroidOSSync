@@ -39,6 +39,7 @@ import org.asteroidos.sync.R;
 import org.asteroidos.sync.ble.MediaService;
 import org.asteroidos.sync.ble.NotificationService;
 import org.asteroidos.sync.ble.ScreenshotService;
+import org.asteroidos.sync.ble.TimeService;
 import org.asteroidos.sync.ble.WeatherService;
 
 import java.util.UUID;
@@ -73,6 +74,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     private WeatherService mWeatherService;
     private NotificationService mNotificationService;
     private MediaService mMediaService;
+    private TimeService mTimeService;
 
     class SynchronizationHandler extends Handler {
         @Override
@@ -103,6 +105,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                     mNotificationService = new NotificationService(getApplicationContext(), mDevice);
                     mMediaService = new MediaService(getApplicationContext(), mDevice);
                     mScreenshotService = new ScreenshotService(getApplicationContext(), mDevice);
+                    mTimeService = new TimeService(getApplicationContext(), mDevice);
 
                     mDevice.connect();
                     break;
@@ -113,6 +116,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                     mWeatherService.unsync();
                     mNotificationService.unsync();
                     mMediaService.unsync();
+                    mTimeService.unsync();
                     mDevice.disconnect();
                     break;
                 case MSG_REQUEST_BATTERY_LIFE:
@@ -137,6 +141,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                             mWeatherService.unsync();
                             mNotificationService.unsync();
                             mMediaService.unsync();
+                            mTimeService.unsync();
                             mDevice.disconnect();
                         }
                         mDevice = null;
@@ -221,6 +226,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             try {
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_CONNECTED, 0));
             } catch (RemoteException ignored) {}
+            mDevice.setMtu(256);
 
             event.device().enableNotify(batteryLevelCharac, new BleDevice.ReadWriteListener() {
                 @Override
@@ -243,6 +249,8 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 mNotificationService.sync();
             if (mMediaService != null)
                 mMediaService.sync();
+            if (mTimeService != null)
+                mTimeService.sync();
         } else if (event.didEnter(BleDeviceState.DISCONNECTED)) {
             mState = STATUS_DISCONNECTED;
             updateNotification();
@@ -258,6 +266,8 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 mNotificationService.unsync();
             if (mMediaService != null)
                 mMediaService.unsync();
+            if (mTimeService != null)
+                mTimeService.unsync();
         } else if(event.didEnter(BleDeviceState.CONNECTING)) {
             mState = STATUS_CONNECTING;
             updateNotification();
