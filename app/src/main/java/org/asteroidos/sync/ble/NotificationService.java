@@ -81,6 +81,10 @@ public class NotificationService implements BleDevice.ReadWriteListener {
                 StringBuilder xmlRequest = new StringBuilder();
                 xmlRequest.append("<insert>");
                 xmlRequest.append("<pn>").append(packageName).append("</pn>");
+                xmlRequest.append("<vb>")
+                        // TODO get list of vibration worthy packages from notification prefs
+                        .append(packageName.equals("com.android.dialer") ? "strong" : "none")
+                        .append("</vb>");
                 xmlRequest.append("<id>").append(id).append("</id>");
                 xmlRequest.append("<an>").append(appName).append("</an>");
                 xmlRequest.append("<ai>").append(appIcon).append("</ai>");
