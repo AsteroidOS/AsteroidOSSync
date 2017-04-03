@@ -50,4 +50,6 @@
     <string name="unpair">Cancelar pareamento</string>
     <string name="synchronize_time">Horário da sincronização</string>
 <string name="scanning">Analisando...</string>
-    </resources>
+    <string name="explain_app_prefs">Seus apps aparecerão aqui quando houver notificações sobre eles</string>
+
+</resources>
