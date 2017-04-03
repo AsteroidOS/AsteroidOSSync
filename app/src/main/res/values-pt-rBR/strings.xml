@@ -43,4 +43,12 @@
 
     <string name="weather_settings">Configurações do tempo</string>
     <string name="enter_city_name">Digite o nome da cidade:</string>
-</resources>
+<string name="time_icon">Ícone do horário</string>
+
+    <string name="downloading">Baixando...</string>
+    <string name="downloaded">Baixado</string>
+    <string name="screenshot">Captura de tela</string>
+    <string name="unpair">Cancelar pareamento</string>
+    <string name="synchronize_time">Horário da sincronização</string>
+<string name="scanning">Analisando...</string>
+    </resources>
