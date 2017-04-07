@@ -33,6 +33,7 @@ import com.idevicesinc.sweetblue.BleDevice;
 import com.idevicesinc.sweetblue.BleDeviceState;
 import com.idevicesinc.sweetblue.BleManager;
 import com.idevicesinc.sweetblue.BleNode;
+import com.idevicesinc.sweetblue.utils.Uuids;
 
 import org.asteroidos.sync.MainActivity;
 import org.asteroidos.sync.R;
@@ -41,8 +42,6 @@ import org.asteroidos.sync.ble.NotificationService;
 import org.asteroidos.sync.ble.ScreenshotService;
 import org.asteroidos.sync.ble.TimeService;
 import org.asteroidos.sync.ble.WeatherService;
-
-import java.util.UUID;
 
 import static com.idevicesinc.sweetblue.BleManager.get;
 
@@ -54,8 +53,6 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     private int mState = STATUS_DISCONNECTED;
 
     private Messenger replyTo;
-
-    public static final UUID batteryLevelCharac = UUID.fromString("0000180F-0000-1000-8000-00805f9b34fb");
 
     public static final int MSG_CONNECT = 1;
     public static final int MSG_DISCONNECT = 2;
@@ -123,13 +120,14 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                     if(mDevice == null) return;
                     if(mState == STATUS_DISCONNECTED) return;
                     replyTo = msg.replyTo;
-                    mDevice.read(batteryLevelCharac, new BleDevice.ReadWriteListener()
+                    mDevice.read(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener()
                     {
                         @Override public void onEvent(ReadWriteEvent result)
                         {
-                            if(result.wasSuccess()) try {
-                                replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
-                            } catch (RemoteException ignored) {}
+                            if(result.wasSuccess())
+                                try {
+                                    replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
+                                } catch (RemoteException ignored) {}
                         }
                     });
                     break;
@@ -228,11 +226,11 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             } catch (RemoteException ignored) {}
             mDevice.setMtu(256);
 
-            event.device().enableNotify(batteryLevelCharac, new BleDevice.ReadWriteListener() {
+            event.device().enableNotify(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener() {
                 @Override
                 public void onEvent(ReadWriteEvent e) {
                     try {
-                        if (e.isNotification() && e.charUuid().equals(batteryLevelCharac)) {
+                        if (e.isNotification() && e.charUuid().equals(Uuids.BATTERY_LEVEL)) {
                             byte data[] = e.data();
                             if (replyTo != null)
                                 replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, data[0], 0));
