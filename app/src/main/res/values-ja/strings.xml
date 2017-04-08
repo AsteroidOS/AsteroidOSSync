@@ -49,4 +49,6 @@
     <string name="downloaded">ダウンロードしました</string>
     <string name="screenshot">スクリーンショット</string>
     <string name="synchronize_time">時刻を同期</string>
+<string name="explain_app_prefs">一度そこに通知を受け取れば、アプリがここに表示されます</string>
+
 </resources>
