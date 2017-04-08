@@ -104,14 +104,14 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                     mFirstNotify = false;
                     progress = 0;
                 } else {
-                    System.arraycopy(data, 0, totalData, progress, data.length);
+                    if(data.length + progress < totalData.length)
+                        System.arraycopy(data, 0, totalData, progress, data.length);
                     progress += data.length;
 
-
-                     Notification.Builder notificationBuilder = new Notification.Builder(mCtx)
+                    Notification.Builder notificationBuilder = new Notification.Builder(mCtx)
                             .setContentTitle(mCtx.getText(R.string.screenshot));
 
-                    if(size == progress) {
+                    if(size < progress) {
                         String dirStr = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/AsteroidOSSync";
                         File directory = new File(dirStr);
                         if(!directory.exists())
