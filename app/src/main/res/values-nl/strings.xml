@@ -42,4 +42,7 @@
 <string name="downloaded">Gedownload</string>
     <string name="downloading">Downloaden...</string>
     <string name="scanning">Scannen...</string>
-    </resources>
+    <string name="time_icon">Tijdpictogram</string>
+
+    <string name="synchronize_time">Tijd synchroniseren</string>
+</resources>
