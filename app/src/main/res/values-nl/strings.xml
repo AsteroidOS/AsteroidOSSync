@@ -43,4 +43,6 @@
     <string name="time_icon">Tijdpictogram</string>
 
     <string name="synchronize_time">Tijd synchroniseren</string>
+<string name="explain_app_prefs">Je apps zullen hier verschijnen wanneer je er meldingen van krijgt</string>
+
 </resources>
