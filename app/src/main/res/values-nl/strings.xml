@@ -2,8 +2,8 @@
 <resources><string name="app_name">AsteroidOS-synchronisatie</string>
     <string name="searching">Naar horloges aan het zoeken</string>
     <string name="generic_ok">Oké</string>
-    <string name="ble_not_supported">Het lijkt erop dat Bluetooth Low Energy niet op dit apparaat ondersteund is.</string>
-    <string name="uhoh_message_phone_restart">Het lijkt erop dat Android\'s Bluetooth stack niet meer werkt. Het kan nodig zijn de telefoon te herstarten.</string>
+    <string name="ble_not_supported">Het lijkt erop dat Bluetooth Low Energy op dit apparaat niet ondersteund wordt.</string>
+    <string name="uhoh_message_phone_restart">Het lijkt erop dat de Bluetooth-stack van Android niet meer werkt. Het kan nodig zijn de telefoon te herstarten.</string>
     <string name="nothing_found">Geen horloge gevonden</string>
     <string name="one_found">1 horloge gevonden</string>
     <string name="n_found">%d horloges gevonden</string>
@@ -15,27 +15,27 @@
     <string name="connected_formatted">Verbonden met %s</string>
     <string name="connecting_formatted">Verbinden met %s</string>
     <string name="not_supported">Deze functie is nog niet ondersteund</string>
-    <string name="notifications_settings">Notificatieinstellingen</string>
+    <string name="notifications_settings">Meldingsinstellingen</string>
     <string name="find_my_watch">Vind mijn horloge</string>
-    <string name="grab_a_screenshot">Neem een schermafbeelding</string>
-    <string name="notifications">Notificaties</string>
-    <string name="notifications_enablement">On notificatiesynchronisatie in te schakelen, moet je AsteroidOS Sync toestaan in het volgende menu.</string>
+    <string name="grab_a_screenshot">Neem een schermafdruk</string>
+    <string name="notifications">Meldingen</string>
+    <string name="notifications_enablement">On meldingssynchronisatie in te schakelen moet je AsteroidOS Sync toestaan in het volgende menu.</string>
     <string name="weather_settings">Weerinstellingen</string>
     <string name="enter_city_name">Voer een stadsnaam in:</string>
-<string name="generic_cancel">Annuleer</string>
-    <string name="unknown_device">Onbekend Apparaat</string>
-    <string name="uhoh_message_nuke">Het lijkt erop dat Android\'s Bluetooth stack problemen heeft. Het wordt aangeraden de Bluetooth stack te herstarten.</string>
-    <string name="uhoh_message_nuke_drop">Reset Bluetooth</string>
-    <string name="uhoh_message_weirdness">Er is iets raars gebeurd in de onderliggende ble stack. Het komt waarschijnlijk weer goed, maar je moet mogelijk je telefoon herstarten als je deze melding blijft zien.</string>
+<string name="generic_cancel">Annuleren</string>
+    <string name="unknown_device">Onbekend apparaat</string>
+    <string name="uhoh_message_nuke">Het lijkt erop dat de Bluetooth-stack van Android problemen heeft. Het wordt aangeraden de Bluetooth-stack te herstarten.</string>
+    <string name="uhoh_message_nuke_drop">Bluetooth herstarten</string>
+    <string name="uhoh_message_weirdness">Er is iets raars gebeurd in de onderliggende ble-stack. Het komt waarschijnlijk weer goed, maar je moet mogelijk je telefoon herstarten als je deze melding blijft zien.</string>
 
     <string name="percentage">%d %%</string>
 
-    <string name="connected_icon">Verbonden icoon</string>
-    <string name="battery_info_icon">Batterijinfo icoon</string>
-    <string name="screenshot_icon">Schermafbeelding icoon</string>
-    <string name="finder_icon">Vinder icoon</string>
-    <string name="settings_icon">Instellingen icoon</string>
-    <string name="weather_icon">Weer icoon</string>
+    <string name="connected_icon">Verbonden-pictogram</string>
+    <string name="battery_info_icon">Batterijinfopictogram</string>
+    <string name="screenshot_icon">Schermafdrukpictogram</string>
+    <string name="finder_icon">Vinderpictogram</string>
+    <string name="settings_icon">Instellingenpictogram</string>
+    <string name="weather_icon">Weerpictogram</string>
 
     <string name="unpair">Ontkoppelen</string>
     <string name="screenshot">Schermafdruk</string>
