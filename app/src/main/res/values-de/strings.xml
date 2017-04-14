@@ -21,8 +21,6 @@
     <string name="uhoh_message_phone_restart">Offenbar ist Bluetooth auf Android nicht mehr funktionsfähig. Ein Neustart des Telefons ist vermutlich nötig.</string>
     <string name="uhoh_message_weirdness">Im BLE-Modul ist etwas schief gelaufen. Es wird sich vermutlich wieder erholen, aber wenn Sie diese Meldung öfter sehen, sollten Sie Ihr Telefon neu starten.</string>
 
-    <string name="percentage">%d %%</string>
-
     <string name="find_my_watch">Finde meine Uhr</string>
 
     <string name="watch_finder">Uhr-Finder</string>

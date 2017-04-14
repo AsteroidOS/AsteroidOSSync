@@ -19,7 +19,6 @@
     <string name="connecting">Tuqqna…</string>
     <string name="connected_formatted">Iqqen ar %s</string>
     <string name="connecting_formatted">Tuqqna ar %s</string>
-    <string name="percentage">%d %%</string>
 
     <string name="connected_icon">Tugna n tuqqna</string>
     <string name="battery_info_icon">Tugna n telɣut n uẓru</string>

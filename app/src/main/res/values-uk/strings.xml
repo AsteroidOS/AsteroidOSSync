@@ -15,7 +15,6 @@
     <string name="connecting">З\'єднання…</string>
     <string name="connected_formatted">З\'єднано з %s</string>
     <string name="connecting_formatted">З\'єднання з %s</string>
-    <string name="percentage">%d %%</string>
 
     <string name="find_my_watch">Знайти мій годинник</string>
 

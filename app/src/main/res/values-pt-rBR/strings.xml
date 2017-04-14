@@ -21,7 +21,6 @@
     <string name="connecting">Conectando…</string>
     <string name="connected_formatted">Conectado a %s</string>
     <string name="connecting_formatted">Conectando a %s</string>
-    <string name="percentage">%d %</string>
 
     <string name="connected_icon">Ícone de conectado</string>
     <string name="battery_info_icon">Ícone de informação da bateria</string>
