@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             if (defaultDevMacAddr.isEmpty()) {
                 f = mListFragment = new DeviceListFragment();
                 onScanRequested();
-                } else {
+            } else {
                 setTitle(prefs.getString(PREFS_DEFAULT_LOC_NAME, ""));
                 f = mDetailFragment = new DeviceDetailFragment();
             }
@@ -317,7 +317,8 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                     getString(R.string.generic_ok), clickListener);
         }
 
-        dialog.show();
+        if (this != null && !isFinishing())
+            dialog.show();
     }
 
     public void showBleNotSupported() {
@@ -337,6 +338,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         dialog.setMessage(getString(R.string.ble_not_supported));
         dialog.setButton(DialogInterface.BUTTON_NEUTRAL,
                 getString(R.string.generic_ok), clickListener);
-        dialog.show();
+        if (this != null && !isFinishing())
+            dialog.show();
     }
 }
