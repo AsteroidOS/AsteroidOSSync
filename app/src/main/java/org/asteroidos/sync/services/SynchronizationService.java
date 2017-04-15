@@ -167,6 +167,9 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     public void onCreate() {
         mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mBleMngr = get(getApplication());
+        BleManagerConfig cfg = new BleManagerConfig();
+        cfg.forceBondDialog = true;
+        mBleMngr.setConfig(cfg);
         updateNotification();
     }
 
