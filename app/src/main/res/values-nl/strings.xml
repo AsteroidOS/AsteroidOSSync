@@ -28,8 +28,6 @@
     <string name="uhoh_message_nuke_drop">Bluetooth herstarten</string>
     <string name="uhoh_message_weirdness">Er is iets raars gebeurd in de onderliggende ble-stack. Het komt waarschijnlijk weer goed, maar je moet mogelijk je telefoon herstarten als je deze melding blijft zien.</string>
 
-    <string name="percentage">%d %%</string>
-
     <string name="connected_icon">Verbonden-pictogram</string>
     <string name="battery_info_icon">Batterijinfopictogram</string>
     <string name="screenshot_icon">Schermafdrukpictogram</string>

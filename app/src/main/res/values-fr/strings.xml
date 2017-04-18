@@ -21,7 +21,6 @@
     <string name="connecting">Connexion…</string>
     <string name="connected_formatted">Connecté à %s</string>
     <string name="connecting_formatted">Connexion à %s</string>
-    <string name="percentage">%d %%</string>
 
     <string name="grab_a_screenshot">Prendre une capture d\'écran</string>
 

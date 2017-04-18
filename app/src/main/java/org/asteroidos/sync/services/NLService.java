@@ -120,6 +120,7 @@ public class NLService extends NotificationListenerService {
         iconFromPackage.put("com.sonyericsson.conversations", "ios-text");
         iconFromPackage.put("com.android.vending", "md-appstore");
         iconFromPackage.put("com.google.android.dialer", "ios-call");
+        iconFromPackage.put("com.android.dialer", "ios-call");
     }
 
     @Override

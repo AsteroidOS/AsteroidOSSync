@@ -65,9 +65,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         mBleMngr.setListener_Discovery(this);
         mBleMngr.setListener_UhOh(this);
 
-        if(defaultDevMacAddr.isEmpty() || !mBleMngr.hasDevice(defaultDevMacAddr))
-            onScanRequested();
-
         /* Check that bluetooth is enabled */
         if (!mBleMngr.isBleSupported())
             showBleNotSupported();
@@ -90,9 +87,10 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
         if (savedInstanceState == null) {
             Fragment f;
-            if(defaultDevMacAddr.isEmpty())
+            if (defaultDevMacAddr.isEmpty()) {
                 f = mListFragment = new DeviceListFragment();
-            else {
+                onScanRequested();
+            } else {
                 setTitle(prefs.getString(PREFS_DEFAULT_LOC_NAME, ""));
                 f = mDetailFragment = new DeviceDetailFragment();
             }
@@ -164,14 +162,19 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
             SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
             String defaultDevMacAddr = prefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
+            String defaultLocalName = prefs.getString(PREFS_DEFAULT_LOC_NAME, "");
 
-            if(mBleMngr.hasDevice(defaultDevMacAddr)) {
+            if(!defaultDevMacAddr.isEmpty()) {
+                if(!mBleMngr.hasDevice(defaultDevMacAddr))
+                    mBleMngr.newDevice(defaultDevMacAddr, defaultLocalName);
                 try {
                     Message msg = Message.obtain(null, SynchronizationService.MSG_SET_DEVICE);
                     msg.obj = defaultDevMacAddr;
                     msg.replyTo = mDeviceDetailMessenger;
                     mSyncServiceMessenger.send(msg);
                 } catch (RemoteException ignored) {}
+
+                onConnectRequested();
             }
         }
 
@@ -247,27 +250,12 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
     @Override
     public void onEvent(BleManager.DiscoveryListener.DiscoveryEvent event) {
-        if (event.was(BleManager.DiscoveryListener.LifeCycle.DISCOVERED)) {
-            SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            String defaultDevMacAddr = prefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
+        if (mListFragment == null) return;
 
-            if(defaultDevMacAddr.equals(event.device().getMacAddress())) {
-                try {
-                    Message msg = Message.obtain(null, SynchronizationService.MSG_SET_DEVICE);
-                    msg.obj = defaultDevMacAddr;
-                    msg.replyTo = mDeviceDetailMessenger;
-                    mSyncServiceMessenger.send(msg);
-                } catch (RemoteException ignored) {}
-
-                onConnectRequested();
-            }
-
-            if (mListFragment == null) return;
+        if (event.was(BleManager.DiscoveryListener.LifeCycle.DISCOVERED))
             mListFragment.deviceDiscovered(event.device());
-        } else if (event.was(BleManager.DiscoveryListener.LifeCycle.UNDISCOVERED)) {
-            if (mListFragment == null) return;
+        else if (event.was(BleManager.DiscoveryListener.LifeCycle.UNDISCOVERED))
             mListFragment.deviceUndiscovered(event.device());
-        }
     }
 
     @Override
@@ -329,7 +317,8 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                     getString(R.string.generic_ok), clickListener);
         }
 
-        dialog.show();
+        if (this != null && !isFinishing())
+            dialog.show();
     }
 
     public void showBleNotSupported() {
@@ -349,6 +338,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         dialog.setMessage(getString(R.string.ble_not_supported));
         dialog.setButton(DialogInterface.BUTTON_NEUTRAL,
                 getString(R.string.generic_ok), clickListener);
-        dialog.show();
+        if (this != null && !isFinishing())
+            dialog.show();
     }
 }

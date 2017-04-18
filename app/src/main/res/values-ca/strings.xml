@@ -17,7 +17,6 @@
     <string name="connecting">Connectant…</string>
     <string name="connected_formatted">Connectat a %s</string>
     <string name="connecting_formatted">Connectant a %s</string>
-    <string name="percentage">%d %%</string>
 
     <string name="connected_icon">Icona de connectat</string>
     <string name="battery_info_icon">Icona d\'informació de la bateria</string>

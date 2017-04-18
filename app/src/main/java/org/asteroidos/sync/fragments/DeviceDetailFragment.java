@@ -188,7 +188,7 @@ public class DeviceDetailFragment extends Fragment {
         mBatteryText.setVisibility(View.VISIBLE);
         mBatteryImage.setVisibility(View.VISIBLE);
         try {
-            mBatteryText.setText(getString(R.string.percentage, percentage));
+            mBatteryText.setText(String.valueOf(percentage)+" %");
         } catch(IllegalStateException ignore) {}
     }
 

@@ -21,7 +21,6 @@
     <string name="connecting">正在连接…</string>
     <string name="connected_formatted">已连接到 %s</string>
     <string name="connecting_formatted">正在连接到 %s</string>
-    <string name="percentage">%d %%</string>
 
     <string name="connected_icon">已连接图标</string>
     <string name="battery_info_icon">电池信息图标</string>

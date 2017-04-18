@@ -15,7 +15,6 @@
     <string name="connecting">Συνδέεται…</string>
     <string name="connected_formatted">Συνδέθηκε στο %s</string>
     <string name="connecting_formatted">Συνδέεται στο %s</string>
-    <string name="percentage">%d %%</string>
 
     <string name="connected_icon">Εικονίδιο σύνδεσης</string>
     <string name="battery_info_icon">Εικονίδιο πληροφοριών μπαταρίας</string>

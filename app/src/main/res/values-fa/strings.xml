@@ -21,7 +21,6 @@
     <string name="connecting">در حال وصل شدن…</string>
     <string name="connected_formatted">وصل شده به %s</string>
     <string name="connecting_formatted">در حال وصل شدن به %s</string>
-    <string name="percentage">‫%Id %%</string>
 
     <string name="connected_icon">نقشک وصل شده</string>
     <string name="battery_info_icon">نقشک اطّلاعات باتری</string>
