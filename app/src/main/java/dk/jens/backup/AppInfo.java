@@ -9,26 +9,16 @@ import android.os.Parcelable;
 public class AppInfo
         implements Comparable<AppInfo>, Parcelable
 {
-    String label, packageName, versionName, sourceDir, dataDir;
-    int versionCode, backupMode;
+    String label, packageName;
     private boolean system, installed, checked, disabled;
     public Bitmap icon;
-    public static final int MODE_UNSET = 0;
-    public static final int MODE_APK = 1;
-    public static final int MODE_DATA = 2;
-    public static final int MODE_BOTH = 3;
 
-    public AppInfo(String packageName, String label, String versionName, int versionCode, String sourceDir, String dataDir, boolean system, boolean installed)
+    public AppInfo(String packageName, String label, boolean system, boolean installed)
     {
         this.label = label;
         this.packageName = packageName;
-        this.versionName = versionName;
-        this.versionCode = versionCode;
-        this.sourceDir = sourceDir;
-        this.dataDir = dataDir;
         this.system = system;
         this.installed = installed;
-        this.backupMode = MODE_UNSET;
     }
     public String getPackageName()
     {
@@ -38,43 +28,7 @@ public class AppInfo
     {
         return label;
     }
-    public String getVersionName()
-    {
-        return versionName;
-    }
-    public int getVersionCode()
-    {
-        return versionCode;
-    }
-    public String getSourceDir()
-    {
-        return sourceDir;
-    }
-    public String getDataDir()
-    {
-        return dataDir;
-    }
-    public int getBackupMode()
-    {
-        return backupMode;
-    }
 
-    public void setBackupMode(int modeToAdd)
-    {
-        // add only if both values are different and neither is MODE_BOTH
-        if(backupMode == MODE_BOTH || modeToAdd == MODE_BOTH)
-            backupMode = MODE_BOTH;
-        else if(modeToAdd != backupMode)
-            backupMode += modeToAdd;
-    }
-    public boolean isChecked()
-    {
-        return checked;
-    }
-    public void setChecked(boolean checked)
-    {
-        this.checked = checked;
-    }
     public void setDisabled(boolean disabled)
     {
         this.disabled = disabled;
@@ -90,16 +44,6 @@ public class AppInfo
     public boolean isInstalled()
     {
         return installed;
-    }
-    // list of single files used by special backups - only for compatibility now
-    public String[] getFilesList()
-    {
-        return null;
-    }
-    // should ideally be removed once proper polymorphism is implemented
-    public boolean isSpecial()
-    {
-        return false;
     }
     public int compareTo(AppInfo appInfo)
     {
@@ -117,11 +61,6 @@ public class AppInfo
     {
         out.writeString(label);
         out.writeString(packageName);
-        out.writeString(versionName);
-        out.writeString(sourceDir);
-        out.writeString(dataDir);
-        out.writeInt(versionCode);
-        out.writeInt(backupMode);
         out.writeBooleanArray(new boolean[] {system, installed, checked});
         out.writeParcelable(icon, flags);
     }
@@ -140,11 +79,6 @@ public class AppInfo
     {
         label = in.readString();
         packageName = in.readString();
-        versionName = in.readString();
-        sourceDir = in.readString();
-        dataDir = in.readString();
-        versionCode = in.readInt();
-        backupMode = in.readInt();
         boolean[] bools = new boolean[4];
         in.readBooleanArray(bools);
         system = bools[0];

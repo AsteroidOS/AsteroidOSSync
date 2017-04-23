@@ -35,7 +35,6 @@ public class AppInfoHelper
         Collections.sort(pinfoList, pInfoPackageNameComparator);
         // list seemingly starts scrambled on 4.3
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         for(PackageInfo pinfo : pinfoList)
         {
             packageNames.add(pinfo.packageName);
@@ -68,16 +67,9 @@ public class AppInfoHelper
                 }
             }
             catch(ClassCastException e) {}
-            // for now the error is ignored since logging it would fill a lot in the log
-            String dataDir = pinfo.applicationInfo.dataDir;
-            // workaround for dataDir being null for the android system
-            // package at least on cm14
-            if(pinfo.packageName.equals("android") && dataDir == null)
-                dataDir = "/data/system";
             AppInfo appInfo = new AppInfo(pinfo.packageName,
                     pinfo.applicationInfo.loadLabel(pm).toString(),
-                    pinfo.versionName, pinfo.versionCode,
-                    pinfo.applicationInfo.sourceDir, dataDir, isSystem,
+                    isSystem,
                     true);
             appInfo.icon = icon;
             list.add(appInfo);

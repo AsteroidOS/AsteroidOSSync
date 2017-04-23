@@ -1,5 +1,7 @@
 package dk.jens.backup.adapters;
 
+// copied from https://github.com/jensstein/oandbackup, used under MIT license
+
 import android.content.Context;
 import android.graphics.Color;
 import android.util.DisplayMetrics;
@@ -15,8 +17,6 @@ import dk.jens.backup.AppInfo;
 import org.asteroidos.sync.R;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 
 public class AppInfoAdapter extends ArrayAdapter<AppInfo>
 {
@@ -192,63 +192,5 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
                 notifyDataSetInvalidated();
             }
         }
-    }
-
-    public void filterAppType(int options)
-    {
-        ArrayList<AppInfo> notInstalled = new ArrayList<AppInfo>();
-        items.clear();
-        switch(options)
-        {
-            case 0: // all apps
-                for(AppInfo appInfo : originalValues)
-                {
-                    if(appInfo.isInstalled())
-                    {
-                        add(appInfo);
-                    }
-                    else
-                    {
-                        notInstalled.add(appInfo);
-                    }
-                }
-                addAll(notInstalled);
-                break;
-            case 1: // user apps
-                for(AppInfo appInfo : originalValues)
-                {
-                    if(!appInfo.isSystem())
-                    {
-                        if(appInfo.isInstalled())
-                        {
-                            add(appInfo);
-                        }
-                        else
-                        {
-                            notInstalled.add(appInfo);
-                        }
-                    }
-                }
-                addAll(notInstalled);
-                break;
-            case 2: // system apps
-                for(AppInfo appInfo : originalValues)
-                {
-                    if(appInfo.isSystem())
-                    {
-                        if(appInfo.isInstalled())
-                        {
-                            add(appInfo);
-                        }
-                        else
-                        {
-                            notInstalled.add(appInfo);
-                        }
-                    }
-                }
-                addAll(notInstalled);
-                break;
-        }
-        notifyDataSetChanged();
     }
 }
