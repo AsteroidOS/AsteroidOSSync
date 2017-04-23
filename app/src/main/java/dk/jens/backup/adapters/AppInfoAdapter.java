@@ -4,11 +4,14 @@ package dk.jens.backup.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
@@ -20,6 +23,8 @@ import java.util.ArrayList;
 
 public class AppInfoAdapter extends ArrayAdapter<AppInfo>
 {
+    final static String TAG = "AsteroidOS Sync";
+
     Context context;
     ArrayList<AppInfo> items;
     int iconSize, layout;
@@ -65,8 +70,10 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
     {
         return items.size();
     }
+
+    @NonNull
     @Override
-    public View getView(int pos, View convertView, ViewGroup parent)
+    public View getView(int pos, View convertView, @NonNull ViewGroup parent)
     {
         ViewHolder viewHolder;
         if(convertView == null)
@@ -75,9 +82,8 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
             convertView = inflater.inflate(layout, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.label = (TextView) convertView.findViewById(R.id.label);
-            viewHolder.packageName = (TextView) convertView.findViewById(R.id.packageName);
-            viewHolder.versionName = (TextView) convertView.findViewById(R.id.versionCode);
             viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
+            viewHolder.button = (Button) convertView.findViewById(R.id.button);
             convertView.setTag(viewHolder);
         }
         else
@@ -100,27 +106,27 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
                 viewHolder.icon.setVisibility(View.GONE);
             }
             viewHolder.label.setText(appInfo.getLabel());
-            viewHolder.packageName.setText(appInfo.getPackageName());
-            if(appInfo.isInstalled())
-            {
-                int color = appInfo.isSystem() ? Color.rgb(198, 91, 112) : Color.rgb(14, 158, 124);
-                if(appInfo.isDisabled())
-                    color = Color.rgb(7, 87, 117);
-                viewHolder.packageName.setTextColor(color);
-            }
-            else
-            {
-                viewHolder.packageName.setTextColor(Color.GRAY);
-            }
+            convertView.setTag(viewHolder);
+            viewHolder.button.setOnClickListener(new MyOnClickListener(appInfo.getLabel()) {
+                @Override
+                public void onClick(View view) {
+                    Log.i(TAG, msg);
+                }
+            });
         }
         return convertView;
+    }
+    abstract class MyOnClickListener implements View.OnClickListener {
+        String msg;
+        MyOnClickListener(String msg) {
+            this.msg = msg;
+        }
     }
     static class ViewHolder
     {
         TextView label;
-        TextView packageName;
-        TextView versionName;
         ImageView icon;
+        Button button;
     }
     @Override
     public Filter getFilter()
