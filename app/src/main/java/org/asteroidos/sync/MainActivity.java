@@ -14,6 +14,7 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -25,23 +26,33 @@ import com.idevicesinc.sweetblue.ManagerStateListener;
 import com.idevicesinc.sweetblue.utils.BluetoothEnabler;
 import com.idevicesinc.sweetblue.utils.Interval;
 
+import org.asteroidos.sync.fragments.AppListFragment;
 import org.asteroidos.sync.fragments.DeviceListFragment;
 import org.asteroidos.sync.fragments.DeviceDetailFragment;
 import org.asteroidos.sync.services.NLService;
 import org.asteroidos.sync.services.SynchronizationService;
 
+import java.util.ArrayList;
+
+import dk.jens.backup.AppInfo;
+import dk.jens.backup.AppInfoHelper;
+
 import static com.idevicesinc.sweetblue.BleManager.get;
 
 public class MainActivity extends AppCompatActivity implements DeviceListFragment.OnDefaultDeviceSelectedListener,
         DeviceListFragment.OnScanRequestedListener, DeviceDetailFragment.OnDefaultDeviceUnselectedListener,
-        DeviceDetailFragment.OnConnectRequestedListener, ManagerStateListener, BleManager.DiscoveryListener, BleManager.UhOhListener {
+        DeviceDetailFragment.OnConnectRequestedListener, ManagerStateListener, BleManager.DiscoveryListener,
+        BleManager.UhOhListener, DeviceDetailFragment.OnAppSettingsClickedListener {
     private BleManager mBleMngr;
     private DeviceListFragment mListFragment;
     private DeviceDetailFragment mDetailFragment;
+    private Fragment mPreviousFragment;
     Messenger mSyncServiceMessenger;
     Intent mSyncServiceIntent;
     final Messenger mDeviceDetailMessenger = new Messenger(new MainActivity.SynchronizationHandler());
     int mStatus = SynchronizationService.STATUS_DISCONNECTED;
+
+    public static ArrayList<AppInfo> appInfoList;
 
     public static final String PREFS_NAME = "WeatherPreferences";
     public static final String PREFS_DEFAULT_MAC_ADDR = "defaultMacAddress";
@@ -54,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String defaultDevMacAddr = prefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
+        appInfoList = AppInfoHelper.getPackageInfo(this);
 
         /* Start and/or attach to the Synchronization Service */
         mSyncServiceIntent = new Intent(this, SynchronizationService.class);
@@ -199,6 +211,44 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             msg.replyTo = mDeviceDetailMessenger;
             mSyncServiceMessenger.send(msg);
         } catch (RemoteException ignored) {}
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fm = getSupportFragmentManager();
+        if(fm.getBackStackEntryCount() > 0) {
+            fm.popBackStack();
+        } else{
+            finish();
+        }
+
+        try {
+            mDetailFragment = (DeviceDetailFragment)mPreviousFragment;
+        } catch (ClassCastException ignored) {}
+        try {
+            mListFragment = (DeviceListFragment)mPreviousFragment;
+        } catch (ClassCastException ignored) {}
+
+    }
+
+    @Override
+    public void onAppSettingsClicked() {
+        Fragment f = new AppListFragment();
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        if (mDetailFragment != null) {
+            mPreviousFragment = mDetailFragment;
+            mDetailFragment = null;
+
+        }
+        if (mListFragment != null) {
+            mPreviousFragment = mListFragment;
+            mListFragment = null;
+        }
+        ft.replace(R.id.flContainer, f);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
     class SynchronizationHandler extends Handler {
