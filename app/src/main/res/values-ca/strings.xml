@@ -42,4 +42,12 @@
     <string name="uhoh_message_phone_restart">Sembla ser que els components del Bluetooth d\'Android estan completament inoperatius. És convenient reiniciar el vostre telèfon.</string>
     <string name="uhoh_message_weirdness">Alguna cosa ha fallat amb els components. Segurament es recuperaran però hauríeu de reiniciar el vostre telèfon si seguiu veient aquest missatge.</string>
 
-    </resources>
+    <string name="time_icon">Icona d\'hora</string>
+
+    <string name="unpair">Desemparellar</string>
+    <string name="scanning">Escanejant...</string>
+    <string name="downloading">Descarregant....</string>
+    <string name="downloaded">Descarregat</string>
+    <string name="screenshot">Captura de pantalla</string>
+    <string name="synchronize_time">Sincronitzar l\'hora</string>
+</resources>
