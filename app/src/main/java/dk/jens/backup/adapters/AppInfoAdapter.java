@@ -3,27 +3,43 @@ package dk.jens.backup.adapters;
 // copied from https://github.com/jensstein/oandbackup, used under MIT license
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import dk.jens.backup.AppInfo;
 import org.asteroidos.sync.R;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class AppInfoAdapter extends ArrayAdapter<AppInfo>
 {
     final static String TAG = "AsteroidOS Sync";
+    final int DEFAULT  = 0;
+    final int NO_NOTIFICATIONS = 1;
+    final int SILENT_NOTIFICATION = 2;
+    final int SMALL_VIBRATION = 3;
+    final int LARGE_VIBRATION = 4;
+
+    public static final String PREFS_NAME = "NotificationPreferences";
+    public static final String PREFS_NOTIFICATIONS = "notifications";
+
 
     Context context;
     ArrayList<AppInfo> items;
@@ -83,7 +99,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
             viewHolder = new ViewHolder();
             viewHolder.label = (TextView) convertView.findViewById(R.id.label);
             viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
-            viewHolder.button = (Button) convertView.findViewById(R.id.button);
+            viewHolder.spinner = (Spinner) convertView.findViewById(R.id.notification_spinner);
             convertView.setTag(viewHolder);
         }
         else
@@ -107,26 +123,56 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
             }
             viewHolder.label.setText(appInfo.getLabel());
             convertView.setTag(viewHolder);
-            viewHolder.button.setOnClickListener(new MyOnClickListener(appInfo.getLabel()) {
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
+                    R.array.notification_types_array, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            viewHolder.spinner.setAdapter(adapter);
+            SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+            String notificationPrefsAsString = prefs.getString(PREFS_NOTIFICATIONS, "{}");
+            Gson gson = new Gson();
+            Type stringIntMap = new TypeToken<Map<String, Integer>>(){}.getType();
+            Map<String,Integer> map = gson.fromJson(notificationPrefsAsString, stringIntMap);
+            Integer position = map.get(appInfo.getPackageName());
+            viewHolder.spinner.setSelection(position != null ? position : DEFAULT);
+            viewHolder.spinner.setOnItemSelectedListener(new MyOnItemSelectedListener(appInfo.getPackageName()) {
                 @Override
-                public void onClick(View view) {
-                    Log.i(TAG, msg);
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i == DEFAULT) return;
+
+                    SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                    String notificationPrefsAsString = prefs.getString(PREFS_NOTIFICATIONS, "{}");
+                    Gson gson = new Gson();
+                    Type stringIntMap = new TypeToken<Map<String, Integer>>(){}.getType();
+                    Map<String,Integer> map = gson.fromJson(notificationPrefsAsString, stringIntMap);
+                    map.put(packageName, i);
+
+                    SharedPreferences.Editor editor = prefs.edit();
+                    String jsonString = gson.toJson(map);
+                    Log.i(TAG, jsonString);
+                    editor.putString(PREFS_NOTIFICATIONS, jsonString);
+                    editor.apply();
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                    Log.i(TAG, "nothing selected");
                 }
             });
         }
         return convertView;
     }
-    abstract class MyOnClickListener implements View.OnClickListener {
-        String msg;
-        MyOnClickListener(String msg) {
-            this.msg = msg;
+    abstract class MyOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
+        String packageName;
+        MyOnItemSelectedListener(String packageName) {
+            this.packageName = packageName;
         }
     }
     static class ViewHolder
     {
         TextView label;
         ImageView icon;
-        Button button;
+        Spinner spinner;
     }
     @Override
     public Filter getFilter()

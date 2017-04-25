@@ -49,4 +49,12 @@
     <string name="downloaded">Downloaded</string>
     <string name="screenshot">Screenshot</string>
     <string name="synchronize_time">Synchronize time</string>
+    <string-array name="notification_types_array">
+        <item>Default</item>
+        <item>No notification</item>
+        <item>Silent</item>
+        <item>Small vibration</item>
+        <item>Large vibration</item>
+    </string-array>
+
 </resources>
