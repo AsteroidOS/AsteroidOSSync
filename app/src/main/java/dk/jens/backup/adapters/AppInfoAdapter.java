@@ -22,6 +22,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import dk.jens.backup.AppInfo;
+
+import org.asteroidos.sync.NotificationPreferences;
 import org.asteroidos.sync.R;
 
 import java.lang.reflect.Type;
@@ -31,15 +33,6 @@ import java.util.Map;
 public class AppInfoAdapter extends ArrayAdapter<AppInfo>
 {
     final static String TAG = "AsteroidOS Sync";
-    final int DEFAULT  = 0;
-    final int NO_NOTIFICATIONS = 1;
-    final int SILENT_NOTIFICATION = 2;
-    final int SMALL_VIBRATION = 3;
-    final int LARGE_VIBRATION = 4;
-
-    public static final String PREFS_NAME = "NotificationPreferences";
-    public static final String PREFS_NOTIFICATIONS = "notifications";
-
 
     Context context;
     ArrayList<AppInfo> items;
@@ -127,30 +120,13 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
                     R.array.notification_types_array, android.R.layout.simple_spinner_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             viewHolder.spinner.setAdapter(adapter);
-            SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            String notificationPrefsAsString = prefs.getString(PREFS_NOTIFICATIONS, "{}");
-            Gson gson = new Gson();
-            Type stringIntMap = new TypeToken<Map<String, Integer>>(){}.getType();
-            Map<String,Integer> map = gson.fromJson(notificationPrefsAsString, stringIntMap);
-            Integer position = map.get(appInfo.getPackageName());
-            viewHolder.spinner.setSelection(position != null ? position : DEFAULT);
+            NotificationPreferences.NotificationOption position =
+                    NotificationPreferences.getNotificationPreferenceForApp(context, appInfo.getPackageName());
+            viewHolder.spinner.setSelection(position.asInt());
             viewHolder.spinner.setOnItemSelectedListener(new MyOnItemSelectedListener(appInfo.getPackageName()) {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if (i == DEFAULT) return;
-
-                    SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-                    String notificationPrefsAsString = prefs.getString(PREFS_NOTIFICATIONS, "{}");
-                    Gson gson = new Gson();
-                    Type stringIntMap = new TypeToken<Map<String, Integer>>(){}.getType();
-                    Map<String,Integer> map = gson.fromJson(notificationPrefsAsString, stringIntMap);
-                    map.put(packageName, i);
-
-                    SharedPreferences.Editor editor = prefs.edit();
-                    String jsonString = gson.toJson(map);
-                    editor.putString(PREFS_NOTIFICATIONS, jsonString);
-                    editor.apply();
-
+                    NotificationPreferences.saveNotificationPreferenceForApp(context, packageName, i);
                 }
 
                 @Override
