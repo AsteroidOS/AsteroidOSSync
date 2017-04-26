@@ -25,6 +25,8 @@ import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
 
+import org.asteroidos.sync.NotificationPreferences;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.UUID;
@@ -72,19 +74,32 @@ public class NotificationService implements BleDevice.ReadWriteListener {
             String event = intent.getStringExtra("event");
             if (Objects.equals(event, "posted")) {
                 String packageName = intent.getStringExtra("packageName");
+                NotificationPreferences.NotificationOption notificationOption =
+                        NotificationPreferences.getNotificationPreferenceForApp(context, packageName);
+                if (notificationOption == NotificationPreferences.NotificationOption.NO_NOTIFICATIONS)
+                    return;
+
                 int id = intent.getIntExtra("id", 0);
                 String appName = intent.getStringExtra("appName");
                 String appIcon = intent.getStringExtra("appIcon");
                 String summary = intent.getStringExtra("summary");
                 String body = intent.getStringExtra("body");
+                String vibration;
+                if (notificationOption == null
+                        || notificationOption == NotificationPreferences.NotificationOption.DEFAULT
+                        || notificationOption == NotificationPreferences.NotificationOption.SILENT_NOTIFICATION)
+                    vibration = "none";
+                else if (notificationOption == NotificationPreferences.NotificationOption.NORMAL_VIBRATION)
+                    vibration = "normal";
+                else if (notificationOption == NotificationPreferences.NotificationOption.STRONG_VIBRATION)
+                    vibration = "strong";
+                else
+                    throw new IllegalArgumentException("Not all options handled");
 
                 StringBuilder xmlRequest = new StringBuilder();
                 xmlRequest.append("<insert>");
                 xmlRequest.append("<pn>").append(packageName).append("</pn>");
-                xmlRequest.append("<vb>")
-                        // TODO get list of vibration worthy packages from notification prefs
-                        .append(packageName.equals("com.android.dialer") ? "strong" : "none")
-                        .append("</vb>");
+                xmlRequest.append("<vb>").append(vibration).append("</vb>");
                 xmlRequest.append("<id>").append(id).append("</id>");
                 xmlRequest.append("<an>").append(appName).append("</an>");
                 xmlRequest.append("<ai>").append(appIcon).append("</ai>");

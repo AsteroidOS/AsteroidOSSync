@@ -53,8 +53,8 @@
         <item>Default</item>
         <item>No notification</item>
         <item>Silent</item>
-        <item>Small vibration</item>
-        <item>Large vibration</item>
+        <item>Vibration</item>
+        <item>Strong vibration</item>
     </string-array>
 
 </resources>
