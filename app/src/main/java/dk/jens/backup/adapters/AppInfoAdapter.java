@@ -148,7 +148,6 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
 
                     SharedPreferences.Editor editor = prefs.edit();
                     String jsonString = gson.toJson(map);
-                    Log.i(TAG, jsonString);
                     editor.putString(PREFS_NOTIFICATIONS, jsonString);
                     editor.apply();
 
