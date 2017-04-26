@@ -42,4 +42,12 @@
 
     <string name="weather_settings">天气设置</string>
     <string name="enter_city_name">输入一个城市名称：</string>
+<string name="time_icon">時間圖標</string>
+
+    <string name="unpair">不成對</string>
+    <string name="scanning">掃描...</string>
+    <string name="downloading">下載中...</string>
+    <string name="downloaded">已下載</string>
+    <string name="screenshot">截圖</string>
+    <string name="synchronize_time">同步時間</string>
 </resources>
