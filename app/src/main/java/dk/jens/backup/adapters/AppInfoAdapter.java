@@ -28,6 +28,7 @@ import org.asteroidos.sync.R;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class AppInfoAdapter extends ArrayAdapter<AppInfo>
@@ -37,10 +38,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
     Context context;
     ArrayList<AppInfo> items;
     int iconSize, layout;
-    String currentFilter;
 
-    private ArrayList<AppInfo> originalValues;
-    private MyArrayFilter mFilter;
     public AppInfoAdapter(Context context, int layout, ArrayList<AppInfo> items)
     {
         super(context, layout, items);
@@ -48,7 +46,6 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
         this.items = new ArrayList<AppInfo>(items);
         this.layout = layout;
 
-        originalValues = new ArrayList<AppInfo>(items);
         try
         {
             DisplayMetrics metrics = new DisplayMetrics();
@@ -152,65 +149,46 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
     @Override
     public Filter getFilter()
     {
-        if(mFilter == null)
-        {
-            mFilter = new MyArrayFilter();
-        }
-        return mFilter;
+        return new MyArrayFilter(NotificationPreferences.seenPackageNames(context));
+    }
+    public void restoreFilter()
+    {
+        getFilter().filter(null);
     }
     private class MyArrayFilter extends Filter
     {
+
+        private List<String> seenPackages;
+        private MyArrayFilter(List<String> seenPackages) {
+            this.seenPackages = seenPackages;
+        }
         @Override
-        protected FilterResults performFiltering(CharSequence prefix)
+        protected FilterResults performFiltering(CharSequence ignored)
         {
             FilterResults results = new FilterResults();
-            if(originalValues == null)
-            {
-                originalValues = new ArrayList<AppInfo>(items);
-            }
             ArrayList<AppInfo> newValues = new ArrayList<AppInfo>();
-            if(prefix != null && prefix.length() > 0)
+            for(AppInfo value : items)
             {
-                String prefixString = prefix.toString().toLowerCase();
-                for(AppInfo value : originalValues)
+                String packageName = value.getPackageName().toLowerCase();
+                if(seenPackages.contains(packageName))
                 {
-                    String packageName = value.getPackageName().toLowerCase();
-                    String label = value.getLabel().toLowerCase();
-                    if((packageName.contains(prefixString) || label.contains(prefixString)) && !newValues.contains(value))
-                    {
-                        newValues.add(value);
-                    }
+                    newValues.add(value);
                 }
-                results.values = newValues;
-                results.count = newValues.size();
             }
-            else
-            {
-                results.values = new ArrayList<AppInfo>(originalValues);
-                results.count = originalValues.size();
-            }
+            results.values = newValues;
+            results.count = newValues.size();
             return results;
         }
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results)
         {
-            currentFilter = constraint.toString();
-            ArrayList<AppInfo> notInstalled = new ArrayList<AppInfo>();
             if(results.count > 0)
             {
                 items.clear();
                 for(AppInfo value : (ArrayList<AppInfo>) results.values)
                 {
-                    if(value.isInstalled())
-                    {
-                        add(value);
-                    }
-                    else
-                    {
-                        notInstalled.add(value);
-                    }
+                    add(value);
                 }
-                addAll(notInstalled);
                 notifyDataSetChanged();
             }
             else

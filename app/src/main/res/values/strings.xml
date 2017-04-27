@@ -56,5 +56,6 @@
         <item>Vibration</item>
         <item>Strong vibration</item>
     </string-array>
+    <string name="explain_app_prefs">Your apps will appear here once you get notifications to them</string>
 
 </resources>

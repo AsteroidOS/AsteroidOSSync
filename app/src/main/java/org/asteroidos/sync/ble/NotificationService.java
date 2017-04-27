@@ -74,6 +74,7 @@ public class NotificationService implements BleDevice.ReadWriteListener {
             String event = intent.getStringExtra("event");
             if (Objects.equals(event, "posted")) {
                 String packageName = intent.getStringExtra("packageName");
+                NotificationPreferences.putPackageToSeen(context, packageName);
                 NotificationPreferences.NotificationOption notificationOption =
                         NotificationPreferences.getNotificationPreferenceForApp(context, packageName);
                 if (notificationOption == NotificationPreferences.NotificationOption.NO_NOTIFICATIONS)

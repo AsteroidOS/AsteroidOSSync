@@ -7,6 +7,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class NotificationPreferences {
@@ -37,8 +40,9 @@ public class NotificationPreferences {
         }
     }
 
-    public static final String PREFS_NAME = "NotificationPreferences";
-    public static final String PREFS_NOTIFICATIONS = "notifications";
+    private static final String PREFS_NAME = "NotificationPreferences";
+    private static final String PREFS_NOTIFICATIONS = "notifications";
+    private static final String PREFS_SEEN_PACKAGES = "seenPackages";
 
 
 
@@ -72,6 +76,24 @@ public class NotificationPreferences {
         SharedPreferences.Editor editor = getPrefs(context).edit();
         String jsonString = new Gson().toJson(map);
         editor.putString(PREFS_NOTIFICATIONS, jsonString);
+        editor.apply();
+    }
+
+    public static List<String> seenPackageNames(Context context) {
+        String asString = getPrefs(context).getString(PREFS_SEEN_PACKAGES, "[]");
+        String[] asArray = new Gson().fromJson(asString, String[].class);
+        return Arrays.asList(asArray);
+    }
+
+    public static void putPackageToSeen(Context context, String packageName) {
+        List<String> list = seenPackageNames(context);
+        if (list.contains(packageName))
+            return;
+        ArrayList<String> array = new ArrayList<>(list);
+        array.add(packageName);
+
+        SharedPreferences.Editor editor = getPrefs(context).edit();
+        editor.putString(PREFS_SEEN_PACKAGES, new Gson().toJson(array));
         editor.apply();
     }
 }
