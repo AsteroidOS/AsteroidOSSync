@@ -24,7 +24,7 @@ import java.util.List;
 
 public class AppInfoHelper
 {
-    final static String TAG = "AsteroidOS Sync";
+    final static String TAG = AppInfoHelper.class.getSimpleName();
 
     public static ArrayList<AppInfo> getPackageInfo(Context context)
     {

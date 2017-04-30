@@ -33,7 +33,7 @@ import java.util.Map;
 
 public class AppInfoAdapter extends ArrayAdapter<AppInfo>
 {
-    final static String TAG = "AsteroidOS Sync";
+    final static String TAG = AppInfoAdapter.class.getSimpleName();
 
     Context context;
     ArrayList<AppInfo> items;
