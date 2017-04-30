@@ -86,11 +86,11 @@ public class NotificationService implements BleDevice.ReadWriteListener {
                 String summary = intent.getStringExtra("summary");
                 String body = intent.getStringExtra("body");
                 String vibration;
-                if (notificationOption == null
-                        || notificationOption == NotificationPreferences.NotificationOption.DEFAULT
-                        || notificationOption == NotificationPreferences.NotificationOption.SILENT_NOTIFICATION)
+                if (notificationOption == NotificationPreferences.NotificationOption.SILENT_NOTIFICATION)
                     vibration = "none";
-                else if (notificationOption == NotificationPreferences.NotificationOption.NORMAL_VIBRATION)
+                else if (notificationOption == null
+                        || notificationOption == NotificationPreferences.NotificationOption.NORMAL_VIBRATION
+                        || notificationOption == NotificationPreferences.NotificationOption.DEFAULT)
                     vibration = "normal";
                 else if (notificationOption == NotificationPreferences.NotificationOption.STRONG_VIBRATION)
                     vibration = "strong";
