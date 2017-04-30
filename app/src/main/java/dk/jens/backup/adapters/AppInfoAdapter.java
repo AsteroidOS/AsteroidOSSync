@@ -3,7 +3,6 @@ package dk.jens.backup.adapters;
 // copied from https://github.com/jensstein/oandbackup, used under MIT license
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,18 +17,13 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import dk.jens.backup.AppInfo;
 
 import org.asteroidos.sync.NotificationPreferences;
 import org.asteroidos.sync.R;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class AppInfoAdapter extends ArrayAdapter<AppInfo>
 {
@@ -149,17 +143,17 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
     @Override
     public Filter getFilter()
     {
-        return new MyArrayFilter(NotificationPreferences.seenPackageNames(context));
+        return new SeenPackagesFilter(NotificationPreferences.seenPackageNames(context));
     }
     public void restoreFilter()
     {
         getFilter().filter(null);
     }
-    private class MyArrayFilter extends Filter
+    private class SeenPackagesFilter extends Filter
     {
 
         private List<String> seenPackages;
-        private MyArrayFilter(List<String> seenPackages) {
+        private SeenPackagesFilter(List<String> seenPackages) {
             this.seenPackages = seenPackages;
         }
         @Override
