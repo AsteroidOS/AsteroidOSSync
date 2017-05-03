@@ -42,4 +42,12 @@
     <string name="enter_city_name">Sekcem isem n uɣrem:</string>
 <string name="not_supported">Tamahilt-a mazal ur tettusefrek</string>
 
-    </resources>
+    <string name="time_icon">Tignit n wakud</string>
+
+    <string name="unpair">Err d asuf</string>
+    <string name="scanning">Asnirem...</string>
+    <string name="downloading">Asider...</string>
+    <string name="downloaded">Yuder-d</string>
+    <string name="screenshot">Tuṭṭfa n ugdil</string>
+    <string name="synchronize_time">Akud n umtawi</string>
+</resources>
