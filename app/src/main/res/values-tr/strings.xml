@@ -43,10 +43,10 @@
     <string name="finder_icon">Bulucu simgesi</string>
     <string name="time_icon">Zaman simgesi</string>
 
-    <string name="notifications_enablement">Bildirim eşzamanlamayı etkinleştirmek için takip eden menüde AsteroidOS Eşzamanlama\'ya izin vermeniz gerekir.</string>
+    <string name="notifications_enablement">Bildirim eşitlemeyi etkinleştirmek için sonraki menüde AsteroidOS Eşitleme\'ye izin vermeniz gerekir.</string>
 
-    <string name="app_name">AsteroidOS Eşzamanlama</string>
+    <string name="app_name">AsteroidOS Eşitleme</string>
     <string name="uhoh_message_weirdness">Bluetooth Düşük Enerji gövdesinde tuhaf birşeyler oldu. Bu muhtemelen düzelecektir ama bunu görmeye devam ederseniz telefonunuzu yeniden başlatmanız gerekebilir.</string>
 
-    <string name="synchronize_time">Zamanı eşzamanla</string>
+    <string name="synchronize_time">Zamanı eşitle</string>
 </resources>
