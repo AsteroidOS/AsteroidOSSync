@@ -1,4 +1,4 @@
-package dk.jens.backup.adapters;
+package org.asteroidos.sync.adapters;
 
 // copied from https://github.com/jensstein/oandbackup, used under MIT license
 
@@ -17,7 +17,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import dk.jens.backup.AppInfo;
+import org.asteroidos.sync.AppInfo;
 
 import org.asteroidos.sync.NotificationPreferences;
 import org.asteroidos.sync.R;

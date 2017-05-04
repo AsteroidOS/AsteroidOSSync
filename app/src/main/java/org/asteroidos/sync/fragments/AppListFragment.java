@@ -13,7 +13,7 @@ import android.widget.Toast;
 import org.asteroidos.sync.MainActivity;
 import org.asteroidos.sync.R;
 
-import dk.jens.backup.adapters.AppInfoAdapter;
+import org.asteroidos.sync.adapters.AppInfoAdapter;
 
 public class AppListFragment extends Fragment {
 

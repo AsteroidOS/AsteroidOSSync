@@ -1,4 +1,4 @@
-package dk.jens.backup;
+package org.asteroidos.sync;
 
 // copied from https://github.com/jensstein/oandbackup, used under MIT license
 

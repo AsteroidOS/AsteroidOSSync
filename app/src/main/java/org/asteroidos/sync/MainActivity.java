@@ -34,9 +34,6 @@ import org.asteroidos.sync.services.SynchronizationService;
 
 import java.util.ArrayList;
 
-import dk.jens.backup.AppInfo;
-import dk.jens.backup.AppInfoHelper;
-
 import static com.idevicesinc.sweetblue.BleManager.get;
 
 public class MainActivity extends AppCompatActivity implements DeviceListFragment.OnDefaultDeviceSelectedListener,

@@ -1,4 +1,4 @@
-package dk.jens.backup;
+package org.asteroidos.sync;
 
 // copied from https://github.com/jensstein/oandbackup, used under MIT license
 
@@ -6,18 +6,13 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
