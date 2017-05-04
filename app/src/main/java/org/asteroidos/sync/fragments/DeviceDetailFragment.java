@@ -133,7 +133,7 @@ public class DeviceDetailFragment extends Fragment {
         notifSettCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), R.string.not_supported, Toast.LENGTH_SHORT).show();
+                mAppSettingsListener.onAppSettingsClicked();
             }
         });
 
@@ -206,12 +206,16 @@ public class DeviceDetailFragment extends Fragment {
     public interface OnDefaultDeviceUnselectedListener {
         void onDefaultDeviceUnselected();
     }
+    public interface OnAppSettingsClickedListener {
+        void onAppSettingsClicked();
+    }
     public interface OnConnectRequestedListener {
         void onConnectRequested();
         void onDisconnectRequested();
     }
     private DeviceDetailFragment.OnDefaultDeviceUnselectedListener mDeviceListener;
     private DeviceDetailFragment.OnConnectRequestedListener mConnectListener;
+    private DeviceDetailFragment.OnAppSettingsClickedListener mAppSettingsListener;
 
     @Override
     public void onAttach(Context context) {
@@ -227,5 +231,12 @@ public class DeviceDetailFragment extends Fragment {
         else
             throw new ClassCastException(context.toString()
                     + " does not implement DeviceDetailFragment.OnConnectRequestedListener");
+
+        if(context instanceof DeviceDetailFragment.OnAppSettingsClickedListener)
+            mAppSettingsListener = (DeviceDetailFragment.OnAppSettingsClickedListener) context;
+        else
+            throw new ClassCastException(context.toString()
+                    + " does not implement DeviceDetailFragment.OnAppSettingsClickedListener");
+
     }
 }

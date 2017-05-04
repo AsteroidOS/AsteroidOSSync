@@ -49,4 +49,13 @@
     <string name="downloaded">Downloaded</string>
     <string name="screenshot">Screenshot</string>
     <string name="synchronize_time">Synchronize time</string>
+    <string-array name="notification_types_array">
+        <item>Default</item>
+        <item>No notification</item>
+        <item>Silent</item>
+        <item>Vibration</item>
+        <item>Strong vibration</item>
+    </string-array>
+    <string name="explain_app_prefs">Your apps will appear here once you get notifications to them</string>
+
 </resources>

@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.idevicesinc.sweetblue.BleDevice;
 import com.idevicesinc.sweetblue.BleDeviceState;
 import com.idevicesinc.sweetblue.BleManager;
+import com.idevicesinc.sweetblue.BleManagerConfig;
 import com.idevicesinc.sweetblue.BleNode;
 import com.idevicesinc.sweetblue.utils.Uuids;
 
