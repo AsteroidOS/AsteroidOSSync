@@ -49,4 +49,6 @@
     <string name="uhoh_message_weirdness">Bluetooth Düşük Enerji gövdesinde tuhaf birşeyler oldu. Bu muhtemelen düzelecektir ama bunu görmeye devam ederseniz telefonunuzu yeniden başlatmanız gerekebilir.</string>
 
     <string name="synchronize_time">Zamanı eşitle</string>
+<string name="explain_app_prefs">Siz uygulamalarınıza bildirim alınca, onlar burada görüneceklerdir</string>
+
 </resources>
