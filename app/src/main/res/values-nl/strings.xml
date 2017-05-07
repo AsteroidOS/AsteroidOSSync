@@ -14,7 +14,7 @@
     <string name="connecting">Verbinden…</string>
     <string name="connected_formatted">Verbonden met %s</string>
     <string name="connecting_formatted">Verbinden met %s</string>
-    <string name="not_supported">Deze functie is nog niet ondersteund</string>
+    <string name="not_supported">Deze functie wordt nog niet ondersteund</string>
     <string name="notifications_settings">Meldingsinstellingen</string>
     <string name="find_my_watch">Vind mijn horloge</string>
     <string name="grab_a_screenshot">Neem een schermafdruk</string>
