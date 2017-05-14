@@ -41,4 +41,12 @@
     <string name="grab_a_screenshot">Bildschirmfoto anfertigen</string>
 
     <string name="finder_icon">„Finden“-Icon</string>
+    <string name="time_icon">„Uhr“-Icon</string>
+
+    <string name="scanning">Scanne...</string>
+    <string name="downloaded">Heruntegeladen</string>
+    <string name="screenshot">Screenshot</string>
+    <string name="explain_app_prefs">Deine Apps werden hier angezeigt, wenn du eine Benachrichtigung zu ihnen erhältst</string>
+
+<string name="unpair">Pairing aufheben</string>
     </resources>
