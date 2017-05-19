@@ -50,4 +50,6 @@
     <string name="downloaded">Descarregat</string>
     <string name="screenshot">Captura de pantalla</string>
     <string name="synchronize_time">Sincronitzar l\'hora</string>
+<string name="explain_app_prefs">Les teves apps apareixeràn aquí un cop rebis notificacions d\'aquestes.</string>
+
 </resources>
