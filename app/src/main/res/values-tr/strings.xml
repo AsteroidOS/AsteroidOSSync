@@ -35,7 +35,7 @@
     <string name="screenshot">Ekran görüntüsü</string>
     <string name="generic_ok">TAMAM</string>
     <string name="generic_cancel">İptal</string>
-    <string name="not_supported">Bu özellikler henüz desteklenmiyor</string>
+    <string name="not_supported">Bu özellik henüz desteklenmiyor</string>
 
     <string name="searching">Saatler aranıyor</string>
     <string name="uhoh_message_nuke">Android\'in Bluetooth gövdesinde sorun olduğu gözüküyor. Bluetooth gövdesini yeniden başlatmanız önerilir.</string>
