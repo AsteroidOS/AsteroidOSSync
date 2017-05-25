@@ -42,12 +42,14 @@
 
     <string name="weather_settings">天气设置</string>
     <string name="enter_city_name">输入一个城市名称：</string>
-<string name="time_icon">時間圖標</string>
+<string name="time_icon">时间图标</string>
 
-    <string name="unpair">不成對</string>
-    <string name="scanning">掃描...</string>
-    <string name="downloading">下載中...</string>
-    <string name="downloaded">已下載</string>
-    <string name="screenshot">截圖</string>
-    <string name="synchronize_time">同步時間</string>
+    <string name="unpair">取消配对</string>
+    <string name="scanning">正在扫描...</string>
+    <string name="downloading">正在下载...</string>
+    <string name="downloaded">已下载</string>
+    <string name="screenshot">截图</string>
+    <string name="synchronize_time">同步时间</string>
+<string name="explain_app_prefs">当您的应用收到通知时会出现在这里</string>
+
 </resources>
