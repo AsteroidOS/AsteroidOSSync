@@ -49,4 +49,5 @@
     <string name="explain_app_prefs">Deine Apps werden hier angezeigt, wenn du eine Benachrichtigung zu ihnen erhältst</string>
 
 <string name="unpair">Pairing aufheben</string>
+    <string name="synchronize_time">Zeit synchronisieren</string>
     </resources>
