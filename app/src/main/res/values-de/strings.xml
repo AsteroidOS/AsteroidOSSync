@@ -50,4 +50,5 @@
 
 <string name="unpair">Pairing aufheben</string>
     <string name="synchronize_time">Zeit synchronisieren</string>
+    <string name="downloading">Wird heruntergeladen...</string>
     </resources>
