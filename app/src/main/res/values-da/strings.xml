@@ -1,2 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">AsteroidOS Synkronisering</string>
+    <string name="generic_ok">OK</string>
+    <string name="generic_cancel">Annuller</string>
+    <string name="not_supported">Denne feature er endnu ikke understøttet</string>
+
+    <string name="searching">Søger efter ure</string>
+    <string name="unknown_device">Ukendt enhed</string>
+    <string name="nothing_found">Ingen ure fundet</string>
+    <string name="one_found">1 ur fundet</string>
+    <string name="n_found">%d ure fundet</string>
+
+    <string name="ble_not_supported">Det lader ikke til at Bluetooth Low Energy er supporteret på denne enhed.</string>
+    <string name="uhoh_message_nuke">Det lader til at Android\'s Bluetooth stack har problemer. Prøv at genstarte Bluetooth.</string>
+    <string name="uhoh_message_nuke_drop">Reset Bluetooth</string>
+    <string name="uhoh_message_phone_restart">Det lader til at Android\'s Bluetooth stack slet ikke fungerer. Prøv at genstarte telefonen.</string>
+    </resources>
