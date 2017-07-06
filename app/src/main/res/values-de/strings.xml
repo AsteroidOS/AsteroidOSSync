@@ -46,7 +46,7 @@
     <string name="scanning">Scanne...</string>
     <string name="downloaded">Heruntegeladen</string>
     <string name="screenshot">Screenshot</string>
-    <string name="explain_app_prefs">Deine Apps werden hier angezeigt, wenn du eine Benachrichtigung zu ihnen erhältst</string>
+    <string name="explain_app_prefs">Deine Apps werden hier angezeigt, sobald du Benachrichtigungen zu ihnen erhältst</string>
 
 <string name="unpair">Pairing aufheben</string>
     <string name="synchronize_time">Zeit synchronisieren</string>
