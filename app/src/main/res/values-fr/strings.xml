@@ -6,7 +6,7 @@
 
     <string name="searching">Recherche de montres</string>
     <string name="unknown_device">Périphérique inconnu</string>
-    <string name="nothing_found">Pas trouvé de montre</string>
+    <string name="nothing_found">Pas de montre trouvée</string>
     <string name="one_found">1 montre trouvée</string>
     <string name="n_found">%d montres trouvées</string>
 
@@ -42,4 +42,14 @@
 
     <string name="connected_icon">Icône de connexion</string>
     <string name="finder_icon">Icône du \"Trouve ma montre\"</string>
+    <string name="unpair">Dissocier</string>
+    <string name="scanning">Scan en cours ...</string>
+    <string name="downloading">Téléchargement ...</string>
+    <string name="screenshot">Capture d\'écran</string>
+    <string name="explain_app_prefs">Vos applis apparaîtront ici une fois que que vous recevrez des notifications</string>
+
+<string name="synchronize_time">Synchroniser la date et l\'heure</string>
+    <string name="time_icon">Icône de date et heure</string>
+
+    <string name="downloaded">Téléchargé(s)</string>
     </resources>
