@@ -44,4 +44,6 @@
 
 <string name="uhoh_message_nuke">Wygląda, że stos Bluetooth systemu android ma problemy. Sugeruje się zrestartowanie stosu Bluetooth.</string>
     <string name="uhoh_message_phone_restart">Wygląda, że stos Bluetooth systemu android kompletnie nie działa. Konieczny może być restart telefonu.</string>
+    <string name="uhoh_message_weirdness">Stało się coś dziwnego i było to związane z Twoim telefonem. Prawdopodobnie to nic poważnego, ale jeżeli będzie się to powtarzać to zalecany jest restart telefonu.</string>
+
     </resources>
