@@ -47,4 +47,5 @@
     <string name="uhoh_message_weirdness">Stało się coś dziwnego z Twoim telefonem. Prawdopodobnie to nic poważnego, ale jeżeli będzie się to powtarzać to zalecany jest restart telefonu.</string>
 
     <string name="watch_finder">Znajdź zegarek</string>
+    <string name="finder_icon">Ikona wyszukiwarki</string>
     </resources>
