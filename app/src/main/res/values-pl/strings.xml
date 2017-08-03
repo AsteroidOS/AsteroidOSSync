@@ -46,4 +46,5 @@
     <string name="uhoh_message_phone_restart">Wygląda, że stos Bluetooth systemu android kompletnie nie działa. Konieczny może być restart telefonu.</string>
     <string name="uhoh_message_weirdness">Stało się coś dziwnego z Twoim telefonem. Prawdopodobnie to nic poważnego, ale jeżeli będzie się to powtarzać to zalecany jest restart telefonu.</string>
 
+    <string name="watch_finder">Znajdź zegarek</string>
     </resources>
