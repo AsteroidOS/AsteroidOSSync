@@ -34,6 +34,9 @@ import com.idevicesinc.sweetblue.BleDeviceState;
 import com.idevicesinc.sweetblue.BleManager;
 import com.idevicesinc.sweetblue.BleManagerConfig;
 import com.idevicesinc.sweetblue.BleNode;
+import com.idevicesinc.sweetblue.BleNodeConfig;
+import com.idevicesinc.sweetblue.BleTask;
+import com.idevicesinc.sweetblue.utils.Interval;
 import com.idevicesinc.sweetblue.utils.Uuids;
 
 import org.asteroidos.sync.MainActivity;
@@ -43,6 +46,8 @@ import org.asteroidos.sync.ble.NotificationService;
 import org.asteroidos.sync.ble.ScreenshotService;
 import org.asteroidos.sync.ble.TimeService;
 import org.asteroidos.sync.ble.WeatherService;
+
+import java.util.UUID;
 
 import static com.idevicesinc.sweetblue.BleManager.get;
 
@@ -170,6 +175,8 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         mBleMngr = get(getApplication());
         BleManagerConfig cfg = new BleManagerConfig();
         cfg.forceBondDialog = true;
+        cfg.taskTimeoutRequestFilter = new TaskTimeoutRequestFilter();
+        cfg.defaultScanFilter = new WatchesFilter();
         mBleMngr.setConfig(cfg);
         updateNotification();
     }
@@ -276,6 +283,34 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             try {
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_CONNECTING, 0));
             } catch (RemoteException ignored) {}
+        }
+    }
+
+    private final class WatchesFilter implements BleManagerConfig.ScanFilter
+    {
+        @Override
+        public Please onEvent(ScanEvent e)
+        {
+            return Please.acknowledgeIf(e.advertisedServices().contains(UUID.fromString("00000000-0000-0000-0000-00a57e401d05")));
+        }
+    }
+
+    public static class TaskTimeoutRequestFilter implements BleNodeConfig.TaskTimeoutRequestFilter
+    {
+        public static final double DEFAULT_TASK_TIMEOUT					= 12.5;
+        public static final double BOND_TASK_TIMEOUT					= 60.0;
+        public static final double DEFAULT_CRASH_RESOLVER_TIMEOUT		= 50.0;
+
+        private static final Please DEFAULT_RETURN_VALUE = Please.setTimeoutFor(Interval.secs(DEFAULT_TASK_TIMEOUT));
+
+        @Override public Please onEvent(TaskTimeoutRequestEvent e)
+        {
+            if(e.task() == BleTask.RESOLVE_CRASHES)
+                return Please.setTimeoutFor(Interval.secs(DEFAULT_CRASH_RESOLVER_TIMEOUT));
+            else if(e.task() == BleTask.BOND)
+                return Please.setTimeoutFor(Interval.secs(BOND_TASK_TIMEOUT));
+            else
+                return DEFAULT_RETURN_VALUE;
         }
     }
 }
