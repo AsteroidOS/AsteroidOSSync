@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.idevicesinc.sweetblue.tester.MainActivity">
+    tools:context="com.idevicesinc.sweetblue.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:id="@+id/stopScan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
+            android:enabled="true"
             android:layout_weight="1"
             android:text="Stop Scan"/>
     </LinearLayout>
