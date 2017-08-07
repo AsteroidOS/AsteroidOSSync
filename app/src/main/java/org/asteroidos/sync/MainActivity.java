@@ -306,6 +306,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     @Override
     public void onScanRequested() {
         mBleMngr.turnOn();
+        mBleMngr.undiscoverAll();
         mBleMngr.startScan(Interval.secs(10.0));
     }
 
