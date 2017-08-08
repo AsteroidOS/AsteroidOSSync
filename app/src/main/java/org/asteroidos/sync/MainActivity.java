@@ -163,6 +163,13 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 .replace(R.id.flContainer, mListFragment)
                 .commit();
 
+        try {
+            Message msg = Message.obtain(null, SynchronizationService.MSG_SET_DEVICE);
+            msg.obj = "";
+            msg.replyTo = mDeviceDetailMessenger;
+            mSyncServiceMessenger.send(msg);
+        } catch (RemoteException ignored) {}
+
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(PREFS_DEFAULT_MAC_ADDR, "");
