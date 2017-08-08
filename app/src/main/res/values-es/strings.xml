@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">AsteroidOS Sync</string>
+    <string name="generic_cancel">Cancelar</string>
+    <string name="generic_ok">OK</string>
+    <string name="not_supported">No soportado</string>
+
+    <string name="searching">Buscando</string>
+    <string name="unknown_device">Reloj desconocido</string>
+    <string name="nothing_found">Nada encontrado</string>
+    <string name="one_found">1 Encontrado</string>
+    <string name="n_found">Relojes encontrado</string>
+
+    <string name="ble_not_supported">Parece ser que la baja energía de Bluetooth no es compatible con este dispositivo.</string>
+    <string name="uhoh_message_nuke">Parece que la pila Bluetooth Android tiene problemas. Se recomienda reiniciar la pila Bluetooth.</string>
+    <string name="uhoh_message_nuke_drop">Réinitialiser le Bluetooth</string>
+    <string name="uhoh_message_phone_restart">Parece que la pila Bluetooth Android es completamente interrumpido. Puede ser necesario reiniciar el teléfono.</string>
+    <string name="uhoh_message_weirdness">Algo extraño sucedió en pila subyacente BLE. Probablemente se recuperará, pero es posible que desee reiniciar el teléfono si continúa viendo este.</string>
+
+    <string name="disconnected">Desconectado</string>
+    <string name="connected">Conectado</string>
+    <string name="connecting">Conectando...</string>
+    <string name="connected_formatted">Conectada con formato</string>
+    <string name="connecting_formatted">Conexión formateada</string>
+
+    <string name="grab_a_screenshot">Hacer captura de pantalla</string>
+
+    <string name="find_my_watch">Encontrar mi reloj</string>
+
+    <string name="notifications_settings">Configuracion de notificaciones</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="notifications_enablement">Habilitación de notificaciones</string>
+
+    <string name="weather_settings">Configuraciones meteorológicas</string>
+    <string name="enter_city_name">Ingrese el nombre de la ciudad</string>
+<string name="battery_info_icon">Icono de información de la batería</string>
+    <string name="screenshot_icon">Icono de captura de pantalla</string>
+    <string name="settings_icon">Icono de configuración</string>
+    <string name="weather_icon">Icono del clima</string>
+
+    <string name="watch_finder">Trouver ma montre</string>
+    <string name="phone_is_searching">El teléfono está buscando</string>
+
+    <string name="connected_icon">Icono conectado</string>
+    <string name="finder_icon">Icono del buscador</string>
+</resources>
