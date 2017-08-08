@@ -39,7 +39,7 @@ import static com.idevicesinc.sweetblue.BleManager.get;
 public class MainActivity extends AppCompatActivity implements DeviceListFragment.OnDefaultDeviceSelectedListener,
         DeviceListFragment.OnScanRequestedListener, DeviceDetailFragment.OnDefaultDeviceUnselectedListener,
         DeviceDetailFragment.OnConnectRequestedListener, BleManager.DiscoveryListener,
-        DeviceDetailFragment.OnAppSettingsClickedListener {
+        DeviceDetailFragment.OnAppSettingsClickedListener, DeviceDetailFragment.OnUpdateListener {
     private BleManager mBleMngr;
     private DeviceListFragment mListFragment;
     private DeviceDetailFragment mDetailFragment;
@@ -171,6 +171,16 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
         mDetailFragment = null;
         setTitle(R.string.app_name);
+    }
+
+    @Override
+    public void onUpdateRequested() {
+        try {
+            Message msg = Message.obtain(null, SynchronizationService.MSG_UPDATE);
+            msg.replyTo = mDeviceDetailMessenger;
+            if(mSyncServiceMessenger != null)
+                mSyncServiceMessenger.send(msg);
+        } catch (RemoteException ignored) {}
     }
 
     /* Synchronization service events handling */

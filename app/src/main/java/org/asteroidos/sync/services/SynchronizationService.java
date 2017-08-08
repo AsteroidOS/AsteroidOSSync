@@ -68,6 +68,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     public static final int MSG_SET_BATTERY_PERCENTAGE = 5;
     public static final int MSG_REQUEST_BATTERY_LIFE = 6;
     public static final int MSG_SET_DEVICE = 7;
+    public static final int MSG_UPDATE = 8;
 
     public static final int STATUS_CONNECTED = 1;
     public static final int STATUS_DISCONNECTED = 2;
@@ -159,6 +160,31 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                             replyTo.send(answer);
 
                             replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
+                        } catch (RemoteException ignored) {}
+                    }
+                    break;
+                case MSG_UPDATE:
+                    if(mDevice != null) {
+                        replyTo = msg.replyTo;
+
+                        try {
+                            Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
+                            answer.obj = mDevice.getName_normalized();
+                            replyTo.send(answer);
+
+                            replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
+
+
+                            mDevice.read(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener()
+                            {
+                                @Override public void onEvent(ReadWriteEvent result)
+                                {
+                                    if(result.wasSuccess())
+                                        try {
+                                            replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
+                                        } catch (RemoteException ignored) {}
+                                }
+                            });
                         } catch (RemoteException ignored) {}
                     }
                     break;

@@ -59,6 +59,13 @@ public class DeviceDetailFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        mUpdateListener.onUpdateRequested();
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         mFab = (FloatingActionButton) view.findViewById(R.id.fab);
         mFab.setOnClickListener(new View.OnClickListener() {
@@ -213,9 +220,13 @@ public class DeviceDetailFragment extends Fragment {
         void onConnectRequested();
         void onDisconnectRequested();
     }
+    public interface OnUpdateListener {
+        void onUpdateRequested();
+    }
     private DeviceDetailFragment.OnDefaultDeviceUnselectedListener mDeviceListener;
     private DeviceDetailFragment.OnConnectRequestedListener mConnectListener;
     private DeviceDetailFragment.OnAppSettingsClickedListener mAppSettingsListener;
+    private DeviceDetailFragment.OnUpdateListener mUpdateListener;
 
     @Override
     public void onAttach(Context context) {
@@ -238,5 +249,10 @@ public class DeviceDetailFragment extends Fragment {
             throw new ClassCastException(context.toString()
                     + " does not implement DeviceDetailFragment.OnAppSettingsClickedListener");
 
+        if(context instanceof DeviceDetailFragment.OnUpdateListener)
+            mUpdateListener = (DeviceDetailFragment.OnUpdateListener) context;
+        else
+            throw new ClassCastException(context.toString()
+                    + " does not implement DeviceDetailFragment.onUpdateListener");
     }
 }
