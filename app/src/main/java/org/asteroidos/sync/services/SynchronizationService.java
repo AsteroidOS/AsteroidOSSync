@@ -89,21 +89,6 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                     if(mState == STATUS_CONNECTED || mState == STATUS_CONNECTING) return;
                     replyTo = msg.replyTo;
                     mDevice.setListener_State(SynchronizationService.this);
-                    mDevice.setListener_ConnectionFail(new BleDevice.DefaultConnectionFailListener() {
-                        @Override public BleNode.ConnectionFailListener.Please onEvent(BleDevice.ConnectionFailListener.ConnectionFailEvent event)
-                        {
-                            BleNode.ConnectionFailListener.Please please = super.onEvent(event);
-
-                            if(!please.isRetry())
-                            {
-                                final String toast = event.device().getName_debug() + " connection failed with " + event.failureCountSoFar() + " retries - " + event.status();
-                                if(getApplicationContext() != null)
-                                    Toast.makeText(getApplicationContext(), toast, Toast.LENGTH_LONG).show();
-                            }
-
-                            return please;
-                        }
-                    });
 
                     mWeatherService = new WeatherService(getApplicationContext(), mDevice);
                     mNotificationService = new NotificationService(getApplicationContext(), mDevice);
