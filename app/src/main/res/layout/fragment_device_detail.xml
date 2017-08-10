@@ -9,14 +9,15 @@
     tools:ignore="MergeRootFrame">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/device_detail_container"
+        android:id="@+id/device_connected_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingBottom="@dimen/detail_vertical_margin"
         android:paddingLeft="@dimen/detail_horizontal_margin"
         android:paddingRight="@dimen/detail_horizontal_margin"
-        android:paddingTop="@dimen/detail_vertical_margin">
+        android:paddingTop="@dimen/detail_vertical_margin"
+        android:visibility="invisible">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -32,7 +33,7 @@
                 android:layout_height="20dp"
                 android:contentDescription="@string/connected_icon"
                 android:gravity="start"
-                android:src="@mipmap/android_cloud" />
+                android:src="@mipmap/android_cloud_done" />
 
             <TextView
                 android:id="@+id/info_connected"
@@ -41,8 +42,8 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:text="@string/disconnected"
-                android:textSize="16sp" />
+                android:text="@string/connected"
+                android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/info_icon_battery"
@@ -50,8 +51,7 @@
                 android:layout_height="20dp"
                 android:contentDescription="@string/battery_info_icon"
                 android:gravity="end"
-                android:src="@mipmap/battery_full"
-                android:visibility="invisible" />
+                android:src="@mipmap/battery_full" />
 
             <TextView
                 android:id="@+id/info_battery"
@@ -60,8 +60,8 @@
                 android:layout_gravity="end"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:textSize="16sp"
-                android:visibility="invisible" />
+                android:text="100 %"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -259,6 +259,30 @@
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/device_disconnected_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/info_icon_disconnected"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:contentDescription="@string/disconnected"
+            android:src="@mipmap/android_cloud" />
+
+        <TextView
+            android:id="@+id/info_disconnected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/disconnected"
+            android:textSize="17dp"
+            android:textColor="#999999"/>
     </LinearLayout>
 
     <TextView
