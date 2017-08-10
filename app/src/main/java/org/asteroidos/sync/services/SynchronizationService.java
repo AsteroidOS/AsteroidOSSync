@@ -30,6 +30,7 @@ import android.os.RemoteException;
 import android.widget.Toast;
 
 import com.idevicesinc.sweetblue.BleDevice;
+import com.idevicesinc.sweetblue.BleDeviceConfig;
 import com.idevicesinc.sweetblue.BleDeviceState;
 import com.idevicesinc.sweetblue.BleManager;
 import com.idevicesinc.sweetblue.BleManagerConfig;
@@ -37,6 +38,7 @@ import com.idevicesinc.sweetblue.BleNode;
 import com.idevicesinc.sweetblue.BleNodeConfig;
 import com.idevicesinc.sweetblue.BleTask;
 import com.idevicesinc.sweetblue.utils.Interval;
+import com.idevicesinc.sweetblue.utils.Utils;
 import com.idevicesinc.sweetblue.utils.Uuids;
 
 import org.asteroidos.sync.MainActivity;
@@ -188,6 +190,9 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         cfg.forceBondDialog = true;
         cfg.taskTimeoutRequestFilter = new TaskTimeoutRequestFilter();
         cfg.defaultScanFilter = new WatchesFilter();
+        cfg.enableCrashResolver = true;
+        cfg.loggingEnabled = true;
+        cfg.bondFilter = new BondFilter();
         mBleMngr.setConfig(cfg);
         updateNotification();
     }
@@ -322,6 +327,15 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 return Please.setTimeoutFor(Interval.secs(BOND_TASK_TIMEOUT));
             else
                 return DEFAULT_RETURN_VALUE;
+        }
+    }
+
+    private static class BondFilter implements BleDeviceConfig.BondFilter
+    {
+        @Override public Please onEvent(StateChangeEvent e)    { return Please.doNothing(); }
+        @Override public Please onEvent(CharacteristicEvent e)
+        {
+            return Please.doNothing();
         }
     }
 }
