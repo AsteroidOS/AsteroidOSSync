@@ -49,6 +49,6 @@
     <string name="scanning">Scansione...</string>
     <string name="downloading">Scaricamento...</string>
     <string name="screenshot">Schermata cattuara</string>
-    <string name="explain_app_prefs">Le applicazioni appariranno quì una volta ricevuta almeno una notifica</string>
+    <string name="explain_app_prefs">Le tue applicazioni compariranno qui al ricevimento di una notifica</string>
 
 </resources>
