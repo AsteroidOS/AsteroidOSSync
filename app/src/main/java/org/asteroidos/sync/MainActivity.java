@@ -38,8 +38,8 @@ import static com.idevicesinc.sweetblue.BleManager.get;
 
 public class MainActivity extends AppCompatActivity implements DeviceListFragment.OnDefaultDeviceSelectedListener,
         DeviceListFragment.OnScanRequestedListener, DeviceDetailFragment.OnDefaultDeviceUnselectedListener,
-        DeviceDetailFragment.OnConnectRequestedListener, ManagerStateListener, BleManager.DiscoveryListener,
-        BleManager.UhOhListener, DeviceDetailFragment.OnAppSettingsClickedListener {
+        DeviceDetailFragment.OnConnectRequestedListener, BleManager.DiscoveryListener,
+        DeviceDetailFragment.OnAppSettingsClickedListener, DeviceDetailFragment.OnUpdateListener {
     private BleManager mBleMngr;
     private DeviceListFragment mListFragment;
     private DeviceDetailFragment mDetailFragment;
@@ -70,9 +70,19 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
         BluetoothEnabler.start(this);
         mBleMngr = get(getApplication());
-        mBleMngr.setListener_State(this);
+        mBleMngr.setListener_State(new ManagerStateListener() {
+            @Override
+            public void onEvent(BleManager.StateListener.StateEvent event) {
+                if(event.didExit(BleManagerState.SCANNING)) {
+                    if(mListFragment != null) mListFragment.scanningStopped();
+                    else                      mDetailFragment.scanningStopped();
+                } else if(event.didEnter(BleManagerState.SCANNING)) {
+                    if(mListFragment != null) mListFragment.scanningStarted();
+                    else                      mDetailFragment.scanningStarted();
+                }
+            }
+        });
         mBleMngr.setListener_Discovery(this);
-        mBleMngr.setListener_UhOh(this);
 
         /* Check that bluetooth is enabled */
         if (!mBleMngr.isBleSupported())
@@ -153,6 +163,13 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 .replace(R.id.flContainer, mListFragment)
                 .commit();
 
+        try {
+            Message msg = Message.obtain(null, SynchronizationService.MSG_SET_DEVICE);
+            msg.obj = "";
+            msg.replyTo = mDeviceDetailMessenger;
+            mSyncServiceMessenger.send(msg);
+        } catch (RemoteException ignored) {}
+
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(PREFS_DEFAULT_MAC_ADDR, "");
@@ -161,6 +178,16 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
         mDetailFragment = null;
         setTitle(R.string.app_name);
+    }
+
+    @Override
+    public void onUpdateRequested() {
+        try {
+            Message msg = Message.obtain(null, SynchronizationService.MSG_UPDATE);
+            msg.replyTo = mDeviceDetailMessenger;
+            if(mSyncServiceMessenger != null)
+                mSyncServiceMessenger.send(msg);
+        } catch (RemoteException ignored) {}
     }
 
     /* Synchronization service events handling */
@@ -283,18 +310,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         }
     }
 
-    /* Bluetooth scanning events handling */
-    @Override
-    public void onEvent(BleManager.StateListener.StateEvent event) {
-        if(event.didExit(BleManagerState.SCANNING)) {
-            if(mListFragment != null) mListFragment.scanningStopped();
-            else                      mDetailFragment.scanningStopped();
-        } else if(event.didEnter(BleManagerState.SCANNING)) {
-            if(mListFragment != null) mListFragment.scanningStarted();
-            else                      mDetailFragment.scanningStarted();
-        }
-    }
-
     @Override
     public void onEvent(BleManager.DiscoveryListener.DiscoveryEvent event) {
         if (mListFragment == null) return;
@@ -308,6 +323,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     @Override
     public void onScanRequested() {
         mBleMngr.turnOn();
+        mBleMngr.undiscoverAll();
         mBleMngr.startScan(Interval.secs(10.0));
     }
 
@@ -323,49 +339,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         super.onPause();
         mBleMngr.onPause();
         unbindService(mConnection);
-    }
-
-    /* Bluetooth errors handling */
-    @Override public void onEvent(UhOhEvent event) {
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        final android.app.AlertDialog dialog = builder.create();
-
-        DialogInterface.OnClickListener clickListener = new DialogInterface.OnClickListener()
-        {
-            @Override public void onClick(DialogInterface dialog, int which)
-            {
-                dialog.dismiss();
-
-                if( which == DialogInterface.BUTTON_POSITIVE )
-                    mBleMngr.reset();
-            }
-        };
-
-        dialog.setTitle(event.uhOh().name());
-
-        if(event.uhOh().getRemedy() == Remedy.RESET_BLE)
-        {
-            dialog.setMessage(getString(R.string.uhoh_message_nuke));
-            dialog.setButton(DialogInterface.BUTTON_POSITIVE,
-                    getString(R.string.uhoh_message_nuke_drop), clickListener);
-            dialog.setButton(DialogInterface.BUTTON_NEGATIVE,
-                    getString(R.string.generic_cancel), clickListener);
-        }
-        else if(event.uhOh().getRemedy() == Remedy.RESTART_PHONE)
-        {
-            dialog.setMessage(getString(R.string.uhoh_message_phone_restart));
-            dialog.setButton(DialogInterface.BUTTON_NEUTRAL,
-                    getString(R.string.generic_ok), clickListener);
-        }
-        else if(event.uhOh().getRemedy() == Remedy.WAIT_AND_SEE)
-        {
-            dialog.setMessage(getString(R.string.uhoh_message_weirdness));
-            dialog.setButton(DialogInterface.BUTTON_NEUTRAL,
-                    getString(R.string.generic_ok), clickListener);
-        }
-
-        if (this != null && !isFinishing())
-            dialog.show();
     }
 
     public void showBleNotSupported() {

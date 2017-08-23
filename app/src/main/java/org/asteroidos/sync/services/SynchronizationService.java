@@ -30,10 +30,15 @@ import android.os.RemoteException;
 import android.widget.Toast;
 
 import com.idevicesinc.sweetblue.BleDevice;
+import com.idevicesinc.sweetblue.BleDeviceConfig;
 import com.idevicesinc.sweetblue.BleDeviceState;
 import com.idevicesinc.sweetblue.BleManager;
 import com.idevicesinc.sweetblue.BleManagerConfig;
 import com.idevicesinc.sweetblue.BleNode;
+import com.idevicesinc.sweetblue.BleNodeConfig;
+import com.idevicesinc.sweetblue.BleTask;
+import com.idevicesinc.sweetblue.utils.Interval;
+import com.idevicesinc.sweetblue.utils.Utils;
 import com.idevicesinc.sweetblue.utils.Uuids;
 
 import org.asteroidos.sync.MainActivity;
@@ -43,6 +48,8 @@ import org.asteroidos.sync.ble.NotificationService;
 import org.asteroidos.sync.ble.ScreenshotService;
 import org.asteroidos.sync.ble.TimeService;
 import org.asteroidos.sync.ble.WeatherService;
+
+import java.util.UUID;
 
 import static com.idevicesinc.sweetblue.BleManager.get;
 
@@ -63,6 +70,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     public static final int MSG_SET_BATTERY_PERCENTAGE = 5;
     public static final int MSG_REQUEST_BATTERY_LIFE = 6;
     public static final int MSG_SET_DEVICE = 7;
+    public static final int MSG_UPDATE = 8;
 
     public static final int STATUS_CONNECTED = 1;
     public static final int STATUS_DISCONNECTED = 2;
@@ -83,21 +91,6 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                     if(mState == STATUS_CONNECTED || mState == STATUS_CONNECTING) return;
                     replyTo = msg.replyTo;
                     mDevice.setListener_State(SynchronizationService.this);
-                    mDevice.setListener_ConnectionFail(new BleDevice.DefaultConnectionFailListener() {
-                        @Override public BleNode.ConnectionFailListener.Please onEvent(BleDevice.ConnectionFailListener.ConnectionFailEvent event)
-                        {
-                            BleNode.ConnectionFailListener.Please please = super.onEvent(event);
-
-                            if(!please.isRetry())
-                            {
-                                final String toast = event.device().getName_debug() + " connection failed with " + event.failureCountSoFar() + " retries - " + event.status();
-                                if(getApplicationContext() != null)
-                                    Toast.makeText(getApplicationContext(), toast, Toast.LENGTH_LONG).show();
-                            }
-
-                            return please;
-                        }
-                    });
 
                     mWeatherService = new WeatherService(getApplicationContext(), mDevice);
                     mNotificationService = new NotificationService(getApplicationContext(), mDevice);
@@ -157,6 +150,31 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                         } catch (RemoteException ignored) {}
                     }
                     break;
+                case MSG_UPDATE:
+                    if(mDevice != null) {
+                        replyTo = msg.replyTo;
+
+                        try {
+                            Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
+                            answer.obj = mDevice.getName_normalized();
+                            replyTo.send(answer);
+
+                            replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
+
+
+                            mDevice.read(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener()
+                            {
+                                @Override public void onEvent(ReadWriteEvent result)
+                                {
+                                    if(result.wasSuccess())
+                                        try {
+                                            replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
+                                        } catch (RemoteException ignored) {}
+                                }
+                            });
+                        } catch (RemoteException ignored) {}
+                    }
+                    break;
                 default:
                     super.handleMessage(msg);
             }
@@ -170,6 +188,11 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         mBleMngr = get(getApplication());
         BleManagerConfig cfg = new BleManagerConfig();
         cfg.forceBondDialog = true;
+        cfg.taskTimeoutRequestFilter = new TaskTimeoutRequestFilter();
+        cfg.defaultScanFilter = new WatchesFilter();
+        cfg.enableCrashResolver = true;
+        cfg.loggingEnabled = true;
+        cfg.bondFilter = new BondFilter();
         mBleMngr.setConfig(cfg);
         updateNotification();
     }
@@ -276,6 +299,43 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             try {
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_CONNECTING, 0));
             } catch (RemoteException ignored) {}
+        }
+    }
+
+    private final class WatchesFilter implements BleManagerConfig.ScanFilter
+    {
+        @Override
+        public Please onEvent(ScanEvent e)
+        {
+            return Please.acknowledgeIf(e.advertisedServices().contains(UUID.fromString("00000000-0000-0000-0000-00a57e401d05")));
+        }
+    }
+
+    public static class TaskTimeoutRequestFilter implements BleNodeConfig.TaskTimeoutRequestFilter
+    {
+        public static final double DEFAULT_TASK_TIMEOUT					= 12.5;
+        public static final double BOND_TASK_TIMEOUT					= 60.0;
+        public static final double DEFAULT_CRASH_RESOLVER_TIMEOUT		= 50.0;
+
+        private static final Please DEFAULT_RETURN_VALUE = Please.setTimeoutFor(Interval.secs(DEFAULT_TASK_TIMEOUT));
+
+        @Override public Please onEvent(TaskTimeoutRequestEvent e)
+        {
+            if(e.task() == BleTask.RESOLVE_CRASHES)
+                return Please.setTimeoutFor(Interval.secs(DEFAULT_CRASH_RESOLVER_TIMEOUT));
+            else if(e.task() == BleTask.BOND)
+                return Please.setTimeoutFor(Interval.secs(BOND_TASK_TIMEOUT));
+            else
+                return DEFAULT_RETURN_VALUE;
+        }
+    }
+
+    private static class BondFilter implements BleDeviceConfig.BondFilter
+    {
+        @Override public Please onEvent(StateChangeEvent e)    { return Please.doNothing(); }
+        @Override public Please onEvent(CharacteristicEvent e)
+        {
+            return Please.doNothing();
         }
     }
 }

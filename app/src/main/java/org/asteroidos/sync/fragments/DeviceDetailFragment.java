@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,11 +42,11 @@ import org.asteroidos.sync.ble.WeatherService;
 import org.asteroidos.sync.services.SynchronizationService;
 
 public class DeviceDetailFragment extends Fragment {
-    private TextView mConnectedText;
-    private ImageView mConnectedImage;
-
+    private TextView mDisconnectedText;
     private TextView mBatteryText;
-    private ImageView mBatteryImage;
+
+    private LinearLayout mDisconnectedPlaceholder;
+    private LinearLayout mConnectedContent;
 
     FloatingActionButton mFab;
 
@@ -56,6 +57,13 @@ public class DeviceDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_device_detail, parent, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mUpdateListener.onUpdateRequested();
     }
 
     @Override
@@ -71,11 +79,11 @@ public class DeviceDetailFragment extends Fragment {
             }
         });
 
-        mConnectedText = (TextView)view.findViewById(R.id.info_connected);
-        mConnectedImage = (ImageView)view.findViewById(R.id.info_icon_connected);
-
+        mDisconnectedText = (TextView)view.findViewById(R.id.info_disconnected);
         mBatteryText = (TextView)view.findViewById(R.id.info_battery);
-        mBatteryImage = (ImageView)view.findViewById(R.id.info_icon_battery);
+
+        mConnectedContent = (LinearLayout)view.findViewById(R.id.device_connected_content);
+        mDisconnectedPlaceholder = (LinearLayout)view.findViewById(R.id.device_disconnected_placeholder);
 
         CardView weatherCard = (CardView)view.findViewById(R.id.card_view1);
         weatherCard.setOnClickListener(new View.OnClickListener() {
@@ -162,22 +170,22 @@ public class DeviceDetailFragment extends Fragment {
         mStatus = status;
         switch(status) {
             case SynchronizationService.STATUS_CONNECTED:
-                mConnectedText.setText(R.string.connected);
-                mConnectedImage.setImageResource(R.mipmap.android_cloud_done);
+                mDisconnectedPlaceholder.setVisibility(View.GONE);
+                mConnectedContent.setVisibility(View.VISIBLE);
                 mFab.setImageResource(R.mipmap.android_bluetooth_disconnect);
                 mConnected = true;
                 break;
             case SynchronizationService.STATUS_DISCONNECTED:
-                mConnectedText.setText(R.string.disconnected);
-                mConnectedImage.setImageResource(R.mipmap.android_cloud);
-                mBatteryText.setVisibility(View.INVISIBLE);
-                mBatteryImage.setVisibility(View.INVISIBLE);
+                mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
+                mConnectedContent.setVisibility(View.GONE);
+                mDisconnectedText.setText(R.string.disconnected);
                 mFab.setImageResource(R.mipmap.android_bluetooth_connect);
                 mConnected = false;
                 break;
             case SynchronizationService.STATUS_CONNECTING:
-                mConnectedText.setText(R.string.connecting);
-                mConnectedImage.setImageResource(R.mipmap.android_cloud);
+                mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
+                mConnectedContent.setVisibility(View.GONE);
+                mDisconnectedText.setText(R.string.connecting);
                 break;
             default:
                 break;
@@ -185,8 +193,6 @@ public class DeviceDetailFragment extends Fragment {
     }
 
     public void setBatteryPercentage(int percentage) {
-        mBatteryText.setVisibility(View.VISIBLE);
-        mBatteryImage.setVisibility(View.VISIBLE);
         try {
             mBatteryText.setText(String.valueOf(percentage)+" %");
         } catch(IllegalStateException ignore) {}
@@ -194,12 +200,12 @@ public class DeviceDetailFragment extends Fragment {
 
     public void scanningStarted() {
         if(mStatus == SynchronizationService.STATUS_DISCONNECTED)
-            mConnectedText.setText(R.string.scanning);
+            mDisconnectedText.setText(R.string.scanning);
     }
 
     public void scanningStopped() {
         if(mStatus == SynchronizationService.STATUS_DISCONNECTED)
-            mConnectedText.setText(R.string.disconnected);
+            mDisconnectedText.setText(R.string.disconnected);
     }
 
     /* Notifies MainActivity when a device unpairing is requested */
@@ -213,9 +219,13 @@ public class DeviceDetailFragment extends Fragment {
         void onConnectRequested();
         void onDisconnectRequested();
     }
+    public interface OnUpdateListener {
+        void onUpdateRequested();
+    }
     private DeviceDetailFragment.OnDefaultDeviceUnselectedListener mDeviceListener;
     private DeviceDetailFragment.OnConnectRequestedListener mConnectListener;
     private DeviceDetailFragment.OnAppSettingsClickedListener mAppSettingsListener;
+    private DeviceDetailFragment.OnUpdateListener mUpdateListener;
 
     @Override
     public void onAttach(Context context) {
@@ -238,5 +248,10 @@ public class DeviceDetailFragment extends Fragment {
             throw new ClassCastException(context.toString()
                     + " does not implement DeviceDetailFragment.OnAppSettingsClickedListener");
 
+        if(context instanceof DeviceDetailFragment.OnUpdateListener)
+            mUpdateListener = (DeviceDetailFragment.OnUpdateListener) context;
+        else
+            throw new ClassCastException(context.toString()
+                    + " does not implement DeviceDetailFragment.onUpdateListener");
     }
 }
