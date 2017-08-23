@@ -39,7 +39,7 @@
     <string name="uhoh_message_phone_restart">Sembra che il backend Bluetooth di Android sia corrotto. Il riavvio del dispositivo potrebbe essere necessario.</string>
     <string name="uhoh_message_weirdness">Qualcosa non sta funzionando nel backend bluetooth. E\' possibile che si corregga automaticamente ma se continui a vedere questo errore prova a riavviare il dispositivo.</string>
 
-    <string name="watch_finder">Trova il mio orologio</string>
+    <string name="watch_finder">Trova il mio orologio&lt;&lt;&lt;</string>
     <string name="phone_is_searching">Il telefono ti sta cercando!</string>
 
     <string name="notifications_enablement">Per abilitare le notifiche devi abilitare AsteroidOS Sync nel seguente menù.</string>
