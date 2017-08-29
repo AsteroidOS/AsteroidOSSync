@@ -2,7 +2,7 @@
 <resources><string name="app_name">Synchronizace AsteroidOS</string>
     <string name="generic_ok">OK</string>
     <string name="generic_cancel">Storno</string>
-    <string name="not_supported">Tato funkce ještě není podporována</string>
+    <string name="not_supported">Tyto funkce ještě nejsou podporované</string>
 
     <string name="searching">Hledání hodinek</string>
     <string name="unknown_device">Neznámé zařízení</string>
