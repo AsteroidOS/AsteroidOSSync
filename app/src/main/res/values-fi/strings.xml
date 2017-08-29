@@ -47,4 +47,9 @@
     <string name="downloading">Ladataan...</string>
     <string name="downloaded">Ladattu</string>
     <string name="screenshot">Kuvankaappaus</string>
+<string name="time_icon">Ajan kuvake</string>
+
+    <string name="synchronize_time">Synkronoi aika</string>
+    <string name="explain_app_prefs">Sovelluksesi näkyvät tässä kun niissä on ilmoituksia</string>
+
 </resources>
