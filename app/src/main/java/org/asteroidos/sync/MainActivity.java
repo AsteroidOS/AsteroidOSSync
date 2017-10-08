@@ -1,11 +1,13 @@
 package org.asteroidos.sync;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,9 +18,11 @@ import android.os.Messenger;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -87,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         });
         mBleMngr.setListener_Discovery(this);
 
-
         //white list the app
         //also need to add permission in manifest file
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -102,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             }
         }
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 
         /* Check that bluetooth is enabled */
         if (!mBleMngr.isBleSupported())
