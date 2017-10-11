@@ -17,7 +17,7 @@
         android:paddingLeft="@dimen/detail_horizontal_margin"
         android:paddingRight="@dimen/detail_horizontal_margin"
         android:paddingTop="@dimen/detail_vertical_margin"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -143,7 +143,6 @@
 
         </android.support.v7.widget.CardView>
 
-
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view3"
@@ -229,7 +228,6 @@
             android:layout_height="55dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             card_view:cardCornerRadius="4dp">
 
@@ -251,11 +249,19 @@
                     android:id="@+id/info_text5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
+                    android:layout_toStartOf="@+id/timeSyncCheckBox"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/info_icon5"
                     android:text="@string/synchronize_time"
                     android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/timeSyncCheckBox"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="16dp" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
