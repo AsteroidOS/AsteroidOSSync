@@ -17,7 +17,7 @@
         android:paddingLeft="@dimen/detail_horizontal_margin"
         android:paddingRight="@dimen/detail_horizontal_margin"
         android:paddingTop="@dimen/detail_vertical_margin"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
