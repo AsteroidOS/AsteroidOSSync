@@ -14,4 +14,21 @@
     <string name="uhoh_message_nuke">Det lader til at Android\'s Bluetooth stack har problemer. Prøv at genstarte Bluetooth.</string>
     <string name="uhoh_message_nuke_drop">Reset Bluetooth</string>
     <string name="uhoh_message_phone_restart">Det lader til at Android\'s Bluetooth stack slet ikke fungerer. Prøv at genstarte telefonen.</string>
-    </resources>
+    <string name="disconnected">Afbrudt</string>
+    <string name="connected">Forbundet</string>
+    <string name="connecting">Tilslutter …</string>
+    <string name="connected_formatted">Forbundet til %s</string>
+    <string name="connecting_formatted">Forbinder til %s</string>
+
+    <string name="grab_a_screenshot">Snup et skærmbillede</string>
+
+    <string name="notifications_settings">Meddelelsesindstillinger</string>
+    <string name="notifications">Meddelelser</string>
+    <string name="unpair">Fjern parringen</string>
+    <string name="scanning">Scanner...</string>
+    <string name="downloading">Henter...</string>
+    <string name="downloaded">Hentet</string>
+    <string name="synchronize_time">Synkroniser tiden</string>
+    <string name="explain_app_prefs">Dine apps vises her, når du får meddelelser til dem.</string>
+
+</resources>
