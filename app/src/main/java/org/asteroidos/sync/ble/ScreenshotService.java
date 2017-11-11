@@ -53,6 +53,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
     private ScreenshotReqReceiver mSReceiver;
 
     private boolean mFirstNotify = true;
+    private boolean mDownloading = false;
 
     private NotificationManager mNM;
 
@@ -70,6 +71,8 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
         IntentFilter filter = new IntentFilter();
         filter.addAction("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER");
         mCtx.registerReceiver(mSReceiver, filter);
+
+        mDownloading = false;
     }
 
     public void unsync() {
@@ -111,7 +114,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                     Notification.Builder notificationBuilder = new Notification.Builder(mCtx)
                             .setContentTitle(mCtx.getText(R.string.screenshot));
 
-                    if(size < progress) {
+                    if(size == progress) {
                         String dirStr = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/AsteroidOSSync";
                         File directory = new File(dirStr);
                         if(!directory.exists())
@@ -141,6 +144,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                         PendingIntent contentIntent = PendingIntent.getActivity(mCtx, 0, notificationIntent, 0);
                         notificationBuilder.setContentIntent(contentIntent);
 
+                        mDownloading = false;
                     } else {
                         notificationBuilder.setContentText(mCtx.getText(R.string.downloading));
                         notificationBuilder.setSmallIcon(R.mipmap.android_image);
@@ -166,10 +170,13 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
     class ScreenshotReqReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            mFirstNotify = true;
-            byte[] data = new byte[1];
-            data[0] = 0x0;
-            mDevice.write(screenshotRequestCharac, data, ScreenshotService.this);
+            if(!mDownloading) {
+                mFirstNotify = true;
+                mDownloading = true;
+                byte[] data = new byte[1];
+                data[0] = 0x0;
+                mDevice.write(screenshotRequestCharac, data, ScreenshotService.this);
+            }
         }
     }
 }

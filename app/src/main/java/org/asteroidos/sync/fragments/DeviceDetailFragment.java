@@ -31,13 +31,14 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.asteroidos.sync.R;
+import org.asteroidos.sync.ble.TimeService;
 import org.asteroidos.sync.ble.WeatherService;
 import org.asteroidos.sync.services.SynchronizationService;
 
@@ -47,6 +48,10 @@ public class DeviceDetailFragment extends Fragment {
 
     private LinearLayout mDisconnectedPlaceholder;
     private LinearLayout mConnectedContent;
+
+    private SharedPreferences mTimeSyncSettings;
+
+    private CheckBox mTimeSyncCheckBox;
 
     FloatingActionButton mFab;
 
@@ -145,11 +150,16 @@ public class DeviceDetailFragment extends Fragment {
             }
         });
 
-        CardView timeSyncCard = (CardView) view.findViewById(R.id.card_view5);
-        timeSyncCard.setOnClickListener(new View.OnClickListener() {
+        mTimeSyncSettings = getActivity().getSharedPreferences(TimeService.PREFS_NAME, 0);
+
+        mTimeSyncCheckBox = (CheckBox) view.findViewById(R.id.timeSyncCheckBox);
+        mTimeSyncCheckBox.setChecked(mTimeSyncSettings.getBoolean(TimeService.PREFS_SYNC_TIME, TimeService.PREFS_SYNC_TIME_DEFAULT));
+        mTimeSyncCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                getActivity().sendBroadcast(new  Intent("org.asteroidos.sync.TIME_SYNC_LISTENER"));
+            public void onCheckedChanged(CompoundButton ignored, boolean checked) {
+                SharedPreferences.Editor editor = mTimeSyncSettings.edit();
+                editor.putBoolean(TimeService.PREFS_SYNC_TIME, mTimeSyncCheckBox.isChecked());
+                editor.apply();
             }
         });
 

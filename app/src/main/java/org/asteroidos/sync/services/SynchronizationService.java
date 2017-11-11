@@ -192,6 +192,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         cfg.defaultScanFilter = new WatchesFilter();
         cfg.enableCrashResolver = true;
         cfg.loggingEnabled = true;
+        cfg.useGattRefresh = true;
         cfg.bondFilter = new BondFilter();
         mBleMngr.setConfig(cfg);
         updateNotification();

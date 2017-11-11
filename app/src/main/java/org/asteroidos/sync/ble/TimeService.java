@@ -17,10 +17,8 @@
 
 package org.asteroidos.sync.ble;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
@@ -28,42 +26,34 @@ import com.idevicesinc.sweetblue.BleDevice;
 import java.util.Date;
 import java.util.UUID;
 
-public class TimeService implements BleDevice.ReadWriteListener {
-    public static final UUID timeSetCharac = UUID.fromString("00005001-0000-0000-0000-00a57e401d05");
+public class TimeService implements BleDevice.ReadWriteListener, SharedPreferences.OnSharedPreferenceChangeListener {
+    private static final UUID timeSetCharac = UUID.fromString("00005001-0000-0000-0000-00a57e401d05");
 
-    private Context mCtx;
+    public static final String PREFS_NAME = "TimePreference";
+    public static final String PREFS_SYNC_TIME = "syncTime";
+    public static final boolean PREFS_SYNC_TIME_DEFAULT = true;
+
     private BleDevice mDevice;
 
-    private TimeSyncReceiver mTReceiver;
+    private SharedPreferences mTimeSyncSettings;
 
-    public TimeService(Context ctx, BleDevice device)
-    {
+    public TimeService(Context ctx, BleDevice device) {
         mDevice = device;
-        mCtx = ctx;
+        mTimeSyncSettings = ctx.getSharedPreferences(PREFS_NAME, 0);
+        mTimeSyncSettings.registerOnSharedPreferenceChangeListener(this);
     }
 
     public void sync() {
-        mTReceiver = new TimeSyncReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("org.asteroidos.sync.TIME_SYNC_LISTENER");
-        mCtx.registerReceiver(mTReceiver, filter);
-    }
-
-    public void unsync() {
-        try {
-            mCtx.unregisterReceiver(mTReceiver);
-        } catch (IllegalArgumentException ignored) {}
+        updateTime();
     }
 
     @Override
-    public void onEvent(ReadWriteEvent e) {
-        if(!e.wasSuccess())
-            Log.e("TimeService", e.status().toString());
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        updateTime();
     }
 
-    class TimeSyncReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
+    private void updateTime() {
+        if(mTimeSyncSettings.getBoolean(PREFS_SYNC_TIME, PREFS_SYNC_TIME_DEFAULT)) {
             Date dt = new Date();
             byte[] data = new byte[6];
             data[0] = (byte)dt.getYear();
@@ -74,5 +64,13 @@ public class TimeService implements BleDevice.ReadWriteListener {
             data[5] = (byte)dt.getSeconds();
             mDevice.write(timeSetCharac, data, TimeService.this);
         }
+    }
+
+    public void unsync() { }
+
+    @Override
+    public void onEvent(ReadWriteEvent e) {
+        if(!e.wasSuccess())
+            Log.e("TimeService", e.status().toString());
     }
 }
