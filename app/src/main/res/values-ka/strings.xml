@@ -1,2 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">AsteroidOS სინქრონიზაცია</string>
+    <string name="generic_ok">კარგი</string>
+    <string name="generic_cancel">გაუქმება</string>
+    <string name="not_supported">ეს ფუნქცია ჯერ არ არის მხარდაჭერილი</string>
+
+    <string name="searching">ეძებს საათები</string>
+    <string name="unknown_device">უცნობი მოწყობილობა</string>
+    <string name="nothing_found">მაჯის საათი არ ნაპოვნია</string>
+    <string name="one_found">1 მაჯის საათი ნაპოვნია</string>
+    <string name="n_found">%d მაჯის საათი ნაპოვნია</string>
+
+    <string name="disconnected">გათიშული</string>
+    <string name="connected">დაკავშირებული</string>
+    <string name="connecting">დამაკავშირებელი…</string>
+    <string name="connected_formatted">დაკავშირებული %s</string>
+    <string name="connecting_formatted">დამაკავშირებელი %s</string>
+
+    <string name="connected_icon">დაკავშირებული ხატი</string>
+    <string name="battery_info_icon">ბატარეის ინფორმაცია ხატი</string>
+    <string name="screenshot_icon">სკრინშოტის ხატი</string>
+    </resources>
