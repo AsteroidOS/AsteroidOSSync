@@ -1,8 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="app_name">AsteroidOS Sync</string>
     <string name="generic_ok">OK</string>
     <string name="generic_cancel">Cancel</string>
-    <string name="not_supported">This features is not supported yet</string>
+    <string name="not_supported">This feature is not supported yet</string>
 
     <string name="searching">Searching for watches</string>
     <string name="unknown_device">Unknown Device</string>
