@@ -6,7 +6,7 @@
 
     <string name="searching">Recherche de montres</string>
     <string name="unknown_device">Périphérique inconnu</string>
-    <string name="nothing_found">Pas de montre trouvée</string>
+    <string name="nothing_found">Aucune montre trouvée</string>
     <string name="one_found">1 montre trouvée</string>
     <string name="n_found">%d montres trouvées</string>
 
