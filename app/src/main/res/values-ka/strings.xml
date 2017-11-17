@@ -33,4 +33,14 @@
     <string name="weather_settings">ამინდის პარამეტრები</string>
     <string name="unpair">დავიწყება</string>
     <string name="screenshot">სკრინშოტი</string>
+    <string name="uhoh_message_nuke">Android-ის ბლუთუზის აქვს პრობლემა. გადატვირთვა ბლუთუზი.</string>
+    <string name="uhoh_message_phone_restart">Android-ის ბლუთუზი გატეხილია. გადატვირთეთ ტელეფონი.</string>
+    <string name="uhoh_message_weirdness">BLE-სთან არის პრობლემა. გადატვირთეთ თქვენი ტელეფონი, რომ ისევ შეძლოთ მისი ნახვა</string>
+
+    <string name="notifications_settings">შეტყობინების პარამეტრები</string>
+    <string name="enter_city_name">ქალაქის დასახელება:</string>
+    <string name="scanning">ძებნა...</string>
+    <string name="downloading">ჩამოტვირთვა...</string>
+    <string name="downloaded">გადმოწერილია</string>
+    <string name="synchronize_time">სინქრონიზება დრო</string>
     </resources>
