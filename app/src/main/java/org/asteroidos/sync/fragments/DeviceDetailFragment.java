@@ -127,7 +127,7 @@ public class DeviceDetailFragment extends Fragment {
                 i.putExtra("packageName", "org.asteroidos.sync.findmywatch");
                 i.putExtra("id", 0xa57e401d);
                 i.putExtra("appName", getString(R.string.app_name));
-                i.putExtra("appIcon", "");
+                i.putExtra("appIcon", "ios-watch-vibrating");
                 i.putExtra("summary", getString(R.string.watch_finder));
                 i.putExtra("body", getString(R.string.phone_is_searching));
                 getActivity().sendBroadcast(i);
