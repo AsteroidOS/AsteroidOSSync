@@ -1,27 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="app_name">סנכרון AsteroidOS</string>
     <string name="generic_ok">אישור</string>
-    <string name="generic_cancel">ביטול</string>
-    <string name="not_supported">תכונה זו אינה נתמכת עדיין</string>
-
     <string name="searching">חיפוש אחר שעונים</string>
     <string name="unknown_device">התקן לא ידוע</string>
     <string name="nothing_found">לא נמצא שעון</string>
     <string name="one_found">נמצא שעון אחד</string>
     <string name="n_found">נמצאו %d שעונים</string>
-
     <string name="ble_not_supported">נראה שאין תמיכה ב־BLE ‏(Bluetooth בצריכת אנרגיה נמוכה) בהתקן זה.</string>
-    <string name="uhoh_message_nuke">נראה כי לחבילת ה־Bluetooth ב־Android יש תקלות. מומלץ להפעיל מחדש את חבילת ה־Bluetooth.</string>
-    <string name="uhoh_message_nuke_drop">איפוס ה־Bluetooth</string>
-    <string name="uhoh_message_phone_restart">נראה כי חבילת ה־Bluetooth של Android פגומה לחלוטין. יתכן שצריך להפעיל את הטלפון מחדש.</string>
-    <string name="uhoh_message_weirdness">משהו מוזר קרה לחבילת ה־ble שמהווה את היסודות. החבילה כנראה תתאושש אבל יהיה עליך להפעיל את הטלפון שלך מחדש אם ההודעה הזאת מופיעה שוב ושוב.</string>
-
     <string name="disconnected">מנותק</string>
     <string name="connected">מחובר</string>
     <string name="connecting">בהתחברות…</string>
     <string name="connected_formatted">מחובר אל %s</string>
     <string name="connecting_formatted">מחובר אל %s</string>
-
     <string name="connected_icon">סמל חיבור</string>
     <string name="battery_info_icon">סמל פרטי סוללה</string>
     <string name="screenshot_icon">סמל צילום מסך</string>
@@ -29,18 +19,13 @@
     <string name="settings_icon">סמל הגדרות</string>
     <string name="weather_icon">סמל מזג האוויר</string>
     <string name="time_icon">סמל שעון</string>
-
     <string name="grab_a_screenshot">צילום המסך</string>
-
     <string name="find_my_watch">איתור השעון שלי</string>
-
     <string name="watch_finder">מאתר השעון</string>
     <string name="phone_is_searching">הטלפון מחפש אותך!</string>
-
     <string name="notifications_settings">הגדרות התרעה</string>
     <string name="notifications">התרעות</string>
     <string name="notifications_enablement">כדי להפעיל סנכרון התרעות, עליך לאפשר את הסנכרון של AsteroidOS בתפריט הבא.</string>
-
     <string name="weather_settings">הגדרות מזג האוויר</string>
     <string name="enter_city_name">נא להזין שם עיר:</string>
     <string name="unpair">ביטול צימוד</string>
@@ -49,6 +34,12 @@
     <string name="downloaded">התקבל</string>
     <string name="screenshot">צילום מסך</string>
     <string name="synchronize_time">סנכרון השעה</string>
+    <string-array name="notification_types_array">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
     <string name="explain_app_prefs">היישומונים שלך יופיע כאן לאחר שתגענה מהם התרעות</string>
-
 </resources>

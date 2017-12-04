@@ -1,23 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">Синхронизация AsteroidOS</string>
+<resources>
     <string name="generic_ok">ОК</string>
-    <string name="generic_cancel">Отмена</string>
-    <string name="not_supported">Эти функции ещё не поддерживаются</string>
-
     <string name="searching">Поиск часов</string>
     <string name="unknown_device">Неизвестное Устройство</string>
     <string name="nothing_found">Часы не найдены</string>
     <string name="one_found">1 часы найдены</string>
     <string name="n_found">%d часов найдено</string>
-
     <string name="ble_not_supported">Не похоже что Bluetooth Low Energy поддерживается на этом устройстве.</string>
-    <string name="uhoh_message_nuke_drop">Сбросить Bluetooth</string>
     <string name="disconnected">Отключено</string>
     <string name="connected">Подключено</string>
     <string name="connecting">Подключение…</string>
     <string name="connected_formatted">Подключено к %s</string>
     <string name="connecting_formatted">Подключение к %s</string>
-
     <string name="connected_icon">Подключённая иконка</string>
     <string name="battery_info_icon">Иконка информации о батареи</string>
     <string name="screenshot_icon">Иконка скриншота</string>
@@ -25,25 +19,27 @@
     <string name="settings_icon">Иконка настроек</string>
     <string name="weather_icon">Иконка погоды</string>
     <string name="time_icon">Иконка времени</string>
-
     <string name="grab_a_screenshot">Забрать скриншот</string>
-
     <string name="find_my_watch">Найти мои часы</string>
-
     <string name="watch_finder">Поиск часов</string>
     <string name="phone_is_searching">Телефон ищет вас!</string>
-
     <string name="notifications_settings">Настройки уведомлений</string>
     <string name="notifications">Уведомления</string>
+    <string name="notifications_enablement"></string>
     <string name="weather_settings">Настройки погоды</string>
     <string name="enter_city_name">Введите имя города:</string>
     <string name="unpair">Отключить</string>
-    <string name="scanning">Сканирование...</string>
-    <string name="downloading">Скачивание...</string>
+    <string name="scanning">Сканирование…</string>
+    <string name="downloading">Скачивание…</string>
     <string name="downloaded">Скачано</string>
     <string name="screenshot">Скриншот</string>
     <string name="synchronize_time">Синхронизированное время</string>
+    <string-array name="notification_types_array">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
     <string name="explain_app_prefs">Ваши приложения появятся здесь когда вы получите уведомления от них</string>
-
-<string name="uhoh_message_nuke">Похоже что Bluetooth stack Android имеет проблемы. Рекомендовано перезапустить Bluetooth stack.</string>
-    </resources>
+</resources>

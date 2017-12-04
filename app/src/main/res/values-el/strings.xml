@@ -1,45 +1,45 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">Συγχρονισμός AsteroidOS</string>
+<resources>
     <string name="generic_ok">OK</string>
-    <string name="generic_cancel">Ακύρωση</string>
-    <string name="not_supported">Αυτή η λειτουργία δεν υποστηρίζεται ακόμη</string>
-
     <string name="searching">Αναζήτηση για ρολόγια</string>
     <string name="unknown_device">Άγνωστη Συσκευή</string>
     <string name="nothing_found">Δεν βρέθηκε ρολόι</string>
     <string name="one_found">1 ρολόι βρέθηκε</string>
     <string name="n_found">%d ρολόγια βρέθηκαν</string>
-
     <string name="ble_not_supported">Δεν φαίνεται να υποστηρίζεται Bluetooth Χαμηλής Ενέργειας σε αυτή την συσκευή.</string>
+    <string name="disconnected">Αποσυνδέθηκε</string>
     <string name="connected">Συνδέθηκε</string>
     <string name="connecting">Συνδέεται…</string>
     <string name="connected_formatted">Συνδέθηκε στο %s</string>
     <string name="connecting_formatted">Συνδέεται στο %s</string>
-
     <string name="connected_icon">Εικονίδιο σύνδεσης</string>
     <string name="battery_info_icon">Εικονίδιο πληροφοριών μπαταρίας</string>
     <string name="screenshot_icon">Εικονίδιο στιγμιότυπου οθόνης</string>
     <string name="finder_icon">Εικονίδιο Εύρεσης</string>
     <string name="settings_icon">Εικονίδιο ρυθμίσεων</string>
     <string name="weather_icon">Εικονίδιο καιρού</string>
-
+    <string name="time_icon"></string>
     <string name="grab_a_screenshot">Λήψη ενός στιγμιότυπου οθόνης</string>
-
     <string name="find_my_watch">Βρες το ρολόι μου</string>
-
     <string name="watch_finder">Εύρεση ρολογιού</string>
     <string name="phone_is_searching">Το τηλέφωνο σε αναζητάει!</string>
-
     <string name="notifications_settings">Ρυθμίσεις ειδοποιήσεων</string>
     <string name="notifications">Ειδοποιήσεις</string>
     <string name="notifications_enablement">Για να ενεργοποιήσετε τον συγχρονισμό των ειδοποιήσεων, πρέπει να επιτρέψετε το Συγχρονισμό του AsteroidOS στο παρακάτω μενού.</string>
-
     <string name="weather_settings">Ρυθμίσεις καιρού</string>
     <string name="enter_city_name">Πληκτρολογήστε ένα όνομα πόλης:</string>
-<string name="uhoh_message_nuke_drop">Επαναφορά Bluetooth</string>
-    <string name="uhoh_message_nuke">Φαίνεται ότι το πρότυπο Bluetooth του Android έχει προβλήματα. Προτείνεται να επανεκκινήσετε το Bluetooth πρότυπο.</string>
-    <string name="uhoh_message_phone_restart">Φαίνεται ότι το πρότυπο Bluetooth του Android είναι χαλασμένο. Μία επανεκκίνηση του τηελεφώνου ίσως είναι απαραίτητη.</string>
-    <string name="uhoh_message_weirdness">Κάτι παράξενο συνέβη με το βασικό Bluetooth πρότυπο. Πιθανότατα θα διορθωθεί όμως ίσως χρειαστεί να επανεκκινήσετε το τηλέφωνο σας εάν το πρόβλημα παραμένει.</string>
-
-    <string name="disconnected">Αποσυνδέθηκε</string>
-    </resources>
+    <string name="unpair"></string>
+    <string name="scanning"></string>
+    <string name="downloading"></string>
+    <string name="downloaded"></string>
+    <string name="screenshot"></string>
+    <string name="synchronize_time"></string>
+    <string-array name="notification_types_array">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string name="explain_app_prefs"></string>
+</resources>

@@ -1,55 +1,45 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">AsteroidOS Sync</string>
-    <string name="generic_cancel">Annuler</string>
+<resources>
     <string name="generic_ok">OK</string>
-    <string name="not_supported">Cette fonctionnalité n\'est pas encore supportée</string>
-
     <string name="searching">Recherche de montres</string>
     <string name="unknown_device">Périphérique inconnu</string>
     <string name="nothing_found">Aucune montre trouvée</string>
     <string name="one_found">1 montre trouvée</string>
     <string name="n_found">%d montres trouvées</string>
-
     <string name="ble_not_supported">Il semble que le Bluetooth Low Energy ne soit pas pris en charge sur cet appareil.</string>
-    <string name="uhoh_message_nuke">Il semble que le Bluetooth stack d\'Android a des problèmes. Il est recommandé de redémarrer le Bluetooth stack.</string>
-    <string name="uhoh_message_nuke_drop">Réinitialiser le Bluetooth</string>
-    <string name="uhoh_message_phone_restart">Il semble que le Bluetooth stack d\'Android soit complètement interrompu. Un redémarrage du téléphone est peut-être nécessaire.</string>
-    <string name="uhoh_message_weirdness">Quelque chose d’étrange s’est passé avec le BLE stack sous-jacente. Il va sans doute se rétablir, mais vous devriez peut-être redémarrer votre téléphone si vous continuez à voir ceci.</string>
-
     <string name="disconnected">Déconnecté</string>
     <string name="connected">Connecté</string>
     <string name="connecting">Connexion…</string>
     <string name="connected_formatted">Connecté à %s</string>
     <string name="connecting_formatted">Connexion à %s</string>
-
+    <string name="connected_icon">Icône de connexion</string>
+    <string name="battery_info_icon">Icône d\'info batterie</string>
+    <string name="screenshot_icon">Icône de capture d’écran</string>
+    <string name="finder_icon">Icône du \"Trouve ma montre\"</string>
+    <string name="settings_icon">Icône des paramètres</string>
+    <string name="weather_icon">Icône de la météo</string>
+    <string name="time_icon">Icône de date et heure</string>
     <string name="grab_a_screenshot">Prendre une capture d\'écran</string>
-
     <string name="find_my_watch">Trouver ma montre</string>
-
+    <string name="watch_finder">Trouver ma montre</string>
+    <string name="phone_is_searching">Votre téléphone recherche pour vous !</string>
     <string name="notifications_settings">Paramètres des notifications</string>
     <string name="notifications">Notifications</string>
     <string name="notifications_enablement">Pour activer la synchronisation des notifications, vous devez autoriser AsteroidOS Sync dans le menu suivant.</string>
-
     <string name="weather_settings">Paramètres météo</string>
     <string name="enter_city_name">Entrez le nom d\'une ville :</string>
-<string name="battery_info_icon">Icône d\'info batterie</string>
-    <string name="screenshot_icon">Icône de capture d’écran</string>
-    <string name="settings_icon">Icône des paramètres</string>
-    <string name="weather_icon">Icône de la météo</string>
-
-    <string name="watch_finder">Trouver ma montre</string>
-    <string name="phone_is_searching">Votre téléphone recherche pour vous !</string>
-
-    <string name="connected_icon">Icône de connexion</string>
-    <string name="finder_icon">Icône du \"Trouve ma montre\"</string>
     <string name="unpair">Dissocier</string>
-    <string name="scanning">Scan en cours ...</string>
-    <string name="downloading">Téléchargement ...</string>
-    <string name="screenshot">Capture d\'écran</string>
-    <string name="explain_app_prefs">Vos applis apparaîtront ici une fois que que vous recevrez des notifications</string>
-
-<string name="synchronize_time">Synchroniser la date et l\'heure</string>
-    <string name="time_icon">Icône de date et heure</string>
-
+    <string name="scanning">Scan en cours …</string>
+    <string name="downloading">Téléchargement …</string>
     <string name="downloaded">Téléchargé</string>
-    </resources>
+    <string name="screenshot">Capture d\'écran</string>
+    <string name="synchronize_time">Synchroniser la date et l\'heure</string>
+    <string-array name="notification_types_array">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string name="explain_app_prefs">Vos applis apparaîtront ici une fois que que vous recevrez des notifications</string>
+</resources>

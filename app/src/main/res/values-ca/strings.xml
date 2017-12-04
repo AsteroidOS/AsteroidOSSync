@@ -1,55 +1,45 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">Sincronitzador d\'AsteroidOS</string>
+<resources>
     <string name="generic_ok">D\'acord</string>
-    <string name="generic_cancel">Cancel·lar</string>
-    <string name="not_supported">Aquesta funció encara no ha estat desenolupada</string>
-
     <string name="searching">Cercant rellotges</string>
     <string name="unknown_device">Dispositiu desconegut</string>
     <string name="nothing_found">No s\'ha trobat cap rellotge</string>
     <string name="one_found">S\'ha trobat 1 rellotge</string>
     <string name="n_found">S\'han trobat %d rellotges</string>
-
     <string name="ble_not_supported">Sembla ser que Bluetooth Low Energy no funciona en aquest dispositiu.</string>
-    <string name="uhoh_message_nuke_drop">Reiniciar el Bluetooth</string>
     <string name="disconnected">Desconnectat</string>
     <string name="connected">Connectat</string>
     <string name="connecting">Connectant…</string>
     <string name="connected_formatted">Connectat a %s</string>
     <string name="connecting_formatted">Connectant a %s</string>
-
     <string name="connected_icon">Icona de connectat</string>
     <string name="battery_info_icon">Icona d\'informació de la bateria</string>
     <string name="screenshot_icon">Icona de la captura de pantalla</string>
     <string name="finder_icon">Icona del cercador</string>
     <string name="settings_icon">Icona de configuració</string>
     <string name="weather_icon">Icona del temps</string>
-
+    <string name="time_icon">Icona d\'hora</string>
     <string name="grab_a_screenshot">Fer una captura de pantalla</string>
-
     <string name="find_my_watch">Cercar el meu rellotge</string>
-
     <string name="watch_finder">Cercador del rellotge</string>
     <string name="phone_is_searching">El telèfon està buscant-te!</string>
-
     <string name="notifications_settings">Configuració de les notificacions</string>
     <string name="notifications">Notificacions</string>
     <string name="notifications_enablement">Per activar la sincronització de notificacions, necessiteu habilitar el Sincronitzador d\'AsteroidOS en el següent menú.</string>
-
     <string name="weather_settings">Configuració del temps</string>
     <string name="enter_city_name">Escriviu el nom d\'una ciutat:</string>
-<string name="uhoh_message_nuke">Sembla ser que els components del Bluetooth d\'Android no funcionen correctament. És convenient reiniciar els components del Bluetooth.</string>
-    <string name="uhoh_message_phone_restart">Sembla ser que els components del Bluetooth d\'Android estan completament inoperatius. És convenient reiniciar el vostre telèfon.</string>
-    <string name="uhoh_message_weirdness">Alguna cosa ha fallat amb els components. Segurament es recuperaran però hauríeu de reiniciar el vostre telèfon si seguiu veient aquest missatge.</string>
-
-    <string name="time_icon">Icona d\'hora</string>
-
     <string name="unpair">Desemparellar</string>
-    <string name="scanning">Escanejant...</string>
+    <string name="scanning">Escanejant…</string>
     <string name="downloading">Descarregant....</string>
     <string name="downloaded">Descarregat</string>
     <string name="screenshot">Captura de pantalla</string>
     <string name="synchronize_time">Sincronitzar l\'hora</string>
-<string name="explain_app_prefs">Les teves apps apareixeràn aquí un cop rebis notificacions d\'aquestes</string>
-
+    <string-array name="notification_types_array">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string name="explain_app_prefs">Les teves apps apareixeràn aquí un cop rebis notificacions d\'aquestes</string>
 </resources>

@@ -1,28 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="app_name">AsteroidOS Sync</string>
+    <string name="app_name" translatable="false">AsteroidOS Sync</string>
     <string name="generic_ok">OK</string>
-    <string name="generic_cancel">Cancel</string>
-    <string name="not_supported">This feature is not supported yet</string>
-
     <string name="searching">Searching for watches</string>
     <string name="unknown_device">Unknown Device</string>
     <string name="nothing_found">No watch found</string>
     <string name="one_found">1 watch found</string>
     <string name="n_found">%d watches found</string>
-
     <string name="ble_not_supported">It does not appear that Bluetooth Low Energy is supported on this device.</string>
-    <string name="uhoh_message_nuke">It appears that Android\'s Bluetooth stack has issues. It is suggested to restart the Bluetooth stack.</string>
-    <string name="uhoh_message_nuke_drop">Reset Bluetooth</string>
-    <string name="uhoh_message_phone_restart">It appears that Android\'s Bluetooth stack is completely broken. A phone restart may be required.</string>
-    <string name="uhoh_message_weirdness">Something weird happened with the underlying ble stack. It will probably recover but you may have to restart your phone if you keep seeing this.</string>
-
     <string name="disconnected">Disconnected</string>
     <string name="connected">Connected</string>
     <string name="connecting">Connecting…</string>
     <string name="connected_formatted">Connected to %s</string>
     <string name="connecting_formatted">Connecting to %s</string>
-
     <string name="connected_icon">Connected icon</string>
     <string name="battery_info_icon">Battery info icon</string>
     <string name="screenshot_icon">Screenshot icon</string>
@@ -30,23 +20,18 @@
     <string name="settings_icon">Settings icon</string>
     <string name="weather_icon">Weather icon</string>
     <string name="time_icon">Time icon</string>
-
     <string name="grab_a_screenshot">Grab a screenshot</string>
-
     <string name="find_my_watch">Find my watch</string>
-
     <string name="watch_finder">Watch finder</string>
     <string name="phone_is_searching">Phone is searching for you!</string>
-
     <string name="notifications_settings">Notifications settings</string>
     <string name="notifications">Notifications</string>
     <string name="notifications_enablement">In order to enable notifications synchronization, you need to allow AsteroidOS Sync in the following menu.</string>
-
     <string name="weather_settings">Weather settings</string>
     <string name="enter_city_name">Enter a city name:</string>
     <string name="unpair">Unpair</string>
-    <string name="scanning">Scanning...</string>
-    <string name="downloading">Downloading...</string>
+    <string name="scanning">Scanning…</string>
+    <string name="downloading">Downloading…</string>
     <string name="downloaded">Downloaded</string>
     <string name="screenshot">Screenshot</string>
     <string name="synchronize_time">Synchronize time</string>
@@ -58,5 +43,4 @@
         <item>Strong vibration</item>
     </string-array>
     <string name="explain_app_prefs">Your apps will appear here once you get notifications to them</string>
-
 </resources>

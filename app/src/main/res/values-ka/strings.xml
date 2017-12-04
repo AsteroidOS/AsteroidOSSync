@@ -1,50 +1,45 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">AsteroidOS სინქრონიზაცია</string>
+<resources>
     <string name="generic_ok">კარგი</string>
-    <string name="generic_cancel">გაუქმება</string>
-    <string name="not_supported">ეს ფუნქცია ჯერ არ არის მხარდაჭერილი</string>
-
     <string name="searching">ეძებს საათები</string>
     <string name="unknown_device">უცნობი მოწყობილობა</string>
     <string name="nothing_found">მაჯის საათი არ ნაპოვნია</string>
     <string name="one_found">1 მაჯის საათი ნაპოვნია</string>
     <string name="n_found">%d მაჯის საათი ნაპოვნია</string>
-
+    <string name="ble_not_supported">ბლუთუზი დაბალი ენერგია (BLE) არ არის მხარდაჭერილი.</string>
     <string name="disconnected">გათიშული</string>
     <string name="connected">დაკავშირებული</string>
     <string name="connecting">დამაკავშირებელი…</string>
     <string name="connected_formatted">დაკავშირებული %s</string>
     <string name="connecting_formatted">დამაკავშირებელი %s</string>
-
     <string name="connected_icon">დაკავშირებული ხატი</string>
     <string name="battery_info_icon">ბატარეის ინფორმაცია ხატი</string>
     <string name="screenshot_icon">სკრინშოტის ხატი</string>
-    <string name="ble_not_supported">ბლუთუზი დაბალი ენერგია (BLE) არ არის მხარდაჭერილი.</string>
-    <string name="uhoh_message_nuke_drop">გადატვირთვა ბლუთუზი</string>
+    <string name="finder_icon">მპოვნელის ხატული</string>
     <string name="settings_icon">პარამეტრების ხატი</string>
     <string name="weather_icon">ამინდის ხატი</string>
     <string name="time_icon">დროს ხატი</string>
-
     <string name="grab_a_screenshot">სკრინშოტი გადაღება</string>
-
     <string name="find_my_watch">იპოვე ჩემი მაჯის საათი</string>
-
-    <string name="notifications">შეტყობინებები</string>
-    <string name="weather_settings">ამინდის პარამეტრები</string>
-    <string name="unpair">დავიწყება</string>
-    <string name="screenshot">სკრინშოტი</string>
-    <string name="uhoh_message_nuke">Android-ის ბლუთუზის აქვს პრობლემა. გადატვირთვა ბლუთუზი.</string>
-    <string name="uhoh_message_phone_restart">Android-ის ბლუთუზი გატეხილია. გადატვირთეთ ტელეფონი.</string>
-    <string name="uhoh_message_weirdness">BLE-სთან არის პრობლემა. გადატვირთეთ თქვენი ტელეფონი, რომ ისევ შეძლოთ მისი ნახვა</string>
-
-    <string name="notifications_settings">შეტყობინების პარამეტრები</string>
-    <string name="enter_city_name">ქალაქის დასახელება:</string>
-    <string name="scanning">ძებნა...</string>
-    <string name="downloading">ჩამოტვირთვა...</string>
-    <string name="downloaded">გადმოწერილია</string>
-    <string name="synchronize_time">სინქრონიზება დრო</string>
-    <string name="finder_icon">მპოვნელის ხატული</string>
     <string name="watch_finder">მაჯის საათი მონახეთ</string>
     <string name="phone_is_searching">ტელეფონი ეძებს თქვენს!</string>
-
-    </resources>
+    <string name="notifications_settings">შეტყობინების პარამეტრები</string>
+    <string name="notifications">შეტყობინებები</string>
+    <string name="notifications_enablement"></string>
+    <string name="weather_settings">ამინდის პარამეტრები</string>
+    <string name="enter_city_name">ქალაქის დასახელება:</string>
+    <string name="unpair">დავიწყება</string>
+    <string name="scanning">ძებნა…</string>
+    <string name="downloading">ჩამოტვირთვა…</string>
+    <string name="downloaded">გადმოწერილია</string>
+    <string name="screenshot">სკრინშოტი</string>
+    <string name="synchronize_time">სინქრონიზება დრო</string>
+    <string-array name="notification_types_array">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string name="explain_app_prefs"></string>
+</resources>

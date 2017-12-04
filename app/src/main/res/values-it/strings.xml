@@ -1,22 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="generic_ok">OK</string>
-    <string name="generic_cancel">Annulla</string>
-    <string name="not_supported">Questa funzionalità non è ancora disponibile</string>
-
+<resources>
+    <string name="generic_ok">OK</string>
     <string name="searching">Ricerca orologi</string>
     <string name="unknown_device">Dispositivo Sconosciuto</string>
     <string name="nothing_found">Nessun orologio trovato</string>
     <string name="one_found">1 orologio trovato</string>
     <string name="n_found">Trovati %d orologi</string>
-
     <string name="ble_not_supported">La modalità Bluetooth Low Energy non è disponibile su questo dispositivo.</string>
-    <string name="uhoh_message_nuke_drop">Resetta Bluetooth</string>
     <string name="disconnected">Disconnesso</string>
     <string name="connected">Connesso</string>
     <string name="connecting">Mi sto collegando…</string>
     <string name="connected_formatted">Connesso a %s</string>
     <string name="connecting_formatted">Mi sto collegando a %s%</string>
-
     <string name="connected_icon">Icona connesso</string>
     <string name="battery_info_icon">Icona batteria</string>
     <string name="screenshot_icon">Icona cattura schermo</string>
@@ -24,31 +19,27 @@
     <string name="settings_icon">Icona Impostazioni</string>
     <string name="weather_icon">Icona meteo</string>
     <string name="time_icon">Icona ora</string>
-
     <string name="grab_a_screenshot">Cattura schermo</string>
-
     <string name="find_my_watch">Trova il mio orologio</string>
-
-    <string name="notifications_settings">Impostazioni notifiche</string>
-    <string name="notifications">Notifiche</string>
-    <string name="weather_settings">Impostazioni meteo</string>
-    <string name="downloaded">Scaricato</string>
-    <string name="synchronize_time">Sincronizza ora</string>
-<string name="app_name">AsteroidOS Sync</string>
-    <string name="uhoh_message_nuke">Sembra che il backend bluetooth di Android non stia funzionando correttamente. Ti suggeriamo di riavviarlo.</string>
-    <string name="uhoh_message_phone_restart">Sembra che il backend Bluetooth di Android sia corrotto. Il riavvio del dispositivo potrebbe essere necessario.</string>
-    <string name="uhoh_message_weirdness">Qualcosa non sta funzionando nel backend bluetooth. E\' possibile che si corregga automaticamente ma se continui a vedere questo errore prova a riavviare il dispositivo.</string>
-
     <string name="watch_finder">Trova il mio orologio&lt;&lt;&lt;</string>
     <string name="phone_is_searching">Il telefono ti sta cercando!</string>
-
+    <string name="notifications_settings">Impostazioni notifiche</string>
+    <string name="notifications">Notifiche</string>
     <string name="notifications_enablement">Per abilitare le notifiche devi abilitare AsteroidOS Sync nel seguente menù.</string>
-
+    <string name="weather_settings">Impostazioni meteo</string>
     <string name="enter_city_name">Nome città:</string>
     <string name="unpair">Disaccoppia</string>
-    <string name="scanning">Scansione...</string>
-    <string name="downloading">Scaricamento...</string>
+    <string name="scanning">Scansione…</string>
+    <string name="downloading">Scaricamento…</string>
+    <string name="downloaded">Scaricato</string>
     <string name="screenshot">Schermata cattuara</string>
+    <string name="synchronize_time">Sincronizza ora</string>
+    <string-array name="notification_types_array">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
     <string name="explain_app_prefs">Le tue applicazioni compariranno qui al ricevimento di una notifica</string>
-
 </resources>

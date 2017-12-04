@@ -1,27 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">AsteroidOS Sync</string>
+<resources>
     <string name="generic_ok">OK</string>
-    <string name="generic_cancel">キャンセル</string>
-    <string name="not_supported">この機能はまだサポートされていません</string>
-
     <string name="searching">ウォッチを検索中</string>
     <string name="unknown_device">不明なデバイス</string>
     <string name="nothing_found">ウォッチが見つかりません</string>
     <string name="one_found">1 つウォッチが見つかりました</string>
     <string name="n_found">%d のウォッチが見つかりました</string>
-
     <string name="ble_not_supported">お使いのデバイスで Bluetooth 低消費電力がサポートされていないようです。</string>
-    <string name="uhoh_message_nuke">Android の Bluetooth スタックに問題があるようです。Bluetooth スタックの再起動をお勧めします。</string>
-    <string name="uhoh_message_nuke_drop">Bluetooth をリセット</string>
-    <string name="uhoh_message_phone_restart">Android の Bluetooth スタックが完全に壊れているようす。電話の再起動が必要な場合があります。</string>
-    <string name="uhoh_message_weirdness">基礎になる ble スタックで何か問題が発生しました。おそらく回復しますが、これが表示される場合は、お使いの電話を再起動する必要があります。</string>
-
     <string name="disconnected">切断しました</string>
     <string name="connected">接続しました</string>
     <string name="connecting">接続中…</string>
     <string name="connected_formatted">%s に接続しました</string>
     <string name="connecting_formatted">%s に接続中</string>
-
     <string name="connected_icon">接続アイコン</string>
     <string name="battery_info_icon">バッテリー情報アイコン</string>
     <string name="screenshot_icon">スクリーンショット アイコン</string>
@@ -29,26 +19,27 @@
     <string name="settings_icon">設定アイコン</string>
     <string name="weather_icon">天気アイコン</string>
     <string name="time_icon">時計アイコン</string>
-
     <string name="grab_a_screenshot">スクリーン ショットを取得</string>
-
     <string name="find_my_watch">ウォッチを見つける</string>
-
     <string name="watch_finder">ウォッチファインダー</string>
     <string name="phone_is_searching">電話が探しています!</string>
-
     <string name="notifications_settings">通知の設定</string>
     <string name="notifications">通知</string>
     <string name="notifications_enablement">通知の同期を有効にするには、次のメニューで AsteroidOS の同期を許可する必要があります。</string>
-
     <string name="weather_settings">天気予報の設定</string>
     <string name="enter_city_name">市区町村名を入力してください:</string>
     <string name="unpair">ペア解除</string>
-    <string name="scanning">スキャン中...</string>
-    <string name="downloading">ダウンロード中...</string>
+    <string name="scanning">スキャン中…</string>
+    <string name="downloading">ダウンロード中…</string>
     <string name="downloaded">ダウンロードしました</string>
     <string name="screenshot">スクリーンショット</string>
     <string name="synchronize_time">時刻を同期</string>
-<string name="explain_app_prefs">一度そこに通知を受け取れば、アプリがここに表示されます</string>
-
+    <string-array name="notification_types_array">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string name="explain_app_prefs">一度そこに通知を受け取れば、アプリがここに表示されます</string>
 </resources>
