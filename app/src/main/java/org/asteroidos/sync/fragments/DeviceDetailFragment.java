@@ -124,7 +124,7 @@ public class DeviceDetailFragment extends Fragment {
             public void onClick(View view) {
                 Intent i = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
                 i.putExtra("event", "posted");
-                i.putExtra("packageName", "org.asteroidos.sync");
+                i.putExtra("packageName", "org.asteroidos.sync.findmywatch");
                 i.putExtra("id", 0xa57e401d);
                 i.putExtra("appName", getString(R.string.app_name));
                 i.putExtra("appIcon", "");
