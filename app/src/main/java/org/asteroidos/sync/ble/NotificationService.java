@@ -32,8 +32,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class NotificationService implements BleDevice.ReadWriteListener {
-    public static final UUID notificationUpdateCharac   = UUID.fromString("00009001-0000-0000-0000-00a57e401d05");
-    public static final UUID notificationFeedbackCharac = UUID.fromString("00009002-0000-0000-0000-00a57e401d05");
+    private static final UUID notificationUpdateCharac   = UUID.fromString("00009001-0000-0000-0000-00a57e401d05");
+    private static final UUID notificationFeedbackCharac = UUID.fromString("00009002-0000-0000-0000-00a57e401d05");
 
     private Context mCtx;
     private BleDevice mDevice;
@@ -97,28 +97,26 @@ public class NotificationService implements BleDevice.ReadWriteListener {
                 else
                     throw new IllegalArgumentException("Not all options handled");
 
-                StringBuilder xmlRequest = new StringBuilder();
-                xmlRequest.append("<insert>");
-                xmlRequest.append("<pn>").append(packageName).append("</pn>");
-                xmlRequest.append("<vb>").append(vibration).append("</vb>");
-                xmlRequest.append("<id>").append(id).append("</id>");
-                xmlRequest.append("<an>").append(appName).append("</an>");
-                xmlRequest.append("<ai>").append(appIcon).append("</ai>");
-                xmlRequest.append("<su>").append(summary).append("</su>");
-                xmlRequest.append("<bo>").append(body).append("</bo>");
-                xmlRequest.append("</insert>");
+                String xmlRequest = "<insert>" +
+                        "<pn>" + packageName + "</pn>" +
+                        "<vb>" + vibration + "</vb>" +
+                        "<id>" + id + "</id>" +
+                        "<an>" + appName + "</an>" +
+                        "<ai>" + appIcon + "</ai>" +
+                        "<su>" + summary + "</su>" +
+                        "<bo>" + body + "</bo>" +
+                        "</insert>";
 
-                byte[] data = xmlRequest.toString().getBytes(StandardCharsets.UTF_8);
+                byte[] data = xmlRequest.getBytes(StandardCharsets.UTF_8);
                 mDevice.write(notificationUpdateCharac, data, NotificationService.this);
             } else if (Objects.equals(event, "removed")) {
                 int id = intent.getIntExtra("id", 0);
 
-                StringBuilder xmlRequest = new StringBuilder();
-                xmlRequest.append("<removed>");
-                xmlRequest.append("<id>").append(id).append("</id>");
-                xmlRequest.append("</removed>");
+                String xmlRequest = "<removed>" +
+                        "<id>" + id + "</id>" +
+                        "</removed>";
 
-                byte[] data = xmlRequest.toString().getBytes(StandardCharsets.UTF_8);
+                byte[] data = xmlRequest.getBytes(StandardCharsets.UTF_8);
                 mDevice.write(notificationUpdateCharac, data, NotificationService.this);
             }
         }

@@ -17,14 +17,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AppInfoHelper
+class AppInfoHelper
 {
-    final static String TAG = AppInfoHelper.class.getSimpleName();
+    private final static String TAG = AppInfoHelper.class.getSimpleName();
 
-    public static ArrayList<AppInfo> getPackageInfo(Context context)
+    static ArrayList<AppInfo> getPackageInfo(Context context)
     {
-        ArrayList<AppInfo> list = new ArrayList<AppInfo>();
-        ArrayList<String> packageNames = new ArrayList<String>();
+        ArrayList<AppInfo> list = new ArrayList<>();
         PackageManager pm = context.getPackageManager();
         List<PackageInfo> pinfoList = pm.getInstalledPackages(0);
         Collections.sort(pinfoList, pInfoPackageNameComparator);
@@ -32,7 +31,6 @@ public class AppInfoHelper
 
         for(PackageInfo pinfo : pinfoList)
         {
-            packageNames.add(pinfo.packageName);
             boolean isSystem = false;
             if((pinfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0)
             {
@@ -60,8 +58,7 @@ public class AppInfoHelper
                     apkIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
                     apkIcon.draw(canvas);
                 }
-            }
-            catch(ClassCastException e) {}
+            } catch(ClassCastException ignored) {}
             AppInfo appInfo = new AppInfo(pinfo.packageName,
                     pinfo.applicationInfo.loadLabel(pm).toString(),
                     isSystem,
@@ -71,7 +68,7 @@ public class AppInfoHelper
         }
         return list;
     }
-    public static Comparator<PackageInfo> pInfoPackageNameComparator = new Comparator<PackageInfo>()
+    private static Comparator<PackageInfo> pInfoPackageNameComparator = new Comparator<PackageInfo>()
     {
         public int compare(PackageInfo p1, PackageInfo p2)
         {

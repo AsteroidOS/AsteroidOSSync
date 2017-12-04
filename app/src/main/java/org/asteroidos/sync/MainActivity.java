@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         ft.commit();
     }
 
-    class SynchronizationHandler extends Handler {
+    private class SynchronizationHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             if(mDetailFragment == null) return;
@@ -382,7 +382,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         dialog.setMessage(getString(R.string.ble_not_supported));
         dialog.setButton(DialogInterface.BUTTON_NEUTRAL,
                 getString(R.string.generic_ok), clickListener);
-        if (this != null && !isFinishing())
+        if (!isFinishing())
             dialog.show();
     }
 }

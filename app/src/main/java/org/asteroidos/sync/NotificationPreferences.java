@@ -44,15 +44,12 @@ public class NotificationPreferences {
     private static final String PREFS_NOTIFICATIONS = "notifications";
     private static final String PREFS_SEEN_PACKAGES = "seenPackages";
 
-
-
     private static Map<String, NotificationOption> getOptionMap(Context context) {
         SharedPreferences prefs = getPrefs(context);
         String notificationPrefsAsString = prefs.getString(PREFS_NOTIFICATIONS, "{}");
         Gson gson = new Gson();
         Type notificationPrefs = new TypeToken<Map<String, NotificationOption>>(){}.getType();
-        Map<String, NotificationOption> map = gson.fromJson(notificationPrefsAsString, notificationPrefs);
-        return map;
+        return gson.fromJson(notificationPrefsAsString, notificationPrefs);
     }
 
     private static SharedPreferences getPrefs(Context context) {

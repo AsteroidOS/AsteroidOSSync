@@ -5,15 +5,16 @@ package org.asteroidos.sync;
 import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 public class AppInfo
         implements Comparable<AppInfo>, Parcelable
 {
-    String label, packageName;
+    private String label, packageName;
     private boolean system, installed, checked, disabled;
     public Bitmap icon;
 
-    public AppInfo(String packageName, String label, boolean system, boolean installed)
+    AppInfo(String packageName, String label, boolean system, boolean installed)
     {
         this.label = label;
         this.packageName = packageName;
@@ -41,14 +42,7 @@ public class AppInfo
     {
         return system;
     }
-    public boolean isInstalled()
-    {
-        return installed;
-    }
-    public int compareTo(AppInfo appInfo)
-    {
-        return label.compareToIgnoreCase(appInfo.getLabel());
-    }
+    public int compareTo(@NonNull AppInfo appInfo) { return label.compareToIgnoreCase(appInfo.getLabel()); }
     public String toString()
     {
         return label + " : " + packageName;
@@ -84,6 +78,6 @@ public class AppInfo
         system = bools[0];
         installed = bools[1];
         checked = bools[2];
-        icon = (Bitmap) in.readParcelable(getClass().getClassLoader());
+        icon = in.readParcelable(getClass().getClassLoader());
     }
 }

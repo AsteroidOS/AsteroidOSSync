@@ -24,11 +24,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
@@ -44,8 +42,8 @@ import java.util.UUID;
 public class ScreenshotService implements BleDevice.ReadWriteListener {
     private int NOTIFICATION = 2726;
 
-    public static final UUID screenshotRequestCharac = UUID.fromString("00006001-0000-0000-0000-00a57e401d05");
-    public static final UUID screenshotContentCharac = UUID.fromString("00006002-0000-0000-0000-00a57e401d05");
+    private static final UUID screenshotRequestCharac = UUID.fromString("00006001-0000-0000-0000-00a57e401d05");
+    private static final UUID screenshotContentCharac = UUID.fromString("00006002-0000-0000-0000-00a57e401d05");
 
     private Context mCtx;
     private BleDevice mDevice;

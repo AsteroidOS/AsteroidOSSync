@@ -37,16 +37,16 @@ import java.util.List;
 import java.util.UUID;
 
 public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionManager.OnActiveSessionsChangedListener {
-    public static final UUID mediaTitleCharac    = UUID.fromString("00007001-0000-0000-0000-00A57E401D05");
-    public static final UUID mediaAlbumCharac    = UUID.fromString("00007002-0000-0000-0000-00A57E401D05");
-    public static final UUID mediaArtistCharac   = UUID.fromString("00007003-0000-0000-0000-00A57E401D05");
-    public static final UUID mediaPlayingCharac  = UUID.fromString("00007004-0000-0000-0000-00A57E401D05");
-    public static final UUID mediaCommandsCharac = UUID.fromString("00007005-0000-0000-0000-00A57E401D05");
+    private static final UUID mediaTitleCharac    = UUID.fromString("00007001-0000-0000-0000-00A57E401D05");
+    private static final UUID mediaAlbumCharac    = UUID.fromString("00007002-0000-0000-0000-00A57E401D05");
+    private static final UUID mediaArtistCharac   = UUID.fromString("00007003-0000-0000-0000-00A57E401D05");
+    private static final UUID mediaPlayingCharac  = UUID.fromString("00007004-0000-0000-0000-00A57E401D05");
+    private static final UUID mediaCommandsCharac = UUID.fromString("00007005-0000-0000-0000-00A57E401D05");
 
-    public static final byte MEDIA_COMMAND_PREVIOUS = 0x0;
-    public static final byte MEDIA_COMMAND_NEXT     = 0x1;
-    public static final byte MEDIA_COMMAND_PLAY     = 0x2;
-    public static final byte MEDIA_COMMAND_PAUSE    = 0x3;
+    private static final byte MEDIA_COMMAND_PREVIOUS = 0x0;
+    private static final byte MEDIA_COMMAND_NEXT     = 0x1;
+    private static final byte MEDIA_COMMAND_PLAY     = 0x2;
+    private static final byte MEDIA_COMMAND_PAUSE    = 0x3;
 
     private Context mCtx;
     private BleDevice mDevice;

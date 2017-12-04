@@ -27,17 +27,17 @@ import java.util.List;
 
 public class AppInfoAdapter extends ArrayAdapter<AppInfo>
 {
-    final static String TAG = AppInfoAdapter.class.getSimpleName();
+    private final static String TAG = AppInfoAdapter.class.getSimpleName();
 
-    Context context;
-    ArrayList<AppInfo> items;
-    int iconSize, layout;
+    private Context context;
+    private ArrayList<AppInfo> items;
+    private int iconSize, layout;
 
     public AppInfoAdapter(Context context, int layout, ArrayList<AppInfo> items)
     {
         super(context, layout, items);
         this.context = context;
-        this.items = new ArrayList<AppInfo>(items);
+        this.items = new ArrayList<>(items);
         this.layout = layout;
 
         try
@@ -55,13 +55,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
     {
         items.add(appInfo);
     }
-    public void addAll(ArrayList<AppInfo> list)
-    {
-        for(AppInfo appInfo : list)
-        {
-            items.add(appInfo);
-        }
-    }
+
     public AppInfo getItem(int pos)
     {
         return items.get(pos);
@@ -134,12 +128,13 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
             this.packageName = packageName;
         }
     }
-    static class ViewHolder
+    private static class ViewHolder
     {
         TextView label;
         ImageView icon;
         Spinner spinner;
     }
+    @NonNull
     @Override
     public Filter getFilter()
     {
@@ -160,7 +155,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
         protected FilterResults performFiltering(CharSequence ignored)
         {
             FilterResults results = new FilterResults();
-            ArrayList<AppInfo> newValues = new ArrayList<AppInfo>();
+            ArrayList<AppInfo> newValues = new ArrayList<>();
             for(AppInfo value : items)
             {
                 String packageName = value.getPackageName().toLowerCase();

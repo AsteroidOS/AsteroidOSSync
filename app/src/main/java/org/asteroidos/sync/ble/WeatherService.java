@@ -33,12 +33,12 @@ import github.vatsal.easyweather.retrofit.models.ForecastResponseModel;
 import github.vatsal.easyweather.retrofit.models.List;
 
 public class WeatherService implements BleDevice.ReadWriteListener {
-    public static final UUID weatherCityCharac     = UUID.fromString("00008001-0000-0000-0000-00a57e401d05");
-    public static final UUID weatherIdsCharac      = UUID.fromString("00008002-0000-0000-0000-00a57e401d05");
-    public static final UUID weatherMinTempsCharac = UUID.fromString("00008003-0000-0000-0000-00a57e401d05");
-    public static final UUID weatherMaxTempsCharac = UUID.fromString("00008004-0000-0000-0000-00a57e401d05");
+    private static final UUID weatherCityCharac     = UUID.fromString("00008001-0000-0000-0000-00a57e401d05");
+    private static final UUID weatherIdsCharac      = UUID.fromString("00008002-0000-0000-0000-00a57e401d05");
+    private static final UUID weatherMinTempsCharac = UUID.fromString("00008003-0000-0000-0000-00a57e401d05");
+    private static final UUID weatherMaxTempsCharac = UUID.fromString("00008004-0000-0000-0000-00a57e401d05");
 
-    public static final String owmApiKey = "ffcb5a7ed134aac3d095fa628bc46c65";
+    private static final String owmApiKey = "ffcb5a7ed134aac3d095fa628bc46c65";
     public static final String PREFS_NAME = "WeatherPreferences";
     public static final String PREFS_CITY_NAME = "cityName";
     public static final String PREFS_CITY_NAME_DEFAULT = "NewYork";
@@ -46,7 +46,7 @@ public class WeatherService implements BleDevice.ReadWriteListener {
 
     private BleDevice mDevice;
     private Context mCtx;
-    SharedPreferences mSettings;
+    private SharedPreferences mSettings;
 
     public WeatherService(Context ctx, BleDevice device) {
         mDevice = device;
@@ -66,7 +66,7 @@ public class WeatherService implements BleDevice.ReadWriteListener {
 
     public void unsync() {}
 
-    public void updateWeather() {
+    private void updateWeather() {
         String cityName = mSettings.getString(PREFS_CITY_NAME, PREFS_CITY_NAME_DEFAULT);
         WeatherMap weatherMap = new WeatherMap(mCtx, owmApiKey);
         weatherMap.getCityForecast (cityName, new ForecastCallback() {

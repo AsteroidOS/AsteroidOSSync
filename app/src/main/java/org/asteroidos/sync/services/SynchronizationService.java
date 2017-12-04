@@ -27,18 +27,15 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import android.widget.Toast;
 
 import com.idevicesinc.sweetblue.BleDevice;
 import com.idevicesinc.sweetblue.BleDeviceConfig;
 import com.idevicesinc.sweetblue.BleDeviceState;
 import com.idevicesinc.sweetblue.BleManager;
 import com.idevicesinc.sweetblue.BleManagerConfig;
-import com.idevicesinc.sweetblue.BleNode;
 import com.idevicesinc.sweetblue.BleNodeConfig;
 import com.idevicesinc.sweetblue.BleTask;
 import com.idevicesinc.sweetblue.utils.Interval;
-import com.idevicesinc.sweetblue.utils.Utils;
 import com.idevicesinc.sweetblue.utils.Uuids;
 
 import org.asteroidos.sync.MainActivity;
@@ -82,7 +79,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     private MediaService mMediaService;
     private TimeService mTimeService;
 
-    class SynchronizationHandler extends Handler {
+    private class SynchronizationHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -312,11 +309,11 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         }
     }
 
-    public static class TaskTimeoutRequestFilter implements BleNodeConfig.TaskTimeoutRequestFilter
+    private static class TaskTimeoutRequestFilter implements BleNodeConfig.TaskTimeoutRequestFilter
     {
-        public static final double DEFAULT_TASK_TIMEOUT					= 12.5;
-        public static final double BOND_TASK_TIMEOUT					= 60.0;
-        public static final double DEFAULT_CRASH_RESOLVER_TIMEOUT		= 50.0;
+        static final double DEFAULT_TASK_TIMEOUT					= 12.5;
+        static final double BOND_TASK_TIMEOUT					= 60.0;
+        static final double DEFAULT_CRASH_RESOLVER_TIMEOUT		= 50.0;
 
         private static final Please DEFAULT_RETURN_VALUE = Please.setTimeoutFor(Interval.secs(DEFAULT_TASK_TIMEOUT));
 
