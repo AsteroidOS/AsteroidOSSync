@@ -18,7 +18,7 @@
     <string name="finder_icon">Εικονίδιο Εύρεσης</string>
     <string name="settings_icon">Εικονίδιο ρυθμίσεων</string>
     <string name="weather_icon">Εικονίδιο καιρού</string>
-    <string name="time_icon"></string>
+    <string name="time_icon">Εικονίδιο Ώρας</string>
     <string name="grab_a_screenshot">Λήψη ενός στιγμιότυπου οθόνης</string>
     <string name="find_my_watch">Βρες το ρολόι μου</string>
     <string name="watch_finder">Εύρεση ρολογιού</string>
@@ -27,19 +27,19 @@
     <string name="notifications">Ειδοποιήσεις</string>
     <string name="notifications_enablement">Για να ενεργοποιήσετε τον συγχρονισμό των ειδοποιήσεων, πρέπει να επιτρέψετε το Συγχρονισμό του AsteroidOS στο παρακάτω μενού.</string>
     <string name="weather_settings">Ρυθμίσεις καιρού</string>
-    <string name="enter_city_name">Πληκτρολογήστε ένα όνομα πόλης:</string>
-    <string name="unpair"></string>
-    <string name="scanning"></string>
-    <string name="downloading"></string>
-    <string name="downloaded"></string>
-    <string name="screenshot"></string>
-    <string name="synchronize_time"></string>
+    <string name="enter_city_name">Προσθήκη πόλης:</string>
+    <string name="unpair">Διακοπή σύζευξης</string>
+    <string name="scanning">Ανανέωση…</string>
+    <string name="downloading">Κατεβάζω…</string>
+    <string name="downloaded">Κατέβηκε</string>
+    <string name="screenshot">Στιγμιότυπο οθόνης</string>
+    <string name="synchronize_time">Συγχρονισμός ώρας</string>
     <string-array name="notification_types_array">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
     </string-array>
-    <string name="explain_app_prefs"></string>
+    <string name="explain_app_prefs">Οι εφαρμογές θα εμφανιστούν μόλις λάβετε ειδοποιήσεις</string>
 </resources>
