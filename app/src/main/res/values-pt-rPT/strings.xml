@@ -1,2 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="generic_ok">OK</string>
+    <string name="searching">A procurar relógios</string>
+    <string name="unknown_device">Dispositivo desconhecido</string>
+    <string name="nothing_found">Nenhum relógio encontrado</string>
+    <string name="one_found">1 relógio encontrado</string>
+    <string name="n_found">%d relógios encontrados</string>
+    <string name="ble_not_supported">Parece que o Bluetooth Low Energy não é compatível com este dispositivo.</string>
+    <string name="disconnected">Desligado</string>
+    <string name="connected">Ligado</string>
+    <string name="connecting">A ligar…</string>
+    <string name="connected_formatted">Ligado a %s</string>
+    <string name="connecting_formatted">A ligar a %s</string>
+    <string name="grab_a_screenshot"></string>
+    <string name="find_my_watch">Encontrar o meu relógio</string>
+    <string name="notifications_settings">Definições de notificações</string>
+    <string name="notifications">Notificações</string>
+    <string name="weather_settings">Definições de tempo</string>
+    <string name="enter_city_name">Introduza o nome de uma cidade:</string>
+    <string name="unpair">Desemparelhar</string>
+    <string name="scanning">A procurar…</string>
+    <string name="downloading">A descarregar…</string>
+    <string name="downloaded">Descarregado</string>
+    <string name="screenshot">Captura de ecrã</string>
+    </resources>
