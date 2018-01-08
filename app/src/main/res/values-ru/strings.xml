@@ -12,34 +12,34 @@
     <string name="connecting">Подключение…</string>
     <string name="connected_formatted">Подключено к %s</string>
     <string name="connecting_formatted">Подключение к %s</string>
-    <string name="connected_icon">Подключённая иконка</string>
-    <string name="battery_info_icon">Иконка информации о батареи</string>
-    <string name="screenshot_icon">Иконка скриншота</string>
-    <string name="finder_icon">Иконка поисковика</string>
-    <string name="settings_icon">Иконка настроек</string>
-    <string name="weather_icon">Иконка погоды</string>
-    <string name="time_icon">Иконка времени</string>
-    <string name="grab_a_screenshot">Забрать скриншот</string>
+    <string name="connected_icon">подключенное приложение</string>
+    <string name="battery_info_icon">приложение информации о батареи</string>
+    <string name="screenshot_icon">приложение скриншота</string>
+    <string name="finder_icon">приложение поисковика</string>
+    <string name="settings_icon">приложение настроек</string>
+    <string name="weather_icon">приложение погоды</string>
+    <string name="time_icon">приложение для времени</string>
+    <string name="grab_a_screenshot">сделать скриншот</string>
     <string name="find_my_watch">Найти мои часы</string>
     <string name="watch_finder">Поиск часов</string>
-    <string name="phone_is_searching">Телефон ищет вас!</string>
+    <string name="phone_is_searching">Телефон находится в режиме поиска!</string>
     <string name="notifications_settings">Настройки уведомлений</string>
     <string name="notifications">Уведомления</string>
-    <string name="notifications_enablement"></string>
+    <string name="notifications_enablement">Чтобы позволить синхронизацию сообщений, Вы должны позволить синхронизацию AsteroidOS в следующем меню.</string>
     <string name="weather_settings">Настройки погоды</string>
-    <string name="enter_city_name">Введите имя города:</string>
-    <string name="unpair">Отключить</string>
+    <string name="enter_city_name">Введите название города:</string>
+    <string name="unpair">Отсоединить</string>
     <string name="scanning">Сканирование…</string>
     <string name="downloading">Скачивание…</string>
     <string name="downloaded">Скачано</string>
     <string name="screenshot">Скриншот</string>
     <string name="synchronize_time">Синхронизированное время</string>
     <string-array name="notification_types_array">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
     </string-array>
-    <string name="explain_app_prefs">Ваши приложения появятся здесь когда вы получите уведомления от них</string>
+    <string name="explain_app_prefs">Ваши приложения появятся здесь сразу после сообщения</string>
 </resources>
