@@ -3,7 +3,7 @@
     <string name="generic_ok">אישור</string>
     <string name="searching">חיפוש אחר שעונים</string>
     <string name="unknown_device">התקן לא ידוע</string>
-    <string name="nothing_found">לא נמצא שעון</string>
+    <string name="nothing_found">לא נמצאו שעונים</string>
     <string name="one_found">נמצא שעון אחד</string>
     <string name="n_found">נמצאו %d שעונים</string>
     <string name="ble_not_supported">נראה שאין תמיכה ב־BLE ‏(Bluetooth בצריכת אנרגיה נמוכה) בהתקן זה.</string>
@@ -25,7 +25,7 @@
     <string name="phone_is_searching">הטלפון מחפש אותך!</string>
     <string name="notifications_settings">הגדרות התרעה</string>
     <string name="notifications">התרעות</string>
-    <string name="notifications_enablement">כדי להפעיל סנכרון התרעות, עליך לאפשר את הסנכרון של AsteroidOS בתפריט הבא.</string>
+    <string name="notifications_enablement">כדי לסנכרן התרעות, עליך לאפשר את ה„סנכרון של AsteroidOS” בתפריט הבא:</string>
     <string name="weather_settings">הגדרות מזג האוויר</string>
     <string name="enter_city_name">נא להזין שם עיר:</string>
     <string name="unpair">ביטול צימוד</string>
@@ -35,11 +35,11 @@
     <string name="screenshot">צילום מסך</string>
     <string name="synchronize_time">סנכרון השעה</string>
     <string-array name="notification_types_array">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
     </string-array>
-    <string name="explain_app_prefs">היישומונים שלך יופיע כאן לאחר שתגענה מהם התרעות</string>
+    <string name="explain_app_prefs">התרעות מהיישומים שלך תופענה כאן</string>
 </resources>
