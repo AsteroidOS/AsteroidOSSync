@@ -4,9 +4,9 @@
     <string name="generic_ok">OK</string>
     <string name="searching">Searching for watches</string>
     <string name="unknown_device">Unknown Device</string>
-    <string name="nothing_found">No watch found</string>
-    <string name="one_found">1 watch found</string>
-    <string name="n_found">%d watches found</string>
+    <string name="nothing_found">No watches found</string>
+    <string name="one_found">Found one watch</string>
+    <string name="n_found">Found %d watches</string>
     <string name="ble_not_supported">It does not appear that Bluetooth Low Energy is supported on this device.</string>
     <string name="disconnected">Disconnected</string>
     <string name="connected">Connected</string>
@@ -23,10 +23,10 @@
     <string name="grab_a_screenshot">Grab a screenshot</string>
     <string name="find_my_watch">Find my watch</string>
     <string name="watch_finder">Watch finder</string>
-    <string name="phone_is_searching">Phone is searching for you!</string>
+    <string name="phone_is_searching">The phone is searching for you!</string>
     <string name="notifications_settings">Notifications settings</string>
     <string name="notifications">Notifications</string>
-    <string name="notifications_enablement">In order to enable notifications synchronization, you need to allow AsteroidOS Sync in the following menu.</string>
+    <string name="notifications_enablement">To sync notifications, allow \"AsteroidOS Sync\" in the following menu:</string>
     <string name="weather_settings">Weather settings</string>
     <string name="enter_city_name">Enter a city name:</string>
     <string name="unpair">Unpair</string>
@@ -42,5 +42,5 @@
         <item>Vibration</item>
         <item>Strong vibration</item>
     </string-array>
-    <string name="explain_app_prefs">Your apps will appear here once you get notifications to them</string>
+    <string name="explain_app_prefs">Notifications from your apps will appear here</string>
 </resources>
