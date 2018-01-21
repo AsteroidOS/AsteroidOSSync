@@ -5,7 +5,7 @@
     <string name="unknown_device">Dispositivo desconocido</string>
     <string name="nothing_found">No se encontraron relojes</string>
     <string name="one_found">Se ha encontrado un reloj</string>
-    <string name="n_found">Se ha(n) encontrado %d reloj(es)</string>
+    <string name="n_found">Se han encontrado %d relojes</string>
     <string name="ble_not_supported">Parece que el Bluetooth de baja energía no está disponible en este dispositivo.</string>
     <string name="disconnected">Desconectado</string>
     <string name="connected">Conectado</string>
