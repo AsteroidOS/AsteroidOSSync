@@ -4,7 +4,7 @@
     <string name="searching">Recherche de montres</string>
     <string name="unknown_device">Périphérique inconnu</string>
     <string name="nothing_found">Aucune montre trouvée</string>
-    <string name="one_found">1 montre trouvée</string>
+    <string name="one_found">Une montre trouvée</string>
     <string name="n_found">%d montres trouvées</string>
     <string name="ble_not_supported">Il semble que le Bluetooth Low Energy ne soit pas pris en charge sur cet appareil.</string>
     <string name="disconnected">Déconnecté</string>
@@ -22,10 +22,10 @@
     <string name="grab_a_screenshot">Prendre une capture d\'écran</string>
     <string name="find_my_watch">Trouver ma montre</string>
     <string name="watch_finder">Trouver ma montre</string>
-    <string name="phone_is_searching">Votre téléphone recherche pour vous !</string>
+    <string name="phone_is_searching">Votre téléphone vous cherche !</string>
     <string name="notifications_settings">Paramètres des notifications</string>
     <string name="notifications">Notifications</string>
-    <string name="notifications_enablement">Pour activer la synchronisation des notifications, vous devez autoriser AsteroidOS Sync dans le menu suivant.</string>
+    <string name="notifications_enablement">Pour synchroniser les notifications, veuillez autoriser \"AsteroidOS Sync\" dans le menu suivant:</string>
     <string name="weather_settings">Paramètres météo</string>
     <string name="enter_city_name">Entrez le nom d\'une ville :</string>
     <string name="unpair">Dissocier</string>
@@ -35,11 +35,11 @@
     <string name="screenshot">Capture d\'écran</string>
     <string name="synchronize_time">Synchroniser la date et l\'heure</string>
     <string-array name="notification_types_array">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
     </string-array>
-    <string name="explain_app_prefs">Vos applis apparaîtront ici une fois que que vous recevrez des notifications</string>
+    <string name="explain_app_prefs">Les notifications de vos applis apparaîtront ici</string>
 </resources>
