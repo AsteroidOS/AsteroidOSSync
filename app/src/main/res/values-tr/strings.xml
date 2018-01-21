@@ -4,7 +4,7 @@
     <string name="searching">Saatler aranıyor</string>
     <string name="unknown_device">Bilinmeyen Aygıt</string>
     <string name="nothing_found">Saat bulunamadı</string>
-    <string name="one_found">1 saat bulundu</string>
+    <string name="one_found">Bir saat bulundu</string>
     <string name="n_found">%d saat bulundu</string>
     <string name="ble_not_supported">Bu aygıtta Bluetooth Düşük Enerji desteklenmiyor.</string>
     <string name="disconnected">Bağlantı kesildi</string>
@@ -22,10 +22,10 @@
     <string name="grab_a_screenshot">Ekran görüntüsü yakala</string>
     <string name="find_my_watch">Saatimi bul</string>
     <string name="watch_finder">Saat bulucu</string>
-    <string name="phone_is_searching">Telefonunuz sizin için arıyor!</string>
+    <string name="phone_is_searching">Telefon sizi arıyor!</string>
     <string name="notifications_settings">Bildirim ayarları</string>
     <string name="notifications">Bildirimler</string>
-    <string name="notifications_enablement">Bildirim eşitlemeyi etkinleştirmek için sonraki menüde AsteroidOS Eşitleme\'ye izin vermeniz gerekir.</string>
+    <string name="notifications_enablement">Bildirimleri eşitlemek için takip eden menüde \"AsteroidOS Eşitleme\"ye izin verin:</string>
     <string name="weather_settings">Hava ayarları</string>
     <string name="enter_city_name">Şehir adı gir:</string>
     <string name="unpair">Kaldır</string>
@@ -41,5 +41,5 @@
         <item>Vibration</item>
         <item>Strong vibration</item>
     </string-array>
-    <string name="explain_app_prefs">Bir kez uygulamalarınız için bildirim alınca, burada görüneceklerdir</string>
+    <string name="explain_app_prefs">Uygulamalarınızdan bildirimler burada gözükecek</string>
 </resources>
