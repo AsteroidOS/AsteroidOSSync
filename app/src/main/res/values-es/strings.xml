@@ -3,9 +3,9 @@
     <string name="generic_ok">OK</string>
     <string name="searching">Búsqueda de relojes</string>
     <string name="unknown_device">Dispositivo desconocido</string>
-    <string name="nothing_found">No se encontró reloj</string>
-    <string name="one_found">1 reloj encontrado</string>
-    <string name="n_found">%d relojes encontrados</string>
+    <string name="nothing_found">No se encontraron relojes</string>
+    <string name="one_found">Se ha encontrado un reloj</string>
+    <string name="n_found">Se ha(n) encontrado %d reloj(es)</string>
     <string name="ble_not_supported">Parece que el Bluetooth de baja energía no está disponible en este dispositivo.</string>
     <string name="disconnected">Desconectado</string>
     <string name="connected">Conectado</string>
@@ -25,7 +25,7 @@
     <string name="phone_is_searching">¡El teléfono te está buscando!</string>
     <string name="notifications_settings">Ajustes de notificaciones</string>
     <string name="notifications">Notificaciones</string>
-    <string name="notifications_enablement">Para habilitar la sincronización de notificaciones, debes activar AsteroidOS Sync en el siguiente menú.</string>
+    <string name="notifications_enablement">Para sincronizar notificaciones, activa \"AsteroidOS Sync\" en el siguiente menú:</string>
     <string name="weather_settings">Ajustes del clima</string>
     <string name="enter_city_name">Escribe un nombre de ciudad:</string>
     <string name="unpair">Desemparejar</string>
@@ -41,5 +41,5 @@
         <item>Vibrar</item>
         <item>Vibrar fuerte</item>
     </string-array>
-    <string name="explain_app_prefs">Tus aplicaciones aparecerán aquí cuando recibas notificaciones</string>
+    <string name="explain_app_prefs">Las notificaciones de tus aplicaciones aparecerán aquí</string>
 </resources>
