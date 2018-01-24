@@ -25,7 +25,7 @@
     <string name="phone_is_searching">O telefone está buscando por você!</string>
     <string name="notifications_settings">Configuração das notificações</string>
     <string name="notifications">Notificações</string>
-    <string name="notifications_enablement">Para habilitar a sincronização das notificações, você precisar permitir o AsteroidOS Sync no próximo menu.</string>
+    <string name="notifications_enablement">Para habilitar a sincronização das notificações, você precisar permitir o AsteroidOS Sync no próximo menu:</string>
     <string name="weather_settings">Configurações do tempo</string>
     <string name="enter_city_name">Digite o nome da cidade:</string>
     <string name="unpair">Cancelar pareamento</string>
