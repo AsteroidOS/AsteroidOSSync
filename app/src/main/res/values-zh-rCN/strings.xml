@@ -25,7 +25,7 @@
     <string name="phone_is_searching">手机正在寻找你！</string>
     <string name="notifications_settings">通知设置</string>
     <string name="notifications">通知</string>
-    <string name="notifications_enablement">为了开启通知同步，您需要在接下来的菜单中允许AsteroidOS 同步。</string>
+    <string name="notifications_enablement">要同步通知，您需要在接下来的菜单中允许AsteroidOS 同步。</string>
     <string name="weather_settings">天气设置</string>
     <string name="enter_city_name">输入一个城市名称：</string>
     <string name="unpair">取消配对</string>
@@ -35,11 +35,11 @@
     <string name="screenshot">截图</string>
     <string name="synchronize_time">同步时间</string>
     <string-array name="notification_types_array">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
     </string-array>
-    <string name="explain_app_prefs">当您的应用收到通知时会出现在这里</string>
+    <string name="explain_app_prefs">来自您应用的通知会出现在这里</string>
 </resources>
