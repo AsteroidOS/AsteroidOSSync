@@ -18,20 +18,20 @@
     <string name="finder_icon">„Finden“-Icon</string>
     <string name="settings_icon">„Einstellungen“-Icon</string>
     <string name="weather_icon">„Wetter“-Icon</string>
-    <string name="time_icon">„Uhr“-Icon</string>
+    <string name="time_icon">Uhr-Icon</string>
     <string name="grab_a_screenshot">Bildschirmfoto anfertigen</string>
     <string name="find_my_watch">Finde meine Uhr</string>
     <string name="watch_finder">Uhr-Finder</string>
     <string name="phone_is_searching">Das Telefon sucht für Sie!</string>
     <string name="notifications_settings">Mitteilungseinstellungen</string>
     <string name="notifications">Mitteilungen</string>
-    <string name="notifications_enablement">Um Mitteilungen synchronisieren müssen Sie AsteroidOS Sync dies im folgenden Menü erlauben:</string>
+    <string name="notifications_enablement">Um Mitteilungen synchronisieren zu können müssen Sie AsteroidOS Sync dies im folgenden Menü erlauben:</string>
     <string name="weather_settings">Wettereinstellungen</string>
     <string name="enter_city_name">Geben Sie eine Stadt an:</string>
     <string name="unpair">Pairing aufheben</string>
     <string name="scanning">Scanne…</string>
     <string name="downloading">Wird heruntergeladen…</string>
-    <string name="downloaded">Heruntegeladen</string>
+    <string name="downloaded">Heruntergeladen</string>
     <string name="screenshot">Screenshot</string>
     <string name="synchronize_time">Zeit synchronisieren</string>
     <string-array name="notification_types_array">
@@ -41,5 +41,5 @@
         <item/>
         <item/>
     </string-array>
-    <string name="explain_app_prefs">App Mitteilungen Ihrer Apps erscheinen hier</string>
+    <string name="explain_app_prefs">Mitteilungen Ihrer Apps erscheinen hier</string>
 </resources>
