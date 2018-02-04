@@ -4,8 +4,8 @@
     <string name="searching">ウォッチを検索中</string>
     <string name="unknown_device">不明なデバイス</string>
     <string name="nothing_found">ウォッチが見つかりません</string>
-    <string name="one_found">1 つウォッチが見つかりました</string>
-    <string name="n_found">%d のウォッチが見つかりました</string>
+    <string name="one_found">ウォッチが１つ見つかりました</string>
+    <string name="n_found">ウォッチが %d つ見つかりました</string>
     <string name="ble_not_supported">お使いのデバイスで Bluetooth 低消費電力がサポートされていないようです。</string>
     <string name="disconnected">切断しました</string>
     <string name="connected">接続しました</string>
@@ -25,7 +25,7 @@
     <string name="phone_is_searching">電話が探しています!</string>
     <string name="notifications_settings">通知の設定</string>
     <string name="notifications">通知</string>
-    <string name="notifications_enablement">通知の同期を有効にするには、次のメニューで AsteroidOS の同期を許可する必要があります。</string>
+    <string name="notifications_enablement">通知を同期するには、次のメニューで \"AsteroidOS の同期\"を許可してください:</string>
     <string name="weather_settings">天気予報の設定</string>
     <string name="enter_city_name">市区町村名を入力してください:</string>
     <string name="unpair">ペア解除</string>
@@ -35,11 +35,11 @@
     <string name="screenshot">スクリーンショット</string>
     <string name="synchronize_time">時刻を同期</string>
     <string-array name="notification_types_array">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
     </string-array>
-    <string name="explain_app_prefs">一度そこに通知を受け取れば、アプリがここに表示されます</string>
+    <string name="explain_app_prefs">アプリからの通知がここに表示されます</string>
 </resources>
