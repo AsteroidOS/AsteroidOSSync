@@ -6,7 +6,7 @@
     <string name="nothing_found">Часов не найдено</string>
     <string name="one_found">одни часы найдены</string>
     <string name="n_found">найдено %d часов</string>
-    <string name="ble_not_supported">Не похоже что Bluetooth Low Energy поддерживается на этом устройстве.</string>
+    <string name="ble_not_supported">Не похоже, что технология Bluetooth Low Energy поддерживается на этом устройстве.</string>
     <string name="disconnected">отсоедино</string>
     <string name="connected">подсоедино</string>
     <string name="connecting">подсоединение…</string>
