@@ -2,16 +2,16 @@
 <resources>
     <string name="generic_ok">ОК</string>
     <string name="searching">Поиск часов</string>
-    <string name="unknown_device">Неизвестное Устройство</string>
-    <string name="nothing_found">Часы не найдены</string>
-    <string name="one_found">1 часы найдены</string>
-    <string name="n_found">%d часов найдено</string>
+    <string name="unknown_device">Неизвестное устройство</string>
+    <string name="nothing_found">Часов не найдено</string>
+    <string name="one_found">одни часы найдены</string>
+    <string name="n_found">найдено %d часов</string>
     <string name="ble_not_supported">Не похоже что Bluetooth Low Energy поддерживается на этом устройстве.</string>
-    <string name="disconnected">Отключено</string>
-    <string name="connected">Подключено</string>
-    <string name="connecting">Подключение…</string>
-    <string name="connected_formatted">Подключено к %s</string>
-    <string name="connecting_formatted">Подключение к %s</string>
+    <string name="disconnected">отсоедино</string>
+    <string name="connected">подсоедино</string>
+    <string name="connecting">подсоединение…</string>
+    <string name="connected_formatted">подсоедино к %s</string>
+    <string name="connecting_formatted">подсоедино к %s</string>
     <string name="connected_icon">подключенное приложение</string>
     <string name="battery_info_icon">приложение информации о батареи</string>
     <string name="screenshot_icon">приложение скриншота</string>
@@ -23,9 +23,9 @@
     <string name="find_my_watch">Найти мои часы</string>
     <string name="watch_finder">Поиск часов</string>
     <string name="phone_is_searching">Телефон находится в режиме поиска!</string>
-    <string name="notifications_settings">Настройки уведомлений</string>
-    <string name="notifications">Уведомления</string>
-    <string name="notifications_enablement">Чтобы позволить синхронизацию сообщений, Вы должны позволить синхронизацию AsteroidOS в следующем меню.</string>
+    <string name="notifications_settings">Настройки оповещаний</string>
+    <string name="notifications">Оповещания</string>
+    <string name="notifications_enablement">для синхронизации сообщений, попозвольте \"Синхронизацию AsteroidOS\" в последующем меню:</string>
     <string name="weather_settings">Настройки погоды</string>
     <string name="enter_city_name">Введите название города:</string>
     <string name="unpair">Отсоединить</string>
@@ -41,5 +41,5 @@
         <item/>
         <item/>
     </string-array>
-    <string name="explain_app_prefs">Ваши приложения появятся здесь сразу после сообщения</string>
+    <string name="explain_app_prefs">Сообщения Ваших приложений появятся здесь</string>
 </resources>
