@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.idevicesinc.sweetblue.utils.Interval;
 
@@ -14,7 +15,6 @@ final class P_TaskQueue
 	private final ArrayList<PA_Task> m_queue = new ArrayList<PA_Task>();
 	private final AtomicReference<PA_Task> m_current;
 	private long m_updateCount;
-	private final P_Logger m_logger;
 	private final BleManager m_mngr;
 	private double m_time = 0.0;
 	private double m_timeSinceEnding = 0.0;
@@ -27,11 +27,15 @@ final class P_TaskQueue
 	P_TaskQueue(BleManager mngr)
 	{
 		m_mngr = mngr;
-		m_logger = mngr.getLogger();
 
 		m_current = new AtomicReference<>(null);
 		
 		initHandler(); 
+	}
+
+	private P_Logger logger()
+	{
+		return m_mngr.getLogger();
 	}
 	
 	final int assignOrdinal()
@@ -130,24 +134,31 @@ final class P_TaskQueue
 		addAtIndex(task, -1);
 	}
 	
-	public final void softlyCancelTasks(PA_Task task)
+	public final void softlyCancelTasks(final PA_Task task)
 	{
-		for( int i = 0; i < m_queue.size()-1; i++ )
+		m_mngr.getPostManager().runOrPostToUpdateThread(new Runnable()
 		{
-			PA_Task ithTask = m_queue.get(i);
-			if( ithTask.isSoftlyCancellableBy(task) )
+			@Override
+			public void run()
 			{
-				ithTask.attemptToSoftlyCancel(task);
-			}
-		}
+				for( int i = 0; i < m_queue.size()-1; i++ )
+				{
+					PA_Task ithTask = m_queue.get(i);
+					if( ithTask.isSoftlyCancellableBy(task) )
+					{
+						ithTask.attemptToSoftlyCancel(task);
+					}
+				}
 
-		if( getCurrent() != null )
-		{
-			if( getCurrent().isSoftlyCancellableBy(task) )
-			{
-				getCurrent().attemptToSoftlyCancel(task);
+				if( getCurrent() != null )
+				{
+					if( getCurrent().isSoftlyCancellableBy(task) )
+					{
+						getCurrent().attemptToSoftlyCancel(task);
+					}
+				}
 			}
-		}
+		});
 	}
 	
 	private void addAtIndex(PA_Task task, int index)
@@ -238,12 +249,12 @@ final class P_TaskQueue
 
 		if( m_executeHandler == null )
 		{
-			m_logger.d("Waiting for execute handler to initialize.");
+			logger().d("Waiting for execute handler to initialize.");
 
 			return executingTask;
 		}
 
-		if( m_current.get() == null )
+		if( getCurrent() == null )
 		{
 			executingTask = dequeue();
 		}
@@ -513,9 +524,10 @@ final class P_TaskQueue
 
 	public final <T extends PA_Task> T get(Class<T> taskClass, BleManager mngr)
 	{
-		if( PU_TaskQueue.isMatch(getCurrent(), taskClass, mngr, null, null) )
+		final PA_Task current = getCurrent();
+		if( PU_TaskQueue.isMatch(current, taskClass, mngr, null, null) )
 		{
-			return (T) getCurrent();
+			return (T) current;
 		}
 
 		for( int i = 0; i < m_queue.size(); i++ )
@@ -531,9 +543,10 @@ final class P_TaskQueue
 
 	public final <T extends PA_Task> T getCurrent(Class<T> taskClass, BleDevice device)
 	{
-		if( PU_TaskQueue.isMatch(getCurrent(), taskClass, null, device, null) )
+		final PA_Task current = getCurrent();
+		if( PU_TaskQueue.isMatch(current, taskClass, null, device, null) )
 		{
-			return (T) getCurrent();
+			return (T) current;
 		}
 
 		return null;
@@ -541,9 +554,10 @@ final class P_TaskQueue
 
 	public final <T extends PA_Task> T getCurrent(Class<T> taskClass, BleManager mngr)
 	{
-		if( PU_TaskQueue.isMatch(getCurrent(), taskClass, mngr, null, null) )
+		final PA_Task current = getCurrent();
+		if( PU_TaskQueue.isMatch(current, taskClass, mngr, null, null) )
 		{
-			return (T) getCurrent();
+			return (T) current;
 		}
 
 		return null;
@@ -551,9 +565,10 @@ final class P_TaskQueue
 
 	public final <T extends PA_Task> T getCurrent(Class<T> taskClass, BleServer server)
 	{
-		if( PU_TaskQueue.isMatch(getCurrent(), taskClass, null, null, server) )
+		final PA_Task current = getCurrent();
+		if( PU_TaskQueue.isMatch(current, taskClass, null, null, server) )
 		{
-			return (T) getCurrent();
+			return (T) current;
 		}
 
 		return null;
@@ -561,9 +576,18 @@ final class P_TaskQueue
 
 	final void print()
 	{
-		if( m_logger.isEnabled() )
+		if( logger().isEnabled() )
 		{
-			m_logger.i(this.toString());
+			// Wrapping this in a try/catch for now. Threading has changed in v3, so this may not happen there, and this is a band-aid to prevent
+			// crashing the app. As we're just printing to logcat, there's no reason not to continue on at this point.
+			try
+			{
+				logger().i(this.toString());
+			}
+			catch (Exception e)
+			{
+				logger().e("Got exception when trying to print! Exception Class: " + e.getClass().getSimpleName() + " Message: " + e.getMessage());
+			}
 		}
 	}
 
@@ -583,45 +607,78 @@ final class P_TaskQueue
 		print();
 	}
 
-	public final void clearQueueOf(Class<? extends PA_Task> taskClass, BleManager mngr)
+	public final void clearQueueOf(final Class<? extends PA_Task> taskClass, final BleManager mngr)
 	{
-		for( int i = m_queue.size()-1; i >= 0; i-- )
+		m_mngr.getPostManager().runOrPostToUpdateThread(new Runnable()
 		{
-			if( PU_TaskQueue.isMatch(m_queue.get(i), taskClass, mngr, null, null) )
+			@Override
+			public void run()
 			{
-				clearQueueOf$removeFromQueue(i);
-			}
-		}
-	}
-
-	public final void clearQueueOf(Class<? extends PA_Task> taskClass, BleDevice device, final int ordinal)
-	{
-		for( int i = m_queue.size()-1; i >= 0; i-- )
-		{
-			final PA_Task task_ith = m_queue.get(i);
-
-			if( ordinal <= -1 || ordinal >= 0 && task_ith.getOrdinal() <= ordinal )
-			{
-				if( PU_TaskQueue.isMatch(task_ith, taskClass, null, device, null) )
+				for( int i = m_queue.size()-1; i >= 0; i-- )
 				{
-					clearQueueOf$removeFromQueue(i);
+					if( PU_TaskQueue.isMatch(m_queue.get(i), taskClass, mngr, null, null) )
+					{
+						clearQueueOf$removeFromQueue(i);
+					}
 				}
 			}
-		}
+		});
 	}
 
-	public final void clearQueueOf(Class<? extends PA_Task> taskClass, BleServer server)
+	public final void clearQueueOf(final Class<? extends PA_Task> taskClass, final BleDevice device, final int ordinal)
 	{
-		for( int i = m_queue.size()-1; i >= 0; i-- )
+		m_mngr.getPostManager().runOrPostToUpdateThread(new Runnable()
 		{
-			if( PU_TaskQueue.isMatch(m_queue.get(i), taskClass, null, null, server) )
+			@Override
+			public void run()
 			{
-				clearQueueOf$removeFromQueue(i);
+				for( int i = m_queue.size()-1; i >= 0; i-- )
+				{
+					final PA_Task task_ith = m_queue.get(i);
+
+					if( ordinal <= -1 || ordinal >= 0 && task_ith.getOrdinal() <= ordinal )
+					{
+						if( PU_TaskQueue.isMatch(task_ith, taskClass, null, device, null) )
+						{
+							clearQueueOf$removeFromQueue(i);
+						}
+					}
+				}
 			}
-		}
+		});
+	}
+
+	public final void clearQueueOf(final Class<? extends PA_Task> taskClass, final BleServer server)
+	{
+		m_mngr.getPostManager().runOrPostToUpdateThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				for( int i = m_queue.size()-1; i >= 0; i-- )
+				{
+					if( PU_TaskQueue.isMatch(m_queue.get(i), taskClass, null, null, server) )
+					{
+						clearQueueOf$removeFromQueue(i);
+					}
+				}
+			}
+		});
 	}
 
 	public final void clearQueueOfAll()
+	{
+		m_mngr.getPostManager().runOrPostToUpdateThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+			clearQueueOfAll_blocking();
+			}
+		});
+	}
+
+	final void clearQueueOfAll_blocking()
 	{
 		for (int i = m_queue.size() - 1; i >= 0; i-- )
 		{

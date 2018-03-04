@@ -167,31 +167,19 @@ public final class P_AndroidBluetoothManager implements P_NativeManagerLayer
     }
 
     @Override
-    public final void startAdvertising(AdvertiseSettings settings, AdvertiseData adData, AdvertiseCallback callback)
+    public final void startAdvertising(AdvertiseSettings settings, AdvertiseData adData, L_Util.AdvertisingCallback callback)
     {
-        final BluetoothLeAdvertiser ad = L_Util.getBluetoothLeAdvertiser(m_adaptor);
-        if (ad != null)
+        if (!L_Util.startAdvertising(m_adaptor, settings, adData, callback))
         {
-            ad.startAdvertising(settings, adData, callback);
-        }
-        else
-        {
-            m_bleManager.getLogger().e("Tried to start advertising, but the BluetoothLeAdvertiser was null!");
+            m_bleManager.ASSERT(false, "Unable to start advertising!");
+            m_bleManager.getLogger().e("Failed to start advertising!");
         }
     }
 
     @Override
-    public final void stopAdvertising(AdvertiseCallback callback)
+    public final void stopAdvertising()
     {
-        final BluetoothLeAdvertiser ad = L_Util.getBluetoothLeAdvertiser(m_adaptor);
-        if (ad != null)
-        {
-            ad.stopAdvertising(callback);
-        }
-        else
-        {
-            m_bleManager.getLogger().e("Tried to stop advertising, but the BluetoothLeAdvertiser was null!");
-        }
+        L_Util.stopAdvertising(m_adaptor);
     }
 
     @Override public final Set<BluetoothDevice> getBondedDevices()
@@ -255,6 +243,15 @@ public final class P_AndroidBluetoothManager implements P_NativeManagerLayer
         }
         else
         {
+            // If the BleManager instance is somehow null here, we'll try to assign it now
+            if (m_bleManager == null)
+            {
+                m_bleManager = BleManager.s_instance;
+                
+                // If the manager is still somehow null here, we'll just return false for the time being
+                if (m_bleManager /*still*/ == null)
+                    return false;
+            }
             return m_bleManager.is(ON);
         }
     }

@@ -3,9 +3,7 @@ package com.idevicesinc.sweetblue;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothGattServer;
 import android.bluetooth.BluetoothManager;
-import android.bluetooth.le.AdvertiseCallback;
 import android.bluetooth.le.AdvertiseData;
 import android.bluetooth.le.AdvertiseSettings;
 import android.content.Context;
@@ -33,8 +31,8 @@ interface P_NativeManagerLayer {
     BluetoothAdapter getNativeAdaptor();
     BluetoothManager getNativeManager();
     P_NativeServerLayer openGattServer(Context context, P_BleServer_Listeners listeners);
-    void startAdvertising(AdvertiseSettings settings, AdvertiseData adData, AdvertiseCallback callback);
-    void stopAdvertising(AdvertiseCallback callback);
+    void startAdvertising(AdvertiseSettings settings, AdvertiseData adData, L_Util.AdvertisingCallback callback);
+    void stopAdvertising();
     boolean isLocationEnabledForScanning_byOsServices();
     boolean isLocationEnabledForScanning_byRuntimePermissions();
     boolean isLocationEnabledForScanning();

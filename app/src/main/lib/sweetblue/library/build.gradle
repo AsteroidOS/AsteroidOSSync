@@ -11,11 +11,12 @@ apply plugin: 'signing'
 version = "${SEMVER}".replace("_", ".")
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         minSdkVersion 18
+        project.archivesBaseName = "sweetblue"
     }
 
     buildTypes {
@@ -26,6 +27,13 @@ android {
             minifyEnabled false
         }
     }
+
+    // Commenting out Java 8 support for now until the lambda issue can be fixed
+    // See https://issuetracker.google.com/issues/68977385
+//    compileOptions {
+//        sourceCompatibility = '1.8'
+//        targetCompatibility = '1.8'
+//    }
 }
 
 // Set base variables
@@ -37,11 +45,9 @@ ext.JAVADOC_JAR_NAME = JAR_BASE_NAME + "-javadoc.jar"
 ext.SOURCES_JAR_NAME = JAR_BASE_NAME + "-sources.jar"
 ext.AS_BUILD_SUFFIX = "/android_studio/build"
 ext.AS_APP_BUILD_SUFFIX = "/android_studio/app/build"
-ext.AS_SUFFIX = "/android_studio/app/libs"
+ext.AS_SUFFIX = "/android_studio/sweetblue"
 ext.ECLIPSE_SUFFIX = "/eclipse/lib"
 
-sourceCompatibility = '1.7'
-targetCompatibility = '1.7'
 
 // List of all of the modules' build.gradle files
 def moduleFiles = files(rootDir.getAbsolutePath() + "/integration/build.gradle") \
@@ -52,9 +58,7 @@ def moduleFiles = files(rootDir.getAbsolutePath() + "/integration/build.gradle")
 
 repositories {
     mavenCentral()
-    maven {
-        url 'https://maven.google.com'
-    }
+    google()
 }
 
 dependencies {
@@ -129,7 +133,7 @@ task gendocs(type: Javadoc) {
         getLogging().removeStandardOutputListener(listener)
         outputEvents.each { e ->
             if (e =~ " warning -") {
-                throw new GradleException("You have some javadoc warnings, please fix them!");
+                throw new GradleException("You have some javadoc warnings, please fix them!")
             }
         }
     }
@@ -167,7 +171,7 @@ task copyFiles {
     }
 }
 
-def checkDir(String dir) {
+static def checkDir(String dir) {
     File f = new File(dir)
     if (!f.exists()) {
         f.mkdirs()
@@ -175,7 +179,7 @@ def checkDir(String dir) {
 }
 
 // Pull down the samples repo
-task getSamples(dependsOn: [jar, sourceJar, javadocJar]) {
+task getSamples(dependsOn: [jar, sourceJar, javadocJar, "assembleRelease"]) {
     group = "sweetblue"
 
     doLast {
@@ -190,11 +194,11 @@ task getSamples(dependsOn: [jar, sourceJar, javadocJar]) {
         // When running on the build server, we need to inject the username and password
         // otherwise it will pull the un/pw of the current user.
         String gu = System.getenv("G_UNAME")
-        def r;
+        def r
         if (!gu || !gu.trim()) {
-            r = "git clone https://github.com/iDevicesInc/SweetBlue_Samples.git ${samplePath}".execute()
+            r = "git clone https://bitbucket.org/idevices/sweetblue_samples.git ${samplePath}".execute()
         } else {
-            String run = "git clone https://" + System.getenv("G_UNAME") + ":" + System.getenv("G_PW") + "@github.com/iDevicesInc/SweetBlue_Samples.git ${samplePath}"
+            String run = "git clone https://" + System.getenv("G_UNAME") + ":" + System.getenv("G_PW") + "@bitbucket.org/idevices/sweetblue_samples.git ${samplePath}"
             r = run.execute()
         }
         r.waitFor()
@@ -209,6 +213,7 @@ task getSamples(dependsOn: [jar, sourceJar, javadocJar]) {
 ext.mainJar = "${BUNDLE_FOLDER}/jars/${JAR_BASE_NAME}.jar"
 ext.sourcesJar = "${BUNDLE_FOLDER}/jars/${JAR_BASE_NAME}-sources.jar"
 ext.javadocJar = "${BUNDLE_FOLDER}/jars/${JAR_BASE_NAME}-javadoc.jar"
+ext.mainAar = "build/outputs/aar/sweetblue-release.aar"
 
 // Copy the samples to the bundle folder
 task copySamples(dependsOn: [copyFiles, getSamples]) {
@@ -232,7 +237,8 @@ def buildSampleTask(buildDir) {
 }
 
 // Copy the new sweetblue jar, sourcejar, and javadoc jars to each sample AS
-// project, and build 
+// project, and build
+// Copy the aar file to the bundle folder for inclusion in the zip file
 task copyAndRenameJars(dependsOn: copySamples) {
     group = "sweetblue"
 
@@ -241,25 +247,19 @@ task copyAndRenameJars(dependsOn: copySamples) {
         FileCollection collection = files {
             sampleDir.listFiles(new FileFilter() {
                 @Override
-                public boolean accept(File file) {
-                    return !file.isHidden();
+                boolean accept(File file) {
+                    return !file.isHidden()
                 }
             })
         }
         collection.each { File file ->
             copy {
-                from mainJar
+                from mainAar
                 into file.getAbsolutePath() + AS_SUFFIX
-                rename("_${SEMVER}", "")
             }
             copy {
                 from mainJar
                 into file.getAbsolutePath() + ECLIPSE_SUFFIX
-                rename("_${SEMVER}", "")
-            }
-            copy {
-                from sourcesJar
-                into file.getAbsolutePath() + AS_SUFFIX
                 rename("_${SEMVER}", "")
             }
             copy {
@@ -281,12 +281,23 @@ task copyAndRenameJars(dependsOn: copySamples) {
                 from '../local.properties'
                 into file.getAbsolutePath() + "/android_studio"
             }
-            buildSampleTask(file.getAbsolutePath()).execute()
+//            File outerBuildFile = new File(file.getAbsolutePath() + "/android_studio/build.gradle")
+//            String contents = outerBuildFile.getText("UTF-8")
+//            contents = contents.replace("classpath", "// classpath")
+//            outerBuildFile.write(contents, "UTF-8")
+            // TODO - Fix this! With the latest APIs, this no longer works.
+//            buildSampleTask(file.getAbsolutePath()).execute()
+//            contents = contents.replace("// classpath", "classpath")
+//            outerBuildFile.write(contents, "UTF-8")
             delete(file.getAbsolutePath() + "/android_studio/local.properties")
             
             // Delete build folders to save on space in the resulting zip file
             delete(file.getAbsolutePath() + AS_APP_BUILD_SUFFIX)
             delete(file.getAbsolutePath() + AS_BUILD_SUFFIX)
+        }
+        copy {
+            from mainAar
+            into "${BUNDLE_FOLDER}/aar/"
         }
     }
 }
@@ -299,6 +310,21 @@ task copyGPL(dependsOn: copyAndRenameJars) {
             from "../LICENSE"
             into "${BUNDLE_FOLDER}"
         }
+        delete "${BUNDLE_FOLDER}/sweetblue_commercial_license.pdf"
+    }
+}
+
+ext.SB_COMM_LICENSE = System.getenv("SB_COMM_LICENSE")
+
+task copyCommercialLicense(dependsOn: copyAndRenameJars) {
+    group = "sweetblue"
+
+    doLast {
+        copy {
+            from "${SB_COMM_LICENSE}"
+            into "${BUNDLE_FOLDER}"
+        }
+        delete "${BUNDLE_FOLDER}/LICENSE"
     }
 }
 
@@ -309,7 +335,14 @@ task zipTrial(type: Zip, dependsOn: copyGPL) {
     group = "sweetblue"
 }
 
-task zipJar(dependsOn: [zipTrial]) {
+task zipCommercial(type: Zip, dependsOn: copyCommercialLicense) {
+    from "${BUNDLE_FOLDER}"
+    archiveName = "sweetblue_commercial.zip"
+    destinationDir = new File(projectDir.absolutePath + "/${STAGE}")
+    group = "sweetblue"
+}
+
+task zipJar(dependsOn: [zipTrial, zipCommercial]) {
     group = "sweetblue"
     description = "Pulls down samples, builds them, and zips up all SweetBlue files."
 
@@ -324,15 +357,15 @@ task zipJar(dependsOn: [zipTrial]) {
     }
 }
 
-def String getHexString(byte[] data) {
-    def hex = "0123456789abcdef".toCharArray();
-    StringBuilder b = new StringBuilder();
+static String getHexString(byte[] data) {
+    def hex = "0123456789abcdef".toCharArray()
+    StringBuilder b = new StringBuilder()
     for (int i = 0; i < data.length; i++) {
-        int v = data[i] & 0xFF;
-        b.append(hex[v >>> 4]);
-        b.append(hex[v & 0x0F]);
+        int v = data[i] & 0xFF
+        b.append(hex[v >>> 4])
+        b.append(hex[v & 0x0F])
     }
-    return b.toString().trim();
+    return b.toString().trim()
 }
 
 import java.security.MessageDigest
@@ -594,10 +627,9 @@ task uploadInternal(type: Upload) {
     }
 }
 
-signing {
-    required { /*gradle.taskGraph.hasTask("uploadArchives")*/ true }
-    sign configurations.archives
-}
+// This is a hack to avoid signing archives when SweetBlue is run as a submodule within another project. Obviously, we need to sign to deploy,
+// so we apply the signing.gradle file (which the build server swaps out before building, then clears the file when done).
+apply from: 'signing.gradle'
 
 task androidJavadocs(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
@@ -632,7 +664,7 @@ task uploadCommerceZip(dependsOn: zipJar) {
 
     doLast {
         // Upload zip file to the big commerce site
-        def curlS = ['curl', '-T', projectDir.absolutePath + "/${STAGE}/sweetblue.zip", "--digest", "https://sweetblue%40idevicesinc.com:${COMMERCE_PW}@store-lec5paa.mybigcommerce.com/dav/product_downloads/s/"]
+        def curlS = ['curl', '-T', projectDir.absolutePath + "/${STAGE}/sweetblue_commercial.zip", "--digest", "https://sweetblue%40idevicesinc.com:${COMMERCE_PW}@solutions.idevicesinc.com/dav/product_downloads/s/sweetblue.zip"]
         def curl = curlS.execute()
         curl.waitFor()
         if (curl.exitValue() != 0) {

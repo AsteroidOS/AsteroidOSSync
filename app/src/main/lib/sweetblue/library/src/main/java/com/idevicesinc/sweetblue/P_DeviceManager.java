@@ -21,7 +21,6 @@ final class P_DeviceManager
     private final HashMap<String, BleDevice> m_map = new HashMap<String, BleDevice>();
     private final ArrayList<BleDevice> m_list = new ArrayList<BleDevice>();
 
-    private final P_Logger m_logger;
     private final BleManager m_mngr;
 
     private boolean m_updating = false;
@@ -30,7 +29,11 @@ final class P_DeviceManager
     P_DeviceManager(BleManager mngr)
     {
         m_mngr = mngr;
-        m_logger = m_mngr.getLogger();
+    }
+
+    private P_Logger logger()
+    {
+        return m_mngr.getLogger();
     }
 
     public ArrayList<BleDevice> getList()
@@ -318,7 +321,7 @@ final class P_DeviceManager
             {
                 if (m_map.containsKey(device.getMacAddress()))
                 {
-                    m_logger.e("Already registered device " + device.getMacAddress());
+                    logger().e("Already registered device " + device.getMacAddress());
                     return;
                 }
 
@@ -407,7 +410,7 @@ final class P_DeviceManager
         {
             BleDevice device = get(i);
 
-            if (device.m_nativeWrapper.isNativelyBonded() || device.m_nativeWrapper.isNativelyBonding())
+            if (device.m_bondMngr.isNativelyBondingOrBonded())
             {
                 device.unbond_internal(priority, status);
             }
@@ -454,7 +457,7 @@ final class P_DeviceManager
             //--- DRK > Just an early-out performance check here.
             if (device.isAny(BleDeviceState.CONNECTING_OVERALL, BleDeviceState.CONNECTED))
             {
-                device.disconnectWithReason(priority, Status.BLE_TURNING_OFF, ConnectionFailListener.Timing.NOT_APPLICABLE, BleStatuses.GATT_STATUS_NOT_APPLICABLE, BleStatuses.BOND_FAIL_REASON_NOT_APPLICABLE, device.NULL_READWRITE_EVENT());
+                device.disconnectWithReason(priority, Status.BLE_TURNING_OFF, ConnectionFailListener.Timing.NOT_APPLICABLE, BleStatuses.GATT_STATUS_NOT_APPLICABLE, BleStatuses.BOND_FAIL_REASON_NOT_APPLICABLE, false, device.NULL_READWRITE_EVENT());
             }
         }
     }
@@ -467,12 +470,13 @@ final class P_DeviceManager
 
             if (!device.is(BleDeviceState.DISCOVERED))
             {
-                device.onNewlyDiscovered(device.layerManager().getDeviceLayer(), null, device.getRssi(), null, device.getOrigin());
+                device.onNewlyDiscovered(device.layerManager().getDeviceLayer(), null, device.getRssi(), device.getScanRecord(), device.getOrigin());
 
-                if (m_mngr.m_discoveryListener != null)
+                BleManager.DiscoveryListener listener = m_mngr.m_discoveryListener;
+                if (listener != null)
                 {
                     DiscoveryEvent event = new DiscoveryEvent(device, LifeCycle.DISCOVERED);
-                    m_mngr.m_discoveryListener.onEvent(event);
+                    m_mngr.postEvent(listener, event);
                 }
             }
         }
@@ -534,7 +538,7 @@ final class P_DeviceManager
         if (listener != null)
         {
             DiscoveryEvent event = new DiscoveryEvent(device, LifeCycle.UNDISCOVERED);
-            listener.onEvent(event);
+            device.getManager().postEvent(listener, event);
         }
     }
 
