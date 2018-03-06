@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 
         /* Check that bluetooth is enabled */
         if (!mBleMngr.isBleSupported())
