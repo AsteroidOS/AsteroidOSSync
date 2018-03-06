@@ -214,7 +214,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             Notification notification = new Notification.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_stat_name)
                 .setContentTitle(getText(R.string.app_name))
                 .setContentText(status)
                 .setContentIntent(contentIntent)
