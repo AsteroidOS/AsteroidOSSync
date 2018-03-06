@@ -36,6 +36,8 @@ import com.idevicesinc.sweetblue.utils.Interval;
 import org.asteroidos.sync.fragments.AppListFragment;
 import org.asteroidos.sync.fragments.DeviceListFragment;
 import org.asteroidos.sync.fragments.DeviceDetailFragment;
+import org.asteroidos.sync.utils.AppInfo;
+import org.asteroidos.sync.utils.AppInfoHelper;
 import org.asteroidos.sync.services.NLService;
 import org.asteroidos.sync.services.SynchronizationService;
 

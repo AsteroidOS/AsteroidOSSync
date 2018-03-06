@@ -17,7 +17,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.asteroidos.sync.AppInfo;
+import org.asteroidos.sync.utils.AppInfo;
 
 import org.asteroidos.sync.NotificationPreferences;
 import org.asteroidos.sync.R;
