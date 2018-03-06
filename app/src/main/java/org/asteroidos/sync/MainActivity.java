@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
     public static ArrayList<AppInfo> appInfoList;
 
-    public static final String PREFS_NAME = "WeatherPreferences";
+    public static final String PREFS_NAME = "MainPreferences";
     public static final String PREFS_DEFAULT_MAC_ADDR = "defaultMacAddress";
     public static final String PREFS_DEFAULT_LOC_NAME = "defaultLocalName";
 
