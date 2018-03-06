@@ -83,11 +83,11 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             @Override
             public void onEvent(BleManager.StateListener.StateEvent event) {
                 if(event.didExit(BleManagerState.SCANNING)) {
-                    if(mListFragment != null) mListFragment.scanningStopped();
-                    else                      mDetailFragment.scanningStopped();
+                    if(mListFragment != null)        mListFragment.scanningStopped();
+                    else if(mDetailFragment != null) mDetailFragment.scanningStopped();
                 } else if(event.didEnter(BleManagerState.SCANNING)) {
-                    if(mListFragment != null) mListFragment.scanningStarted();
-                    else                      mDetailFragment.scanningStarted();
+                    if(mListFragment != null)        mListFragment.scanningStarted();
+                    else if(mDetailFragment != null) mDetailFragment.scanningStarted();
                 }
             }
         });
