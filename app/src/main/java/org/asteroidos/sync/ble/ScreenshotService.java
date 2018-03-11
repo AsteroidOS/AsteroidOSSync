@@ -149,11 +149,9 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                         notificationBuilder.setProgress(size, progress, false);
                     }
 
-                    if(progress >= previousNotifiedProgress + 500 || progress == size) {
-                        Notification notification = notificationBuilder.build();
-                        mNM.notify(NOTIFICATION, notification);
-                        previousNotifiedProgress = progress;
-                    }
+                    Notification notification = notificationBuilder.build();
+                    mNM.notify(NOTIFICATION, notification);
+                    previousNotifiedProgress = progress;
                 }
             }
         }
