@@ -34,12 +34,5 @@
     <string name="downloaded">התקבל</string>
     <string name="screenshot">צילום מסך</string>
     <string name="synchronize_time">סנכרון השעה</string>
-    <string-array name="notification_types_array">
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-    </string-array>
     <string name="explain_app_prefs">התרעות מהיישומים שלך תופענה כאן</string>
 </resources>

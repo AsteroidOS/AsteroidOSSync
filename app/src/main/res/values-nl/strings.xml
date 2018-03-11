@@ -34,12 +34,5 @@
     <string name="downloaded">Gedownload</string>
     <string name="screenshot">Schermafdruk</string>
     <string name="synchronize_time">Tijd synchroniseren</string>
-    <string-array name="notification_types_array">
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-    </string-array>
     <string name="explain_app_prefs">Meldingen van je apps zullen hier verschijnen</string>
 </resources>

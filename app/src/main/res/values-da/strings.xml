@@ -34,12 +34,5 @@
     <string name="downloaded">Hentet</string>
     <string name="screenshot"></string>
     <string name="synchronize_time">Synkroniser tiden</string>
-    <string-array name="notification_types_array">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-    </string-array>
     <string name="explain_app_prefs">Dine apps vises her, når du får meddelelser til dem.</string>
 </resources>

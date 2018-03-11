@@ -34,12 +34,5 @@
     <string name="downloaded">Pobrane</string>
     <string name="screenshot">Zrzut ekranu</string>
     <string name="synchronize_time">Synchronizuj czas</string>
-    <string-array name="notification_types_array">
-        <item>Default</item>
-        <item>No notification</item>
-        <item>Silent</item>
-        <item>Vibration</item>
-        <item>Strong vibration</item>
-    </string-array>
     <string name="explain_app_prefs">Twoje aplikacje pojawią się tutaj, gdy otrzymasz powiadomienia</string>
 </resources>

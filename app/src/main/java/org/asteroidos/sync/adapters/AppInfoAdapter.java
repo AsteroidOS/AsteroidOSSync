@@ -101,8 +101,13 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
             }
             viewHolder.label.setText(appInfo.getLabel());
             convertView.setTag(viewHolder);
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
-                    R.array.notification_types_array, android.R.layout.simple_spinner_item);
+
+            ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, android.R.id.text1);
+            adapter.add(context.getResources().getString(R.string.notification_type_default));
+            adapter.add(context.getResources().getString(R.string.notification_type_no_notif));
+            adapter.add(context.getResources().getString(R.string.notification_type_silent));
+            adapter.add(context.getResources().getString(R.string.notification_type_vibra));
+            adapter.add(context.getResources().getString(R.string.notification_type_strong_vibra));
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             viewHolder.spinner.setAdapter(adapter);
             NotificationPreferences.NotificationOption position =

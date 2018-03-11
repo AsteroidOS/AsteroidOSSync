@@ -34,12 +34,5 @@
     <string name="downloaded">دریافت شد</string>
     <string name="screenshot">تصویر‌برداری از صفحه</string>
     <string name="synchronize_time">زمان همگام سازی</string>
-    <string-array name="notification_types_array">
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-    </string-array>
     <string name="explain_app_prefs">اعلان‌های برنامه‌های شما اینجا اعمال می‌شود</string>
 </resources>

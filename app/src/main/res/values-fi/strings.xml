@@ -34,12 +34,5 @@
     <string name="downloaded">Ladattu</string>
     <string name="screenshot">Kuvankaappaus</string>
     <string name="synchronize_time">Synkronoi aika</string>
-    <string-array name="notification_types_array">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-    </string-array>
     <string name="explain_app_prefs">Sovelluksesi näkyvät tässä kun niissä on ilmoituksia</string>
 </resources>

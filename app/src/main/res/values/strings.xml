@@ -35,13 +35,11 @@
     <string name="downloaded">Downloaded</string>
     <string name="screenshot">Screenshot</string>
     <string name="synchronize_time">Synchronize time</string>
-    <string-array name="notification_types_array">
-        <item>Default</item>
-        <item>No notification</item>
-        <item>Silent</item>
-        <item>Vibration</item>
-        <item>Strong vibration</item>
-    </string-array>
+    <string name="notification_type_default">Default</string>
+    <string name="notification_type_no_notif">No notification</string>
+    <string name="notification_type_silent">Silent</string>
+    <string name="notification_type_vibra">Vibration</string>
+    <string name="notification_type_strong_vibra">Strong vibration</string>
     <string name="explain_app_prefs">Notifications from your apps will appear here</string>
     <string name="select_this_point">Select this point</string>
     <string name="position_indicator">Position indicator</string>

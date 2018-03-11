@@ -34,12 +34,5 @@
     <string name="downloaded">Heruntergeladen</string>
     <string name="screenshot">Screenshot</string>
     <string name="synchronize_time">Zeit synchronisieren</string>
-    <string-array name="notification_types_array">
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-    </string-array>
     <string name="explain_app_prefs">Mitteilungen Ihrer Apps erscheinen hier</string>
 </resources>
