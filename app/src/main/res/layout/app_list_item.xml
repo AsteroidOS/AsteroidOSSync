@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5sp">
+    android:padding="10dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginLeft="7dp">
         <ImageView
             android:id="@+id/icon"
             android:layout_height="wrap_content"
@@ -18,10 +19,12 @@
         <TextView
             android:id="@+id/label"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="0.7"
+            android:layout_marginLeft="5dp"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:gravity="center_vertical|left"/>
     </LinearLayout>
 
     <Spinner
