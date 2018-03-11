@@ -122,15 +122,20 @@ public class DeviceDetailFragment extends Fragment {
         findCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
-                i.putExtra("event", "posted");
-                i.putExtra("packageName", "org.asteroidos.sync.findmywatch");
-                i.putExtra("id", 0xa57e401d);
-                i.putExtra("appName", getString(R.string.app_name));
-                i.putExtra("appIcon", "ios-watch-vibrating");
-                i.putExtra("summary", getString(R.string.watch_finder));
-                i.putExtra("body", getString(R.string.phone_is_searching));
-                getActivity().sendBroadcast(i);
+                Intent iremove = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
+                iremove.putExtra("event", "removed");
+                iremove.putExtra("id", 0xa57e401d);
+                getActivity().sendBroadcast(iremove);
+
+                Intent ipost = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
+                ipost.putExtra("event", "posted");
+                ipost.putExtra("packageName", "org.asteroidos.sync.findmywatch");
+                ipost.putExtra("id", 0xa57e401d);
+                ipost.putExtra("appName", getString(R.string.app_name));
+                ipost.putExtra("appIcon", "ios-watch-vibrating");
+                ipost.putExtra("summary", getString(R.string.watch_finder));
+                ipost.putExtra("body", getString(R.string.phone_is_searching));
+                getActivity().sendBroadcast(ipost);
             }
         });
 
