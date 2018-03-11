@@ -139,7 +139,8 @@ public class NLService extends NotificationListenerService {
 
         if((notification.priority < Notification.PRIORITY_DEFAULT) ||
            ((notification.flags & Notification.FLAG_ONGOING_EVENT) != 0) ||
-           (NotificationCompat.getLocalOnly(notification)))
+           (NotificationCompat.getLocalOnly(notification)) ||
+           (NotificationCompat.isGroupSummary(notification)))
             return;
 
         NotificationParser notifParser = new NotificationParser(notification);
