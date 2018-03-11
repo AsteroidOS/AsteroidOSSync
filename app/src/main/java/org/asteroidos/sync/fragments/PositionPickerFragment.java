@@ -31,6 +31,7 @@ public class PositionPickerFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         float latitude = mSettings.getFloat(WeatherService.PREFS_LATITUDE, WeatherService.PREFS_LATITUDE_DEFAULT);
         float longitude = mSettings.getFloat(WeatherService.PREFS_LONGITUDE, WeatherService.PREFS_LONGITUDE_DEFAULT);
+        float zoom = mSettings.getFloat(WeatherService.PREFS_ZOOM, WeatherService.PREFS_ZOOM_DEFAULT);
 
         mMapView = view.findViewById(R.id.map);
         mMapView.setTileSource(TileSourceFactory.MAPNIK);
@@ -38,7 +39,7 @@ public class PositionPickerFragment extends Fragment {
         mMapView.setBuiltInZoomControls(false);
         mMapView.setMaxZoomLevel(13.0);
         mMapView.setMinZoomLevel(5.0);
-        mMapView.getController().setZoom(7.0);
+        mMapView.getController().setZoom(zoom);
         mMapView.getController().setCenter(new GeoPoint(latitude, longitude));
 
         Button mButton = view.findViewById(R.id.positionPickerButton);
@@ -49,10 +50,12 @@ public class PositionPickerFragment extends Fragment {
 
                 float latitude = (float) center.getLatitude();
                 float longitude = (float) center.getLongitude();
+                float zoom = (float) mMapView.getZoomLevelDouble();
 
                 SharedPreferences.Editor editor = mSettings.edit();
                 editor.putFloat(WeatherService.PREFS_LATITUDE, latitude);
                 editor.putFloat(WeatherService.PREFS_LONGITUDE, longitude);
+                editor.putFloat(WeatherService.PREFS_ZOOM, zoom);
                 editor.apply();
 
                 getActivity().onBackPressed();
