@@ -25,6 +25,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.Window;
 
 import com.idevicesinc.sweetblue.BleManager;
@@ -66,13 +67,15 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     public static final String PREFS_DEFAULT_MAC_ADDR = "defaultMacAddress";
     public static final String PREFS_DEFAULT_LOC_NAME = "defaultLocalName";
 
+    private SharedPreferences mPrefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        String defaultDevMacAddr = prefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
+        mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String defaultDevMacAddr = mPrefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
 
         Thread appInfoRetrieval = new Thread(new Runnable() {
             public void run() {
@@ -144,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 f = mListFragment = new DeviceListFragment();
                 onScanRequested();
             } else {
-                setTitle(prefs.getString(PREFS_DEFAULT_LOC_NAME, ""));
+                setTitle(mPrefs.getString(PREFS_DEFAULT_LOC_NAME, ""));
                 f = mDetailFragment = new DeviceDetailFragment();
             }
 
@@ -180,8 +183,8 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
         onConnectRequested();
 
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+        mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPrefs.edit();
         editor.putString(PREFS_DEFAULT_MAC_ADDR, macAddress);
         editor.apply();
 
@@ -204,8 +207,8 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             mSyncServiceMessenger.send(msg);
         } catch (RemoteException ignored) {}
 
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+        mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPrefs.edit();
         editor.putString(PREFS_DEFAULT_MAC_ADDR, "");
         editor.putString(PREFS_DEFAULT_LOC_NAME, "");
         editor.apply();
@@ -230,9 +233,9 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                                        IBinder service) {
             mSyncServiceMessenger = new Messenger(service);
 
-            SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            String defaultDevMacAddr = prefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
-            String defaultLocalName = prefs.getString(PREFS_DEFAULT_LOC_NAME, "");
+            mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+            String defaultDevMacAddr = mPrefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
+            String defaultLocalName = mPrefs.getString(PREFS_DEFAULT_LOC_NAME, "");
 
             if(!defaultDevMacAddr.isEmpty()) {
                 if(!mBleMngr.hasDevice(defaultDevMacAddr))
@@ -272,13 +275,22 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if(menuItem.getItemId() ==  android.R.id.home)
+            onBackPressed();
+        
+        return (super.onOptionsItemSelected(menuItem));
+    }
+
+    @Override
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
         if(fm.getBackStackEntryCount() > 0) {
             fm.popBackStack();
-        } else{
+            setTitle(mPrefs.getString(PREFS_DEFAULT_LOC_NAME, ""));
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        } else
             finish();
-        }
 
         try {
             mDetailFragment = (DeviceDetailFragment)mPreviousFragment;
@@ -286,7 +298,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         try {
             mListFragment = (DeviceListFragment)mPreviousFragment;
         } catch (ClassCastException ignored) {}
-
     }
 
     @Override
@@ -298,7 +309,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         if (mDetailFragment != null) {
             mPreviousFragment = mDetailFragment;
             mDetailFragment = null;
-
         }
         if (mListFragment != null) {
             mPreviousFragment = mListFragment;
@@ -307,6 +317,9 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         ft.replace(R.id.flContainer, f);
         ft.addToBackStack(null);
         ft.commit();
+
+        setTitle(getString(R.string.notifications_settings));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -326,6 +339,9 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         ft.replace(R.id.flContainer, f);
         ft.addToBackStack(null);
         ft.commit();
+
+        setTitle(getString(R.string.weather_settings));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private class SynchronizationHandler extends Handler {
@@ -338,8 +354,8 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                     String name = (String)msg.obj;
                     mDetailFragment.setLocalName(name);
 
-                    SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = prefs.edit();
+                    mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = mPrefs.edit();
                     editor.putString(PREFS_DEFAULT_LOC_NAME, name);
                     editor.apply();
                     break;
