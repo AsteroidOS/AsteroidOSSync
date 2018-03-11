@@ -190,6 +190,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         cfg.enableCrashResolver = true;
         cfg.loggingEnabled = true;
         cfg.bondFilter = new BondFilter();
+        cfg.alwaysUseAutoConnect = true;
         mBleMngr.setConfig(cfg);
         updateNotification();
     }
