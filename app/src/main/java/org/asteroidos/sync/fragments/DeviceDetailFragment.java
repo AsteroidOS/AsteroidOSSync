@@ -54,6 +54,7 @@ public class DeviceDetailFragment extends Fragment {
     boolean mConnected = false;
 
     int mStatus = SynchronizationService.STATUS_DISCONNECTED;
+    private int mBatteryPercentage = 100;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
@@ -82,6 +83,7 @@ public class DeviceDetailFragment extends Fragment {
 
         mDisconnectedText = view.findViewById(R.id.info_disconnected);
         mBatteryText = view.findViewById(R.id.info_battery);
+        mBatteryText.setText(String.valueOf(mBatteryPercentage)+" %");
 
         mConnectedContent = view.findViewById(R.id.device_connected_content);
         mDisconnectedPlaceholder = view.findViewById(R.id.device_disconnected_placeholder);
@@ -151,6 +153,8 @@ public class DeviceDetailFragment extends Fragment {
                 mDeviceListener.onDefaultDeviceUnselected();
             }
         });
+
+        setStatus(mStatus);
     }
 
     public void setLocalName(String name) {
@@ -186,6 +190,7 @@ public class DeviceDetailFragment extends Fragment {
     public void setBatteryPercentage(int percentage) {
         try {
             mBatteryText.setText(String.valueOf(percentage)+" %");
+            mBatteryPercentage = percentage;
         } catch(IllegalStateException ignore) {}
     }
 
