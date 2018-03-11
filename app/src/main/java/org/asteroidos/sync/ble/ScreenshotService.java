@@ -141,12 +141,13 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                         notificationIntent.setDataAndType(Uri.parse(fileName.getAbsolutePath()), "image/*");
                         PendingIntent contentIntent = PendingIntent.getActivity(mCtx, 0, notificationIntent, 0);
                         notificationBuilder.setContentIntent(contentIntent);
-
+                        notificationBuilder.setLocalOnly(true);
                         mDownloading = false;
                     } else {
                         notificationBuilder.setContentText(mCtx.getText(R.string.downloading));
                         notificationBuilder.setSmallIcon(R.mipmap.android_image);
                         notificationBuilder.setProgress(size, progress, false);
+                        notificationBuilder.setLocalOnly(true);
                     }
 
                     Notification notification = notificationBuilder.build();
