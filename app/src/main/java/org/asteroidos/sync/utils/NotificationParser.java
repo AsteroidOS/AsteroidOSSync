@@ -147,8 +147,6 @@ public class NotificationParser {
                 break;
         }
 
-        body = body.trim();
-
         return true;
     }
 
@@ -268,7 +266,7 @@ public class NotificationParser {
                 if (viewId == android.R.id.title)
                 {
                     if (summary == null || summary.length() < value.length())
-                        summary = value.toString().trim();
+                        summary = value.toString();
                 }
                 else
                     body += formatCharSequence(value) + "\n\n";

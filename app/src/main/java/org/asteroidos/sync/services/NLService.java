@@ -143,8 +143,8 @@ public class NLService extends NotificationListenerService {
             return;
 
         NotificationParser notifParser = new NotificationParser(notification);
-        String summary = notifParser.summary;
-        String body = notifParser.body;
+        String summary = notifParser.summary.trim();
+        String body = notifParser.body.trim();
         int id = sbn.getId();
         String packageName = sbn.getPackageName();
         String appIcon = iconFromPackage.get(packageName);
