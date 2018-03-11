@@ -26,6 +26,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
+import android.support.v4.app.NotificationCompat;
+
+import org.asteroidos.sync.utils.NotificationParser;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -132,26 +135,26 @@ public class NLService extends NotificationListenerService {
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
-        Notification n = sbn.getNotification();
-        if(n.priority < Notification.PRIORITY_DEFAULT)
+        Notification notification = sbn.getNotification();
+
+        if((notification.priority < Notification.PRIORITY_DEFAULT) ||
+           ((notification.flags & Notification.FLAG_ONGOING_EVENT) != 0) ||
+           (NotificationCompat.getLocalOnly(notification)))
             return;
 
-        String packageName = sbn.getPackageName();
+        NotificationParser notifParser = new NotificationParser(notification);
+        String summary = notifParser.summary;
+        String body = notifParser.body;
         int id = sbn.getId();
-        String summary = n.extras.getString("android.title");
-        String body = n.extras.getString("android.text");
-        if(body == null)
-            body = n.extras.getString("android.summaryText");
-
-        final PackageManager pm = getApplicationContext().getPackageManager();
-        ApplicationInfo ai;
-        try {
-            ai = pm.getApplicationInfo(packageName, 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            ai = null;
-        }
-        String appName = pm.getApplicationLabel(ai).toString();
+        String packageName = sbn.getPackageName();
         String appIcon = iconFromPackage.get(packageName);
+
+        String appName = "";
+        try {
+            final PackageManager pm = getApplicationContext().getPackageManager();
+            ApplicationInfo ai = pm.getApplicationInfo(packageName, 0);
+            appName = pm.getApplicationLabel(ai).toString();
+        } catch (PackageManager.NameNotFoundException ignored) {}
 
         if(summary == null) summary = "";
         if(body == null) body = "";
