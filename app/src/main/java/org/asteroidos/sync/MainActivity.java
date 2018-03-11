@@ -183,11 +183,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
         onConnectRequested();
 
-        mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mPrefs.edit();
-        editor.putString(PREFS_DEFAULT_MAC_ADDR, macAddress);
-        editor.apply();
-
         mListFragment = null;
     }
 
@@ -206,12 +201,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             msg.replyTo = mDeviceDetailMessenger;
             mSyncServiceMessenger.send(msg);
         } catch (RemoteException ignored) {}
-
-        mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mPrefs.edit();
-        editor.putString(PREFS_DEFAULT_MAC_ADDR, "");
-        editor.putString(PREFS_DEFAULT_LOC_NAME, "");
-        editor.apply();
 
         mDetailFragment = null;
         setTitle(R.string.app_name);
@@ -232,23 +221,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
             mSyncServiceMessenger = new Messenger(service);
-
-            mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            String defaultDevMacAddr = mPrefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
-            String defaultLocalName = mPrefs.getString(PREFS_DEFAULT_LOC_NAME, "");
-
-            if(!defaultDevMacAddr.isEmpty()) {
-                if(!mBleMngr.hasDevice(defaultDevMacAddr))
-                    mBleMngr.newDevice(defaultDevMacAddr, defaultLocalName);
-                try {
-                    Message msg = Message.obtain(null, SynchronizationService.MSG_SET_DEVICE);
-                    msg.obj = defaultDevMacAddr;
-                    msg.replyTo = mDeviceDetailMessenger;
-                    mSyncServiceMessenger.send(msg);
-                } catch (RemoteException ignored) {}
-
-                onConnectRequested();
-            }
+            onUpdateRequested();
         }
 
         public void onServiceDisconnected(ComponentName className) {
@@ -353,11 +326,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 case SynchronizationService.MSG_SET_LOCAL_NAME:
                     String name = (String)msg.obj;
                     mDetailFragment.setLocalName(name);
-
-                    mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = mPrefs.edit();
-                    editor.putString(PREFS_DEFAULT_LOC_NAME, name);
-                    editor.apply();
                     break;
                 case SynchronizationService.MSG_SET_STATUS:
                     mDetailFragment.setStatus(msg.arg1);
