@@ -94,27 +94,7 @@ public class DeviceDetailFragment extends Fragment {
         weatherCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setTitle(R.string.weather_settings);
-                alert.setMessage(R.string.enter_city_name);
-
-                final SharedPreferences settings = getActivity().getSharedPreferences(WeatherService.PREFS_NAME, 0);
-                final EditText edittext = new EditText(getActivity());
-                int padding = (int)DeviceDetailFragment.this.getResources().getDisplayMetrics().density*15;
-                edittext.setPadding(padding, padding, padding, padding);
-                edittext.setText(settings.getString(WeatherService.PREFS_CITY_NAME, WeatherService.PREFS_CITY_NAME_DEFAULT));
-                alert.setView(edittext);
-
-                alert.setPositiveButton(getString(R.string.generic_ok), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String cityName = edittext.getText().toString();
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.putString(WeatherService.PREFS_CITY_NAME, cityName);
-                        editor.apply();
-                    }
-                });
-
-                alert.show();
+                mLocationSettingsListener.onLocationSettingsClicked();
             }
         });
 
@@ -230,6 +210,9 @@ public class DeviceDetailFragment extends Fragment {
     public interface OnAppSettingsClickedListener {
         void onAppSettingsClicked();
     }
+    public interface OnLocationSettingsClickedListener {
+        void onLocationSettingsClicked();
+    }
     public interface OnConnectRequestedListener {
         void onConnectRequested();
         void onDisconnectRequested();
@@ -240,6 +223,7 @@ public class DeviceDetailFragment extends Fragment {
     private DeviceDetailFragment.OnDefaultDeviceUnselectedListener mDeviceListener;
     private DeviceDetailFragment.OnConnectRequestedListener mConnectListener;
     private DeviceDetailFragment.OnAppSettingsClickedListener mAppSettingsListener;
+    private DeviceDetailFragment.OnLocationSettingsClickedListener mLocationSettingsListener;
     private DeviceDetailFragment.OnUpdateListener mUpdateListener;
 
     @Override
@@ -262,6 +246,12 @@ public class DeviceDetailFragment extends Fragment {
         else
             throw new ClassCastException(context.toString()
                     + " does not implement DeviceDetailFragment.OnAppSettingsClickedListener");
+
+        if(context instanceof DeviceDetailFragment.OnLocationSettingsClickedListener)
+            mLocationSettingsListener = (DeviceDetailFragment.OnLocationSettingsClickedListener) context;
+        else
+            throw new ClassCastException(context.toString()
+                    + " does not implement DeviceDetailFragment.OnLocationSettingsClickedListener");
 
         if(context instanceof DeviceDetailFragment.OnUpdateListener)
             mUpdateListener = (DeviceDetailFragment.OnUpdateListener) context;

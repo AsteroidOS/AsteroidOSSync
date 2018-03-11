@@ -43,4 +43,6 @@
         <item>Strong vibration</item>
     </string-array>
     <string name="explain_app_prefs">Notifications from your apps will appear here</string>
+    <string name="select_this_point">Select this point</string>
+    <string name="position_indicator">Position indicator</string>
 </resources>

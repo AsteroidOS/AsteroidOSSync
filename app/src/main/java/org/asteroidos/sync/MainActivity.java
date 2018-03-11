@@ -36,6 +36,7 @@ import com.idevicesinc.sweetblue.utils.Interval;
 import org.asteroidos.sync.fragments.AppListFragment;
 import org.asteroidos.sync.fragments.DeviceListFragment;
 import org.asteroidos.sync.fragments.DeviceDetailFragment;
+import org.asteroidos.sync.fragments.PositionPickerFragment;
 import org.asteroidos.sync.utils.AppInfo;
 import org.asteroidos.sync.utils.AppInfoHelper;
 import org.asteroidos.sync.services.NLService;
@@ -48,7 +49,8 @@ import static com.idevicesinc.sweetblue.BleManager.get;
 public class MainActivity extends AppCompatActivity implements DeviceListFragment.OnDefaultDeviceSelectedListener,
         DeviceListFragment.OnScanRequestedListener, DeviceDetailFragment.OnDefaultDeviceUnselectedListener,
         DeviceDetailFragment.OnConnectRequestedListener, BleManager.DiscoveryListener,
-        DeviceDetailFragment.OnAppSettingsClickedListener, DeviceDetailFragment.OnUpdateListener {
+        DeviceDetailFragment.OnAppSettingsClickedListener, DeviceDetailFragment.OnLocationSettingsClickedListener,
+        DeviceDetailFragment.OnUpdateListener {
     private BleManager mBleMngr;
     private DeviceListFragment mListFragment;
     private DeviceDetailFragment mDetailFragment;
@@ -297,6 +299,25 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             mPreviousFragment = mDetailFragment;
             mDetailFragment = null;
 
+        }
+        if (mListFragment != null) {
+            mPreviousFragment = mListFragment;
+            mListFragment = null;
+        }
+        ft.replace(R.id.flContainer, f);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    @Override
+    public void onLocationSettingsClicked() {
+        Fragment f = new PositionPickerFragment();
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        if (mDetailFragment != null) {
+            mPreviousFragment = mDetailFragment;
+            mDetailFragment = null;
         }
         if (mListFragment != null) {
             mPreviousFragment = mListFragment;

@@ -39,10 +39,12 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     private static final UUID weatherMaxTempsCharac = UUID.fromString("00008004-0000-0000-0000-00a57e401d05");
 
     private static final String owmApiKey = "ffcb5a7ed134aac3d095fa628bc46c65";
+
     public static final String PREFS_NAME = "WeatherPreferences";
-    public static final String PREFS_CITY_NAME = "cityName";
-    public static final String PREFS_CITY_NAME_DEFAULT = "New York";
-    // TODO: Should we fallback to a better default value?
+    public static final String PREFS_LATITUDE = "latitude";
+    public static final float PREFS_LATITUDE_DEFAULT = (float) 40.7128;
+    public static final String PREFS_LONGITUDE = "longitude";
+    public static final float PREFS_LONGITUDE_DEFAULT = (float) 74.006;
 
     private BleDevice mDevice;
     private Context mCtx;
@@ -67,13 +69,17 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     public void unsync() {}
 
     private void updateWeather() {
-        String cityName = mSettings.getString(PREFS_CITY_NAME, PREFS_CITY_NAME_DEFAULT);
+        float latitude = mSettings.getFloat(PREFS_LATITUDE, PREFS_LATITUDE_DEFAULT);
+        float longitude = mSettings.getFloat(PREFS_LONGITUDE, PREFS_LONGITUDE_DEFAULT);
         WeatherMap weatherMap = new WeatherMap(mCtx, owmApiKey);
-        weatherMap.getCityForecast (cityName, new ForecastCallback() {
+        weatherMap.getLocationForecast(String.valueOf(latitude), String.valueOf(longitude), new ForecastCallback() {
             @Override
             public void success(ForecastResponseModel response) {
                 List[] l = response.getList();
-                final byte[] city = response.getCity().getName().getBytes(StandardCharsets.UTF_8);
+                String cityName = response.getCity().getName();
+                byte[] city = {};
+                if(cityName != null)
+                    city = cityName.getBytes(StandardCharsets.UTF_8);
                 final byte[] ids = new byte[10];
                 final byte[] maxTemps = new byte[10];
                 final byte[] minTemps = new byte[10];
