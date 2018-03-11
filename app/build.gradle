@@ -45,4 +45,5 @@ dependencies {
     compile 'github.vatsal.easyweather:library:1.0.0'
     compile 'com.skyfishjy.ripplebackground:library:1.0.1'
     compile 'com.google.code.gson:gson:2.8.0'
+    compile 'org.osmdroid:osmdroid-android:6.0.1'
 }
