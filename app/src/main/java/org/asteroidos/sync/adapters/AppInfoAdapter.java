@@ -75,9 +75,9 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(layout, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.label = (TextView) convertView.findViewById(R.id.label);
-            viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
-            viewHolder.spinner = (Spinner) convertView.findViewById(R.id.notification_spinner);
+            viewHolder.label = convertView.findViewById(R.id.label);
+            viewHolder.icon = convertView.findViewById(R.id.icon);
+            viewHolder.spinner = convertView.findViewById(R.id.notification_spinner);
             convertView.setTag(viewHolder);
         }
         else

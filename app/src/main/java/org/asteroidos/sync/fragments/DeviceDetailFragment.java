@@ -19,27 +19,23 @@
 package org.asteroidos.sync.fragments;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.asteroidos.sync.R;
 import org.asteroidos.sync.ble.TimeService;
-import org.asteroidos.sync.ble.WeatherService;
 import org.asteroidos.sync.services.SynchronizationService;
 
 public class DeviceDetailFragment extends Fragment {
@@ -73,7 +69,7 @@ public class DeviceDetailFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mFab = (FloatingActionButton) view.findViewById(R.id.fab);
+        mFab = view.findViewById(R.id.fab);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,13 +80,13 @@ public class DeviceDetailFragment extends Fragment {
             }
         });
 
-        mDisconnectedText = (TextView)view.findViewById(R.id.info_disconnected);
-        mBatteryText = (TextView)view.findViewById(R.id.info_battery);
+        mDisconnectedText = view.findViewById(R.id.info_disconnected);
+        mBatteryText = view.findViewById(R.id.info_battery);
 
-        mConnectedContent = (LinearLayout)view.findViewById(R.id.device_connected_content);
-        mDisconnectedPlaceholder = (LinearLayout)view.findViewById(R.id.device_disconnected_placeholder);
+        mConnectedContent = view.findViewById(R.id.device_connected_content);
+        mDisconnectedPlaceholder = view.findViewById(R.id.device_disconnected_placeholder);
 
-        CardView weatherCard = (CardView)view.findViewById(R.id.card_view1);
+        CardView weatherCard = view.findViewById(R.id.card_view1);
         weatherCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +94,7 @@ public class DeviceDetailFragment extends Fragment {
             }
         });
 
-        CardView findCard = (CardView)view.findViewById(R.id.card_view2);
+        CardView findCard = view.findViewById(R.id.card_view2);
         findCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +115,7 @@ public class DeviceDetailFragment extends Fragment {
             }
         });
 
-        CardView screenshotCard = (CardView)view.findViewById(R.id.card_view3);
+        CardView screenshotCard = view.findViewById(R.id.card_view3);
         screenshotCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +123,7 @@ public class DeviceDetailFragment extends Fragment {
             }
         });
 
-        CardView notifSettCard = (CardView) view.findViewById(R.id.card_view4);
+        CardView notifSettCard = view.findViewById(R.id.card_view4);
         notifSettCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,7 +133,7 @@ public class DeviceDetailFragment extends Fragment {
 
         mTimeSyncSettings = getActivity().getSharedPreferences(TimeService.PREFS_NAME, 0);
 
-        mTimeSyncCheckBox = (CheckBox) view.findViewById(R.id.timeSyncCheckBox);
+        mTimeSyncCheckBox = view.findViewById(R.id.timeSyncCheckBox);
         mTimeSyncCheckBox.setChecked(mTimeSyncSettings.getBoolean(TimeService.PREFS_SYNC_TIME, TimeService.PREFS_SYNC_TIME_DEFAULT));
         mTimeSyncCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
             @Override
@@ -148,7 +144,7 @@ public class DeviceDetailFragment extends Fragment {
             }
         });
 
-        TextView unpairTextView = (TextView) view.findViewById(R.id.unpairTextView);
+        TextView unpairTextView = view.findViewById(R.id.unpairTextView);
         unpairTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

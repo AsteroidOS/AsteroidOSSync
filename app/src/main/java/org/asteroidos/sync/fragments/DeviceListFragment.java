@@ -51,10 +51,10 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mSearchingText = (TextView)view.findViewById(R.id.searchingText);
-        mRippleBackground = (RippleBackground)view.findViewById(R.id.content);
-        FloatingActionButton fab = (FloatingActionButton)view.findViewById(R.id.fab);
-        ListView mScanListView = (ListView)view.findViewById(R.id.device_list);
+        mSearchingText = view.findViewById(R.id.searchingText);
+        mRippleBackground = view.findViewById(R.id.content);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        ListView mScanListView = view.findViewById(R.id.device_list);
 
         fab.setOnClickListener(this);
 
