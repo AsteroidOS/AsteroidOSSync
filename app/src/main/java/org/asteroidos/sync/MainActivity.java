@@ -71,7 +71,13 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String defaultDevMacAddr = prefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
-        appInfoList = AppInfoHelper.getPackageInfo(this);
+
+        Thread appInfoRetrieval = new Thread(new Runnable() {
+            public void run() {
+                appInfoList = AppInfoHelper.getPackageInfo(MainActivity.this);
+            }
+        });
+        appInfoRetrieval.start();
 
         /* Start and/or attach to the Synchronization Service */
         mSyncServiceIntent = new Intent(this, SynchronizationService.class);
