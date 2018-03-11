@@ -77,12 +77,6 @@ public class NotificationParser {
         else
             body = formatCharSequence(extras.getCharSequence(Notification.EXTRA_TEXT));
 
-        if (extras.get(Notification.EXTRA_SUB_TEXT) != null)
-        {
-            body = body.trim();
-            body = body + "\n\n" + formatCharSequence(extras.getCharSequence(Notification.EXTRA_SUB_TEXT));
-        }
-
         return true;
     }
 
