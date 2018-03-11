@@ -41,7 +41,7 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     private static final String owmApiKey = "ffcb5a7ed134aac3d095fa628bc46c65";
     public static final String PREFS_NAME = "WeatherPreferences";
     public static final String PREFS_CITY_NAME = "cityName";
-    public static final String PREFS_CITY_NAME_DEFAULT = "NewYork";
+    public static final String PREFS_CITY_NAME_DEFAULT = "New York";
     // TODO: Should we fallback to a better default value?
 
     private BleDevice mDevice;
