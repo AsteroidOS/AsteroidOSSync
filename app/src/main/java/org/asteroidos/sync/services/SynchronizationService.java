@@ -132,6 +132,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                             mMediaService.unsync();
                             mTimeService.unsync();
                             mDevice.disconnect();
+                            mDevice.unbond();
                         }
                         mDevice = null;
                     } else {
