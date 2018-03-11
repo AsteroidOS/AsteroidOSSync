@@ -12,11 +12,13 @@
     <Button
         android:id="@+id/positionPickerButton"
         android:layout_width="wrap_content"
-        android:text="@string/select_this_point"
+        android:text="@string/use_this_area"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@android:color/white"/>
 
     <ImageView
         android:id="@+id/positionPickerIndicator"

@@ -41,6 +41,6 @@
     <string name="notification_type_vibra">Vibration</string>
     <string name="notification_type_strong_vibra">Strong vibration</string>
     <string name="explain_app_prefs">Notifications from your apps will appear here</string>
-    <string name="select_this_point">Select this point</string>
     <string name="position_indicator">Position indicator</string>
+    <string name="use_this_area">Use this area for weather</string>
 </resources>
