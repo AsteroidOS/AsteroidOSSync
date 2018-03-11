@@ -21,26 +21,26 @@ import java.util.List;
 // Originally from https://github.com/matejdro/PebbleNotificationCenter-Android written by Matej Drobnič under the terms of the GPLv3
 
 public class NotificationParser {
-	public String summary;
-	public String body;
+    public String summary;
+    public String body;
 
     public NotificationParser(Notification notification)
-	{
-		this.summary = null;
-		this.body = "";
+    {
+        this.summary = null;
+        this.body = "";
 
         if (tryParseNatively(notification))
             return;
 
         getExtraBigData(notification);
-	}
-	
-	@TargetApi(value = Build.VERSION_CODES.JELLY_BEAN)
+    }
+
+    @TargetApi(value = Build.VERSION_CODES.JELLY_BEAN)
     private boolean tryParseNatively(Notification notification)
-	{
-		Bundle extras = notification.extras;
-		if (extras == null)
-			return false;
+    {
+        Bundle extras = notification.extras;
+        if (extras == null)
+            return false;
 
         if (parseMessageStyleNotification(notification, extras))
             return true;
@@ -51,19 +51,19 @@ public class NotificationParser {
                 return true;
         }
 
-		if (extras.get(Notification.EXTRA_TEXT) == null && extras.get(Notification.EXTRA_TEXT_LINES) == null && extras.get(Notification.EXTRA_BIG_TEXT) == null)
-			return false;
-		
-		if (extras.get(Notification.EXTRA_TITLE_BIG) != null)
-		{
-			CharSequence bigTitle = extras.getCharSequence(Notification.EXTRA_TITLE_BIG);
-			if (bigTitle.length() < 40 || extras.get(Notification.EXTRA_TITLE) == null)
-				summary = bigTitle.toString();
-			else
-				summary = extras.getCharSequence(Notification.EXTRA_TITLE).toString();
-		}
-		else if (extras.get(Notification.EXTRA_TITLE) != null)
-			summary = extras.getCharSequence(Notification.EXTRA_TITLE).toString();
+        if (extras.get(Notification.EXTRA_TEXT) == null && extras.get(Notification.EXTRA_TEXT_LINES) == null && extras.get(Notification.EXTRA_BIG_TEXT) == null)
+            return false;
+
+        if (extras.get(Notification.EXTRA_TITLE_BIG) != null)
+        {
+            CharSequence bigTitle = extras.getCharSequence(Notification.EXTRA_TITLE_BIG);
+            if (bigTitle.length() < 40 || extras.get(Notification.EXTRA_TITLE) == null)
+                summary = bigTitle.toString();
+            else
+                summary = extras.getCharSequence(Notification.EXTRA_TITLE).toString();
+        }
+        else if (extras.get(Notification.EXTRA_TITLE) != null)
+            summary = extras.getCharSequence(Notification.EXTRA_TITLE).toString();
 
         if (extras.get(Notification.EXTRA_TEXT_LINES) != null)
         {
@@ -84,7 +84,7 @@ public class NotificationParser {
         }
 
         return true;
-	}
+    }
 
     private boolean parseMessageStyleNotification(Notification notification, Bundle extras)
     {
@@ -168,12 +168,12 @@ public class NotificationParser {
 
         int amountOfBoldspans = 0;
 
-       for (int i = spans.length - 1; i >= 0; i--)
-       {
-          StyleSpan span = spans[i];
-          if (span.getStyle() == Typeface.BOLD)
-              amountOfBoldspans++;
-       }
+        for (int i = spans.length - 1; i >= 0; i--)
+        {
+            StyleSpan span = spans[i];
+            if (span.getStyle() == Typeface.BOLD)
+                amountOfBoldspans++;
+        }
 
         if (amountOfBoldspans == 1)
         {
@@ -196,96 +196,96 @@ public class NotificationParser {
         return text.substring(0, pos).trim().concat("\n").trim().concat(text.substring(pos)).trim();
     }
 
-	private void getExtraData(Notification notification) {
-		RemoteViews views = notification.contentView;
-		if (views == null)
-			return;
+    private void getExtraData(Notification notification) {
+        RemoteViews views = notification.contentView;
+        if (views == null)
+            return;
 
-		parseRemoteView(views);
-	}
+        parseRemoteView(views);
+    }
 
-	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-	private void getExtraBigData(Notification notification) {
-		RemoteViews views;
-		try {
-			views = notification.bigContentView;
-		} catch (NoSuchFieldError e) {
-			getExtraData(notification);
-			return;
-		}
-		if (views == null) {
-			getExtraData(notification);
-			return;
-		}
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void getExtraBigData(Notification notification) {
+        RemoteViews views;
+        try {
+            views = notification.bigContentView;
+        } catch (NoSuchFieldError e) {
+            getExtraData(notification);
+            return;
+        }
+        if (views == null) {
+            getExtraData(notification);
+            return;
+        }
 
-		parseRemoteView(views);
-	}
+        parseRemoteView(views);
+    }
 
     @SuppressLint("PrivateApi")
     private void parseRemoteView(RemoteViews views)
-	{
-		try {
-			Class remoteViewsClass = RemoteViews.class;
-			Class baseActionClass = Class.forName("android.widget.RemoteViews$Action");
+    {
+        try {
+            Class remoteViewsClass = RemoteViews.class;
+            Class baseActionClass = Class.forName("android.widget.RemoteViews$Action");
 
-			Field actionsField = remoteViewsClass.getDeclaredField("mActions");
+            Field actionsField = remoteViewsClass.getDeclaredField("mActions");
 
-			actionsField.setAccessible(true);
+            actionsField.setAccessible(true);
 
-			ArrayList<Object> actions = (ArrayList<Object>) actionsField.get(views);
-			for (Object action : actions) {
+            ArrayList<Object> actions = (ArrayList<Object>) actionsField.get(views);
+            for (Object action : actions) {
                 if (!action.getClass().getName().contains("$ReflectionAction"))
-					continue;
+                    continue;
 
-				Field typeField = action.getClass().getDeclaredField("type");
-				typeField.setAccessible(true);
-				int type = typeField.getInt(action);
+                Field typeField = action.getClass().getDeclaredField("type");
+                typeField.setAccessible(true);
+                int type = typeField.getInt(action);
                 if (type != 9 && type != 10)
-					continue;
+                    continue;
 
 
-				int viewId = -1;
-				try
-				{
-					Field idField = baseActionClass.getDeclaredField("viewId");
-					idField.setAccessible(true);
-					viewId = idField.getInt(action);
-				}
-				catch (NoSuchFieldException ignored) {}
-
-				Field valueField = action.getClass().getDeclaredField("value");
-				valueField.setAccessible(true);
-				CharSequence value = (CharSequence) valueField.get(action);
-				
-				if (value == null ||
-                    value.equals("...") ||
-                    isInteger(value.toString()) ||
-                    body.contains(value))
+                int viewId = -1;
+                try
                 {
-					continue;
-				}
+                    Field idField = baseActionClass.getDeclaredField("viewId");
+                    idField.setAccessible(true);
+                    viewId = idField.getInt(action);
+                }
+                catch (NoSuchFieldException ignored) {}
 
-				if (viewId == android.R.id.title)
-				{
-					if (summary == null || summary.length() < value.length())
-						summary = value.toString().trim();
-				}
-				else
-					body += formatCharSequence(value) + "\n\n";
+                Field valueField = action.getClass().getDeclaredField("value");
+                valueField.setAccessible(true);
+                CharSequence value = (CharSequence) valueField.get(action);
 
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+                if (value == null ||
+                        value.equals("...") ||
+                        isInteger(value.toString()) ||
+                        body.contains(value))
+                {
+                    continue;
+                }
 
-	private static boolean isInteger(String input) {
-		try {
-			Integer.parseInt(input);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+                if (viewId == android.R.id.title)
+                {
+                    if (summary == null || summary.length() < value.length())
+                        summary = value.toString().trim();
+                }
+                else
+                    body += formatCharSequence(value) + "\n\n";
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 }
