@@ -8,11 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.asteroidos.sync.MainActivity;
 import org.asteroidos.sync.R;
-
 import org.asteroidos.sync.adapters.AppInfoAdapter;
 
 public class AppListFragment extends Fragment {
@@ -25,8 +23,6 @@ public class AppListFragment extends Fragment {
         super.onAttach(context);
         adapter = new AppInfoAdapter(context, R.layout.app_list_item, MainActivity.appInfoList);
         adapter.restoreFilter();
-        Toast toast = Toast.makeText(context, R.string.explain_app_prefs, Toast.LENGTH_SHORT);
-        toast.show();
     }
 
     @Override
