@@ -105,7 +105,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                     mFirstNotify = false;
                     progress = 0;
                 } else {
-                    if(data.length + progress < totalData.length)
+                    if(data.length + progress <= totalData.length)
                         System.arraycopy(data, 0, totalData, progress, data.length);
                     progress += data.length;
 
