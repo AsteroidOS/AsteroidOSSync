@@ -10,7 +10,7 @@
     <string name="disconnected">Frakoblet</string>
     <string name="connected">Tilkoblet</string>
     <string name="connecting">Kobler til…</string>
-    <string name="connected_formatted">Tilkoblet til %s</string>
+    <string name="connected_formatted">Tilkoblet %s</string>
     <string name="connecting_formatted">Kobler til %s</string>
     <string name="connected_icon">\"Tilkoblet\"-ikon</string>
     <string name="battery_info_icon">Batteriinfo-ikon</string>
