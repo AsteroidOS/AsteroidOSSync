@@ -20,6 +20,8 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/lib/sweetblue/library/src/main/java/'
         main.res.srcDirs += 'src/main/lib/sweetblue/library/src/main/res/'
+        main.java.srcDirs += 'src/main/lib/android-ripple-background/library/src/main/java/'
+        main.res.srcDirs += 'src/main/lib/android-ripple-background/library/src/main/res/'
     }
 
     lintOptions {
@@ -43,7 +45,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:design:26.1.0'
     compile 'github.vatsal.easyweather:library:1.0.0'
-    compile 'com.skyfishjy.ripplebackground:library:1.0.1'
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'org.osmdroid:osmdroid-android:6.0.1'
 }
