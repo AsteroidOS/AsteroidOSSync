@@ -44,7 +44,7 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     public static final String PREFS_LATITUDE = "latitude";
     public static final float PREFS_LATITUDE_DEFAULT = (float) 40.7128;
     public static final String PREFS_LONGITUDE = "longitude";
-    public static final float PREFS_LONGITUDE_DEFAULT = (float) 74.006;
+    public static final float PREFS_LONGITUDE_DEFAULT = (float) -74.006;
     public static final String PREFS_ZOOM = "zoom";
     public static final float PREFS_ZOOM_DEFAULT = (float) 7.0;
 
