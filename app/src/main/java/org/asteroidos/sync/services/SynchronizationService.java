@@ -275,6 +275,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 .build();
 
             mNM.notify(NOTIFICATION, notification);
+            startForeground(NOTIFICATION, notification);
         }
     }
 
