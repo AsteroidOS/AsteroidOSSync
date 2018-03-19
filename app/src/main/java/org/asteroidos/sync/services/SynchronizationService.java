@@ -18,17 +18,20 @@
 package org.asteroidos.sync.services;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.support.v4.app.NotificationCompat;
 
 import com.idevicesinc.sweetblue.BleDevice;
 import com.idevicesinc.sweetblue.BleDeviceConfig;
@@ -50,11 +53,10 @@ import org.asteroidos.sync.ble.WeatherService;
 
 import java.util.UUID;
 
-import github.vatsal.easyweather.retrofit.models.Main;
-
 import static com.idevicesinc.sweetblue.BleManager.get;
 
 public class SynchronizationService extends Service implements BleDevice.StateListener {
+    private static final String NOTIFICATION_CHANNEL_ID = "synchronizationservice_channel_id_01";
     private NotificationManager mNM;
     private int NOTIFICATION = 2725;
     private BleManager mBleMngr;
@@ -202,6 +204,13 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     public void onCreate() {
         mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Synchronization Service", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("Connection status");
+            notificationChannel.setVibrationPattern(new long[]{0L});
+            mNM.createNotificationChannel(notificationChannel);
+        }
+
         mBleMngr = get(getApplication());
         BleManagerConfig cfg = new BleManagerConfig();
         cfg.forceBondDialog = true;
@@ -255,7 +264,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            Notification notification = new Notification.Builder(this)
+            Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_stat_name)
                 .setContentTitle(getText(R.string.app_name))
                 .setContentText(status)
