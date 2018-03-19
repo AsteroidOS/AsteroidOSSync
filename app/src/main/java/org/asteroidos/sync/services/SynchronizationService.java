@@ -18,15 +18,20 @@
 package org.asteroidos.sync.services;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.support.v4.app.NotificationCompat;
 
 import com.idevicesinc.sweetblue.BleDevice;
 import com.idevicesinc.sweetblue.BleDeviceConfig;
@@ -51,6 +56,7 @@ import java.util.UUID;
 import static com.idevicesinc.sweetblue.BleManager.get;
 
 public class SynchronizationService extends Service implements BleDevice.StateListener {
+    private static final String NOTIFICATION_CHANNEL_ID = "synchronizationservice_channel_id_01";
     private NotificationManager mNM;
     private int NOTIFICATION = 2725;
     private BleManager mBleMngr;
@@ -78,6 +84,8 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     private NotificationService mNotificationService;
     private MediaService mMediaService;
     private TimeService mTimeService;
+
+    private SharedPreferences mPrefs;
 
     private class SynchronizationHandler extends Handler {
         @Override
@@ -119,11 +127,16 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                                 try {
                                     replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
                                 } catch (RemoteException ignored) {}
+                                  catch (NullPointerException ignored) {}
                         }
                     });
                     break;
                 case MSG_SET_DEVICE:
                     String macAddress = (String)msg.obj;
+
+                    SharedPreferences.Editor editor = mPrefs.edit();
+                    editor.putString(MainActivity.PREFS_DEFAULT_MAC_ADDR, macAddress);
+
                     if(macAddress.isEmpty()) {
                         if(mState != STATUS_DISCONNECTED) {
                             mScreenshotService.unsync();
@@ -132,20 +145,27 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                             mMediaService.unsync();
                             mTimeService.unsync();
                             mDevice.disconnect();
+                            mDevice.unbond();
                         }
                         mDevice = null;
+                        editor.putString(MainActivity.PREFS_DEFAULT_LOC_NAME, "");
                     } else {
                         mDevice = mBleMngr.getDevice(macAddress);
                         replyTo = msg.replyTo;
 
+                        String name = mDevice.getName_normalized();
                         try {
                             Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
-                            answer.obj = mDevice.getName_normalized();
+                            answer.obj = name;
                             replyTo.send(answer);
 
                             replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
                         } catch (RemoteException ignored) {}
+                          catch (NullPointerException ignored) {}
+
+                        editor.putString(MainActivity.PREFS_DEFAULT_LOC_NAME, name);
                     }
+                    editor.apply();
                     break;
                 case MSG_UPDATE:
                     if(mDevice != null) {
@@ -158,7 +178,6 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
 
                             replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
 
-
                             mDevice.read(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener()
                             {
                                 @Override public void onEvent(ReadWriteEvent result)
@@ -167,9 +186,11 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                                         try {
                                             replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
                                         } catch (RemoteException ignored) {}
+                                          catch (NullPointerException ignored) {}
                                 }
                             });
                         } catch (RemoteException ignored) {}
+                          catch (NullPointerException ignored) {}
                     }
                     break;
                 default:
@@ -182,6 +203,14 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     @Override
     public void onCreate() {
         mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Synchronization Service", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("Connection status");
+            notificationChannel.setVibrationPattern(new long[]{0L});
+            mNM.createNotificationChannel(notificationChannel);
+        }
+
         mBleMngr = get(getApplication());
         BleManagerConfig cfg = new BleManagerConfig();
         cfg.forceBondDialog = true;
@@ -189,9 +218,30 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         cfg.defaultScanFilter = new WatchesFilter();
         cfg.enableCrashResolver = true;
         cfg.loggingEnabled = true;
-        cfg.useGattRefresh = true;
         cfg.bondFilter = new BondFilter();
+        cfg.alwaysUseAutoConnect = true;
         mBleMngr.setConfig(cfg);
+
+        mPrefs = getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
+        String defaultDevMacAddr = mPrefs.getString(MainActivity.PREFS_DEFAULT_MAC_ADDR, "");
+        String defaultLocalName = mPrefs.getString(MainActivity.PREFS_DEFAULT_LOC_NAME, "");
+
+        if(!defaultDevMacAddr.isEmpty()) {
+            if(!mBleMngr.hasDevice(defaultDevMacAddr))
+                mBleMngr.newDevice(defaultDevMacAddr, defaultLocalName);
+
+            mDevice = mBleMngr.getDevice(defaultDevMacAddr);
+            mDevice.setListener_State(SynchronizationService.this);
+
+            mWeatherService = new WeatherService(getApplicationContext(), mDevice);
+            mNotificationService = new NotificationService(getApplicationContext(), mDevice);
+            mMediaService = new MediaService(getApplicationContext(), mDevice);
+            mScreenshotService = new ScreenshotService(getApplicationContext(), mDevice);
+            mTimeService = new TimeService(getApplicationContext(), mDevice);
+
+            mDevice.connect();
+        }
+
         updateNotification();
     }
 
@@ -214,8 +264,8 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            Notification notification = new Notification.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+            Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_stat_name)
                 .setContentTitle(getText(R.string.app_name))
                 .setContentText(status)
                 .setContentIntent(contentIntent)
@@ -225,6 +275,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 .build();
 
             mNM.notify(NOTIFICATION, notification);
+            startForeground(NOTIFICATION, notification);
         }
     }
 
@@ -249,6 +300,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             try {
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_CONNECTED, 0));
             } catch (RemoteException ignored) {}
+              catch (NullPointerException ignored) {}
             mDevice.setMtu(256);
 
             event.device().enableNotify(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener() {
@@ -257,10 +309,10 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                     try {
                         if (e.isNotification() && e.charUuid().equals(Uuids.BATTERY_LEVEL)) {
                             byte data[] = e.data();
-                            if (replyTo != null)
-                                replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, data[0], 0));
+                            replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, data[0], 0));
                         }
                     } catch(RemoteException ignored) {}
+                      catch (NullPointerException ignored) {}
                 }
             });
 
@@ -280,6 +332,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             try {
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_DISCONNECTED, 0));
             } catch (RemoteException ignored) {}
+              catch (NullPointerException ignored) {}
 
             if(mScreenshotService != null)
                 mScreenshotService.sync();
@@ -297,6 +350,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             try {
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_CONNECTING, 0));
             } catch (RemoteException ignored) {}
+              catch (NullPointerException ignored) {}
         }
     }
 

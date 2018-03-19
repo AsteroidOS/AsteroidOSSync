@@ -18,6 +18,7 @@
 package org.asteroidos.sync.ble;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -26,7 +27,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
@@ -40,6 +43,7 @@ import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 public class ScreenshotService implements BleDevice.ReadWriteListener {
+    private static final String NOTIFICATION_CHANNEL_ID = "screenshotservice_channel_id_01";
     private int NOTIFICATION = 2726;
 
     private static final UUID screenshotRequestCharac = UUID.fromString("00006001-0000-0000-0000-00a57e401d05");
@@ -60,6 +64,13 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
         mDevice = device;
         mCtx = ctx;
         mNM = (NotificationManager) mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Screenshot Service", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("Screenshot download");
+            notificationChannel.setVibrationPattern(new long[]{0L});
+            mNM.createNotificationChannel(notificationChannel);
+        }
     }
 
     public void sync() {
@@ -105,12 +116,13 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                     mFirstNotify = false;
                     progress = 0;
                 } else {
-                    if(data.length + progress < totalData.length)
+                    if(data.length + progress <= totalData.length)
                         System.arraycopy(data, 0, totalData, progress, data.length);
                     progress += data.length;
 
-                    Notification.Builder notificationBuilder = new Notification.Builder(mCtx)
-                            .setContentTitle(mCtx.getText(R.string.screenshot));
+                    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mCtx, NOTIFICATION_CHANNEL_ID)
+                            .setContentTitle(mCtx.getText(R.string.screenshot))
+                            .setLocalOnly(true);
 
                     if(size == progress) {
                         String dirStr = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/AsteroidOSSync";
@@ -134,26 +146,23 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
 
                         notificationBuilder.setContentText(mCtx.getText(R.string.downloaded));
                         notificationBuilder.setLargeIcon(BitmapFactory.decodeByteArray(totalData, 0, size));
-                        notificationBuilder.setSmallIcon(R.mipmap.android_image);
+                        notificationBuilder.setSmallIcon(R.mipmap.android_image_white);
 
                         Intent notificationIntent = new Intent();
                         notificationIntent.setAction(Intent.ACTION_VIEW);
                         notificationIntent.setDataAndType(Uri.parse(fileName.getAbsolutePath()), "image/*");
                         PendingIntent contentIntent = PendingIntent.getActivity(mCtx, 0, notificationIntent, 0);
                         notificationBuilder.setContentIntent(contentIntent);
-
                         mDownloading = false;
                     } else {
                         notificationBuilder.setContentText(mCtx.getText(R.string.downloading));
-                        notificationBuilder.setSmallIcon(R.mipmap.android_image);
+                        notificationBuilder.setSmallIcon(R.mipmap.android_image_white);
                         notificationBuilder.setProgress(size, progress, false);
                     }
 
-                    if(progress >= previousNotifiedProgress + 500 || progress == size) {
-                        Notification notification = notificationBuilder.build();
-                        mNM.notify(NOTIFICATION, notification);
-                        previousNotifiedProgress = progress;
-                    }
+                    Notification notification = notificationBuilder.build();
+                    mNM.notify(NOTIFICATION, notification);
+                    previousNotifiedProgress = progress;
                 }
             }
         }

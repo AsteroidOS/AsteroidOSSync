@@ -25,6 +25,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.Window;
 
 import com.idevicesinc.sweetblue.BleManager;
@@ -36,6 +37,9 @@ import com.idevicesinc.sweetblue.utils.Interval;
 import org.asteroidos.sync.fragments.AppListFragment;
 import org.asteroidos.sync.fragments.DeviceListFragment;
 import org.asteroidos.sync.fragments.DeviceDetailFragment;
+import org.asteroidos.sync.fragments.PositionPickerFragment;
+import org.asteroidos.sync.utils.AppInfo;
+import org.asteroidos.sync.utils.AppInfoHelper;
 import org.asteroidos.sync.services.NLService;
 import org.asteroidos.sync.services.SynchronizationService;
 
@@ -46,7 +50,8 @@ import static com.idevicesinc.sweetblue.BleManager.get;
 public class MainActivity extends AppCompatActivity implements DeviceListFragment.OnDefaultDeviceSelectedListener,
         DeviceListFragment.OnScanRequestedListener, DeviceDetailFragment.OnDefaultDeviceUnselectedListener,
         DeviceDetailFragment.OnConnectRequestedListener, BleManager.DiscoveryListener,
-        DeviceDetailFragment.OnAppSettingsClickedListener, DeviceDetailFragment.OnUpdateListener {
+        DeviceDetailFragment.OnAppSettingsClickedListener, DeviceDetailFragment.OnLocationSettingsClickedListener,
+        DeviceDetailFragment.OnUpdateListener {
     private BleManager mBleMngr;
     private DeviceListFragment mListFragment;
     private DeviceDetailFragment mDetailFragment;
@@ -58,18 +63,26 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
     public static ArrayList<AppInfo> appInfoList;
 
-    public static final String PREFS_NAME = "WeatherPreferences";
+    public static final String PREFS_NAME = "MainPreferences";
     public static final String PREFS_DEFAULT_MAC_ADDR = "defaultMacAddress";
     public static final String PREFS_DEFAULT_LOC_NAME = "defaultLocalName";
+
+    private SharedPreferences mPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        String defaultDevMacAddr = prefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
-        appInfoList = AppInfoHelper.getPackageInfo(this);
+        mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String defaultDevMacAddr = mPrefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
+
+        Thread appInfoRetrieval = new Thread(new Runnable() {
+            public void run() {
+                appInfoList = AppInfoHelper.getPackageInfo(MainActivity.this);
+            }
+        });
+        appInfoRetrieval.start();
 
         /* Start and/or attach to the Synchronization Service */
         mSyncServiceIntent = new Intent(this, SynchronizationService.class);
@@ -81,11 +94,11 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             @Override
             public void onEvent(BleManager.StateListener.StateEvent event) {
                 if(event.didExit(BleManagerState.SCANNING)) {
-                    if(mListFragment != null) mListFragment.scanningStopped();
-                    else                      mDetailFragment.scanningStopped();
+                    if(mListFragment != null)        mListFragment.scanningStopped();
+                    else if(mDetailFragment != null) mDetailFragment.scanningStopped();
                 } else if(event.didEnter(BleManagerState.SCANNING)) {
-                    if(mListFragment != null) mListFragment.scanningStarted();
-                    else                      mDetailFragment.scanningStarted();
+                    if(mListFragment != null)        mListFragment.scanningStarted();
+                    else if(mDetailFragment != null) mDetailFragment.scanningStarted();
                 }
             }
         });
@@ -106,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 
         /* Check that bluetooth is enabled */
         if (!mBleMngr.isBleSupported())
@@ -134,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 f = mListFragment = new DeviceListFragment();
                 onScanRequested();
             } else {
-                setTitle(prefs.getString(PREFS_DEFAULT_LOC_NAME, ""));
+                setTitle(mPrefs.getString(PREFS_DEFAULT_LOC_NAME, ""));
                 f = mDetailFragment = new DeviceDetailFragment();
             }
 
@@ -170,11 +183,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
         onConnectRequested();
 
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(PREFS_DEFAULT_MAC_ADDR, macAddress);
-        editor.apply();
-
         mListFragment = null;
     }
 
@@ -193,12 +201,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             msg.replyTo = mDeviceDetailMessenger;
             mSyncServiceMessenger.send(msg);
         } catch (RemoteException ignored) {}
-
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(PREFS_DEFAULT_MAC_ADDR, "");
-        editor.putString(PREFS_DEFAULT_LOC_NAME, "");
-        editor.apply();
 
         mDetailFragment = null;
         setTitle(R.string.app_name);
@@ -219,23 +221,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
             mSyncServiceMessenger = new Messenger(service);
-
-            SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-            String defaultDevMacAddr = prefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
-            String defaultLocalName = prefs.getString(PREFS_DEFAULT_LOC_NAME, "");
-
-            if(!defaultDevMacAddr.isEmpty()) {
-                if(!mBleMngr.hasDevice(defaultDevMacAddr))
-                    mBleMngr.newDevice(defaultDevMacAddr, defaultLocalName);
-                try {
-                    Message msg = Message.obtain(null, SynchronizationService.MSG_SET_DEVICE);
-                    msg.obj = defaultDevMacAddr;
-                    msg.replyTo = mDeviceDetailMessenger;
-                    mSyncServiceMessenger.send(msg);
-                } catch (RemoteException ignored) {}
-
-                onConnectRequested();
-            }
+            onUpdateRequested();
         }
 
         public void onServiceDisconnected(ComponentName className) {
@@ -262,13 +248,22 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if(menuItem.getItemId() ==  android.R.id.home)
+            onBackPressed();
+        
+        return (super.onOptionsItemSelected(menuItem));
+    }
+
+    @Override
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
         if(fm.getBackStackEntryCount() > 0) {
             fm.popBackStack();
-        } else{
+            setTitle(mPrefs.getString(PREFS_DEFAULT_LOC_NAME, ""));
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        } else
             finish();
-        }
 
         try {
             mDetailFragment = (DeviceDetailFragment)mPreviousFragment;
@@ -276,7 +271,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         try {
             mListFragment = (DeviceListFragment)mPreviousFragment;
         } catch (ClassCastException ignored) {}
-
     }
 
     @Override
@@ -288,7 +282,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         if (mDetailFragment != null) {
             mPreviousFragment = mDetailFragment;
             mDetailFragment = null;
-
         }
         if (mListFragment != null) {
             mPreviousFragment = mListFragment;
@@ -297,6 +290,31 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         ft.replace(R.id.flContainer, f);
         ft.addToBackStack(null);
         ft.commit();
+
+        setTitle(getString(R.string.notifications_settings));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public void onLocationSettingsClicked() {
+        Fragment f = new PositionPickerFragment();
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        if (mDetailFragment != null) {
+            mPreviousFragment = mDetailFragment;
+            mDetailFragment = null;
+        }
+        if (mListFragment != null) {
+            mPreviousFragment = mListFragment;
+            mListFragment = null;
+        }
+        ft.replace(R.id.flContainer, f);
+        ft.addToBackStack(null);
+        ft.commit();
+
+        setTitle(getString(R.string.weather_settings));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private class SynchronizationHandler extends Handler {
@@ -308,11 +326,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 case SynchronizationService.MSG_SET_LOCAL_NAME:
                     String name = (String)msg.obj;
                     mDetailFragment.setLocalName(name);
-
-                    SharedPreferences prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.putString(PREFS_DEFAULT_LOC_NAME, name);
-                    editor.apply();
                     break;
                 case SynchronizationService.MSG_SET_STATUS:
                     mDetailFragment.setStatus(msg.arg1);

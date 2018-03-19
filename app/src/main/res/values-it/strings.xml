@@ -11,7 +11,7 @@
     <string name="connected">Connesso</string>
     <string name="connecting">Mi sto collegando…</string>
     <string name="connected_formatted">Connesso a %s</string>
-    <string name="connecting_formatted">Mi sto collegando a %s%</string>
+    <string name="connecting_formatted">Mi sto collegando a %s</string>
     <string name="connected_icon">Icona connesso</string>
     <string name="battery_info_icon">Icona batteria</string>
     <string name="screenshot_icon">Icona cattura schermo</string>
@@ -34,12 +34,5 @@
     <string name="downloaded">Scaricato</string>
     <string name="screenshot">Schermata cattuara</string>
     <string name="synchronize_time">Sincronizza ora</string>
-    <string-array name="notification_types_array">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-    </string-array>
     <string name="explain_app_prefs">Le tue applicazioni compariranno qui al ricevimento di una notifica</string>
 </resources>

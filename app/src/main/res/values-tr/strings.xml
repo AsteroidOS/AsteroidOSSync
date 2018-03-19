@@ -34,12 +34,5 @@
     <string name="downloaded">İndirildi</string>
     <string name="screenshot">Ekran görüntüsü</string>
     <string name="synchronize_time">Zamanı eşitle</string>
-    <string-array name="notification_types_array">
-        <item>Default</item>
-        <item>No notification</item>
-        <item>Silent</item>
-        <item>Vibration</item>
-        <item>Strong vibration</item>
-    </string-array>
     <string name="explain_app_prefs">Uygulamalarınızdan bildirimler burada gözükecek</string>
 </resources>

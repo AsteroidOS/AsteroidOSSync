@@ -3,14 +3,13 @@ package com.idevicesinc.sweetblue;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.util.Log;
-
 import com.idevicesinc.sweetblue.compat.L_Util;
 import com.idevicesinc.sweetblue.utils.Interval;
 import com.idevicesinc.sweetblue.utils.Utils;
 import com.idevicesinc.sweetblue.utils.Utils_String;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
@@ -105,7 +104,7 @@ final class P_ScanManager
                 {
                     m_manager.getLogger().e("Tried to start BLE scan, but scanning is not ready (most likely need to get permissions). Falling back to classic discovery.");
                     mCurrentApi.set(BleScanApi.CLASSIC);
-                    return tryClassicDiscovery(intent, true);
+                    return tryClassicDiscovery(PA_StateTracker.E_Intent.UNINTENTIONAL, true);
                 }
             case AUTO:
             case PRE_LOLLIPOP:
@@ -275,6 +274,7 @@ final class P_ScanManager
                 Interval pauseTime = Interval.isEnabled(m_manager.m_config.infinitePauseInterval) ? m_manager.m_config.infinitePauseInterval : Interval.secs(BleManagerConfig.DEFAULT_SCAN_INFINITE_PAUSE_TIME);
                 if (m_timePausedScan >= pauseTime.secs())
                 {
+                    m_manager.getLogger().i("Restarting paused scan...");
                     startScan(PA_StateTracker.E_Intent.INTENTIONAL, Interval.INFINITE.secs(), false);
                 }
             }
@@ -308,6 +308,7 @@ final class P_ScanManager
 
                     if (!m_manager.isScanning())
                     {
+                        m_manager.getLogger().i("Auto starting scan after BLE turned back on...");
                         startScan = true;
                     }
                 }
@@ -317,6 +318,7 @@ final class P_ScanManager
 
                     if (!m_manager.isScanning())
                     {
+                        m_manager.getLogger().i("Auto starting scan after resume...");
                         startScan = true;
                     }
                 }
@@ -327,6 +329,7 @@ final class P_ScanManager
 
                 if( Interval.isEnabled(scanInterval) && m_timeNotScanning >= scanInterval )
                 {
+                    m_manager.getLogger().i("Starting scan as part of a periodic scan...");
                     startScan = true;
                 }
             }
@@ -372,7 +375,7 @@ final class P_ScanManager
     {
         m_triedToStartScanAfterResume = false;
 
-        if( m_doingInfiniteScan )
+        if( m_doingInfiniteScan && !m_manager.isScanning())
         {
             m_triedToStartScanAfterResume = true;
 
@@ -412,10 +415,22 @@ final class P_ScanManager
         if ( size > 0 )
         {
             final List<ScanInfo> infos;
+
+            // Get our max scan entries to process based off the update loop rate, with
+            // a minimum of 5.
+            final long upRate = m_manager.m_config.autoUpdateRate.millis();
+            final int maxEntries = (int) Math.min(size, Math.max(5, upRate));
+            infos = new ArrayList<>(maxEntries);
             synchronized (entryLock)
             {
-                infos = new ArrayList<>(m_scanEntries);
-                m_scanEntries.clear();
+                int current = 0;
+                final Iterator<ScanInfo> it = m_scanEntries.iterator();
+                while (it.hasNext() && current < maxEntries)
+                {
+                    infos.add(it.next());
+                    it.remove();
+                    current++;
+                }
             }
 
             final List<DiscoveryEntry> entries = new ArrayList<>(infos.size());
@@ -431,7 +446,7 @@ final class P_ScanManager
                 }
                 else
                 {
-                    m_manager.getCrashResolver().notifyScannedDevice(layer, null, L_Util.getNativeCallback());
+                    m_manager.getCrashResolver().notifyScannedDevice(layer, null, L_Util.getNativeScanCallback());
                 }
 
                 entries.add(DiscoveryEntry.newEntry(layer, info.m_rssi, info.m_record));
@@ -490,6 +505,12 @@ final class P_ScanManager
         else
         {
             m_manager.getStateTracker().update(PA_StateTracker.E_Intent.INTENTIONAL, BleStatuses.GATT_STATUS_NOT_APPLICABLE, SCANNING, false, SCANNING_PAUSED, true, BOOST_SCANNING, false);
+        }
+        // Clear out the scan entries list so we don't end up caching old discoveries (it's possible there's a large amount of time between scans, so
+        // what's held in the list may not actually be within range anymore, or some other data on it has changed).
+        synchronized (entryLock)
+        {
+            m_scanEntries.clear();
         }
     }
 
@@ -550,7 +571,7 @@ final class P_ScanManager
         {
             m_manager.getLogger().w("Pre-Lollipop LeScan totally failed to start!");
 
-            tryClassicDiscovery(intent, /*suppressUhOh=*/false);
+            tryClassicDiscovery(PA_StateTracker.E_Intent.UNINTENTIONAL, /*suppressUhOh=*/false);
             return true;
         }
         else
@@ -631,7 +652,8 @@ final class P_ScanManager
 
     private boolean tryClassicDiscovery(final PA_StateTracker.E_Intent intent, final boolean suppressUhOh)
     {
-        if (m_manager.m_config.revertToClassicDiscoveryIfNeeded)
+        boolean intentional = intent == PA_StateTracker.E_Intent.INTENTIONAL;
+        if (intentional || m_manager.m_config.revertToClassicDiscoveryIfNeeded)
         {
             if (false == startClassicDiscovery())
             {
@@ -819,16 +841,24 @@ final class P_ScanManager
 
         @Override public void onScanFailed(int errorCode)
         {
-            m_manager.getLogger().e(Utils_String.concatStrings("Post lollipop scan failed with error code ", String.valueOf(errorCode)));
-            if (errorCode != SCAN_FAILED_ALREADY_STARTED)
+            if (errorCode == SCAN_FAILED_ALREADY_STARTED)
             {
-                fail();
+                m_manager.ASSERT(false, "Got an error stating the scan has already started when trying to start a scan.");
+                // We're already scanning, so nothing to do here
             }
             else
             {
-                tryClassicDiscovery(PA_StateTracker.E_Intent.INTENTIONAL, /*suppressUhOh=*/false);
+                m_manager.getLogger().e(Utils_String.concatStrings("Post lollipop scan failed with error code ", String.valueOf(errorCode)));
 
-                m_mode = Mode_CLASSIC;
+                if (m_manager.m_config.revertToClassicDiscoveryIfNeeded)
+                {
+                    m_manager.getLogger().i("Reverting to a CLASSIC scan...");
+                    tryClassicDiscovery(PA_StateTracker.E_Intent.UNINTENTIONAL, /*suppressUhOh=*/false);
+
+                    m_mode = Mode_CLASSIC;
+                }
+                else
+                    fail();
             }
         }
     }

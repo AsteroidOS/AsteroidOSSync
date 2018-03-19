@@ -17,7 +17,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.asteroidos.sync.AppInfo;
+import org.asteroidos.sync.utils.AppInfo;
 
 import org.asteroidos.sync.NotificationPreferences;
 import org.asteroidos.sync.R;
@@ -75,9 +75,9 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(layout, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.label = (TextView) convertView.findViewById(R.id.label);
-            viewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
-            viewHolder.spinner = (Spinner) convertView.findViewById(R.id.notification_spinner);
+            viewHolder.label = convertView.findViewById(R.id.label);
+            viewHolder.icon = convertView.findViewById(R.id.icon);
+            viewHolder.spinner = convertView.findViewById(R.id.notification_spinner);
             convertView.setTag(viewHolder);
         }
         else
@@ -101,8 +101,13 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
             }
             viewHolder.label.setText(appInfo.getLabel());
             convertView.setTag(viewHolder);
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
-                    R.array.notification_types_array, android.R.layout.simple_spinner_item);
+
+            ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, android.R.id.text1);
+            adapter.add(context.getResources().getString(R.string.notification_type_default));
+            adapter.add(context.getResources().getString(R.string.notification_type_no_notif));
+            adapter.add(context.getResources().getString(R.string.notification_type_silent));
+            adapter.add(context.getResources().getString(R.string.notification_type_vibra));
+            adapter.add(context.getResources().getString(R.string.notification_type_strong_vibra));
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             viewHolder.spinner.setAdapter(adapter);
             NotificationPreferences.NotificationOption position =

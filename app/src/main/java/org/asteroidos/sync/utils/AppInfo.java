@@ -1,4 +1,4 @@
-package org.asteroidos.sync;
+package org.asteroidos.sync.utils;
 
 // copied from https://github.com/jensstein/oandbackup, used under MIT license
 

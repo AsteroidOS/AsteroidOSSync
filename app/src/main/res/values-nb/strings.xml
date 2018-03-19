@@ -34,12 +34,5 @@
     <string name="downloaded">Nedlastet</string>
     <string name="screenshot">Skjermavbildning</string>
     <string name="synchronize_time">Synkroniseringstid</string>
-    <string-array name="notification_types_array">
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-    </string-array>
     <string name="explain_app_prefs">Merknader fra dine programmer vil vises her</string>
 </resources>

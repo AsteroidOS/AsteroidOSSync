@@ -34,12 +34,5 @@
     <string name="downloaded">Yuder-d</string>
     <string name="screenshot">Tuṭṭfa n ugdil</string>
     <string name="synchronize_time">Akud n umtawi</string>
-    <string-array name="notification_types_array">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-    </string-array>
     <string name="explain_app_prefs"></string>
 </resources>

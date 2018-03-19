@@ -1,5 +1,6 @@
 package com.idevicesinc.sweetblue;
 
+import static com.idevicesinc.sweetblue.BleManagerState.BLE_SCAN_READY;
 import static com.idevicesinc.sweetblue.BleManagerState.BOOST_SCANNING;
 import static com.idevicesinc.sweetblue.BleManagerState.IDLE;
 import static com.idevicesinc.sweetblue.BleManagerState.OFF;
@@ -49,7 +50,7 @@ final class P_BleManager_Listeners
 
             //--- DRK > Got this assert to trip by putting a breakpoint in constructor of NativeDeviceWrapper
             //---		and waiting, but now can't reproduce.
-            if (!m_mngr.ASSERT(task.getClass() == P_Task_Scan.class && m_mngr.isAny(SCANNING, BOOST_SCANNING, STARTING_SCAN, SCANNING_PAUSED)))
+            if (!m_mngr.ASSERT(task.getClass() == P_Task_Scan.class && state != PE_TaskState.CLEARED_FROM_QUEUE && m_mngr.isAny(SCANNING, BOOST_SCANNING, STARTING_SCAN, SCANNING_PAUSED)))
                 return;
 
             if (state.isEndingState())
@@ -120,27 +121,26 @@ final class P_BleManager_Listeners
             //---		They don't seem to be but leaving it here for the future if needed anyway.
             else if (action.contains("ACL") || action.equals(BluetoothDevice.ACTION_UUID) || action.equals(BluetoothDevice_ACTION_DISAPPEARED))
             {
-                final BluetoothDevice device_native = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+//                final BluetoothDevice device_native = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+//
+//                if (action.equals(BluetoothDevice.ACTION_FOUND))
+//                {
+////					device_native.fetchUuidsWithSdp();
+//                }
+//                else if (action.equals(BluetoothDevice.ACTION_UUID))
+//                {
+//                    m_mngr.getLogger().d("");
+//                }
 
-                if (action.equals(BluetoothDevice.ACTION_FOUND))
-                {
-//					device_native.fetchUuidsWithSdp();
-                }
-                else if (action.equals(BluetoothDevice.ACTION_UUID))
-                {
-                    m_mngr.getLogger().d("");
-                }
-
-                BleDevice device = m_mngr.getDevice(device_native.getAddress());
-
-                if (device != null)
-                {
+//                BleDevice device = m_mngr.getDevice(device_native.getAddress());
+//                if (device != null)
+//                {
 //					m_mngr.getLogger().e("Known device " + device.getDebugName() + " " + action);
-                }
-                else
-                {
+//                }
+//                else
+//                {
 //					m_mngr.getLogger().e("Mystery device " + device_native.getName() + " " + device_native.getAddress() + " " + action);
-                }
+//                }
             }
         }
     };
@@ -254,17 +254,29 @@ final class P_BleManager_Listeners
         }
     }
 
-    private void onClassicDiscoveryFinished()
+    void onClassicDiscoveryFinished()
     {
         P_Task_Scan scanTask = m_mngr.getTaskQueue().getCurrent(P_Task_Scan.class, m_mngr);
+        boolean interrupt = false;
         if (scanTask != null)
         {
             if (scanTask.isClassicBoosted())
             {
                 return;
             }
+            if (m_mngr.getScanManager().isPeriodicScan())
+                interrupt = true;
+
         }
-        m_mngr.getTaskQueue().interrupt(P_Task_Scan.class, m_mngr);
+        if (interrupt)
+            m_mngr.getTaskQueue().interrupt(P_Task_Scan.class, m_mngr);
+        else
+            // Try to succeed the task, if that fails, it means it's no longer current, so we'll clear the queue of the scan task, just to be sure it doesn't
+            // start up again
+            if (!m_mngr.getTaskQueue().succeed(P_Task_Scan.class, m_mngr))
+            {
+                m_mngr.getTaskQueue().clearQueueOf(P_Task_Scan.class, m_mngr);
+            }
     }
 
     final void onNativeBleStateChangeFromBroadcastReceiver(Context context, Intent intent)
@@ -323,7 +335,7 @@ final class P_BleManager_Listeners
         //---		simply because where this is where it was first observed. Checking at the bottom
         //---		may not work because maybe this bug relied on a race condition.
         //---		UPDATE: Not checking for inconsistent state anymore cause it can be legitimate due to native
-        //---		state changing while call to this method is sitting on the main thread queue.
+        //---		state changing while call to this method is sitting on the update thread queue.
         final int adapterState = m_mngr.managerLayer().getState();
 
 //		boolean inconsistentState = adapterState != newNativeState;
@@ -361,7 +373,7 @@ final class P_BleManager_Listeners
             // We need to make sure to remove the transitory states, in case they were missed, and to enforce the ON/OFF state to get propagated app-side
             if (m_mngr.isAny(TURNING_OFF, TURNING_ON))
             {
-                m_mngr.getStateTracker().update(intent, BleStatuses.GATT_STATUS_NOT_APPLICABLE, TURNING_OFF, false, TURNING_ON, false, OFF, true, ON, false);
+                m_mngr.getStateTracker().update(intent, BleStatuses.GATT_STATUS_NOT_APPLICABLE, TURNING_OFF, false, TURNING_ON, false, OFF, true, ON, false, BLE_SCAN_READY, false);
             }
         }
         else if (newNativeState == BluetoothAdapter.STATE_TURNING_ON)
@@ -389,6 +401,7 @@ final class P_BleManager_Listeners
         }
         else if (newNativeState == BluetoothAdapter.STATE_TURNING_OFF)
         {
+
             if (!m_mngr.getTaskQueue().isCurrent(P_Task_TurnBleOff.class, m_mngr))
             {
                 m_mngr.m_deviceMngr.disconnectAllForTurnOff(PE_TaskPriority.CRITICAL);
@@ -421,6 +434,12 @@ final class P_BleManager_Listeners
 
         m_mngr.getNativeStateTracker().update(intent, BleStatuses.GATT_STATUS_NOT_APPLICABLE, previousState, false, newState, true);
         m_mngr.getStateTracker().update(intent, BleStatuses.GATT_STATUS_NOT_APPLICABLE, previousState, false, newState, true);
+
+        // If BT is now off, and the manager thinks it's still in the scan ready state, then remove the scan ready state.
+        if (newNativeState == BluetoothAdapter.STATE_OFF && m_mngr.is(BLE_SCAN_READY))
+        {
+            m_mngr.getStateTracker().update(intent, BleStatuses.GATT_STATUS_NOT_APPLICABLE, BLE_SCAN_READY, false);
+        }
 
         if (previousNativeState != BluetoothAdapter.STATE_ON && newNativeState == BluetoothAdapter.STATE_ON)
         {

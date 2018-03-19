@@ -34,12 +34,5 @@
     <string name="downloaded">Staženo</string>
     <string name="screenshot">Snímek obrazovky</string>
     <string name="synchronize_time">Synchronizovat čas</string>
-    <string-array name="notification_types_array">
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-    </string-array>
     <string name="explain_app_prefs">Oznámení z aplikací se objeví zde</string>
 </resources>

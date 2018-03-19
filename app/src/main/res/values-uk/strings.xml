@@ -34,12 +34,5 @@
     <string name="downloaded">Скачано</string>
     <string name="screenshot">Скріншот</string>
     <string name="synchronize_time">Синхронізоване час</string>
-    <string-array name="notification_types_array">
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-    </string-array>
     <string name="explain_app_prefs">Сповіщення ваших додатків з\'являться тут</string>
 </resources>

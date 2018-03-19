@@ -15,8 +15,7 @@ import com.idevicesinc.sweetblue.BleManager.UhOhListener.UhOh;
 
 final class P_Task_Write extends PA_Task_ReadOrWrite
 {
-	public static final int MTU_LIMIT = 20;
-	
+
 	private byte[] m_data = null;
 
 	private final FutureData m_futureData;
@@ -43,7 +42,7 @@ final class P_Task_Write extends PA_Task_ReadOrWrite
 	
 	@Override protected ReadWriteEvent newReadWriteEvent(final Status status, final int gattStatus, final Target target, final UUID serviceUuid, final UUID charUuid, final UUID descUuid)
 	{
-		final BluetoothGattCharacteristic char_native = getDevice().getNativeCharacteristic(serviceUuid, charUuid);
+		final BleCharacteristicWrapper char_native = getDevice().getNativeBleCharacteristic(serviceUuid, charUuid);
 		final Type type = P_DeviceServiceManager.modifyResultType(char_native, Type.WRITE);
 		final UUID actualDescUuid = getActualDescUuid(descUuid);
 		

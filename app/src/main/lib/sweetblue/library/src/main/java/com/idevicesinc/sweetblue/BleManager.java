@@ -40,6 +40,7 @@ import com.idevicesinc.sweetblue.BleManagerConfig.ScanFilter.Please;
 import com.idevicesinc.sweetblue.P_ScanManager.DiscoveryEntry;
 import com.idevicesinc.sweetblue.PA_StateTracker.E_Intent;
 import com.idevicesinc.sweetblue.annotations.Advanced;
+import com.idevicesinc.sweetblue.annotations.Experimental;
 import com.idevicesinc.sweetblue.annotations.Nullable;
 import com.idevicesinc.sweetblue.annotations.Immutable;
 import com.idevicesinc.sweetblue.annotations.Nullable.Prevalence;
@@ -269,6 +270,7 @@ public final class BleManager
 		 * then from a user-experience perspective it's most often best to automatically connect without user confirmation.
 		 */
 		void onEvent(final DiscoveryEvent e);
+
 	}
 
 	/**
@@ -322,17 +324,20 @@ public final class BleManager
 	 * when the {@link BleManager} undergoes a *native* {@link BleManagerState} change. This is similar to {@link BleManager.StateListener}
 	 * but reflects what is going on in the actual underlying stack, which may lag slightly behind the
 	 * abstracted state reflected by {@link BleManager.StateListener}. Most apps will not find this callback useful.
+	 *
+	 * @deprecated This will be removed in v3.
 	 */
 	@Advanced
 	@com.idevicesinc.sweetblue.annotations.Lambda
-	public static interface NativeStateListener
+	@Deprecated
+	public interface NativeStateListener extends GenericListener_Void<NativeStateListener.NativeStateEvent>
 	{
 		/**
 		 * Class declared here to be make it implicitly imported for overrides.
 		 */
 		@Advanced
 		@Immutable
-		public static class NativeStateEvent extends StateListener.StateEvent
+		class NativeStateEvent extends StateListener.StateEvent
 		{
 			NativeStateEvent(final BleManager manager, final int oldStateBits, final int newStateBits, final int intentMask)
 			{
@@ -393,6 +398,13 @@ public final class BleManager
 			 * Similar to {@link #READ_TIMED_OUT} but for {@link BleDevice#write(java.util.UUID, byte[])}.
 			 */
 			WRITE_TIMED_OUT,
+
+			/**
+			 * Similar to {@link #WRITE_TIMED_OUT}, only used to signify when testing a new MTU size, and it times out. This usually means the android device
+			 * has a bug where it says the MTU size has changed, but can't write the MTU size amount (OnePlus2, Moto X Pure). In this case, SweetBlue will disconnect
+			 * the device, as no other reads/writes will work once this happens.
+			 */
+			WRITE_MTU_TEST_TIMED_OUT,
 
 
 			/**
@@ -821,6 +833,7 @@ public final class BleManager
 	 * @see BleServer#appData
 	 */
 	public Object appData;
+
 
 	private BleManager(Context context, BleManagerConfig config)
 	{
@@ -1409,7 +1422,11 @@ public final class BleManager
 
 	/**
 	 * Set a listener here to be notified whenever this manager's native {@link BleManagerState} changes.
+	 *
+	 * @deprecated {@link NativeStateListener} is being removed in v3. There is no alternative. Just use SweetBlue's internal state management (which
+	 * is keyed from the native state, and callbacks).
 	 */
+	@Deprecated
 	public final void setListener_NativeState(NativeStateListener listener)
 	{
 		m_nativeStateTracker.setListener(listener);
@@ -1868,52 +1885,31 @@ public final class BleManager
 	 */
 	public final void reset(ResetListener listener)
 	{
-		if( listener != null )
-		{
-			if( m_resetListeners != null )
-			{
-				m_resetListeners.addListener(listener);
-			}
-			else
-			{
-				m_resetListeners = new P_WrappingResetListener(listener, m_postManager.getUIHandler(), m_config.postCallbacksToMainThread);
-			}
-		}
+		reset_private(false, listener);
+	}
 
-		if( is(BleManagerState.RESETTING) )
-		{
-			return;
-		}
+	/**
+	 * Similar to {@link BleManager#reset()}, only this also calls the factoryReset method hidden in {@link BluetoothAdapter} after turning
+	 * off BLE, and running the crash resolver. It's not clear what this method does, hence why this is marked as being experimental.
+	 *
+	 * @see #reset()
+	 */
+	@Experimental
+	public final void nukeBle()
+	{
+		nukeBle(null);
+	}
 
-		m_stateTracker.append(RESETTING, E_Intent.INTENTIONAL, BleStatuses.GATT_STATUS_NOT_APPLICABLE);
-
-		if( m_config.enableCrashResolverForReset )
-		{
-			m_taskQueue.add(new P_Task_CrashResolver(BleManager.this, m_crashResolver, /*partOfReset=*/true));
-		}
-
-		turnOff_private(/*removeAllBonds=*/true);
-
-		m_taskQueue.add(new P_Task_TurnBleOn(this, /*implicit=*/false, new PA_Task.I_StateListener()
-		{
-			@Override
-			public void onStateChange(PA_Task taskClass, PE_TaskState state)
-			{
-				if (state.isEndingState())
-				{
-					ResetListener nukeListeners = m_resetListeners;
-					m_resetListeners = null;
-					m_nativeStateTracker.remove(RESETTING, E_Intent.UNINTENTIONAL, BleStatuses.GATT_STATUS_NOT_APPLICABLE);
-					m_stateTracker.remove(RESETTING, E_Intent.UNINTENTIONAL, BleStatuses.GATT_STATUS_NOT_APPLICABLE);
-
-					if (nukeListeners != null)
-					{
-						ResetEvent event = new ResetEvent(BleManager.this, ResetListener.Progress.COMPLETED);
-						nukeListeners.onEvent(event);
-					}
-				}
-			}
-		}));
+	/**
+	 * Similar to {@link BleManager#reset(ResetListener)}, only this also calls the factoryReset method hidden in {@link BluetoothAdapter} after turning
+	 * off BLE, and running the crash resolver. It's not clear what this method does, hence why this is marked as being experimental.
+	 *
+	 * @see #reset(ResetListener)
+	 */
+	@Experimental
+	public final void nukeBle(ResetListener resetListener)
+	{
+		reset_private(true, resetListener);
 	}
 
 	/**
@@ -2197,7 +2193,9 @@ public final class BleManager
 	 */
 	public final void shutdown()
 	{
+		m_logger.e("Received shutdown call, shutting down BleManager...");
 		disconnectAll();
+		clearQueue_blocking();
 		m_uhOhThrottler.shutdown();
 		m_updateRunnable.m_shutdown = true;
 		m_postManager.removeUpdateCallbacks(m_updateRunnable);
@@ -2205,6 +2203,11 @@ public final class BleManager
 		m_wakeLockMngr.clear();
 		m_listeners.onDestroy();
 		s_instance = null;
+	}
+
+	private void clearQueue_blocking()
+	{
+		m_taskQueue.clearQueueOfAll_blocking();
 	}
 
 	/**
@@ -2255,15 +2258,12 @@ public final class BleManager
 
 		if( !m_taskQueue.succeed(P_Task_Scan.class, this) )
 		{
-			m_postManager.runOrPostToUpdateThread(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					m_taskQueue.clearQueueOf(P_Task_Scan.class, BleManager.this);
-				}
-			});
-
+			// I don't think this is needed, if we're clearing it from the queue below.
+//			P_Task_Scan scanTask = m_taskQueue.get(P_Task_Scan.class, BleManager.this);
+//			if (scanTask != null)
+//				scanTask.succeed();
+			m_logger.i("Clearing queue of any scan tasks...");
+			m_taskQueue.clearQueueOf(P_Task_Scan.class, BleManager.this);
 		}
 
 		m_stateTracker.remove(BleManagerState.STARTING_SCAN, intent, BleStatuses.GATT_STATUS_NOT_APPLICABLE);
@@ -2439,10 +2439,18 @@ public final class BleManager
 	 * Convenience method to return a {@link Set} of currently bonded devices. This simply calls
 	 * {@link BluetoothAdapter#getBondedDevices()}, and wraps all bonded devices into separate
 	 * {@link BleDevice} classes.
+	 *
+	 * NOTE: If the Bluetooth radio is turned off, some android devices return <code>null</code>. In this case,
+	 * SweetBlue will just return an empty list.
      */
 	public final Set<BleDevice> getDevices_bonded()
 	{
 		Set<BluetoothDevice> native_bonded_devices = managerLayer().getBondedDevices();
+		// The native system can return null from the above call if the bluetooth radio is
+		// turned off, so if that's the case, just return an empty Set.
+		if (native_bonded_devices == null)
+			return new HashSet<>(0);
+
 		Set<BleDevice> bonded_devices = new HashSet<>(native_bonded_devices.size());
 		BleDevice device;
 		for (BluetoothDevice d : native_bonded_devices)
@@ -2521,7 +2529,11 @@ public final class BleManager
 	 * Accessor into the underlying array used to store {@link BleDevice} instances.
 	 * Combine with {@link #getDeviceCount()} to iterate, or you may want to use the
 	 * {@link java.util.Iterator} returned from {@link #getDevices()} and its various overloads instead.
+	 *
+	 * @deprecated This is going to be removed in version 3. If this is something you use a lot, please let us know at
+	 * sweetblue@idevicesinc.com.
 	 */
+	@Deprecated
 	public final @Nullable(Prevalence.NEVER) BleDevice getDeviceAt(final int index)
 	{
 		return m_deviceMngr.get(index);
@@ -2529,7 +2541,11 @@ public final class BleManager
 
 	/**
 	 * Returns the index of this device in the internal list, or -1 if it's not found.
+	 *
+	 * @deprecated This is going to be removed in version 3. If this is something you use a lot, please let us know at
+	 * sweetblue@idevicesinc.com.
 	 */
+	@Deprecated
 	public final int getDeviceIndex(final BleDevice device)
 	{
 		for( int i = 0; i < getDeviceCount(); i++ )
@@ -2545,6 +2561,12 @@ public final class BleManager
 		return -1;
 	}
 
+	/**
+	 *
+	 * @deprecated This is going to be removed in version 3. If this is something you use a lot, please let us know at
+	 * sweetblue@idevicesinc.com.
+	 */
+	@Deprecated
 	public final @Nullable(Prevalence.NEVER) BleDevice getDevice_previous(final BleDevice device)
 	{
 		return m_deviceMngr.getDevice_offset(device, -1);
@@ -2553,7 +2575,11 @@ public final class BleManager
 	/**
 	 * Same as {@link #getDevice_next(BleDevice, BleDeviceState)} but just returns the next device in the internal list
 	 * with no state checking.
+	 *
+	 * @deprecated This is going to be removed in version 3. If this is something you use a lot, please let us know at
+	 * sweetblue@idevicesinc.com.
 	 */
+	@Deprecated
 	public final @Nullable(Prevalence.NEVER) BleDevice getDevice_next(final BleDevice device)
 	{
 		return m_deviceMngr.getDevice_offset(device, 1);
@@ -2563,7 +2589,11 @@ public final class BleManager
 	 * Returns the first device previous to the provided one in the internal list that is in the given state. For various fringe cases like
 	 * this manager not having any devices, this method returns {@link BleDevice#NULL}. This method wraps
 	 * around so that if the provided device is at index 0, the returned device will be the last device this manager holds.
+	 *
+	 * @deprecated This is going to be removed in version 3. If this is something you use a lot, please let us know at
+	 * sweetblue@idevicesinc.com.
 	 */
+	@Deprecated
 	public final @Nullable(Prevalence.NEVER) BleDevice getDevice_previous(final BleDevice device, final BleDeviceState state)
 	{
 		return m_deviceMngr.getDevice_offset(device, -1, state, true);
@@ -2572,7 +2602,11 @@ public final class BleManager
 	/**
 	 * Same as {@link #getDevice_previous(BleDevice, BleDeviceState)} but returns the next device in the internal list
 	 * with no state checking.
+	 *
+	 * @deprecated This is going to be removed in version 3. If this is something you use a lot, please let us know at
+	 * sweetblue@idevicesinc.com.
 	 */
+	@Deprecated
 	public final @Nullable(Prevalence.NEVER) BleDevice getDevice_next(final BleDevice device, final BleDeviceState state)
 	{
 		return m_deviceMngr.getDevice_offset(device, 1, state, true);
@@ -2581,7 +2615,11 @@ public final class BleManager
 	/**
 	 * Same as {@link #getDevice_previous(BleDevice, BleDeviceState)} but allows you to pass a query.
 	 * See {@link BleDevice#is(Object...)} for the query format.
+	 *
+	 * @deprecated This is going to be removed in version 3. If this is something you use a lot, please let us know at
+	 * sweetblue@idevicesinc.com.
 	 */
+	@Deprecated
 	public final @Nullable(Prevalence.NEVER) BleDevice getDevice_previous(final BleDevice device, final Object ... query)
 	{
 		return m_deviceMngr.getDevice_offset(device, -1, query);
@@ -2590,7 +2628,11 @@ public final class BleManager
 	/**
 	 * Same as {@link #getDevice_next(BleDevice, BleDeviceState)} but allows you to pass a query.
 	 * See {@link BleDevice#is(Object...)} for the query format.
+	 *
+	 * @deprecated This is going to be removed in version 3. If this is something you use a lot, please let us know at
+	 * sweetblue@idevicesinc.com.
 	 */
+	@Deprecated
 	public final @Nullable(Prevalence.NEVER) BleDevice getDevice_next(final BleDevice device, final Object ... query)
 	{
 		return m_deviceMngr.getDevice_offset(device, 1, query);
@@ -2765,7 +2807,7 @@ public final class BleManager
 	}
 
 	/**
-	 * Overload of {@link #getServer(IncomingListener, GattDatabase, BleServer.ServiceAddListener)}, with no {@link IncomingListener} set.
+	 * Overload of {@link BleManager#getServer(IncomingListener, GattDatabase, BleServer.ServiceAddListener)}, with no {@link IncomingListener} set.
 	 */
 	public final BleServer getServer(final GattDatabase gattDatabase, BleServer.ServiceAddListener addServiceListener)
 	{
@@ -2892,12 +2934,10 @@ public final class BleManager
 		if( !hasDevice(device) )						return false;
 		if( device.is(BleDeviceState.UNDISCOVERED) )	return false;
 
-		if( device.is(BleDeviceState.CONNECTED) )
-		{
-			device.disconnect();
-		}
-
-		m_deviceMngr.undiscoverAndRemove(device, m_discoveryListener, m_deviceMngr_cache, E_Intent.INTENTIONAL);
+		if( device.isAny(BleDeviceState.CONNECTED, BleDeviceState.CONNECTING, BleDeviceState.CONNECTING_OVERALL) )
+			device.disconnectAndUndiscover();
+		else
+			m_deviceMngr.undiscoverAndRemove(device, m_discoveryListener, m_deviceMngr_cache, E_Intent.INTENTIONAL);
 
 		return true;
 	}
@@ -2909,14 +2949,7 @@ public final class BleManager
 	@Advanced
 	public final void clearQueue()
 	{
-		m_postManager.runOrPostToUpdateThread(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				m_taskQueue.clearQueueOfAll();
-			}
-		});
+		m_taskQueue.clearQueueOfAll();
 	}
 
 	/**
@@ -2989,7 +3022,7 @@ public final class BleManager
 
 		if( m_server != null )
 		{
-			m_server.disconnect_internal(BleServer.ServiceAddListener.Status.CANCELLED_FROM_BLE_TURNING_OFF, BleServer.ConnectionFailListener.Status.CANCELLED_FROM_BLE_TURNING_OFF, ChangeIntent.INTENTIONAL);
+			m_server.disconnect_internal(BleServer.ServiceAddListener.Status.CANCELLED_FROM_BLE_TURNING_OFF, BleServer.ConnectionFailListener.Status.CANCELLED_FROM_BLE_TURNING_OFF, State.ChangeIntent.INTENTIONAL);
 		}
 
 		final P_Task_TurnBleOff task = new P_Task_TurnBleOff(this, /*implicit=*/false, new PA_Task.I_StateListener()
@@ -3041,7 +3074,7 @@ public final class BleManager
 		return false;
 	}
 
-	final void onDiscoveredFromNativeStack(List<DiscoveryEntry> entries)
+	final synchronized void onDiscoveredFromNativeStack(List<DiscoveryEntry> entries)
 	{
 		//--- DRK > Protects against fringe case where scan task is executing and app calls turnOff().
 		//---		Here the scan task will be interrupted but still potentially has enough time to
@@ -3106,6 +3139,7 @@ public final class BleManager
 				final boolean hitDisk = BleDeviceConfig.boolOrDefault(m_config.manageLastDisconnectOnDisk);
 				final State.ChangeIntent lastDisconnectIntent = m_diskOptionsMngr.loadLastDisconnect(macAddress, hitDisk);
 				scanEvent_nullable = m_filterMngr.makeEvent() ? ScanFilter.ScanEvent.fromScanRecord(entry.device().getNativeDevice(), rawDeviceName, normalizedDeviceName, entry.rssi(), lastDisconnectIntent, entry.record()) : null;
+
 				please = m_filterMngr.allow(m_logger, scanEvent_nullable);
 
 				if (please != null && false == please.ack()) continue;
@@ -3130,6 +3164,62 @@ public final class BleManager
 		}
 
 		onDiscovered_wrapItUp(list);
+	}
+
+	private void reset_private(boolean nuclear, ResetListener listener)
+	{
+		if( listener != null )
+		{
+			if( m_resetListeners != null )
+			{
+				m_resetListeners.addListener(listener);
+			}
+			else
+			{
+				m_resetListeners = new P_WrappingResetListener(listener, m_postManager.getUIHandler(), m_config.postCallbacksToMainThread);
+			}
+		}
+
+		if( is(BleManagerState.RESETTING) )
+		{
+			return;
+		}
+
+		m_stateTracker.append(RESETTING, E_Intent.INTENTIONAL, BleStatuses.GATT_STATUS_NOT_APPLICABLE);
+
+		if( m_config.enableCrashResolverForReset )
+		{
+			m_taskQueue.add(new P_Task_CrashResolver(BleManager.this, m_crashResolver, /*partOfReset=*/true));
+		}
+
+		turnOff_private(/*removeAllBonds=*/true);
+
+		if (nuclear)
+		{
+			P_Task_FactoryReset reset = new P_Task_FactoryReset(this, null);
+			m_taskQueue.add(reset);
+		}
+
+		m_taskQueue.add(new P_Task_TurnBleOn(this, /*implicit=*/false, new PA_Task.I_StateListener()
+		{
+			@Override
+			public void onStateChange(PA_Task taskClass, PE_TaskState state)
+			{
+				if (state.isEndingState())
+				{
+					ResetListener nukeListeners = m_resetListeners;
+					m_resetListeners = null;
+					m_nativeStateTracker.remove(RESETTING, E_Intent.UNINTENTIONAL, BleStatuses.GATT_STATUS_NOT_APPLICABLE);
+					m_stateTracker.remove(RESETTING, E_Intent.UNINTENTIONAL, BleStatuses.GATT_STATUS_NOT_APPLICABLE);
+
+					if (nukeListeners != null)
+					{
+						ResetEvent event = new ResetEvent(BleManager.this, ResetListener.Progress.COMPLETED);
+						nukeListeners.onEvent(event);
+					}
+				}
+			}
+		}));
 	}
 
 	private BleDevice newDevice_private(final P_NativeDeviceLayer device_native, final String name_normalized, final String name_native, final BleDeviceOrigin origin, final BleDeviceConfig config_nullable)
@@ -3347,8 +3437,12 @@ public final class BleManager
 	 * This method is made public in case you want to tie the library in to an update loop
 	 * from another codebase. Generally you should leave {@link BleManagerConfig#autoUpdateRate}
 	 * alone and let the library handle the calling of this method.
+	 *
+	 * @deprecated - This is marked as deprecated because it will no longer be exposed in v3 (there will be a new way
+	 * to have SweetBlue run on a thread of your choosing).
 	 */
 	@Advanced
+	@Deprecated
 	public final void update(final double timeStep_seconds, final long currentTime)
 	{
 		m_currentTick = currentTime;

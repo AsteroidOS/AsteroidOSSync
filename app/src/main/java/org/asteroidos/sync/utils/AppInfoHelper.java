@@ -1,4 +1,4 @@
-package org.asteroidos.sync;
+package org.asteroidos.sync.utils;
 
 // copied from https://github.com/jensstein/oandbackup, used under MIT license
 
@@ -17,11 +17,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-class AppInfoHelper
+public class AppInfoHelper
 {
     private final static String TAG = AppInfoHelper.class.getSimpleName();
 
-    static ArrayList<AppInfo> getPackageInfo(Context context)
+    public static ArrayList<AppInfo> getPackageInfo(Context context)
     {
         ArrayList<AppInfo> list = new ArrayList<>();
         PackageManager pm = context.getPackageManager();
