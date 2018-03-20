@@ -35,4 +35,11 @@
     <string name="screenshot">צילום מסך</string>
     <string name="synchronize_time">סנכרון השעה</string>
     <string name="explain_app_prefs">התרעות מהיישומים שלך תופענה כאן</string>
+<string name="notification_type_default">בררת מחדל</string>
+    <string name="notification_type_no_notif">אין התרעה</string>
+    <string name="notification_type_silent">שקט</string>
+    <string name="notification_type_vibra">רטט</string>
+    <string name="notification_type_strong_vibra">רטט חזק</string>
+    <string name="position_indicator">מחוון מיקום</string>
+    <string name="use_this_area">שימוש בשטח זה למזג אוויר</string>
 </resources>
