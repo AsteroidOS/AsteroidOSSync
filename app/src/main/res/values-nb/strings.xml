@@ -35,4 +35,11 @@
     <string name="screenshot">Skjermavbildning</string>
     <string name="synchronize_time">Synkroniseringstid</string>
     <string name="explain_app_prefs">Merknader fra dine programmer vil vises her</string>
+<string name="notification_type_default">Forvalg</string>
+    <string name="notification_type_no_notif">Ingen merknad</string>
+    <string name="notification_type_silent">Stille</string>
+    <string name="notification_type_vibra">Vibrasjon</string>
+    <string name="notification_type_strong_vibra">Kraftig vibrasjon</string>
+    <string name="position_indicator">Posisjonsindikator</string>
+    <string name="use_this_area">Bruk dette området for vær</string>
 </resources>
