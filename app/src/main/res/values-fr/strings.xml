@@ -35,4 +35,8 @@
     <string name="screenshot">Capture d\'écran</string>
     <string name="synchronize_time">Synchroniser la date et l\'heure</string>
     <string name="explain_app_prefs">Les notifications de vos applis apparaîtront ici</string>
-</resources>
+<string name="notification_type_default">Par défaut</string>
+    <string name="notification_type_no_notif">Pas de notification</string>
+    <string name="notification_type_silent">Silencieux</string>
+    <string name="notification_type_vibra">Vibration</string>
+    </resources>
