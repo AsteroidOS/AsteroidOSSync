@@ -39,4 +39,5 @@
     <string name="notification_type_no_notif">Pas de notification</string>
     <string name="notification_type_silent">Silencieux</string>
     <string name="notification_type_vibra">Vibration</string>
+    <string name="notification_type_strong_vibra">Forte vibration</string>
     </resources>
