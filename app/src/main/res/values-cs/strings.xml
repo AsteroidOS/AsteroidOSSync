@@ -35,4 +35,11 @@
     <string name="screenshot">Snímek obrazovky</string>
     <string name="synchronize_time">Synchronizovat čas</string>
     <string name="explain_app_prefs">Oznámení z aplikací se objeví zde</string>
+<string name="notification_type_default">Výchozí</string>
+    <string name="notification_type_no_notif">Žádné oznámení</string>
+    <string name="notification_type_silent">Tiché</string>
+    <string name="notification_type_vibra">Vibrace</string>
+    <string name="notification_type_strong_vibra">Silné vibrace</string>
+    <string name="position_indicator">Ukazatel pozice</string>
+    <string name="use_this_area">Použít tuto oblast pro počasí</string>
 </resources>
