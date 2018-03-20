@@ -40,6 +40,6 @@
     <string name="notification_type_silent">Sessiz</string>
     <string name="notification_type_vibra">Titreşim</string>
     <string name="notification_type_strong_vibra">Güçlü titreşim</string>
-    <string name="position_indicator">Konum belirteci</string>
+    <string name="position_indicator">Konum göstergesi</string>
     <string name="use_this_area">Bu alanı hava durumu için kullan</string>
 </resources>
