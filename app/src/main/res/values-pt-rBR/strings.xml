@@ -35,4 +35,11 @@
     <string name="screenshot">Captura de tela</string>
     <string name="synchronize_time">Horário da sincronização</string>
     <string name="explain_app_prefs">Notificações do seus aplicativos aparecerão aqui</string>
+<string name="notification_type_default">Padrão</string>
+    <string name="notification_type_no_notif">Sem notificações</string>
+    <string name="notification_type_silent">Silenciar</string>
+    <string name="notification_type_vibra">Vibrar</string>
+    <string name="notification_type_strong_vibra">Vibração forte</string>
+    <string name="position_indicator">Indicador de posição</string>
+    <string name="use_this_area">Usar esta área para o tempo</string>
 </resources>
