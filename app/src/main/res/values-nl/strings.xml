@@ -35,4 +35,11 @@
     <string name="screenshot">Schermafdruk</string>
     <string name="synchronize_time">Tijd synchroniseren</string>
     <string name="explain_app_prefs">Meldingen van je apps zullen hier verschijnen</string>
+<string name="notification_type_default">Standaard</string>
+    <string name="notification_type_no_notif">Geen melding</string>
+    <string name="notification_type_silent">Stil</string>
+    <string name="notification_type_vibra">Trillen</string>
+    <string name="notification_type_strong_vibra">Sterk trillen</string>
+    <string name="position_indicator">Positie-indicator</string>
+    <string name="use_this_area">Gebruik dit gebied voor weer</string>
 </resources>
