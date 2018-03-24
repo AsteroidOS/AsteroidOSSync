@@ -144,8 +144,8 @@ public class NLService extends NotificationListenerService {
             return;
 
         NotificationParser notifParser = new NotificationParser(notification);
-        String summary = notifParser.summary.trim();
-        String body = notifParser.body.trim();
+        String summary = notifParser.summary;
+        String body = notifParser.body;
         int id = sbn.getId();
         String packageName = sbn.getPackageName();
         String appIcon = iconFromPackage.get(packageName);
@@ -158,7 +158,9 @@ public class NLService extends NotificationListenerService {
         } catch (PackageManager.NameNotFoundException ignored) {}
 
         if(summary == null) summary = "";
+        else                summary = summary.trim();
         if(body == null) body = "";
+        else                body = body.trim();
         if(packageName == null) packageName = "";
         if(appIcon == null) appIcon = "";
 
