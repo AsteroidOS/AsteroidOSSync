@@ -22,7 +22,7 @@
     <string name="grab_a_screenshot">сделать скриншот</string>
     <string name="find_my_watch">Найти мои часы</string>
     <string name="watch_finder">Поиск часов</string>
-    <string name="phone_is_searching">Телефон находится в режиме поиска!</string>
+    <string name="phone_is_searching">Телефон в режиме поиска!</string>
     <string name="notifications_settings">Настройки оповещаний</string>
     <string name="notifications">Оповещания</string>
     <string name="notifications_enablement">для синхронизации сообщений, попозвольте \"Синхронизацию AsteroidOS\" в последующем меню:</string>
@@ -35,4 +35,11 @@
     <string name="screenshot">Скриншот</string>
     <string name="synchronize_time">Синхронизированное время</string>
     <string name="explain_app_prefs">Сообщения Ваших приложений появятся здесь</string>
+<string name="notification_type_default">По умолчанию</string>
+    <string name="notification_type_no_notif">Уведомления отсутствуют</string>
+    <string name="notification_type_silent">Беззвучный</string>
+    <string name="notification_type_vibra">Вибрация</string>
+    <string name="notification_type_strong_vibra">Сильная вибрация</string>
+    <string name="position_indicator">Индикатор позиции</string>
+    <string name="use_this_area">Место для погоды</string>
 </resources>
