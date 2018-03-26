@@ -30,6 +30,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
@@ -102,7 +103,6 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
 
     private BleDevice.ReadWriteListener contentListener = new BleDevice.ReadWriteListener() {
         private int progress = 0;
-        private int previousNotifiedProgress = -500;
         private int size = 0;
         private byte[] totalData;
 
@@ -148,9 +148,11 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                         notificationBuilder.setLargeIcon(BitmapFactory.decodeByteArray(totalData, 0, size));
                         notificationBuilder.setSmallIcon(R.mipmap.android_image_white);
 
+                        Uri imgURI = FileProvider.getUriForFile(mCtx, mCtx.getApplicationContext().getPackageName() + ".fileprovider", fileName);
                         Intent notificationIntent = new Intent();
                         notificationIntent.setAction(Intent.ACTION_VIEW);
-                        notificationIntent.setDataAndType(Uri.parse(fileName.getAbsolutePath()), "image/*");
+                        notificationIntent.setDataAndType(imgURI, "image/*");
+                        notificationIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                         PendingIntent contentIntent = PendingIntent.getActivity(mCtx, 0, notificationIntent, 0);
                         notificationBuilder.setContentIntent(contentIntent);
                         mDownloading = false;
@@ -162,7 +164,6 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
 
                     Notification notification = notificationBuilder.build();
                     mNM.notify(NOTIFICATION, notification);
-                    previousNotifiedProgress = progress;
                 }
             }
         }
