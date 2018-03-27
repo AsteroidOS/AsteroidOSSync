@@ -45,7 +45,8 @@ public class NotificationParser {
         if (parseMessageStyleNotification(notification, extras))
             return true;
 
-        if (extras.get(Notification.EXTRA_TEXT_LINES) != null && extras.getCharSequenceArray(Notification.EXTRA_TEXT_LINES).length > 0)
+        CharSequence[] textLinesSequence = extras.getCharSequenceArray(Notification.EXTRA_TEXT_LINES);
+        if (textLinesSequence != null && textLinesSequence.length > 0)
         {
             if (parseInboxNotification(extras))
                 return true;
@@ -54,23 +55,28 @@ public class NotificationParser {
         if (extras.get(Notification.EXTRA_TEXT) == null && extras.get(Notification.EXTRA_TEXT_LINES) == null && extras.get(Notification.EXTRA_BIG_TEXT) == null)
             return false;
 
-        if (extras.get(Notification.EXTRA_TITLE_BIG) != null)
-        {
-            CharSequence bigTitle = extras.getCharSequence(Notification.EXTRA_TITLE_BIG);
-            if (bigTitle.length() < 40 || extras.get(Notification.EXTRA_TITLE) == null)
-                summary = bigTitle.toString();
-            else
-                summary = extras.getCharSequence(Notification.EXTRA_TITLE).toString();
-        }
-        else if (extras.get(Notification.EXTRA_TITLE) != null)
-            summary = extras.getCharSequence(Notification.EXTRA_TITLE).toString();
+        CharSequence bigTitle = extras.getCharSequence(Notification.EXTRA_TITLE_BIG);
+        CharSequence title = extras.getCharSequence(Notification.EXTRA_TITLE);
+
+        if (bigTitle != null && (bigTitle.length() < 40 || extras.get(Notification.EXTRA_TITLE) == null))
+            summary = bigTitle.toString();
+        else if (title != null)
+            summary = title.toString();
 
         if (extras.get(Notification.EXTRA_TEXT_LINES) != null)
         {
-            for (CharSequence line : extras.getCharSequenceArray(Notification.EXTRA_TEXT_LINES))
-                body += formatCharSequence(line) + "\n\n";
+            CharSequence[] lines = extras.getCharSequenceArray(Notification.EXTRA_TEXT_LINES);
 
-            body = body.trim();
+            StringBuilder sb = new StringBuilder();
+            sb.append(body);
+            if(lines != null) {
+                for (CharSequence line : lines) {
+                    sb.append(formatCharSequence(line));
+                    sb.append("\n\n");
+                }
+            }
+
+            body = sb.toString().trim();
         }
         else if (extras.get(Notification.EXTRA_BIG_TEXT) != null)
             body = formatCharSequence(extras.getCharSequence(Notification.EXTRA_BIG_TEXT));
@@ -102,7 +108,9 @@ public class NotificationParser {
             }
         });
 
+        StringBuilder sb = new StringBuilder();
         body = "";
+
         for (NotificationCompat.MessagingStyle.Message message : messagesDescending)
         {
             String sender;
@@ -111,35 +119,45 @@ public class NotificationParser {
             else
                 sender = formatCharSequence(message.getSender());
 
-            body += sender + ": " + message.getText() + "\n";
+            sb.append(sender);
+            sb.append(": ");
+            sb.append(message.getText());
+            sb.append("\n");
         }
+
+        body = sb.toString().trim();
 
         return true;
     }
 
     @TargetApi(value = Build.VERSION_CODES.JELLY_BEAN)
-    public boolean parseInboxNotification(Bundle extras)
+    private boolean parseInboxNotification(Bundle extras)
     {
-        if (extras.getCharSequence(Notification.EXTRA_SUMMARY_TEXT) != null)
-            summary = extras.getCharSequence(Notification.EXTRA_SUMMARY_TEXT).toString();
-        else if (extras.getCharSequence(Notification.EXTRA_SUB_TEXT) != null)
-            summary = extras.getCharSequence(Notification.EXTRA_SUB_TEXT).toString();
-        else if (extras.getCharSequence(Notification.EXTRA_TITLE) != null)
-            summary = extras.getCharSequence(Notification.EXTRA_TITLE).toString();
+        CharSequence summaryTextSequence = extras.getCharSequence(Notification.EXTRA_SUMMARY_TEXT);
+        CharSequence subTextSequence = extras.getCharSequence(Notification.EXTRA_SUMMARY_TEXT);
+        CharSequence titleSequence = extras.getCharSequence(Notification.EXTRA_SUMMARY_TEXT);
+
+        if (summaryTextSequence != null)
+            summary = summaryTextSequence.toString();
+        else if (subTextSequence != null)
+            summary = subTextSequence.toString();
+        else if (titleSequence != null)
+            summary = titleSequence.toString();
         else
             return false;
 
         CharSequence[] lines = extras.getCharSequenceArray(Notification.EXTRA_TEXT_LINES);
 
-        int i = 0;
-        while (true)
-        {
-            body += formatCharSequence(lines[i]) + "\n\n";
-
-            i++;
-            if (i >= lines.length)
-                break;
+        StringBuilder sb = new StringBuilder();
+        sb.append(body);
+        if(lines != null) {
+            for (CharSequence line : lines) {
+                sb.append(formatCharSequence(line));
+                sb.append("\n\n");
+            }
         }
+
+        body = sb.toString().trim();
 
         return true;
     }
@@ -213,6 +231,7 @@ public class NotificationParser {
         parseRemoteView(views);
     }
 
+    @SuppressWarnings("unchecked")
     @SuppressLint("PrivateApi")
     private void parseRemoteView(RemoteViews views)
     {
@@ -225,6 +244,10 @@ public class NotificationParser {
             actionsField.setAccessible(true);
 
             ArrayList<Object> actions = (ArrayList<Object>) actionsField.get(views);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append(body);
+
             for (Object action : actions) {
                 if (!action.getClass().getName().contains("$ReflectionAction"))
                     continue;
@@ -262,10 +285,13 @@ public class NotificationParser {
                     if (summary == null || summary.length() < value.length())
                         summary = value.toString();
                 }
-                else
-                    body += formatCharSequence(value) + "\n\n";
-
+                else {
+                    sb.append(formatCharSequence(value));
+                    sb.append("\n\n");
+                }
             }
+
+            body = sb.toString().trim();
         } catch (Exception e) {
             e.printStackTrace();
         }

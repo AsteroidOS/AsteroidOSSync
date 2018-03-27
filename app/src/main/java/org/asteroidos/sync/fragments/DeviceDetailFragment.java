@@ -18,6 +18,7 @@
 
 package org.asteroidos.sync.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -68,6 +69,7 @@ public class DeviceDetailFragment extends Fragment {
         mUpdateListener.onUpdateRequested();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         mFab = view.findViewById(R.id.fab);
@@ -187,6 +189,7 @@ public class DeviceDetailFragment extends Fragment {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     public void setBatteryPercentage(int percentage) {
         try {
             mBatteryText.setText(String.valueOf(percentage)+" %");

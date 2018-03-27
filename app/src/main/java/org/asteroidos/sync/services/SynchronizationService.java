@@ -55,6 +55,7 @@ import java.util.UUID;
 
 import static com.idevicesinc.sweetblue.BleManager.get;
 
+@SuppressWarnings( "deprecation" ) // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated StateListener
 public class SynchronizationService extends Service implements BleDevice.StateListener {
     private static final String NOTIFICATION_CHANNEL_ID = "synchronizationservice_channel_id_01";
     private NotificationManager mNM;
@@ -87,118 +88,135 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
 
     private SharedPreferences mPrefs;
 
-    private class SynchronizationHandler extends Handler {
+    void handleConnect() {
+        if(mDevice == null) return;
+        if(mState == STATUS_CONNECTED || mState == STATUS_CONNECTING) return;
+        mDevice.setListener_State(SynchronizationService.this);
+
+        mWeatherService = new WeatherService(getApplicationContext(), mDevice);
+        mNotificationService = new NotificationService(getApplicationContext(), mDevice);
+        mMediaService = new MediaService(getApplicationContext(), mDevice);
+        mScreenshotService = new ScreenshotService(getApplicationContext(), mDevice);
+        mTimeService = new TimeService(getApplicationContext(), mDevice);
+
+        mDevice.connect();
+    }
+
+    void handleDisconnect() {
+        if(mDevice == null) return;
+        if(mState == STATUS_DISCONNECTED) return;
+        mScreenshotService.unsync();
+        mWeatherService.unsync();
+        mNotificationService.unsync();
+        mMediaService.unsync();
+        mTimeService.unsync();
+        mDevice.disconnect();
+    }
+
+    void handleReqBattery() {
+        if(mDevice == null) return;
+        if(mState == STATUS_DISCONNECTED) return;
+        mDevice.read(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener()
+        {
+            @Override public void onEvent(ReadWriteEvent result)
+            {
+                if(result.wasSuccess())
+                    try {
+                        replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
+                    } catch (RemoteException | NullPointerException ignored) {}
+            }
+        });
+    }
+
+    void handleSetDevice(String macAddress) {
+        SharedPreferences.Editor editor = mPrefs.edit();
+        editor.putString(MainActivity.PREFS_DEFAULT_MAC_ADDR, macAddress);
+
+        if(macAddress.isEmpty()) {
+            if(mState != STATUS_DISCONNECTED) {
+                mScreenshotService.unsync();
+                mWeatherService.unsync();
+                mNotificationService.unsync();
+                mMediaService.unsync();
+                mTimeService.unsync();
+                mDevice.disconnect();
+                mDevice.unbond();
+            }
+            mDevice = null;
+            editor.putString(MainActivity.PREFS_DEFAULT_LOC_NAME, "");
+        } else {
+            mDevice = mBleMngr.getDevice(macAddress);
+
+            String name = mDevice.getName_normalized();
+            try {
+                Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
+                answer.obj = name;
+                replyTo.send(answer);
+
+                replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
+            } catch (RemoteException | NullPointerException ignored) {}
+
+            editor.putString(MainActivity.PREFS_DEFAULT_LOC_NAME, name);
+        }
+        editor.apply();
+    }
+
+    void handleUpdate() {
+        if(mDevice != null) {
+            try {
+                Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
+                answer.obj = mDevice.getName_normalized();
+                replyTo.send(answer);
+
+                replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
+
+                mDevice.read(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener()
+                {
+                    @Override public void onEvent(ReadWriteEvent result)
+                    {
+                        if(result.wasSuccess())
+                            try {
+                                replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
+                            } catch (RemoteException | NullPointerException ignored) {}
+                    }
+                });
+            } catch (RemoteException | NullPointerException ignored) {}
+        }
+    }
+
+    static private class SynchronizationHandler extends Handler {
+        private SynchronizationService mService;
+
+        SynchronizationHandler(SynchronizationService service) {
+            mService = service;
+        }
+
         @Override
         public void handleMessage(Message msg) {
+            mService.replyTo = msg.replyTo;
+
             switch (msg.what) {
                 case MSG_CONNECT:
-                    if(mDevice == null) return;
-                    if(mState == STATUS_CONNECTED || mState == STATUS_CONNECTING) return;
-                    replyTo = msg.replyTo;
-                    mDevice.setListener_State(SynchronizationService.this);
-
-                    mWeatherService = new WeatherService(getApplicationContext(), mDevice);
-                    mNotificationService = new NotificationService(getApplicationContext(), mDevice);
-                    mMediaService = new MediaService(getApplicationContext(), mDevice);
-                    mScreenshotService = new ScreenshotService(getApplicationContext(), mDevice);
-                    mTimeService = new TimeService(getApplicationContext(), mDevice);
-
-                    mDevice.connect();
+                    mService.handleConnect();
                     break;
                 case MSG_DISCONNECT:
-                    if(mDevice == null) return;
-                    if(mState == STATUS_DISCONNECTED) return;
-                    mScreenshotService.unsync();
-                    mWeatherService.unsync();
-                    mNotificationService.unsync();
-                    mMediaService.unsync();
-                    mTimeService.unsync();
-                    mDevice.disconnect();
+                    mService.handleDisconnect();
                     break;
                 case MSG_REQUEST_BATTERY_LIFE:
-                    if(mDevice == null) return;
-                    if(mState == STATUS_DISCONNECTED) return;
-                    replyTo = msg.replyTo;
-                    mDevice.read(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener()
-                    {
-                        @Override public void onEvent(ReadWriteEvent result)
-                        {
-                            if(result.wasSuccess())
-                                try {
-                                    replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
-                                } catch (RemoteException ignored) {}
-                                  catch (NullPointerException ignored) {}
-                        }
-                    });
+                    mService.handleReqBattery();
                     break;
                 case MSG_SET_DEVICE:
-                    String macAddress = (String)msg.obj;
-
-                    SharedPreferences.Editor editor = mPrefs.edit();
-                    editor.putString(MainActivity.PREFS_DEFAULT_MAC_ADDR, macAddress);
-
-                    if(macAddress.isEmpty()) {
-                        if(mState != STATUS_DISCONNECTED) {
-                            mScreenshotService.unsync();
-                            mWeatherService.unsync();
-                            mNotificationService.unsync();
-                            mMediaService.unsync();
-                            mTimeService.unsync();
-                            mDevice.disconnect();
-                            mDevice.unbond();
-                        }
-                        mDevice = null;
-                        editor.putString(MainActivity.PREFS_DEFAULT_LOC_NAME, "");
-                    } else {
-                        mDevice = mBleMngr.getDevice(macAddress);
-                        replyTo = msg.replyTo;
-
-                        String name = mDevice.getName_normalized();
-                        try {
-                            Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
-                            answer.obj = name;
-                            replyTo.send(answer);
-
-                            replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
-                        } catch (RemoteException ignored) {}
-                          catch (NullPointerException ignored) {}
-
-                        editor.putString(MainActivity.PREFS_DEFAULT_LOC_NAME, name);
-                    }
-                    editor.apply();
+                    mService.handleSetDevice((String)msg.obj);
                     break;
                 case MSG_UPDATE:
-                    if(mDevice != null) {
-                        replyTo = msg.replyTo;
-
-                        try {
-                            Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
-                            answer.obj = mDevice.getName_normalized();
-                            replyTo.send(answer);
-
-                            replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
-
-                            mDevice.read(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener()
-                            {
-                                @Override public void onEvent(ReadWriteEvent result)
-                                {
-                                    if(result.wasSuccess())
-                                        try {
-                                            replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
-                                        } catch (RemoteException ignored) {}
-                                          catch (NullPointerException ignored) {}
-                                }
-                            });
-                        } catch (RemoteException ignored) {}
-                          catch (NullPointerException ignored) {}
-                    }
+                    mService.handleUpdate();
                     break;
                 default:
                     super.handleMessage(msg);
             }
         }
     }
-    final Messenger mMessenger = new Messenger(new SynchronizationHandler());
+    final Messenger mMessenger = new Messenger(new SynchronizationHandler(this));
 
     @Override
     public void onCreate() {
@@ -299,8 +317,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             updateNotification();
             try {
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_CONNECTED, 0));
-            } catch (RemoteException ignored) {}
-              catch (NullPointerException ignored) {}
+            } catch (RemoteException | NullPointerException ignored) {}
             mDevice.setMtu(256);
 
             event.device().enableNotify(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener() {
@@ -311,8 +328,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                             byte data[] = e.data();
                             replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, data[0], 0));
                         }
-                    } catch(RemoteException ignored) {}
-                      catch (NullPointerException ignored) {}
+                    } catch(RemoteException | NullPointerException ignored) {}
                 }
             });
 
@@ -331,8 +347,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             updateNotification();
             try {
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_DISCONNECTED, 0));
-            } catch (RemoteException ignored) {}
-              catch (NullPointerException ignored) {}
+            } catch (RemoteException | NullPointerException ignored) {}
 
             if(mScreenshotService != null)
                 mScreenshotService.sync();
@@ -349,8 +364,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             updateNotification();
             try {
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_CONNECTING, 0));
-            } catch (RemoteException ignored) {}
-              catch (NullPointerException ignored) {}
+            } catch (RemoteException | NullPointerException ignored) {}
         }
     }
 

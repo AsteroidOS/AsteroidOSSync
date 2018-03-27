@@ -69,7 +69,7 @@ public class AppInfo
             return new AppInfo[size];
         }
     };
-    protected AppInfo(Parcel in)
+    private AppInfo(Parcel in)
     {
         label = in.readString();
         packageName = in.readString();
