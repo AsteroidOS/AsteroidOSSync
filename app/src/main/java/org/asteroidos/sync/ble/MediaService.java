@@ -36,6 +36,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings( "deprecation" ) // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated ReadWriteListener
 public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionManager.OnActiveSessionsChangedListener {
     private static final UUID mediaTitleCharac    = UUID.fromString("00007001-0000-0000-0000-00A57E401D05");
     private static final UUID mediaAlbumCharac    = UUID.fromString("00007002-0000-0000-0000-00A57E401D05");

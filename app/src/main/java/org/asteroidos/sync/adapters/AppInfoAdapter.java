@@ -73,6 +73,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
         if(convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            assert inflater != null;
             convertView = inflater.inflate(layout, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.label = convertView.findViewById(R.id.label);
@@ -165,24 +166,22 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
             {
                 String packageName = value.getPackageName().toLowerCase();
                 if(seenPackages.contains(packageName))
-                {
                     newValues.add(value);
-                }
             }
             results.values = newValues;
             results.count = newValues.size();
             return results;
         }
         @Override
+        @SuppressWarnings("unchecked")
         protected void publishResults(CharSequence constraint, FilterResults results)
         {
             if(results.count > 0)
             {
                 items.clear();
                 for(AppInfo value : (ArrayList<AppInfo>) results.values)
-                {
                     add(value);
-                }
+
                 notifyDataSetChanged();
             }
             else

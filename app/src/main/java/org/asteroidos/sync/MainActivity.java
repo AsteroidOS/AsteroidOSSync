@@ -23,6 +23,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -47,6 +48,7 @@ import java.util.ArrayList;
 
 import static com.idevicesinc.sweetblue.BleManager.get;
 
+@SuppressWarnings( "deprecation" ) // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated StateListener
 public class MainActivity extends AppCompatActivity implements DeviceListFragment.OnDefaultDeviceSelectedListener,
         DeviceListFragment.OnScanRequestedListener, DeviceDetailFragment.OnDefaultDeviceUnselectedListener,
         DeviceDetailFragment.OnConnectRequestedListener, BleManager.DiscoveryListener,
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     private Fragment mPreviousFragment;
     Messenger mSyncServiceMessenger;
     Intent mSyncServiceIntent;
-    final Messenger mDeviceDetailMessenger = new Messenger(new MainActivity.SynchronizationHandler());
+    final Messenger mDeviceDetailMessenger = new Messenger(new MainActivity.SynchronizationHandler(this));
     int mStatus = SynchronizationService.STATUS_DISCONNECTED;
 
     public static ArrayList<AppInfo> appInfoList;
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             Intent intent = new Intent();
             String packageName = getPackageName();
             PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
-            if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+            if (pm != null && !pm.isIgnoringBatteryOptimizations(packageName)) {
                 intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
                 intent.setData(Uri.parse("package:" + packageName));
                 startActivity(intent);
@@ -261,16 +263,19 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         if(fm.getBackStackEntryCount() > 0) {
             fm.popBackStack();
             setTitle(mPrefs.getString(PREFS_DEFAULT_LOC_NAME, ""));
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            ActionBar ab = getSupportActionBar();
+            if (ab != null)
+                ab.setDisplayHomeAsUpEnabled(false);
         } else
             finish();
 
         try {
             mDetailFragment = (DeviceDetailFragment)mPreviousFragment;
-        } catch (ClassCastException ignored) {}
-        try {
-            mListFragment = (DeviceListFragment)mPreviousFragment;
-        } catch (ClassCastException ignored) {}
+        } catch (ClassCastException ignored1) {
+            try {
+                mListFragment = (DeviceListFragment)mPreviousFragment;
+            } catch (ClassCastException ignored2) {}
+        }
     }
 
     @Override
@@ -292,7 +297,9 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         ft.commit();
 
         setTitle(getString(R.string.notifications_settings));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar ab = getSupportActionBar();
+        if (ab != null)
+            ab.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -314,32 +321,53 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         ft.commit();
 
         setTitle(getString(R.string.weather_settings));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar ab = getSupportActionBar();
+        if (ab != null)
+            ab.setDisplayHomeAsUpEnabled(true);
     }
 
-    private class SynchronizationHandler extends Handler {
+    void handleSetLocalName(String name) {
+        if(mDetailFragment != null)
+            mDetailFragment.setLocalName(name);
+    }
+
+    void handleSetStatus(int status) {
+        if(mDetailFragment != null) {
+            mDetailFragment.setStatus(status);
+            if(status == SynchronizationService.STATUS_CONNECTED) {
+                try {
+                    Message batteryMsg = Message.obtain(null, SynchronizationService.MSG_REQUEST_BATTERY_LIFE);
+                    batteryMsg.replyTo = mDeviceDetailMessenger;
+                    mSyncServiceMessenger.send(batteryMsg);
+                } catch (RemoteException ignored) {}
+            }
+            mStatus = status;
+        }
+    }
+
+    void handleBatteryPercentage(int percentage) {
+        if(mDetailFragment != null)
+            mDetailFragment.setBatteryPercentage(percentage);
+    }
+
+    static private class SynchronizationHandler extends Handler {
+        private MainActivity mActivity;
+
+        SynchronizationHandler(MainActivity activity) {
+            mActivity = activity;
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            if(mDetailFragment == null) return;
-
             switch (msg.what) {
                 case SynchronizationService.MSG_SET_LOCAL_NAME:
-                    String name = (String)msg.obj;
-                    mDetailFragment.setLocalName(name);
+                    mActivity.handleSetLocalName((String)msg.obj);
                     break;
                 case SynchronizationService.MSG_SET_STATUS:
-                    mDetailFragment.setStatus(msg.arg1);
-                    if(msg.arg1 == SynchronizationService.STATUS_CONNECTED) {
-                        try {
-                            Message batteryMsg = Message.obtain(null, SynchronizationService.MSG_REQUEST_BATTERY_LIFE);
-                            batteryMsg.replyTo = mDeviceDetailMessenger;
-                            mSyncServiceMessenger.send(batteryMsg);
-                        } catch (RemoteException ignored) {}
-                    }
-                    mStatus = msg.arg1;
+                    mActivity.handleSetStatus(msg.arg1);
                     break;
                 case SynchronizationService.MSG_SET_BATTERY_PERCENTAGE:
-                    mDetailFragment.setBatteryPercentage(msg.arg1);
+                    mActivity.handleBatteryPercentage(msg.arg1);
                     break;
                 default:
                     super.handleMessage(msg);

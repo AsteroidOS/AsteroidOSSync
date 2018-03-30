@@ -23,9 +23,10 @@ import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.UUID;
 
+@SuppressWarnings( "deprecation" ) // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated ReadWriteListener
 public class TimeService implements BleDevice.ReadWriteListener, SharedPreferences.OnSharedPreferenceChangeListener {
     private static final UUID timeSetCharac = UUID.fromString("00005001-0000-0000-0000-00a57e401d05");
 
@@ -54,14 +55,14 @@ public class TimeService implements BleDevice.ReadWriteListener, SharedPreferenc
 
     private void updateTime() {
         if(mTimeSyncSettings.getBoolean(PREFS_SYNC_TIME, PREFS_SYNC_TIME_DEFAULT)) {
-            Date dt = new Date();
             byte[] data = new byte[6];
-            data[0] = (byte)dt.getYear();
-            data[1] = (byte)dt.getMonth();
-            data[2] = (byte)dt.getDate();
-            data[3] = (byte)dt.getHours();
-            data[4] = (byte)dt.getMinutes();
-            data[5] = (byte)dt.getSeconds();
+            Calendar c =  Calendar.getInstance();
+            data[0] = (byte)(c.get(Calendar.YEAR) - 1900);
+            data[1] = (byte)(c.get(Calendar.MONTH));
+            data[2] = (byte)(c.get(Calendar.DAY_OF_MONTH));
+            data[3] = (byte)(c.get(Calendar.HOUR_OF_DAY));
+            data[4] = (byte)(c.get(Calendar.MINUTE));
+            data[5] = (byte)(c.get(Calendar.SECOND));
             mDevice.write(timeSetCharac, data, TimeService.this);
         }
     }

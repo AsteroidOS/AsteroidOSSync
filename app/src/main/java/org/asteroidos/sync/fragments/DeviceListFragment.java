@@ -158,9 +158,9 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
         public View getView(int i, View view, ViewGroup viewGroup) {
             ViewHolder viewHolder;
             if (view == null) {
-                view = mInflator.inflate(R.layout.device_list_item, null);
+                view = mInflator.inflate(R.layout.device_list_item, viewGroup, false);
                 viewHolder = new ViewHolder();
-                viewHolder.deviceName = (TextView) view.findViewById(R.id.content);
+                viewHolder.deviceName = view.findViewById(R.id.content);
                 view.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) view.getTag();

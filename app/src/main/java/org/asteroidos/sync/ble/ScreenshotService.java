@@ -41,8 +41,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.UUID;
 
+@SuppressWarnings({"FieldCanBeLocal", "deprecation"}) // For clarity, we prefer having NOTIFICATION as a top level field
+                                                      // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated ReadWriteListener
 public class ScreenshotService implements BleDevice.ReadWriteListener {
     private static final String NOTIFICATION_CHANNEL_ID = "screenshotservice_channel_id_01";
     private int NOTIFICATION = 2726;
@@ -120,16 +123,16 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                         System.arraycopy(data, 0, totalData, progress, data.length);
                     progress += data.length;
 
-                    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mCtx, NOTIFICATION_CHANNEL_ID)
-                            .setContentTitle(mCtx.getText(R.string.screenshot))
-                            .setLocalOnly(true);
-
                     if(size == progress) {
+                        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mCtx, NOTIFICATION_CHANNEL_ID)
+                                .setContentTitle(mCtx.getText(R.string.screenshot))
+                                .setLocalOnly(true);
+
                         String dirStr = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/AsteroidOSSync";
                         File directory = new File(dirStr);
                         if(!directory.exists())
                             directory.mkdirs();
-                        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(System.currentTimeMillis());
+                        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(System.currentTimeMillis());
                         File fileName = new File(dirStr + "/Screenshot_" + timeStamp + ".jpg");
 
                         try {
@@ -156,14 +159,21 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                         PendingIntent contentIntent = PendingIntent.getActivity(mCtx, 0, notificationIntent, 0);
                         notificationBuilder.setContentIntent(contentIntent);
                         mDownloading = false;
-                    } else {
+
+                        Notification notification = notificationBuilder.build();
+                        mNM.notify(NOTIFICATION, notification);
+                    } else if(progress < size) {
+                        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mCtx, NOTIFICATION_CHANNEL_ID)
+                                .setContentTitle(mCtx.getText(R.string.screenshot))
+                                .setLocalOnly(true);
+
                         notificationBuilder.setContentText(mCtx.getText(R.string.downloading));
                         notificationBuilder.setSmallIcon(R.mipmap.android_image_white);
                         notificationBuilder.setProgress(size, progress, false);
-                    }
 
-                    Notification notification = notificationBuilder.build();
-                    mNM.notify(NOTIFICATION, notification);
+                        Notification notification = notificationBuilder.build();
+                        mNM.notify(NOTIFICATION, notification);
+                    }
                 }
             }
         }
