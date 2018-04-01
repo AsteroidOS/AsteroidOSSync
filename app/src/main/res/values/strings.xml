@@ -43,4 +43,5 @@
     <string name="explain_app_prefs">Notifications from your apps will appear here</string>
     <string name="position_indicator">Position indicator</string>
     <string name="use_this_area">Use this area for weather</string>
+    <string name="app_icon">Application icon</string>
 </resources>

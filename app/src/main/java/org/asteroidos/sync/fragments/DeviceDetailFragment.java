@@ -169,14 +169,14 @@ public class DeviceDetailFragment extends Fragment {
             case SynchronizationService.STATUS_CONNECTED:
                 mDisconnectedPlaceholder.setVisibility(View.GONE);
                 mConnectedContent.setVisibility(View.VISIBLE);
-                mFab.setImageResource(R.mipmap.android_bluetooth_disconnect);
+                mFab.setImageResource(R.drawable.bluetooth_disconnect);
                 mConnected = true;
                 break;
             case SynchronizationService.STATUS_DISCONNECTED:
                 mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
                 mConnectedContent.setVisibility(View.GONE);
                 mDisconnectedText.setText(R.string.disconnected);
-                mFab.setImageResource(R.mipmap.android_bluetooth_connect);
+                mFab.setImageResource(R.drawable.bluetooth_connect);
                 mConnected = false;
                 break;
             case SynchronizationService.STATUS_CONNECTING:

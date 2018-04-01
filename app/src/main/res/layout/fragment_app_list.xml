@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:contentDescription="@string/explain_app_prefs"
-            android:src="@mipmap/android_notifications_grey" />
+            android:src="@drawable/notifications_grey" />
 
         <TextView
             android:id="@+id/info_disconnected"
