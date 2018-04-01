@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
@@ -178,17 +179,25 @@ public class NLService extends NotificationListenerService {
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
-        Intent i = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
+        Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
         i.putExtra("event", "removed");
         i.putExtra("id", sbn.getId());
         sendBroadcast(i);
     }
 
-    class NLServiceReceiver extends BroadcastReceiver{
+    class NLServiceReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getStringExtra("command").equals("clearall"))
-                cancelAllNotifications();
+            if (intent.getStringExtra("command").equals("refresh")) {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        StatusBarNotification[] notifs = getActiveNotifications();
+                        for(StatusBarNotification notif : notifs)
+                            onNotificationPosted(notif);                    }
+                }, 500);
+            }
         }
     }
 }

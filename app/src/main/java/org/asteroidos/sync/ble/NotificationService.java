@@ -54,6 +54,10 @@ public class NotificationService implements BleDevice.ReadWriteListener {
         IntentFilter filter = new IntentFilter();
         filter.addAction("org.asteroidos.sync.NOTIFICATION_LISTENER");
         mCtx.registerReceiver(mNReceiver, filter);
+
+        Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER_SERVICE");
+        i.putExtra("command", "refresh");
+        mCtx.sendBroadcast(i);
     }
 
     public void unsync() {
