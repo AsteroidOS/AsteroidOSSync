@@ -17,13 +17,16 @@
 
 package org.asteroidos.sync.services;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
@@ -183,6 +186,13 @@ public class NLService extends NotificationListenerService {
         i.putExtra("event", "removed");
         i.putExtra("id", sbn.getId());
         sendBroadcast(i);
+    }
+
+    @Override
+    @TargetApi(Build.VERSION_CODES.N)
+    public void onListenerDisconnected() {
+        // Notification listener disconnected - requesting rebind
+        requestRebind(new ComponentName(this, NotificationListenerService.class));
     }
 
     class NLServiceReceiver extends BroadcastReceiver {
