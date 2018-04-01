@@ -43,6 +43,7 @@ import com.idevicesinc.sweetblue.BleTask;
 import com.idevicesinc.sweetblue.utils.Interval;
 import com.idevicesinc.sweetblue.utils.Uuids;
 
+import org.asteroidos.sync.BuildConfig;
 import org.asteroidos.sync.MainActivity;
 import org.asteroidos.sync.R;
 import org.asteroidos.sync.ble.MediaService;
@@ -235,9 +236,10 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         cfg.taskTimeoutRequestFilter = new TaskTimeoutRequestFilter();
         cfg.defaultScanFilter = new WatchesFilter();
         cfg.enableCrashResolver = true;
-        cfg.loggingEnabled = true;
         cfg.bondFilter = new BondFilter();
         cfg.alwaysUseAutoConnect = true;
+        if (BuildConfig.DEBUG)
+            cfg.loggingEnabled = true;
         mBleMngr.setConfig(cfg);
 
         mPrefs = getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
