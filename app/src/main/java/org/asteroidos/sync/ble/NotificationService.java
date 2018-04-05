@@ -102,15 +102,20 @@ public class NotificationService implements BleDevice.ReadWriteListener {
                 else
                     throw new IllegalArgumentException("Not all options handled");
 
-                String xmlRequest = "<insert>" +
-                        "<pn>" + packageName + "</pn>" +
-                        "<vb>" + vibration + "</vb>" +
-                        "<id>" + id + "</id>" +
-                        "<an>" + appName + "</an>" +
-                        "<ai>" + appIcon + "</ai>" +
-                        "<su>" + summary + "</su>" +
-                        "<bo>" + body + "</bo>" +
-                        "</insert>";
+                String xmlRequest = "<insert><id>" + id + "</id>";
+                if(!packageName.isEmpty())
+                    xmlRequest += "<pn>" + packageName + "</pn>";
+                if(!vibration.isEmpty())
+                    xmlRequest += "<vb>" + vibration + "</vb>";
+                if(!appName.isEmpty())
+                    xmlRequest += "<an>" + appName + "</an>";
+                if(!appIcon.isEmpty())
+                    xmlRequest += "<ai>" + appIcon + "</ai>";
+                if(!summary.isEmpty())
+                    xmlRequest += "<su>" + summary + "</su>";
+                if(!body.isEmpty())
+                    xmlRequest += "<bo>" + body + "</bo>";
+                xmlRequest += "</insert>";
 
                 byte[] data = xmlRequest.getBytes(StandardCharsets.UTF_8);
                 mDevice.write(notificationUpdateCharac, data, NotificationService.this);
