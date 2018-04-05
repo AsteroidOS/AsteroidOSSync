@@ -1,4 +1,0 @@
-<resources>
-    <string name="app_name" translatable="false">Tester</string>
-    <string name="title_activity_server" translatable="false">ServerActivity</string>
-</resources>
