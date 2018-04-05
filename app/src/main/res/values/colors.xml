@@ -3,4 +3,16 @@
     <color name="colorPrimary">#f57c00</color>
     <color name="colorPrimaryDark">#e65100</color>
     <color name="colorAccent">#e65100</color>
+    <color name="colorintroslide1">#FF8F00</color>
+    <color name="colorintroslide1button">#FF6F00</color>
+    <color name="colorintroslide2">#FB8600</color>
+    <color name="colorintroslide2button">#F96800</color>
+    <color name="colorintroslide3">#F77E00</color>
+    <color name="colorintroslide3button">#F36000</color>
+    <color name="colorintroslide4">#F37500</color>
+    <color name="colorintroslide4button">#EC5900</color>
+    <color name="colorintroslide5">#EF6C00</color>
+    <color name="colorintroslide5button">#E65100</color>
+    <color name="colorintroslideerror">#f57c00</color>
+    <color name="colorintroslideerrorbutton">#e65100</color>
 </resources>

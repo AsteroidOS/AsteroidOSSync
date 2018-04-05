@@ -6,7 +6,7 @@
     <string name="nothing_found">Geen horloges gevonden</string>
     <string name="one_found">Één horloge gevonden</string>
     <string name="n_found">%d horloges gevonden</string>
-    <string name="ble_not_supported">Het lijkt erop dat Bluetooth Low Energy op dit apparaat niet ondersteund wordt.</string>
+    <string name="intro_slideerror_subtitle">Het lijkt erop dat Bluetooth Low Energy op dit apparaat niet ondersteund wordt.</string>
     <string name="disconnected">Niet verbonden</string>
     <string name="connected">Verbonden</string>
     <string name="connecting">Verbinden…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Horlogevinder</string>
     <string name="phone_is_searching">De telefoon is naar je op zoek!</string>
     <string name="notifications_settings">Meldingsinstellingen</string>
-    <string name="notifications">Meldingen</string>
-    <string name="notifications_enablement">On meldingen te synchroniseren moet je in het volgende menu ‘AsteroidOS Sync’ toestaan:</string>
+    <string name="intro_slide4_title">Meldingen</string>
+    <string name="intro_slide4_subtitle">On meldingen te synchroniseren moet je in het volgende menu ‘AsteroidOS Sync’ toestaan:</string>
     <string name="weather_settings">Weerinstellingen</string>
     <string name="enter_city_name">Voer een stadsnaam in:</string>
     <string name="unpair">Ontkoppelen</string>

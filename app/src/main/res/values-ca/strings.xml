@@ -6,7 +6,7 @@
     <string name="nothing_found">No s\'ha trobat cap rellotge</string>
     <string name="one_found">S\'ha trobat 1 rellotge</string>
     <string name="n_found">S\'han trobat %d rellotges</string>
-    <string name="ble_not_supported">Sembla ser que Bluetooth Low Energy no funciona en aquest dispositiu.</string>
+    <string name="intro_slideerror_subtitle">Sembla ser que Bluetooth Low Energy no funciona en aquest dispositiu.</string>
     <string name="disconnected">Desconnectat</string>
     <string name="connected">Connectat</string>
     <string name="connecting">Connectant…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Cercador del rellotge</string>
     <string name="phone_is_searching">El telèfon està buscant-te!</string>
     <string name="notifications_settings">Configuració de les notificacions</string>
-    <string name="notifications">Notificacions</string>
-    <string name="notifications_enablement">Per activar la sincronització de notificacions, necessiteu habilitar el Sincronitzador d\'AsteroidOS en el següent menú.</string>
+    <string name="intro_slide4_title">Notificacions</string>
+    <string name="intro_slide4_subtitle">Per activar la sincronització de notificacions, necessiteu habilitar el Sincronitzador d\'AsteroidOS en el següent menú.</string>
     <string name="weather_settings">Configuració del temps</string>
     <string name="enter_city_name">Escriviu el nom d\'una ciutat:</string>
     <string name="unpair">Desemparellar</string>

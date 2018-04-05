@@ -6,7 +6,7 @@
     <string name="nothing_found">ウォッチが見つかりません</string>
     <string name="one_found">ウォッチが１つ見つかりました</string>
     <string name="n_found">ウォッチが %d つ見つかりました</string>
-    <string name="ble_not_supported">お使いのデバイスで Bluetooth 低消費電力がサポートされていないようです。</string>
+    <string name="intro_slideerror_subtitle">お使いのデバイスで Bluetooth 低消費電力がサポートされていないようです。</string>
     <string name="disconnected">切断しました</string>
     <string name="connected">接続しました</string>
     <string name="connecting">接続中…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">ウォッチファインダー</string>
     <string name="phone_is_searching">電話が探しています!</string>
     <string name="notifications_settings">通知の設定</string>
-    <string name="notifications">通知</string>
-    <string name="notifications_enablement">通知を同期するには、次のメニューで \"AsteroidOS の同期\"を許可してください:</string>
+    <string name="intro_slide4_title">通知</string>
+    <string name="intro_slide4_subtitle">通知を同期するには、次のメニューで \"AsteroidOS の同期\"を許可してください:</string>
     <string name="weather_settings">天気予報の設定</string>
     <string name="enter_city_name">市区町村名を入力してください:</string>
     <string name="unpair">ペア解除</string>

@@ -6,7 +6,7 @@
     <string name="nothing_found">Ingen ure fundet</string>
     <string name="one_found">1 ur fundet</string>
     <string name="n_found">%d ure fundet</string>
-    <string name="ble_not_supported">Det lader ikke til at Bluetooth Low Energy er supporteret på denne enhed.</string>
+    <string name="intro_slideerror_subtitle">Det lader ikke til at Bluetooth Low Energy er supporteret på denne enhed.</string>
     <string name="disconnected">Afbrudt</string>
     <string name="connected">Forbundet</string>
     <string name="connecting">Tilslutter …</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder"></string>
     <string name="phone_is_searching"></string>
     <string name="notifications_settings">Meddelelsesindstillinger</string>
-    <string name="notifications">Meddelelser</string>
-    <string name="notifications_enablement"></string>
+    <string name="intro_slide4_title">Meddelelser</string>
+    <string name="intro_slide4_subtitle"></string>
     <string name="weather_settings"></string>
     <string name="enter_city_name"></string>
     <string name="unpair">Fjern parringen</string>

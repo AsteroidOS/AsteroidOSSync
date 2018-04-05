@@ -7,7 +7,6 @@
     <string name="nothing_found">No watches found</string>
     <string name="one_found">Found one watch</string>
     <string name="n_found">Found %d watches</string>
-    <string name="ble_not_supported">It does not appear that Bluetooth Low Energy is supported on this device.</string>
     <string name="disconnected">Disconnected</string>
     <string name="connected">Connected</string>
     <string name="connecting">Connecting…</string>
@@ -25,8 +24,6 @@
     <string name="watch_finder">Watch finder</string>
     <string name="phone_is_searching">The phone is searching for you!</string>
     <string name="notifications_settings">Notifications settings</string>
-    <string name="notifications">Notifications</string>
-    <string name="notifications_enablement">To sync notifications, allow \"AsteroidOS Sync\" in the following menu:</string>
     <string name="weather_settings">Weather settings</string>
     <string name="enter_city_name">Enter a city name:</string>
     <string name="unpair">Unpair</string>
@@ -44,4 +41,19 @@
     <string name="position_indicator">Position indicator</string>
     <string name="use_this_area">Use this area for weather</string>
     <string name="app_icon">Application icon</string>
+    <string name="intro_slide1_title">Welcome</string>
+    <string name="intro_slide1_subtitle">This app lets you sync your Android phone with your AsteroidOS watch. But first, it needs some permissions.</string>
+    <string name="intro_slide2_title">Files access</string>
+    <string name="intro_slide2_subtitle">This permission is needed to cache data and save screenshots of your watch.</string>
+    <string name="intro_slide3_title">Location</string>
+    <string name="intro_slide3_subtitle">This permission is needed to scan for nearby Bluetooth Low Energy devices.</string>
+    <string name="intro_slide4_title">Notifications</string>
+    <string name="intro_slide4_subtitle">To sync notifications with your watch, allow \"AsteroidOS Sync\" in the following menu:</string>
+    <string name="intro_slide5_title">Battery Optimization</string>
+    <string name="intro_slide5_subtitle">To let this app run in background, disable \"Battery Optimization\" for AsteroidOS Sync in the following menu:</string>
+    <string name="intro_slideerror_title">Bluetooth Low Energy support</string>
+    <string name="intro_slideerror_subtitle">It does not appear that Bluetooth Low Energy is supported on this device.</string>
+    <string name="grant_permission">Grant permission</string>
+    <string name="please_grant_permissions">Please grant this permission</string>
+    <string name="impassable_slide">Please grant this permission</string>
 </resources>

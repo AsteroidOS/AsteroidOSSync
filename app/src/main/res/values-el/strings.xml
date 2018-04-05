@@ -6,7 +6,7 @@
     <string name="nothing_found">Δεν βρέθηκε ρολόι</string>
     <string name="one_found">1 ρολόι βρέθηκε</string>
     <string name="n_found">%d ρολόγια βρέθηκαν</string>
-    <string name="ble_not_supported">Δεν φαίνεται να υποστηρίζεται Bluetooth Χαμηλής Ενέργειας σε αυτή την συσκευή.</string>
+    <string name="intro_slideerror_subtitle">Δεν φαίνεται να υποστηρίζεται Bluetooth Χαμηλής Ενέργειας σε αυτή την συσκευή.</string>
     <string name="disconnected">Αποσυνδέθηκε</string>
     <string name="connected">Συνδέθηκε</string>
     <string name="connecting">Συνδέεται…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Εύρεση ρολογιού</string>
     <string name="phone_is_searching">Το τηλέφωνο σε αναζητάει!</string>
     <string name="notifications_settings">Ρυθμίσεις ειδοποιήσεων</string>
-    <string name="notifications">Ειδοποιήσεις</string>
-    <string name="notifications_enablement">Για να ενεργοποιήσετε τον συγχρονισμό των ειδοποιήσεων, πρέπει να επιτρέψετε το Συγχρονισμό του AsteroidOS στο παρακάτω μενού.</string>
+    <string name="intro_slide4_title">Ειδοποιήσεις</string>
+    <string name="intro_slide4_subtitle">Για να ενεργοποιήσετε τον συγχρονισμό των ειδοποιήσεων, πρέπει να επιτρέψετε το Συγχρονισμό του AsteroidOS στο παρακάτω μενού.</string>
     <string name="weather_settings">Ρυθμίσεις καιρού</string>
     <string name="enter_city_name">Προσθήκη πόλης:</string>
     <string name="unpair">Διακοπή σύζευξης</string>

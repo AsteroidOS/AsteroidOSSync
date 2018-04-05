@@ -6,7 +6,7 @@
     <string name="nothing_found">No se encontraron relojes</string>
     <string name="one_found">Se ha encontrado un reloj</string>
     <string name="n_found">Se han encontrado %d relojes</string>
-    <string name="ble_not_supported">Parece que el Bluetooth de baja energía no está disponible en este dispositivo.</string>
+    <string name="intro_slideerror_subtitle">Parece que el Bluetooth de baja energía no está disponible en este dispositivo.</string>
     <string name="disconnected">Desconectado</string>
     <string name="connected">Conectado</string>
     <string name="connecting">Conectando…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Buscador del reloj</string>
     <string name="phone_is_searching">¡El teléfono te está buscando!</string>
     <string name="notifications_settings">Configuración de notificaciones</string>
-    <string name="notifications">Notificaciones</string>
-    <string name="notifications_enablement">Para sincronizar las notificaciones, active \"AsteroidOS Sync\" en el siguiente menú:</string>
+    <string name="intro_slide4_title">Notificaciones</string>
+    <string name="intro_slide4_subtitle">Para sincronizar las notificaciones, active \"AsteroidOS Sync\" en el siguiente menú:</string>
     <string name="weather_settings">Configuración del clima</string>
     <string name="enter_city_name">Escriba un nombre de ciudad:</string>
     <string name="unpair">Desemparejar</string>

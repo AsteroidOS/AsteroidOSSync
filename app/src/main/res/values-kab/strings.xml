@@ -6,7 +6,7 @@
     <string name="nothing_found">Ulac tamrilt</string>
     <string name="one_found">1 n temrilt tella</string>
     <string name="n_found">%d n temrilin llant</string>
-    <string name="ble_not_supported">Ur iban ara Bluetooth Low Energy ur ittusefrak ɣef yibenk-a.</string>
+    <string name="intro_slideerror_subtitle">Ur iban ara Bluetooth Low Energy ur ittusefrak ɣef yibenk-a.</string>
     <string name="disconnected">Ur iqqin ara</string>
     <string name="connected">iqqen</string>
     <string name="connecting">Tuqqna…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Af-d tamrilt-inu</string>
     <string name="phone_is_searching">Tiliɣri tettnadi-ak-d!</string>
     <string name="notifications_settings">Iɣewwaṛen n ulɣu</string>
-    <string name="notifications">Alɣuten</string>
-    <string name="notifications_enablement">"Akken ad tremdeḍ amtawi n ilɣuten, issefk ad tsirgeḍ  AsteroidOS Sync deg umuɣ-a."</string>
+    <string name="intro_slide4_title">Alɣuten</string>
+    <string name="intro_slide4_subtitle">"Akken ad tremdeḍ amtawi n ilɣuten, issefk ad tsirgeḍ  AsteroidOS Sync deg umuɣ-a."</string>
     <string name="weather_settings">Iɣewwaṛen n tegnawt</string>
     <string name="enter_city_name">Sekcem isem n uɣrem:</string>
     <string name="unpair">Err d asuf</string>

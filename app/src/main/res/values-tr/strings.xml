@@ -6,7 +6,7 @@
     <string name="nothing_found">Saat bulunamadı</string>
     <string name="one_found">Bir saat bulundu</string>
     <string name="n_found">%d saat bulundu</string>
-    <string name="ble_not_supported">Bu aygıtta Bluetooth Düşük Enerji desteklenmiyor.</string>
+    <string name="intro_slideerror_subtitle">Bu aygıtta Bluetooth Düşük Enerji desteklenmiyor.</string>
     <string name="disconnected">Bağlantı kesildi</string>
     <string name="connected">Bağlandı</string>
     <string name="connecting">Bağlanıyor…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Saat bulucu</string>
     <string name="phone_is_searching">Telefon sizi arıyor!</string>
     <string name="notifications_settings">Bildirim ayarları</string>
-    <string name="notifications">Bildirimler</string>
-    <string name="notifications_enablement">Bildirimleri eşitlemek için takip eden menüde \"AsteroidOS Eşitleme\"ye izin verin:</string>
+    <string name="intro_slide4_title">Bildirimler</string>
+    <string name="intro_slide4_subtitle">Bildirimleri eşitlemek için takip eden menüde \"AsteroidOS Eşitleme\"ye izin verin:</string>
     <string name="weather_settings">Hava ayarları</string>
     <string name="enter_city_name">Şehir adı gir:</string>
     <string name="unpair">Kaldır</string>

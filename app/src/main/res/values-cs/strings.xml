@@ -6,7 +6,7 @@
     <string name="nothing_found">Nebyly nalezeny žádné hodinky</string>
     <string name="one_found">Nalezeny jedny hodinky</string>
     <string name="n_found">Nalezeno %d hodinek</string>
-    <string name="ble_not_supported">Nezdá se, že by na tomto zařízení byla podporována úsporná (LE) technologie Bluetooth.</string>
+    <string name="intro_slideerror_subtitle">Nezdá se, že by na tomto zařízení byla podporována úsporná (LE) technologie Bluetooth.</string>
     <string name="disconnected">Odpojeno</string>
     <string name="connected">Připojeno</string>
     <string name="connecting">Připojování…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Hledání hodinek</string>
     <string name="phone_is_searching">Telefon hledá za vás!</string>
     <string name="notifications_settings">Nastavení oznamování</string>
-    <string name="notifications">Oznamování</string>
-    <string name="notifications_enablement">Aby byla synchronizována oznamování, je třeba v následující nabídce zapnout „Synchronizace AsteroidOS“:</string>
+    <string name="intro_slide4_title">Oznamování</string>
+    <string name="intro_slide4_subtitle">Aby byla synchronizována oznamování, je třeba v následující nabídce zapnout „Synchronizace AsteroidOS“:</string>
     <string name="weather_settings">Nastavení počasí</string>
     <string name="enter_city_name">Zadejte název města:</string>
     <string name="unpair">Zrušit spárování</string>
