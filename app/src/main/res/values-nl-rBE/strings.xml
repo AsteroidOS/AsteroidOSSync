@@ -52,5 +52,6 @@
     <string name="intro_slide5_subtitle">Om deze app in de achtergrond te kunnen uitvoeren moet ge ‘Batterijoptimalisatie’ voor AsteroidOS-synchronisatie in het volgende menu uitschakelen:</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy-ondersteuning</string>
     <string name="grant_permission">Toestemming geven</string>
-    <string name="please_grant_permissions">Geef deze toestemming</string>
-    </resources>
+    <string name="please_grant_permissions">Gelieve deze toestemming te geven</string>
+    <string name="impassable_slide">Gelieve deze toestemming te geven</string>
+</resources>
