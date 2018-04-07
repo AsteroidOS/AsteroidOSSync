@@ -32,7 +32,7 @@
                 android:layout_height="20dp"
                 android:contentDescription="@string/connected_icon"
                 android:gravity="start"
-                android:src="@mipmap/android_cloud_done" />
+                android:src="@drawable/cloud_done" />
 
             <TextView
                 android:layout_width="0dp"
@@ -48,7 +48,7 @@
                 android:layout_height="20dp"
                 android:contentDescription="@string/battery_info_icon"
                 android:gravity="end"
-                android:src="@mipmap/battery_full" />
+                android:src="@drawable/battery_full" />
 
             <TextView
                 android:id="@+id/info_battery"
@@ -71,7 +71,8 @@
             android:layout_margin="10dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            card_view:cardCornerRadius="4dp">
+            card_view:cardCornerRadius="4dp"
+            android:focusable="true">
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -85,7 +86,7 @@
                     android:layout_centerVertical="true"
                     android:layout_margin="16dp"
                     android:contentDescription="@string/weather_icon"
-                    android:src="@mipmap/android_weather" />
+                    android:src="@drawable/weather" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -109,7 +110,8 @@
             android:layout_margin="10dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            card_view:cardCornerRadius="4dp">
+            card_view:cardCornerRadius="4dp"
+            android:focusable="true">
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -123,7 +125,7 @@
                     android:layout_centerVertical="true"
                     android:layout_margin="16dp"
                     android:contentDescription="@string/finder_icon"
-                    android:src="@mipmap/android_notifications" />
+                    android:src="@drawable/notifications" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -147,7 +149,8 @@
             android:layout_margin="10dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            card_view:cardCornerRadius="4dp">
+            card_view:cardCornerRadius="4dp"
+            android:focusable="true">
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -161,7 +164,7 @@
                     android:layout_centerVertical="true"
                     android:layout_margin="16dp"
                     android:contentDescription="@string/screenshot_icon"
-                    android:src="@mipmap/android_image" />
+                    android:src="@drawable/image" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -185,7 +188,8 @@
             android:layout_margin="10dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            card_view:cardCornerRadius="4dp">
+            card_view:cardCornerRadius="4dp"
+            android:focusable="true">
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -199,7 +203,7 @@
                     android:layout_centerVertical="true"
                     android:layout_margin="16dp"
                     android:contentDescription="@string/settings_icon"
-                    android:src="@mipmap/android_settings" />
+                    android:src="@drawable/settings" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -235,7 +239,7 @@
                     android:layout_centerVertical="true"
                     android:layout_margin="16dp"
                     android:contentDescription="@string/time_icon"
-                    android:src="@mipmap/android_time" />
+                    android:src="@drawable/time" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -269,7 +273,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:contentDescription="@string/disconnected"
-            android:src="@mipmap/android_cloud" />
+            android:src="@drawable/cloud" />
 
         <TextView
             android:id="@+id/info_disconnected"
@@ -277,7 +281,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:text="@string/disconnected"
-            android:textSize="17dp"
+            android:textSize="17sp"
             android:textColor="#999999"/>
     </LinearLayout>
 
@@ -289,16 +293,17 @@
         android:layout_margin="20dp"
         android:clickable="true"
         android:text="@string/unpair"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:focusable="true" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
-        android:src="@mipmap/android_bluetooth_connect"
+        android:src="@drawable/bluetooth_connect"
         app:elevation="8dp"
         app:fabSize="normal" />
 </RelativeLayout>

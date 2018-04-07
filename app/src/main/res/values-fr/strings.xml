@@ -6,7 +6,7 @@
     <string name="nothing_found">Aucune montre trouvée</string>
     <string name="one_found">Une montre trouvée</string>
     <string name="n_found">%d montres trouvées</string>
-    <string name="ble_not_supported">Il semble que le Bluetooth Low Energy ne soit pas pris en charge sur cet appareil.</string>
+    <string name="intro_slideerror_subtitle">Il semble que le Bluetooth Low Energy ne soit pas pris en charge sur cet appareil.</string>
     <string name="disconnected">Déconnecté</string>
     <string name="connected">Connecté</string>
     <string name="connecting">Connexion…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Trouver ma montre</string>
     <string name="phone_is_searching">Votre téléphone vous cherche !</string>
     <string name="notifications_settings">Paramètres des notifications</string>
-    <string name="notifications">Notifications</string>
-    <string name="notifications_enablement">Pour synchroniser les notifications, veuillez autoriser \"AsteroidOS Sync\" dans le menu suivant :</string>
+    <string name="intro_slide4_title">Notifications</string>
+    <string name="intro_slide4_subtitle">Pour synchroniser les notifications, veuillez autoriser \"AsteroidOS Sync\" dans le menu suivant :</string>
     <string name="weather_settings">Paramètres météo</string>
     <string name="enter_city_name">Entrez le nom d\'une ville :</string>
     <string name="unpair">Dissocier</string>

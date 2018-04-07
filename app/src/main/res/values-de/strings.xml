@@ -6,7 +6,7 @@
     <string name="nothing_found">Keine Uhren gefunden</string>
     <string name="one_found">Eine Uhr gefunden</string>
     <string name="n_found">%d Uhren gefunden</string>
-    <string name="ble_not_supported">Es sieht so aus als würde dieses Gerät Bluetooth Low Energy nicht unterstützen.</string>
+    <string name="intro_slideerror_subtitle">Es sieht so aus als würde dieses Gerät Bluetooth Low Energy nicht unterstützen.</string>
     <string name="disconnected">Verbindung getrennt</string>
     <string name="connected">Verbunden</string>
     <string name="connecting">Verbinde…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Uhr-Finder</string>
     <string name="phone_is_searching">Das Telefon sucht Dich!</string>
     <string name="notifications_settings">Mitteilungseinstellungen</string>
-    <string name="notifications">Mitteilungen</string>
-    <string name="notifications_enablement">Um Mitteilungen synchronisieren zu können müssen Sie AsteroidOS Sync dies im folgenden Menü erlauben:</string>
+    <string name="intro_slide4_title">Mitteilungen</string>
+    <string name="intro_slide4_subtitle">Um Mitteilungen synchronisieren zu können müssen Sie AsteroidOS Sync dies im folgenden Menü erlauben:</string>
     <string name="weather_settings">Wettereinstellungen</string>
     <string name="enter_city_name">Gebe eine Stadt an:</string>
     <string name="unpair">Pairing aufheben</string>

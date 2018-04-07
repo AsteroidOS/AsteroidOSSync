@@ -1,33 +1,22 @@
 package org.asteroidos.sync;
 
-import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
-import android.os.PowerManager;
 import android.os.RemoteException;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.Window;
 
 import com.idevicesinc.sweetblue.BleManager;
 import com.idevicesinc.sweetblue.BleManagerState;
@@ -36,13 +25,12 @@ import com.idevicesinc.sweetblue.utils.BluetoothEnabler;
 import com.idevicesinc.sweetblue.utils.Interval;
 
 import org.asteroidos.sync.fragments.AppListFragment;
-import org.asteroidos.sync.fragments.DeviceListFragment;
 import org.asteroidos.sync.fragments.DeviceDetailFragment;
+import org.asteroidos.sync.fragments.DeviceListFragment;
 import org.asteroidos.sync.fragments.PositionPickerFragment;
+import org.asteroidos.sync.services.SynchronizationService;
 import org.asteroidos.sync.utils.AppInfo;
 import org.asteroidos.sync.utils.AppInfoHelper;
-import org.asteroidos.sync.services.NLService;
-import org.asteroidos.sync.services.SynchronizationService;
 
 import java.util.ArrayList;
 
@@ -105,43 +93,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             }
         });
         mBleMngr.setListener_Discovery(this);
-
-        //white list the app
-        //also need to add permission in manifest file
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // only for marshmallow and newer versions
-            Intent intent = new Intent();
-            String packageName = getPackageName();
-            PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
-            if (pm != null && !pm.isIgnoringBatteryOptimizations(packageName)) {
-                intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-                intent.setData(Uri.parse("package:" + packageName));
-                startActivity(intent);
-            }
-        }
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-
-        /* Check that bluetooth is enabled */
-        if (!mBleMngr.isBleSupported())
-            showBleNotSupported();
-
-        /* Check that notifications are enabled */
-        ComponentName cn = new ComponentName(this, NLService.class);
-        String flat = Settings.Secure.getString(this.getContentResolver(), "enabled_notification_listeners");
-        if (!(flat != null && flat.contains(cn.flattenToString()))) {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.notifications)
-                    .setMessage(R.string.notifications_enablement)
-                    .setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
-                            startActivity(intent);
-                        }
-                    })
-                    .show();
-        }
 
         if (savedInstanceState == null) {
             Fragment f;
@@ -404,26 +355,5 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         super.onPause();
         mBleMngr.onPause();
         unbindService(mConnection);
-    }
-
-    public void showBleNotSupported() {
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        final android.app.AlertDialog dialog = builder.create();
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        DialogInterface.OnClickListener clickListener = new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-                dialog.dismiss();
-            }
-        };
-
-        dialog.setMessage(getString(R.string.ble_not_supported));
-        dialog.setButton(DialogInterface.BUTTON_NEUTRAL,
-                getString(R.string.generic_ok), clickListener);
-        if (!isFinishing())
-            dialog.show();
     }
 }

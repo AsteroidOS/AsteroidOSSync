@@ -6,7 +6,7 @@
     <string name="nothing_found">לא נמצאו שעונים</string>
     <string name="one_found">נמצא שעון אחד</string>
     <string name="n_found">נמצאו %d שעונים</string>
-    <string name="ble_not_supported">נראה שאין תמיכה ב־BLE ‏(Bluetooth בצריכת אנרגיה נמוכה) בהתקן זה.</string>
+    <string name="intro_slideerror_subtitle">נראה שאין תמיכה ב־BLE ‏(Bluetooth בצריכת אנרגיה נמוכה) בהתקן זה.</string>
     <string name="disconnected">מנותק</string>
     <string name="connected">מחובר</string>
     <string name="connecting">בהתחברות…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">מאתר השעון</string>
     <string name="phone_is_searching">הטלפון מחפש אותך!</string>
     <string name="notifications_settings">הגדרות התרעה</string>
-    <string name="notifications">התרעות</string>
-    <string name="notifications_enablement">כדי לסנכרן התרעות, עליך לאפשר את ה„סנכרון של AsteroidOS” בתפריט הבא:</string>
+    <string name="intro_slide4_title">התרעות</string>
+    <string name="intro_slide4_subtitle">כדי לסנכרן התרעות, עליך לאפשר את ה„סנכרון של AsteroidOS” בתפריט הבא:</string>
     <string name="weather_settings">הגדרות מזג האוויר</string>
     <string name="enter_city_name">נא להזין שם עיר:</string>
     <string name="unpair">ביטול צימוד</string>

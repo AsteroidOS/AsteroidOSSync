@@ -19,6 +19,7 @@ package org.asteroidos.sync.ble;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
@@ -45,7 +46,14 @@ public class TimeService implements BleDevice.ReadWriteListener, SharedPreferenc
     }
 
     public void sync() {
-        updateTime();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateTime();
+            }
+        }, 500);
     }
 
     @Override

@@ -6,7 +6,7 @@
     <string name="nothing_found">მაჯის საათი არ ნაპოვნია</string>
     <string name="one_found">1 მაჯის საათი ნაპოვნია</string>
     <string name="n_found">%d მაჯის საათი ნაპოვნია</string>
-    <string name="ble_not_supported">ბლუთუზი დაბალი ენერგია (BLE) არ არის მხარდაჭერილი.</string>
+    <string name="intro_slideerror_subtitle">ბლუთუზი დაბალი ენერგია (BLE) არ არის მხარდაჭერილი.</string>
     <string name="disconnected">გათიშული</string>
     <string name="connected">დაკავშირებული</string>
     <string name="connecting">დამაკავშირებელი…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">მაჯის საათი მონახეთ</string>
     <string name="phone_is_searching">ტელეფონი ეძებს თქვენს!</string>
     <string name="notifications_settings">შეტყობინების პარამეტრები</string>
-    <string name="notifications">შეტყობინებები</string>
-    <string name="notifications_enablement"></string>
+    <string name="intro_slide4_title">შეტყობინებები</string>
+    <string name="intro_slide4_subtitle"></string>
     <string name="weather_settings">ამინდის პარამეტრები</string>
     <string name="enter_city_name">ქალაქის დასახელება:</string>
     <string name="unpair">დავიწყება</string>

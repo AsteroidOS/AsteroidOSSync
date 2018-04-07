@@ -6,7 +6,7 @@
     <string name="nothing_found">Ingen armbåndsur funnet</string>
     <string name="one_found">Fant én klokke</string>
     <string name="n_found">Fant %d klokker</string>
-    <string name="ble_not_supported">Det ser ikke ut til at lavenergi-Blåtann støttes på denne enheten.</string>
+    <string name="intro_slideerror_subtitle">Det ser ikke ut til at lavenergi-Blåtann støttes på denne enheten.</string>
     <string name="disconnected">Frakoblet</string>
     <string name="connected">Tilkoblet</string>
     <string name="connecting">Kobler til…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Armbåndsur-finner</string>
     <string name="phone_is_searching">Telefonen søker etter deg!</string>
     <string name="notifications_settings">Merknadsinnstillinger</string>
-    <string name="notifications">Merknader</string>
-    <string name="notifications_enablement">For å synkronisere merknader, må du tillate \"AsteroidOS-synkronisering\" i følgende meny:</string>
+    <string name="intro_slide4_title">Merknader</string>
+    <string name="intro_slide4_subtitle">For å synkronisere merknader, må du tillate \"AsteroidOS-synkronisering\" i følgende meny:</string>
     <string name="weather_settings">Værinnstillinger</string>
     <string name="enter_city_name">Skriv inn et bynavn:</string>
     <string name="unpair">Opphev parring</string>

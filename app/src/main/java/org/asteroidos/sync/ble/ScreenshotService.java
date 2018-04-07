@@ -149,7 +149,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
 
                         notificationBuilder.setContentText(mCtx.getText(R.string.downloaded));
                         notificationBuilder.setLargeIcon(BitmapFactory.decodeByteArray(totalData, 0, size));
-                        notificationBuilder.setSmallIcon(R.mipmap.android_image_white);
+                        notificationBuilder.setSmallIcon(R.drawable.image_white);
 
                         Uri imgURI = FileProvider.getUriForFile(mCtx, mCtx.getApplicationContext().getPackageName() + ".fileprovider", fileName);
                         Intent notificationIntent = new Intent();
@@ -168,7 +168,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                                 .setLocalOnly(true);
 
                         notificationBuilder.setContentText(mCtx.getText(R.string.downloading));
-                        notificationBuilder.setSmallIcon(R.mipmap.android_image_white);
+                        notificationBuilder.setSmallIcon(R.drawable.image_white);
                         notificationBuilder.setProgress(size, progress, false);
 
                         Notification notification = notificationBuilder.build();

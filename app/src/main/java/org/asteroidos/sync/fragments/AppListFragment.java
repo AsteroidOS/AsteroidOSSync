@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ListView;
 
 import org.asteroidos.sync.MainActivity;
@@ -14,9 +15,9 @@ import org.asteroidos.sync.R;
 import org.asteroidos.sync.adapters.AppInfoAdapter;
 
 public class AppListFragment extends Fragment {
-
     AppInfoAdapter adapter;
     ListView listView;
+    View placeholder;
 
     @Override
     public void onAttach(Context context) {
@@ -34,6 +35,12 @@ public class AppListFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         listView = view.findViewById(R.id.listview);
         listView.setAdapter(adapter);
-    }
 
+        placeholder = view.findViewById(R.id.no_notification_placeholder);
+        adapter.getFilter().filter("", new Filter.FilterListener() {
+            public void onFilterComplete(int count) {
+                placeholder.setVisibility(count == 0 ? View.VISIBLE : View.INVISIBLE);
+            }
+        });
+    }
 }

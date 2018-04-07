@@ -6,7 +6,7 @@
     <string name="nothing_found">Kelloa ei löydetty</string>
     <string name="one_found">1 Kello löydetty</string>
     <string name="n_found">%d kelloa löydetty</string>
-    <string name="ble_not_supported">Tämä laite ei tue Bluetooth Low Energy ominaisuutta.</string>
+    <string name="intro_slideerror_subtitle">Tämä laite ei tue Bluetooth Low Energy ominaisuutta.</string>
     <string name="disconnected">Ei yhdistetty</string>
     <string name="connected">Yhdistetty</string>
     <string name="connecting">Yhdistetään…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Kellon paikantaja</string>
     <string name="phone_is_searching">Puhelin etsii sinua!</string>
     <string name="notifications_settings">Ilmoituksien asetukset</string>
-    <string name="notifications">Ilmoitukset</string>
-    <string name="notifications_enablement">Jotta voit mahdollistaa ilmoituksien synkronoinnin, sinun täytyy sallia AsteroidOS Synkronointi seuraavassa valikossa.</string>
+    <string name="intro_slide4_title">Ilmoitukset</string>
+    <string name="intro_slide4_subtitle">Jotta voit mahdollistaa ilmoituksien synkronoinnin, sinun täytyy sallia AsteroidOS Synkronointi seuraavassa valikossa.</string>
     <string name="weather_settings">Sään asetukset</string>
     <string name="enter_city_name">Syötä kaupunki:</string>
     <string name="unpair">Irroita</string>

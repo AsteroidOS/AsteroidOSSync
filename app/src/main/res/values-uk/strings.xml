@@ -6,7 +6,7 @@
     <string name="nothing_found">Годинники, не знайдено</string>
     <string name="one_found">Знайдено один годинник</string>
     <string name="n_found">%d годинника(-ів) знайдено</string>
-    <string name="ble_not_supported">Не схоже, що Bluetooth Low Energy підтримується на цьому пристрої.</string>
+    <string name="intro_slideerror_subtitle">Не схоже, що Bluetooth Low Energy підтримується на цьому пристрої.</string>
     <string name="disconnected">Від\'єднано</string>
     <string name="connected">З\'єднано</string>
     <string name="connecting">З\'єднання…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Watch finder</string>
     <string name="phone_is_searching">Телефон шукає для Вас!</string>
     <string name="notifications_settings">Налаштування сповіщень</string>
-    <string name="notifications">Сповіщення</string>
-    <string name="notifications_enablement">Щоб синхронізувати сповіщення, дозвольте \"AsteroidOS Sync\" в наступному меню:</string>
+    <string name="intro_slide4_title">Сповіщення</string>
+    <string name="intro_slide4_subtitle">Щоб синхронізувати сповіщення, дозвольте \"AsteroidOS Sync\" в наступному меню:</string>
     <string name="weather_settings">Налаштування погоди</string>
     <string name="enter_city_name">Введіть назву міста:</string>
     <string name="unpair">Від\'єднати</string>

@@ -6,7 +6,7 @@
     <string name="nothing_found">未找到手表</string>
     <string name="one_found">找到 1 个手表</string>
     <string name="n_found">找到 %d 个手表</string>
-    <string name="ble_not_supported">似乎在这个设备上蓝牙4.0（BLE）不被支持.</string>
+    <string name="intro_slideerror_subtitle">似乎在这个设备上蓝牙4.0（BLE）不被支持.</string>
     <string name="disconnected">连接已断开</string>
     <string name="connected">已连接</string>
     <string name="connecting">正在连接…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">寻找手表</string>
     <string name="phone_is_searching">手机正在寻找你！</string>
     <string name="notifications_settings">通知设置</string>
-    <string name="notifications">通知</string>
-    <string name="notifications_enablement">要同步通知，您需要在接下来的菜单中允许AsteroidOS 同步:</string>
+    <string name="intro_slide4_title">通知</string>
+    <string name="intro_slide4_subtitle">要同步通知，您需要在接下来的菜单中允许AsteroidOS 同步:</string>
     <string name="weather_settings">天气设置</string>
     <string name="enter_city_name">输入一个城市名称：</string>
     <string name="unpair">取消配对</string>

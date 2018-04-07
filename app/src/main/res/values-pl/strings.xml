@@ -6,7 +6,7 @@
     <string name="nothing_found">Nie znaleziono zegarków</string>
     <string name="one_found">Znaleziono 1 zegarek</string>
     <string name="n_found">Liczba znalezionych zegarków: %d</string>
-    <string name="ble_not_supported">Wygląda na to, że Bluetooth Low Energy nie jest wspierany na tym urządzeniu.</string>
+    <string name="intro_slideerror_subtitle">Wygląda na to, że Bluetooth Low Energy nie jest wspierany na tym urządzeniu.</string>
     <string name="disconnected">Rozłączono</string>
     <string name="connected">Połączono</string>
     <string name="connecting">Łączenie…</string>
@@ -24,8 +24,8 @@
     <string name="watch_finder">Znajdź zegarek</string>
     <string name="phone_is_searching">Twój telefon szuka tego zegarka!</string>
     <string name="notifications_settings">Ustawienia powiadomień</string>
-    <string name="notifications">Powiadomienia</string>
-    <string name="notifications_enablement">Jeżeli chcesz synchronizować powiadomienia ze swoim zegarkiem, aplikacja musi otrzymać pozwolenie na dostęp do nich.</string>
+    <string name="intro_slide4_title">Powiadomienia</string>
+    <string name="intro_slide4_subtitle">Jeżeli chcesz synchronizować powiadomienia ze swoim zegarkiem, aplikacja musi otrzymać pozwolenie na dostęp do nich.</string>
     <string name="weather_settings">Ustawienia pogody</string>
     <string name="enter_city_name">Wpisz nazwę miasta:</string>
     <string name="unpair">Rozłącz</string>
