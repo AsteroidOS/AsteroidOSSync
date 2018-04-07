@@ -40,4 +40,17 @@
     <string name="use_this_area">Gebruik dit gebied voor weer</string>
     <string name="intro_slide4_title">Meldingen</string>
     <string name="intro_slideerror_subtitle">Het lijkt erop dat Bluetooth Low Energy op dit apparaat niet ondersteund wordt.</string>
+    <string name="app_icon">Toepassingspictogram</string>
+    <string name="intro_slide1_title">Welkom</string>
+    <string name="intro_slide1_subtitle">Deze app biedt u de mogelijkheid uw Android-gsm te synchroniseren met uw AsteroidOS-horloge, maar eerst heeft ze een aantal toestemmingen nodig.</string>
+    <string name="intro_slide2_title">Toegang tot bestanden</string>
+    <string name="intro_slide2_subtitle">Deze toestemming is nodig om gegevens in het cachegeheugen op te slaan, en schermafdrukken van uw horloge te maken.</string>
+    <string name="intro_slide3_title">Locatie</string>
+    <string name="intro_slide3_subtitle">Deze toestemming is nodig om te scannen naar nabije Bluetooth Low Energy-apparaten.</string>
+    <string name="intro_slide4_subtitle">Om meldingen te synchroniseren moet ge in het volgende menu ‘AsteroidOS Sync’ toestaan:</string>
+    <string name="intro_slide5_title">Batterijoptimalisatie</string>
+    <string name="intro_slide5_subtitle">Om deze app in de achtergrond te kunnen uitvoeren moet ge ‘Batterijoptimalisatie’ voor AsteroidOS-synchronisatie in het volgende menu uitschakelen:</string>
+    <string name="intro_slideerror_title">Bluetooth Low Energy-ondersteuning</string>
+    <string name="grant_permission">Toestemming geven</string>
+    <string name="please_grant_permissions">Geef deze toestemming</string>
     </resources>
