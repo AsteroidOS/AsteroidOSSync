@@ -42,4 +42,9 @@
     <string name="notification_type_strong_vibra">Kraftig vibrasjon</string>
     <string name="position_indicator">Posisjonsindikator</string>
     <string name="use_this_area">Bruk dette området for vær</string>
-</resources>
+<string name="app_icon">Programikon</string>
+    <string name="intro_slide1_title">Velkommen</string>
+    <string name="intro_slide1_subtitle">Dette programmet lar deg synkronisere din Android-enhet med din AsteroidOS-klokke. Først trenger det noen tilganger.</string>
+    <string name="intro_slide2_title">Filtilgang</string>
+    <string name="intro_slide2_subtitle">Denne tilgangen behøv</string>
+    </resources>
