@@ -50,5 +50,9 @@
     <string name="intro_slide3_title">Plassering</string>
     <string name="intro_slide3_subtitle">Denne tilgangen behøves for å se etter lavenergi-Blåtannsenheter i nærheten.</string>
     <string name="intro_slide5_title">Batterioptimisering</string>
-    <string name="intro_slide5_subtitle">For å latte programmet kjøre i bakgrunnen, skru av \"Batterioptimisering\" for AsteroidOS-synk i følgende meny:</string>
-    </resources>
+    <string name="intro_slide5_subtitle">For å tillate programmet å kjøre i bakgrunnen, skru av \"Batterioptimisering\" for AsteroidOS-synk i følgende meny:</string>
+    <string name="intro_slideerror_title">Lavenergi-Blåtannsstøtte</string>
+    <string name="grant_permission">Innvilg tilgang</string>
+    <string name="please_grant_permissions">Innvilg denne tilgangen</string>
+    <string name="impassable_slide">Innvilg denne tilgangen</string>
+</resources>
