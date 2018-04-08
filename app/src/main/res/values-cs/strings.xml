@@ -42,4 +42,12 @@
     <string name="notification_type_strong_vibra">Silné vibrace</string>
     <string name="position_indicator">Ukazatel pozice</string>
     <string name="use_this_area">Použít tuto oblast pro počasí</string>
+<string name="app_icon">Ikona aplikace</string>
+    <string name="intro_slide1_title">Vítejte</string>
+    <string name="intro_slide5_title">Optimalizace napájení</string>
+    <string name="intro_slide5_subtitle">Aby aplikace mohla zůstat spuštěná na pozadí, vypněte v následující nabídce „Optimalizaci n</string>
+    <string name="intro_slideerror_title">Podpora Bluetooth Low Energy</string>
+    <string name="grant_permission">Udělit oprávnění</string>
+    <string name="please_grant_permissions">Prosíme udělte toto oprávnění</string>
+    <string name="impassable_slide">Prosíme udělte toto oprávnění</string>
 </resources>
