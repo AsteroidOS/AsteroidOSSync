@@ -44,10 +44,15 @@
     <string name="use_this_area">Použít tuto oblast pro počasí</string>
 <string name="app_icon">Ikona aplikace</string>
     <string name="intro_slide1_title">Vítejte</string>
-    <string name="intro_slide5_title">Optimalizace napájení</string>
-    <string name="intro_slide5_subtitle">Aby aplikace mohla zůstat spuštěná na pozadí, vypněte v následující nabídce „Optimalizaci n</string>
+    <string name="intro_slide5_title">Optimalizace spotřeby energie</string>
+    <string name="intro_slide5_subtitle">Aby aplikace mohla zůstat spuštěná na pozadí, vypněte v následující nabídce pro AsteroidOS Sync „Optimalizaci spotřeby energie“:</string>
     <string name="intro_slideerror_title">Podpora Bluetooth Low Energy</string>
     <string name="grant_permission">Udělit oprávnění</string>
     <string name="please_grant_permissions">Prosíme udělte toto oprávnění</string>
     <string name="impassable_slide">Prosíme udělte toto oprávnění</string>
-</resources>
+<string name="intro_slide1_subtitle">Tato aplikace umožňuje synchronizaci telefonu s Android s hodinkami s AsteroidOS. K tomu je třeba několik oprávnění.</string>
+    <string name="intro_slide2_title">Přístup k souborům</string>
+    <string name="intro_slide2_subtitle">Toto oprávnění je třeba pro mezipaměť dat a ukládání snímků obrazovky vašich hodinek.</string>
+    <string name="intro_slide3_title">Umístění</string>
+    <string name="intro_slide3_subtitle">Toto oprávnění je třeba pro skenování přítomnosti Bluetooth Low Energy zařízení poblíž.</string>
+    </resources>
