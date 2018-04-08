@@ -42,4 +42,17 @@
     <string name="notification_type_strong_vibra">רטט חזק</string>
     <string name="position_indicator">מחוון מיקום</string>
     <string name="use_this_area">שימוש בשטח זה למזג אוויר</string>
+<string name="app_icon">סמל יישומון</string>
+    <string name="intro_slide1_title">ברוך בואך</string>
+    <string name="intro_slide1_subtitle">יישומון זה מאפשר לך לסנכרן את טלפון ה־Android שלך עם שעון ה־AsteroidOS שלך. אך תחילה, נדרשות הרשאות לכך.</string>
+    <string name="intro_slide2_title">גישה לקבצים</string>
+    <string name="intro_slide2_subtitle">הרשאה זו נדרשת כדי לאחסן נתונים ולשמור צילומי מסך של השעון שלך.</string>
+    <string name="intro_slide3_title">מיקום</string>
+    <string name="intro_slide3_subtitle">הרשאה זו נדרשת לצורך סריקת התקני בלוטות׳ עם צריכת אנרגיה נמוכה.</string>
+    <string name="intro_slide5_title">מטוב סוללה</string>
+    <string name="intro_slide5_subtitle">כדי לאפשר ליישומון זה לפעול ברקע, יש להשבית את „מטוב סוללה” עבור הסנכרון של AsteroidOS בתפריט הבא:</string>
+    <string name="intro_slideerror_title">תמיכה בבלוטות׳ בצריכת אנרגיה נמוכה</string>
+    <string name="grant_permission">הענקת הרשאות</string>
+    <string name="please_grant_permissions">נא להעניק הרשאה זו</string>
+    <string name="impassable_slide">נא להעניק הרשאה זו</string>
 </resources>
