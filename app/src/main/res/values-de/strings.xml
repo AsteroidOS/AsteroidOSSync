@@ -42,4 +42,17 @@
     <string name="notification_type_strong_vibra">Starke Vibration</string>
     <string name="position_indicator">Positionsanzeige</string>
     <string name="use_this_area">Nutze diesen Ort für Wetter</string>
+<string name="app_icon">Anwendungssymbol</string>
+    <string name="intro_slide1_title">Willkommen</string>
+    <string name="intro_slide1_subtitle">Mit dieser App kannst du dein Android-Handy mit deiner AsteroidOS-Uhr synchronisieren. Aber zuerst braucht es einige Berechtigungen.</string>
+    <string name="intro_slide2_title">Dateizugriff</string>
+    <string name="intro_slide2_subtitle">Diese Berechtigung wird benötigt, um Daten zwischenzuspeichern und Screenshots deiner Uhr zu speichern.</string>
+    <string name="intro_slide3_title">Standort</string>
+    <string name="intro_slide3_subtitle">Diese Berechtigung wird benötigt, um nach Bluetooth Low Energy-Geräten in der Nähe zu suchen.</string>
+    <string name="intro_slide5_title">Batterieoptimierung</string>
+    <string name="intro_slide5_subtitle">Um diese App im Hintergrund laufen zu lassen, deaktiviere \"Batterieoptimierung\" für AsteroidOS Sync im folgenden Menü:</string>
+    <string name="intro_slideerror_title">Bluetooth Low Energy Unterstützung</string>
+    <string name="grant_permission">Erlaubnis erteilen</string>
+    <string name="please_grant_permissions">Bitte gewähre diese Erlaubnis</string>
+    <string name="impassable_slide">Bitte gewähre diese Erlaubnis</string>
 </resources>
