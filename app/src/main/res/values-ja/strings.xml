@@ -42,4 +42,17 @@
     <string name="notification_type_strong_vibra">強い振動</string>
     <string name="position_indicator">位置インジケーター</string>
     <string name="use_this_area">天気にこのエリアを使用する</string>
+<string name="app_icon">アプリケーションアイコン</string>
+    <string name="intro_slide1_title">ようこそ</string>
+    <string name="intro_slide1_subtitle">このアプリは、AsteroidOS ウォッチとお使いの Android 携帯電話を同期することができます。しかし、まず、いくつかのアクセス許可が必要です。</string>
+    <string name="intro_slide2_title">ファイルアクセス</string>
+    <string name="intro_slide2_subtitle">このアクセス許可は、データをキャッシュし、ウォッチのスクリーンショットを保存するために必要です。</string>
+    <string name="intro_slide3_title">位置</string>
+    <string name="intro_slide3_subtitle">このアクセス許可は、近くにある Bluetooth 低消費電力デバイスをスキャンするために必要です。</string>
+    <string name="intro_slide5_title">バッテリーの最適化</string>
+    <string name="intro_slide5_subtitle">このアプリをバックグラウンドで実行させるには、次のメニューの AsteroidOS 同期の「バッテリー最適化」を無効にしてください。</string>
+    <string name="intro_slideerror_title">Bluetooth 低消費電力サポート</string>
+    <string name="grant_permission">アクセス許可の付与</string>
+    <string name="please_grant_permissions">このアクセス許可を付与してください</string>
+    <string name="impassable_slide">このアクセス許可を付与してください</string>
 </resources>
