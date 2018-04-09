@@ -42,4 +42,17 @@
     <string name="notification_type_strong_vibra">Сильная вибрация</string>
     <string name="position_indicator">Индикатор позиции</string>
     <string name="use_this_area">Место для погоды</string>
+<string name="app_icon">Значок приложения</string>
+    <string name="intro_slide1_title">Добро пожаловать</string>
+    <string name="intro_slide1_subtitle">Это приложение позволяет синхронизировать ваш телефон на Android с часами на AsteroidOS. Но сначала ему нужны некоторые разрешения.</string>
+    <string name="intro_slide2_title">Доступ к файлам</string>
+    <string name="intro_slide2_subtitle">Для кэширования данных и сохранения скриншотов ваших часов.</string>
+    <string name="intro_slide3_title">Местоположение</string>
+    <string name="intro_slide3_subtitle">Сканировать ближайшие Bluetooth LE устройства.</string>
+    <string name="intro_slide5_title">Оптимизация Батареи</string>
+    <string name="intro_slide5_subtitle">Что бы разрешить этому приложению работать в фоновом режиме, отключите \"Оптимизацию батареи\" для AsteroidOS Sync в следующем меню:</string>
+    <string name="intro_slideerror_title">Поддержка Bluetooth LE</string>
+    <string name="grant_permission">Выдать разрешение</string>
+    <string name="please_grant_permissions">Пожалуйста, дайте это разрешение</string>
+    <string name="impassable_slide">Пожалуйста, дайте это разрешение</string>
 </resources>
