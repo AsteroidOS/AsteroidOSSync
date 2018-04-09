@@ -34,5 +34,25 @@
     <string name="downloaded">Pobrane</string>
     <string name="screenshot">Zrzut ekranu</string>
     <string name="synchronize_time">Synchronizuj czas</string>
-    <string name="explain_app_prefs">Twoje aplikacje pojawią się tutaj, gdy otrzymasz powiadomienia</string>
+    <string name="explain_app_prefs">Powiadomienia z twoich aplikacji pojawią się tutaj</string>
+<string name="notification_type_default">Domyślne</string>
+    <string name="notification_type_no_notif">"Bez powiadomień "</string>
+    <string name="notification_type_silent">"Cisza "</string>
+    <string name="notification_type_vibra">"Wibracje "</string>
+    <string name="notification_type_strong_vibra">"Silne wibracje "</string>
+    <string name="position_indicator">"Wskaźnik pozycji "</string>
+    <string name="use_this_area">"Użyj tej lokalizacji dla pogody "</string>
+    <string name="app_icon">"Ikona aplikacji "</string>
+    <string name="intro_slide1_title">Witaj</string>
+    <string name="intro_slide1_subtitle">Ta aplikacja pozwoli ci zsynchronizować twój telefon z zegarkiem na systemie AsteroidOS. Ale najpierw potrzebujemy kilku pozwoleń.</string>
+    <string name="intro_slide2_title">"Dostęp do plików "</string>
+    <string name="intro_slide2_subtitle">Aby mieć w pamięci podręcznej dane i zapisywać zrzuty ekranu z zegarka.</string>
+    <string name="intro_slide3_title">Lokalizacja</string>
+    <string name="intro_slide3_subtitle">Aby skanowanie pobliskie urządzenia Bluetooth LE.</string>
+    <string name="intro_slide5_title">Optymalizacja baterii</string>
+    <string name="intro_slide5_subtitle">Aby pozwolić aplikacji działać w tle, wyłącz \"Optymalizacje baterii\" dla AsteroidOS Sync w tym menu:</string>
+    <string name="intro_slideerror_title">Wsparcie dla Bluetooth LE</string>
+    <string name="grant_permission">"Przyznaj uprawnienia "</string>
+    <string name="please_grant_permissions">Proszę udzielić tych uprawnień</string>
+    <string name="impassable_slide">Proszę udzielić tych uprawnień</string>
 </resources>
