@@ -6,7 +6,7 @@
     <string name="nothing_found">Saat bulunamadı</string>
     <string name="one_found">Bir saat bulundu</string>
     <string name="n_found">%d saat bulundu</string>
-    <string name="intro_slideerror_subtitle">Bu aygıtta Bluetooth Düşük Enerji desteklenmiyor.</string>
+    <string name="intro_slideerror_subtitle">Bu aygıt Bluetooth Düşük Enerji\'yi desteklemiyor.</string>
     <string name="disconnected">Bağlantı kesildi</string>
     <string name="connected">Bağlandı</string>
     <string name="connecting">Bağlanıyor…</string>
@@ -42,4 +42,17 @@
     <string name="notification_type_strong_vibra">Güçlü titreşim</string>
     <string name="position_indicator">Konum göstergesi</string>
     <string name="use_this_area">Bu alanı hava durumu için kullan</string>
+<string name="app_icon">Uygulama simgesi</string>
+    <string name="intro_slide1_title">Hoş geldiniz</string>
+    <string name="intro_slide1_subtitle">Bu uygulama Android telefonunuzu AsteroidOS saatinizle eşitlemenizi sağlar. Ancak önce bazı izinler gerektirir.</string>
+    <string name="intro_slide2_title">Dosya erişimi</string>
+    <string name="intro_slide2_subtitle">Veriyi önbelleğe almak ve saatinizin ekran görüntülerini kaydetmek için.</string>
+    <string name="intro_slide3_title">Konum</string>
+    <string name="intro_slide3_subtitle">Yakındaki Bluetooth Düşük Enerji aygıtları taramak için.</string>
+    <string name="intro_slide5_title">Pil İyileştirmesi</string>
+    <string name="intro_slide5_subtitle">Bu uygulamanın arka planda çalışması için takip eden menüde AsteroidOS Sync için \"Pil İyileştirmesi\"ni kapatın:</string>
+    <string name="intro_slideerror_title">Bluetooth Düşük Enerji desteği</string>
+    <string name="grant_permission">İzin ver</string>
+    <string name="please_grant_permissions">Lütfen bu izni verin</string>
+    <string name="impassable_slide">Lütfen bu izni verin</string>
 </resources>
