@@ -15,7 +15,7 @@
     <string name="connected_icon">Ikona połączenia</string>
     <string name="battery_info_icon">Ikona statusu baterii</string>
     <string name="screenshot_icon">Ikona zrzutu ekranu</string>
-    <string name="finder_icon">Ikona wyszukiwarki</string>
+    <string name="finder_icon">Ikona wyszukiwania</string>
     <string name="settings_icon">Ikona ustawień</string>
     <string name="weather_icon">Ikona aplikacji prognozy pogody</string>
     <string name="time_icon">Ikona zegara</string>
