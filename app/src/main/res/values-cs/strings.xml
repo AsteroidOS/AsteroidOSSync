@@ -6,7 +6,7 @@
     <string name="nothing_found">Nebyly nalezeny žádné hodinky</string>
     <string name="one_found">Nalezeny jedny hodinky</string>
     <string name="n_found">Nalezeno %d hodinek</string>
-    <string name="intro_slideerror_subtitle">Nezdá se, že by na tomto zařízení byla podporována úsporná (LE) technologie Bluetooth.</string>
+    <string name="intro_slideerror_subtitle">Toto zařízení nepodporuje úspornou (LE) technologie Bluetooth.</string>
     <string name="disconnected">Odpojeno</string>
     <string name="connected">Připojeno</string>
     <string name="connecting">Připojování…</string>
@@ -52,7 +52,7 @@
     <string name="impassable_slide">Prosíme udělte toto oprávnění</string>
 <string name="intro_slide1_subtitle">Tato aplikace umožňuje synchronizaci telefonu s Android s hodinkami s AsteroidOS. K tomu je třeba několik oprávnění.</string>
     <string name="intro_slide2_title">Přístup k souborům</string>
-    <string name="intro_slide2_subtitle">Toto oprávnění je třeba pro mezipaměť dat a ukládání snímků obrazovky vašich hodinek.</string>
+    <string name="intro_slide2_subtitle">Pro mezipaměť dat a ukládání snímků obrazovky vašich hodinek.</string>
     <string name="intro_slide3_title">Umístění</string>
-    <string name="intro_slide3_subtitle">Toto oprávnění je třeba pro skenování přítomnosti Bluetooth Low Energy zařízení poblíž.</string>
+    <string name="intro_slide3_subtitle">Pro skenování přítomnosti Bluetooth Low Energy zařízení poblíž.</string>
     </resources>
