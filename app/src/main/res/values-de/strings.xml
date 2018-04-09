@@ -6,7 +6,7 @@
     <string name="nothing_found">Keine Uhren gefunden</string>
     <string name="one_found">Eine Uhr gefunden</string>
     <string name="n_found">%d Uhren gefunden</string>
-    <string name="intro_slideerror_subtitle">Es sieht so aus als würde dieses Gerät Bluetooth Low Energy nicht unterstützen.</string>
+    <string name="intro_slideerror_subtitle">Dieses Gerät unterstützt keine Bluetooth Low Energy.</string>
     <string name="disconnected">Verbindung getrennt</string>
     <string name="connected">Verbunden</string>
     <string name="connecting">Verbinde…</string>
@@ -34,7 +34,7 @@
     <string name="downloaded">Heruntergeladen</string>
     <string name="screenshot">Bildschirmfoto</string>
     <string name="synchronize_time">Zeit synchronisieren</string>
-    <string name="explain_app_prefs">Benachrichtigungen deiner Apps werden hier angezeigt</string>
+    <string name="explain_app_prefs">Mitteilungen Ihrer Apps werden hier angezeigt</string>
 <string name="notification_type_default">Standard</string>
     <string name="notification_type_no_notif">Keine Benachrichtigung</string>
     <string name="notification_type_silent">Stumm</string>
@@ -46,11 +46,11 @@
     <string name="intro_slide1_title">Willkommen</string>
     <string name="intro_slide1_subtitle">Mit dieser App kannst du dein Android-Handy mit deiner AsteroidOS-Uhr synchronisieren. Aber zuerst braucht es einige Berechtigungen.</string>
     <string name="intro_slide2_title">Dateizugriff</string>
-    <string name="intro_slide2_subtitle">Diese Berechtigung wird benötigt, um Daten zwischenzuspeichern und Screenshots deiner Uhr zu speichern.</string>
+    <string name="intro_slide2_subtitle">Um Daten zwischenzuspeichern und Bildschirmfotos Ihrer Uhr zu speichern.</string>
     <string name="intro_slide3_title">Standort</string>
-    <string name="intro_slide3_subtitle">Diese Berechtigung wird benötigt, um nach Bluetooth Low Energy-Geräten in der Nähe zu suchen.</string>
+    <string name="intro_slide3_subtitle">Um nach Bluetooth-Geräten in der Nähe zu suchen.</string>
     <string name="intro_slide5_title">Batterieoptimierung</string>
-    <string name="intro_slide5_subtitle">Um diese App im Hintergrund laufen zu lassen, deaktiviere \"Batterieoptimierung\" für AsteroidOS Sync im folgenden Menü:</string>
+    <string name="intro_slide5_subtitle">Um diese Anwendung im Hintergrund laufen zu lassen, deaktivieren Sie „Batterieoptimierung” für AsteroidOS Sync im folgenden Menü:</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy Unterstützung</string>
     <string name="grant_permission">Erlaubnis erteilen</string>
     <string name="please_grant_permissions">Bitte gewähre diese Erlaubnis</string>
