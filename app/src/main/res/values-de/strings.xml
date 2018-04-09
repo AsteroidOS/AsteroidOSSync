@@ -32,13 +32,13 @@
     <string name="scanning">Scanne…</string>
     <string name="downloading">Wird heruntergeladen…</string>
     <string name="downloaded">Heruntergeladen</string>
-    <string name="screenshot">Screenshot</string>
+    <string name="screenshot">Bildschirmfoto</string>
     <string name="synchronize_time">Zeit synchronisieren</string>
-    <string name="explain_app_prefs">Mitteilungen Deiner Apps erscheinen hier</string>
+    <string name="explain_app_prefs">Benachrichtigungen deiner Apps werden hier angezeigt</string>
 <string name="notification_type_default">Standard</string>
     <string name="notification_type_no_notif">Keine Benachrichtigung</string>
     <string name="notification_type_silent">Stumm</string>
-    <string name="notification_type_vibra">Vibration</string>
+    <string name="notification_type_vibra">Vibrieren</string>
     <string name="notification_type_strong_vibra">Starke Vibration</string>
     <string name="position_indicator">Positionsanzeige</string>
     <string name="use_this_area">Nutze diesen Ort für Wetter</string>
