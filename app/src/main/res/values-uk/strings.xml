@@ -6,7 +6,7 @@
     <string name="nothing_found">Годинники, не знайдено</string>
     <string name="one_found">Знайдено один годинник</string>
     <string name="n_found">%d годинника(-ів) знайдено</string>
-    <string name="intro_slideerror_subtitle">Не схоже, що Bluetooth Low Energy підтримується на цьому пристрої.</string>
+    <string name="intro_slideerror_subtitle">Схоже, що Bluetooth Low Energy не підтримується на цьому пристрої.</string>
     <string name="disconnected">Від\'єднано</string>
     <string name="connected">З\'єднано</string>
     <string name="connecting">З\'єднання…</string>
@@ -35,4 +35,21 @@
     <string name="screenshot">Скріншот</string>
     <string name="synchronize_time">Синхронізоване час</string>
     <string name="explain_app_prefs">Сповіщення ваших додатків з\'являться тут</string>
-</resources>
+<string name="notification_type_default">За замовчуванням</string>
+    <string name="notification_type_no_notif">Сповіщення відсутні</string>
+    <string name="notification_type_silent">Беззвучний</string>
+    <string name="notification_type_vibra">Вібрація</string>
+    <string name="notification_type_strong_vibra">Сильна вібрація</string>
+    <string name="position_indicator">Індикатор позиції</string>
+    <string name="use_this_area">Місце для погоди</string>
+    <string name="app_icon">Значок додатку</string>
+    <string name="intro_slide1_title">Ласкаво просимо</string>
+    <string name="intro_slide1_subtitle">Цей додаток дозволяє синхронізувати ваш телефон Android із вашим годинником AsteroidOS. Але, йому потрібні деякі дозволи.</string>
+    <string name="intro_slide2_title">Дозвіл до сховища</string>
+    <string name="intro_slide2_subtitle">Щоб кешувати дані та зберігати скріншоти на вашому годиннику</string>
+    <string name="intro_slide3_title">Місцезнаходження</string>
+    <string name="intro_slide3_subtitle">Щоб сканувати пристрої BLE (Bluetooth Low Energy)</string>
+    <string name="intro_slide5_title">Оптимізація акумулятора</string>
+    <string name="intro_slide5_subtitle">Щоб ця програма працювала у фоновому режимі, вимкніть \"Оптимізація акумулятора\" для AsteroidOS Sunc в наступному меню:</string>
+    <string name="intro_slideerror_title">Підтримка Bluetooth Low Energy</string>
+    </resources>
