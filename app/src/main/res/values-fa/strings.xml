@@ -6,7 +6,7 @@
     <string name="nothing_found">ساعتی پیدا نشد</string>
     <string name="one_found">۱ ساعت پیدا شد</string>
     <string name="n_found">%d ساعت پیدا شد</string>
-    <string name="intro_slideerror_subtitle">به نظر نمی‌رسد که این دستگاه از بلوتوث کم‌مصرف پشتیبانی کند.</string>
+    <string name="intro_slideerror_subtitle">به نظر نمی‌رسد که این دستگاه از بلوتوثِ کم‌مصرف پشتیبانی کند.</string>
     <string name="disconnected">قطع شد</string>
     <string name="connected">وصل شد</string>
     <string name="connecting">در حال اتصال…</string>
@@ -35,4 +35,24 @@
     <string name="screenshot">تصویر‌برداری از صفحه</string>
     <string name="synchronize_time">زمان همگام سازی</string>
     <string name="explain_app_prefs">اعلان‌های برنامه‌های شما اینجا اعمال می‌شود</string>
+<string name="notification_type_default">پیش‌فرض</string>
+    <string name="notification_type_no_notif">بدون اعلان</string>
+    <string name="notification_type_silent">سکوت</string>
+    <string name="notification_type_vibra">لرزیدن</string>
+    <string name="notification_type_strong_vibra">لرزش قوی</string>
+    <string name="position_indicator">نشان‌دهنده مکان</string>
+    <string name="use_this_area">از این منطقه برای آب‌و‌هوا استفاده کن</string>
+    <string name="app_icon">نشانگر برنامه</string>
+    <string name="intro_slide1_title">خوش آمدید</string>
+    <string name="intro_slide1_subtitle">این برنامه به شما امکان می‌دهد تا گوشی اندرویدتان را با ساعت آسترویدیتان همگام کنید. اما ابتدا، به چند دسترسی نیاز دارد.</string>
+    <string name="intro_slide2_title">دسترسی به پرونده ها</string>
+    <string name="intro_slide2_subtitle">برای ذخیره اطلاعات و تصویربرداری از ساعت شما.</string>
+    <string name="intro_slide3_title">مکان</string>
+    <string name="intro_slide3_subtitle">برای بررسی دستگاه های بلوتوثِ کم مصرف.</string>
+    <string name="intro_slide5_title">بهینه‌سازی باتری</string>
+    <string name="intro_slide5_subtitle">برای اینکه به برنامه اجازه دهید تا در پس‌زمینه اجرا شود، \"بهینه‌سازی باتری\" را برای AsteroidOS Sync در منوی بعدی غیرفعال کنید:</string>
+    <string name="intro_slideerror_title">پشتیبانی از بلوتوثِ کم مصرف</string>
+    <string name="grant_permission">اجازه دسترسی</string>
+    <string name="please_grant_permissions">لطفا این دسترسی را اجازه دهید</string>
+    <string name="impassable_slide">لطفا این دسترسی را اجازه دهید</string>
 </resources>
