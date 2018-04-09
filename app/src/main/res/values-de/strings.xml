@@ -27,7 +27,7 @@
     <string name="intro_slide4_title">Mitteilungen</string>
     <string name="intro_slide4_subtitle">Um Mitteilungen synchronisieren zu können müssen Sie AsteroidOS Sync dies im folgenden Menü erlauben:</string>
     <string name="weather_settings">Wettereinstellungen</string>
-    <string name="enter_city_name">Gebe eine Stadt an:</string>
+    <string name="enter_city_name">Namen der Stadt eingeben:</string>
     <string name="unpair">Pairing aufheben</string>
     <string name="scanning">Scanne…</string>
     <string name="downloading">Wird heruntergeladen…</string>
