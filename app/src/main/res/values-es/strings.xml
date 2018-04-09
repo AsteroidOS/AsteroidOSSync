@@ -6,7 +6,7 @@
     <string name="nothing_found">No se encontraron relojes</string>
     <string name="one_found">Se ha encontrado un reloj</string>
     <string name="n_found">Se han encontrado %d relojes</string>
-    <string name="intro_slideerror_subtitle">Parece que el Bluetooth de baja energía no está disponible en este dispositivo.</string>
+    <string name="intro_slideerror_subtitle">Este dispositivo no soporta Bluetooth de bajo consumo.</string>
     <string name="disconnected">Desconectado</string>
     <string name="connected">Conectado</string>
     <string name="connecting">Conectando…</string>
@@ -46,4 +46,13 @@
     <string name="intro_slide1_title">Bienvenido</string>
     <string name="intro_slide1_subtitle">Esta aplicación te permite sincronizar tu teléfono Android con tu reloj AsteroidOS. Pero primero esta necesita algunos permisos.</string>
     <string name="intro_slide2_title">Acceso a archivos</string>
-    </resources>
+    <string name="intro_slide2_subtitle">Para almacenar datos temporales y capturas de pantalla de tu reloj.</string>
+    <string name="intro_slide3_title">Ubicación</string>
+    <string name="intro_slide3_subtitle">Para detectar dispositivos Bluetooth de bajo consumo cercanos.</string>
+    <string name="intro_slide5_title">Optimización de bateria</string>
+    <string name="intro_slide5_subtitle">Para permitir que esta aplicación se ejecute en segundo plano, desactiva la \"Optimización de bateria\" para AsteroidOS Sync en el siguente menú:</string>
+    <string name="intro_slideerror_title">Soporte Bluetooth de bajo consumo</string>
+    <string name="grant_permission">Autorizar permiso</string>
+    <string name="please_grant_permissions">Por favor autorize este permiso</string>
+    <string name="impassable_slide">Por favor autorize este permiso</string>
+</resources>
