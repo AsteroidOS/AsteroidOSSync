@@ -42,4 +42,8 @@
     <string name="explain_app_prefs">Las notificaciones de sus aplicaciones aparecerán aquí</string>
 <string name="position_indicator">Indicador de posición</string>
     <string name="use_this_area">Use esta área para el clima</string>
-</resources>
+<string name="app_icon">Icono aplicación</string>
+    <string name="intro_slide1_title">Bienvenido</string>
+    <string name="intro_slide1_subtitle">Esta aplicación te permite sincronizar tu teléfono Android con tu reloj AsteroidOS. Pero primero esta necesita algunos permisos.</string>
+    <string name="intro_slide2_title">Acceso a archivos</string>
+    </resources>
