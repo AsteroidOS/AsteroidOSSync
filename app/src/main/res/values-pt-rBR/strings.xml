@@ -6,7 +6,7 @@
     <string name="nothing_found">Nenhum relógio encontrado</string>
     <string name="one_found">"Um relógio foi  encontrado"</string>
     <string name="n_found">Encontrados %d relógios</string>
-    <string name="intro_slideerror_subtitle">Parece que o Bluetooth Low Energy não é suportado por estes dispositivo.</string>
+    <string name="intro_slideerror_subtitle">Este dispositivo não suporta o Bluetooth de baixa energia.</string>
     <string name="disconnected">Desconectado</string>
     <string name="connected">Conectado</string>
     <string name="connecting">Conectando…</string>
@@ -42,4 +42,17 @@
     <string name="notification_type_strong_vibra">Vibração forte</string>
     <string name="position_indicator">Indicador de posição</string>
     <string name="use_this_area">Usar esta área para o tempo</string>
+<string name="app_icon">Ícone do aplicativo</string>
+    <string name="intro_slide1_title">Bem-vindo</string>
+    <string name="intro_slide1_subtitle">Este app permite a você sincronizar seu celular Android com o relógio AsteroidOS. Mas primeiro ele precisa de algumas permissões.</string>
+    <string name="intro_slide2_title">Acesso aos arquivos</string>
+    <string name="intro_slide2_subtitle">Para fazer o cache de dados e salvar as capturas de tela de seu relógio.</string>
+    <string name="intro_slide3_title">Localização</string>
+    <string name="intro_slide3_subtitle">Para procurar nas proximidades por dispositivos Bluetooth de baixa energia.</string>
+    <string name="intro_slide5_title">Otimização da bateria</string>
+    <string name="intro_slide5_subtitle">Para deixar este app em execução em segundo plano, desabilite a \"Otimização da bateria\" para o AsteroidOS Sync no seguinte menu:</string>
+    <string name="intro_slideerror_title">Suporte ao Bluetooth de baixa energia</string>
+    <string name="grant_permission">Conceder permissão</string>
+    <string name="please_grant_permissions">Por favor, conceda essa permissão</string>
+    <string name="impassable_slide">Por favor, conceda essa permissão</string>
 </resources>
