@@ -6,7 +6,7 @@
     <string name="nothing_found">לא נמצאו שעונים</string>
     <string name="one_found">נמצא שעון אחד</string>
     <string name="n_found">נמצאו %d שעונים</string>
-    <string name="intro_slideerror_subtitle">נראה שאין תמיכה ב־BLE ‏(Bluetooth בצריכת אנרגיה נמוכה) בהתקן זה.</string>
+    <string name="intro_slideerror_subtitle">התקן זה אינו תומך ב־BLE ‏(Bluetooth בצריכת אנרגיה נמוכה).</string>
     <string name="disconnected">מנותק</string>
     <string name="connected">מחובר</string>
     <string name="connecting">בהתחברות…</string>
@@ -46,9 +46,9 @@
     <string name="intro_slide1_title">ברוך בואך</string>
     <string name="intro_slide1_subtitle">יישומון זה מאפשר לך לסנכרן את טלפון ה־Android שלך עם שעון ה־AsteroidOS שלך. אך תחילה, נדרשות הרשאות לכך.</string>
     <string name="intro_slide2_title">גישה לקבצים</string>
-    <string name="intro_slide2_subtitle">הרשאה זו נדרשת כדי לאחסן נתונים ולשמור צילומי מסך של השעון שלך.</string>
+    <string name="intro_slide2_subtitle">לאחסון נתונים ושמירת צילומי מסך של השעון שלך.</string>
     <string name="intro_slide3_title">מיקום</string>
-    <string name="intro_slide3_subtitle">הרשאה זו נדרשת לצורך סריקת התקני בלוטות׳ עם צריכת אנרגיה נמוכה.</string>
+    <string name="intro_slide3_subtitle">לסריקת התקני Bluetooth עם צריכת אנרגיה נמוכה.</string>
     <string name="intro_slide5_title">מטוב סוללה</string>
     <string name="intro_slide5_subtitle">כדי לאפשר ליישומון זה לפעול ברקע, יש להשבית את „מטוב סוללה” עבור הסנכרון של AsteroidOS בתפריט הבא:</string>
     <string name="intro_slideerror_title">תמיכה בבלוטות׳ בצריכת אנרגיה נמוכה</string>
