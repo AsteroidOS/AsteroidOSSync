@@ -6,7 +6,7 @@
     <string name="nothing_found">Aucune montre trouvée</string>
     <string name="one_found">Une montre trouvée</string>
     <string name="n_found">%d montres trouvées</string>
-    <string name="intro_slideerror_subtitle">Ce périphérique ne supporte pas le Bluetooth à basse consommation</string>
+    <string name="intro_slideerror_subtitle">Ce périphérique ne supporte pas le Bluetooth Low Energy</string>
     <string name="disconnected">Déconnecté</string>
     <string name="connected">Connecté</string>
     <string name="connecting">Connexion…</string>
@@ -48,10 +48,10 @@
     <string name="intro_slide2_title">Accès aux fichiers</string>
     <string name="intro_slide2_subtitle">Pour mettre en cache les données et sauvegarder les captures d\'écran de votre montre.</string>
     <string name="intro_slide3_title">Localisation</string>
-    <string name="intro_slide3_subtitle">Pour rechercher les périphériques Bluetooth à basse consommation à proximité.</string>
+    <string name="intro_slide3_subtitle">Rechercher des périphériques Bluetooth Low Energy à proximité.</string>
     <string name="intro_slide5_title">Optimisation de la batterie</string>
     <string name="intro_slide5_subtitle">Pour laisser cette application s\'exécuter en arrière-plan, désactivez l\'optimisation de la batterie pour AsteroidOS Sync dans le menu suivant :</string>
-    <string name="intro_slideerror_title">Support du Bluetooth à basse consommation</string>
+    <string name="intro_slideerror_title">Support du Bluetooth Low Energy</string>
     <string name="grant_permission">Accorder la permission</string>
     <string name="please_grant_permissions">Veuillez accorder cette permission</string>
     <string name="impassable_slide">Veuillez accorder cette permission</string>
