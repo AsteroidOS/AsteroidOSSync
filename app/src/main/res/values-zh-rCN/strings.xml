@@ -6,7 +6,7 @@
     <string name="nothing_found">未找到手表</string>
     <string name="one_found">找到 1 个手表</string>
     <string name="n_found">找到 %d 个手表</string>
-    <string name="intro_slideerror_subtitle">似乎在这个设备上蓝牙4.0（BLE）不被支持.</string>
+    <string name="intro_slideerror_subtitle">此设备不支持蓝牙低功耗 (BLE)。</string>
     <string name="disconnected">连接已断开</string>
     <string name="connected">已连接</string>
     <string name="connecting">正在连接…</string>
@@ -35,4 +35,24 @@
     <string name="screenshot">截图</string>
     <string name="synchronize_time">同步时间</string>
     <string name="explain_app_prefs">来自您应用的通知会出现在这里</string>
+<string name="notification_type_default">默认</string>
+    <string name="notification_type_no_notif">暂无通知</string>
+    <string name="notification_type_silent">静音</string>
+    <string name="notification_type_vibra">振动</string>
+    <string name="notification_type_strong_vibra">增强振动</string>
+    <string name="position_indicator">指示器位置</string>
+    <string name="use_this_area">使用此地区的天气</string>
+    <string name="app_icon">应用程序图标</string>
+    <string name="intro_slide1_title">欢迎</string>
+    <string name="intro_slide1_subtitle">你能使用此应用从 Android 手机同步 AstrroidOS 设备。不过首先这需要权限。</string>
+    <string name="intro_slide2_title">文件访问</string>
+    <string name="intro_slide2_subtitle">用于在缓存数据和保存截图。</string>
+    <string name="intro_slide3_title">位置</string>
+    <string name="intro_slide3_subtitle">用于扫描附近的 BLE 蓝牙设备。。</string>
+    <string name="intro_slide5_title">电池优化</string>
+    <string name="intro_slide5_subtitle">"用于后台服务。对 AsteroidOS 同步关闭 “电池优化” 于下列菜单: "</string>
+    <string name="intro_slideerror_title">蓝牙低功耗支持</string>
+    <string name="grant_permission">授权</string>
+    <string name="please_grant_permissions">请授予此权限</string>
+    <string name="impassable_slide">请授予此权限</string>
 </resources>
