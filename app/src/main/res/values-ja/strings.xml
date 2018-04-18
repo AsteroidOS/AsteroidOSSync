@@ -6,7 +6,7 @@
     <string name="nothing_found">ウォッチが見つかりません</string>
     <string name="one_found">ウォッチが１つ見つかりました</string>
     <string name="n_found">ウォッチが %d つ見つかりました</string>
-    <string name="intro_slideerror_subtitle">お使いのデバイスで Bluetooth 低消費電力がサポートされていないようです。</string>
+    <string name="intro_slideerror_subtitle">このデバイスは Bluetooth 低消費電力がサポートされていません。</string>
     <string name="disconnected">切断しました</string>
     <string name="connected">接続しました</string>
     <string name="connecting">接続中…</string>
@@ -46,9 +46,9 @@
     <string name="intro_slide1_title">ようこそ</string>
     <string name="intro_slide1_subtitle">このアプリは、AsteroidOS ウォッチとお使いの Android 携帯電話を同期することができます。しかし、まず、いくつかのアクセス許可が必要です。</string>
     <string name="intro_slide2_title">ファイルアクセス</string>
-    <string name="intro_slide2_subtitle">このアクセス許可は、データをキャッシュし、ウォッチのスクリーンショットを保存するために必要です。</string>
+    <string name="intro_slide2_subtitle">データをキャッシュし、ウォッチのスクリーンショットを保存するため。</string>
     <string name="intro_slide3_title">位置</string>
-    <string name="intro_slide3_subtitle">このアクセス許可は、近くにある Bluetooth 低消費電力デバイスをスキャンするために必要です。</string>
+    <string name="intro_slide3_subtitle">近くにある Bluetooth 低消費電力デバイスをスキャンするため。</string>
     <string name="intro_slide5_title">バッテリーの最適化</string>
     <string name="intro_slide5_subtitle">このアプリをバックグラウンドで実行させるには、次のメニューの AsteroidOS 同期の「バッテリー最適化」を無効にしてください。</string>
     <string name="intro_slideerror_title">Bluetooth 低消費電力サポート</string>
