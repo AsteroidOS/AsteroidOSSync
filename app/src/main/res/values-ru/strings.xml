@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="generic_ok">ОК</string>
-    <string name="searching">Поиск часов</string>
+    <string name="searching">Идёт поиск часов</string>
     <string name="unknown_device">Неизвестное устройство</string>
     <string name="nothing_found">Часов не найдено</string>
     <string name="one_found">одни часы найдены</string>
