@@ -45,11 +45,14 @@
     <string name="app_icon">Значок додатку</string>
     <string name="intro_slide1_title">Ласкаво просимо</string>
     <string name="intro_slide1_subtitle">Цей додаток дозволяє синхронізувати ваш телефон Android із вашим годинником AsteroidOS. Але, йому потрібні деякі дозволи.</string>
-    <string name="intro_slide2_title">Дозвіл до сховища</string>
-    <string name="intro_slide2_subtitle">Щоб кешувати дані та зберігати скріншоти на вашому годиннику</string>
+    <string name="intro_slide2_title">Доступ до файлів</string>
+    <string name="intro_slide2_subtitle">Щоб кешувати дані та зберігати скріншоти на вашому годиннику.</string>
     <string name="intro_slide3_title">Місцезнаходження</string>
-    <string name="intro_slide3_subtitle">Щоб сканувати пристрої BLE (Bluetooth Low Energy)</string>
+    <string name="intro_slide3_subtitle">Сканувати найближчі Bluetooth LE пристрою.</string>
     <string name="intro_slide5_title">Оптимізація акумулятора</string>
     <string name="intro_slide5_subtitle">Щоб ця програма працювала у фоновому режимі, вимкніть \"Оптимізація акумулятора\" для AsteroidOS Sunc в наступному меню:</string>
     <string name="intro_slideerror_title">Підтримка Bluetooth Low Energy</string>
-    </resources>
+    <string name="grant_permission">Видати дозвіл</string>
+    <string name="please_grant_permissions">Будь ласка, дайте це дозвіл</string>
+    <string name="impassable_slide">Пожалуйста, дайте это разрешение</string>
+</resources>
