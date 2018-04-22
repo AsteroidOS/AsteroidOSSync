@@ -6,7 +6,7 @@
     <string name="nothing_found">Часов не найдено</string>
     <string name="one_found">одни часы найдены</string>
     <string name="n_found">найдено %d часов</string>
-    <string name="intro_slideerror_subtitle">Это устройство не поддерживает Bluetooth Low Energy</string>
+    <string name="intro_slideerror_subtitle">Это устройство не поддерживает Bluetooth Low Energy.</string>
     <string name="disconnected">отсоедино</string>
     <string name="connected">подсоедино</string>
     <string name="connecting">подсоединение…</string>
@@ -14,11 +14,11 @@
     <string name="connecting_formatted">подсоедино к %s</string>
     <string name="connected_icon">подключенное приложение</string>
     <string name="battery_info_icon">приложение информации о батареи</string>
-    <string name="screenshot_icon">приложение скриншота.</string>
-    <string name="finder_icon">приложение поисковика.</string>
-    <string name="settings_icon">приложение настроек.</string>
-    <string name="weather_icon">приложение погоды.</string>
-    <string name="time_icon">приложение времени.</string>
+    <string name="screenshot_icon">приложение скриншота</string>
+    <string name="finder_icon">приложение поисковика</string>
+    <string name="settings_icon">приложение настроек</string>
+    <string name="weather_icon">приложение погоды</string>
+    <string name="time_icon">приложение времени</string>
     <string name="grab_a_screenshot">сделать скриншот</string>
     <string name="find_my_watch">Найти мои часы</string>
     <string name="watch_finder">Поиск часов</string>
