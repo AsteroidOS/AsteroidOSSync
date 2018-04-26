@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="generic_ok">Oké</string>
-    <string name="searching">Naar horloges aan het zoeken</string>
+    <string name="searching">Aan’t zoeken naar horloges</string>
     <string name="unknown_device">Onbekend apparaat</string>
     <string name="nothing_found">Geen horloges gevonden</string>
     <string name="one_found">Één horloge gevonden</string>
@@ -49,7 +49,7 @@
     <string name="intro_slide3_subtitle">Voor te scannen naar nabije Bluetooth Low Energy-apparaten.</string>
     <string name="intro_slide4_subtitle">Voor meldingen te synchroniseren moet g’in het volgend menu ‘AsteroidOS Sync’ toestaan:</string>
     <string name="intro_slide5_title">Batterijoptimalisatie</string>
-    <string name="intro_slide5_subtitle">Voor deze app in d’achtergrond te kunnen uitvoeren moet ge ‘Batterijoptimalisatie’ voor AsteroidOS-synchronisatie in het volgend menu uitschakelen:</string>
+    <string name="intro_slide5_subtitle">Voor dezen app in d’achtergrond te kunnen uitvoeren moet ge ‘Batterijoptimalisatie’ voor AsteroidOS-synchronisatie in het volgend menu uitschakelen:</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy-ondersteuning</string>
     <string name="grant_permission">Toelating geven</string>
     <string name="please_grant_permissions">Gelieve deze toelating te geven</string>
