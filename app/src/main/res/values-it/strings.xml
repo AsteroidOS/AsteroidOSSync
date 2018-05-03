@@ -4,7 +4,7 @@
     <string name="searching">Ricerca orologi</string>
     <string name="unknown_device">Dispositivo Sconosciuto</string>
     <string name="nothing_found">Nessun orologio trovato</string>
-    <string name="one_found">1 orologio trovato</string>
+    <string name="one_found">Un orologio trovato</string>
     <string name="n_found">Trovati %d orologi</string>
     <string name="intro_slideerror_subtitle">Questo dispositivo non supporta la tecnologia Bluetooth Low Energy.</string>
     <string name="disconnected">Disconnesso</string>
