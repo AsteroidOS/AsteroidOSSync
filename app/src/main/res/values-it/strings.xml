@@ -44,13 +44,15 @@
     <string name="intro_slide1_title">Benvenuto</string>
     <string name="intro_slide1_subtitle">Questa app ti permette di sincronizzare il tuo telefono Android col tuo orologio AsteroidOS. Ma prima, ha bisogno di alcune autorizzazioni.</string>
     <string name="intro_slide2_title">Accesso ai file</string>
-    <string name="intro_slide2_subtitle">Salvare dati e salvare screenshot del tuo orologio.</string>
+    <string name="intro_slide2_subtitle">Per salvare dati e salvare screenshot del tuo orologio.</string>
     <string name="intro_slide3_title">Posizione</string>
-    <string name="intro_slide3_subtitle">Ricercare dispositivi Bluetooth Low Energy nelle vicinanze.</string>
+    <string name="intro_slide3_subtitle">Per ricercare dispositivi Bluetooth Low Energy nelle vicinanze.</string>
     <string name="intro_slide5_title">Ottimizzazione batteria</string>
     <string name="intro_slide5_subtitle">Per lasciare attiva questa app in background, disabilita \"Ottimizzazione Batteria\" per AsteroidOS Sync nel seguente menù:</string>
     <string name="intro_slideerror_title">Supporto Bluetooth Low Energy</string>
     <string name="grant_permission">Concedi autorizzazione</string>
-    <string name="please_grant_permissions">Prego consentire l\'autorizzazione</string>
-    <string name="impassable_slide">Prego consentire l\'autorizzazione</string>
-</resources>
+    <string name="please_grant_permissions">Si prega di consentire l\'autorizzazione</string>
+    <string name="impassable_slide">Si prega di consentire l\'autorizzazione</string>
+<string name="notification_type_default">Predefinito</string>
+    <string name="use_this_area">Utilizza questa zona per il meteo</string>
+    </resources>
