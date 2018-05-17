@@ -9,7 +9,7 @@
     <string name="intro_slideerror_subtitle">Questo dispositivo non supporta la tecnologia Bluetooth Low Energy.</string>
     <string name="disconnected">Disconnesso</string>
     <string name="connected">Connesso</string>
-    <string name="connecting">Mi sto collegando…</string>
+    <string name="connecting">Collegamento...</string>
     <string name="connected_formatted">Connesso a %s</string>
     <string name="connecting_formatted">Mi sto collegando a %s</string>
     <string name="connected_icon">Icona connesso</string>
