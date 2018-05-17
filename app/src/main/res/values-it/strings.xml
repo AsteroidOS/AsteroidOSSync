@@ -11,7 +11,7 @@
     <string name="connected">Connesso</string>
     <string name="connecting">Collegamento...</string>
     <string name="connected_formatted">Connesso a %s</string>
-    <string name="connecting_formatted">Mi sto collegando a %s</string>
+    <string name="connecting_formatted">Collegamento con %s</string>
     <string name="connected_icon">Icona connesso</string>
     <string name="battery_info_icon">Icona batteria</string>
     <string name="screenshot_icon">Icona cattura schermo</string>
