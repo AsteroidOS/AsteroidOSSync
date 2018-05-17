@@ -1,2 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="generic_ok">Ok</string>
+    <string name="unknown_device">Onbekannt Gerät</string>
+    <string name="nothing_found">Keng Aueren fonnt</string>
+    <string name="one_found">Eng Auer fonnt</string>
+    <string name="n_found">%d Aueren fonnt</string>
+    <string name="connected">Verbonnen</string>
+    <string name="connecting">Verbannen…</string>
+    <string name="connected_formatted">Verbonnen mat %s</string>
+    <string name="connecting_formatted">Verbannen mat %s</string>
+    <string name="connected_icon">„Verbonnen“-Icon</string>
+    <string name="battery_info_icon">„Akku“-Icon</string>
+    <string name="screenshot_icon">„Bildschirmfoto“-Icon</string>
+    <string name="finder_icon">„Fannen“-Icon</string>
+    </resources>
