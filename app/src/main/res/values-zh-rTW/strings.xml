@@ -50,7 +50,7 @@
     <string name="intro_slide5_title">電池最佳化</string>
     <string name="intro_slide5_subtitle">為了讓這個程式能保持在背景運作，請在接下來的選單中關閉AsteroidOS Sync的電池最佳化:</string>
     <string name="intro_slideerror_title">支援低耗電藍牙</string>
-    <string name="intro_slideerror_subtitle">此裝置不支援低耗電藍牙(BLE)</string>
+    <string name="intro_slideerror_subtitle">此裝置不支援低耗電藍牙(BLE)。</string>
     <string name="grant_permission">授予權限</string>
     <string name="please_grant_permissions">請授予此權限</string>
     <string name="impassable_slide">請授予此權限</string>
