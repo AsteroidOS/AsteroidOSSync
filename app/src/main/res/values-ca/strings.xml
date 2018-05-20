@@ -51,9 +51,9 @@
     <string name="use_this_area">Utilitzar aquesta àrea pel temps</string>
     <string name="app_icon">Icona de l\'aplicació</string>
     <string name="intro_slide1_title">Benvingut</string>
-    <string name="intro_slide1_subtitle">Aquesta aplicació us permet sincronitzar el vostre dispositiu Android amb el vostre rellotge AsteriodOS. Abans, però, cal que accepteu alguns permisos.</string>
+    <string name="intro_slide1_subtitle">Aquesta aplicació et permet sincronitzar el teu dispositiu Android amb el teu rellotge AsteriodOS. Abans, però, cal que acceptis alguns permisos.</string>
     <string name="intro_slide2_title">Accés a fitxers</string>
-    <string name="intro_slide2_subtitle">Per desar memòria cau i captures de pantalla del vostre rellotge.</string>
+    <string name="intro_slide2_subtitle">Per desar memòria cau i captures de pantalla del teu rellotge.</string>
     <string name="intro_slide3_title">Localització</string>
     <string name="intro_slide3_subtitle">Per escanejar dispositius Bluetooth Low Energy a prop.</string>
     <string name="intro_slide5_title">Optimització de bateria</string>
