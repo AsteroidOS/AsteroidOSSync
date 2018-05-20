@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="generic_ok">OK</string>
-    <string name="searching">Búsqueda de relojes</string>
+    <string name="searching">Buscando relojes</string>
     <string name="unknown_device">Dispositivo desconocido</string>
     <string name="nothing_found">No se encontraron relojes</string>
     <string name="one_found">Se ha encontrado un reloj</string>
@@ -36,7 +36,7 @@
     <string name="synchronize_time">Sincronizar la hora</string>
     <string name="notification_type_default">Predeterminado</string>
     <string name="notification_type_no_notif">No hay notificaciones</string>
-    <string name="notification_type_silent">Silenciar</string>
+    <string name="notification_type_silent">Silenciosa</string>
     <string name="notification_type_vibra">Vibración</string>
     <string name="notification_type_strong_vibra">Vibración fuerte</string>
     <string name="explain_app_prefs">Las notificaciones de tus aplicaciones aparecerán aquí</string>
