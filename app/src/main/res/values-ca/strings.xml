@@ -9,7 +9,7 @@
     <string name="intro_slideerror_subtitle">Sembla ser que aquest dispositiu no suporta Bluetooth de baix consum.</string>
     <string name="disconnected">Desconnectat</string>
     <string name="connected">Connectat</string>
-    <string name="connecting">Connectant…</string>
+    <string name="connecting">Connectant...</string>
     <string name="connected_formatted">Connectat a %s</string>
     <string name="connecting_formatted">Connectant a %s</string>
     <string name="connected_icon">Icona de connectat</string>
