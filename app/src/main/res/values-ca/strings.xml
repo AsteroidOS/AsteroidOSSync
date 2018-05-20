@@ -6,7 +6,7 @@
     <string name="nothing_found">No s\'ha trobat cap rellotge</string>
     <string name="one_found">S\'ha trobat un rellotge</string>
     <string name="n_found">S\'han trobat %d rellotges</string>
-    <string name="intro_slideerror_subtitle">Sembla ser que Bluetooth Low Energy no funciona en aquest dispositiu.</string>
+    <string name="intro_slideerror_subtitle">Sembla ser que aquest dispositiu no suporta Bluetooth de baix consum.</string>
     <string name="disconnected">Desconnectat</string>
     <string name="connected">Connectat</string>
     <string name="connecting">Connectant…</string>
@@ -54,12 +54,12 @@
     <string name="intro_slide1_subtitle">Aquesta aplicació et permet sincronitzar el teu dispositiu Android amb el teu rellotge AsteriodOS. Abans, però, cal que acceptis alguns permisos.</string>
     <string name="intro_slide2_title">Accés a fitxers</string>
     <string name="intro_slide2_subtitle">Per desar memòria cau i captures de pantalla del teu rellotge.</string>
-    <string name="intro_slide3_title">Localització</string>
-    <string name="intro_slide3_subtitle">Per escanejar dispositius Bluetooth Low Energy a prop.</string>
+    <string name="intro_slide3_title">Ubicació</string>
+    <string name="intro_slide3_subtitle">Per escanejar dispositius Bluetooth de baix consum a prop.</string>
     <string name="intro_slide5_title">Optimització de bateria</string>
-    <string name="intro_slide5_subtitle">Per permetre que aquesta aplicació funcioni en segon pla, desactiveu l\'optimització de la bateria per l\'AsteroidOS Sync en el següent menú:</string>
-    <string name="intro_slideerror_title">Suport de Bluetooth Low Energy</string>
-    <string name="grant_permission">Acceptar</string>
-    <string name="please_grant_permissions">Si us plau, accepteu el permís</string>
+    <string name="intro_slide5_subtitle">Per permetre que aquesta aplicació funcioni en segon pla, desactiva \"Optimització de la bateria\" per l\'AsteroidOS Sync en el següent menú:</string>
+    <string name="intro_slideerror_title">Suport de Bluetooth de baix consum</string>
+    <string name="grant_permission">Donar permisos</string>
+    <string name="please_grant_permissions">Si us plau, accepta el permís</string>
     <string name="impassable_slide">Si us plau, accepteu el permís</string>
 </resources>
