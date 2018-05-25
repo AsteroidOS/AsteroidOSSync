@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="generic_ok">Ok</string>
-    <string name="unknown_device">Onbekannt Gerät</string>
+    <string name="unknown_device">Onbekannten Apparat</string>
     <string name="nothing_found">Keng Aueren fonnt</string>
     <string name="one_found">Eng Auer fonnt</string>
     <string name="n_found">%d Aueren fonnt</string>
@@ -12,4 +12,38 @@
     <string name="battery_info_icon">„Akku“-Icon</string>
     <string name="screenshot_icon">„Bildschirmfoto“-Icon</string>
     <string name="finder_icon">„Fannen“-Icon</string>
+    <string name="searching">Sichen no Aueren</string>
+    <string name="disconnected">Verbindung getrennt</string>
+    <string name="settings_icon">„Astellungen“-Icon</string>
+    <string name="weather_icon">„Wieder“-Icon</string>
+    <string name="time_icon">Auer-Icon</string>
+    <string name="grab_a_screenshot">Bildschirmfoto maachen</string>
+    <string name="find_my_watch">Meng Auer fannen</string>
+    <string name="watch_finder">Auer-Fanner</string>
+    <string name="phone_is_searching">Den Telefon sicht Dech!</string>
+    <string name="notifications_settings">Notifikatiounsastellungen</string>
+    <string name="weather_settings">Wiederastellungen</string>
+    <string name="enter_city_name">Numm vun der Stad aginn:</string>
+    <string name="unpair">Pairing läschen</string>
+    <string name="scanning">Scannen…</string>
+    <string name="downloading">Gëtt rofgelueden…</string>
+    <string name="downloaded">Rofgelueden</string>
+    <string name="screenshot">Bildschirmfoto</string>
+    <string name="synchronize_time">Zäit synchroniséieren</string>
+    <string name="notification_type_default">Standard</string>
+    <string name="notification_type_no_notif">Keng Noriichten</string>
+    <string name="notification_type_silent">Stomm</string>
+    <string name="notification_type_vibra">Vibratioun</string>
+    <string name="notification_type_strong_vibra">Staark Vibratioun</string>
+    <string name="explain_app_prefs">Noriichten vun äeren Apps ginn hei ugewisen</string>
+    <string name="use_this_area">Huel dës Plaz fir d\'Wieder</string>
+    <string name="app_icon">Applikatiounssymbol</string>
+    <string name="intro_slide1_title">Wëllkomm</string>
+    <string name="intro_slide1_subtitle">Mat dëser App kanns du däin Android-Handy mat denger AsteroidOS-Auer synchroniséieren. Mee fir d\'éischt brauch se puer Permissiounen.</string>
+    <string name="intro_slide2_title">Dateizougrëff</string>
+    <string name="intro_slide3_title">Standort</string>
+    <string name="intro_slide4_title">Notifikatiounen</string>
+    <string name="intro_slide5_title">Batterieoptiméierung</string>
+    <string name="intro_slideerror_title">Ennerstëtzung fir Bluetooth Low Energy</string>
+    <string name="grant_permission">Erlaabnes erdeelen</string>
     </resources>
