@@ -5,7 +5,7 @@
     <string name="nothing_found">Não foram encontrados relógios</string>
     <string name="one_found">Foi encontrado um relógio</string>
     <string name="n_found">Foram encontrados %d relógios</string>
-    <string name="intro_slideerror_subtitle">Parece que o Bluetooth Low Energy não é compatível com este dispositivo.</string>
+    <string name="intro_slideerror_subtitle">Este dispositivo não suporta Bluetooth de baixa energia.</string>
     <string name="disconnected">Desligado</string>
     <string name="connected">Ligado</string>
     <string name="connecting">A ligar…</string>
@@ -47,4 +47,11 @@
     <string name="intro_slide2_subtitle">Para armazenar os dados em cache e guardar as capturas de ecrã do seu relógio.</string>
     <string name="intro_slide3_title">Localização</string>
     <string name="intro_slide3_subtitle">Para procurar por dispositivos Bluetooth Low Energy nas proximidades.</string>
-    </resources>
+    <string name="intro_slide4_subtitle">Para sincronizar notificações com o relógio, permita \"AsteroidOS Sync\" no seguinte menu:</string>
+    <string name="intro_slide5_title">Optimização de bateria</string>
+    <string name="intro_slide5_subtitle">Para permitir que esta aplicação seja executada em segundo plano, desative \"Otimização de bateria\" para o AsteroidOS Sync no seguinte menu:</string>
+    <string name="intro_slideerror_title">Este dispositivo suporta Bluetooth de baixa energia</string>
+    <string name="grant_permission">Conceda permissão</string>
+    <string name="please_grant_permissions">"Por favor conceda permissão "</string>
+    <string name="impassable_slide">"Por favor conceda esta permissão "</string>
+</resources>
