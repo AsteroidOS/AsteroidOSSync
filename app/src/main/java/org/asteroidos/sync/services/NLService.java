@@ -140,9 +140,11 @@ public class NLService extends NotificationListenerService {
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         Notification notification = sbn.getNotification();
+        String packageName = sbn.getPackageName();
 
         if((notification.priority < Notification.PRIORITY_DEFAULT) ||
-           ((notification.flags & Notification.FLAG_ONGOING_EVENT) != 0) ||
+           ((notification.flags & Notification.FLAG_ONGOING_EVENT) != 0
+            && !packageName.equals("com.google.android.apps.maps")) ||
            (NotificationCompat.getLocalOnly(notification)) ||
            (NotificationCompat.isGroupSummary(notification)))
             return;
@@ -151,7 +153,6 @@ public class NLService extends NotificationListenerService {
         String summary = notifParser.summary;
         String body = notifParser.body;
         int id = sbn.getId();
-        String packageName = sbn.getPackageName();
         String appIcon = iconFromPackage.get(packageName);
 
         String appName = "";
