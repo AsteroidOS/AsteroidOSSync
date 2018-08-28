@@ -6,7 +6,7 @@
     <string name="one_found">Menjumpai satu jam</string>
     <string name="n_found">Menjumpai %d jam</string>
     <string name="disconnected">Terputus</string>
-    <string name="connected">Bersambung</string>
+    <string name="connected">Disambungkan</string>
     <string name="connecting">Menyambungkan…</string>
     <string name="connected_formatted">Disambungkan ke %s</string>
     <string name="connecting_formatted">Disambungkan ke %s</string>
