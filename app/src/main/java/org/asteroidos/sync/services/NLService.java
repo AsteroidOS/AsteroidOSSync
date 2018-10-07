@@ -34,6 +34,7 @@ import android.support.v4.app.NotificationCompat;
 
 import org.asteroidos.sync.utils.NotificationParser;
 
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -142,9 +143,10 @@ public class NLService extends NotificationListenerService {
         Notification notification = sbn.getNotification();
         String packageName = sbn.getPackageName();
 
+        String[] allowedOngoingApps = {"com.google.android.apps.maps", "com.android.dialer"};
         if((notification.priority < Notification.PRIORITY_DEFAULT) ||
            ((notification.flags & Notification.FLAG_ONGOING_EVENT) != 0
-            && !packageName.equals("com.google.android.apps.maps")) ||
+            && !Arrays.asList(allowedOngoingApps).contains(packageName)) ||
            (NotificationCompat.getLocalOnly(notification)) ||
            (NotificationCompat.isGroupSummary(notification)))
             return;
