@@ -17,9 +17,15 @@
 
 package org.asteroidos.sync.ble;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
@@ -34,19 +40,25 @@ public class TimeService implements BleDevice.ReadWriteListener, SharedPreferenc
     public static final String PREFS_NAME = "TimePreference";
     public static final String PREFS_SYNC_TIME = "syncTime";
     public static final boolean PREFS_SYNC_TIME_DEFAULT = true;
+    public static final String TIME_SYNC_INTENT = "org.asteroidos.sync.TIME_SYNC_REQUEST_LISTENER";
 
     private BleDevice mDevice;
+    private Context mCtx;
 
     private SharedPreferences mTimeSyncSettings;
 
+    private TimeSyncReqReceiver mSReceiver;
+    private PendingIntent alarmPendingIntent;
+    private AlarmManager alarmMgr;
+
     public TimeService(Context ctx, BleDevice device) {
         mDevice = device;
+        mCtx = ctx;
         mTimeSyncSettings = ctx.getSharedPreferences(PREFS_NAME, 0);
         mTimeSyncSettings.registerOnSharedPreferenceChangeListener(this);
     }
 
     public void sync() {
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -54,6 +66,23 @@ public class TimeService implements BleDevice.ReadWriteListener, SharedPreferenc
                 updateTime();
             }
         }, 500);
+
+        // Register a broadcast handler to use for the alarm Intent
+        // Also listen for TIME_CHANGED and TIMEZONE_CHANGED events
+        mSReceiver = new TimeSyncReqReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(TIME_SYNC_INTENT);
+        filter.addAction(Intent.ACTION_TIME_CHANGED);
+        filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
+        mCtx.registerReceiver(mSReceiver, filter);
+
+        // register an alarm to sync the time once a day
+        Intent alarmIntent = new Intent(TIME_SYNC_INTENT);
+        alarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, 0);
+        alarmMgr = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
+        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_DAY,
+                AlarmManager.INTERVAL_DAY, alarmPendingIntent);
     }
 
     @Override
@@ -75,11 +104,25 @@ public class TimeService implements BleDevice.ReadWriteListener, SharedPreferenc
         }
     }
 
-    public void unsync() { }
+    public void unsync() {
+        try {
+            mCtx.unregisterReceiver(mSReceiver);
+        } catch (IllegalArgumentException ignored) {}
+        if (alarmMgr!= null) {
+            alarmMgr.cancel(alarmPendingIntent);
+        }
+    }
 
     @Override
     public void onEvent(ReadWriteEvent e) {
         if(!e.wasSuccess())
             Log.e("TimeService", e.status().toString());
+    }
+
+    class TimeSyncReqReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateTime();
+        }
     }
 }
