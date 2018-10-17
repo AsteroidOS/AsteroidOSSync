@@ -1,5 +1,6 @@
 package org.asteroidos.sync.fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -57,6 +58,9 @@ public class PositionPickerFragment extends Fragment {
                 editor.putFloat(WeatherService.PREFS_LONGITUDE, longitude);
                 editor.putFloat(WeatherService.PREFS_ZOOM, zoom);
                 editor.apply();
+
+                // Update the Weather after changing it
+                getActivity().sendBroadcast(new Intent(WeatherService.WEATHER_SYNC_INTENT));
 
                 getActivity().onBackPressed();
             }
