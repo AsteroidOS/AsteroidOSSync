@@ -67,6 +67,8 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     public WeatherService(Context ctx, BleDevice device) {
         mDevice = device;
         mCtx = ctx;
+
+        mSettings = mCtx.getSharedPreferences(PREFS_NAME, 0);
     }
 
     public void sync() {
