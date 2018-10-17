@@ -17,8 +17,14 @@
 
 package org.asteroidos.sync.ble;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
@@ -48,28 +54,48 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     public static final float PREFS_LONGITUDE_DEFAULT = (float) -74.006;
     public static final String PREFS_ZOOM = "zoom";
     public static final float PREFS_ZOOM_DEFAULT = (float) 7.0;
+    public static final String WEATHER_SYNC_INTENT = "org.asteroidos.sync.WEATHER_SYNC_REQUEST_LISTENER";
 
     private BleDevice mDevice;
     private Context mCtx;
     private SharedPreferences mSettings;
 
+    private WeatherSyncReqReceiver mSReceiver;
+    private PendingIntent alarmPendingIntent;
+    private AlarmManager alarmMgr;
+
     public WeatherService(Context ctx, BleDevice device) {
         mDevice = device;
         mCtx = ctx;
-
-        mSettings = mCtx.getSharedPreferences(PREFS_NAME, 0);
-        mSettings.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                updateWeather();
-            }});
     }
 
     public void sync() {
         updateWeather();
+
+        // Register a broadcast handler to use for the alarm Intent
+        mSReceiver = new WeatherSyncReqReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(WEATHER_SYNC_INTENT);
+        mCtx.registerReceiver(mSReceiver, filter);
+
+        // Fire update intent every 30 Minutes to update Weather
+        Intent alarmIntent = new Intent(WEATHER_SYNC_INTENT);
+        alarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, 0);
+        alarmMgr = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
+        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_HALF_HOUR,
+                AlarmManager.INTERVAL_HALF_HOUR, alarmPendingIntent);
     }
 
-    public void unsync() {}
+    public void unsync() {
+        try {
+            mCtx.unregisterReceiver(mSReceiver);
+        } catch (IllegalArgumentException ignored) {}
+
+        if (alarmMgr!= null) {
+            alarmMgr.cancel(alarmPendingIntent);
+        }
+    }
 
     private void updateWeather() {
         float latitude = mSettings.getFloat(PREFS_LATITUDE, PREFS_LATITUDE_DEFAULT);
@@ -145,5 +171,13 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     public void onEvent(ReadWriteEvent e) {
         if(!e.wasSuccess())
             Log.e("WeatherService", e.status().toString());
+    }
+
+
+    class WeatherSyncReqReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateWeather();
+        }
     }
 }
