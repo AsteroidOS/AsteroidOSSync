@@ -1,14 +1,21 @@
 package org.asteroidos.sync.fragments;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import org.asteroidos.sync.R;
 import org.asteroidos.sync.ble.WeatherService;
@@ -16,10 +23,19 @@ import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 public class PositionPickerFragment extends Fragment {
     private MapView mMapView;
     private SharedPreferences mSettings;
+    private Button mButton;
+
+    private SharedPreferences mWeatherSyncSettings;
+    private CheckBox mWeatherSyncCheckBox;
+
+    public static final int WEATHER_LOCATION_SYNC_PERMISSION_REQUEST = 1;
+    public static final int WEATHER_LOCATION_PERMISSION_REQUEST = 2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
@@ -43,7 +59,19 @@ public class PositionPickerFragment extends Fragment {
         mMapView.getController().setZoom(zoom);
         mMapView.getController().setCenter(new GeoPoint(latitude, longitude));
 
-        Button mButton = view.findViewById(R.id.positionPickerButton);
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    WEATHER_LOCATION_PERMISSION_REQUEST);
+        } else {
+            MyLocationNewOverlay mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(getContext()),mMapView);
+            mLocationOverlay.enableMyLocation();
+            mMapView.getOverlays().add(mLocationOverlay);
+        }
+
+        mButton = view.findViewById(R.id.positionPickerButton);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +93,27 @@ public class PositionPickerFragment extends Fragment {
                 getActivity().onBackPressed();
             }
         });
+
+        mWeatherSyncSettings = getActivity().getSharedPreferences(WeatherService.PREFS_NAME, 0);
+
+        mWeatherSyncCheckBox = view.findViewById(R.id.autoLocationPickerButton);
+        mWeatherSyncCheckBox.setChecked(mWeatherSyncSettings.getBoolean(WeatherService.PREFS_SYNC_WEATHER, WeatherService.PREFS_SYNC_WEATHER_DEFAULT));
+        mWeatherSyncCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton ignored, boolean checked) {
+                if (ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            WEATHER_LOCATION_SYNC_PERMISSION_REQUEST);
+                } else {
+                    handleLocationToggle(mWeatherSyncCheckBox.isChecked());
+                }
+            }
+        });
+
+        mButton.setVisibility(mWeatherSyncCheckBox.isChecked() ? View.INVISIBLE : View.VISIBLE);
     }
 
     @Override
@@ -77,5 +126,39 @@ public class PositionPickerFragment extends Fragment {
     public void onPause() {
         super.onPause();
         mMapView.onPause();
+    }
+
+    private void handleLocationToggle(boolean enable) {
+        SharedPreferences.Editor editor = mWeatherSyncSettings.edit();
+        editor.putBoolean(WeatherService.PREFS_SYNC_WEATHER, enable);
+        editor.apply();
+        mButton.setVisibility(enable ? View.INVISIBLE : View.VISIBLE);
+        getActivity().sendBroadcast(new  Intent(WeatherService.WEATHER_SYNC_INTENT));
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case WEATHER_LOCATION_SYNC_PERMISSION_REQUEST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    handleLocationToggle(mWeatherSyncCheckBox.isChecked());
+                } else {
+                    handleLocationToggle(false);
+                    mWeatherSyncCheckBox.setChecked(false);
+                }
+                break;
+            }
+            case WEATHER_LOCATION_PERMISSION_REQUEST: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    MyLocationNewOverlay mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(getContext()), mMapView);
+                    mLocationOverlay.enableMyLocation();
+                    mMapView.getOverlays().add(mLocationOverlay);
+                }
+            }
+        }
     }
 }
