@@ -78,6 +78,8 @@ public class WeatherService implements BleDevice.ReadWriteListener {
         mCtx = ctx;
 
         mSettings = mCtx.getSharedPreferences(PREFS_NAME, 0);
+        mLatitude = mSettings.getFloat(PREFS_LATITUDE, PREFS_LATITUDE_DEFAULT);
+        mLongitude = mSettings.getFloat(PREFS_LONGITUDE, PREFS_LONGITUDE_DEFAULT);
     }
 
     public void sync() {
@@ -145,6 +147,11 @@ public class WeatherService implements BleDevice.ReadWriteListener {
             mLongitude = mSettings.getFloat(PREFS_LONGITUDE, PREFS_LONGITUDE_DEFAULT);
         }
         updateWeather(mLatitude, mLongitude);
+
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putFloat(WeatherService.PREFS_LATITUDE, mLatitude);
+        editor.putFloat(WeatherService.PREFS_LONGITUDE, mLongitude);
+        editor.apply();
     }
 
     private boolean isNearNull(float coord) {
