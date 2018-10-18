@@ -162,13 +162,13 @@ public class PermissionsActivity extends MaterialIntroActivity {
             SlideFragment localizationFragment = new SlideFragmentBuilder()
                     .backgroundColor(R.color.colorintroslide3)
                     .buttonsColor(R.color.colorintroslide3button)
-                    .neededPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION})
+                    .neededPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION})
                     .image(R.drawable.introslide3icon)
                     .title(getString(R.string.intro_slide3_title))
                     .description(getString(R.string.intro_slide3_subtitle))
                     .build();
             boolean localizationFragmentShown = (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
+                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED);
 
             NotificationsSlide notificationFragment = new NotificationsSlide();
             notificationFragment.setContext(this);

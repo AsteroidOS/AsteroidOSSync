@@ -9,17 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
-        android:id="@+id/positionPickerButton"
-        android:layout_width="wrap_content"
-        android:text="@string/use_this_area"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"/>
-
     <ImageView
         android:id="@+id/positionPickerIndicator"
         android:layout_width="40dp"
@@ -34,5 +23,36 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_centerInParent="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <CheckBox
+            android:id="@+id/autoLocationPickerButton"
+            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimary"
+            android:buttonTint="@android:color/white"
+            android:padding="5dp"
+            android:text="@string/synchronize_weather"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/positionPickerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/use_this_area"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
 </RelativeLayout>

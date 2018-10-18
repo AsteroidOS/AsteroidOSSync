@@ -32,6 +32,7 @@
     <string name="downloaded">Downloaded</string>
     <string name="screenshot">Screenshot</string>
     <string name="synchronize_time">Synchronize time</string>
+    <string name="synchronize_weather">Locate weather automatically</string>
     <string name="notification_type_default">Default</string>
     <string name="notification_type_no_notif">No notification</string>
     <string name="notification_type_silent">Silent</string>

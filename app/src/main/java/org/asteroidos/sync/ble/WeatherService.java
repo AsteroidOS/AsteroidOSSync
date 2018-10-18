@@ -24,10 +24,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
+
+import org.asteroidos.sync.services.GPSTracker;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
@@ -54,6 +57,8 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     public static final float PREFS_LONGITUDE_DEFAULT = (float) -74.006;
     public static final String PREFS_ZOOM = "zoom";
     public static final float PREFS_ZOOM_DEFAULT = (float) 7.0;
+    public static final String PREFS_SYNC_WEATHER = "syncWeather";
+    public static final boolean PREFS_SYNC_WEATHER_DEFAULT = false;
     public static final String WEATHER_SYNC_INTENT = "org.asteroidos.sync.WEATHER_SYNC_REQUEST_LISTENER";
 
     private BleDevice mDevice;
@@ -64,9 +69,15 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     private PendingIntent alarmPendingIntent;
     private AlarmManager alarmMgr;
 
+    private GPSTracker mGPS;
+    private Float mLatitude;
+    private Float mLongitude;
+
     public WeatherService(Context ctx, BleDevice device) {
         mDevice = device;
         mCtx = ctx;
+
+        mSettings = mCtx.getSharedPreferences(PREFS_NAME, 0);
     }
 
     public void sync() {
@@ -98,8 +109,50 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     }
 
     private void updateWeather() {
-        float latitude = mSettings.getFloat(PREFS_LATITUDE, PREFS_LATITUDE_DEFAULT);
-        float longitude = mSettings.getFloat(PREFS_LONGITUDE, PREFS_LONGITUDE_DEFAULT);
+        if (mSettings.getBoolean(PREFS_SYNC_WEATHER, PREFS_SYNC_WEATHER_DEFAULT)) {
+            if (mGPS == null) {
+                mGPS = new GPSTracker(mCtx);
+            }
+            // Check if GPS enabled
+            mGPS.updateLocation();
+            if (mGPS.canGetLocation()) {
+                mLatitude = (float) mGPS.getLatitude();
+                mLongitude = (float) mGPS.getLongitude();
+                mGPS.gotLocation();
+                if(isNearNull(mLatitude) && isNearNull(mLongitude) ) {
+                    // We don't have a valid Location yet
+                    // Use the old location until we have a new one, recheck in 2 Minutes
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateWeather();
+                        }
+                    }, 1000 * 60 * 2);
+                    return;
+                }
+            }
+            // } else {
+                // Can't get location.
+                // GPS or network is available, don't set new Location and reuse the old one.
+            // }
+        } else {
+            if (mGPS != null) {
+                mGPS.stopUsingGPS();
+                mGPS = null;
+            }
+            mLongitude = mSettings.getFloat(PREFS_LATITUDE, PREFS_LATITUDE_DEFAULT);
+            mLatitude = mSettings.getFloat(PREFS_LONGITUDE, PREFS_LONGITUDE_DEFAULT);
+        }
+        updateWeather(mLatitude, mLongitude);
+    }
+
+    private boolean isNearNull(float coord) {
+        return -0.000001f < coord && coord < 0.000001f;
+    }
+
+    private void updateWeather(float latitude, float longitude) {
+
         WeatherMap weatherMap = new WeatherMap(mCtx, owmApiKey);
         weatherMap.getLocationForecast(String.valueOf(latitude), String.valueOf(longitude), new ForecastCallback() {
             @Override
