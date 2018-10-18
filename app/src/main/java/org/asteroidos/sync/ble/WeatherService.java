@@ -141,8 +141,8 @@ public class WeatherService implements BleDevice.ReadWriteListener {
                 mGPS.stopUsingGPS();
                 mGPS = null;
             }
-            mLongitude = mSettings.getFloat(PREFS_LATITUDE, PREFS_LATITUDE_DEFAULT);
-            mLatitude = mSettings.getFloat(PREFS_LONGITUDE, PREFS_LONGITUDE_DEFAULT);
+            mLatitude = mSettings.getFloat(PREFS_LATITUDE, PREFS_LATITUDE_DEFAULT);
+            mLongitude = mSettings.getFloat(PREFS_LONGITUDE, PREFS_LONGITUDE_DEFAULT);
         }
         updateWeather(mLatitude, mLongitude);
     }
