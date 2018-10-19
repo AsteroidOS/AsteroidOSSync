@@ -21,12 +21,6 @@ public class GPSTracker extends Service implements LocationListener {
     double mLatitude; // Latitude
     double mLongitude; // Longitude
 
-    // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 100; // 100 meters
-
-    // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 10; // 10 minutes
-
     // Declaring a Location Manager
     protected LocationManager mLocationManager;
 
@@ -49,7 +43,7 @@ public class GPSTracker extends Service implements LocationListener {
             criteria.setPowerRequirement(Criteria.POWER_LOW);
             String provider = mLocationManager.getBestProvider(criteria, true);
             if(provider != null) {
-                mLocationManager.requestLocationUpdates(provider, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                mLocationManager.requestSingleUpdate(provider, this, null);
                 mCanGetLocation = true;
             }
         }
@@ -75,7 +69,6 @@ public class GPSTracker extends Service implements LocationListener {
      * Function to get mLatitude
      * */
     public double getLatitude(){
-        // return mLatitude
         return mLatitude;
     }
 
@@ -84,7 +77,6 @@ public class GPSTracker extends Service implements LocationListener {
      * Function to get mLongitude
      * */
     public double getLongitude(){
-        // return mLongitude
         return mLongitude;
     }
 
