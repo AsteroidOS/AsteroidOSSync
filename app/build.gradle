@@ -24,6 +24,8 @@ android {
         main.res.srcDirs += 'src/main/lib/android-ripple-background/library/src/main/res/'
         main.java.srcDirs += 'src/main/lib/material-intro-screen/material-intro-screen/src/main/java/'
         main.res.srcDirs += 'src/main/lib/material-intro-screen/material-intro-screen/src/main/res/'
+        main.java.srcDirs += 'src/main/lib/powerampapi/poweramp_api_lib/src/'
+        main.res.srcDirs += 'src/main/lib/powerampapi/poweramp_api_lib/res/'
     }
 
     lintOptions {
