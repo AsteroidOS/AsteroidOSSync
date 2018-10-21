@@ -20,6 +20,7 @@ package org.asteroidos.sync.ble;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
@@ -29,6 +30,8 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
+import com.maxmpz.poweramp.player.PowerampAPI;
+import com.maxmpz.poweramp.player.PowerampAPIHelper;
 
 import org.asteroidos.sync.services.NLService;
 
@@ -49,8 +52,13 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
     private static final byte MEDIA_COMMAND_PLAY     = 0x2;
     private static final byte MEDIA_COMMAND_PAUSE    = 0x3;
 
+    public static final String PREFS_NAME = "MediaPreferences";
+    public static final String PREFS_MEDIA_CONTROLLER_PACKAGE = "media_controller_package";
+    public static final String PREFS_MEDIA_CONTROLLER_PACKAGE_DEFAULT = "default";
+
     private Context mCtx;
     private BleDevice mDevice;
+    private SharedPreferences mSettings;
 
     private MediaController mMediaController = null;
     private MediaSessionManager mMediaSessionManager;
@@ -59,6 +67,8 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
     {
         mDevice = device;
         mCtx = ctx;
+
+        mSettings = mCtx.getSharedPreferences(PREFS_NAME, 0);
     }
 
     public void sync() {
@@ -92,14 +102,43 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
             if(e.isNotification() && e.charUuid().equals(mediaCommandsCharac)) {
                 if (mMediaController != null) {
                     byte data[] = e.data();
-                    if (data[0] == MEDIA_COMMAND_PREVIOUS)
-                        mMediaController.getTransportControls().skipToPrevious();
-                    else if (data[0] == MEDIA_COMMAND_NEXT)
-                        mMediaController.getTransportControls().skipToNext();
-                    else if (data[0] == MEDIA_COMMAND_PLAY)
-                        mMediaController.getTransportControls().play();
-                    else if (data[0] == MEDIA_COMMAND_PAUSE)
-                        mMediaController.getTransportControls().pause();
+                    boolean isPoweramp = mSettings.getString(PREFS_MEDIA_CONTROLLER_PACKAGE, PREFS_MEDIA_CONTROLLER_PACKAGE_DEFAULT)
+                            .equals(PowerampAPI.PACKAGE_NAME);
+
+                    switch (data[0]) {
+                        case MEDIA_COMMAND_PREVIOUS:
+                            if(isPoweramp) {
+                                PowerampAPIHelper.startPAService(mCtx, new Intent(PowerampAPI.ACTION_API_COMMAND)
+                                        .putExtra(PowerampAPI.COMMAND, PowerampAPI.Commands.PREVIOUS));
+                            } else {
+                                mMediaController.getTransportControls().skipToPrevious();
+                            }
+                            break;
+                        case MEDIA_COMMAND_NEXT:
+                            if(isPoweramp) {
+                                PowerampAPIHelper.startPAService(mCtx, new Intent(PowerampAPI.ACTION_API_COMMAND)
+                                        .putExtra(PowerampAPI.COMMAND, PowerampAPI.Commands.NEXT));
+                            } else {
+                                mMediaController.getTransportControls().skipToNext();
+                            }
+                            break;
+                        case MEDIA_COMMAND_PLAY:
+                            if(isPoweramp) {
+                                PowerampAPIHelper.startPAService(mCtx, new Intent(PowerampAPI.ACTION_API_COMMAND)
+                                        .putExtra(PowerampAPI.COMMAND, PowerampAPI.Commands.RESUME));
+                            } else {
+                                mMediaController.getTransportControls().play();
+                            }
+                            break;
+                        case MEDIA_COMMAND_PAUSE:
+                            if (isPoweramp) {
+                                PowerampAPIHelper.startPAService(mCtx, new Intent(PowerampAPI.ACTION_API_COMMAND)
+                                        .putExtra(PowerampAPI.COMMAND, PowerampAPI.Commands.PAUSE));
+                            } else {
+                                mMediaController.getTransportControls().pause();
+                            }
+                             break;
+                    }
                 } else {
                     Intent mediaIntent = new Intent(Intent.ACTION_MAIN);
                     mediaIntent.addCategory(Intent.CATEGORY_APP_MUSIC);
@@ -190,29 +229,24 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
     @Override
     public void onActiveSessionsChanged(List<MediaController> controllers) {
         if (controllers.size() > 0) {
-            if (mMediaController != null) {
-                if (!controllers.get(0).getSessionToken().equals(mMediaController.getSessionToken())) {
-                    // Detach current controller
-                    mMediaController.unregisterCallback(mMediaCallback);
-                    Log.d("MediaService", "MediaController removed");
-                    mMediaController = null;
+            if (mMediaController != null && !controllers.get(0).getSessionToken().equals(mMediaController.getSessionToken())) {
+                // Detach current controller
+                mMediaController.unregisterCallback(mMediaCallback);
+                Log.d("MediaService", "MediaController removed");
+                mMediaController = null;
+            }
 
-                    // Attach new controller
-                    mMediaController = controllers.get(0);
-                    mMediaController.registerCallback(mMediaCallback);
-                    mMediaCallback.onMetadataChanged(mMediaController.getMetadata());
-                    if(mMediaController.getPlaybackState() != null)
-                        mMediaCallback.onPlaybackStateChanged(mMediaController.getPlaybackState());
-                    Log.d("MediaService", "MediaController set: " + mMediaController.getPackageName());
-                }
-            } else {
+            if(mMediaController == null) {
                 // Attach new controller
                 mMediaController = controllers.get(0);
                 mMediaController.registerCallback(mMediaCallback);
                 mMediaCallback.onMetadataChanged(mMediaController.getMetadata());
-                if(mMediaController.getPlaybackState() != null)
+                if (mMediaController.getPlaybackState() != null)
                     mMediaCallback.onPlaybackStateChanged(mMediaController.getPlaybackState());
                 Log.d("MediaService", "MediaController set: " + mMediaController.getPackageName());
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putString(PREFS_MEDIA_CONTROLLER_PACKAGE, mMediaController.getPackageName());
+                editor.apply();
             }
         } else {
             byte[] data = new byte[]{0};
