@@ -55,4 +55,5 @@
     <string name="grant_permission">Giv tilladelse</string>
     <string name="please_grant_permissions">Giv denne tilladelse</string>
     <string name="impassable_slide">Giv denne tilladelse</string>
-</resources>
+<string name="synchronize_weather">Find vejr automatisk</string>
+    </resources>
