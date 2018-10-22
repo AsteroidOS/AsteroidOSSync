@@ -55,4 +55,5 @@
     <string name="grant_permission">הענקת הרשאות</string>
     <string name="please_grant_permissions">נא להעניק הרשאה זו</string>
     <string name="impassable_slide">נא להעניק הרשאה זו</string>
-</resources>
+<string name="synchronize_weather">איתור מזג האוויר אוטומטית</string>
+    </resources>
