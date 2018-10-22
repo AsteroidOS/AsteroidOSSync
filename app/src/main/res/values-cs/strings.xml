@@ -55,4 +55,5 @@
     <string name="intro_slide2_subtitle">Pro mezipaměť dat a ukládání snímků obrazovky vašich hodinek.</string>
     <string name="intro_slide3_title">Umístění</string>
     <string name="intro_slide3_subtitle">Pro skenování přítomnosti Bluetooth Low Energy zařízení poblíž.</string>
+    <string name="synchronize_weather">Najít počasí automaticky</string>
     </resources>
