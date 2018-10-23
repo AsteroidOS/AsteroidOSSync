@@ -55,4 +55,5 @@
     <string name="grant_permission">Innvilg tilgang</string>
     <string name="please_grant_permissions">Innvilg denne tilgangen</string>
     <string name="impassable_slide">Innvilg denne tilgangen</string>
-</resources>
+<string name="synchronize_weather">Finn plassering for vær automatisk</string>
+    </resources>
