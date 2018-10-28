@@ -55,4 +55,5 @@
     <string name="grant_permission">İzin ver</string>
     <string name="please_grant_permissions">Lütfen bu izni verin</string>
     <string name="impassable_slide">Lütfen bu izni verin</string>
-</resources>
+<string name="synchronize_weather">Hava durumunu kendiliğinden konumla</string>
+    </resources>
