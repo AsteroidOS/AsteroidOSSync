@@ -46,4 +46,5 @@
     <string name="intro_slide5_title">Batterieoptiméierung</string>
     <string name="intro_slideerror_title">Ennerstëtzung fir Bluetooth Low Energy</string>
     <string name="grant_permission">Erlaabnes erdeelen</string>
+    <string name="synchronize_weather">Wieder automatesch sichen</string>
     </resources>
