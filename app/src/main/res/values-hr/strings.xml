@@ -54,4 +54,5 @@
     <string name="grant_permission">Daj dopuštenja</string>
     <string name="please_grant_permissions">Molimo vas da date sljedeće dopuštenje</string>
     <string name="impassable_slide">Molimo vas da date ovo dopuštenje</string>
-</resources>
+<string name="synchronize_weather">Automatski sinkroniziraj vrijeme</string>
+    </resources>
