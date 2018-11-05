@@ -55,4 +55,5 @@
     <string name="grant_permission">اجازه دسترسی</string>
     <string name="please_grant_permissions">لطفا این دسترسی را اجازه دهید</string>
     <string name="impassable_slide">لطفا این دسترسی را اجازه دهید</string>
-</resources>
+<string name="synchronize_weather">یافتن خودکار آب‌وهوای محل</string>
+    </resources>
