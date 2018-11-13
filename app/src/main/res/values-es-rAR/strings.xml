@@ -54,4 +54,5 @@
     <string name="grant_permission">Otorgar permiso</string>
     <string name="please_grant_permissions">Por favor, otorga este permiso</string>
     <string name="impassable_slide">Por favor, otorga este permiso</string>
-</resources>
+<string name="synchronize_weather">Localizar clima automáticamente</string>
+    </resources>
