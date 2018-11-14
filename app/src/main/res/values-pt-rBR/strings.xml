@@ -17,7 +17,7 @@
     <string name="screenshot_icon">Ícone da captura de tela</string>
     <string name="finder_icon">Ícone da pesquisa</string>
     <string name="settings_icon">Ícone das configurações</string>
-    <string name="weather_icon">Ícone do tempo</string>
+    <string name="weather_icon">Ícone do clima</string>
     <string name="time_icon">Ícone do horário</string>
     <string name="grab_a_screenshot">Obter uma captura de tela</string>
     <string name="find_my_watch">Encontrar meu relógio</string>
@@ -26,7 +26,7 @@
     <string name="notifications_settings">Configuração das notificações</string>
     <string name="intro_slide4_title">Notificações</string>
     <string name="intro_slide4_subtitle">Para habilitar a sincronização das notificações, você precisar permitir o AsteroidOS Sync no próximo menu:</string>
-    <string name="weather_settings">Configurações do tempo</string>
+    <string name="weather_settings">Configurações do clima</string>
     <string name="enter_city_name">Digite o nome da cidade:</string>
     <string name="unpair">Cancelar pareamento</string>
     <string name="scanning">Analisando…</string>
@@ -41,7 +41,7 @@
     <string name="notification_type_vibra">Vibrar</string>
     <string name="notification_type_strong_vibra">Vibração forte</string>
     <string name="position_indicator">Indicador de posição</string>
-    <string name="use_this_area">Usar esta área para o tempo</string>
+    <string name="use_this_area">Usar esta área para o clima</string>
 <string name="app_icon">Ícone do aplicativo</string>
     <string name="intro_slide1_title">Bem-vindo</string>
     <string name="intro_slide1_subtitle">Este app permite a você sincronizar seu celular Android com o relógio AsteroidOS. Mas primeiro ele precisa de algumas permissões.</string>
@@ -55,4 +55,5 @@
     <string name="grant_permission">Conceder permissão</string>
     <string name="please_grant_permissions">Por favor, conceda essa permissão</string>
     <string name="impassable_slide">Por favor, conceda essa permissão</string>
-</resources>
+<string name="synchronize_weather">Localizar clima automaticamente</string>
+    </resources>
