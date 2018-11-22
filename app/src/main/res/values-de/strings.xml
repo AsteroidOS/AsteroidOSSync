@@ -55,4 +55,5 @@
     <string name="grant_permission">Erlaubnis erteilen</string>
     <string name="please_grant_permissions">Bitte gewähre diese Erlaubnis</string>
     <string name="impassable_slide">Bitte gewähre diese Erlaubnis</string>
-</resources>
+<string name="synchronize_weather">Wetter automatisch lokalisieren</string>
+    </resources>
