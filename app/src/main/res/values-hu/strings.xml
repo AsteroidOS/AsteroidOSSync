@@ -1,2 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources><string name="generic_ok">OK</string>
+    <string name="searching">Órák keresése</string>
+    <string name="unknown_device">Ismeretlen eszköz</string>
+    <string name="nothing_found">Órák nem találhatóak</string>
+    <string name="one_found">Egy óra talált</string>
+    <string name="disconnected">Kapcsolat megszakadt</string>
+    <string name="connected">Csatlakoztatva</string>
+    <string name="connecting">Csatlakozás…</string>
+    <string name="finder_icon">Kereső ikon</string>
+    <string name="settings_icon">Beállítások ikon</string>
+    <string name="weather_icon">Időjárás ikon</string>
+    <string name="time_icon">Idő ikon</string>
+    <string name="grab_a_screenshot">Képernyőkép készítése</string>
+    <string name="watch_finder">Óra kereső</string>
+    <string name="notifications_settings">Értesítés beállítások</string>
+    <string name="weather_settings">Időjárás beállítások</string>
+    <string name="enter_city_name">Írja be a város nevét:</string>
+    <string name="unpair">Párosítás megszüntetése</string>
+    <string name="downloading">Letöltés…</string>
+    <string name="downloaded">Letöltés befejeződött</string>
+    <string name="screenshot">Képernyőkép</string>
+    <string name="synchronize_time">Idő szinkronizálása</string>
+    <string name="notification_type_default">Alapértelmezett</string>
+    <string name="notification_type_no_notif">Nincs értesítés</string>
+    <string name="notification_type_silent">Néma</string>
+    <string name="notification_type_vibra">Rezgés</string>
+    <string name="notification_type_strong_vibra">Erős rezgés</string>
+    <string name="explain_app_prefs">Itt fognak megjelenni az alkalmazásokból érkező értesítések</string>
+    <string name="use_this_area">Használja ezt a területet időjáráshoz</string>
+    <string name="app_icon">Alkalmazás ikon</string>
+    <string name="intro_slide1_title">Üdvözöljük</string>
+    <string name="intro_slide2_title">Fájl hozzáférés</string>
+    <string name="intro_slide3_title">Hely</string>
+    <string name="intro_slide4_title">Értesítések</string>
+    <string name="intro_slide4_subtitle">Az értesítések szinkronizáláshoz engedélyezze az \"AsteroidOS Sync\"-t a következő menüben:</string>
+    <string name="intro_slide5_title">Akkumulátor Optimalizálás</string>
+    <string name="intro_slide5_subtitle">Annak érdekében, hogy ez az alkalmazás fusson a háttérben, tiltsa le az \"Akkumulátor Optimalizálás\" funkciót AsteroidOS Sync-nek az alábbi menüben:</string>
+    <string name="grant_permission">Engedély megadása</string>
+    <string name="please_grant_permissions">Kérjük, adja meg ezt az engedélyt</string>
+    <string name="impassable_slide">Kérjük, adja meg ezt az engedélyt</string>
+</resources>
