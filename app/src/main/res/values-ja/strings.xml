@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">OK</string>
     <string name="searching">ウォッチを検索中</string>
@@ -55,4 +55,5 @@
     <string name="grant_permission">アクセス許可の付与</string>
     <string name="please_grant_permissions">このアクセス許可を付与してください</string>
     <string name="impassable_slide">このアクセス許可を付与してください</string>
+    <string name="synchronize_weather">自動的に天気を取得</string>
 </resources>
