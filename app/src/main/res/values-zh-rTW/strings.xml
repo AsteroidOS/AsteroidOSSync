@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="generic_ok">確定</string>
     <string name="searching">掃描手錶中</string>
     <string name="unknown_device">不明的裝置</string>
@@ -54,4 +54,5 @@
     <string name="grant_permission">授予權限</string>
     <string name="please_grant_permissions">請授予此權限</string>
     <string name="impassable_slide">請授予此權限</string>
+    <string name="synchronize_weather">自動定位天氣</string>
 </resources>
