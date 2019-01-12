@@ -55,5 +55,5 @@
     <string name="grant_permission">Toestemming geven</string>
     <string name="please_grant_permissions">Gelieve deze toestemming te geven</string>
     <string name="impassable_slide">Gelieve deze toestemming te geven</string>
-    <string name="synchronize_weather">Lokaliseer weer automatisch</string>
+    <string name="synchronize_weather">Weer automatisch lokaliseren</string>
 </resources>
