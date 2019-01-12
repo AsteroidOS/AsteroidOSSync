@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="generic_ok">Oké</string>
-    <string name="searching">Aan het zoeken naar horloges</string>
+    <string name="searching">Achter horloges aan het zoeken</string>
     <string name="unknown_device">Onbekend apparaat</string>
     <string name="nothing_found">Geen horloges gevonden</string>
     <string name="one_found">Één horloge gevonden</string>
@@ -54,4 +54,5 @@
     <string name="grant_permission">Toelating geven</string>
     <string name="please_grant_permissions">Gelieve deze toelating te geven</string>
     <string name="impassable_slide">Gelieve deze toelating te geven</string>
+    <string name="synchronize_weather">Weerbericht automatisch lokaliseren</string>
 </resources>
