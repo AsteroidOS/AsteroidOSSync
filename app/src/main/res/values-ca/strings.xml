@@ -22,7 +22,7 @@
     <string name="grab_a_screenshot">Fer una captura de pantalla</string>
     <string name="find_my_watch">Troba el meu rellotge</string>
     <string name="watch_finder">Cercador del rellotge</string>
-    <string name="phone_is_searching">El telèfon està buscant-vos!</string>
+    <string name="phone_is_searching">El telèfon està buscant per tu!</string>
     <string name="notifications_settings">Configuració de les notificacions</string>
     <string name="intro_slide4_title">Notificacions</string>
     <string name="intro_slide4_subtitle">Per sincronitzar notificacions amb el rellotge, necessiteu habilitar el \"Sincronitzador d\'AsteroidOS\" en el següent menú:</string>
