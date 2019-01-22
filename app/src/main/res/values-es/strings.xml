@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">OK</string>
     <string name="searching">Buscando relojes</string>
@@ -55,4 +55,5 @@
     <string name="grant_permission">Autorizar permiso</string>
     <string name="please_grant_permissions">Por favor, autoriza este permiso</string>
     <string name="impassable_slide">Por favor, autoriza este permiso</string>
+    <string name="synchronize_weather">Localizar clima automáticamente</string>
 </resources>
