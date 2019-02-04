@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="generic_ok">OK</string>
     <string name="searching">Mencari jam</string>
     <string name="unknown_device">Peranti tidak dikenali</string>
@@ -42,7 +42,7 @@
     <string name="intro_slide1_title">Selamat Datang</string>
     <string name="intro_slide1_subtitle">Aplikasi ini membolehkan anda menyegerakkan telefon Android anda dengan jam tangan AsteroidOS anda. Tetapi, ia memerlukan beberapa kebenaran.</string>
     <string name="intro_slide2_title">Akses fail</string>
-    <string name="intro_slide2_subtitle">Untuk menyembunyikan (cache) data dan menyimpan tangkapan skrin jam tangan anda.</string>
+    <string name="intro_slide2_subtitle">Untuk menyinggahkan (cache) data dan menyimpan tangkapan skrin jam tangan anda.</string>
     <string name="intro_slide3_title">Lokasi</string>
     <string name="intro_slide3_subtitle">Untuk mengimbas Peranti Bluetooth Rendah Tenaga berdekatan.</string>
     <string name="intro_slide4_title">Notifikasi</string>
