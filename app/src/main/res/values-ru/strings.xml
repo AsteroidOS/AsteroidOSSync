@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">ОК</string>
     <string name="searching">Идёт поиск часов</string>
@@ -35,14 +35,14 @@
     <string name="screenshot">Скриншот</string>
     <string name="synchronize_time">Синхронизация времени</string>
     <string name="explain_app_prefs">Сообщения Ваших приложений появятся здесь</string>
-<string name="notification_type_default">По умолчанию</string>
+    <string name="notification_type_default">По умолчанию</string>
     <string name="notification_type_no_notif">Уведомления отсутствуют</string>
     <string name="notification_type_silent">Беззвучный</string>
     <string name="notification_type_vibra">Вибрация</string>
     <string name="notification_type_strong_vibra">Сильная вибрация</string>
     <string name="position_indicator">Индикатор позиции</string>
     <string name="use_this_area">Используйте эту область для погоды</string>
-<string name="app_icon">Значок приложения</string>
+    <string name="app_icon">Значок приложения</string>
     <string name="intro_slide1_title">Добро пожаловать</string>
     <string name="intro_slide1_subtitle">Это приложение позволяет синхронизировать ваш телефон на Android с часами на AsteroidOS. Для этого, приложению нужны некоторые разрешения.</string>
     <string name="intro_slide2_title">Доступ к файлам</string>
@@ -55,4 +55,5 @@
     <string name="grant_permission">Выдать разрешение</string>
     <string name="please_grant_permissions">Пожалуйста, дайте это разрешение</string>
     <string name="impassable_slide">Пожалуйста, дайте это разрешение</string>
+    <string name="synchronize_weather">Определять местоположение для погоды автоматически</string>
 </resources>
