@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">OK</string>
     <string name="searching">Ricerca orologi</string>
@@ -11,9 +11,9 @@
     <string name="connected">Connesso</string>
     <string name="connecting">Collegamento in corso…</string>
     <string name="connected_formatted">Connesso a %s</string>
-    <string name="connecting_formatted">Collegamento con %s</string>
-    <string name="connected_icon">Icona connesso</string>
-    <string name="battery_info_icon">Icona batteria</string>
+    <string name="connecting_formatted">Mi sto collegando con %s%</string>
+    <string name="connected_icon">Icona connessa</string>
+    <string name="battery_info_icon">Icona stato batteria</string>
     <string name="screenshot_icon">Icona cattura schermo</string>
     <string name="finder_icon">Icona cerca</string>
     <string name="settings_icon">Icona Impostazioni</string>
@@ -21,7 +21,7 @@
     <string name="time_icon">Icona ora</string>
     <string name="grab_a_screenshot">Cattura schermo</string>
     <string name="find_my_watch">Trova il mio orologio</string>
-    <string name="watch_finder">Trova il mio orologio</string>
+    <string name="watch_finder">Sto cercando il mio orologio</string>
     <string name="phone_is_searching">Il telefono ti sta cercando!</string>
     <string name="notifications_settings">Impostazioni notifiche</string>
     <string name="intro_slide4_title">Notifiche</string>
@@ -35,7 +35,7 @@
     <string name="screenshot">Screenshot</string>
     <string name="synchronize_time">Sincronizza ora</string>
     <string name="explain_app_prefs">Le notifiche delle tue applicazioni compariranno qui</string>
-<string name="notification_type_no_notif">Nessuna notifica</string>
+    <string name="notification_type_no_notif">Nessuna notifica</string>
     <string name="notification_type_silent">Silenzioso</string>
     <string name="notification_type_vibra">Vibrazione</string>
     <string name="notification_type_strong_vibra">Vibrazione forte</string>
@@ -53,6 +53,7 @@
     <string name="grant_permission">Concedi autorizzazione</string>
     <string name="please_grant_permissions">Si prega di consentire l\'autorizzazione</string>
     <string name="impassable_slide">Si prega di consentire l\'autorizzazione</string>
-<string name="notification_type_default">Predefinito</string>
+    <string name="notification_type_default">Predefinito</string>
     <string name="use_this_area">Utilizza questa zona per il meteo</string>
-    </resources>
+    <string name="synchronize_weather">Localizzazione meteo automatica</string>
+</resources>
