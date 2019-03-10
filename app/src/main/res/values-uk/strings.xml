@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">OK</string>
     <string name="searching">Пошук годинників</string>
@@ -35,7 +35,7 @@
     <string name="screenshot">Скріншот</string>
     <string name="synchronize_time">Синхронізоване час</string>
     <string name="explain_app_prefs">Сповіщення ваших додатків з\'являться тут</string>
-<string name="notification_type_default">За замовчуванням</string>
+    <string name="notification_type_default">За замовчуванням</string>
     <string name="notification_type_no_notif">Сповіщення відсутні</string>
     <string name="notification_type_silent">Беззвучний</string>
     <string name="notification_type_vibra">Вібрація</string>
@@ -55,4 +55,5 @@
     <string name="grant_permission">Видати дозвіл</string>
     <string name="please_grant_permissions">Будь ласка, дайте це дозвіл</string>
     <string name="impassable_slide">Пожалуйста, дайте это разрешение</string>
+    <string name="synchronize_weather">Автоматично визначати позицію для погоди</string>
 </resources>
