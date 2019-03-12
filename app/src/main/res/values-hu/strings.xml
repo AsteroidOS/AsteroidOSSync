@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="generic_ok">OK</string>
+<resources>
+    <string name="generic_ok">OK</string>
     <string name="searching">Órák keresése</string>
     <string name="unknown_device">Ismeretlen eszköz</string>
     <string name="nothing_found">Órák nem találhatóak</string>
     <string name="one_found">Egy óra talált</string>
-    <string name="disconnected">Kapcsolat megszakadt</string>
+    <string name="disconnected">A kapcsolat megszakadt</string>
     <string name="connected">Csatlakoztatva</string>
     <string name="connecting">Csatlakozás…</string>
     <string name="finder_icon">Kereső ikon</string>
@@ -39,4 +40,20 @@
     <string name="grant_permission">Engedély megadása</string>
     <string name="please_grant_permissions">Kérjük, adja meg ezt az engedélyt</string>
     <string name="impassable_slide">Kérjük, adja meg ezt az engedélyt</string>
+    <string name="n_found">%d óra talált</string>
+    <string name="connected_formatted">Csatlakoztatva a következőhöz: %s</string>
+    <string name="connecting_formatted">Csatlakozás a következőhöz:%s</string>
+    <string name="connected_icon">Csatlakoztatva ikon</string>
+    <string name="battery_info_icon">Akkumulátor információ ikon</string>
+    <string name="screenshot_icon">Képernyőmentés ikon</string>
+    <string name="find_my_watch">Találd meg az órámat</string>
+    <string name="phone_is_searching">A telefon keres téged!</string>
+    <string name="scanning">Szkennelés…</string>
+    <string name="synchronize_weather">Időjárás automatikus behatárolása</string>
+    <string name="position_indicator">Helyzet jelző</string>
+    <string name="intro_slide1_subtitle">Ez az alkalmazás lehetővé teszi az Android telefon szinkronizálását az AsteroidOS órájával. De először kell egy pár alkalmazásengedélyt engedélyezni.</string>
+    <string name="intro_slide2_subtitle">Adatok tárolásához és az óra képernyőképeinek mentéséhez.</string>
+    <string name="intro_slide3_subtitle">A közeli Bluetooth Low Energy eszközök keresése.</string>
+    <string name="intro_slideerror_title">Bluetooth Low Energy támogatás</string>
+    <string name="intro_slideerror_subtitle">Ez az eszköz nem támogatja a Bluetooth Low Energyt.</string>
 </resources>
