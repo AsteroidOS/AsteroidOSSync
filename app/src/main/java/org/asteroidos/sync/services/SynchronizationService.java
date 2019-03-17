@@ -49,6 +49,7 @@ import org.asteroidos.sync.R;
 import org.asteroidos.sync.ble.MediaService;
 import org.asteroidos.sync.ble.NotificationService;
 import org.asteroidos.sync.ble.ScreenshotService;
+import org.asteroidos.sync.ble.SilentModeService;
 import org.asteroidos.sync.ble.TimeService;
 import org.asteroidos.sync.ble.WeatherService;
 
@@ -87,6 +88,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     private MediaService mMediaService;
     private TimeService mTimeService;
 
+    private SilentModeService silentModeService;
     private SharedPreferences mPrefs;
 
     void handleConnect() {
@@ -99,6 +101,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         mMediaService = new MediaService(getApplicationContext(), mDevice);
         mScreenshotService = new ScreenshotService(getApplicationContext(), mDevice);
         mTimeService = new TimeService(getApplicationContext(), mDevice);
+        silentModeService = new SilentModeService(getApplicationContext());
 
         mDevice.connect();
     }
@@ -112,6 +115,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         mMediaService.unsync();
         mTimeService.unsync();
         mDevice.disconnect();
+        silentModeService.onDisconnect();
     }
 
     void handleReqBattery() {
@@ -259,6 +263,8 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             mScreenshotService = new ScreenshotService(getApplicationContext(), mDevice);
             mTimeService = new TimeService(getApplicationContext(), mDevice);
 
+            silentModeService = new SilentModeService(getApplicationContext());
+
             mDevice.connect();
         }
 
@@ -344,6 +350,8 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 mMediaService.sync();
             if (mTimeService != null)
                 mTimeService.sync();
+            if (silentModeService != null)
+                silentModeService.onConnect();
         } else if (event.didEnter(BleDeviceState.DISCONNECTED)) {
             mState = STATUS_DISCONNECTED;
             updateNotification();
@@ -361,6 +369,8 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 mMediaService.unsync();
             if (mTimeService != null)
                 mTimeService.unsync();
+            if (silentModeService != null)
+                silentModeService.onDisconnect();
         } else if(event.didEnter(BleDeviceState.CONNECTING)) {
             mState = STATUS_CONNECTING;
             updateNotification();

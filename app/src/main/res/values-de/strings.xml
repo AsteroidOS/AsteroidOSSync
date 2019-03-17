@@ -56,4 +56,5 @@
     <string name="please_grant_permissions">Bitte gewähre diese Erlaubnis</string>
     <string name="impassable_slide">Bitte gewähre diese Erlaubnis</string>
 <string name="synchronize_weather">Wetter automatisch lokalisieren</string>
-    </resources>
+    <string name="switch_phone_notifications">Telefon stumm bei Verbindung</string>
+</resources>

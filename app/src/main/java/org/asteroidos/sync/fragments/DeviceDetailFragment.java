@@ -36,6 +36,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.asteroidos.sync.R;
+import org.asteroidos.sync.ble.SilentModeService;
 import org.asteroidos.sync.ble.TimeService;
 import org.asteroidos.sync.services.SynchronizationService;
 
@@ -47,8 +48,10 @@ public class DeviceDetailFragment extends Fragment {
     private LinearLayout mConnectedContent;
 
     private SharedPreferences mTimeSyncSettings;
+    private SharedPreferences mSilenceModeSettings;
 
     private CheckBox mTimeSyncCheckBox;
+    private CheckBox mSilenceModeCheckBox;
 
     FloatingActionButton mFab;
 
@@ -144,6 +147,18 @@ public class DeviceDetailFragment extends Fragment {
             public void onCheckedChanged(CompoundButton ignored, boolean checked) {
                 SharedPreferences.Editor editor = mTimeSyncSettings.edit();
                 editor.putBoolean(TimeService.PREFS_SYNC_TIME, mTimeSyncCheckBox.isChecked());
+                editor.apply();
+            }
+        });
+
+        mSilenceModeSettings = getActivity().getSharedPreferences(SilentModeService.PREFS_NAME, Context.MODE_PRIVATE);
+        mSilenceModeCheckBox = view.findViewById(R.id.SilentModeCheckBox);
+        mSilenceModeCheckBox.setChecked(mSilenceModeSettings.getBoolean(SilentModeService.PREF_RINGER, false));
+        mSilenceModeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = mSilenceModeSettings.edit();
+                editor.putBoolean(SilentModeService.PREF_RINGER, isChecked);
                 editor.apply();
             }
         });
