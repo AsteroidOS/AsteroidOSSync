@@ -110,6 +110,7 @@ public class NLService extends NotificationListenerService {
         iconFromPackage.put("com.snapchat.android", "logo-snapchat");
         iconFromPackage.put("com.sonyericsson.conversations", "ios-text");
         iconFromPackage.put("com.spotify.music", "ios-musical-notes");
+        iconFromPackage.put("org.thunderdog.challegram", "ios-paper-plane");
         iconFromPackage.put("com.tinder", "md-flame");
         iconFromPackage.put("com.tumblr", "logo-tumblr");
         iconFromPackage.put("com.twitter.android", "logo-twitter");
