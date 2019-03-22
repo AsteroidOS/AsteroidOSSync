@@ -224,7 +224,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Synchronization Service", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Synchronization Service", NotificationManager.IMPORTANCE_LOW);
             notificationChannel.setDescription("Connection status");
             notificationChannel.setVibrationPattern(new long[]{0L});
             mNM.createNotificationChannel(notificationChannel);
