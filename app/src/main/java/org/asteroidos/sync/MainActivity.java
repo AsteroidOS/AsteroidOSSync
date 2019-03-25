@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         if(menuItem.getItemId() ==  android.R.id.home)
             onBackPressed();
-        
+
         return (super.onOptionsItemSelected(menuItem));
     }
 
@@ -219,7 +219,6 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 ab.setDisplayHomeAsUpEnabled(false);
         } else
             finish();
-
         try {
             mDetailFragment = (DeviceDetailFragment)mPreviousFragment;
         } catch (ClassCastException ignored1) {

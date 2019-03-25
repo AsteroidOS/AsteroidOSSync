@@ -57,4 +57,9 @@
     <string name="grant_permission">Grant permission</string>
     <string name="please_grant_permissions">Please grant this permission</string>
     <string name="impassable_slide">Please grant this permission</string>
+    <string name="title_activity_settings_activity">Settings</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="switch_phone_notifications">Silence phone when connected </string>
+    <string name="notification_silent_icon">notification silent icon</string>
 </resources>
