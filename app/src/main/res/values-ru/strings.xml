@@ -56,4 +56,9 @@
     <string name="please_grant_permissions">Пожалуйста, дайте это разрешение</string>
     <string name="impassable_slide">Пожалуйста, дайте это разрешение</string>
     <string name="synchronize_weather">Определять местоположение для погоды автоматически</string>
+    <string name="title_activity_settings_activity">Настройки</string>
+    <string name="action_settings">Настройки</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="switch_phone_notifications">Беззвучный режим телефона при подключении</string>
+    <string name="notification_silent_icon">значок беззвучных уведомления</string>
 </resources>
