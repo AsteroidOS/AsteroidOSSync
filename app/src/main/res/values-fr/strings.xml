@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">OK</string>
     <string name="searching">Recherche de montres</string>
@@ -35,14 +35,14 @@
     <string name="screenshot">Capture d\'écran</string>
     <string name="synchronize_time">Synchroniser la date et l\'heure</string>
     <string name="explain_app_prefs">Les notifications de vos applis apparaîtront ici</string>
-<string name="notification_type_default">Par défaut</string>
+    <string name="notification_type_default">Par défaut</string>
     <string name="notification_type_no_notif">Pas de notification</string>
     <string name="notification_type_silent">Silencieux</string>
     <string name="notification_type_vibra">Vibration</string>
     <string name="notification_type_strong_vibra">Forte vibration</string>
     <string name="position_indicator">Indicateur de localisation</string>
     <string name="use_this_area">Utiliser cette localisation pour la météo</string>
-<string name="app_icon">Icône de l\'application</string>
+    <string name="app_icon">Icône de l\'application</string>
     <string name="intro_slide1_title">Bienvenue</string>
     <string name="intro_slide1_subtitle">Cette application vous permet de synchroniser votre téléphone Android avec votre montre AsteroidOS. Mais d\'abord, elle a besoin de quelques permissions.</string>
     <string name="intro_slide2_title">Accès aux fichiers</string>
@@ -55,4 +55,5 @@
     <string name="grant_permission">Accorder la permission</string>
     <string name="please_grant_permissions">Veuillez accorder cette permission</string>
     <string name="impassable_slide">Veuillez accorder cette permission</string>
+    <string name="synchronize_weather">Emplacement météo automatique</string>
 </resources>
