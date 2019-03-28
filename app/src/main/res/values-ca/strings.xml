@@ -42,7 +42,7 @@
         <item/>
     </string-array>
     <string name="explain_app_prefs">Les notificacions de les vostres aplicacions apareixeran aquí</string>
-<string name="notification_type_default">Predeterminat</string>
+    <string name="notification_type_default">Predeterminat</string>
     <string name="notification_type_no_notif">Sense notificacions</string>
     <string name="notification_type_silent">Silenciosa</string>
     <string name="notification_type_vibra">Vibració</string>
@@ -63,4 +63,7 @@
     <string name="please_grant_permissions">Si us plau, accepta el permís</string>
     <string name="impassable_slide">Si us plau, accepteu el permís</string>
     <string name="synchronize_weather">Localitzar clima automàticament</string>
+    <string name="title_activity_settings_activity">Configuració</string>
+    <string name="action_settings">Configuració</string>
+    <string name="title_activity_settings">Configuració</string>
 </resources>
