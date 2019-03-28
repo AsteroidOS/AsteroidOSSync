@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">OK</string>
     <string name="searching">Hledání hodinek</string>
@@ -35,14 +35,14 @@
     <string name="screenshot">Snímek obrazovky</string>
     <string name="synchronize_time">Synchronizovat čas</string>
     <string name="explain_app_prefs">Oznámení z aplikací se objeví zde</string>
-<string name="notification_type_default">Výchozí</string>
+    <string name="notification_type_default">Výchozí</string>
     <string name="notification_type_no_notif">Žádné oznámení</string>
     <string name="notification_type_silent">Tiché</string>
     <string name="notification_type_vibra">Vibrace</string>
     <string name="notification_type_strong_vibra">Silné vibrace</string>
     <string name="position_indicator">Ukazatel pozice</string>
     <string name="use_this_area">Použít tuto oblast pro počasí</string>
-<string name="app_icon">Ikona aplikace</string>
+    <string name="app_icon">Ikona aplikace</string>
     <string name="intro_slide1_title">Vítejte</string>
     <string name="intro_slide5_title">Optimalizace spotřeby energie</string>
     <string name="intro_slide5_subtitle">Aby aplikace mohla zůstat spuštěná na pozadí, vypněte v následující nabídce pro AsteroidOS Sync „Optimalizaci spotřeby energie“:</string>
@@ -50,10 +50,15 @@
     <string name="grant_permission">Udělit oprávnění</string>
     <string name="please_grant_permissions">Prosíme udělte toto oprávnění</string>
     <string name="impassable_slide">Prosíme udělte toto oprávnění</string>
-<string name="intro_slide1_subtitle">Tato aplikace umožňuje synchronizaci telefonu s Android s hodinkami s AsteroidOS. K tomu je třeba několik oprávnění.</string>
+    <string name="intro_slide1_subtitle">Tato aplikace umožňuje synchronizaci telefonu s Android s hodinkami s AsteroidOS. K tomu je třeba několik oprávnění.</string>
     <string name="intro_slide2_title">Přístup k souborům</string>
     <string name="intro_slide2_subtitle">Pro mezipaměť dat a ukládání snímků obrazovky vašich hodinek.</string>
     <string name="intro_slide3_title">Umístění</string>
     <string name="intro_slide3_subtitle">Pro skenování přítomnosti Bluetooth Low Energy zařízení poblíž.</string>
     <string name="synchronize_weather">Najít počasí automaticky</string>
-    </resources>
+    <string name="title_activity_settings_activity">Nastavení</string>
+    <string name="action_settings">Nastavení</string>
+    <string name="title_activity_settings">Nastavení</string>
+    <string name="switch_phone_notifications">Umlčet telefon když je připojeno</string>
+    <string name="notification_silent_icon">ikona tichého oznámení</string>
+</resources>
