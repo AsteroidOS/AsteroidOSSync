@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">סנכרון AsteroidOS</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">סנכרון AsteroidOS</string>
     <string name="generic_ok">אישור</string>
     <string name="searching">חיפוש אחר שעונים</string>
     <string name="unknown_device">התקן לא ידוע</string>
@@ -35,14 +36,14 @@
     <string name="screenshot">צילום מסך</string>
     <string name="synchronize_time">סנכרון השעה</string>
     <string name="explain_app_prefs">התרעות מהיישומים שלך תופענה כאן</string>
-<string name="notification_type_default">בררת מחדל</string>
+    <string name="notification_type_default">בררת מחדל</string>
     <string name="notification_type_no_notif">אין התרעה</string>
     <string name="notification_type_silent">שקט</string>
     <string name="notification_type_vibra">רטט</string>
     <string name="notification_type_strong_vibra">רטט חזק</string>
     <string name="position_indicator">מחוון מיקום</string>
     <string name="use_this_area">שימוש בשטח זה למזג אוויר</string>
-<string name="app_icon">סמל יישומון</string>
+    <string name="app_icon">סמל יישומון</string>
     <string name="intro_slide1_title">ברוך בואך</string>
     <string name="intro_slide1_subtitle">יישומון זה מאפשר לך לסנכרן את טלפון ה־Android שלך עם שעון ה־AsteroidOS שלך. אך תחילה, נדרשות הרשאות לכך.</string>
     <string name="intro_slide2_title">גישה לקבצים</string>
@@ -55,5 +56,8 @@
     <string name="grant_permission">הענקת הרשאות</string>
     <string name="please_grant_permissions">נא להעניק הרשאה זו</string>
     <string name="impassable_slide">נא להעניק הרשאה זו</string>
-<string name="synchronize_weather">איתור מזג האוויר אוטומטית</string>
-    </resources>
+    <string name="synchronize_weather">איתור מזג האוויר אוטומטית</string>
+    <string name="title_activity_settings_activity">הגדרות</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="title_activity_settings">הגדרות</string>
+</resources>
