@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">OK</string>
     <string name="searching">Søger efter ure</string>
@@ -35,7 +35,7 @@
     <string name="screenshot">Skærmbillede</string>
     <string name="synchronize_time">Synkroniser tiden</string>
     <string name="explain_app_prefs">Meddelelser fra programmer vises her</string>
-<string name="notification_type_default">Standard</string>
+    <string name="notification_type_default">Standard</string>
     <string name="notification_type_no_notif">Ingen meddelse</string>
     <string name="notification_type_silent">Lydløs</string>
     <string name="notification_type_vibra">Vibration</string>
@@ -55,5 +55,10 @@
     <string name="grant_permission">Giv tilladelse</string>
     <string name="please_grant_permissions">Giv denne tilladelse</string>
     <string name="impassable_slide">Giv denne tilladelse</string>
-<string name="synchronize_weather">Find vejr automatisk</string>
-    </resources>
+    <string name="synchronize_weather">Find vejr automatisk</string>
+    <string name="title_activity_settings_activity">Indstillinger</string>
+    <string name="action_settings">Indstillinger</string>
+    <string name="title_activity_settings">Indstillinger</string>
+    <string name="switch_phone_notifications">Lydløs telefon når den er tilsluttet</string>
+    <string name="notification_silent_icon">meddelelse lydløs-ikon</string>
+</resources>
