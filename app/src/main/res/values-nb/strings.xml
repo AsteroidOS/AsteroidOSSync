@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">OK</string>
     <string name="searching">Søker etter armbåndsur</string>
@@ -35,14 +35,14 @@
     <string name="screenshot">Skjermavbildning</string>
     <string name="synchronize_time">Synkroniseringstid</string>
     <string name="explain_app_prefs">Merknader fra dine programmer vil vises her</string>
-<string name="notification_type_default">Forvalg</string>
+    <string name="notification_type_default">Forvalg</string>
     <string name="notification_type_no_notif">Ingen merknad</string>
     <string name="notification_type_silent">Stille</string>
     <string name="notification_type_vibra">Vibrasjon</string>
     <string name="notification_type_strong_vibra">Kraftig vibrasjon</string>
     <string name="position_indicator">Posisjonsindikator</string>
     <string name="use_this_area">Bruk dette området for vær</string>
-<string name="app_icon">Programikon</string>
+    <string name="app_icon">Programikon</string>
     <string name="intro_slide1_title">Velkommen</string>
     <string name="intro_slide1_subtitle">Dette programmet lar deg synkronisere din Android-enhet med din AsteroidOS-klokke. Først trenger det noen tilganger.</string>
     <string name="intro_slide2_title">Filtilgang</string>
@@ -55,5 +55,10 @@
     <string name="grant_permission">Innvilg tilgang</string>
     <string name="please_grant_permissions">Innvilg denne tilgangen</string>
     <string name="impassable_slide">Innvilg denne tilgangen</string>
-<string name="synchronize_weather">Finn plassering for vær automatisk</string>
-    </resources>
+    <string name="synchronize_weather">Finn plassering for vær automatisk</string>
+    <string name="title_activity_settings_activity">Innstillinger</string>
+    <string name="action_settings">Innstillinger</string>
+    <string name="title_activity_settings">Innstillinger</string>
+    <string name="switch_phone_notifications">Forstum telefon når tilkoblet</string>
+    <string name="notification_silent_icon">ikon for avslåtte merknader</string>
+</resources>
