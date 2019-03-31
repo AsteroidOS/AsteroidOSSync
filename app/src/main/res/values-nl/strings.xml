@@ -35,14 +35,14 @@
     <string name="screenshot">Schermafdruk</string>
     <string name="synchronize_time">Tijd synchroniseren</string>
     <string name="explain_app_prefs">Meldingen van je apps zullen hier verschijnen</string>
-<string name="notification_type_default">Standaard</string>
+    <string name="notification_type_default">Standaard</string>
     <string name="notification_type_no_notif">Geen melding</string>
     <string name="notification_type_silent">Stil</string>
     <string name="notification_type_vibra">Trillen</string>
     <string name="notification_type_strong_vibra">Sterk trillen</string>
     <string name="position_indicator">Positie-indicator</string>
     <string name="use_this_area">Gebruik dit gebied voor weer</string>
-<string name="intro_slide5_title">Batterijoptimalisatie</string>
+    <string name="intro_slide5_title">Batterijoptimalisatie</string>
     <string name="intro_slide5_subtitle">Om deze app in de achtergrond te kunnen uitvoeren moet je ‘Batterijoptimalisatie’ voor AsteroidOS-synchronisatie in het volgende menu uitschakelen:</string>
     <string name="app_icon">Toepassingspictogram</string>
     <string name="intro_slide1_title">Welkom</string>
@@ -56,4 +56,9 @@
     <string name="please_grant_permissions">Gelieve deze toestemming te geven</string>
     <string name="impassable_slide">Gelieve deze toestemming te geven</string>
     <string name="synchronize_weather">Weer automatisch lokaliseren</string>
+    <string name="title_activity_settings_activity">Instellingen</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="title_activity_settings">Instellingen</string>
+    <string name="switch_phone_notifications">Telefoon dempen wanneer verbonden</string>
+    <string name="notification_silent_icon">pictogram stille melding</string>
 </resources>
