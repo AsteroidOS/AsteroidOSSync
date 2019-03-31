@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="generic_ok">Oké</string>
+<resources>
+    <string name="generic_ok">Oké</string>
     <string name="searching">Achter horloges aan het zoeken</string>
     <string name="unknown_device">Onbekend apparaat</string>
     <string name="nothing_found">Geen horloges gevonden</string>
@@ -55,4 +56,9 @@
     <string name="please_grant_permissions">Gelieve deze toelating te geven</string>
     <string name="impassable_slide">Gelieve deze toelating te geven</string>
     <string name="synchronize_weather">Weerbericht automatisch lokaliseren</string>
+    <string name="title_activity_settings_activity">Instellingen</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="title_activity_settings">Instellingen</string>
+    <string name="switch_phone_notifications">Gsm dempen wanneer verbonden</string>
+    <string name="notification_silent_icon">pictogram stille melding</string>
 </resources>
