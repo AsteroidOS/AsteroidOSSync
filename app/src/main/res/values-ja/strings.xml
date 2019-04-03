@@ -35,14 +35,14 @@
     <string name="screenshot">スクリーンショット</string>
     <string name="synchronize_time">時刻を同期</string>
     <string name="explain_app_prefs">アプリからの通知がここに表示されます</string>
-<string name="notification_type_default">デフォルト</string>
+    <string name="notification_type_default">デフォルト</string>
     <string name="notification_type_no_notif">通知しない</string>
     <string name="notification_type_silent">サイレント</string>
     <string name="notification_type_vibra">振動</string>
     <string name="notification_type_strong_vibra">強い振動</string>
     <string name="position_indicator">位置インジケーター</string>
     <string name="use_this_area">天気にこのエリアを使用する</string>
-<string name="app_icon">アプリケーションアイコン</string>
+    <string name="app_icon">アプリケーションアイコン</string>
     <string name="intro_slide1_title">ようこそ</string>
     <string name="intro_slide1_subtitle">このアプリは、AsteroidOS ウォッチとお使いの Android 携帯電話を同期することができます。しかし、まず、いくつかのアクセス許可が必要です。</string>
     <string name="intro_slide2_title">ファイルアクセス</string>
@@ -56,4 +56,9 @@
     <string name="please_grant_permissions">このアクセス許可を付与してください</string>
     <string name="impassable_slide">このアクセス許可を付与してください</string>
     <string name="synchronize_weather">自動的に天気を取得</string>
+    <string name="title_activity_settings_activity">設定</string>
+    <string name="action_settings">設定</string>
+    <string name="title_activity_settings">設定</string>
+    <string name="switch_phone_notifications">接続された時に電話の音を出さない</string>
+    <string name="notification_silent_icon">通知サイレントアイコン</string>
 </resources>
