@@ -1,2 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="generic_ok">Aceutar</string>
+    <string name="searching">Guetando relós</string>
+    <string name="unknown_device">Preséu desconocíu</string>
+    <string name="nothing_found">Nun s\'alcontraron relós</string>
+    <string name="one_found">Alcontróse un reló</string>
+    <string name="n_found">Alcontráronse %d relós</string>
+    <string name="connecting">Coneutando…</string>
+    <string name="connecting_formatted">Coneutando con %s</string>
+    <string name="settings_icon">Iconu d\'Axustes</string>
+    <string name="phone_is_searching">¡El teléfonu ta guetándote!</string>
+    <string name="downloading">Baxando…</string>
+    <string name="notification_type_default">Por defeutu</string>
+    <string name="notification_type_vibra">Vibración</string>
+    <string name="notification_type_strong_vibra">Vibración fuerte</string>
+    <string name="explain_app_prefs">Equí van apaecer los avisos de les aplicaciones</string>
+    <string name="intro_slide1_title">Afáyate</string>
+    <string name="intro_slide1_subtitle">Esta aplicación déxate sincronizar esti teléfonu Android con un reló AsteroidOS. Pero primero, precisa dalgunos permisos.</string>
+    <string name="intro_slide2_title">Accesu a ficheros</string>
+    <string name="intro_slide2_subtitle">Pa atroxar datos na caché y guardar les captures del reló.</string>
+    <string name="intro_slide3_title">Allugamientu</string>
+    <string name="intro_slide3_subtitle">Pa guetar preseos Bluetooth de consumu baxu cercanos.</string>
+    <string name="intro_slide4_title">Avisos</string>
+    <string name="intro_slide5_title">Optimización de batería</string>
+    <string name="intro_slide5_subtitle">Pa dexar qu\'esta aplicación s\'execute en segundu planu, desactiva «Optimización de batería» p\'AsteroidOS Sync nel menú de darréu:</string>
+    <string name="intro_slideerror_subtitle">Esti preséu nun sofita\'l Bluetooth de consumu baxu.</string>
+    <string name="grant_permission">Conceder</string>
+    <string name="please_grant_permissions">Concede\'l permisu, por favor</string>
+    <string name="impassable_slide">Concede\'l permisu, por favor</string>
+    <string name="title_activity_settings_activity">Axustes</string>
+    <string name="action_settings">Axustes</string>
+    <string name="title_activity_settings">Axustes</string>
+</resources>
