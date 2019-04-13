@@ -56,4 +56,8 @@
     <string name="notification_type_default">Predefinito</string>
     <string name="use_this_area">Utilizza questa zona per il meteo</string>
     <string name="synchronize_weather">Localizzazione meteo automatica</string>
+    <string name="title_activity_settings_activity">Impostazioni</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="title_activity_settings">Impostazioni</string>
+    <string name="switch_phone_notifications">Silenzia il telefono quando è connesso</string>
 </resources>
