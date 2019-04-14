@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="generic_ok">OKE</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic_ok">OKE</string>
     <string name="searching">Mencari jam tangan</string>
     <string name="unknown_device">Perangkat tidak dikenal</string>
     <string name="nothing_found">Jam tangan tidak ditemukan</string>
@@ -55,4 +56,9 @@
     <string name="grant_permission">Memberikan izin</string>
     <string name="please_grant_permissions">Silakan memberikan izin ini</string>
     <string name="impassable_slide">Silakan memberikan izin ini</string>
+    <string name="title_activity_settings_activity">Pengaturan</string>
+    <string name="action_settings">Pengaturan</string>
+    <string name="title_activity_settings">Pengaturan</string>
+    <string name="switch_phone_notifications">Diamkan ponsel saat terhubung</string>
+    <string name="notification_silent_icon">Ikon notifikasi diam</string>
 </resources>
