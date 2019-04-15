@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">OK</string>
     <string name="searching">Procurando relógios</string>
@@ -35,14 +35,14 @@
     <string name="screenshot">Captura de tela</string>
     <string name="synchronize_time">Horário da sincronização</string>
     <string name="explain_app_prefs">Notificações do seus aplicativos aparecerão aqui</string>
-<string name="notification_type_default">Padrão</string>
+    <string name="notification_type_default">Padrão</string>
     <string name="notification_type_no_notif">Sem notificações</string>
     <string name="notification_type_silent">Silenciar</string>
     <string name="notification_type_vibra">Vibrar</string>
     <string name="notification_type_strong_vibra">Vibração forte</string>
     <string name="position_indicator">Indicador de posição</string>
     <string name="use_this_area">Usar esta área para o clima</string>
-<string name="app_icon">Ícone do aplicativo</string>
+    <string name="app_icon">Ícone do aplicativo</string>
     <string name="intro_slide1_title">Bem-vindo</string>
     <string name="intro_slide1_subtitle">Este app permite a você sincronizar seu celular Android com o relógio AsteroidOS. Mas primeiro ele precisa de algumas permissões.</string>
     <string name="intro_slide2_title">Acesso aos arquivos</string>
@@ -54,6 +54,11 @@
     <string name="intro_slideerror_title">Suporte ao Bluetooth de baixa energia</string>
     <string name="grant_permission">Conceder permissão</string>
     <string name="please_grant_permissions">Por favor, conceda essa permissão</string>
-    <string name="impassable_slide">Por favor, conceda essa permissão</string>
-<string name="synchronize_weather">Localizar clima automaticamente</string>
-    </resources>
+    <string name="impassable_slide">Conceda essa permissão</string>
+    <string name="synchronize_weather">Localizar clima automaticamente</string>
+    <string name="title_activity_settings_activity">Configurações</string>
+    <string name="action_settings">Configurações</string>
+    <string name="title_activity_settings">Configurações</string>
+    <string name="switch_phone_notifications">Silenciar telefone quando conectado</string>
+    <string name="notification_silent_icon">ícone de silenciar notificação</string>
+</resources>
