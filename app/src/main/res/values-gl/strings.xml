@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="generic_ok">Feito</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic_ok">Feito</string>
     <string name="searching">Estase a procurar reloxos</string>
     <string name="unknown_device">Dispositivo descoñecido</string>
     <string name="nothing_found">Non foron atopados reloxos</string>
@@ -55,4 +56,9 @@
     <string name="grant_permission">Outorgar permiso</string>
     <string name="please_grant_permissions">Por favor, outorga este permiso</string>
     <string name="impassable_slide">Por favor, outorga este permiso</string>
+    <string name="title_activity_settings_activity">Axustes</string>
+    <string name="action_settings">Axustes</string>
+    <string name="title_activity_settings">Axustes</string>
+    <string name="switch_phone_notifications">Sileciar teléfono cando está conectado</string>
+    <string name="notification_silent_icon">Icona de silenciar</string>
 </resources>
