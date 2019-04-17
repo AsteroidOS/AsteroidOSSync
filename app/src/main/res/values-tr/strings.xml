@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">TAMAM</string>
     <string name="searching">Saatler aranıyor</string>
@@ -35,14 +35,14 @@
     <string name="screenshot">Ekran görüntüsü</string>
     <string name="synchronize_time">Zamanı eşitle</string>
     <string name="explain_app_prefs">Uygulamalarınızdan bildirimler burada gözükecek</string>
-<string name="notification_type_default">Öntanımlı</string>
+    <string name="notification_type_default">Öntanımlı</string>
     <string name="notification_type_no_notif">Bildirim yok</string>
     <string name="notification_type_silent">Sessiz</string>
     <string name="notification_type_vibra">Titreşim</string>
     <string name="notification_type_strong_vibra">Güçlü titreşim</string>
     <string name="position_indicator">Konum göstergesi</string>
     <string name="use_this_area">Bu alanı hava durumu için kullan</string>
-<string name="app_icon">Uygulama simgesi</string>
+    <string name="app_icon">Uygulama simgesi</string>
     <string name="intro_slide1_title">Hoş geldiniz</string>
     <string name="intro_slide1_subtitle">Bu uygulama Android telefonunuzu AsteroidOS saatinizle eşitlemenizi sağlar. Ancak önce bazı izinler gerektirir.</string>
     <string name="intro_slide2_title">Dosya erişimi</string>
@@ -55,5 +55,10 @@
     <string name="grant_permission">İzin ver</string>
     <string name="please_grant_permissions">Lütfen bu izni verin</string>
     <string name="impassable_slide">Lütfen bu izni verin</string>
-<string name="synchronize_weather">Hava durumunu kendiliğinden konumla</string>
-    </resources>
+    <string name="synchronize_weather">Hava durumunu kendiliğinden konumla</string>
+    <string name="title_activity_settings_activity">Ayarlar</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="title_activity_settings">Ayarlar</string>
+    <string name="switch_phone_notifications">Telefon bağlıyken sessiz</string>
+    <string name="notification_silent_icon">bildirim sessiz simgesi</string>
+</resources>
