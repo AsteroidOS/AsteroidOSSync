@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">Ok</string>
     <string name="searching">Suche nach Uhren</string>
@@ -35,14 +35,14 @@
     <string name="screenshot">Bildschirmfoto</string>
     <string name="synchronize_time">Zeit synchronisieren</string>
     <string name="explain_app_prefs">Mitteilungen Ihrer Apps werden hier angezeigt</string>
-<string name="notification_type_default">Standard</string>
+    <string name="notification_type_default">Standard</string>
     <string name="notification_type_no_notif">Keine Benachrichtigung</string>
     <string name="notification_type_silent">Stumm</string>
     <string name="notification_type_vibra">Vibrieren</string>
     <string name="notification_type_strong_vibra">Starke Vibration</string>
     <string name="position_indicator">Positionsanzeige</string>
     <string name="use_this_area">Nutze diesen Ort für Wetter</string>
-<string name="app_icon">Anwendungssymbol</string>
+    <string name="app_icon">Anwendungssymbol</string>
     <string name="intro_slide1_title">Willkommen</string>
     <string name="intro_slide1_subtitle">Mit dieser App kannst du dein Android-Handy mit deiner AsteroidOS-Uhr synchronisieren. Aber zuerst braucht es einige Berechtigungen.</string>
     <string name="intro_slide2_title">Dateizugriff</string>
@@ -55,6 +55,9 @@
     <string name="grant_permission">Erlaubnis erteilen</string>
     <string name="please_grant_permissions">Bitte gewähre diese Erlaubnis</string>
     <string name="impassable_slide">Bitte gewähre diese Erlaubnis</string>
-<string name="synchronize_weather">Wetter automatisch lokalisieren</string>
+    <string name="synchronize_weather">Wetter automatisch lokalisieren</string>
     <string name="switch_phone_notifications">Telefon stumm bei Verbindung</string>
+    <string name="title_activity_settings_activity">Einstellungen</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="title_activity_settings">Einstellungen</string>
 </resources>
