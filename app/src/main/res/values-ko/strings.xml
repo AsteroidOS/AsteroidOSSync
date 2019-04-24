@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="generic_ok">승인</string>
+<resources>
+    <string name="generic_ok">승인</string>
     <string name="searching">시계를 찾는 중</string>
     <string name="unknown_device">알려지지 않은 장치</string>
     <string name="nothing_found">시계를 찾을 수 없음</string>
@@ -55,4 +56,9 @@
     <string name="please_grant_permissions">이 권한을 주세요</string>
     <string name="impassable_slide">이 권한을 주세요</string>
     <string name="synchronize_weather">위치를 사용해 날씨를 가져오기</string>
+    <string name="title_activity_settings_activity">설정</string>
+    <string name="action_settings">설정</string>
+    <string name="title_activity_settings">설정</string>
+    <string name="switch_phone_notifications">핸드폰에 연결될 때 무음</string>
+    <string name="notification_silent_icon">무음 아이콘 알림</string>
 </resources>
