@@ -146,7 +146,7 @@ public class NLService extends NotificationListenerService {
         Notification notification = sbn.getNotification();
         String packageName = sbn.getPackageName();
 
-        String[] allowedOngoingApps = {"com.google.android.apps.maps", "com.android.dialer"};
+        String[] allowedOngoingApps = {"com.google.android.apps.maps", "com.android.dialer", "com.google.android.dialer"};
         if((notification.priority < Notification.PRIORITY_DEFAULT) ||
            ((notification.flags & Notification.FLAG_ONGOING_EVENT) != 0
             && !Arrays.asList(allowedOngoingApps).contains(packageName)) ||
