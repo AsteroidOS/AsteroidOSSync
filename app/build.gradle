@@ -50,5 +50,5 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation 'github.vatsal.easyweather:library:1.0.0'
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'org.osmdroid:osmdroid-android:6.0.1'
+    implementation 'org.osmdroid:osmdroid-android:6.1.0'
 }
