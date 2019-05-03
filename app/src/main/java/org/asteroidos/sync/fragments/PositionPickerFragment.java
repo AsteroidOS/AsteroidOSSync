@@ -54,6 +54,7 @@ public class PositionPickerFragment extends Fragment {
         mMapView.setTileSource(TileSourceFactory.MAPNIK);
         mMapView.setMultiTouchControls(true);
         mMapView.setBuiltInZoomControls(false);
+        mMapView.setZoomRounding(true);
         mMapView.setMaxZoomLevel(13.0);
         mMapView.setMinZoomLevel(5.0);
         mMapView.getController().setZoom(zoom);

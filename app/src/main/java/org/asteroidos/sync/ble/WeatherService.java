@@ -26,11 +26,13 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
 
 import org.asteroidos.sync.services.GPSTracker;
+import org.osmdroid.config.Configuration;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
@@ -76,6 +78,8 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     public WeatherService(Context ctx, BleDevice device) {
         mDevice = device;
         mCtx = ctx;
+
+        Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
         mSettings = mCtx.getSharedPreferences(PREFS_NAME, 0);
         mLatitude = mSettings.getFloat(PREFS_LATITUDE, PREFS_LATITUDE_DEFAULT);
