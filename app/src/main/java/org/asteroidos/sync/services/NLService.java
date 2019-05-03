@@ -127,6 +127,7 @@ public class NLService extends NotificationListenerService {
         iconFromPackage.put("flipboard.app", "logo-rss");
         iconFromPackage.put("net.slideshare.mobile", "logo-linkedin");
         iconFromPackage.put("org.buffer.android", "logo-buffer");
+        iconFromPackage.put("org.kde.kdeconnect_tp", "md-phone-portrait");
         iconFromPackage.put("org.telegram.messenger", "ios-paper-plane");
         iconFromPackage.put("org.thoughtcrime.securesms", "logo-signal");
         iconFromPackage.put("org.thunderdog.challegram", "ios-paper-plane");
