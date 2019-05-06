@@ -330,17 +330,6 @@
             android:textColor="#999999"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/unpairTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        android:clickable="true"
-        android:text="@string/unpair"
-        android:textAlignment="center"
-        android:focusable="true" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

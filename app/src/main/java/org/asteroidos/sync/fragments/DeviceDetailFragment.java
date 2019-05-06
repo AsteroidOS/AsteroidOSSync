@@ -19,6 +19,7 @@
 package org.asteroidos.sync.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +29,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -70,6 +74,12 @@ public class DeviceDetailFragment extends Fragment {
         super.onResume();
 
         mUpdateListener.onUpdateRequested();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @SuppressLint("SetTextI18n")
@@ -163,15 +173,23 @@ public class DeviceDetailFragment extends Fragment {
             }
         });
 
-        TextView unpairTextView = view.findViewById(R.id.unpairTextView);
-        unpairTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDeviceListener.onDefaultDeviceUnselected();
-            }
-        });
+
 
         setStatus(mStatus);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.device_detail_manu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if(menuItem.getItemId() ==  R.id.unpairButton)
+            mDeviceListener.onDefaultDeviceUnselected();
+
+        return (super.onOptionsItemSelected(menuItem));
     }
 
     public void setLocalName(String name) {
@@ -186,6 +204,7 @@ public class DeviceDetailFragment extends Fragment {
                 mConnectedContent.setVisibility(View.VISIBLE);
                 mFab.setImageResource(R.drawable.bluetooth_disconnect);
                 mConnected = true;
+                setMenuVisibility(true);
                 break;
             case SynchronizationService.STATUS_DISCONNECTED:
                 mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
@@ -193,11 +212,13 @@ public class DeviceDetailFragment extends Fragment {
                 mDisconnectedText.setText(R.string.disconnected);
                 mFab.setImageResource(R.drawable.bluetooth_connect);
                 mConnected = false;
+                setMenuVisibility(false);
                 break;
             case SynchronizationService.STATUS_CONNECTING:
                 mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
                 mConnectedContent.setVisibility(View.GONE);
                 mDisconnectedText.setText(R.string.connecting);
+                setMenuVisibility(false);
                 break;
             default:
                 break;
