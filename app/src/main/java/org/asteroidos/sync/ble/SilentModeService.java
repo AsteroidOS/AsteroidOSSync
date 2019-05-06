@@ -30,41 +30,38 @@ public class SilentModeService implements SharedPreferences.OnSharedPreferenceCh
     SharedPreferences prefs;
     Boolean notificationPref;
     Context context;
+    AudioManager am;
 
     public SilentModeService(Context con) {
         prefs = con.getSharedPreferences(PREFS_NAME, Activity.MODE_PRIVATE);
         context = con;
         prefs.registerOnSharedPreferenceChangeListener(this);
+        am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
     }
     public void onConnect() {
         notificationPref = prefs.getBoolean(PREF_RINGER, false);
-        AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-
-        int origRingerMode = am.getRingerMode();
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt(PREF_ORIG_RINGER, origRingerMode);
-        editor.apply();
 
         if (notificationPref){
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt(PREF_ORIG_RINGER, am.getRingerMode());
+            editor.apply();
             am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
         }
     }
 
     public void onDisconnect(){
-        AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        int origRingerMode = prefs.getInt(PREF_ORIG_RINGER, AudioManager.MODE_NORMAL);
+        int origRingerMode = prefs.getInt(PREF_ORIG_RINGER, AudioManager.RINGER_MODE_NORMAL);
         am.setRingerMode(origRingerMode);
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         notificationPref = prefs.getBoolean(PREF_RINGER, false);
-        AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         if (notificationPref){
             am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
         } else {
-            am.setRingerMode(prefs.getInt(PREF_ORIG_RINGER, AudioManager.MODE_NORMAL));
+            am.setRingerMode(prefs.getInt(PREF_ORIG_RINGER, am.getRingerMode()));
         }
     }
 }
