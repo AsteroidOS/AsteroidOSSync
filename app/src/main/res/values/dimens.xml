@@ -3,6 +3,6 @@
     <dimen name="device_list_margin">60dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="detail_horizontal_margin">20dp</dimen>
-    <dimen name="detail_vertical_margin">30dp</dimen>
+    <dimen name="detail_vertical_margin">70dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 </resources>
