@@ -30,7 +30,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 
 import org.asteroidos.sync.utils.NotificationParser;
 

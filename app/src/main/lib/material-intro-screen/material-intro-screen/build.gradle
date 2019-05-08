@@ -1,45 +1,25 @@
-apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+plugins {
+    id 'com.android.library'
+    id 'digital.wup.android-maven-publish' version '3.6.2'
+    id 'signing'
+}
 
-apply from: "$rootDir/versions.gradle"
+group = 'io.github.dreierf'
+version = '0.0.6'
+
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 28
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
-        debug {
-            defaultPublishConfig "debug"
-        }
-
-        android.libraryVariants.all { variant ->
-            project.task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
-                title = "Documentation for Android $project.android.defaultConfig.versionName v$project.android.defaultConfig.versionCode"
-                description = "Generates Javadoc for $variant.name."
-                group = 'Documentation'
-
-                destinationDir = new File("${project.getProjectDir()}/javaDoc/", variant.baseName)
-                source = variant.javaCompile.source
-
-                ext.androidJar = "${project.android.sdkDirectory}/platforms/${project.android.compileSdkVersion}/android.jar"
-                classpath = project.files(variant.javaCompile.classpath.files) + project.files(ext.androidJar)
-
-                options.memberLevel = JavadocMemberLevel.PROTECTED
-                options.links("http://docs.oracle.com/javase/7/docs/api/")
-                options.links("http://developer.android.com/reference/")
-                options.tags = ['sample']
-                exclude '**/BuildConfig.java'
-                exclude '**/R.java'
-            }
-        }
+        debug {}
+        release {}
     }
 
     lintOptions {
@@ -47,20 +27,84 @@ android {
     }
 
     dependencies {
-        compile fileTree(include: ['*.jar'], dir: 'libs')
-        androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-            exclude group: 'com.android.support', module: 'support-annotations'
-        })
-        compile "com.android.support:appcompat-v7:${project.androidSupport}"
-        compile "com.android.support:design:${project.androidSupport}"
-    }
+        implementation 'androidx.appcompat:appcompat:1.0.2'
+        implementation 'com.google.android.material:material:1.0.0'
 
-    publish {
-        userOrg = 'tangoagency'
-        groupId = 'agency.tango.android'
-        artifactId = 'material-intro-screen'
-        publishVersion = '0.0.5'
-        desc = ''
-        website = 'https://github.com/TangoAgency/material-intro-screen'
+        androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     }
+}
+
+task generateJavadoc(type: Javadoc) {
+    failOnError false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+    classpath += project.files("${project.android.sdkDirectory}/platforms/${project.android.compileSdkVersion}/android.jar")
+
+    options.memberLevel = JavadocMemberLevel.PROTECTED
+    options.links("http://docs.oracle.com/javase/7/docs/api/")
+    options.links("http://developer.android.com/reference/")
+    exclude '**/BuildConfig.java'
+    exclude '**/R.java'
+}
+
+task javadocJar(type: Jar, dependsOn: generateJavadoc) {
+    classifier = 'javadoc'
+    from generateJavadoc.destinationDir
+}
+
+task sourceJar(type: Jar) {
+    classifier 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+publishing {
+    repositories {
+        maven {
+            credentials {
+                username ossrhUsername
+                password ossrhPassword
+            }
+            url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+        }
+    }
+    publications {
+        mavenAar(MavenPublication) {
+            from components.android
+            artifact sourceJar
+            artifact javadocJar
+            artifactId = 'material-intro-screen'
+
+            pom {
+                name = 'Material Intro Screen'
+                description = 'Provides an intro screen for your app'
+                url = 'https://github.com/DreierF/material-intro-screen'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'dreierf'
+                        name = 'Florian Dreier'
+                    }
+                    developer {
+                        id = 'tango'
+                        name = 'Tango Agency'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/DreierF/material-intro-screen.git'
+                    developerConnection = 'scm:git:git://github.com/DreierF/material-intro-screen.git'
+                    url = 'https://github.com/DreierF/material-intro-screen'
+                }
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenAar
 }
