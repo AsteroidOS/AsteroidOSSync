@@ -5,7 +5,7 @@ package org.asteroidos.sync.utils;
 import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class AppInfo
         implements Comparable<AppInfo>, Parcelable

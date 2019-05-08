@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator_layout_slide"
@@ -11,7 +11,7 @@
     android:background="@android:color/transparent"
     android:orientation="vertical">
 
-    <agency.tango.materialintroscreen.widgets.OverScrollViewPager
+    <io.github.dreierf.materialintroscreen.widgets.OverScrollViewPager
         android:id="@+id/view_pager_slides"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -23,9 +23,9 @@
         android:layout_gravity="bottom"
         android:orientation="vertical"
         android:paddingTop="32dp"
-        app:layout_behavior="agency.tango.materialintroscreen.MoveUpBehaviour">
+        app:layout_behavior="io.github.dreierf.materialintroscreen.MoveUpBehaviour">
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                 android:src="@drawable/ic_skip"
                 android:visibility="gone" />
 
-            <agency.tango.materialintroscreen.widgets.InkPageIndicator
+            <io.github.dreierf.materialintroscreen.widgets.InkPageIndicator
                 android:id="@+id/indicator"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -87,5 +87,5 @@
         </LinearLayout>
     </LinearLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
