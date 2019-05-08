@@ -15,10 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/detail_vertical_margin"
+            android:paddingBottom="@dimen/detail_bottom_margin"
             android:paddingLeft="@dimen/detail_horizontal_margin"
             android:paddingRight="@dimen/detail_horizontal_margin"
-            android:paddingTop="@dimen/detail_vertical_margin"
+            android:paddingTop="@dimen/detail_top_margin"
             android:visibility="invisible">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
