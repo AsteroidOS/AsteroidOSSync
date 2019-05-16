@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">OK</string>
     <string name="searching">Αναζήτηση για ρολόγια</string>
@@ -35,7 +35,7 @@
     <string name="screenshot">Στιγμιότυπο οθόνης</string>
     <string name="synchronize_time">Συγχρονισμός ώρας</string>
     <string name="explain_app_prefs">Οι ειδοποιήσεις εφαρμογών θα εμφανιστούν εδώ</string>
-<string name="notification_type_default">Προεπιλογή</string>
+    <string name="notification_type_default">Προεπιλογή</string>
     <string name="notification_type_no_notif">Καμία ειδοποίηση</string>
     <string name="notification_type_silent">Αθόρυβο</string>
     <string name="notification_type_vibra">Δόνηση</string>
@@ -55,4 +55,10 @@
     <string name="grant_permission">Εκχώρηση άδειας</string>
     <string name="please_grant_permissions">Παρακαλώ εκχωρήστε το δικαίωμα</string>
     <string name="impassable_slide">Παρακαλώ εκχωρήστε το δικαίωμα</string>
+    <string name="synchronize_weather">Αυτόματη εύρεση τοποθεσίας καιρού</string>
+    <string name="title_activity_settings_activity">Ρυθμίσεις</string>
+    <string name="action_settings">Ρυθμίσεις</string>
+    <string name="title_activity_settings">Ρυθμίσεις</string>
+    <string name="switch_phone_notifications">Το τηλέφωνο σε αθόρυβη λειτουργία όταν συνδέεται</string>
+    <string name="notification_silent_icon">Εικονίδιο αθόρυβης λειτουργίας</string>
 </resources>

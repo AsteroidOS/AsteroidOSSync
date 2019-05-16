@@ -60,5 +60,5 @@
     <string name="action_settings">Настройки</string>
     <string name="title_activity_settings">Настройки</string>
     <string name="switch_phone_notifications">Беззвучный режим телефона при подключении</string>
-    <string name="notification_silent_icon">значок беззвучных уведомления</string>
+    <string name="notification_silent_icon">иконка уведомления в бесшумном режиме</string>
 </resources>
