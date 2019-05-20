@@ -27,10 +27,10 @@ public class SilentModeService implements SharedPreferences.OnSharedPreferenceCh
     public static final String PREFS_NAME = "AppPreferences";
     public static final String PREF_RINGER = "PhoneRingModeOnConnection";
     private static final String PREF_ORIG_RINGER = "OriginalRingMode";
-    SharedPreferences prefs;
-    Boolean notificationPref;
-    Context context;
-    AudioManager am;
+    private SharedPreferences prefs;
+    private Boolean notificationPref;
+    private Context context;
+    private AudioManager am;
 
     public SilentModeService(Context con) {
         prefs = con.getSharedPreferences(PREFS_NAME, Activity.MODE_PRIVATE);
