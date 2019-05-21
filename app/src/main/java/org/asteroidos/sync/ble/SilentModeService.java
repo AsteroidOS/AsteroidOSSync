@@ -51,8 +51,11 @@ public class SilentModeService implements SharedPreferences.OnSharedPreferenceCh
     }
 
     public void onDisconnect(){
-        int origRingerMode = prefs.getInt(PREF_ORIG_RINGER, AudioManager.RINGER_MODE_NORMAL);
-        am.setRingerMode(origRingerMode);
+        notificationPref = prefs.getBoolean(PREF_RINGER, false);
+        if (notificationPref) {
+            int origRingerMode = prefs.getInt(PREF_ORIG_RINGER, AudioManager.RINGER_MODE_NORMAL);
+            am.setRingerMode(origRingerMode);
+        }
     }
 
     @Override
