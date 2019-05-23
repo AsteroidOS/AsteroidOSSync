@@ -23,7 +23,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.7"
             android:layout_marginStart="5dp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:gravity="center_vertical|start"/>
     </LinearLayout>

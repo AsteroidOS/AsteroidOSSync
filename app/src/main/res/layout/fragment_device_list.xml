@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/content"
-    app:rb_color="#ff8f6b"
+    app:rb_color="@color/rb_color"
     app:rb_radius="25dp"
     app:rb_rippleAmount="4"
     app:rb_duration="5000"
