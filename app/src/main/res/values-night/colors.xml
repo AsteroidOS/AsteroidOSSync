@@ -17,5 +17,5 @@
     <color name="colorintroslideerrorbutton">#e65100</color>
     <color name="iconTint">@android:color/black</color>
     <color name="appListTextColor">@android:color/white</color>
-    <color name="rb_color">#ff8f6b</color>
+    <color name="rb_color">@color/colorAccent</color>
 </resources>
