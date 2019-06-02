@@ -212,15 +212,16 @@ public class DeviceDetailFragment extends Fragment {
                 mDisconnectedText.setText(R.string.disconnected);
                 mFab.setImageResource(R.drawable.bluetooth_connect);
                 mConnected = false;
-                setMenuVisibility(false);
+                setMenuVisibility(true);
                 break;
             case SynchronizationService.STATUS_CONNECTING:
                 mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
                 mConnectedContent.setVisibility(View.GONE);
                 mDisconnectedText.setText(R.string.connecting);
-                setMenuVisibility(false);
+                setMenuVisibility(true);
                 break;
             default:
+                setMenuVisibility(false);
                 break;
         }
     }
