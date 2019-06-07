@@ -59,6 +59,6 @@
     <string name="title_activity_settings_activity">Indstillinger</string>
     <string name="action_settings">Indstillinger</string>
     <string name="title_activity_settings">Indstillinger</string>
-    <string name="switch_phone_notifications">Lydløs telefon når den er tilsluttet</string>
-    <string name="notification_silent_icon">meddelelse lydløs-ikon</string>
+    <string name="switch_phone_notifications">Sæt telefonen på lydløs når den er tilsluttet</string>
+    <string name="notification_silent_icon">notifikation lydløs-ikon</string>
 </resources>
