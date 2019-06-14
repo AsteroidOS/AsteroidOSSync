@@ -52,7 +52,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:configChanges="uiMode"/>
 
         <service
             android:name=".services.NLService"
