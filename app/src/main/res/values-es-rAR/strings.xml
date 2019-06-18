@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="generic_ok">Aceptar</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic_ok">Aceptar</string>
     <string name="searching">Buscando relojes</string>
     <string name="unknown_device">Dispositivo desconocido</string>
     <string name="nothing_found">No se encontraron relojes</string>
@@ -54,5 +55,9 @@
     <string name="grant_permission">Otorgar permiso</string>
     <string name="please_grant_permissions">Por favor, otorga este permiso</string>
     <string name="impassable_slide">Por favor, otorga este permiso</string>
-<string name="synchronize_weather">Localizar clima automáticamente</string>
-    </resources>
+    <string name="synchronize_weather">Localizar clima automáticamente</string>
+    <string name="title_activity_settings_activity">Ajustes</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="title_activity_settings">Ajustes</string>
+    <string name="switch_phone_notifications">Silenciar teléfono mientras conectado</string>
+</resources>

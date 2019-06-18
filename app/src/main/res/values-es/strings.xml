@@ -40,9 +40,9 @@
     <string name="notification_type_vibra">Vibración</string>
     <string name="notification_type_strong_vibra">Vibración fuerte</string>
     <string name="explain_app_prefs">Las notificaciones de tus aplicaciones aparecerán aquí</string>
-<string name="position_indicator">Indicador de posición</string>
+    <string name="position_indicator">Indicador de posición</string>
     <string name="use_this_area">Usa esta área para el clima</string>
-<string name="app_icon">Icono aplicación</string>
+    <string name="app_icon">Icono aplicación</string>
     <string name="intro_slide1_title">Bienvenido</string>
     <string name="intro_slide1_subtitle">Esta aplicación te permite sincronizar tu teléfono Android con tu reloj AsteroidOS. Pero primero se necesitan algunos permisos.</string>
     <string name="intro_slide2_title">Acceso a archivos</string>
@@ -56,4 +56,8 @@
     <string name="please_grant_permissions">Por favor, autoriza este permiso</string>
     <string name="impassable_slide">Por favor, autoriza este permiso</string>
     <string name="synchronize_weather">Localizar clima automáticamente</string>
+    <string name="title_activity_settings_activity">Ajustes</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="title_activity_settings">Ajustes</string>
+    <string name="switch_phone_notifications">Silenciar teléfono mientras conectado</string>
 </resources>
