@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="generic_ok">OK</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic_ok">OK</string>
     <string name="searching">Vyhľadávanie hodiniek</string>
     <string name="unknown_device">Neznáme zariadenie</string>
     <string name="nothing_found">Neboli nájdené žiadne hodinky</string>
@@ -54,4 +55,10 @@
     <string name="grant_permission">Udeliť povolenie</string>
     <string name="please_grant_permissions">Prosím udeľte toto povolenie</string>
     <string name="impassable_slide">Prosím udeľte toto povolenie</string>
+    <string name="synchronize_weather">Automaticky vyhľadať počasie</string>
+    <string name="title_activity_settings_activity">Nastavenia</string>
+    <string name="action_settings">Nastavenia</string>
+    <string name="title_activity_settings">Nastavenia</string>
+    <string name="switch_phone_notifications">Stlmiť telefón pri pripojení</string>
+    <string name="notification_silent_icon">ikona tichého upozornenia</string>
 </resources>
