@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="generic_ok">OK</string>
+<resources>
+    <string name="generic_ok">OK</string>
     <string name="searching">Mencari jam</string>
     <string name="unknown_device">Peranti tidak dikenali</string>
     <string name="nothing_found">Tiada jam dijumpai</string>
@@ -55,4 +56,9 @@
     <string name="please_grant_permissions">Sila berikan kebenaran ini</string>
     <string name="impassable_slide">Sila berikan kebenaran ini</string>
     <string name="synchronize_weather">Temukan cuaca secara auto</string>
+    <string name="title_activity_settings_activity">Tetapan</string>
+    <string name="action_settings">Tetapan</string>
+    <string name="title_activity_settings">Tetapan</string>
+    <string name="switch_phone_notifications">Senyapkan telefon apabila disambungkan</string>
+    <string name="notification_silent_icon">notifikasi ikon senyap</string>
 </resources>
