@@ -66,4 +66,6 @@
     <string name="title_activity_settings_activity">Configuració</string>
     <string name="action_settings">Configuració</string>
     <string name="title_activity_settings">Configuració</string>
+    <string name="switch_phone_notifications">Silenciar telèfon quan es connecti</string>
+    <string name="notification_silent_icon">icona de silenciar notificació</string>
 </resources>
