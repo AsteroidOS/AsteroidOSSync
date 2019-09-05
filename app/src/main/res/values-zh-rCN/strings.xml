@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">确认</string>
     <string name="searching">正在寻找手表</string>
@@ -35,7 +35,7 @@
     <string name="screenshot">截图</string>
     <string name="synchronize_time">同步时间</string>
     <string name="explain_app_prefs">来自您应用的通知会出现在这里</string>
-<string name="notification_type_default">默认</string>
+    <string name="notification_type_default">默认</string>
     <string name="notification_type_no_notif">暂无通知</string>
     <string name="notification_type_silent">静音</string>
     <string name="notification_type_vibra">振动</string>
@@ -55,4 +55,10 @@
     <string name="grant_permission">授权</string>
     <string name="please_grant_permissions">请授予此权限</string>
     <string name="impassable_slide">请授予此权限</string>
+    <string name="synchronize_weather">自动定位天气</string>
+    <string name="title_activity_settings_activity">设置</string>
+    <string name="action_settings">设置</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="switch_phone_notifications">连接时手机静音</string>
+    <string name="notification_silent_icon">通知静音图标</string>
 </resources>
