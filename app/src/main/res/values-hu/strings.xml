@@ -56,4 +56,7 @@
     <string name="intro_slide3_subtitle">A közeli Bluetooth Low Energy eszközök keresése.</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy támogatás</string>
     <string name="intro_slideerror_subtitle">Ez az eszköz nem támogatja a Bluetooth Low Energyt.</string>
+    <string name="title_activity_settings_activity">Beállítások</string>
+    <string name="action_settings">Beállítások</string>
+    <string name="title_activity_settings">Beállítások</string>
 </resources>
