@@ -55,5 +55,10 @@
     <string name="grant_permission">Accorder la permission</string>
     <string name="please_grant_permissions">Veuillez accorder cette permission</string>
     <string name="impassable_slide">Veuillez accorder cette permission</string>
-    <string name="synchronize_weather">Emplacement météo automatique</string>
+    <string name="synchronize_weather">Position météo automatique</string>
+    <string name="title_activity_settings_activity">Réglages</string>
+    <string name="action_settings">Réglages</string>
+    <string name="title_activity_settings">Réglages</string>
+    <string name="switch_phone_notifications">Téléphone connecté en sourdine</string>
+    <string name="notification_silent_icon">icône de sourdine des notifications</string>
 </resources>
