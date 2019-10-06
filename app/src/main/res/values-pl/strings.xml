@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">OK</string>
     <string name="searching">Wyszukiwanie zegarków</string>
@@ -35,7 +35,7 @@
     <string name="screenshot">Zrzut ekranu</string>
     <string name="synchronize_time">Synchronizuj czas</string>
     <string name="explain_app_prefs">Powiadomienia z twoich aplikacji pojawią się tutaj</string>
-<string name="notification_type_default">Domyślne</string>
+    <string name="notification_type_default">Domyślne</string>
     <string name="notification_type_no_notif">"Bez powiadomień "</string>
     <string name="notification_type_silent">"Cisza "</string>
     <string name="notification_type_vibra">"Wibracje "</string>
@@ -55,4 +55,10 @@
     <string name="grant_permission">"Przyznaj uprawnienia "</string>
     <string name="please_grant_permissions">Proszę udzielić tych uprawnień</string>
     <string name="impassable_slide">Proszę udzielić tych uprawnień</string>
+    <string name="synchronize_weather">Pogoda dla automatycznej lokalizacji</string>
+    <string name="title_activity_settings_activity">Ustawienia</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="title_activity_settings">Ustawienia</string>
+    <string name="switch_phone_notifications">Wycisz telefon, gdy połączone</string>
+    <string name="notification_silent_icon">Ikona trybu cichego w notyfikacjach</string>
 </resources>
