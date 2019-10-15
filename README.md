@@ -82,7 +82,7 @@ If you don't have an IRC client, you can use [webchat](https://webchat.freenode.
 
 
 [contributors-shield]: https://img.shields.io/github/contributors/AsteroidOS/AsteroidOSSync.svg?style=flat-square
-[contributors-url]: https://github.com/AsteroiidOS/AsteroidOSSync/graphs/contributors
+[contributors-url]: https://github.com/AsteroidOS/AsteroidOSSync/graphs/contributors
 
 [forks-shield]: https://img.shields.io/github/forks/AsteroidOS/AsteroidOSSync.svg?style=flat-square
 [forks-url]: https://github.com/microsoft/AsteroidOS/AsteroidOSSync/members
@@ -97,4 +97,4 @@ If you don't have an IRC client, you can use [webchat](https://webchat.freenode.
 [good-first-issue-url]: https://github.com/AsteroidOS/AsteroidOSSync/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
 
 [license-shield]: https://img.shields.io/github/license/AsteroidOS/AsteroidOSSync.svg?style=flat-square
-[license-url]: https://github.com/AsteroidOS/AsteroidOSSync/blob/master/LICENSE.txt
+[license-url]: https://github.com/AsteroidOS/AsteroidOSSync/blob/master/LICENSE
