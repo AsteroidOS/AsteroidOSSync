@@ -20,7 +20,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.DisplayMetrics;
 import android.view.MenuItem;
 
 import com.idevicesinc.sweetblue.BleManager;
