@@ -84,6 +84,8 @@ public class NLService extends NotificationListenerService {
         iconFromPackage.put("com.instagram.layout", "logo-instagram");
         iconFromPackage.put("com.jb.gosms", "ios-text");
         iconFromPackage.put("com.joelapenna.foursquared", "logo-foursquare");
+        iconFromPackage.put("com.keylesspalace.tusky", "md-mastodon");
+        iconFromPackage.put("com.keylesspalace.tusky.test", "md-mastodon");
         iconFromPackage.put("com.linkedin.android.jobs.jobseeker", "logo-linkedin");
         iconFromPackage.put("com.linkedin.android.learning", "logo-linkedin");
         iconFromPackage.put("com.linkedin.android", "logo-linkedin");
