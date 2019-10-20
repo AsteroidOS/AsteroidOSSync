@@ -70,7 +70,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
         mNM = (NotificationManager) mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Screenshot Service", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Screenshot Service", NotificationManager.IMPORTANCE_LOW);
             notificationChannel.setDescription("Screenshot download");
             notificationChannel.setVibrationPattern(new long[]{0L});
             mNM.createNotificationChannel(notificationChannel);
