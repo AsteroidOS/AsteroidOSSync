@@ -99,6 +99,8 @@ public class NotificationService implements BleDevice.ReadWriteListener {
                     vibration = "normal";
                 else if (notificationOption == NotificationPreferences.NotificationOption.STRONG_VIBRATION)
                     vibration = "strong";
+                else if(notificationOption == NotificationPreferences.NotificationOption.RINGTONE_VIBRATION)
+                    vibration = "ringtone";
                 else
                     throw new IllegalArgumentException("Not all options handled");
 

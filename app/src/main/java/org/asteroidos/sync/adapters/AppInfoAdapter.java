@@ -109,6 +109,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo>
             adapter.add(context.getResources().getString(R.string.notification_type_silent));
             adapter.add(context.getResources().getString(R.string.notification_type_vibra));
             adapter.add(context.getResources().getString(R.string.notification_type_strong_vibra));
+            adapter.add(context.getResources().getString(R.string.notification_type_ringtone));
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             viewHolder.spinner.setAdapter(adapter);
             NotificationPreferences.NotificationOption position =

@@ -18,7 +18,8 @@ public class NotificationPreferences {
         NO_NOTIFICATIONS(1),
         SILENT_NOTIFICATION(2),
         NORMAL_VIBRATION(3),
-        STRONG_VIBRATION(4);
+        STRONG_VIBRATION(4),
+        RINGTONE_VIBRATION(5);
 
         private int value;
         NotificationOption(int value) {
@@ -35,6 +36,7 @@ public class NotificationPreferences {
                 case 2: return SILENT_NOTIFICATION;
                 case 3: return NORMAL_VIBRATION;
                 case 4: return STRONG_VIBRATION;
+                case 5: return RINGTONE_VIBRATION;
             }
             throw new IllegalArgumentException("No such NotificationOption: " + x);
         }
