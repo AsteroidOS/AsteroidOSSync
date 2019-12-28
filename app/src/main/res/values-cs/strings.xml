@@ -61,4 +61,5 @@
     <string name="title_activity_settings">Nastavení</string>
     <string name="switch_phone_notifications">Umlčet telefon když je připojeno</string>
     <string name="notification_silent_icon">ikona tichého oznámení</string>
+    <string name="notification_type_ringtone">Vyzváněcí tón</string>
 </resources>
