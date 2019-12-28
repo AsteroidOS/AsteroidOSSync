@@ -62,4 +62,5 @@
     <string name="title_activity_settings">הגדרות</string>
     <string name="switch_phone_notifications">השתקת הטלפון כשמחובר</string>
     <string name="notification_silent_icon">סמל השתקת התראות</string>
+    <string name="notification_type_ringtone">צלצול</string>
 </resources>
