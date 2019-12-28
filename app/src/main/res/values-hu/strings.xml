@@ -59,4 +59,7 @@
     <string name="title_activity_settings_activity">Beállítások</string>
     <string name="action_settings">Beállítások</string>
     <string name="title_activity_settings">Beállítások</string>
+    <string name="switch_phone_notifications">Telefon némítása amikor kapcsolódva van</string>
+    <string name="notification_silent_icon">értesítés csendes ikon</string>
+    <string name="notification_type_ringtone">Csengőhang</string>
 </resources>
