@@ -61,4 +61,5 @@
     <string name="title_activity_settings">Indstillinger</string>
     <string name="switch_phone_notifications">Sæt telefonen på lydløs når den er tilsluttet</string>
     <string name="notification_silent_icon">notifikation lydløs-ikon</string>
+    <string name="notification_type_ringtone">Ringetone</string>
 </resources>
