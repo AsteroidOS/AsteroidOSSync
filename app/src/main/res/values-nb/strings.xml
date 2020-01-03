@@ -61,4 +61,5 @@
     <string name="title_activity_settings">Innstillinger</string>
     <string name="switch_phone_notifications">Forstum telefon når tilkoblet</string>
     <string name="notification_silent_icon">Ikon for avslåtte merknader</string>
+    <string name="notification_type_ringtone">Ringetone</string>
 </resources>
