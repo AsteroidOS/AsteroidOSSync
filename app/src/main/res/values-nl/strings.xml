@@ -61,4 +61,5 @@
     <string name="title_activity_settings">Instellingen</string>
     <string name="switch_phone_notifications">Telefoon dempen wanneer verbonden</string>
     <string name="notification_silent_icon">pictogram stille melding</string>
+    <string name="notification_type_ringtone">Beltoon</string>
 </resources>
