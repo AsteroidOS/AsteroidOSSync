@@ -61,4 +61,5 @@
     <string name="title_activity_settings">Ustawienia</string>
     <string name="switch_phone_notifications">Wycisz telefon, gdy połączone</string>
     <string name="notification_silent_icon">Ikona trybu cichego w notyfikacjach</string>
+    <string name="notification_type_ringtone">Dzwonek</string>
 </resources>
