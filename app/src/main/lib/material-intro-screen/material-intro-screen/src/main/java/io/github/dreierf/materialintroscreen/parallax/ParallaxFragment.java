@@ -19,24 +19,22 @@ public class ParallaxFragment extends Fragment implements Parallaxable {
         parallaxLayout = findParallaxLayout(view);
     }
 
-    public Parallaxable findParallaxLayout(View root) {
-        Queue<View> queue = new LinkedList<>();
-        queue.add(root);
-
-        while (!queue.isEmpty()) {
-            View child = queue.remove();
-
-            if (child instanceof Parallaxable) {
-                return (Parallaxable) child;
-            } else if (child instanceof ViewGroup) {
-                ViewGroup viewGroup = (ViewGroup) child;
-                for (int i = viewGroup.getChildCount() - 1; i >= 0; i--) {
-                    queue.add(viewGroup.getChildAt(i));
-                }
-            }
-        }
-        return null;
-    }
+    public static Parallaxable findParallaxLayout(View root) {
+		Queue<View> queue = new LinkedList<>();
+		queue.add(root);
+		while (!queue.isEmpty()) {
+			View child = queue.remove();
+			if (child instanceof Parallaxable) {
+				return (Parallaxable) child;
+			} else if (child instanceof ViewGroup) {
+				ViewGroup viewGroup = (ViewGroup) child;
+				for (int i = viewGroup.getChildCount() - 1; i >= 0; i--) {
+					queue.add(viewGroup.getChildAt(i));
+				}
+			}
+		}
+		return null;
+	}
 
     @Override
     public void setOffset(@FloatRange(from = -1.0, to = 1.0) float offset) {
