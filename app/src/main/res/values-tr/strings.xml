@@ -61,4 +61,5 @@
     <string name="title_activity_settings">Ayarlar</string>
     <string name="switch_phone_notifications">Telefon bağlıyken sessiz</string>
     <string name="notification_silent_icon">bildirim sessiz simgesi</string>
+    <string name="notification_type_ringtone">Zil sesi</string>
 </resources>
