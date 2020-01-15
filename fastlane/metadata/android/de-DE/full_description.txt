@@ -1,1 +1,9 @@
-Synchronisiere die Uhrzeit, Benachrichtigungen und mehr mit deiner AsteroidOS Smartwatch.
+AsteroidOSSync ist die offizielle Android App um deine AsteroidOS Smartwatch zu synchronisieren.
+
+• Zeit Sync
+• Wetter Sync
+• Benachrichtigungs Sync
+• "Finde meine Uhr"
+• Erzeuge Bildschirmfotos
+
+Um mehr über AsteroidOS zu lernen, besuche https://asteroidos.org/

@@ -1,1 +1,9 @@
-Synchronize the time, notifications and more with your AsteroidOS smartwatch.
+AsteroidOSSync is the official Android companion app for synchronizing your AsteroidOS smartwatch.
+
+• Time sync
+• Weather sync
+• Notification sync
+• "Find my watch"
+• Grab a screenshot
+
+To learn more about AsteroidOS, visit https://asteroidos.org/
