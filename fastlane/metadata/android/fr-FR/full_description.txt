@@ -1,1 +1,9 @@
-Synchronise l'heure, les notifications et plus encore avec votre montre connectée AsteroidOS.
+AsteroidOSSync est l'application Android officielle pour synchroniser votre smartwatch AsteroidOS.
+
+• Synchronisation de l'horloge
+• Synchronisation de la météo
+• Synchronisation des notifications
+• Fonctionnalité "Trouver ma montre"
+• Captures d'écrans
+
+Pour en apprendre d'avantage sur AsteroidOS, visitez https://asteroidos.org/
