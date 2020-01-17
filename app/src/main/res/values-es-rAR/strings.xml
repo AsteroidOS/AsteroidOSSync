@@ -60,4 +60,6 @@
     <string name="action_settings">Ajustes</string>
     <string name="title_activity_settings">Ajustes</string>
     <string name="switch_phone_notifications">Silenciar teléfono mientras conectado</string>
+    <string name="notification_silent_icon">Ícono de notificación silenciada</string>
+    <string name="notification_type_ringtone">Tono de llamada</string>
 </resources>
