@@ -61,4 +61,5 @@
     <string name="title_activity_settings">Налаштування</string>
     <string name="switch_phone_notifications">Заглушати телефон при підключенні</string>
     <string name="notification_silent_icon">іконка сповіщення у безгучному режимі</string>
+    <string name="notification_type_ringtone">Мелодія дзвінка</string>
 </resources>
