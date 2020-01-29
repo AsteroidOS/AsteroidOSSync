@@ -61,4 +61,5 @@
     <string name="title_activity_settings">Configurações</string>
     <string name="switch_phone_notifications">Silenciar telefone quando conectado</string>
     <string name="notification_silent_icon">ícone de silenciar notificação</string>
+    <string name="notification_type_ringtone">Toque</string>
 </resources>
