@@ -61,4 +61,5 @@
     <string name="title_activity_settings">Pengaturan</string>
     <string name="switch_phone_notifications">Diamkan ponsel saat terhubung</string>
     <string name="notification_silent_icon">Ikon notifikasi diam</string>
+    <string name="notification_type_ringtone">Nada dering</string>
 </resources>
