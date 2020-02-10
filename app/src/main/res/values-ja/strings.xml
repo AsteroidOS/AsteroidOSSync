@@ -61,4 +61,5 @@
     <string name="title_activity_settings">設定</string>
     <string name="switch_phone_notifications">接続された時に電話の音を出さない</string>
     <string name="notification_silent_icon">通知サイレントアイコン</string>
+    <string name="notification_type_ringtone">着信音</string>
 </resources>
