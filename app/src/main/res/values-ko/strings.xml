@@ -61,4 +61,5 @@
     <string name="title_activity_settings">설정</string>
     <string name="switch_phone_notifications">핸드폰에 연결될 때 무음</string>
     <string name="notification_silent_icon">무음 아이콘 알림</string>
+    <string name="notification_type_ringtone">신호음</string>
 </resources>
