@@ -94,7 +94,7 @@ public class NLService extends NotificationListenerService {
         iconFromPackage.put("com.linkedin.leap", "logo-linkedin");
         iconFromPackage.put("com.linkedin.pulse", "logo-linkedin");
         iconFromPackage.put("com.linkedin.recruiter", "logo-linkedin");
-        iconFromPackage.put("com.mattermost.mbeta", "logo-mattermost");
+        iconFromPackage.put("com.mattermost.rnbeta", "logo-mattermost");
         iconFromPackage.put("com.mattermost.rn", "logo-mattermost");
         iconFromPackage.put("com.microsoft.office.lync15", "logo-skype");
         iconFromPackage.put("com.microsoft.xboxone.smartglass.beta", "logo-xbox");
