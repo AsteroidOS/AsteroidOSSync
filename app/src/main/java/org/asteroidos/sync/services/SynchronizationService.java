@@ -263,7 +263,6 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             mMediaService = new MediaService(getApplicationContext(), mDevice);
             mScreenshotService = new ScreenshotService(getApplicationContext(), mDevice);
             mTimeService = new TimeService(getApplicationContext(), mDevice);
-
             silentModeService = new SilentModeService(getApplicationContext());
 
             mDevice.connect();

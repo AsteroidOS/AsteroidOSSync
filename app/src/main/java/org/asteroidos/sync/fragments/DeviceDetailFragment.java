@@ -41,6 +41,7 @@ import android.widget.TextView;
 import org.asteroidos.sync.R;
 import org.asteroidos.sync.ble.SilentModeService;
 import org.asteroidos.sync.ble.TimeService;
+import org.asteroidos.sync.services.PhoneStateReceiver;
 import org.asteroidos.sync.services.SynchronizationService;
 
 public class DeviceDetailFragment extends Fragment {
@@ -52,15 +53,17 @@ public class DeviceDetailFragment extends Fragment {
 
     private SharedPreferences mTimeSyncSettings;
     private SharedPreferences mSilenceModeSettings;
+    private SharedPreferences mCallStateSettings;
 
     private CheckBox mTimeSyncCheckBox;
     private CheckBox mSilenceModeCheckBox;
+    private CheckBox mCallStateServiceCheckBox;
 
     FloatingActionButton mFab;
 
-    boolean mConnected = false;
+    private boolean mConnected = false;
 
-    int mStatus = SynchronizationService.STATUS_DISCONNECTED;
+    private int mStatus = SynchronizationService.STATUS_DISCONNECTED;
     private int mBatteryPercentage = 100;
 
     @Override
@@ -172,7 +175,17 @@ public class DeviceDetailFragment extends Fragment {
             }
         });
 
-
+        mCallStateSettings = getActivity().getSharedPreferences(PhoneStateReceiver.PREFS_NAME, Context.MODE_PRIVATE);
+        mCallStateServiceCheckBox = view.findViewById(R.id.CallStateServiceCheckBox);
+        mCallStateServiceCheckBox.setChecked(mCallStateSettings.getBoolean(PhoneStateReceiver.PREF_SEND_CALL_STATE, true));
+        mCallStateServiceCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = mCallStateSettings.edit();
+                editor.putBoolean(PhoneStateReceiver.PREF_SEND_CALL_STATE, isChecked);
+                editor.apply();
+            }
+        });
 
         setStatus(mStatus);
     }

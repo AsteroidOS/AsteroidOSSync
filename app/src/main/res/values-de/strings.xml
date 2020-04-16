@@ -64,4 +64,6 @@
     <string name="notification_type_ringtone">Klingelton</string>
     <string name="intro_phonestateslide_subtitle">Um eingehende Anrufe auf der Uhr anzuzeigen.</string>
     <string name="intro_phonestateslide_title">Anruf Status</string>
+    <string name="show_calls_on_watch">Zeige eingehende Anrufe</string>
+    <string name="dialer">Telefon</string>
 </resources>
