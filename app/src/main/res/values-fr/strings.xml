@@ -62,4 +62,5 @@
     <string name="switch_phone_notifications">Téléphone connecté en sourdine</string>
     <string name="notification_silent_icon">icône de sourdine des notifications</string>
     <string name="notification_type_ringtone">Sonnerie</string>
+    <string name="show_calls_on_watch">Afficher les appels entrants</string>
 </resources>

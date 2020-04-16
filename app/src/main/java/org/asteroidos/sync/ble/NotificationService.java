@@ -104,6 +104,9 @@ public class NotificationService implements BleDevice.ReadWriteListener {
                 else
                     throw new IllegalArgumentException("Not all options handled");
 
+                if(intent.hasExtra("vibration"))
+                    vibration = intent.getStringExtra("vibration");
+
                 String xmlRequest = "<insert><id>" + id + "</id>";
                 if(!packageName.isEmpty())
                     xmlRequest += "<pn>" + packageName + "</pn>";

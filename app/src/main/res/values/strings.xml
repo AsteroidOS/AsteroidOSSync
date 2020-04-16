@@ -65,4 +65,6 @@
     <string name="notification_type_ringtone">Ringtone</string>
     <string name="intro_phonestateslide_subtitle">To show incoming calls on the Watch.</string>
     <string name="intro_phonestateslide_title">Phone State</string>
+    <string name="show_calls_on_watch">Display incoming calls</string>
+    <string name="dialer">Dialer</string>
 </resources>
