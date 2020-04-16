@@ -61,4 +61,5 @@
     <string name="title_activity_settings">Ρυθμίσεις</string>
     <string name="switch_phone_notifications">Το τηλέφωνο σε αθόρυβη λειτουργία όταν συνδέεται</string>
     <string name="notification_silent_icon">Εικονίδιο αθόρυβης λειτουργίας</string>
+    <string name="notification_type_ringtone">Ήχος κλήσης</string>
 </resources>
