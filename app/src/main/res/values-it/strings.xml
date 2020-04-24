@@ -61,4 +61,5 @@
     <string name="title_activity_settings">Impostazioni</string>
     <string name="switch_phone_notifications">Silenzia il telefono quando è connesso</string>
     <string name="notification_silent_icon">Icona di notifica silenziosa</string>
+    <string name="notification_type_ringtone">Suoneria</string>
 </resources>
