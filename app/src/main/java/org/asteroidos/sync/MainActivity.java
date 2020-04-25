@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             ab.setDisplayHomeAsUpEnabled(true);
     }
 
-    void handleSetLocalName(String name) {
+    private void handleSetLocalName(String name) {
         if(mDetailFragment != null)
             mDetailFragment.setLocalName(name);
     }
