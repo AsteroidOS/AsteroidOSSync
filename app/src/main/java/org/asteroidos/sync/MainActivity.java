@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         }
     }
 
-    void handleBatteryPercentage(int percentage) {
+    private void handleBatteryPercentage(int percentage) {
         if(mDetailFragment != null)
             mDetailFragment.setBatteryPercentage(percentage);
     }
