@@ -15,7 +15,7 @@
     <string name="connected_icon">Icône de connexion</string>
     <string name="battery_info_icon">Icône d\'info batterie</string>
     <string name="screenshot_icon">Icône de capture d’écran</string>
-    <string name="finder_icon">Icône du \"Trouve ma montre\"</string>
+    <string name="finder_icon">Icône du « Trouve ma montre »</string>
     <string name="settings_icon">Icône des paramètres</string>
     <string name="weather_icon">Icône de la météo</string>
     <string name="time_icon">Icône de date et heure</string>
@@ -25,7 +25,7 @@
     <string name="phone_is_searching">Votre téléphone vous cherche !</string>
     <string name="notifications_settings">Paramètres des notifications</string>
     <string name="intro_slide4_title">Notifications</string>
-    <string name="intro_slide4_subtitle">Pour synchroniser les notifications, veuillez autoriser \"AsteroidOS Sync\" dans le menu suivant :</string>
+    <string name="intro_slide4_subtitle">Pour synchroniser les notifications, veuillez autoriser AsteroidOS Sync dans le menu suivant :</string>
     <string name="weather_settings">Paramètres météo</string>
     <string name="enter_city_name">Entrez le nom d\'une ville :</string>
     <string name="unpair">Dissocier</string>

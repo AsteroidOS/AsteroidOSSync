@@ -2,7 +2,7 @@
 <resources>
     <string name="generic_ok">OK</string>
     <string name="searching">Ricerca orologi</string>
-    <string name="unknown_device">Dispositivo Sconosciuto</string>
+    <string name="unknown_device">Dispositivo sconosciuto</string>
     <string name="nothing_found">Nessun orologio trovato</string>
     <string name="one_found">Un orologio trovato</string>
     <string name="n_found">Trovati %d orologi</string>
@@ -25,14 +25,14 @@
     <string name="phone_is_searching">Il telefono ti sta cercando!</string>
     <string name="notifications_settings">Impostazioni notifiche</string>
     <string name="intro_slide4_title">Notifiche</string>
-    <string name="intro_slide4_subtitle">Per sincronizzare le notifiche, devi abilitare \"AsteroidOS Sync\" nel seguente menù:</string>
+    <string name="intro_slide4_subtitle">Per sincronizzare le notifiche, devi abilitare AsteroidOS Sync nel seguente menù:</string>
     <string name="weather_settings">Impostazioni meteo</string>
     <string name="enter_city_name">Nome città:</string>
     <string name="unpair">Disaccoppia</string>
     <string name="scanning">Scansione…</string>
     <string name="downloading">Scaricamento…</string>
     <string name="downloaded">Scaricato</string>
-    <string name="screenshot">Screenshot</string>
+    <string name="screenshot">Schermata</string>
     <string name="synchronize_time">Sincronizza ora</string>
     <string name="explain_app_prefs">Le notifiche delle tue applicazioni compariranno qui</string>
     <string name="notification_type_no_notif">Nessuna notifica</string>
@@ -61,4 +61,5 @@
     <string name="title_activity_settings">Impostazioni</string>
     <string name="switch_phone_notifications">Silenzia il telefono quando è connesso</string>
     <string name="notification_silent_icon">Icona di notifica silenziosa</string>
+    <string name="notification_type_ringtone">Suoneria</string>
 </resources>
