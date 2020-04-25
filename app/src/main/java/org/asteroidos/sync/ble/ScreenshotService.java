@@ -22,15 +22,20 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
+
+import android.provider.MediaStore;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
@@ -40,6 +45,7 @@ import org.asteroidos.sync.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.UUID;
@@ -70,7 +76,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
         mNM = (NotificationManager) mCtx.getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Screenshot Service", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Screenshot Service", NotificationManager.IMPORTANCE_MIN);
             notificationChannel.setDescription("Screenshot download");
             notificationChannel.setVibrationPattern(new long[]{0L});
             mNM.createNotificationChannel(notificationChannel);
@@ -128,33 +134,20 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                                 .setContentTitle(mCtx.getText(R.string.screenshot))
                                 .setLocalOnly(true);
 
-                        String dirStr = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/AsteroidOSSync";
-                        File directory = new File(dirStr);
-                        if(!directory.exists())
-                            directory.mkdirs();
-                        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(System.currentTimeMillis());
-                        File fileName = new File(dirStr + "/Screenshot_" + timeStamp + ".jpg");
-
+                        Uri fileName = null;
                         try {
-                            FileOutputStream out = new FileOutputStream(fileName);
-                            out.write(totalData);
-                            out.close();
-                        } catch(IOException ignored) {}
-
-                        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                        Uri contentUri = Uri.fromFile(fileName);
-                        mediaScanIntent.setData(contentUri);
-
-                        mCtx.sendBroadcast(mediaScanIntent);
+                            fileName = createFile(totalData);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
 
                         notificationBuilder.setContentText(mCtx.getText(R.string.downloaded));
                         notificationBuilder.setLargeIcon(BitmapFactory.decodeByteArray(totalData, 0, size));
                         notificationBuilder.setSmallIcon(R.drawable.image_white);
 
-                        Uri imgURI = FileProvider.getUriForFile(mCtx, mCtx.getApplicationContext().getPackageName() + ".fileprovider", fileName);
                         Intent notificationIntent = new Intent();
                         notificationIntent.setAction(Intent.ACTION_VIEW);
-                        notificationIntent.setDataAndType(imgURI, "image/*");
+                        notificationIntent.setDataAndType(fileName, "image/*");
                         notificationIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                         PendingIntent contentIntent = PendingIntent.getActivity(mCtx, 0, notificationIntent, 0);
                         notificationBuilder.setContentIntent(contentIntent);
@@ -183,6 +176,62 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
     public void onEvent(ReadWriteEvent e) {
         if(!e.wasSuccess())
             Log.e("ScreenshotService", e.status().toString());
+    }
+
+    private Uri createFile(byte[] totalData) throws IOException {
+        String dirStr = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/AsteroidOSSync";
+        Uri uri;
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(System.currentTimeMillis());
+        File fileName = new File(dirStr + "/Screenshot_" + timeStamp + ".jpg");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ContentResolver resolver = mCtx.getContentResolver();
+            ContentValues metaInfo = new ContentValues();
+            metaInfo.put(MediaStore.MediaColumns.DISPLAY_NAME, "Screenshot_" + timeStamp + ".jpg");
+            metaInfo.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg");
+            metaInfo.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/AsteroidOSSync");
+            metaInfo.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis());
+            metaInfo.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+            Uri imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI , metaInfo);
+            assert imageUri != null;
+            OutputStream out = resolver.openOutputStream(imageUri);
+            assert out != null;
+            try {
+                out.write(totalData);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            } finally {
+                out.close();
+                uri = imageUri;
+            }
+        } else {
+            File directory = new File(dirStr);
+            if(!directory.exists())
+                directory.mkdirs();
+
+            try {
+                FileOutputStream out = new FileOutputStream(fileName);
+                out.write(totalData);
+                out.close();
+                doMediaScan(fileName);
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+            uri = FileProvider.getUriForFile(mCtx, mCtx.getApplicationContext().getPackageName() + ".fileprovider", fileName);
+        }
+        return uri;
+    }
+
+    private void doMediaScan(File file){
+        MediaScannerConnection.scanFile(mCtx,
+                new String[] { file.toString() }, null,
+                new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        Log.i("ExternalStorage", "Scanned " + path + ":");
+                        Log.i("ExternalStorage", "-> uri=" + uri);
+                    }
+                });
     }
 
     class ScreenshotReqReceiver extends BroadcastReceiver {
