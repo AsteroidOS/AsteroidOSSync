@@ -59,7 +59,7 @@ public class DeviceDetailFragment extends Fragment {
     private CheckBox mSilenceModeCheckBox;
     private CheckBox mCallStateServiceCheckBox;
 
-    FloatingActionButton mFab;
+    private FloatingActionButton mFab;
 
     private boolean mConnected = false;
 
