@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             mDetailFragment.setLocalName(name);
     }
 
-    void handleSetStatus(int status) {
+    private void handleSetStatus(int status) {
         if(mDetailFragment != null) {
             mDetailFragment.setStatus(status);
             if(status == SynchronizationService.STATUS_CONNECTED) {
