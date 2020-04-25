@@ -112,7 +112,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
         @Override
         public void onEvent(ReadWriteEvent e) {
             if(e.isNotification() && e.charUuid().equals(screenshotContentCharac)) {
-                byte data[] = e.data();
+                byte[] data = e.data();
                 if(mFirstNotify) {
                     size = bytesToInt(data);
                     totalData = new byte[size];
