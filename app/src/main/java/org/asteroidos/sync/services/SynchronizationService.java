@@ -380,7 +380,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         }
     }
 
-    private final class WatchesFilter implements BleManagerConfig.ScanFilter
+    private static final class WatchesFilter implements BleManagerConfig.ScanFilter
     {
         @Override
         public Please onEvent(ScanEvent e)
