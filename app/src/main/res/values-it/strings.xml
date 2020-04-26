@@ -62,4 +62,8 @@
     <string name="switch_phone_notifications">Silenzia il telefono quando è connesso</string>
     <string name="notification_silent_icon">Icona di notifica silenziosa</string>
     <string name="notification_type_ringtone">Suoneria</string>
+    <string name="dialer">Tastiera telefono</string>
+    <string name="intro_phonestateslide_title">Stato telefono</string>
+    <string name="intro_phonestateslide_subtitle">Mostra chiamate in arrivo sull\'orologio.</string>
+    <string name="show_calls_on_watch">Mostra chiamate in arrivo</string>
 </resources>
