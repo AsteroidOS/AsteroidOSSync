@@ -63,4 +63,8 @@
     <string name="switch_phone_notifications">השתקת הטלפון כשמחובר</string>
     <string name="notification_silent_icon">סמל השתקת התראות</string>
     <string name="notification_type_ringtone">צלצול</string>
+    <string name="dialer">חייגן</string>
+    <string name="show_calls_on_watch">הצגת שיחות נכנסות</string>
+    <string name="intro_phonestateslide_title">מצב הטלפון</string>
+    <string name="intro_phonestateslide_subtitle">להציג שיחות נכנסות בשעון.</string>
 </resources>
