@@ -62,4 +62,8 @@
     <string name="switch_phone_notifications">Umlčet telefon když je připojeno</string>
     <string name="notification_silent_icon">ikona tichého oznámení</string>
     <string name="notification_type_ringtone">Vyzváněcí tón</string>
+    <string name="dialer">Vytáčení</string>
+    <string name="show_calls_on_watch">Zobrazovat příchozí hovory</string>
+    <string name="intro_phonestateslide_title">Stav telefonu</string>
+    <string name="intro_phonestateslide_subtitle">Pro zobrazení příchozích hovorů na hodinkách.</string>
 </resources>
