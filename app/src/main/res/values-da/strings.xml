@@ -62,4 +62,7 @@
     <string name="switch_phone_notifications">Sæt telefonen på lydløs når den er tilsluttet</string>
     <string name="notification_silent_icon">notifikation lydløs-ikon</string>
     <string name="notification_type_ringtone">Ringetone</string>
+    <string name="show_calls_on_watch">Vis indgående opkald</string>
+    <string name="intro_phonestateslide_title">Telefontilstand</string>
+    <string name="intro_phonestateslide_subtitle">For at vise indgående opkald på uret.</string>
 </resources>
