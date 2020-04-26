@@ -2,7 +2,7 @@
 <resources>
     <string name="generic_ok">U redu</string>
     <string name="searching">Traženje satova</string>
-    <string name="unknown_device">Nepoznati uređaj</string>
+    <string name="unknown_device">Nepoznat uređaj</string>
     <string name="nothing_found">Sat nije pronađen</string>
     <string name="one_found">Pronađen jedan sat</string>
     <string name="n_found">Pronađeno satova: %d</string>
@@ -62,4 +62,8 @@
     <string name="switch_phone_notifications">Stišaj mobitel kad je spojen</string>
     <string name="notification_silent_icon">ikona za bezvučno obavještavanje</string>
     <string name="notification_type_ringtone">Zvono</string>
+    <string name="dialer">Birač</string>
+    <string name="show_calls_on_watch">Prikaži dolazne pozive</string>
+    <string name="intro_phonestateslide_title">Stanje mobitela</string>
+    <string name="intro_phonestateslide_subtitle">Za prikaz dolaznih poziva na satu.</string>
 </resources>
