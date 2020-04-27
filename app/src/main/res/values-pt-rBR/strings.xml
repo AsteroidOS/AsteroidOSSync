@@ -62,4 +62,8 @@
     <string name="switch_phone_notifications">Silenciar telefone quando conectado</string>
     <string name="notification_silent_icon">ícone de silenciar notificação</string>
     <string name="notification_type_ringtone">Toque</string>
+    <string name="dialer">Discador</string>
+    <string name="show_calls_on_watch">Mostrar chamadas recebidas</string>
+    <string name="intro_phonestateslide_title">Estado do telefone</string>
+    <string name="intro_phonestateslide_subtitle">Para mostrar as chamadas recebidas no relógio.</string>
 </resources>
