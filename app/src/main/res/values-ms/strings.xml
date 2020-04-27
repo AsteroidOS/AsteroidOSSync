@@ -61,4 +61,9 @@
     <string name="title_activity_settings">Tetapan</string>
     <string name="switch_phone_notifications">Senyapkan telefon apabila disambungkan</string>
     <string name="notification_silent_icon">notifikasi ikon senyap</string>
+    <string name="dialer">Pendail</string>
+    <string name="show_calls_on_watch">Memaparkan panggilan masuk</string>
+    <string name="intro_phonestateslide_title">Keadaan telefon</string>
+    <string name="intro_phonestateslide_subtitle">Untuk menunjukkan panggilan masuk di jam tangan</string>
+    <string name="notification_type_ringtone">Nada dering</string>
 </resources>
