@@ -63,4 +63,7 @@
     <string name="notification_silent_icon">icône de sourdine des notifications</string>
     <string name="notification_type_ringtone">Sonnerie</string>
     <string name="show_calls_on_watch">Afficher les appels entrants</string>
+    <string name="dialer">Clavier</string>
+    <string name="intro_phonestateslide_title">État du téléphone</string>
+    <string name="intro_phonestateslide_subtitle">Pour afficher les appels entrants sur la Montre.</string>
 </resources>
