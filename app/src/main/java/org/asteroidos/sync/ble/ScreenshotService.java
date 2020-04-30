@@ -34,7 +34,6 @@ import android.os.Build;
 import android.os.Environment;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
-
 import android.provider.MediaStore;
 import android.util.Log;
 
@@ -49,6 +48,9 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings({"FieldCanBeLocal", "deprecation"}) // For clarity, we prefer having NOTIFICATION as a top level field
                                                       // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated ReadWriteListener
@@ -114,6 +116,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
         private int progress = 0;
         private int size = 0;
         private byte[] totalData;
+        private ScheduledExecutorService processUpdate;
 
         @Override
         public void onEvent(ReadWriteEvent e) {
@@ -124,12 +127,30 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                     totalData = new byte[size];
                     mFirstNotify = false;
                     progress = 0;
+
+                    processUpdate = Executors.newSingleThreadScheduledExecutor();
+                    processUpdate.scheduleWithFixedDelay(new Runnable() {
+                        @Override
+                        public void run() {
+                            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mCtx, NOTIFICATION_CHANNEL_ID)
+                                    .setContentTitle(mCtx.getText(R.string.screenshot))
+                                    .setLocalOnly(true);
+
+                            notificationBuilder.setContentText(mCtx.getText(R.string.downloading));
+                            notificationBuilder.setSmallIcon(R.drawable.image_white);
+                            notificationBuilder.setProgress(size, progress, false);
+
+                            Notification notification = notificationBuilder.build();
+                            mNM.notify(NOTIFICATION, notification);
+                        }
+                    }, 0, 1, TimeUnit.SECONDS);
                 } else {
                     if(data.length + progress <= totalData.length)
                         System.arraycopy(data, 0, totalData, progress, data.length);
                     progress += data.length;
 
                     if(size == progress) {
+                        processUpdate.shutdown();
                         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mCtx, NOTIFICATION_CHANNEL_ID)
                                 .setContentTitle(mCtx.getText(R.string.screenshot))
                                 .setLocalOnly(true);
@@ -152,17 +173,6 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                         PendingIntent contentIntent = PendingIntent.getActivity(mCtx, 0, notificationIntent, 0);
                         notificationBuilder.setContentIntent(contentIntent);
                         mDownloading = false;
-
-                        Notification notification = notificationBuilder.build();
-                        mNM.notify(NOTIFICATION, notification);
-                    } else if(progress < size) {
-                        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mCtx, NOTIFICATION_CHANNEL_ID)
-                                .setContentTitle(mCtx.getText(R.string.screenshot))
-                                .setLocalOnly(true);
-
-                        notificationBuilder.setContentText(mCtx.getText(R.string.downloading));
-                        notificationBuilder.setSmallIcon(R.drawable.image_white);
-                        notificationBuilder.setProgress(size, progress, false);
 
                         Notification notification = notificationBuilder.build();
                         mNM.notify(NOTIFICATION, notification);
