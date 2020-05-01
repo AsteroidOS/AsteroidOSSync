@@ -1,0 +1,4 @@
+0.17
+  * Ringtone vibration pattern on incomming calls
+  * Fixed screenshot saving on Android 10
+  * Translation improvements
