@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">IH</string>
     <string name="searching">Anadi n temrilin</string>
@@ -35,7 +35,7 @@
     <string name="screenshot">Tuṭṭfa n ugdil</string>
     <string name="synchronize_time">Akud n umtawi</string>
     <string name="explain_app_prefs">Ilɣa seg yisnasen ad d-banen dagi</string>
-<string name="notification_type_default">Amezwer</string>
+    <string name="notification_type_default">Amezwer</string>
     <string name="notification_type_no_notif">Ulac alɣu</string>
     <string name="notification_type_silent">Asusam</string>
     <string name="notification_type_vibra">Anhaz</string>
@@ -55,4 +55,15 @@
     <string name="grant_permission">Mudd tasiregt</string>
     <string name="please_grant_permissions">Mudd tasiregt-agi</string>
     <string name="impassable_slide">Mudd tasiregt-agi</string>
+    <string name="dialer">Anasiw</string>
+    <string name="show_calls_on_watch">Sken ismektiyen i d-ikecmen</string>
+    <string name="intro_phonestateslide_title">Addad n tiliɣri</string>
+    <string name="intro_phonestateslide_subtitle">Akken ad tsekneḍ ismektiyen inekcam ɣef temrilt.</string>
+    <string name="notification_type_ringtone">Teṭenṭunt</string>
+    <string name="notification_silent_icon">Tignit n tsusmi n yilɣa</string>
+    <string name="switch_phone_notifications">Tiliɣri teqqen s tsusmi</string>
+    <string name="title_activity_settings">Iɣewwaṛen</string>
+    <string name="action_settings">Iɣewwaṛen</string>
+    <string name="title_activity_settings_activity">Iɣewwaṛen</string>
+    <string name="synchronize_weather">Adig awurman n tegnawt</string>
 </resources>
