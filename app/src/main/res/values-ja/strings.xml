@@ -62,4 +62,8 @@
     <string name="switch_phone_notifications">接続された時に電話の音を出さない</string>
     <string name="notification_silent_icon">通知サイレントアイコン</string>
     <string name="notification_type_ringtone">着信音</string>
+    <string name="intro_phonestateslide_title">電話の状態</string>
+    <string name="intro_phonestateslide_subtitle">ウォッチに着信を表示する。</string>
+    <string name="dialer">ダイヤラ</string>
+    <string name="show_calls_on_watch">着信を表示する</string>
 </resources>
