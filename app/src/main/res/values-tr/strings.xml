@@ -62,4 +62,8 @@
     <string name="switch_phone_notifications">Telefon bağlıyken sessiz</string>
     <string name="notification_silent_icon">bildirim sessiz simgesi</string>
     <string name="notification_type_ringtone">Zil sesi</string>
+    <string name="dialer">Çevirici</string>
+    <string name="show_calls_on_watch">Gelen çağrıları göster</string>
+    <string name="intro_phonestateslide_title">Telefon Durumu</string>
+    <string name="intro_phonestateslide_subtitle">Gelen çağrıları saatte görüntülemek için.</string>
 </resources>
