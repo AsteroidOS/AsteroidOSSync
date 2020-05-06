@@ -51,6 +51,7 @@ public class NLService extends NotificationListenerService {
         registerReceiver(nlServiceReceiver, filter);
 
         iconFromPackage = new Hashtable<>();
+        iconFromPackage.put("code.name.monkey.retromusic", "ios-musical-notes");
         iconFromPackage.put("com.android.chrome", "logo-chrome");
         iconFromPackage.put("com.android.dialer", "ios-call");
         iconFromPackage.put("com.android.mms", "ios-text");
