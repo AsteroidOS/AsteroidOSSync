@@ -62,4 +62,8 @@
     <string name="switch_phone_notifications">Беззвучный режим телефона при подключении</string>
     <string name="notification_silent_icon">иконка уведомления в бесшумном режиме</string>
     <string name="notification_type_ringtone">Мелодия</string>
+    <string name="dialer">Номеронабиратель</string>
+    <string name="show_calls_on_watch">Показывать входящие звонки</string>
+    <string name="intro_phonestateslide_title">Состояние телефона</string>
+    <string name="intro_phonestateslide_subtitle">Чтобы показать входящие звонки на часах.</string>
 </resources>
