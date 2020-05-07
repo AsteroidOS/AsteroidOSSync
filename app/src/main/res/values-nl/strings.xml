@@ -62,4 +62,6 @@
     <string name="switch_phone_notifications">Telefoon dempen wanneer verbonden</string>
     <string name="notification_silent_icon">pictogram stille melding</string>
     <string name="notification_type_ringtone">Beltoon</string>
+    <string name="intro_phonestateslide_title">Telefoontoestand</string>
+    <string name="intro_phonestateslide_subtitle">Om inkomende gesprekken op de Watch te laten zien.</string>
 </resources>
