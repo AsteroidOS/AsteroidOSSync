@@ -76,13 +76,15 @@ public class PermissionsActivity extends MaterialIntroActivity {
             SlideFragment phoneStateFragment = new SlideFragmentBuilder()
                                         .backgroundColor(R.color.colorintroslide2)
                                         .buttonsColor(R.color.colorintroslide2button)
-                                        .neededPermissions(new String[]{Manifest.permission.READ_PHONE_STATE})
+                                        .neededPermissions(new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CALL_LOG})
                                         .image(R.drawable.ic_ring_volume)
                                         .title(getString(R.string.intro_phonestateslide_title))
                                         .description(getString(R.string.intro_phonestateslide_subtitle))
                                         .build();
             boolean phoneStateFragmentShown = (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED);
+                    Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) ||
+                    (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED);
 
             if (externalStorageFragmentShown || localizationFragmentShown ||
                     notificationFragmentShown || batteryOptimFragmentShown || phoneStateFragmentShown) {
