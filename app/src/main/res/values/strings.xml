@@ -63,8 +63,8 @@
     <string name="switch_phone_notifications">Silence phone when connected </string>
     <string name="notification_silent_icon">notification silent icon</string>
     <string name="notification_type_ringtone">Ringtone</string>
-    <string name="intro_phonestateslide_subtitle">To show incoming calls on the Watch.</string>
-    <string name="intro_phonestateslide_title">Phone State</string>
+    <string name="intro_phonestateslide_subtitle">To show incoming calls on the watch and for displaying the name of caller.</string>
+    <string name="intro_phonestateslide_title">Phone and Contacts</string>
     <string name="show_calls_on_watch">Display incoming calls</string>
     <string name="dialer">Dialer</string>
 </resources>
