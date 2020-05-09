@@ -2,9 +2,13 @@ package org.asteroidos.sync.services;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
@@ -51,16 +55,34 @@ public class PhoneStateReceiver extends BroadcastReceiver {
             }
         }
 
-        private void startRinging(String number){
+        private String getContact(String number) {
+            String contact = null;
+            ContentResolver cr = context.getContentResolver();
+            Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
+            Cursor cursor = cr.query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
+            if (cursor != null) {
+                if(cursor.moveToFirst()) {
+                    contact = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+                }
+                cursor.close();
+            }
+            return contact;
+        }
+
+        private void startRinging(String number) {
             boolean notificationPref = prefs.getBoolean(PREF_SEND_CALL_STATE, true);
-            if (notificationPref){
+            if (notificationPref) {
+                String contact = getContact(number);
+                if (contact == null) {
+                    contact = number;
+                }
                 Intent i = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
                 i.putExtra("event", "posted");
                 i.putExtra("packageName", "org.asteroidos.generic.dialer");
                 i.putExtra("id", 56345);
                 i.putExtra("appName", context.getResources().getString(R.string.dialer));
                 i.putExtra("appIcon", "ios-call");
-                i.putExtra("summary", number);
+                i.putExtra("summary", contact);
                 i.putExtra("body", number);
                 i.putExtra("vibration", "ringtone");
 
