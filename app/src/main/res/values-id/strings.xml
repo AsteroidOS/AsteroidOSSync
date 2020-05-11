@@ -62,4 +62,8 @@
     <string name="switch_phone_notifications">Diamkan ponsel saat terhubung</string>
     <string name="notification_silent_icon">Ikon notifikasi diam</string>
     <string name="notification_type_ringtone">Nada dering</string>
+    <string name="dialer">Pemanggil</string>
+    <string name="show_calls_on_watch">Tampilkan panggilan masuk</string>
+    <string name="intro_phonestateslide_title">Status telepon</string>
+    <string name="intro_phonestateslide_subtitle">Untuk menampilkan panggilan masuk pada Arloji.</string>
 </resources>
