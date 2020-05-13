@@ -20,8 +20,8 @@
     <string name="enter_city_name">Introduza o nome de uma cidade:</string>
     <string name="unpair">Desemparelhar</string>
     <string name="scanning">A procurar…</string>
-    <string name="downloading">A descarregar…</string>
-    <string name="downloaded">Descarregado</string>
+    <string name="downloading">A transferir…</string>
+    <string name="downloaded">Transferido</string>
     <string name="screenshot">Captura de ecrã</string>
     <string name="connected_icon">Ícone de conexão</string>
     <string name="battery_info_icon">Ícone de informação da bateria</string>
@@ -62,4 +62,8 @@
     <string name="switch_phone_notifications">Silenciar telefone quando conectado</string>
     <string name="notification_silent_icon">ícone de notificação silenciosa</string>
     <string name="notification_type_ringtone">Toque de chamada</string>
+    <string name="dialer">Marcador</string>
+    <string name="show_calls_on_watch">Exibir chamadas a receber</string>
+    <string name="intro_phonestateslide_title">Telefone e Contactos</string>
+    <string name="intro_phonestateslide_subtitle">Para mostrar as chamadas a receber no relógio e para exibir o nome do chamador.</string>
 </resources>
