@@ -64,6 +64,6 @@
     <string name="notification_type_ringtone">Zvono</string>
     <string name="dialer">Birač</string>
     <string name="show_calls_on_watch">Prikaži dolazne pozive</string>
-    <string name="intro_phonestateslide_title">Stanje mobitela</string>
-    <string name="intro_phonestateslide_subtitle">Za prikaz dolaznih poziva na satu.</string>
+    <string name="intro_phonestateslide_title">Mobitel i kontakti</string>
+    <string name="intro_phonestateslide_subtitle">Za prikaz dolaznih poziva na satu kao i za prikaz imena pozivatelja.</string>
 </resources>
