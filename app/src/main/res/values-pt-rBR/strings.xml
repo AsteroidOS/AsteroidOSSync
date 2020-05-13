@@ -64,6 +64,6 @@
     <string name="notification_type_ringtone">Toque</string>
     <string name="dialer">Discador</string>
     <string name="show_calls_on_watch">Mostrar chamadas recebidas</string>
-    <string name="intro_phonestateslide_title">Estado do telefone</string>
-    <string name="intro_phonestateslide_subtitle">Para mostrar as chamadas recebidas no relógio.</string>
+    <string name="intro_phonestateslide_title">Telefone e contatos</string>
+    <string name="intro_phonestateslide_subtitle">Para mostrar as chamadas recebidas no relógio e quem está chamando.</string>
 </resources>
