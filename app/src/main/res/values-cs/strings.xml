@@ -64,6 +64,6 @@
     <string name="notification_type_ringtone">Vyzváněcí tón</string>
     <string name="dialer">Vytáčení</string>
     <string name="show_calls_on_watch">Zobrazovat příchozí hovory</string>
-    <string name="intro_phonestateslide_title">Stav telefonu</string>
-    <string name="intro_phonestateslide_subtitle">Pro zobrazení příchozích hovorů na hodinkách.</string>
+    <string name="intro_phonestateslide_title">Telefon a kontakty</string>
+    <string name="intro_phonestateslide_subtitle">Pro zobrazení příchozích hovorů na hodinkách a pro zobrazení jména volajícího.</string>
 </resources>
