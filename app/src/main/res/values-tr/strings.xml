@@ -64,6 +64,6 @@
     <string name="notification_type_ringtone">Zil sesi</string>
     <string name="dialer">Çevirici</string>
     <string name="show_calls_on_watch">Gelen çağrıları göster</string>
-    <string name="intro_phonestateslide_title">Telefon Durumu</string>
-    <string name="intro_phonestateslide_subtitle">Gelen çağrıları saatte görüntülemek için.</string>
+    <string name="intro_phonestateslide_title">Telefon ve Kişiler</string>
+    <string name="intro_phonestateslide_subtitle">Gelen çağrıları saatte göstermek ve arayanın adını görüntülemek için.</string>
 </resources>
