@@ -65,5 +65,5 @@
     <string name="dialer">Pemanggil</string>
     <string name="show_calls_on_watch">Tampilkan panggilan masuk</string>
     <string name="intro_phonestateslide_title">Status telepon</string>
-    <string name="intro_phonestateslide_subtitle">Untuk menampilkan panggilan masuk pada Arloji.</string>
+    <string name="intro_phonestateslide_subtitle">Untuk menampilkan panggilan masuk pada Arloji dan untuk menampilkan nama pemanggil.</string>
 </resources>
