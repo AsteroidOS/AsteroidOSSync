@@ -64,6 +64,6 @@
     <string name="notification_type_ringtone">Мелодия</string>
     <string name="dialer">Номеронабиратель</string>
     <string name="show_calls_on_watch">Показывать входящие звонки</string>
-    <string name="intro_phonestateslide_title">Состояние телефона</string>
-    <string name="intro_phonestateslide_subtitle">Чтобы показать входящие звонки на часах.</string>
+    <string name="intro_phonestateslide_title">Телефон и контакты</string>
+    <string name="intro_phonestateslide_subtitle">Чтобы показать входящие звонки на часах и для отображения имени звонящего.</string>
 </resources>
