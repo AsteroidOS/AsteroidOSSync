@@ -62,4 +62,8 @@
     <string name="switch_phone_notifications">连接时手机静音</string>
     <string name="notification_silent_icon">通知静音图标</string>
     <string name="notification_type_ringtone">铃声</string>
+    <string name="dialer">拨号</string>
+    <string name="show_calls_on_watch">来电提醒</string>
+    <string name="intro_phonestateslide_title">来电与联系人</string>
+    <string name="intro_phonestateslide_subtitle">显示来电联系人的信息</string>
 </resources>
