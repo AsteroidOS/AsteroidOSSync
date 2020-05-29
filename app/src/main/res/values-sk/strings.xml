@@ -55,11 +55,15 @@
     <string name="grant_permission">Udeliť povolenie</string>
     <string name="please_grant_permissions">Prosím udeľte toto povolenie</string>
     <string name="impassable_slide">Prosím udeľte toto povolenie</string>
-    <string name="synchronize_weather">Automaticky vyhľadať počasie</string>
+    <string name="synchronize_weather">Automaticky určiť polohu</string>
     <string name="title_activity_settings_activity">Nastavenia</string>
     <string name="action_settings">Nastavenia</string>
     <string name="title_activity_settings">Nastavenia</string>
     <string name="switch_phone_notifications">Stlmiť telefón pri pripojení</string>
     <string name="notification_silent_icon">ikona tichého upozornenia</string>
     <string name="notification_type_ringtone">Zvonenie</string>
+    <string name="intro_phonestateslide_subtitle">Zobrazenie prichádzajúcich hovorov a meno volajúceho na hodinkách.</string>
+    <string name="dialer">Číselník</string>
+    <string name="intro_phonestateslide_title">Telefón a Kontakty</string>
+    <string name="show_calls_on_watch">Zobraziť prichádzajúce hovory</string>
 </resources>
