@@ -25,7 +25,7 @@
     <string name="phone_is_searching">تلفن در جست‌وجوی شماست!</string>
     <string name="notifications_settings">تنظیمات آگاهی‌ها</string>
     <string name="intro_slide4_title">آگاهی‌ها</string>
-    <string name="intro_slide4_subtitle">برای همگام‌سازی آگاهی‌ها با ساعتتان، در فهرست پیش رو AsteroidOS Sync را مجاز کنید:</string>
+    <string name="intro_slide4_subtitle">برای همگام‌سازی اعلان‌ها با ساعت‌تان، در فهرست پیش رو AsteroidOS Sync را مجاز کنید:</string>
     <string name="weather_settings">تنظیمات آب‌وهوا</string>
     <string name="enter_city_name">نام شهری را وارد کنید:</string>
     <string name="unpair">قطع اتصال</string>
@@ -42,15 +42,15 @@
     <string name="notification_type_strong_vibra">لرزش قوی</string>
     <string name="position_indicator">نشانگر موقعیّت</string>
     <string name="use_this_area">استفاده از این ناحیه برای آب‌وهوا</string>
-    <string name="app_icon">نقشک برنامه</string>
+    <string name="app_icon">نشان برنامه</string>
     <string name="intro_slide1_title">خوش آمدید</string>
-    <string name="intro_slide1_subtitle">این کاره، اجازهٔ همگام‌سازی تلفن اندرویدیتان با ساعت استرویدتان را می‌دهد. ولی نخست، به چند دسترسی نیاز دارد.</string>
+    <string name="intro_slide1_subtitle">این برنامه، اجازهٔ همگام‌سازی تلفن اندرویدی‌تان با ساعت استروید‌تان را می‌دهد. ولی نخست، به چند دسترسی نیاز دارد.</string>
     <string name="intro_slide2_title">دسترسی پرونده</string>
-    <string name="intro_slide2_subtitle">برای انبارش داده و ذخیرهٔ نماگرفت از ساعتتان.</string>
-    <string name="intro_slide3_title">موقعیّت</string>
-    <string name="intro_slide3_subtitle">برای پویش دستگاه‌های بلوتوث کم‌مصرف.</string>
+    <string name="intro_slide2_subtitle">برای ذخیره داده و ذخیرهٔ نماگرفت از ساعت‌تان.</string>
+    <string name="intro_slide3_title">موقعیت</string>
+    <string name="intro_slide3_subtitle">برای گشتن دستگاه‌های بلوتوث کم‌مصرف.</string>
     <string name="intro_slide5_title">بهینه‌سازی باتری</string>
-    <string name="intro_slide5_subtitle">برای اجازه به اجرای این کاره در پس‌زمینه، «بهینه‌ساز باتری» را برای AsteroidOS Sync در فهرستی که در ادامه خواهد آمد، غیرفعّال کنید:</string>
+    <string name="intro_slide5_subtitle">برای اجازه به اجرای این برنامه در پس‌زمینه، «بهینه‌ساز باتری» را برای AsteroidOS Sync در فهرستی که در ادامه خواهد آمد، غیرفعال کنید:</string>
     <string name="intro_slideerror_title">پشتیبانی بلوتوث کم‌مصرف</string>
     <string name="grant_permission">اعطای دسترسی</string>
     <string name="please_grant_permissions">لطفاً این دسترسی را اعطا کنید</string>
@@ -59,7 +59,11 @@
     <string name="title_activity_settings_activity">تنظیمات</string>
     <string name="action_settings">تنظیمات</string>
     <string name="title_activity_settings">تنظیمات</string>
-    <string name="switch_phone_notifications">خموش کردن تلفن هنگام اتّصال</string>
-    <string name="notification_silent_icon">نقشک خموشی آگاهی</string>
-    <string name="notification_type_ringtone">آهنگ زنگ</string>
+    <string name="switch_phone_notifications">بی‌صدا کردن تلفن وقتی متصل است</string>
+    <string name="notification_silent_icon">نشان بی‌صدا‌‌کردن اعلان</string>
+    <string name="notification_type_ringtone">زنگ</string>
+    <string name="dialer">تماس گیرنده</string>
+    <string name="show_calls_on_watch">نشان دادن تماس های ورودی</string>
+    <string name="intro_phonestateslide_title">تلفن و مخاطبین</string>
+    <string name="intro_phonestateslide_subtitle">برای نشان دادن تماس های ورودی روی ساعت و برای نشان دادن نام تماس گیرنده.</string>
 </resources>
