@@ -64,6 +64,6 @@
     <string name="notification_type_ringtone">신호음</string>
     <string name="dialer">다이얼러</string>
     <string name="show_calls_on_watch">발신전화 표시</string>
-    <string name="intro_phonestateslide_title">전화기 상태</string>
-    <string name="intro_phonestateslide_subtitle">시계에 발신전화 표시.</string>
+    <string name="intro_phonestateslide_title">전화 및 연락처</string>
+    <string name="intro_phonestateslide_subtitle">시계에 발신전화와 발신자 이름 표시.</string>
 </resources>
