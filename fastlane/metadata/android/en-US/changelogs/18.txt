@@ -1,0 +1,4 @@
+0.18
+  * Improvements to the incomming call detection
+  * Contact name lookup for incomming calls
+  * Translation improvements
