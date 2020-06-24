@@ -55,7 +55,7 @@
     <string name="grant_permission">Accorder la permission</string>
     <string name="please_grant_permissions">Veuillez accorder cette permission</string>
     <string name="impassable_slide">Veuillez accorder cette permission</string>
-    <string name="synchronize_weather">Position météo automatique</string>
+    <string name="synchronize_weather">Localiser la météo automatiquement</string>
     <string name="title_activity_settings_activity">Réglages</string>
     <string name="action_settings">Réglages</string>
     <string name="title_activity_settings">Réglages</string>
@@ -64,6 +64,6 @@
     <string name="notification_type_ringtone">Sonnerie</string>
     <string name="show_calls_on_watch">Afficher les appels entrants</string>
     <string name="dialer">Clavier</string>
-    <string name="intro_phonestateslide_title">État du téléphone</string>
-    <string name="intro_phonestateslide_subtitle">Pour afficher les appels entrants sur la Montre.</string>
+    <string name="intro_phonestateslide_title">Téléphone et contacts</string>
+    <string name="intro_phonestateslide_subtitle">Pour afficher les appels entrants et le nom de l’appelant sur la montre.</string>
 </resources>
