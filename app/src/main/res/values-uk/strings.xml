@@ -54,12 +54,16 @@
     <string name="intro_slideerror_title">Підтримка Bluetooth Low Energy</string>
     <string name="grant_permission">Видати дозвіл</string>
     <string name="please_grant_permissions">Будь ласка, дайте це дозвіл</string>
-    <string name="impassable_slide">Пожалуйста, дайте это разрешение</string>
+    <string name="impassable_slide">Будь ласка, дайте доступ</string>
     <string name="synchronize_weather">Автоматично визначати позицію для погоди</string>
     <string name="title_activity_settings_activity">Налаштування</string>
     <string name="action_settings">Налаштування</string>
     <string name="title_activity_settings">Налаштування</string>
     <string name="switch_phone_notifications">Заглушати телефон при підключенні</string>
-    <string name="notification_silent_icon">іконка сповіщення у безгучному режимі</string>
+    <string name="notification_silent_icon">іконка сповіщення у беззвучному режимі</string>
     <string name="notification_type_ringtone">Мелодія дзвінка</string>
+    <string name="dialer">Телефон</string>
+    <string name="show_calls_on_watch">Показувати вхідні звінки</string>
+    <string name="intro_phonestateslide_title">Телефон та контакти</string>
+    <string name="intro_phonestateslide_subtitle">Щоб бачити коло годинника вхідні дзвінки та хто телефонує</string>
 </resources>
