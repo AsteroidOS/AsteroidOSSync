@@ -62,4 +62,8 @@
     <string name="switch_phone_notifications">Silenciar teléfono mientras conectado</string>
     <string name="notification_silent_icon">Icono de silenciar notificaciones</string>
     <string name="notification_type_ringtone">Tono de llamada</string>
+    <string name="dialer">Marcador</string>
+    <string name="show_calls_on_watch">Mostrar llamadas entrantes</string>
+    <string name="intro_phonestateslide_title">Teléfono y contactos</string>
+    <string name="intro_phonestateslide_subtitle">Para mostrar las llamadas entrantes en el reloj y para mostrar el nombre de la persona que llama.</string>
 </resources>
