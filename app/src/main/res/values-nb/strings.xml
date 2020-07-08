@@ -63,7 +63,7 @@
     <string name="notification_silent_icon">Ikon for avslåtte merknader</string>
     <string name="notification_type_ringtone">Ringetone</string>
     <string name="dialer">Urskive</string>
-    <string name="intro_phonestateslide_subtitle">For å vise innkommende anrop på klokken.</string>
+    <string name="intro_phonestateslide_subtitle">For å vise innkommende anrop på klokken og visning av navn på oppringer.</string>
     <string name="intro_phonestateslide_title">Telefon og kontakter</string>
     <string name="show_calls_on_watch">Vis innkommende anrop</string>
 </resources>
