@@ -62,4 +62,6 @@
     <string name="switch_phone_notifications">Wycisz telefon, gdy połączone</string>
     <string name="notification_silent_icon">Ikona trybu cichego w notyfikacjach</string>
     <string name="notification_type_ringtone">Dzwonek</string>
+    <string name="show_calls_on_watch">Pokaż połączenia przychodzące</string>
+    <string name="intro_phonestateslide_title">Telefon i Kontakty</string>
 </resources>
