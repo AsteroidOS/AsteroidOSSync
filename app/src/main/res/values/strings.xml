@@ -54,6 +54,8 @@
     <string name="intro_slide5_subtitle">To let this app run in the background, disable \"Battery Optimization\" for AsteroidOS Sync in the following menu:</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy support</string>
     <string name="intro_slideerror_subtitle">This device does not support Bluetooth Low Energy.</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go is unsupported because it does not allow notification access and restricts background processes. A workaround for root users is to set the \"ro.config.low_ram\" flag in the build.prop file to \"false\".</string>
     <string name="grant_permission">Grant permission</string>
     <string name="please_grant_permissions">Please grant this permission</string>
     <string name="impassable_slide">Please grant this permission</string>
