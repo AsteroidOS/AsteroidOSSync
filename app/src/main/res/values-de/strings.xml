@@ -66,4 +66,6 @@
     <string name="intro_phonestateslide_title">Telefon und Kontakte</string>
     <string name="show_calls_on_watch">Zeige eingehende Anrufe</string>
     <string name="dialer">Telefon</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go ist nicht unterstützt, da es keinen Benachrichtigungszugriff erlaubt und Hintergrundprozesse einschränkt. Für Root-Nutzer besteht die Möglichkeit die \"ro.config.low_ram\" Variable in der build.prop auf \"false\" zu setzen.</string>
 </resources>

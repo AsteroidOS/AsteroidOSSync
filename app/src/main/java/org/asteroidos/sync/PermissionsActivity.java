@@ -1,6 +1,7 @@
 package org.asteroidos.sync;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -34,7 +35,11 @@ public class PermissionsActivity extends MaterialIntroActivity {
         PackageManager pm = getPackageManager();
         boolean hasBLE = pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE);
 
+        ActivityManager am = (ActivityManager) getApplicationContext().getSystemService(ACTIVITY_SERVICE);
+        boolean isLowRamDevice = am.isLowRamDevice();
+
         if (hasBLE) {
+            if (!isLowRamDevice) {
             SlideFragment welcomeFragment = new SlideFragmentBuilder()
                     .backgroundColor(R.color.colorintroslide1)
                     .buttonsColor(R.color.colorintroslide1button)
@@ -99,7 +104,10 @@ public class PermissionsActivity extends MaterialIntroActivity {
             } else
                 startMainActivity();
         } else {
-            addSlide(new BLENotSupportedSlide());
+                addSlide(new AndroidGoSlide());
+            }
+        } else {
+                addSlide(new BLENotSupportedSlide());
         }
     }
 
@@ -222,9 +230,30 @@ public class PermissionsActivity extends MaterialIntroActivity {
             Bundle bundle = new Bundle();
             bundle.putInt("background_color", R.color.colorintroslideerror);
             bundle.putInt("buttons_color", R.color.colorintroslideerrorbutton);
-            bundle.putInt("image", R.drawable.introslideerroricon);
+            bundle.putInt("image", R.drawable.introslidebluetoothicon);
             bundle.putString("title", inflater.getContext().getString(R.string.intro_slideerror_title));
             bundle.putString("description", inflater.getContext().getString(R.string.intro_slideerror_subtitle));
+            setArguments(bundle);
+
+            return super.onCreateView(inflater, container, savedInstanceState);
+        }
+
+        @Override
+        public boolean canMoveFurther() {
+            return false;
+        }
+    }
+
+    static public class AndroidGoSlide extends SlideFragment {
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("background_color", R.color.colorintroslideerror);
+            bundle.putInt("buttons_color", R.color.colorintroslideerrorbutton);
+            bundle.putInt("image", R.drawable.introslidelowramicon);
+            bundle.putString("title", inflater.getContext().getString(R.string.intro_slideandroidgo_title));
+            bundle.putString("description", inflater.getContext().getString(R.string.intro_slideandroidgo_subtitle));
             setArguments(bundle);
 
             return super.onCreateView(inflater, container, savedInstanceState);
