@@ -141,6 +141,7 @@ public class NLService extends NotificationListenerService {
         iconFromPackage.put("org.thunderdog.challegram", "ios-paper-plane");
         iconFromPackage.put("org.wordpress.android", "logo-wordpress");
         iconFromPackage.put("tv.twitch.android.app", "logo-twitch");
+        iconFromPackage.put("ws.xsoh.etar", "ios-calendar");
     }
 
     @Override
