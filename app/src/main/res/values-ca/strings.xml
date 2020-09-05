@@ -69,4 +69,8 @@
     <string name="switch_phone_notifications">Silenciar telèfon quan es connecti</string>
     <string name="notification_silent_icon">icona de silenciar notificació</string>
     <string name="notification_type_ringtone">To de trucada</string>
+    <string name="dialer">Marcador</string>
+    <string name="show_calls_on_watch">Visibilitat de trucades entrants</string>
+    <string name="intro_phonestateslide_title">Telèfon i contactes</string>
+    <string name="intro_phonestateslide_subtitle">Visibilitat de trucades entrants i del nom de l\'emissor.</string>
 </resources>
