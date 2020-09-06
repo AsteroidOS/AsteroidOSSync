@@ -67,4 +67,6 @@
     <string name="show_calls_on_watch">הצגת שיחות נכנסות</string>
     <string name="intro_phonestateslide_title">טלפון ואנשי קשר</string>
     <string name="intro_phonestateslide_subtitle">כדי להציג שיחות נכנסות בשעון עם שם המתקשר.</string>
+    <string name="intro_slideandroidgo_subtitle">אין תמיכה ב־Android Go כיוון שאינו מרשה גישה להתראות ומגביל שירותי רקע. ניתן לעקוף את זה דרך משתמש על (root) על ידי הגדרת הדגלון „ro.config.low_ram” בקובץ build.prod ל־„false”.</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
