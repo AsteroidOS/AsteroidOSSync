@@ -62,7 +62,7 @@
     <string name="title_activity_settings">Einstellungen</string>
     <string name="notification_silent_icon">Symbol „Lautlose Benachrichtigung“</string>
     <string name="notification_type_ringtone">Klingelton</string>
-    <string name="intro_phonestateslide_subtitle">Eingehende Anrufe mit dem Anrufernamen auf der Uhr anzeigen.</string>
+    <string name="intro_phonestateslide_subtitle">Eingehende Anrufe mit Anrufername auf der Uhr anzeigen.</string>
     <string name="intro_phonestateslide_title">Telefon und Kontakte</string>
     <string name="show_calls_on_watch">Zeige eingehende Anrufe</string>
     <string name="dialer">Telefon</string>
