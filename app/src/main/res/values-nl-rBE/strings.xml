@@ -19,7 +19,7 @@
     <string name="weather_icon">Weerpictogram</string>
     <string name="time_icon">Tijdpictogram</string>
     <string name="grab_a_screenshot">Neemt ne schermafdruk</string>
-    <string name="find_my_watch">Zoekt mijn horloge</string>
+    <string name="find_my_watch">Horloge zoeken</string>
     <string name="watch_finder">Horlogevinder</string>
     <string name="phone_is_searching">Uwe gsm is naar u op zoek!</string>
     <string name="notifications_settings">Meldingsinstellingen</string>
@@ -61,4 +61,9 @@
     <string name="title_activity_settings">Instellingen</string>
     <string name="switch_phone_notifications">Gsm dempen wanneer verbonden</string>
     <string name="notification_silent_icon">pictogram stille melding</string>
+    <string name="dialer">Kiezer</string>
+    <string name="show_calls_on_watch">Toon inkomende oproepen</string>
+    <string name="intro_phonestateslide_title">Telefoon en contacten</string>
+    <string name="intro_phonestateslide_subtitle">Om inkomende gesprekken en de naam van de bellen op de horloge te laten zien.</string>
+    <string name="notification_type_ringtone">Beltoon</string>
 </resources>
