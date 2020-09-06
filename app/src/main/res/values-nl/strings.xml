@@ -63,7 +63,7 @@
     <string name="notification_silent_icon">pictogram stille melding</string>
     <string name="notification_type_ringtone">Beltoon</string>
     <string name="intro_phonestateslide_title">Telefoon en contacten</string>
-    <string name="intro_phonestateslide_subtitle">Om inkomende gesprekken en de naam van de beller op de horloge te laten zien.</string>
+    <string name="intro_phonestateslide_subtitle">Om inkomende gesprekken en de naam van de beller op het horloge te laten zien.</string>
     <string name="dialer">Kiezer</string>
     <string name="show_calls_on_watch">Toon inkomende oproepen</string>
 </resources>
