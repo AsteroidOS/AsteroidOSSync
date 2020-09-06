@@ -13,9 +13,9 @@
     <string name="connected_formatted">Verbonden met %s</string>
     <string name="connecting_formatted">Verbinden met %s</string>
     <string name="connected_icon">Verbonden-pictogram</string>
-    <string name="battery_info_icon">Batterijinfopictogram</string>
-    <string name="screenshot_icon">Schermafdrukpictogram</string>
-    <string name="finder_icon">Vinderpictogram</string>
+    <string name="battery_info_icon">Accu-infopictogram</string>
+    <string name="screenshot_icon">Schermfotopictogram</string>
+    <string name="finder_icon">Zoekpictogram</string>
     <string name="settings_icon">Instellingenpictogram</string>
     <string name="weather_icon">Weerpictogram</string>
     <string name="time_icon">Tijdpictogram</string>
@@ -66,4 +66,6 @@
     <string name="intro_phonestateslide_subtitle">Om inkomende gesprekken en de naam van de beller op het horloge te laten zien.</string>
     <string name="dialer">Kiezer</string>
     <string name="show_calls_on_watch">Toon inkomende oproepen</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go wordt niet ondersteund omdat daarop geen toegang tot meldingen is en achtergrondprocessen te veel worden beperkt. Rootgebruikers kunnen dit omzeilen door de optie \'ro.config.low_ram\' in build.prop in te stellen op \'false\'.</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
