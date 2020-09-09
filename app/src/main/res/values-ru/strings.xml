@@ -66,4 +66,6 @@
     <string name="show_calls_on_watch">Показывать входящие звонки</string>
     <string name="intro_phonestateslide_title">Телефон и контакты</string>
     <string name="intro_phonestateslide_subtitle">Чтобы показать входящие звонки на часах и для отображения имени звонящего.</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go не поддерживается, поскольку он не разрешает доступ к уведомлениям и ограничивает фоновые процессы. Обходной путь для пользователей root - установить для флага \"ro.config.low_ram\" в файле build.prop значение \"false\".</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>

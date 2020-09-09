@@ -66,4 +66,6 @@
     <string name="show_calls_on_watch">Prikaži dolazne pozive</string>
     <string name="intro_phonestateslide_title">Mobitel i kontakti</string>
     <string name="intro_phonestateslide_subtitle">Za prikaz dolaznih poziva na satu kao i za prikaz imena pozivatelja.</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go nije podržan, jer ne dopušta pristup obavijestima i ograničava pozadinske procese. Zaobilazno rješenje za root korisnike je postavljanje upozorenja „ro.config.low_ram” u datoteci build.prop na „false”.</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
