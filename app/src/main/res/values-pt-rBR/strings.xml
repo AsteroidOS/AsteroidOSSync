@@ -66,4 +66,6 @@
     <string name="show_calls_on_watch">Mostrar chamadas recebidas</string>
     <string name="intro_phonestateslide_title">Telefone e contatos</string>
     <string name="intro_phonestateslide_subtitle">Para mostrar as chamadas recebidas no relógio e quem está chamando.</string>
+    <string name="intro_slideandroidgo_subtitle">O Android Go não é suportado pois ele não permite o acesso às notificações e restringe os processos em segundo plano. Uma solução alternativa para usuários root é definir o marcador \"ro.config.low_ram\" no arquivo build.prop como \"false\".</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
