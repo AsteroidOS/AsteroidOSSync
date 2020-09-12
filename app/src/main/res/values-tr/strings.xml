@@ -66,4 +66,6 @@
     <string name="show_calls_on_watch">Gelen çağrıları göster</string>
     <string name="intro_phonestateslide_title">Telefon ve Kişiler</string>
     <string name="intro_phonestateslide_subtitle">Gelen çağrıları saatte göstermek ve arayanın adını görüntülemek için.</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go desteklenmiyor çünkü bildirim erişimine izin vermiyor ve arka plan süreçlerini kısıtlıyor. Kök kullanıcılar, build.prop dosyasındaki \"ro.config.low_ram\" bayrağını \"false\" yaparak geçici çözüm üretebilir.</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
