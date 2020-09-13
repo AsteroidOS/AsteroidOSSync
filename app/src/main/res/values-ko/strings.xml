@@ -66,4 +66,6 @@
     <string name="show_calls_on_watch">발신전화 표시</string>
     <string name="intro_phonestateslide_title">전화 및 연락처</string>
     <string name="intro_phonestateslide_subtitle">시계에 발신전화와 발신자 이름 표시.</string>
+    <string name="intro_slideandroidgo_subtitle">안드로이드 고는 알림 액세스를 허용하지 않고 백그라운드 프로세스를 제한하므로 지원되지 않습니다. 루트 사용자를 위한 해결 방법은 build.prop 파일의 \"ro.config.low_ram\"플래그를 \"false\"로 설정하는 것입니다.</string>
+    <string name="intro_slideandroidgo_title">안드로이드 고</string>
 </resources>
