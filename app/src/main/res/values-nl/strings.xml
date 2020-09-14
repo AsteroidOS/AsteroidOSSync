@@ -59,10 +59,10 @@
     <string name="title_activity_settings_activity">Instellingen</string>
     <string name="action_settings">Instellingen</string>
     <string name="title_activity_settings">Instellingen</string>
-    <string name="switch_phone_notifications">Telefoon dempen wanneer verbonden</string>
+    <string name="switch_phone_notifications">Telefoon dempen wanneer het verbonden is</string>
     <string name="notification_silent_icon">pictogram stille melding</string>
     <string name="notification_type_ringtone">Beltoon</string>
-    <string name="intro_phonestateslide_title">Telefoon en contacten</string>
+    <string name="intro_phonestateslide_title">Telefoon en Contacten</string>
     <string name="intro_phonestateslide_subtitle">Om inkomende gesprekken en de naam van de beller op het horloge te laten zien.</string>
     <string name="dialer">Kiezer</string>
     <string name="show_calls_on_watch">Toon inkomende oproepen</string>
