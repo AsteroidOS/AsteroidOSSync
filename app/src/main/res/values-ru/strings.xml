@@ -38,7 +38,7 @@
     <string name="notification_type_default">По умолчанию</string>
     <string name="notification_type_no_notif">Уведомления отсутствуют</string>
     <string name="notification_type_silent">Беззвучный</string>
-    <string name="notification_type_vibra">Вибрация</string>
+    <string name="notification_type_vibra">Вибрации</string>
     <string name="notification_type_strong_vibra">Сильная вибрация</string>
     <string name="position_indicator">Индикатор позиции</string>
     <string name="use_this_area">Используйте эту область для погоды</string>
@@ -50,7 +50,7 @@
     <string name="intro_slide3_title">Местоположение</string>
     <string name="intro_slide3_subtitle">Сканировать ближайшие Bluetooth LE устройства.</string>
     <string name="intro_slide5_title">Оптимизация батареи</string>
-    <string name="intro_slide5_subtitle">Что бы разрешить этому приложению работать в фоновом режиме, отключите \"Оптимизацию батареи\" для AsteroidOS Sync в следующем меню:</string>
+    <string name="intro_slide5_subtitle">Что бы разрешить этому приложению работать в фоновом режиме, пожалуйста, отключите \"Оптимизацию батареи\" для AsteroidOS Sync в следующем меню:</string>
     <string name="intro_slideerror_title">Поддержка Bluetooth LE</string>
     <string name="grant_permission">Выдать разрешение</string>
     <string name="please_grant_permissions">Пожалуйста, дайте это разрешение</string>
@@ -60,12 +60,12 @@
     <string name="action_settings">Настройки</string>
     <string name="title_activity_settings">Настройки</string>
     <string name="switch_phone_notifications">Беззвучный режим телефона при подключении</string>
-    <string name="notification_silent_icon">иконка уведомления в бесшумном режиме</string>
+    <string name="notification_silent_icon">Иконка уведомления в бесшумном режиме</string>
     <string name="notification_type_ringtone">Мелодия</string>
     <string name="dialer">Номеронабиратель</string>
     <string name="show_calls_on_watch">Показывать входящие звонки</string>
-    <string name="intro_phonestateslide_title">Телефон и контакты</string>
-    <string name="intro_phonestateslide_subtitle">Чтобы показать входящие звонки на часах и для отображения имени звонящего.</string>
+    <string name="intro_phonestateslide_title">Телефон &amp; контакты</string>
+    <string name="intro_phonestateslide_subtitle">Чтобы показать входящие звонки на часах, и для отображения имени звонящего.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go не поддерживается, поскольку он не разрешает доступ к уведомлениям и ограничивает фоновые процессы. Обходной путь для пользователей root - установить для флага \"ro.config.low_ram\" в файле build.prop значение \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
