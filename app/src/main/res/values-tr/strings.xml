@@ -38,9 +38,9 @@
     <string name="notification_type_default">Öntanımlı</string>
     <string name="notification_type_no_notif">Bildirim yok</string>
     <string name="notification_type_silent">Sessiz</string>
-    <string name="notification_type_vibra">Titreşim</string>
+    <string name="notification_type_vibra">Titreşimler</string>
     <string name="notification_type_strong_vibra">Güçlü titreşim</string>
-    <string name="position_indicator">Konum göstergesi</string>
+    <string name="position_indicator">Konum Göstergesi</string>
     <string name="use_this_area">Bu alanı hava durumu için kullan</string>
     <string name="app_icon">Uygulama simgesi</string>
     <string name="intro_slide1_title">Hoş geldiniz</string>
@@ -50,7 +50,7 @@
     <string name="intro_slide3_title">Konum</string>
     <string name="intro_slide3_subtitle">Yakındaki Bluetooth Düşük Enerji aygıtları taramak için.</string>
     <string name="intro_slide5_title">Pil İyileştirmesi</string>
-    <string name="intro_slide5_subtitle">Bu uygulamanın arka planda çalışması için takip eden menüde AsteroidOS Sync için \"Pil İyileştirmesi\"ni kapatın:</string>
+    <string name="intro_slide5_subtitle">Bu uygulamanın arka planda çalışması için lütfen takip eden menüde AsteroidOS Sync için \"Pil İyileştirmesi\"ni kapatın:</string>
     <string name="intro_slideerror_title">Bluetooth Düşük Enerji desteği</string>
     <string name="grant_permission">İzin ver</string>
     <string name="please_grant_permissions">Lütfen bu izni verin</string>
@@ -60,7 +60,7 @@
     <string name="action_settings">Ayarlar</string>
     <string name="title_activity_settings">Ayarlar</string>
     <string name="switch_phone_notifications">Telefon bağlıyken sessiz</string>
-    <string name="notification_silent_icon">bildirim sessiz simgesi</string>
+    <string name="notification_silent_icon">Bildirim Sessiz Simgesi</string>
     <string name="notification_type_ringtone">Zil sesi</string>
     <string name="dialer">Çevirici</string>
     <string name="show_calls_on_watch">Gelen çağrıları göster</string>
