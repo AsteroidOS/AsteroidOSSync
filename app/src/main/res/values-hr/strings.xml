@@ -37,7 +37,7 @@
     <string name="notification_type_vibra">Vibracija</string>
     <string name="notification_type_strong_vibra">Jaka vibracija</string>
     <string name="explain_app_prefs">Obavijesti aplikacija će se pojaviti ovdje</string>
-    <string name="position_indicator">Indikator pozicije</string>
+    <string name="position_indicator">Pokazatelj Položaja</string>
     <string name="use_this_area">Koristi ovo područje za vremensku prognozu</string>
     <string name="app_icon">Ikona aplikacije</string>
     <string name="intro_slide1_title">Dobrodošli</string>
@@ -49,7 +49,7 @@
     <string name="intro_slide4_title">Obavijesti</string>
     <string name="intro_slide4_subtitle">Za sinkronizaciju obavijesti s tvojim satom, dozvoli „AsteroidOS Sync” u sljedećem izborniku:</string>
     <string name="intro_slide5_title">Optimizacija baterije</string>
-    <string name="intro_slide5_subtitle">Za rad aplikacije u pozadini isključi opciju „Optimizacija baterije” u sljedećem izborniku:</string>
+    <string name="intro_slide5_subtitle">Da bi aplikacija radila u pozadini, molim vas isključite „Optimizacija baterije” za AsteroidOS Sync u sljedećem izborniku:</string>
     <string name="intro_slideerror_title">Podrška za Bluetooth male snage</string>
     <string name="intro_slideerror_subtitle">Ovaj uređaj ne podržava Bluetooth male snage.</string>
     <string name="grant_permission">Dozvoli</string>
@@ -59,13 +59,13 @@
     <string name="title_activity_settings_activity">Postavke</string>
     <string name="action_settings">Postavke</string>
     <string name="title_activity_settings">Postavke</string>
-    <string name="switch_phone_notifications">Stišaj mobitel kad je spojen</string>
-    <string name="notification_silent_icon">ikona za bezvučno obavještavanje</string>
+    <string name="switch_phone_notifications">Utišajte telefon kad je povezan</string>
+    <string name="notification_silent_icon">Ikona za Bezvučno Obavještavanje</string>
     <string name="notification_type_ringtone">Zvono</string>
     <string name="dialer">Birač</string>
     <string name="show_calls_on_watch">Prikaži dolazne pozive</string>
-    <string name="intro_phonestateslide_title">Mobitel i kontakti</string>
-    <string name="intro_phonestateslide_subtitle">Za prikaz dolaznih poziva na satu kao i za prikaz imena pozivatelja.</string>
+    <string name="intro_phonestateslide_title">Mobitel i Kontakti</string>
+    <string name="intro_phonestateslide_subtitle">Za prikaz dolaznih poziva na satu, i za prikaz imena pozivatelja.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go nije podržan, jer ne dopušta pristup obavijestima i ograničava pozadinske procese. Zaobilazno rješenje za root korisnike je postavljanje upozorenja „ro.config.low_ram” u datoteci build.prop na „false”.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
