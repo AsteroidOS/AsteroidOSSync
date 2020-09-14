@@ -43,14 +43,14 @@
     <string name="intro_slideerror_subtitle">Dit apparaat ondersteunt Bluetooth Low Energy niet.</string>
     <string name="app_icon">App-pictogram</string>
     <string name="intro_slide1_title">Welkom</string>
-    <string name="intro_slide1_subtitle">Dezen app biedt u de mogelijkheid uwen Android-gsm te synchroniseren met uw AsteroidOS-horloge, maar eerst heeft hij een aantal toestemmingen nodig.</string>
+    <string name="intro_slide1_subtitle">Met deze app kunt u uw Android-telefoon synchroniseren met uw AsteroidOS-horloge. Maar eerst heeft het enkele toestemmingen nodig.</string>
     <string name="intro_slide2_title">Toegang tot bestanden</string>
     <string name="intro_slide2_subtitle">Voor gegevens in het cachegeheugen op te slaan, en schermafdrukken van uw horloge te maken.</string>
     <string name="intro_slide3_title">Locatie</string>
     <string name="intro_slide3_subtitle">Voor te scannen naar nabije Bluetooth Low Energy-apparaten.</string>
     <string name="intro_slide4_subtitle">Voor meldingen te synchroniseren moet ge in het volgend menu ‘AsteroidOS Sync’ toestaan:</string>
     <string name="intro_slide5_title">Batterijoptimalisatie</string>
-    <string name="intro_slide5_subtitle">Voor dezen app in de achtergrond te kunnen uitvoeren moet ge ‘Batterijoptimalisatie’ voor AsteroidOS-synchronisatie in het volgend menu uitschakelen:</string>
+    <string name="intro_slide5_subtitle">Om deze app in de achtergrond te kunnen uitvoeren moet je ‘Batterijoptimalisatie’ voor AsteroidOS-synchronisatie in het volgende menu uitschakelen:</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy-ondersteuning</string>
     <string name="grant_permission">Toelating geven</string>
     <string name="please_grant_permissions">Gelieve deze toelating te geven</string>
@@ -59,11 +59,13 @@
     <string name="title_activity_settings_activity">Instellingen</string>
     <string name="action_settings">Instellingen</string>
     <string name="title_activity_settings">Instellingen</string>
-    <string name="switch_phone_notifications">Gsm dempen wanneer verbonden</string>
+    <string name="switch_phone_notifications">Gsm dempen wanneer het verbonden is</string>
     <string name="notification_silent_icon">pictogram stille melding</string>
     <string name="dialer">Kiezer</string>
     <string name="show_calls_on_watch">Toon inkomende oproepen</string>
-    <string name="intro_phonestateslide_title">Telefoon en contacten</string>
-    <string name="intro_phonestateslide_subtitle">Om inkomende gesprekken en de naam van de bellen op de horloge te laten zien.</string>
+    <string name="intro_phonestateslide_title">Telefoon en Contacten</string>
+    <string name="intro_phonestateslide_subtitle">Om inkomende oproepen op het horloge weer te geven en om de naam van de beller weer te geven.</string>
     <string name="notification_type_ringtone">Beltoon</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go wordt niet ondersteund omdat het geen toegang tot meldingen toestaat en achtergrondprocessen beperkt. Een oplossing voor rootgebruikers is om de vlag \"ro.config.low_ram\" in het build.prop-bestand op \"false\" in te stellen.</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
