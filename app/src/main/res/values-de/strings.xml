@@ -40,7 +40,7 @@
     <string name="notification_type_silent">Lautlos</string>
     <string name="notification_type_vibra">Vibration</string>
     <string name="notification_type_strong_vibra">Starke Vibration</string>
-    <string name="position_indicator">Positionsanzeige</string>
+    <string name="position_indicator">Positionsanzeiger</string>
     <string name="use_this_area">Diesen Ort für Wetterinformationen nutzen</string>
     <string name="app_icon">Anwendungssymbol</string>
     <string name="intro_slide1_title">Willkommen</string>
@@ -56,7 +56,7 @@
     <string name="please_grant_permissions">Bitte diese Erlaubnis gewähren</string>
     <string name="impassable_slide">Bitte diese Erlaubnis gewähren</string>
     <string name="synchronize_weather">Wetter automatisch ermitteln</string>
-    <string name="switch_phone_notifications">Telefon bei Verbindung lautlos stellen</string>
+    <string name="switch_phone_notifications">Telefon stumm schalten, wenn es ist verbunden</string>
     <string name="title_activity_settings_activity">Einstellungen</string>
     <string name="action_settings">Einstellungen</string>
     <string name="title_activity_settings">Einstellungen</string>
