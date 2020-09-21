@@ -34,6 +34,7 @@ import com.maxmpz.poweramp.player.PowerampAPI;
 import com.maxmpz.poweramp.player.PowerampAPIHelper;
 
 import org.asteroidos.sync.services.NLService;
+import org.asteroidos.sync.utils.AsteroidUUIDS;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -41,11 +42,6 @@ import java.util.UUID;
 
 @SuppressWarnings( "deprecation" ) // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated ReadWriteListener
 public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionManager.OnActiveSessionsChangedListener {
-    private static final UUID mediaTitleCharac    = UUID.fromString("00007001-0000-0000-0000-00A57E401D05");
-    private static final UUID mediaAlbumCharac    = UUID.fromString("00007002-0000-0000-0000-00A57E401D05");
-    private static final UUID mediaArtistCharac   = UUID.fromString("00007003-0000-0000-0000-00A57E401D05");
-    private static final UUID mediaPlayingCharac  = UUID.fromString("00007004-0000-0000-0000-00A57E401D05");
-    private static final UUID mediaCommandsCharac = UUID.fromString("00007005-0000-0000-0000-00A57E401D05");
 
     private static final byte MEDIA_COMMAND_PREVIOUS = 0x0;
     private static final byte MEDIA_COMMAND_NEXT     = 0x1;
@@ -72,7 +68,7 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
     }
 
     public void sync() {
-        mDevice.enableNotify(mediaCommandsCharac, commandsListener);
+        mDevice.enableNotify(AsteroidUUIDS.MEDIA_COMMANDS_CHAR, commandsListener);
         try {
             mMediaSessionManager = (MediaSessionManager) mCtx.getSystemService(Context.MEDIA_SESSION_SERVICE);
             List<MediaController> controllers = mMediaSessionManager.getActiveSessions(new ComponentName(mCtx, NLService.class));
@@ -84,7 +80,7 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
     }
 
     public void unsync() {
-        mDevice.disableNotify(mediaCommandsCharac);
+        mDevice.disableNotify(AsteroidUUIDS.MEDIA_COMMANDS_CHAR);
 
         if(mMediaSessionManager != null)
             mMediaSessionManager.removeOnActiveSessionsChangedListener(this);
@@ -99,7 +95,7 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
     private BleDevice.ReadWriteListener commandsListener = new BleDevice.ReadWriteListener() {
         @Override
         public void onEvent(ReadWriteEvent e) {
-            if(e.isNotification() && e.charUuid().equals(mediaCommandsCharac)) {
+            if(e.isNotification() && e.charUuid().equals(AsteroidUUIDS.MEDIA_COMMANDS_CHAR)) {
                 if (mMediaController != null) {
                     byte data[] = e.data();
                     boolean isPoweramp = mSettings.getString(PREFS_MEDIA_CONTROLLER_PACKAGE, PREFS_MEDIA_CONTROLLER_PACKAGE_DEFAULT)
@@ -194,15 +190,15 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
             super.onMetadataChanged(metadata);
 
             if (metadata != null) {
-                mDevice.write(mediaArtistCharac,
+                mDevice.write(AsteroidUUIDS.MEDIA_ARTIST_CHAR,
                         getTextAsBytes(metadata, MediaMetadata.METADATA_KEY_ARTIST),
                         MediaService.this);
 
-                mDevice.write(mediaAlbumCharac,
+                mDevice.write(AsteroidUUIDS.MEDIA_ALBUM_CHAR,
                         getTextAsBytes(metadata, MediaMetadata.METADATA_KEY_ALBUM),
                         MediaService.this);
 
-                mDevice.write(mediaTitleCharac,
+                mDevice.write(AsteroidUUIDS.MEDIA_TITLE_CHAR,
                         getTextAsBytes(metadata, MediaMetadata.METADATA_KEY_TITLE),
                         MediaService.this);
             }
@@ -213,7 +209,7 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
             super.onPlaybackStateChanged(state);
             byte[] data = new byte[1];
             data[0] = (byte)(state.getState() == PlaybackState.STATE_PLAYING ?  1 : 0);
-            mDevice.write(mediaPlayingCharac, data, MediaService.this);
+            mDevice.write(AsteroidUUIDS.MEDIA_PLAYING_CHAR, data, MediaService.this);
         }
 
         @Override
@@ -250,9 +246,9 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
             }
         } else {
             byte[] data = new byte[]{0};
-            mDevice.write(mediaArtistCharac, data, MediaService.this);
-            mDevice.write(mediaAlbumCharac, data, MediaService.this);
-            mDevice.write(mediaTitleCharac, data, MediaService.this);
+            mDevice.write(AsteroidUUIDS.MEDIA_ARTIST_CHAR, data, MediaService.this);
+            mDevice.write(AsteroidUUIDS.MEDIA_ALBUM_CHAR, data, MediaService.this);
+            mDevice.write(AsteroidUUIDS.MEDIA_TITLE_CHAR, data, MediaService.this);
         }
     }
 }

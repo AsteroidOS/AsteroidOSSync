@@ -41,7 +41,6 @@ import com.idevicesinc.sweetblue.BleManagerConfig;
 import com.idevicesinc.sweetblue.BleNodeConfig;
 import com.idevicesinc.sweetblue.BleTask;
 import com.idevicesinc.sweetblue.utils.Interval;
-import com.idevicesinc.sweetblue.utils.Uuids;
 
 import org.asteroidos.sync.BuildConfig;
 import org.asteroidos.sync.MainActivity;
@@ -52,8 +51,7 @@ import org.asteroidos.sync.ble.ScreenshotService;
 import org.asteroidos.sync.ble.SilentModeService;
 import org.asteroidos.sync.ble.TimeService;
 import org.asteroidos.sync.ble.WeatherService;
-
-import java.util.UUID;
+import org.asteroidos.sync.utils.AsteroidUUIDS;
 
 import static com.idevicesinc.sweetblue.BleManager.get;
 
@@ -121,7 +119,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
     void handleReqBattery() {
         if(mDevice == null) return;
         if(mState == STATUS_DISCONNECTED) return;
-        mDevice.read(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener()
+        mDevice.read(AsteroidUUIDS.BATTERY_UUID, new BleDevice.ReadWriteListener()
         {
             @Override public void onEvent(ReadWriteEvent result)
             {
@@ -175,7 +173,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
 
                 replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
 
-                mDevice.read(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener()
+                mDevice.read(AsteroidUUIDS.BATTERY_UUID, new BleDevice.ReadWriteListener()
                 {
                     @Override public void onEvent(ReadWriteEvent result)
                     {
@@ -329,11 +327,11 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
             } catch (RemoteException | NullPointerException ignored) {}
             mDevice.setMtu(256);
 
-            event.device().enableNotify(Uuids.BATTERY_LEVEL, new BleDevice.ReadWriteListener() {
+            event.device().enableNotify(AsteroidUUIDS.BATTERY_UUID, new BleDevice.ReadWriteListener() {
                 @Override
                 public void onEvent(ReadWriteEvent e) {
                     try {
-                        if (e.isNotification() && e.charUuid().equals(Uuids.BATTERY_LEVEL)) {
+                        if (e.isNotification() && e.charUuid().equals(AsteroidUUIDS.BATTERY_UUID)) {
                             byte data[] = e.data();
                             replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, data[0], 0));
                         }
@@ -386,7 +384,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
         @Override
         public Please onEvent(ScanEvent e)
         {
-            return Please.acknowledgeIf(e.advertisedServices().contains(UUID.fromString("00000000-0000-0000-0000-00a57e401d05")));
+            return Please.acknowledgeIf(e.advertisedServices().contains(AsteroidUUIDS.SERVICE_UUID));
         }
     }
 

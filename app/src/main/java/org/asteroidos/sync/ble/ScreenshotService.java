@@ -40,6 +40,7 @@ import android.util.Log;
 import com.idevicesinc.sweetblue.BleDevice;
 
 import org.asteroidos.sync.R;
+import org.asteroidos.sync.utils.AsteroidUUIDS;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -57,9 +58,6 @@ import java.util.concurrent.TimeUnit;
 public class ScreenshotService implements BleDevice.ReadWriteListener {
     private static final String NOTIFICATION_CHANNEL_ID = "screenshotservice_channel_id_01";
     private int NOTIFICATION = 2726;
-
-    private static final UUID screenshotRequestCharac = UUID.fromString("00006001-0000-0000-0000-00a57e401d05");
-    private static final UUID screenshotContentCharac = UUID.fromString("00006002-0000-0000-0000-00a57e401d05");
 
     private Context mCtx;
     private BleDevice mDevice;
@@ -86,7 +84,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
     }
 
     public void sync() {
-        mDevice.enableNotify(screenshotContentCharac, contentListener);
+        mDevice.enableNotify(AsteroidUUIDS.SCREENSHOT_CONTENT, contentListener);
 
         mSReceiver = new ScreenshotReqReceiver();
         IntentFilter filter = new IntentFilter();
@@ -97,7 +95,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
     }
 
     public void unsync() {
-        mDevice.disableNotify(screenshotContentCharac);
+        mDevice.disableNotify(AsteroidUUIDS.SCREENSHOT_CONTENT);
         try {
             mCtx.unregisterReceiver(mSReceiver);
         } catch (IllegalArgumentException ignored) {}
@@ -120,7 +118,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
 
         @Override
         public void onEvent(ReadWriteEvent e) {
-            if(e.isNotification() && e.charUuid().equals(screenshotContentCharac)) {
+            if(e.isNotification() && e.charUuid().equals(AsteroidUUIDS.SCREENSHOT_CONTENT)) {
                 byte[] data = e.data();
                 if(mFirstNotify) {
                     size = bytesToInt(data);
@@ -252,7 +250,7 @@ public class ScreenshotService implements BleDevice.ReadWriteListener {
                 mDownloading = true;
                 byte[] data = new byte[1];
                 data[0] = 0x0;
-                mDevice.write(screenshotRequestCharac, data, ScreenshotService.this);
+                mDevice.write(AsteroidUUIDS.SCREENSHOT_REQUEST, data, ScreenshotService.this);
             }
         }
     }
