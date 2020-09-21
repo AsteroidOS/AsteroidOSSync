@@ -26,8 +26,8 @@ import android.util.Log;
 import com.idevicesinc.sweetblue.BleDevice;
 
 import org.asteroidos.sync.NotificationPreferences;
+import org.asteroidos.sync.dataobjects.Notification;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -107,32 +107,21 @@ public class NotificationService implements BleDevice.ReadWriteListener {
                 if(intent.hasExtra("vibration"))
                     vibration = intent.getStringExtra("vibration");
 
-                String xmlRequest = "<insert><id>" + id + "</id>";
-                if(!packageName.isEmpty())
-                    xmlRequest += "<pn>" + packageName + "</pn>";
-                if(!vibration.isEmpty())
-                    xmlRequest += "<vb>" + vibration + "</vb>";
-                if(!appName.isEmpty())
-                    xmlRequest += "<an>" + appName + "</an>";
-                if(!appIcon.isEmpty())
-                    xmlRequest += "<ai>" + appIcon + "</ai>";
-                if(!summary.isEmpty())
-                    xmlRequest += "<su>" + summary + "</su>";
-                if(!body.isEmpty())
-                    xmlRequest += "<bo>" + body + "</bo>";
-                xmlRequest += "</insert>";
+                Notification notification = new Notification(
+                        Notification.MsgType.POSTED,
+                        packageName,
+                        id,
+                        appName,
+                        appIcon,
+                        summary,
+                        body,
+                        vibration);
 
-                byte[] data = xmlRequest.getBytes(StandardCharsets.UTF_8);
-                mDevice.write(notificationUpdateCharac, data, NotificationService.this);
+                mDevice.write(notificationUpdateCharac, notification.toBytes(), NotificationService.this);
             } else if (Objects.equals(event, "removed")) {
                 int id = intent.getIntExtra("id", 0);
 
-                String xmlRequest = "<removed>" +
-                        "<id>" + id + "</id>" +
-                        "</removed>";
-
-                byte[] data = xmlRequest.getBytes(StandardCharsets.UTF_8);
-                mDevice.write(notificationUpdateCharac, data, NotificationService.this);
+                mDevice.write(notificationUpdateCharac, new Notification(Notification.MsgType.REMOVED, id).toBytes(), NotificationService.this);
             }
         }
     }
