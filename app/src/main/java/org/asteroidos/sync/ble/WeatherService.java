@@ -32,6 +32,7 @@ import android.util.Log;
 import com.idevicesinc.sweetblue.BleDevice;
 
 import org.asteroidos.sync.services.GPSTracker;
+import org.asteroidos.sync.utils.AsteroidUUIDS;
 import org.osmdroid.config.Configuration;
 
 import java.nio.charset.StandardCharsets;
@@ -45,10 +46,6 @@ import github.vatsal.easyweather.retrofit.models.List;
 
 @SuppressWarnings( "deprecation" ) // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated ReadWriteListener
 public class WeatherService implements BleDevice.ReadWriteListener {
-    private static final UUID weatherCityCharac     = UUID.fromString("00008001-0000-0000-0000-00a57e401d05");
-    private static final UUID weatherIdsCharac      = UUID.fromString("00008002-0000-0000-0000-00a57e401d05");
-    private static final UUID weatherMinTempsCharac = UUID.fromString("00008003-0000-0000-0000-00a57e401d05");
-    private static final UUID weatherMaxTempsCharac = UUID.fromString("00008004-0000-0000-0000-00a57e401d05");
 
     private static final String owmApiKey = "ffcb5a7ed134aac3d095fa628bc46c65";
 
@@ -207,10 +204,10 @@ public class WeatherService implements BleDevice.ReadWriteListener {
                     }
                 } catch(java.lang.ArrayIndexOutOfBoundsException ignored) {}
 
-                mDevice.write(weatherCityCharac, city, WeatherService.this);
-                mDevice.write(weatherIdsCharac, ids, WeatherService.this);
-                mDevice.write(weatherMaxTempsCharac, maxTemps, WeatherService.this);
-                mDevice.write(weatherMinTempsCharac, minTemps, WeatherService.this);
+                mDevice.write(AsteroidUUIDS.WEATHER_CITY_CHAR, city, WeatherService.this);
+                mDevice.write(AsteroidUUIDS.WEATHER_IDS_CHAR, ids, WeatherService.this);
+                mDevice.write(AsteroidUUIDS.WEATHER_MAX_TEMPS_CHAR, maxTemps, WeatherService.this);
+                mDevice.write(AsteroidUUIDS.WEATHER_MIN_TEMPS_CHAR, minTemps, WeatherService.this);
             }
 
             @Override public void failure(String message) {

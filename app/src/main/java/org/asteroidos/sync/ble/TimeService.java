@@ -30,12 +30,13 @@ import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
 
+import org.asteroidos.sync.utils.AsteroidUUIDS;
+
 import java.util.Calendar;
 import java.util.UUID;
 
 @SuppressWarnings( "deprecation" ) // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated ReadWriteListener
 public class TimeService implements BleDevice.ReadWriteListener, SharedPreferences.OnSharedPreferenceChangeListener {
-    private static final UUID timeSetCharac = UUID.fromString("00005001-0000-0000-0000-00a57e401d05");
 
     public static final String PREFS_NAME = "TimePreference";
     public static final String PREFS_SYNC_TIME = "syncTime";
@@ -100,7 +101,7 @@ public class TimeService implements BleDevice.ReadWriteListener, SharedPreferenc
             data[3] = (byte)(c.get(Calendar.HOUR_OF_DAY));
             data[4] = (byte)(c.get(Calendar.MINUTE));
             data[5] = (byte)(c.get(Calendar.SECOND));
-            mDevice.write(timeSetCharac, data, TimeService.this);
+            mDevice.write(AsteroidUUIDS.TIME_SET_CHAR, data, TimeService.this);
         }
     }
 

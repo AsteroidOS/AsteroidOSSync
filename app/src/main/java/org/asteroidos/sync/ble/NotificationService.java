@@ -27,14 +27,12 @@ import com.idevicesinc.sweetblue.BleDevice;
 
 import org.asteroidos.sync.NotificationPreferences;
 import org.asteroidos.sync.dataobjects.Notification;
+import org.asteroidos.sync.utils.AsteroidUUIDS;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @SuppressWarnings( "deprecation" ) // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated ReadWriteListener
 public class NotificationService implements BleDevice.ReadWriteListener {
-    private static final UUID notificationUpdateCharac   = UUID.fromString("00009001-0000-0000-0000-00a57e401d05");
-    private static final UUID notificationFeedbackCharac = UUID.fromString("00009002-0000-0000-0000-00a57e401d05");
 
     private Context mCtx;
     private BleDevice mDevice;
@@ -48,7 +46,7 @@ public class NotificationService implements BleDevice.ReadWriteListener {
     }
 
     public void sync() {
-        mDevice.enableNotify(notificationFeedbackCharac);
+        mDevice.enableNotify(AsteroidUUIDS.NOTIFICATION_FEEDBACK_CHAR);
 
         mNReceiver = new NotificationReceiver();
         IntentFilter filter = new IntentFilter();
@@ -61,7 +59,7 @@ public class NotificationService implements BleDevice.ReadWriteListener {
     }
 
     public void unsync() {
-        mDevice.disableNotify(notificationFeedbackCharac);
+        mDevice.disableNotify(AsteroidUUIDS.NOTIFICATION_FEEDBACK_CHAR);
         try {
             mCtx.unregisterReceiver(mNReceiver);
         } catch (IllegalArgumentException ignored) {}
@@ -117,11 +115,11 @@ public class NotificationService implements BleDevice.ReadWriteListener {
                         body,
                         vibration);
 
-                mDevice.write(notificationUpdateCharac, notification.toBytes(), NotificationService.this);
+                mDevice.write(AsteroidUUIDS.NOTIFICATION_UPDATE_CHAR, notification.toBytes(), NotificationService.this);
             } else if (Objects.equals(event, "removed")) {
                 int id = intent.getIntExtra("id", 0);
 
-                mDevice.write(notificationUpdateCharac, new Notification(Notification.MsgType.REMOVED, id).toBytes(), NotificationService.this);
+                mDevice.write(AsteroidUUIDS.NOTIFICATION_UPDATE_CHAR, new Notification(Notification.MsgType.REMOVED, id).toBytes(), NotificationService.this);
             }
         }
     }
