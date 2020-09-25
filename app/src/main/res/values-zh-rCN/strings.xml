@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">确认</string>
-    <string name="searching">正在寻找手表</string>
+    <string name="searching">正在搜寻周围的手表</string>
     <string name="unknown_device">未知设备</string>
     <string name="nothing_found">未找到手表</string>
     <string name="one_found">找到 1 个手表</string>
@@ -27,7 +27,7 @@
     <string name="intro_slide4_title">通知</string>
     <string name="intro_slide4_subtitle">要同步通知，您需要在接下来的菜单中允许AsteroidOS 同步:</string>
     <string name="weather_settings">天气设置</string>
-    <string name="enter_city_name">输入一个城市名称：</string>
+    <string name="enter_city_name">请输入城市名称：</string>
     <string name="unpair">取消配对</string>
     <string name="scanning">正在扫描…</string>
     <string name="downloading">正在下载…</string>
@@ -36,11 +36,11 @@
     <string name="synchronize_time">同步时间</string>
     <string name="explain_app_prefs">来自您应用的通知会出现在这里</string>
     <string name="notification_type_default">默认</string>
-    <string name="notification_type_no_notif">暂无通知</string>
+    <string name="notification_type_no_notif">不同步通知</string>
     <string name="notification_type_silent">静音</string>
     <string name="notification_type_vibra">振动</string>
     <string name="notification_type_strong_vibra">增强振动</string>
-    <string name="position_indicator">指示器位置</string>
+    <string name="position_indicator">位置指示器</string>
     <string name="use_this_area">使用此地区的天气</string>
     <string name="app_icon">应用程序图标</string>
     <string name="intro_slide1_title">欢迎</string>
@@ -50,20 +50,20 @@
     <string name="intro_slide3_title">位置</string>
     <string name="intro_slide3_subtitle">用于扫描附近的 BLE 蓝牙设备。。</string>
     <string name="intro_slide5_title">电池优化</string>
-    <string name="intro_slide5_subtitle">"用于后台服务。对 AsteroidOS 同步关闭 “电池优化” 于下列菜单: "</string>
+    <string name="intro_slide5_subtitle">为了保证AsteroidOS Sync可以时刻与手表连接。请在下面出现的菜单中为 AsteroidOS Sync 应用关闭 “电池优化” :</string>
     <string name="intro_slideerror_title">蓝牙低功耗支持</string>
-    <string name="grant_permission">授权</string>
+    <string name="grant_permission">授予权限</string>
     <string name="please_grant_permissions">请授予此权限</string>
     <string name="impassable_slide">请授予此权限</string>
     <string name="synchronize_weather">自动定位天气</string>
     <string name="title_activity_settings_activity">设置</string>
     <string name="action_settings">设置</string>
     <string name="title_activity_settings">设置</string>
-    <string name="switch_phone_notifications">连接时手机静音</string>
+    <string name="switch_phone_notifications">连接时让手机静音</string>
     <string name="notification_silent_icon">通知静音图标</string>
     <string name="notification_type_ringtone">铃声</string>
     <string name="dialer">拨号</string>
     <string name="show_calls_on_watch">来电提醒</string>
     <string name="intro_phonestateslide_title">来电与联系人</string>
-    <string name="intro_phonestateslide_subtitle">显示来电联系人的信息</string>
+    <string name="intro_phonestateslide_subtitle">为了在手表上显示来电信息和联系人姓名。</string>
 </resources>
