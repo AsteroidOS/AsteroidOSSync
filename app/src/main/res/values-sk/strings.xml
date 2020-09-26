@@ -55,7 +55,7 @@
     <string name="grant_permission">Udeliť povolenie</string>
     <string name="please_grant_permissions">Prosím udeľte toto povolenie</string>
     <string name="impassable_slide">Prosím udeľte toto povolenie</string>
-    <string name="synchronize_weather">Automaticky určiť polohu</string>
+    <string name="synchronize_weather">Vyhľadať počasie automaticky</string>
     <string name="title_activity_settings_activity">Nastavenia</string>
     <string name="action_settings">Nastavenia</string>
     <string name="title_activity_settings">Nastavenia</string>
