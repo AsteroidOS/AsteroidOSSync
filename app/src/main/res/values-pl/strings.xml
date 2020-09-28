@@ -38,9 +38,9 @@
     <string name="notification_type_default">Domyślne</string>
     <string name="notification_type_no_notif">"Bez powiadomień "</string>
     <string name="notification_type_silent">"Cisza "</string>
-    <string name="notification_type_vibra">"Wibracje "</string>
+    <string name="notification_type_vibra">Wibracje</string>
     <string name="notification_type_strong_vibra">"Silne wibracje "</string>
-    <string name="position_indicator">"Wskaźnik pozycji "</string>
+    <string name="position_indicator">Wskaźnik pozycji</string>
     <string name="use_this_area">"Użyj tej lokalizacji dla pogody "</string>
     <string name="app_icon">"Ikona aplikacji "</string>
     <string name="intro_slide1_title">Witaj</string>
@@ -59,11 +59,13 @@
     <string name="title_activity_settings_activity">Ustawienia</string>
     <string name="action_settings">Ustawienia</string>
     <string name="title_activity_settings">Ustawienia</string>
-    <string name="switch_phone_notifications">Wycisz telefon, gdy połączone</string>
-    <string name="notification_silent_icon">Ikona trybu cichego w notyfikacjach</string>
+    <string name="switch_phone_notifications">Wycisz telefon po podłączeniu</string>
+    <string name="notification_silent_icon">Ikona trybu cichego w powiadomieniach</string>
     <string name="notification_type_ringtone">Dzwonek</string>
     <string name="show_calls_on_watch">Pokaż połączenia przychodzące</string>
     <string name="intro_phonestateslide_title">Telefon i Kontakty</string>
     <string name="dialer">Wybieranie numeru</string>
     <string name="intro_phonestateslide_subtitle">Pokazuj polączenia przychodzące i imię dzwoniącego na zegarku.</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go nie jest obsługiwany, ponieważ nie zezwala na dostęp do powiadomień i ogranicza procesy w tle. Obejściem problemu dla użytkowników z dostępem do uprawnień root jest ustawienie flagi „ro.config.low_ram” w pliku build.prop na wartość „false”.</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
