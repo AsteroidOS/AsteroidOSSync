@@ -64,4 +64,6 @@
     <string name="notification_type_ringtone">Dzwonek</string>
     <string name="show_calls_on_watch">Pokaż połączenia przychodzące</string>
     <string name="intro_phonestateslide_title">Telefon i Kontakty</string>
+    <string name="dialer">Wybieranie numeru</string>
+    <string name="intro_phonestateslide_subtitle">Pokazuj polączenia przychodzące i imię dzwoniącego na zegarku.</string>
 </resources>
