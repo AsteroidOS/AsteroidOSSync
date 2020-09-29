@@ -128,7 +128,7 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
         public void onEvent(ReadWriteEvent e) {
             if(e.isNotification() && e.charUuid().equals(AsteroidUUIDS.MEDIA_COMMANDS_CHAR)) {
                 if (mMediaController != null) {
-                    byte data[] = e.data();
+                    byte[] data = e.data();
                     boolean isPoweramp = mSettings.getString(PREFS_MEDIA_CONTROLLER_PACKAGE, PREFS_MEDIA_CONTROLLER_PACKAGE_DEFAULT)
                             .equals(PowerampAPI.PACKAGE_NAME);
 
@@ -226,7 +226,7 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
          * @return the field value as a byte array
          */
         private byte[] getTextAsBytes(MediaMetadata metadata, String fieldName) {
-            byte [] result;
+            byte[] result;
 
             CharSequence text = metadata.getText(fieldName);
 

@@ -332,7 +332,7 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                 public void onEvent(ReadWriteEvent e) {
                     try {
                         if (e.isNotification() && e.charUuid().equals(AsteroidUUIDS.BATTERY_UUID)) {
-                            byte data[] = e.data();
+                            byte[] data = e.data();
                             replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, data[0], 0));
                         }
                     } catch(RemoteException | NullPointerException ignored) {}
