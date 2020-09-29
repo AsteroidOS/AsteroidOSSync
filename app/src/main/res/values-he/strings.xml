@@ -39,7 +39,7 @@
     <string name="notification_type_default">בררת מחדל</string>
     <string name="notification_type_no_notif">אין התרעה</string>
     <string name="notification_type_silent">שקט</string>
-    <string name="notification_type_vibra">רטט</string>
+    <string name="notification_type_vibra">רטטים</string>
     <string name="notification_type_strong_vibra">רטט חזק</string>
     <string name="position_indicator">מחוון מיקום</string>
     <string name="use_this_area">שימוש בשטח זה למזג אוויר</string>
@@ -51,7 +51,7 @@
     <string name="intro_slide3_title">מיקום</string>
     <string name="intro_slide3_subtitle">לסריקת התקני Bluetooth עם צריכת אנרגיה נמוכה.</string>
     <string name="intro_slide5_title">מטוב סוללה</string>
-    <string name="intro_slide5_subtitle">כדי לאפשר ליישומון זה לפעול ברקע, יש להשבית את „מטוב סוללה” עבור הסנכרון של AsteroidOS בתפריט הבא:</string>
+    <string name="intro_slide5_subtitle">כדי לאפשר ליישומון זה לפעול ברקע, נא להשבית את „מטוב סוללה” עבור הסנכרון של AsteroidOS בתפריט הבא:</string>
     <string name="intro_slideerror_title">תמיכה בבלוטות׳ בצריכת אנרגיה נמוכה</string>
     <string name="grant_permission">הענקת הרשאות</string>
     <string name="please_grant_permissions">נא להעניק הרשאה זו</string>
