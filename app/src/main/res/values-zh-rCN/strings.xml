@@ -66,4 +66,5 @@
     <string name="show_calls_on_watch">来电提醒</string>
     <string name="intro_phonestateslide_title">来电与联系人</string>
     <string name="intro_phonestateslide_subtitle">为了在手表上显示来电信息和联系人姓名。</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
