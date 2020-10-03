@@ -21,12 +21,16 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.ContentObserver;
+import android.media.AudioManager;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
 import androidx.annotation.NonNull;
+
+import android.os.Handler;
 import android.util.Log;
 
 import com.idevicesinc.sweetblue.BleDevice;
@@ -38,7 +42,6 @@ import org.asteroidos.sync.utils.AsteroidUUIDS;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.UUID;
 
 @SuppressWarnings( "deprecation" ) // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated ReadWriteListener
 public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionManager.OnActiveSessionsChangedListener {
@@ -47,6 +50,7 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
     private static final byte MEDIA_COMMAND_NEXT     = 0x1;
     private static final byte MEDIA_COMMAND_PLAY     = 0x2;
     private static final byte MEDIA_COMMAND_PAUSE    = 0x3;
+    private static final byte MEDIA_COMMAND_VOLUME   = 0x4;
 
     public static final String PREFS_NAME = "MediaPreferences";
     public static final String PREFS_MEDIA_CONTROLLER_PACKAGE = "media_controller_package";
@@ -59,6 +63,8 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
     private MediaController mMediaController = null;
     private MediaSessionManager mMediaSessionManager;
 
+    private int mVolume;
+
     public MediaService(Context ctx, BleDevice device)
     {
         mDevice = device;
@@ -69,6 +75,7 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
 
     public void sync() {
         mDevice.enableNotify(AsteroidUUIDS.MEDIA_COMMANDS_CHAR, commandsListener);
+        mCtx.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, mVolumeChangeObserver);
         try {
             mMediaSessionManager = (MediaSessionManager) mCtx.getSystemService(Context.MEDIA_SESSION_SERVICE);
             List<MediaController> controllers = mMediaSessionManager.getActiveSessions(new ComponentName(mCtx, NLService.class));
@@ -81,6 +88,7 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
 
     public void unsync() {
         mDevice.disableNotify(AsteroidUUIDS.MEDIA_COMMANDS_CHAR);
+        mCtx.getContentResolver().unregisterContentObserver(mVolumeChangeObserver);
 
         if(mMediaSessionManager != null)
             mMediaSessionManager.removeOnActiveSessionsChangedListener(this);
@@ -92,12 +100,35 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
         }
     }
 
+    private ContentObserver mVolumeChangeObserver = new ContentObserver(new Handler()) {
+        // The last value of volume send to the watch.
+        private int reportedVolume;
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+            if (mMediaController != null && mMediaController.getPlaybackInfo() != null) {
+                int vol = (100 * mMediaController.getPlaybackInfo().getCurrentVolume()) / mMediaController.getPlaybackInfo().getMaxVolume();
+
+                if (reportedVolume != vol) {
+                    reportedVolume = vol;
+                    // Set real volume.
+                    mVolume = reportedVolume;
+
+                    byte[] data = new byte[1];
+                    data[0] = (byte) mVolume;
+                    mDevice.write(AsteroidUUIDS.MEDIA_VOLUME_CHAR, data, MediaService.this);
+                }
+            }
+        }
+    };
+
     private BleDevice.ReadWriteListener commandsListener = new BleDevice.ReadWriteListener() {
         @Override
         public void onEvent(ReadWriteEvent e) {
             if(e.isNotification() && e.charUuid().equals(AsteroidUUIDS.MEDIA_COMMANDS_CHAR)) {
                 if (mMediaController != null) {
-                    byte data[] = e.data();
+                    byte[] data = e.data();
                     boolean isPoweramp = mSettings.getString(PREFS_MEDIA_CONTROLLER_PACKAGE, PREFS_MEDIA_CONTROLLER_PACKAGE_DEFAULT)
                             .equals(PowerampAPI.PACKAGE_NAME);
 
@@ -132,6 +163,29 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
                                         .putExtra(PowerampAPI.COMMAND, PowerampAPI.Commands.PAUSE));
                             } else {
                                 mMediaController.getTransportControls().pause();
+                            }
+                             break;
+                        case MEDIA_COMMAND_VOLUME:
+                            if (mMediaController.getPlaybackInfo() != null) {
+                                if (data[1] != mVolume) {
+                                    int delta = Math.abs(mVolume - data[1]);
+                                    int deviceDelta = 100 / mMediaController.getPlaybackInfo().getMaxVolume();
+                                    // Change in volume is smaller than the device volume step (i.e. volume won't change)
+                                    // Increase or decrease the volume by one step anyway to improve UX.
+                                    if (delta < deviceDelta) {
+                                        if (data[1] > mVolume) {
+                                            mMediaController.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
+                                        } else if (data[1] < mVolume) {
+                                            mMediaController.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
+                                        }
+                                    } else {
+                                        // Convert volume range (0-100) to Android device range(0-?).
+                                        int volume = (int) (mMediaController.getPlaybackInfo().getMaxVolume() * (data[1] / 100.0));
+                                        mMediaController.setVolumeTo(volume, AudioManager.FLAG_SHOW_UI);
+                                    }
+                                    // Set theoretical volume.
+                                    mVolume = data[1];
+                                }
                             }
                              break;
                     }
@@ -172,7 +226,7 @@ public class MediaService implements BleDevice.ReadWriteListener,  MediaSessionM
          * @return the field value as a byte array
          */
         private byte[] getTextAsBytes(MediaMetadata metadata, String fieldName) {
-            byte [] result;
+            byte[] result;
 
             CharSequence text = metadata.getText(fieldName);
 
