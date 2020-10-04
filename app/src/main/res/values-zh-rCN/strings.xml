@@ -67,4 +67,5 @@
     <string name="intro_phonestateslide_title">来电与联系人</string>
     <string name="intro_phonestateslide_subtitle">为了在手表上显示来电信息和联系人姓名。</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="intro_slideandroidgo_subtitle">本应用不支持Android Go系统，因为 Android Go 禁止读取通知并且严格限制后台。解决方案是如果你的手机取得了root权限，你可以修改build.prop文件中的“ro.config.low_ram”栏，把后面的“true”改成“false”。</string>
 </resources>
