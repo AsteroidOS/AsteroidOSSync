@@ -37,7 +37,7 @@
     <string name="notification_type_vibra">Getaran</string>
     <string name="notification_type_strong_vibra">Getaran kuat</string>
     <string name="explain_app_prefs">Notifikasi daripada aplikasi di sini</string>
-    <string name="position_indicator">Indikator posisi</string>
+    <string name="position_indicator">Petunjuk Kedudukan</string>
     <string name="use_this_area">Guna ini untuk cuaca</string>
     <string name="app_icon">Ikon applikasi</string>
     <string name="intro_slide1_title">Selamat Datang</string>
@@ -49,7 +49,7 @@
     <string name="intro_slide4_title">Notifikasi</string>
     <string name="intro_slide4_subtitle">Untuk menyegerakkan (sync) pemberitahuan dengan jam tangan anda, benarkan \"AsteroidOS Sync\" dalam menu berikut:</string>
     <string name="intro_slide5_title">Pengoptimuman Bateri</string>
-    <string name="intro_slide5_subtitle">Untuk membolehkan aplikasi ini berjalan di latar belakang, nyahdayakan \"Pengoptimuman Bateri\" untuk AsteroidOS Sync dalam menu berikut:</string>
+    <string name="intro_slide5_subtitle">Untuk membiarkan aplikasi ini berjalan di latar belakang, nonaktifkan \"Pengoptimuman Bateri\" untuk AsteroidOS Sync di menu berikut:</string>
     <string name="intro_slideerror_title">Sokongan Bluetooth Rendah Tenaga</string>
     <string name="intro_slideerror_subtitle">Peranti ini tidak menyokong Bluetooth Tenaga Rendah.</string>
     <string name="grant_permission">Pemberian izin</string>
@@ -60,10 +60,12 @@
     <string name="action_settings">Tetapan</string>
     <string name="title_activity_settings">Tetapan</string>
     <string name="switch_phone_notifications">Senyapkan telefon apabila disambungkan</string>
-    <string name="notification_silent_icon">notifikasi ikon senyap</string>
+    <string name="notification_silent_icon">Ikon Senyap Pemberitahuan</string>
     <string name="dialer">Pendail</string>
     <string name="show_calls_on_watch">Memaparkan panggilan masuk</string>
-    <string name="intro_phonestateslide_title">Keadaan telefon</string>
-    <string name="intro_phonestateslide_subtitle">Untuk menunjukkan panggilan masuk di jam tangan</string>
+    <string name="intro_phonestateslide_title">Telefon &amp; Kenalan</string>
+    <string name="intro_phonestateslide_subtitle">Untuk menunjukkan panggilan masuk di jam tangan, dan untuk memaparkan nama pemanggil.</string>
     <string name="notification_type_ringtone">Nada dering</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go tidak disokong kerana tidak membenarkan akses pemberitahuan dan menyekat proses latar belakang. Penyelesaian bagi pengguna root adalah menetapkan bendera \"ro.config.low_ram\" dalam fail build.prop ke \"false\".</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
