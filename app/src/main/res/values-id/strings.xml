@@ -50,7 +50,7 @@
     <string name="intro_slide4_title">Notifikasi</string>
     <string name="intro_slide4_subtitle">Untuk menyinkronkan notifikasi dengan jam tangan Anda, mengizinkan \"AsteroidOS Sync\" di menu berikut:</string>
     <string name="intro_slide5_title">Optimisasi Baterai</string>
-    <string name="intro_slide5_subtitle">Untuk membiarkan aplikasi ini berjalan di latar belakang, nonaktifkan \"Optimisasi Baterai\" untuk Sinkronisasi AsteroidOS di menu berikut:</string>
+    <string name="intro_slide5_subtitle">Agar aplikasi ini berjalan di latar belakang, nonaktifkan \"Pengoptimalan Baterai\" untuk AsteroidOS Sync di menu berikut:</string>
     <string name="intro_slideerror_title">Dukungan Bluetooth Rendah Energi</string>
     <string name="intro_slideerror_subtitle">Perangkat ini tidak mendukung Bluetooth Rendah Energi.</string>
     <string name="grant_permission">Memberikan izin</string>
@@ -60,10 +60,12 @@
     <string name="action_settings">Pengaturan</string>
     <string name="title_activity_settings">Pengaturan</string>
     <string name="switch_phone_notifications">Diamkan ponsel saat terhubung</string>
-    <string name="notification_silent_icon">Ikon notifikasi diam</string>
+    <string name="notification_silent_icon">Ikon Senyap Pemberitahuan</string>
     <string name="notification_type_ringtone">Nada dering</string>
     <string name="dialer">Pemanggil</string>
     <string name="show_calls_on_watch">Tampilkan panggilan masuk</string>
-    <string name="intro_phonestateslide_title">Status telepon</string>
-    <string name="intro_phonestateslide_subtitle">Untuk menampilkan panggilan masuk pada Arloji dan untuk menampilkan nama pemanggil.</string>
+    <string name="intro_phonestateslide_title">Telepon &amp; Kontak</string>
+    <string name="intro_phonestateslide_subtitle">Untuk menampilkan panggilan masuk di jam tangan, dan untuk menampilkan nama penelepon.</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go tidak didukung karena tidak mengizinkan akses notifikasi dan membatasi proses latar belakang. Solusi untuk pengguna root adalah menyetel flag \"ro.config.low_ram\" di file build.prop ke \"false\".</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
