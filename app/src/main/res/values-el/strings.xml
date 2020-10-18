@@ -38,7 +38,7 @@
     <string name="notification_type_default">Προεπιλογή</string>
     <string name="notification_type_no_notif">Καμία ειδοποίηση</string>
     <string name="notification_type_silent">Αθόρυβο</string>
-    <string name="notification_type_vibra">Δόνηση</string>
+    <string name="notification_type_vibra">Δονήσεις</string>
     <string name="notification_type_strong_vibra">Ισχυρή δόνηση</string>
     <string name="position_indicator">Δείκτης θέσης</string>
     <string name="use_this_area">Χρησιμοποιήστε αυτή την τοποθεσία για τον καιρό</string>
@@ -50,7 +50,7 @@
     <string name="intro_slide3_title">Τοποθεσία</string>
     <string name="intro_slide3_subtitle">Για την αναζήτηση κοντινών συσκευών με Bluetooth Χαμηλής Ενέργειας.</string>
     <string name="intro_slide5_title">Βελτίωση Μπαταρίας</string>
-    <string name="intro_slide5_subtitle">Για να επιτρέψετε στην εφαρμογή να εκτελείται στο παρασκήνιο, απενεργοποιήστε τη \"Βελτίωση Μπαταρίας\" του Συγχρονισμού AsteroidOS στο ακόλουθο μενού:</string>
+    <string name="intro_slide5_subtitle">Για να επιτρέψετε στην εφαρμογή να εκτελείται στο παρασκήνιο, παρακαλώ απενεργοποιήστε τη \"Βελτίωση Μπαταρίας\" του Συγχρονισμού AsteroidOS στο ακόλουθο μενού:</string>
     <string name="intro_slideerror_title">Υποστηρίζεται Bluetooth Χαμηλής Ενέργειας</string>
     <string name="grant_permission">Εκχώρηση άδειας</string>
     <string name="please_grant_permissions">Παρακαλώ εκχωρήστε το δικαίωμα</string>
@@ -59,11 +59,12 @@
     <string name="title_activity_settings_activity">Ρυθμίσεις</string>
     <string name="action_settings">Ρυθμίσεις</string>
     <string name="title_activity_settings">Ρυθμίσεις</string>
-    <string name="switch_phone_notifications">Αθόρυβη λειτουργία κατά την σύνδεση</string>
+    <string name="switch_phone_notifications">Σίγαση του τηλεφώνου όταν είναι συνδεδεμένο</string>
     <string name="notification_silent_icon">Εικονίδιο αθόρυβης λειτουργίας</string>
     <string name="notification_type_ringtone">Ήχος κλήσης</string>
     <string name="dialer">Πρόγραμμα κλήσης</string>
     <string name="show_calls_on_watch">Εμφάνιση εισερχόμενων κλήσεων</string>
-    <string name="intro_phonestateslide_title">Τηλέφωνο και Επαφές</string>
-    <string name="intro_phonestateslide_subtitle">Για εμφάνιση εισερχόμενων κλήσεων και ονόματος του καλούντος.</string>
+    <string name="intro_phonestateslide_title">Τηλέφωνο &amp; Επαφές</string>
+    <string name="intro_phonestateslide_subtitle">Για να εμφανίσετε εισερχόμενες κλήσεις στο ρολόι και για την εμφάνιση του ονόματος του καλούντος.</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
