@@ -38,9 +38,9 @@
     <string name="notification_type_default">Par défaut</string>
     <string name="notification_type_no_notif">Pas de notification</string>
     <string name="notification_type_silent">Silencieux</string>
-    <string name="notification_type_vibra">Vibration</string>
+    <string name="notification_type_vibra">Vibrations</string>
     <string name="notification_type_strong_vibra">Forte vibration</string>
-    <string name="position_indicator">Indicateur de localisation</string>
+    <string name="position_indicator">Indicateur de position</string>
     <string name="use_this_area">Utiliser cette localisation pour la météo</string>
     <string name="app_icon">Icône de l\'application</string>
     <string name="intro_slide1_title">Bienvenue</string>
@@ -50,7 +50,7 @@
     <string name="intro_slide3_title">Localisation</string>
     <string name="intro_slide3_subtitle">Rechercher des périphériques Bluetooth Low Energy à proximité.</string>
     <string name="intro_slide5_title">Optimisation de la batterie</string>
-    <string name="intro_slide5_subtitle">Pour laisser cette application s\'exécuter en arrière-plan, désactivez l\'optimisation de la batterie pour AsteroidOS Sync dans le menu suivant :</string>
+    <string name="intro_slide5_subtitle">Pour laisser cette application s\'exécuter en arrière-plan, veuillez désactiver l\'optimisation de la batterie pour AsteroidOS Sync dans le menu suivant :</string>
     <string name="intro_slideerror_title">Support du Bluetooth Low Energy</string>
     <string name="grant_permission">Accorder la permission</string>
     <string name="please_grant_permissions">Veuillez accorder cette permission</string>
@@ -59,11 +59,13 @@
     <string name="title_activity_settings_activity">Réglages</string>
     <string name="action_settings">Réglages</string>
     <string name="title_activity_settings">Réglages</string>
-    <string name="switch_phone_notifications">Téléphone connecté en sourdine</string>
-    <string name="notification_silent_icon">icône de sourdine des notifications</string>
+    <string name="switch_phone_notifications">Téléphone en sourdine quand connecté</string>
+    <string name="notification_silent_icon">Icône de sourdine des notifications</string>
     <string name="notification_type_ringtone">Sonnerie</string>
     <string name="show_calls_on_watch">Afficher les appels entrants</string>
     <string name="dialer">Clavier</string>
     <string name="intro_phonestateslide_title">Téléphone et contacts</string>
     <string name="intro_phonestateslide_subtitle">Pour afficher les appels entrants et le nom de l’appelant sur la montre.</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go n\'est pas supporté car il ne donne pas accès aux notifications et restreint les processus d\'arrière-plan. Une solution pour les utilisateurs root serait de mettre l\'option \"ro.config.low_ram\" dans le fichier build.prop à \"false\".</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
