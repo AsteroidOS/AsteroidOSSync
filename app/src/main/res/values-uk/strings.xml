@@ -38,9 +38,9 @@
     <string name="notification_type_default">За замовчуванням</string>
     <string name="notification_type_no_notif">Сповіщення відсутні</string>
     <string name="notification_type_silent">Беззвучний</string>
-    <string name="notification_type_vibra">Вібрація</string>
+    <string name="notification_type_vibra">Дрижання</string>
     <string name="notification_type_strong_vibra">Сильна вібрація</string>
-    <string name="position_indicator">Індикатор позиції</string>
+    <string name="position_indicator">Покажчик положення</string>
     <string name="use_this_area">Місце для погоди</string>
     <string name="app_icon">Значок додатку</string>
     <string name="intro_slide1_title">Ласкаво просимо</string>
@@ -59,11 +59,13 @@
     <string name="title_activity_settings_activity">Налаштування</string>
     <string name="action_settings">Налаштування</string>
     <string name="title_activity_settings">Налаштування</string>
-    <string name="switch_phone_notifications">Заглушати телефон при підключенні</string>
-    <string name="notification_silent_icon">іконка сповіщення у беззвучному режимі</string>
+    <string name="switch_phone_notifications">Заглушувати телефон за підключення</string>
+    <string name="notification_silent_icon">Значок сповіщення у беззвучному режимі</string>
     <string name="notification_type_ringtone">Мелодія дзвінка</string>
     <string name="dialer">Телефон</string>
     <string name="show_calls_on_watch">Показувати вхідні звінки</string>
     <string name="intro_phonestateslide_title">Телефон та контакти</string>
-    <string name="intro_phonestateslide_subtitle">Щоб бачити коло годинника вхідні дзвінки та хто телефонує</string>
+    <string name="intro_phonestateslide_subtitle">Щоб бачити коло годинника, вхідні дзвінки та хто телефонує</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go не підтримується, оскільки він не дозволяє доступ до сповіщень та обмежує фонові процеси. Рішення для рут-користувачів - установити прапорець \"ro.config.low_ram\" у файлі build.prop на \"false\".</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
