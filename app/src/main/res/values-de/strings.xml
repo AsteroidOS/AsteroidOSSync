@@ -50,7 +50,7 @@
     <string name="intro_slide3_title">Standort</string>
     <string name="intro_slide3_subtitle">Um nach Bluetooth-Geräten in der Nähe zu suchen.</string>
     <string name="intro_slide5_title">Batterieoptimierung</string>
-    <string name="intro_slide5_subtitle">Um diese Anwendung im Hintergrund laufen zu lassen, „Batterieoptimierung“ für AsteroidOS Sync im folgenden Menü deaktivieren:</string>
+    <string name="intro_slide5_subtitle">Um diese App im Hintergrund laufen zu lassen, deaktivieren Sie bitte \"Batterieoptimierung\" für AsteroidOS Sync im folgenden Menü:</string>
     <string name="intro_slideerror_title">Unterstützung für Bluetooth Low Energy</string>
     <string name="grant_permission">Erlaubnis erteilen</string>
     <string name="please_grant_permissions">Bitte diese Erlaubnis gewähren</string>
@@ -60,9 +60,9 @@
     <string name="title_activity_settings_activity">Einstellungen</string>
     <string name="action_settings">Einstellungen</string>
     <string name="title_activity_settings">Einstellungen</string>
-    <string name="notification_silent_icon">Symbol „Lautlose Benachrichtigung“</string>
+    <string name="notification_silent_icon">Symbol für Stumme Benachrichtigung</string>
     <string name="notification_type_ringtone">Klingelton</string>
-    <string name="intro_phonestateslide_subtitle">Eingehende Anrufe mit Anrufername auf der Uhr anzeigen.</string>
+    <string name="intro_phonestateslide_subtitle">Um eingehende Anrufe auf der Uhr anzuzeigen und den Namen des Anrufers anzuzeigen.</string>
     <string name="intro_phonestateslide_title">Telefon und Kontakte</string>
     <string name="show_calls_on_watch">Zeige eingehende Anrufe</string>
     <string name="dialer">Telefon</string>
