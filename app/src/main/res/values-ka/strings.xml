@@ -38,10 +38,10 @@
     <string name="dialer">მრეკავი</string>
     <string name="show_calls_on_watch">გამოჩნდეს შემომავალი ზარები</string>
     <string name="intro_phonestateslide_title">ტელეფონი და კონტაქტები</string>
-    <string name="intro_phonestateslide_subtitle">შემომავალი ზარებისა და მრეკავის სახელის გამოსაჩენად</string>
+    <string name="intro_phonestateslide_subtitle">იმისათვის, რომ ნახოთ შემომავალი ზარები watch, და ჩვენებისას სახელი აბონენტის.</string>
     <string name="notification_type_ringtone">ზარის მელოდია</string>
-    <string name="notification_silent_icon">ჩუმი შეტყობინების ნიშანი</string>
-    <string name="switch_phone_notifications">დაკავშირებისას ტელეფონის უხმო რეჟიმში გადაყვანა</string>
+    <string name="notification_silent_icon">შეტყობინება Silent Icon</string>
+    <string name="switch_phone_notifications">დუმილი ტელეფონი, როდესაც უკავშირდება</string>
     <string name="title_activity_settings">პარამეტრები</string>
     <string name="action_settings">პარამეტრები</string>
     <string name="title_activity_settings_activity">პარამეტრები</string>
@@ -49,7 +49,7 @@
     <string name="please_grant_permissions">გთხოვთ მიანიჭოთ ეს უფლება</string>
     <string name="grant_permission">უფლების მინიჭება</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy-ს მხარდაჭერა</string>
-    <string name="intro_slide5_subtitle">რათა ამ აპლიკაციან ფონურ რეზმში მუშაობა შეძლოს, გააუქმეთ \"ელემენტის ოპტიმიზაცია\" AsteroidOS Sync-თვის შემდეგ მენიუში:</string>
+    <string name="intro_slide5_subtitle">ნება ამ app აწარმოებს ფონზე, გთხოვთ გამორთოთ \"ბატარეის ოპტიმიზაცია\" For AsteroidOS Sync შემდეგ მენიუში:</string>
     <string name="intro_slide5_title">ელემენტის ოპტიმიზაცია</string>
     <string name="intro_slide3_subtitle">ახლო Bluetooth Low Energy მოწყობილებების ძებნა.</string>
     <string name="intro_slide3_title">ადგილმდებარეობა</string>
@@ -61,9 +61,11 @@
     <string name="use_this_area">გამოიყენეთ ეს ადგილი ამინდისთვის</string>
     <string name="position_indicator">პოზიციის ინდიკატორი</string>
     <string name="notification_type_strong_vibra">ძლიერი ვიბრაცია</string>
-    <string name="notification_type_vibra">ვიბრაცია</string>
+    <string name="notification_type_vibra">ვიბრატორი</string>
     <string name="notification_type_silent">უხმო</string>
     <string name="notification_type_no_notif">შეტყობინებები არ არის</string>
     <string name="notification_type_default">ნაგულისხმევი</string>
     <string name="synchronize_weather">ამინდისთვის ადგილმდებარეობიდ ავტომატურად დადგენა</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go არ არის მხარდაჭერილი, რადგან ის არ იძლევა შეტყობინებას ხელმისაწვდომობას და ზღუდავს ფონურ პროცესებს. სამუშაო root მომხმარებლებს არის მითითებული \" ro.config.low_ram \" დროშა build.დასაცავად ფაილი \"ცრუ\".</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
