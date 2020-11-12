@@ -37,9 +37,9 @@
     <string name="explain_app_prefs">Powiadomienia z twoich aplikacji pojawią się tutaj</string>
     <string name="notification_type_default">Domyślne</string>
     <string name="notification_type_no_notif">Brak powiadomienia</string>
-    <string name="notification_type_silent">"Cisza "</string>
+    <string name="notification_type_silent">Milczący</string>
     <string name="notification_type_vibra">Wibracje</string>
-    <string name="notification_type_strong_vibra">"Silne wibracje "</string>
+    <string name="notification_type_strong_vibra">Silna wibracja</string>
     <string name="position_indicator">Wskaźnik pozycji</string>
     <string name="use_this_area">Użyj tego obszaru do pogody</string>
     <string name="app_icon">Ikona aplikacji</string>
