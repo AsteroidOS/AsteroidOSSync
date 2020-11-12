@@ -39,7 +39,7 @@
     <string name="notification_type_silent">Silenzioso</string>
     <string name="notification_type_vibra">Vibrazione</string>
     <string name="notification_type_strong_vibra">Vibrazione forte</string>
-    <string name="position_indicator">Indicatore posizione</string>
+    <string name="position_indicator">Indicatore Di Posizione</string>
     <string name="app_icon">Icona applicazione</string>
     <string name="intro_slide1_title">Benvenuto</string>
     <string name="intro_slide1_subtitle">Questa app ti permette di sincronizzare il tuo telefono Android col tuo orologio AsteroidOS. Ma prima, ha bisogno di alcune autorizzazioni.</string>
@@ -48,7 +48,7 @@
     <string name="intro_slide3_title">Posizione</string>
     <string name="intro_slide3_subtitle">Per ricercare dispositivi Bluetooth Low Energy nelle vicinanze.</string>
     <string name="intro_slide5_title">Ottimizzazione batteria</string>
-    <string name="intro_slide5_subtitle">Per lasciare attiva questa app in background, disabilita \"Ottimizzazione Batteria\" per AsteroidOS Sync nel seguente menù:</string>
+    <string name="intro_slide5_subtitle">Per far funzionare questa app in background, disabilita \"ottimizzazione della batteria\" per AsteroidOS Sync nel seguente menu:</string>
     <string name="intro_slideerror_title">Supporto Bluetooth Low Energy</string>
     <string name="grant_permission">Concedi autorizzazione</string>
     <string name="please_grant_permissions">Si prega di consentire l\'autorizzazione</string>
@@ -59,11 +59,13 @@
     <string name="title_activity_settings_activity">Impostazioni</string>
     <string name="action_settings">Impostazioni</string>
     <string name="title_activity_settings">Impostazioni</string>
-    <string name="switch_phone_notifications">Silenzia il telefono quando è connesso</string>
-    <string name="notification_silent_icon">Icona di notifica silenziosa</string>
+    <string name="switch_phone_notifications">Silenzio il telefono quando è collegato</string>
+    <string name="notification_silent_icon">Icona Silenziosa Di Notifica</string>
     <string name="notification_type_ringtone">Suoneria</string>
     <string name="dialer">Tastiera telefono</string>
-    <string name="intro_phonestateslide_title">Telefono e Contatti</string>
-    <string name="intro_phonestateslide_subtitle">Mostra chiamate in arrivo e nome del chiamante sull\'orologio.</string>
+    <string name="intro_phonestateslide_title">Telefono E Contatti</string>
+    <string name="intro_phonestateslide_subtitle">Per mostrare le chiamate in arrivo sull\'orologio e per visualizzare il nome del chiamante.</string>
     <string name="show_calls_on_watch">Mostra chiamate in arrivo</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go non è supportato perché non consente l\'accesso alle notifiche e limita i processi in background. Una soluzione alternativa per gli utenti root è impostare \" ro.config.bandiera low_ram \" nella build.prop file su \"false\".</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
