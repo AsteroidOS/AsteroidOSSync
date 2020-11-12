@@ -60,11 +60,12 @@
     <string name="action_settings">Ρυθμίσεις</string>
     <string name="title_activity_settings">Ρυθμίσεις</string>
     <string name="switch_phone_notifications">Σίγαση του τηλεφώνου όταν είναι συνδεδεμένο</string>
-    <string name="notification_silent_icon">Εικονίδιο αθόρυβης λειτουργίας</string>
+    <string name="notification_silent_icon">Σιωπηλό εικονίδιο ειδοποίησης</string>
     <string name="notification_type_ringtone">Ήχος κλήσης</string>
     <string name="dialer">Πρόγραμμα κλήσης</string>
     <string name="show_calls_on_watch">Εμφάνιση εισερχόμενων κλήσεων</string>
     <string name="intro_phonestateslide_title">Τηλέφωνο &amp; Επαφές</string>
     <string name="intro_phonestateslide_subtitle">Για να εμφανίσετε εισερχόμενες κλήσεις στο ρολόι και για την εμφάνιση του ονόματος του καλούντος.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="intro_slideandroidgo_subtitle">Το Android Go δεν υποστηρίζεται επειδή δεν επιτρέπει την πρόσβαση στις ειδοποιήσεις και περιορίζει τις διαδικασίες παρασκηνίου. Μια λύση για τους χρήστες root είναι να ορίσετε τη σημαία \"ro.config.low_ram\" στο αρχείο build.prop σε \"false\".</string>
 </resources>
