@@ -38,7 +38,7 @@
     <string name="notification_type_default">Forvalg</string>
     <string name="notification_type_no_notif">Ingen merknad</string>
     <string name="notification_type_silent">Stille</string>
-    <string name="notification_type_vibra">Vibrasjon</string>
+    <string name="notification_type_vibra">Vibrasjoner</string>
     <string name="notification_type_strong_vibra">Kraftig vibrasjon</string>
     <string name="position_indicator">Posisjonsindikator</string>
     <string name="use_this_area">Bruk dette området for vær</string>
@@ -50,7 +50,7 @@
     <string name="intro_slide3_title">Plassering</string>
     <string name="intro_slide3_subtitle">For å se etter lavenergi-Blåtannsenheter i nærheten.</string>
     <string name="intro_slide5_title">Batterioptimisering</string>
-    <string name="intro_slide5_subtitle">For å tillate programmet å kjøre i bakgrunnen, skru av \"Batterioptimisering\" for AsteroidOS-synk i følgende meny:</string>
+    <string name="intro_slide5_subtitle">For å la denne appen kjøre i bakgrunnen, kan du deaktivere \"Batterioptimalisering\" for AsteroidOS Sync i følgende meny:</string>
     <string name="intro_slideerror_title">Lavenergi-Blåtannsstøtte</string>
     <string name="grant_permission">Innvilg tilgang</string>
     <string name="please_grant_permissions">Innvilg denne tilgangen</string>
@@ -59,11 +59,11 @@
     <string name="title_activity_settings_activity">Innstillinger</string>
     <string name="action_settings">Innstillinger</string>
     <string name="title_activity_settings">Innstillinger</string>
-    <string name="switch_phone_notifications">Forstum telefon når tilkoblet</string>
-    <string name="notification_silent_icon">Ikon for avslåtte merknader</string>
+    <string name="switch_phone_notifications">Stille telefonen når den er tilkoblet</string>
+    <string name="notification_silent_icon">Melding stille ikon</string>
     <string name="notification_type_ringtone">Ringetone</string>
-    <string name="dialer">Urskive</string>
-    <string name="intro_phonestateslide_subtitle">For å vise innkommende anrop på klokken og visning av navn på oppringer.</string>
+    <string name="dialer">Oppringingsprogram</string>
+    <string name="intro_phonestateslide_subtitle">For å vise innkommende anrop på klokken, og for å vise navnet på den som ringer.</string>
     <string name="intro_phonestateslide_title">Telefon og kontakter</string>
     <string name="show_calls_on_watch">Vis innkommende anrop</string>
     <string name="intro_slideandroidgo_subtitle">Android Go støttes ikke fordi det ikke tillater merknadstilgang og begrenser bakgrunnsprosesser. En fiks for rotbrukere er å sette \"ro.config.low_ram\"-flagget i build.prop-filen til \"false\".</string>
