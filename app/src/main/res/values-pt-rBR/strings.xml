@@ -38,7 +38,7 @@
     <string name="notification_type_default">Padrão</string>
     <string name="notification_type_no_notif">Sem notificações</string>
     <string name="notification_type_silent">Silenciar</string>
-    <string name="notification_type_vibra">Vibrar</string>
+    <string name="notification_type_vibra">Vibrações</string>
     <string name="notification_type_strong_vibra">Vibração forte</string>
     <string name="position_indicator">Indicador de posição</string>
     <string name="use_this_area">Usar esta área para o clima</string>
@@ -50,7 +50,7 @@
     <string name="intro_slide3_title">Localização</string>
     <string name="intro_slide3_subtitle">Para procurar nas proximidades por dispositivos Bluetooth de baixa energia.</string>
     <string name="intro_slide5_title">Otimização da bateria</string>
-    <string name="intro_slide5_subtitle">Para deixar este app em execução em segundo plano, desabilite a \"Otimização da bateria\" para o AsteroidOS Sync no seguinte menu:</string>
+    <string name="intro_slide5_subtitle">Para deixar este aplicativo rodar em segundo plano, desabilite \"Battery Optimization\" para o AsteroidOS Sync no menu a seguir:</string>
     <string name="intro_slideerror_title">Suporte ao Bluetooth de baixa energia</string>
     <string name="grant_permission">Conceder permissão</string>
     <string name="please_grant_permissions">Por favor, conceda essa permissão</string>
@@ -59,13 +59,13 @@
     <string name="title_activity_settings_activity">Configurações</string>
     <string name="action_settings">Configurações</string>
     <string name="title_activity_settings">Configurações</string>
-    <string name="switch_phone_notifications">Silenciar telefone quando conectado</string>
-    <string name="notification_silent_icon">ícone de silenciar notificação</string>
+    <string name="switch_phone_notifications">Silencie o telefone quando estiver conectado</string>
+    <string name="notification_silent_icon">Notificação Ícone silencioso</string>
     <string name="notification_type_ringtone">Toque</string>
     <string name="dialer">Discador</string>
     <string name="show_calls_on_watch">Mostrar chamadas recebidas</string>
-    <string name="intro_phonestateslide_title">Telefone e contatos</string>
-    <string name="intro_phonestateslide_subtitle">Para mostrar as chamadas recebidas no relógio e quem está chamando.</string>
+    <string name="intro_phonestateslide_title">Telefone e Contatos</string>
+    <string name="intro_phonestateslide_subtitle">Para mostrar as chamadas recebidas no relógio, e para exibir o nome do chamador.</string>
     <string name="intro_slideandroidgo_subtitle">O Android Go não é suportado pois ele não permite o acesso às notificações e restringe os processos em segundo plano. Uma solução alternativa para usuários root é definir o marcador \"ro.config.low_ram\" no arquivo build.prop como \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
