@@ -55,7 +55,7 @@
     <string name="impassable_slide">Si prega di consentire l\'autorizzazione</string>
     <string name="notification_type_default">Predefinito</string>
     <string name="use_this_area">Utilizza questa zona per il meteo</string>
-    <string name="synchronize_weather">Localizzazione meteo automatica</string>
+    <string name="synchronize_weather">Individua automaticamente il meteo</string>
     <string name="title_activity_settings_activity">Impostazioni</string>
     <string name="action_settings">Impostazioni</string>
     <string name="title_activity_settings">Impostazioni</string>
@@ -66,6 +66,6 @@
     <string name="intro_phonestateslide_title">Telefono E Contatti</string>
     <string name="intro_phonestateslide_subtitle">Per mostrare le chiamate in arrivo sull\'orologio e per visualizzare il nome del chiamante.</string>
     <string name="show_calls_on_watch">Mostra chiamate in arrivo</string>
-    <string name="intro_slideandroidgo_subtitle">Android Go non è supportato perché non consente l\'accesso alle notifiche e limita i processi in background. Una soluzione alternativa per gli utenti root è impostare \" ro.config.bandiera low_ram \" nella build.prop file su \"false\".</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go non è supportato perché non consente l\'accesso alle notifiche e limita i processi in background. Una soluzione alternativa per gli utenti root è impostare il flag \"ro.config.low_ram\" nel file build.prop su \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
