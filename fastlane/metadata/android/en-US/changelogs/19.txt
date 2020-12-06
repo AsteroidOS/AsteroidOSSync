@@ -1,0 +1,4 @@
+0.19
+  * Music volume control via asteroid-music
+  * Android 11 optimizations
+  * Translation improvements
