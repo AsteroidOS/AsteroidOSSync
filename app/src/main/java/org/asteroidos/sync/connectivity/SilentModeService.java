@@ -15,14 +15,14 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.asteroidos.sync.ble;
+package org.asteroidos.sync.connectivity;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 
-public class SilentModeService implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SilentModeService implements SharedPreferences.OnSharedPreferenceChangeListener, IService {
 
     public static final String PREFS_NAME = "AppPreferences";
     public static final String PREF_RINGER = "PhoneRingModeOnConnection";
@@ -39,7 +39,9 @@ public class SilentModeService implements SharedPreferences.OnSharedPreferenceCh
         am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
     }
-    public void onConnect() {
+
+    @Override
+    public final void sync() {
         notificationPref = prefs.getBoolean(PREF_RINGER, false);
 
         if (notificationPref){
@@ -50,7 +52,8 @@ public class SilentModeService implements SharedPreferences.OnSharedPreferenceCh
         }
     }
 
-    public void onDisconnect(){
+    @Override
+    public final void unsync() {
         notificationPref = prefs.getBoolean(PREF_RINGER, false);
         if (notificationPref) {
             int origRingerMode = prefs.getInt(PREF_ORIG_RINGER, AudioManager.RINGER_MODE_NORMAL);
@@ -59,9 +62,9 @@ public class SilentModeService implements SharedPreferences.OnSharedPreferenceCh
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+    public final void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         notificationPref = prefs.getBoolean(PREF_RINGER, false);
-        if (notificationPref){
+        if (notificationPref) {
             am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
         } else {
             am.setRingerMode(prefs.getInt(PREF_ORIG_RINGER, am.getRingerMode()));

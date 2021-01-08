@@ -30,6 +30,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
+
 import androidx.core.app.NotificationCompat;
 
 import org.asteroidos.sync.utils.NotificationParser;
@@ -41,6 +42,7 @@ import java.util.Map;
 public class NLService extends NotificationListenerService {
     private NLServiceReceiver nlServiceReceiver;
     private Map<String, String> iconFromPackage;
+    private volatile boolean listenerConnected = false;
 
     @Override
     public void onCreate() {
@@ -207,21 +209,27 @@ public class NLService extends NotificationListenerService {
     @Override
     @TargetApi(Build.VERSION_CODES.N)
     public void onListenerDisconnected() {
+        listenerConnected = false;
         // Notification listener disconnected - requesting rebind
         requestRebind(new ComponentName(this, NotificationListenerService.class));
     }
 
+    @Override
+    public void onListenerConnected() {
+        listenerConnected = true;
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
     class NLServiceReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getStringExtra("command").equals("refresh")) {
                 Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        StatusBarNotification[] notifs = getActiveNotifications();
-                        for(StatusBarNotification notif : notifs)
-                            onNotificationPosted(notif);                    }
+                handler.postDelayed(() -> {
+                    while (!listenerConnected);
+                    StatusBarNotification[] notifs = getActiveNotifications();
+                    for(StatusBarNotification notif : notifs)
+                        onNotificationPosted(notif);
                 }, 500);
             }
         }

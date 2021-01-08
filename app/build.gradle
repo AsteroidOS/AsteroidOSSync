@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "org.asteroidos.sync"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 19
         versionName "0.19"
@@ -31,6 +31,10 @@ android {
     lintOptions {
         checkReleaseBuilds false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 repositories {
@@ -51,4 +55,6 @@ dependencies {
     implementation 'github.vatsal.easyweather:library:1.0.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'org.osmdroid:osmdroid-android:6.1.6'
+    implementation 'no.nordicsemi.android.support.v18:scanner:1.4.3'
+    implementation 'no.nordicsemi.android:ble:2.2.4'
 }

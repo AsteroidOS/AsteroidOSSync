@@ -15,7 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.asteroidos.sync.ble;
+package org.asteroidos.sync.connectivity;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -29,14 +29,15 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.idevicesinc.sweetblue.BleDevice;
 
+import org.asteroidos.sync.asteroid.IAsteroidDevice;
 import org.asteroidos.sync.services.GPSTracker;
 import org.asteroidos.sync.utils.AsteroidUUIDS;
 import org.osmdroid.config.Configuration;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.UUID;
 
 import github.vatsal.easyweather.Helper.ForecastCallback;
@@ -44,8 +45,7 @@ import github.vatsal.easyweather.WeatherMap;
 import github.vatsal.easyweather.retrofit.models.ForecastResponseModel;
 import github.vatsal.easyweather.retrofit.models.List;
 
-@SuppressWarnings( "deprecation" ) // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated ReadWriteListener
-public class WeatherService implements BleDevice.ReadWriteListener {
+public class WeatherService implements IConnectivityService {
 
     private static final String owmApiKey = "ffcb5a7ed134aac3d095fa628bc46c65";
 
@@ -60,19 +60,19 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     public static final boolean PREFS_SYNC_WEATHER_DEFAULT = false;
     public static final String WEATHER_SYNC_INTENT = "org.asteroidos.sync.WEATHER_SYNC_REQUEST_LISTENER";
 
-    private BleDevice mDevice;
+    private IAsteroidDevice mDevice;
     private Context mCtx;
     private SharedPreferences mSettings;
 
     private WeatherSyncReqReceiver mSReceiver;
-    private PendingIntent alarmPendingIntent;
-    private AlarmManager alarmMgr;
+    private PendingIntent mAlarmPendingIntent;
+    private AlarmManager mAlarmMgr;
 
     private GPSTracker mGPS;
     private Float mLatitude;
     private Float mLongitude;
 
-    public WeatherService(Context ctx, BleDevice device) {
+    public WeatherService(Context ctx, IAsteroidDevice device) {
         mDevice = device;
         mCtx = ctx;
 
@@ -83,6 +83,7 @@ public class WeatherService implements BleDevice.ReadWriteListener {
         mLongitude = mSettings.getFloat(PREFS_LONGITUDE, PREFS_LONGITUDE_DEFAULT);
     }
 
+    @Override
     public void sync() {
         updateWeather();
 
@@ -94,20 +95,21 @@ public class WeatherService implements BleDevice.ReadWriteListener {
 
         // Fire update intent every 30 Minutes to update Weather
         Intent alarmIntent = new Intent(WEATHER_SYNC_INTENT);
-        alarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, 0);
-        alarmMgr = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
-        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+        mAlarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, 0);
+        mAlarmMgr = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
+        mAlarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_HALF_HOUR,
-                AlarmManager.INTERVAL_HALF_HOUR, alarmPendingIntent);
+                AlarmManager.INTERVAL_HALF_HOUR, mAlarmPendingIntent);
     }
 
+    @Override
     public void unsync() {
         try {
             mCtx.unregisterReceiver(mSReceiver);
         } catch (IllegalArgumentException ignored) {}
 
-        if (alarmMgr!= null) {
-            alarmMgr.cancel(alarmPendingIntent);
+        if (mAlarmMgr != null) {
+            mAlarmMgr.cancel(mAlarmPendingIntent);
         }
     }
 
@@ -204,10 +206,10 @@ public class WeatherService implements BleDevice.ReadWriteListener {
                     }
                 } catch(java.lang.ArrayIndexOutOfBoundsException ignored) {}
 
-                mDevice.write(AsteroidUUIDS.WEATHER_CITY_CHAR, city, WeatherService.this);
-                mDevice.write(AsteroidUUIDS.WEATHER_IDS_CHAR, ids, WeatherService.this);
-                mDevice.write(AsteroidUUIDS.WEATHER_MAX_TEMPS_CHAR, maxTemps, WeatherService.this);
-                mDevice.write(AsteroidUUIDS.WEATHER_MIN_TEMPS_CHAR, minTemps, WeatherService.this);
+                mDevice.send(AsteroidUUIDS.WEATHER_CITY_CHAR, city, WeatherService.this);
+                mDevice.send(AsteroidUUIDS.WEATHER_IDS_CHAR, ids, WeatherService.this);
+                mDevice.send(AsteroidUUIDS.WEATHER_MAX_TEMPS_CHAR, maxTemps, WeatherService.this);
+                mDevice.send(AsteroidUUIDS.WEATHER_MIN_TEMPS_CHAR, minTemps, WeatherService.this);
             }
 
             @Override public void failure(String message) {
@@ -229,11 +231,19 @@ public class WeatherService implements BleDevice.ReadWriteListener {
     }
 
     @Override
-    public void onEvent(ReadWriteEvent e) {
-        if(!e.wasSuccess())
-            Log.e("WeatherService", e.status().toString());
+    public HashMap<UUID, Direction> getCharacteristicUUIDs() {
+        HashMap<UUID, Direction> chars = new HashMap<>();
+        chars.put(AsteroidUUIDS.WEATHER_CITY_CHAR, Direction.TO_WATCH);
+        chars.put(AsteroidUUIDS.WEATHER_IDS_CHAR, Direction.TO_WATCH);
+        chars.put(AsteroidUUIDS.WEATHER_MIN_TEMPS_CHAR, Direction.TO_WATCH);
+        chars.put(AsteroidUUIDS.WEATHER_MAX_TEMPS_CHAR, Direction.TO_WATCH);
+        return chars;
     }
 
+    @Override
+    public UUID getServiceUUID() {
+        return AsteroidUUIDS.WEATHER_SERVICE_UUID;
+    }
 
     class WeatherSyncReqReceiver extends BroadcastReceiver {
         @Override

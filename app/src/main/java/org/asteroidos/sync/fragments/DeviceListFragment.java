@@ -18,11 +18,9 @@
 
 package org.asteroidos.sync.fragments;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,18 +29,23 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.idevicesinc.sweetblue.BleDevice;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.skyfishjy.library.RippleBackground;
 
 import org.asteroidos.sync.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DeviceListFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     private LeDeviceListAdapter mLeDeviceListAdapter;
     private RippleBackground mRippleBackground;
     private TextView mSearchingText;
+    private OnDefaultDeviceSelectedListener mDeviceListener;
+    private OnScanRequestedListener mScanListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
@@ -55,6 +58,8 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
         mRippleBackground = view.findViewById(R.id.content);
         FloatingActionButton fab = view.findViewById(R.id.fab);
         ListView mScanListView = view.findViewById(R.id.device_list);
+
+        mRippleBackground.startRippleAnimation();
 
         fab.setOnClickListener(this);
 
@@ -72,66 +77,91 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
     /* Device selection */
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        final BleDevice device = mLeDeviceListAdapter.getDevice(i);
+        final BluetoothDevice device = mLeDeviceListAdapter.getDevice(i);
         if (device != null)
-            mDeviceListener.onDefaultDeviceSelected(device.getMacAddress());
+            mDeviceListener.onDefaultDeviceSelected(device);
     }
 
     /* Scanning events handling */
-    public void scanningStarted()
-    {
-        mRippleBackground.startRippleAnimation();
-        mSearchingText.setText(R.string.searching);
+    public void scanningStarted() {
+        if (mRippleBackground != null) mRippleBackground.startRippleAnimation();
+        if (mSearchingText != null) mSearchingText.setText(R.string.searching);
     }
 
-    public void scanningStopped()
-    {
+    public void scanningStopped() {
         mRippleBackground.stopRippleAnimation();
         int deviceCount = mLeDeviceListAdapter.getCount();
-        if(deviceCount == 0)
+        if (deviceCount == 0)
             mSearchingText.setText(R.string.nothing_found);
-        else if(deviceCount == 1)
+        else if (deviceCount == 1)
             mSearchingText.setText(R.string.one_found);
         else
             mSearchingText.setText(getString(R.string.n_found, deviceCount));
     }
 
-    public void deviceDiscovered(BleDevice dev)
-    {
+    public void deviceDiscovered(BluetoothDevice dev) {
         mLeDeviceListAdapter.addDevice(dev);
         mLeDeviceListAdapter.notifyDataSetChanged();
     }
 
-    public void deviceUndiscovered(BleDevice dev)
-    {
+    public void deviceUndiscovered(BluetoothDevice dev) {
         mLeDeviceListAdapter.removeDevice(dev);
         mLeDeviceListAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnDefaultDeviceSelectedListener)
+            mDeviceListener = (OnDefaultDeviceSelectedListener) context;
+        else
+            throw new ClassCastException(context.toString()
+                    + " does not implement DeviceListFragment.OnDeviceSelectedListener");
+
+        if (context instanceof OnScanRequestedListener)
+            mScanListener = (OnScanRequestedListener) context;
+        else
+            throw new ClassCastException(context.toString()
+                    + " does not implement DeviceListFragment.OnScanRequestedListener");
+    }
+
+    /* Notifies MainActivity when a device pairing or scanning is requested */
+    public interface OnDefaultDeviceSelectedListener {
+        void onDefaultDeviceSelected(BluetoothDevice mDevice);
+    }
+
+    public interface OnScanRequestedListener {
+        void onScanRequested();
+    }
+
+    private static class ViewHolder {
+        TextView deviceName;
+    }
+
     /* Adapter for holding devices found through scanning */
     private class LeDeviceListAdapter extends BaseAdapter {
-        private ArrayList<BleDevice> mLeDevices;
-        private LayoutInflater mInflator;
+        private final ArrayList<BluetoothDevice> mLeDevices;
+        private final LayoutInflater mInflator;
 
         LeDeviceListAdapter() {
             super();
-            mLeDevices = new ArrayList<>();
-            mInflator = getActivity().getLayoutInflater();
+            mLeDevices = new ArrayList<BluetoothDevice>();
+            mInflator = Objects.requireNonNull(getActivity()).getLayoutInflater();
         }
 
-        void addDevice(BleDevice device) {
+        void addDevice(BluetoothDevice device) {
             if (!mLeDevices.contains(device)) {
                 mLeDevices.add(device);
             }
         }
 
-        void removeDevice(BleDevice device) {
+        void removeDevice(BluetoothDevice device) {
             if (!mLeDevices.contains(device)) {
                 mLeDevices.remove(device);
             }
         }
 
-        public BleDevice getDevice(int position) {
+        public BluetoothDevice getDevice(int position) {
             return mLeDevices.get(position);
         }
 
@@ -166,8 +196,8 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
                 viewHolder = (ViewHolder) view.getTag();
             }
 
-            BleDevice device = mLeDevices.get(i);
-            final String deviceName = device.getName_normalized();
+            BluetoothDevice device = mLeDevices.get(i);
+            final String deviceName = device.getName();
             if (deviceName != null && deviceName.length() > 0)
                 viewHolder.deviceName.setText(deviceName);
             else
@@ -175,34 +205,5 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
 
             return view;
         }
-    }
-    private static class ViewHolder {
-        TextView deviceName;
-    }
-
-    /* Notifies MainActivity when a device pairing or scanning is requested */
-    public interface OnDefaultDeviceSelectedListener {
-        void onDefaultDeviceSelected(String macAddress);
-    }
-    public interface OnScanRequestedListener {
-        void onScanRequested();
-    }
-    private OnDefaultDeviceSelectedListener mDeviceListener;
-    private OnScanRequestedListener mScanListener;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if(context instanceof OnDefaultDeviceSelectedListener)
-            mDeviceListener = (OnDefaultDeviceSelectedListener) context;
-        else
-            throw new ClassCastException(context.toString()
-                    + " does not implement DeviceListFragment.OnDeviceSelectedListener");
-
-        if(context instanceof OnScanRequestedListener)
-            mScanListener = (OnScanRequestedListener) context;
-        else
-            throw new ClassCastException(context.toString()
-                    + " does not implement DeviceListFragment.OnScanRequestedListener");
     }
 }

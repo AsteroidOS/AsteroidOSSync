@@ -23,10 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.fragment.app.Fragment;
-import androidx.cardview.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,9 +34,16 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.asteroidos.sync.R;
-import org.asteroidos.sync.ble.SilentModeService;
-import org.asteroidos.sync.ble.TimeService;
+import org.asteroidos.sync.asteroid.IAsteroidDevice;
+import org.asteroidos.sync.connectivity.SilentModeService;
+import org.asteroidos.sync.connectivity.TimeService;
 import org.asteroidos.sync.services.PhoneStateReceiver;
 import org.asteroidos.sync.services.SynchronizationService;
 
@@ -63,8 +66,14 @@ public class DeviceDetailFragment extends Fragment {
 
     private boolean mConnected = false;
 
-    private int mStatus = SynchronizationService.STATUS_DISCONNECTED;
+    private IAsteroidDevice.ConnectionState mStatus = IAsteroidDevice.ConnectionState.STATUS_DISCONNECTED;
     private int mBatteryPercentage = 100;
+    private DeviceDetailFragment.OnDefaultDeviceUnselectedListener mDeviceListener;
+    private DeviceDetailFragment.OnConnectRequestedListener mConnectListener;
+    private DeviceDetailFragment.OnAppSettingsClickedListener mAppSettingsListener;
+    private DeviceDetailFragment.OnLocationSettingsClickedListener mLocationSettingsListener;
+    private DeviceDetailFragment.OnUpdateListener mUpdateListener;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
@@ -91,7 +100,7 @@ public class DeviceDetailFragment extends Fragment {
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mConnected)
+                if (mConnected)
                     mConnectListener.onDisconnectRequested();
                 else
                     mConnectListener.onConnectRequested();
@@ -100,7 +109,7 @@ public class DeviceDetailFragment extends Fragment {
 
         mDisconnectedText = view.findViewById(R.id.info_disconnected);
         mBatteryText = view.findViewById(R.id.info_battery);
-        mBatteryText.setText(String.valueOf(mBatteryPercentage)+" %");
+        mBatteryText.setText(mBatteryPercentage + " %");
 
         mConnectedContent = view.findViewById(R.id.device_connected_content);
         mDisconnectedPlaceholder = view.findViewById(R.id.device_disconnected_placeholder);
@@ -117,12 +126,12 @@ public class DeviceDetailFragment extends Fragment {
         findCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent iremove = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
+                Intent iremove = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
                 iremove.putExtra("event", "removed");
                 iremove.putExtra("id", 0xa57e401d);
                 getActivity().sendBroadcast(iremove);
 
-                Intent ipost = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
+                Intent ipost = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
                 ipost.putExtra("event", "posted");
                 ipost.putExtra("packageName", "org.asteroidos.sync.findmywatch");
                 ipost.putExtra("id", 0xa57e401d);
@@ -135,12 +144,7 @@ public class DeviceDetailFragment extends Fragment {
         });
 
         CardView screenshotCard = view.findViewById(R.id.card_view3);
-        screenshotCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().sendBroadcast(new  Intent("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER"));
-            }
-        });
+        screenshotCard.setOnClickListener(view1 -> getActivity().sendBroadcast(new Intent("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER")));
 
         CardView notifSettCard = view.findViewById(R.id.card_view4);
         notifSettCard.setOnClickListener(new View.OnClickListener() {
@@ -198,7 +202,7 @@ public class DeviceDetailFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if(menuItem.getItemId() ==  R.id.unpairButton)
+        if (menuItem.getItemId() == R.id.unpairButton)
             mDeviceListener.onDefaultDeviceUnselected();
 
         return (super.onOptionsItemSelected(menuItem));
@@ -208,108 +212,104 @@ public class DeviceDetailFragment extends Fragment {
         getActivity().setTitle(name);
     }
 
-    public void setStatus(int status) {
+    public void setStatus(IAsteroidDevice.ConnectionState status) {
         mStatus = status;
-        switch(status) {
-            case SynchronizationService.STATUS_CONNECTED:
-                mDisconnectedPlaceholder.setVisibility(View.GONE);
-                mConnectedContent.setVisibility(View.VISIBLE);
-                mFab.setImageResource(R.drawable.bluetooth_disconnect);
-                mConnected = true;
-                setMenuVisibility(true);
-                break;
-            case SynchronizationService.STATUS_DISCONNECTED:
-                mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
-                mConnectedContent.setVisibility(View.GONE);
-                mDisconnectedText.setText(R.string.disconnected);
-                mFab.setImageResource(R.drawable.bluetooth_connect);
-                mConnected = false;
-                setMenuVisibility(true);
-                break;
-            case SynchronizationService.STATUS_CONNECTING:
-                mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
-                mConnectedContent.setVisibility(View.GONE);
-                mDisconnectedText.setText(R.string.connecting);
-                setMenuVisibility(true);
-                break;
-            default:
-                setMenuVisibility(false);
-                break;
+        if (status == IAsteroidDevice.ConnectionState.STATUS_CONNECTED){
+            mDisconnectedPlaceholder.setVisibility(View.GONE);
+            mConnectedContent.setVisibility(View.VISIBLE);
+            mFab.setImageResource(R.drawable.bluetooth_disconnect);
+            mConnected = true;
+            setMenuVisibility(true);
+        } else if (status == IAsteroidDevice.ConnectionState.STATUS_DISCONNECTED){
+            mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
+            mConnectedContent.setVisibility(View.GONE);
+            mDisconnectedText.setText(R.string.disconnected);
+            mFab.setImageResource(R.drawable.bluetooth_connect);
+            mConnected = false;
+            setMenuVisibility(true);
+        } else if (status == IAsteroidDevice.ConnectionState.STATUS_CONNECTING) {
+            mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
+            mConnectedContent.setVisibility(View.GONE);
+            mDisconnectedText.setText(R.string.connecting);
+            setMenuVisibility(true);
+        } else {
+            setMenuVisibility(false);
         }
     }
 
     @SuppressLint("SetTextI18n")
     public void setBatteryPercentage(int percentage) {
         try {
-            mBatteryText.setText(String.valueOf(percentage)+" %");
+            mBatteryText.setText(mBatteryPercentage + " %");
             mBatteryPercentage = percentage;
-        } catch(IllegalStateException ignore) {}
+        } catch (IllegalStateException ignore) {
+        }
     }
 
     public void scanningStarted() {
-        if(mStatus == SynchronizationService.STATUS_DISCONNECTED)
+        if (mStatus == IAsteroidDevice.ConnectionState.STATUS_DISCONNECTED)
             mDisconnectedText.setText(R.string.scanning);
     }
 
     public void scanningStopped() {
-        if(mStatus == SynchronizationService.STATUS_DISCONNECTED)
+        if (mStatus == IAsteroidDevice.ConnectionState.STATUS_DISCONNECTED)
             mDisconnectedText.setText(R.string.disconnected);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof DeviceDetailFragment.OnDefaultDeviceUnselectedListener)
+            mDeviceListener = (DeviceDetailFragment.OnDefaultDeviceUnselectedListener) context;
+        else
+            throw new ClassCastException(context.toString()
+                    + " does not implement DeviceDetailFragment.OnDefaultDeviceUnselectedListener");
+
+        if (context instanceof DeviceDetailFragment.OnConnectRequestedListener)
+            mConnectListener = (DeviceDetailFragment.OnConnectRequestedListener) context;
+        else
+            throw new ClassCastException(context.toString()
+                    + " does not implement DeviceDetailFragment.OnConnectRequestedListener");
+
+        if (context instanceof DeviceDetailFragment.OnAppSettingsClickedListener)
+            mAppSettingsListener = (DeviceDetailFragment.OnAppSettingsClickedListener) context;
+        else
+            throw new ClassCastException(context.toString()
+                    + " does not implement DeviceDetailFragment.OnAppSettingsClickedListener");
+
+        if (context instanceof DeviceDetailFragment.OnLocationSettingsClickedListener)
+            mLocationSettingsListener = (DeviceDetailFragment.OnLocationSettingsClickedListener) context;
+        else
+            throw new ClassCastException(context.toString()
+                    + " does not implement DeviceDetailFragment.OnLocationSettingsClickedListener");
+
+        if (context instanceof DeviceDetailFragment.OnUpdateListener)
+            mUpdateListener = (DeviceDetailFragment.OnUpdateListener) context;
+        else
+            throw new ClassCastException(context.toString()
+                    + " does not implement DeviceDetailFragment.onUpdateListener");
     }
 
     /* Notifies MainActivity when a device unpairing is requested */
     public interface OnDefaultDeviceUnselectedListener {
         void onDefaultDeviceUnselected();
     }
+
     public interface OnAppSettingsClickedListener {
         void onAppSettingsClicked();
     }
+
     public interface OnLocationSettingsClickedListener {
         void onLocationSettingsClicked();
     }
+
     public interface OnConnectRequestedListener {
         void onConnectRequested();
         void onDisconnectRequested();
     }
+
     public interface OnUpdateListener {
         void onUpdateRequested();
     }
-    private DeviceDetailFragment.OnDefaultDeviceUnselectedListener mDeviceListener;
-    private DeviceDetailFragment.OnConnectRequestedListener mConnectListener;
-    private DeviceDetailFragment.OnAppSettingsClickedListener mAppSettingsListener;
-    private DeviceDetailFragment.OnLocationSettingsClickedListener mLocationSettingsListener;
-    private DeviceDetailFragment.OnUpdateListener mUpdateListener;
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if(context instanceof DeviceDetailFragment.OnDefaultDeviceUnselectedListener)
-            mDeviceListener = (DeviceDetailFragment.OnDefaultDeviceUnselectedListener) context;
-        else
-            throw new ClassCastException(context.toString()
-                    + " does not implement DeviceDetailFragment.OnDefaultDeviceUnselectedListener");
-
-        if(context instanceof DeviceDetailFragment.OnConnectRequestedListener)
-            mConnectListener = (DeviceDetailFragment.OnConnectRequestedListener) context;
-        else
-            throw new ClassCastException(context.toString()
-                    + " does not implement DeviceDetailFragment.OnConnectRequestedListener");
-
-        if(context instanceof DeviceDetailFragment.OnAppSettingsClickedListener)
-            mAppSettingsListener = (DeviceDetailFragment.OnAppSettingsClickedListener) context;
-        else
-            throw new ClassCastException(context.toString()
-                    + " does not implement DeviceDetailFragment.OnAppSettingsClickedListener");
-
-        if(context instanceof DeviceDetailFragment.OnLocationSettingsClickedListener)
-            mLocationSettingsListener = (DeviceDetailFragment.OnLocationSettingsClickedListener) context;
-        else
-            throw new ClassCastException(context.toString()
-                    + " does not implement DeviceDetailFragment.OnLocationSettingsClickedListener");
-
-        if(context instanceof DeviceDetailFragment.OnUpdateListener)
-            mUpdateListener = (DeviceDetailFragment.OnUpdateListener) context;
-        else
-            throw new ClassCastException(context.toString()
-                    + " does not implement DeviceDetailFragment.onUpdateListener");
-    }
 }
