@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">OK</string>
+    <string name="generic_ok">Εντάξει</string>
     <string name="searching">Αναζήτηση για ρολόγια</string>
     <string name="unknown_device">Άγνωστη Συσκευή</string>
     <string name="nothing_found">Δεν βρέθηκαν ρολόγια</string>
