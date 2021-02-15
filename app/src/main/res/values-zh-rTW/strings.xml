@@ -61,4 +61,11 @@
     <string name="title_activity_settings">設定</string>
     <string name="switch_phone_notifications">連接時將手機靜音</string>
     <string name="notification_silent_icon">通知無聲圖示</string>
+    <string name="intro_phonestateslide_subtitle">展示目前的來電，並將來電者顯示在錶面上。</string>
+    <string name="intro_slideandroidgo_subtitle">無法支援Android Go，因為它不允許通知存取並限制背景行程。root用戶的解決方法是將 \"build.ro.config.low_ram\" 的 \"ro.config.low_ram\" 標誌設置為 \"false\"。</string>
+    <string name="dialer">撥號</string>
+    <string name="show_calls_on_watch">顯示來電</string>
+    <string name="notification_type_ringtone">鈴聲</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="intro_phonestateslide_title">電話與聯繫方式</string>
 </resources>
