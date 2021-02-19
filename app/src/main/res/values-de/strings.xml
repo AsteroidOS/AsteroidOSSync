@@ -25,7 +25,7 @@
     <string name="phone_is_searching">Das Telefon sucht dich!</string>
     <string name="notifications_settings">Benachrichtigungseinstellungen</string>
     <string name="intro_slide4_title">Mitteilungen</string>
-    <string name="intro_slide4_subtitle">Um Mitteilungen synchronisieren zu können, bitte „AsteroidOS Sync“ im folgenden Menü erlauben:</string>
+    <string name="intro_slide4_subtitle">Um Mitteilungen mit deiner Uhr synchronisieren zu können, bitte „AsteroidOS Sync“ im folgenden Menü erlauben:</string>
     <string name="weather_settings">Wettereinstellungen</string>
     <string name="enter_city_name">Namen der Stadt eingeben:</string>
     <string name="unpair">Kopplung aufheben</string>
@@ -56,16 +56,16 @@
     <string name="please_grant_permissions">Bitte diese Erlaubnis gewähren</string>
     <string name="impassable_slide">Bitte diese Erlaubnis gewähren</string>
     <string name="synchronize_weather">Wetter automatisch ermitteln</string>
-    <string name="switch_phone_notifications">Telefon stumm schalten, wenn es ist verbunden</string>
+    <string name="switch_phone_notifications">Telefon stumm schalten, wenn verbunden</string>
     <string name="title_activity_settings_activity">Einstellungen</string>
     <string name="action_settings">Einstellungen</string>
     <string name="title_activity_settings">Einstellungen</string>
     <string name="notification_silent_icon">Symbol für Stumme Benachrichtigung</string>
     <string name="notification_type_ringtone">Klingelton</string>
-    <string name="intro_phonestateslide_subtitle">Um eingehende Anrufe auf der Uhr anzuzeigen und den Namen des Anrufers anzuzeigen.</string>
+    <string name="intro_phonestateslide_subtitle">Um eingehende Anrufe und den Namen des Anrufers auf der Uhr anzuzeigen.</string>
     <string name="intro_phonestateslide_title">Telefon und Kontakte</string>
     <string name="show_calls_on_watch">Zeige eingehende Anrufe</string>
     <string name="dialer">Telefon</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
-    <string name="intro_slideandroidgo_subtitle">Android Go ist nicht unterstützt, da es keinen Benachrichtigungszugriff erlaubt und Hintergrundprozesse einschränkt. Für Root-Nutzer besteht die Möglichkeit die \"ro.config.low_ram\" Variable in der build.prop auf \"false\" zu setzen.</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go ist nicht unterstützt, da es keinen Benachrichtigungszugriff erlaubt und Hintergrundprozesse einschränkt. Für Root-Nutzer besteht die Möglichkeit die \"ro.config.low_ram\" Variable in der build.prop Datei auf \"false\" zu setzen.</string>
 </resources>
