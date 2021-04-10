@@ -62,4 +62,10 @@
     <string name="switch_phone_notifications">Kytke puhelin äänettömälle kun se on liitettynä</string>
     <string name="notification_silent_icon">äänettömät ilmoitukset kuvake</string>
     <string name="notification_type_ringtone">Soittoääni</string>
+    <string name="dialer">Puhelin</string>
+    <string name="show_calls_on_watch">Näytä saapuvat puhelut</string>
+    <string name="intro_phonestateslide_title">Puhelin &amp; Yhteystiedot</string>
+    <string name="intro_phonestateslide_subtitle">Soiton ja soittajan nimen kellolla näyttämisen vuoksi.</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go ei ole tuettu koska se ei tue pääsyjä ilmoituksiin ja rajoittaa taustaprosesseja. Väliaikainen korjaus root-käyttäjille on asettaa \"ro.config.low_ram\" flag build.prop tiedostiossa \"false\" :seksi.</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
