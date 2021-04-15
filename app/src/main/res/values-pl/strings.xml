@@ -55,7 +55,7 @@
     <string name="grant_permission">Zezwolenie na udzielenie</string>
     <string name="please_grant_permissions">Proszę udzielić tych uprawnień</string>
     <string name="impassable_slide">Proszę udzielić tych uprawnień</string>
-    <string name="synchronize_weather">Pogoda dla automatycznej lokalizacji</string>
+    <string name="synchronize_weather">Ustaw pogodę automatycznie</string>
     <string name="title_activity_settings_activity">Ustawienia</string>
     <string name="action_settings">Ustawienia</string>
     <string name="title_activity_settings">Ustawienia</string>
