@@ -16,13 +16,13 @@
     <string name="impassable_slide">Por favor conceda esta permissão</string>
     <string name="please_grant_permissions">Por favor conceda permissão</string>
     <string name="grant_permission">Conceda permissão</string>
-    <string name="intro_slideerror_subtitle">Este dispositivo não suporta Bluetooth de baixa energia.</string>
-    <string name="intro_slideerror_title">Este dispositivo suporta Bluetooth de baixa energia</string>
+    <string name="intro_slideerror_subtitle">Este aparelho não suporta Bluetooth de baixa energia.</string>
+    <string name="intro_slideerror_title">Este aparelho suporta Bluetooth de baixa energia</string>
     <string name="intro_slide5_subtitle">Para permitir que esta app seja executada em segundo plano, por favor desative \"Otimização de bateria\" para o AsteroidOS Sync no menu seguinte:</string>
     <string name="intro_slide5_title">Otimização da bateria</string>
     <string name="intro_slide4_subtitle">Para sincronizar notificações com o relógio, permita \"AsteroidOS Sync\" no seguinte menu:</string>
     <string name="intro_slide4_title">Notificações</string>
-    <string name="intro_slide3_subtitle">Para procurar por dispositivos Bluetooth de baixo consumo nas proximidades.</string>
+    <string name="intro_slide3_subtitle">Para procurar por aparelhos Bluetooth de baixo consumo nas proximidades.</string>
     <string name="intro_slide3_title">Localização</string>
     <string name="intro_slide2_subtitle">Para armazenar os dados em cache e guardar as capturas de ecrã do seu relógio.</string>
     <string name="intro_slide2_title">Acesso aos ficheiros</string>
@@ -65,7 +65,7 @@
     <string name="n_found">Foram encontrados %d relógios</string>
     <string name="one_found">Foi encontrado um relógio</string>
     <string name="nothing_found">Não foram encontrados relógios</string>
-    <string name="unknown_device">Dispositivo desconhecido</string>
+    <string name="unknown_device">Aparelho desconhecido</string>
     <string name="searching">A procurar relógios</string>
     <string name="generic_ok">OK</string>
 </resources>
