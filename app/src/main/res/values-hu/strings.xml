@@ -62,4 +62,8 @@
     <string name="switch_phone_notifications">Telefon némítása amikor kapcsolódva van</string>
     <string name="notification_silent_icon">értesítés csendes ikon</string>
     <string name="notification_type_ringtone">Csengőhang</string>
+    <string name="dialer">Tárcsázó</string>
+    <string name="show_calls_on_watch">Bejövő hivások kijelzése</string>
+    <string name="intro_phonestateslide_title">Telefon és kapcsolatok</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
 </resources>
