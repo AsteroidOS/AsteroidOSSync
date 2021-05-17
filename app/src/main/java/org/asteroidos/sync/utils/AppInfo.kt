@@ -1,83 +1,110 @@
-package org.asteroidos.sync.utils;
+package org.asteroidos.sync.utils
 
-// copied from https://github.com/jensstein/oandbackup, used under MIT license
+import android.graphics.Bitmap
+import android.os.Parcel
+import android.os.Parcelable
 
-import android.graphics.Bitmap;
-import android.os.Parcel;
-import android.os.Parcelable;
-import androidx.annotation.NonNull;
+/**
+ * Appears to represent an app and its information such that it is presented to the user
+ *
+ *
+ * - Copied from https://github.com/jensstein/oandbackup, used under MIT license
+ *
+ * - Edited by Doomsdayrs as of May 17th 2021. Kotlin conversion with some proper standards.
+ *
+ * @param mLabel Label of the application, Nullable
+ * @param mPackageName Package name of the application, Nullable
+ * @param isSystem Is this application a system app
+ * @param isInstalled Is this application installed (??)
+ * @param isChecked Is this application checked (If this is for the UI, please move it out)
+ * @param isDisabled Is this application disabled by the OS
+ * @param icon Icon of the application
+ *
+ * @author https://github.com/jensstein & https://github.com/doomsdayrs
+ * @see <a href="https://github.com/jensstein">jensstein</a>
+ * @see <a href="https://github.com/doomsdayrs">Doomsdayrs</a>
+ * @see <a href="https://github.com/jensstein/oandbackup">oandbackup</a>
+ */
+data class AppInfo internal constructor(
+	private val mLabel: String?,
+	private val mPackageName: String?,
 
-public class AppInfo
-        implements Comparable<AppInfo>, Parcelable
-{
-    private String label, packageName;
-    private boolean system, installed, checked, disabled;
-    public Bitmap icon;
+	val isSystem: Boolean = false,
+	val isInstalled: Boolean = false,
+	val isChecked: Boolean = false,
+	var isDisabled: Boolean = false,
 
-    AppInfo(String packageName, String label, boolean system, boolean installed)
-    {
-        this.label = label;
-        this.packageName = packageName;
-        this.system = system;
-        this.installed = installed;
-    }
-    public String getPackageName()
-    {
-        return packageName;
-    }
-    public String getLabel()
-    {
-        return label;
-    }
+	@JvmField
+	var icon: Bitmap? = null
+) : Comparable<AppInfo>, Parcelable {
 
-    public void setDisabled(boolean disabled)
-    {
-        this.disabled = disabled;
-    }
-    public boolean isDisabled()
-    {
-        return disabled;
-    }
-    public boolean isSystem()
-    {
-        return system;
-    }
-    public int compareTo(@NonNull AppInfo appInfo) { return label.compareToIgnoreCase(appInfo.getLabel()); }
-    public String toString()
-    {
-        return label + " : " + packageName;
-    }
-    public int describeContents()
-    {
-        return 0;
-    }
-    public void writeToParcel(Parcel out, int flags)
-    {
-        out.writeString(label);
-        out.writeString(packageName);
-        out.writeBooleanArray(new boolean[] {system, installed, checked});
-        out.writeParcelable(icon, flags);
-    }
-    public static final Parcelable.Creator<AppInfo> CREATOR = new Parcelable.Creator<AppInfo>()
-    {
-        public AppInfo createFromParcel(Parcel in)
-        {
-            return new AppInfo (in);
-        }
-        public AppInfo[] newArray(int size)
-        {
-            return new AppInfo[size];
-        }
-    };
-    private AppInfo(Parcel in)
-    {
-        label = in.readString();
-        packageName = in.readString();
-        boolean[] bools = new boolean[4];
-        in.readBooleanArray(bools);
-        system = bools[0];
-        installed = bools[1];
-        checked = bools[2];
-        icon = in.readParcelable(getClass().getClassLoader());
-    }
+	/** Accessor for the package name of the application */
+	val packageName: String?
+		get() = mPackageName
+
+	/** Accessor for the application label */
+	val label: String?
+		get() = mLabel
+
+	/**
+	 * Constructor as used by java code
+	 *
+	 * Note, Can be deprecated once the code base is further migrated to kotlin.
+	 */
+	constructor(packageName: String?, label: String?, system: Boolean, installed: Boolean) : this(
+		mLabel = label,
+		mPackageName = packageName,
+		isSystem = system,
+		isInstalled = installed,
+	)
+
+	/**
+	 * Support constructor to handle [booleanArray] from [Parcel]
+	 */
+	internal constructor(
+		label: String?,
+		packageName: String?,
+		booleanArray: BooleanArray,
+		icon: Bitmap?
+	) : this(
+		mLabel = label,
+		mPackageName = packageName,
+		isSystem = booleanArray[0],
+		isInstalled = booleanArray[1],
+		isChecked = booleanArray[2],
+		icon = icon,
+	)
+
+	/**
+	 * Creates an [AppInfo] from a [Parcel]
+	 */
+	internal constructor(input: Parcel) : this(
+		label = input.readString(),
+		packageName = input.readString(),
+		booleanArray = BooleanArray(4).apply { input.readBooleanArray(this) },
+		icon = input.readParcelable(object {}.javaClass.classLoader)
+	)
+
+	override fun compareTo(other: AppInfo): Int =
+		mLabel!!.compareTo(other.mLabel!!, ignoreCase = true)
+
+	override fun toString(): String = "$mLabel : $mPackageName"
+
+	override fun describeContents(): Int = 0
+
+	override fun writeToParcel(out: Parcel, flags: Int) {
+		out.writeString(mLabel)
+		out.writeString(mPackageName)
+		out.writeBooleanArray(booleanArrayOf(isSystem, isInstalled, isChecked))
+		out.writeParcelable(icon, flags)
+	}
+
+	companion object {
+		@JvmField
+		val CREATOR: Parcelable.Creator<AppInfo> = object : Parcelable.Creator<AppInfo> {
+			override fun createFromParcel(input: Parcel): AppInfo = AppInfo(input)
+
+			override fun newArray(size: Int): Array<AppInfo?> = arrayOfNulls(size)
+		}
+	}
 }
