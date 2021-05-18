@@ -1,25 +1,18 @@
-package org.asteroidos.sync.services;
+package org.asteroidos.sync.services
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import org.asteroidos.sync.MainActivity.PREFS_DEFAULT_MAC_ADDR
+import org.asteroidos.sync.MainActivity.PREFS_NAME
 
-import org.asteroidos.sync.MainActivity;
-
-import java.util.Objects;
-
-public class AutostartService extends BroadcastReceiver {
-    public void onReceive(Context context, Intent intent)
-    {
-        if(Objects.equals(intent.getAction(), Intent.ACTION_BOOT_COMPLETED)) {
-            SharedPreferences prefs = context.getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
-            String defaultDevMacAddr = prefs.getString(MainActivity.PREFS_DEFAULT_MAC_ADDR, "");
-
-            if (defaultDevMacAddr.length() > 0) {
-                Intent mSyncServiceIntent = new Intent(context, SynchronizationService.class);
-                context.startService(mSyncServiceIntent);
-            }
-        }
-    }
+class AutostartService : BroadcastReceiver() {
+	override fun onReceive(context: Context, intent: Intent) {
+		if (intent.action != Intent.ACTION_BOOT_COMPLETED) return
+		context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).let { prefs ->
+			val defaultDevMacAddr = prefs.getString(PREFS_DEFAULT_MAC_ADDR, "")!!
+			if (defaultDevMacAddr.isNotEmpty())
+				context.startService(Intent(context, SynchronizationService::class.java))
+		}
+	}
 }
