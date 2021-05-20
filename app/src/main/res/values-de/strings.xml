@@ -29,7 +29,7 @@
     <string name="weather_settings">Wettereinstellungen</string>
     <string name="enter_city_name">Namen der Stadt eingeben:</string>
     <string name="unpair">Kopplung aufheben</string>
-    <string name="scanning">Scannen …</string>
+    <string name="scanning">Suchen …</string>
     <string name="downloading">Wird heruntergeladen …</string>
     <string name="downloaded">Heruntergeladen</string>
     <string name="screenshot">Bildschirmfoto</string>
