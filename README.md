@@ -36,7 +36,8 @@ AsteroidOS Sync
 # Table of Contents 
 * [About The Project](#about-the-project) 
 * [Getting Started](#getting-started)
-  * [Development Instructions](#development-instructions) 
+  * [Development Instructions](#development-instructions)
+  * [Architecture of AsteroidOSSync](#architecture-of-asteroidossync) 
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
   * [IRC](#IRC)
@@ -68,15 +69,26 @@ AsteroidOSSync can be downloaded from f-droid [here](https://f-droid.org/package
 If you don't have a device running AsteroidOS, instructions for installation can be found [here](https://asteroidos.org/install/) 
 
 ### Development Instructions 
+
 To get started with a developing for AsteroidOSSync, fork and clone the project, and import into any Android IDE. 
 
-# Roadmap 
+### Architecture of AsteroidOSSync
+
+The [MainActivity](./app/src/main/java/org/asteroidos/sync/MainActivity.java) manages the UI fragments based on the current `IAsteroidDevice.ConnectionState` and starts a backend that is responsible for communication with the watch.
+
+The Bluetooth backend is the [SynchronizationService](./app/src/main/java/org/asteroidos/sync/services/SynchronizationService.java). It is  responsible for talking to the watch via the [AsteroidBleManager](./app/src/main/java/org/asteroidos/sync/asteroid/AsteroidBleManager.java) and loading/unloading a service module that can talk to the watch.
+
+A service, that implements [IConnectivityService](./app/src/main/java/org/asteroidos/sync/connectivity/IConnectivityService.java) (e.g. the [NotificationService](./app/src/main/java/org/asteroidos/sync/connectivity/NotificationService.java)), is a module that can send and receive data from a watch via a backend that implements the [IAsteroidDevice](./app/src/main/java/org/asteroidos/sync/asteroid/IAsteroidDevice.java) interface.
+
+# Roadmap
+
 See the [open issues](https://github.com/AsteroidOS/AsteroidOSSync/issues) for a list of proposed features and known issues 
 
 # Contributing
+
 AsteroidOS is driven by a vibrant community. We would love your help!
 
-### IRC 
+### IRC
 General discussions around AsteroidOS happen on the #asteroid IRC channel on Freenode. Logs are available [here](https://log.asteroidos.org/). 
 If you don't have an IRC client, you can use [webchat](https://webchat.freenode.net/).
 
