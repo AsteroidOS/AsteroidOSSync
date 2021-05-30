@@ -22,6 +22,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,164 +33,326 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import com.idevicesinc.sweetblue.BleDevice;
-import com.idevicesinc.sweetblue.BleDeviceConfig;
-import com.idevicesinc.sweetblue.BleDeviceState;
-import com.idevicesinc.sweetblue.BleManager;
-import com.idevicesinc.sweetblue.BleManagerConfig;
-import com.idevicesinc.sweetblue.BleNodeConfig;
-import com.idevicesinc.sweetblue.BleTask;
-import com.idevicesinc.sweetblue.utils.Interval;
-
-import org.asteroidos.sync.BuildConfig;
 import org.asteroidos.sync.MainActivity;
 import org.asteroidos.sync.R;
-import org.asteroidos.sync.ble.MediaService;
-import org.asteroidos.sync.ble.NotificationService;
-import org.asteroidos.sync.ble.ScreenshotService;
-import org.asteroidos.sync.ble.SilentModeService;
-import org.asteroidos.sync.ble.TimeService;
-import org.asteroidos.sync.ble.WeatherService;
-import org.asteroidos.sync.utils.AsteroidUUIDS;
+import org.asteroidos.sync.asteroid.AsteroidBleManager;
+import org.asteroidos.sync.asteroid.IAsteroidDevice;
+import org.asteroidos.sync.connectivity.IConnectivityService;
+import org.asteroidos.sync.connectivity.IService;
+import org.asteroidos.sync.connectivity.IServiceCallback;
+import org.asteroidos.sync.connectivity.MediaService;
+import org.asteroidos.sync.connectivity.NotificationService;
+import org.asteroidos.sync.connectivity.ScreenshotService;
+import org.asteroidos.sync.connectivity.SilentModeService;
+import org.asteroidos.sync.connectivity.TimeService;
+import org.asteroidos.sync.connectivity.WeatherService;
 
-import static com.idevicesinc.sweetblue.BleManager.get;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-@SuppressWarnings( "deprecation" ) // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated StateListener
-public class SynchronizationService extends Service implements BleDevice.StateListener {
-    private static final String NOTIFICATION_CHANNEL_ID = "synchronizationservice_channel_id_01";
-    private NotificationManager mNM;
-    private int NOTIFICATION = 2725;
-    private BleManager mBleMngr;
-    private BleDevice mDevice;
-    private int mState = STATUS_DISCONNECTED;
+import no.nordicsemi.android.ble.observer.ConnectionObserver;
 
-    private Messenger replyTo;
-
+public class SynchronizationService extends Service implements IAsteroidDevice, ConnectionObserver {
+    public static final String TAG = SynchronizationService.class.toString();
     public static final int MSG_CONNECT = 1;
     public static final int MSG_DISCONNECT = 2;
-
     public static final int MSG_SET_LOCAL_NAME = 3;
     public static final int MSG_SET_STATUS = 4;
     public static final int MSG_SET_BATTERY_PERCENTAGE = 5;
     public static final int MSG_REQUEST_BATTERY_LIFE = 6;
     public static final int MSG_SET_DEVICE = 7;
     public static final int MSG_UPDATE = 8;
+    public static final int MSG_UNSET_DEVICE = 9;
 
-    public static final int STATUS_CONNECTED = 1;
-    public static final int STATUS_DISCONNECTED = 2;
-    public static final int STATUS_CONNECTING = 3;
-
-    private ScreenshotService mScreenshotService;
-    private WeatherService mWeatherService;
-    private NotificationService mNotificationService;
-    private MediaService mMediaService;
-    private TimeService mTimeService;
-
-    private SilentModeService silentModeService;
+    private static final String NOTIFICATION_CHANNEL_ID = "synchronizationservice_channel_id_01";
+    final Messenger mMessenger = new Messenger(new SynchronizationHandler(this));
+    private final int NOTIFICATION = 2725;
+    public BluetoothDevice mDevice;
+    public int batteryPercentage = 0;
+    HashMap<UUID, IConnectivityService> bleServices;
+    List<IService> nonBleServices;
+    private NotificationManager mNM;
+    private ConnectionState mState = ConnectionState.STATUS_DISCONNECTED;
+    private Messenger replyTo;
     private SharedPreferences mPrefs;
+    private AsteroidBleManager mBleMngr;
 
-    void handleConnect() {
-        if(mDevice == null) return;
-        if(mState == STATUS_CONNECTED || mState == STATUS_CONNECTING) return;
-        mDevice.setListener_State(SynchronizationService.this);
-
-        mWeatherService = new WeatherService(getApplicationContext(), mDevice);
-        mNotificationService = new NotificationService(getApplicationContext(), mDevice);
-        mMediaService = new MediaService(getApplicationContext(), mDevice);
-        mScreenshotService = new ScreenshotService(getApplicationContext(), mDevice);
-        mTimeService = new TimeService(getApplicationContext(), mDevice);
-        silentModeService = new SilentModeService(getApplicationContext());
-
-        mDevice.connect();
-    }
-
-    void handleDisconnect() {
-        if(mDevice == null) return;
-        if(mState == STATUS_DISCONNECTED) return;
-        mScreenshotService.unsync();
-        mWeatherService.unsync();
-        mNotificationService.unsync();
-        mMediaService.unsync();
-        mTimeService.unsync();
-        mDevice.disconnect();
-        silentModeService.onDisconnect();
-    }
-
-    void handleReqBattery() {
-        if(mDevice == null) return;
-        if(mState == STATUS_DISCONNECTED) return;
-        mDevice.read(AsteroidUUIDS.BATTERY_UUID, new BleDevice.ReadWriteListener()
-        {
-            @Override public void onEvent(ReadWriteEvent result)
-            {
-                if(result.wasSuccess())
-                    try {
-                        replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
-                    } catch (RemoteException | NullPointerException ignored) {}
-            }
-        });
-    }
-
-    void handleSetDevice(String macAddress) {
-        SharedPreferences.Editor editor = mPrefs.edit();
-        editor.putString(MainActivity.PREFS_DEFAULT_MAC_ADDR, macAddress);
-
-        if(macAddress.isEmpty()) {
-            if(mState != STATUS_DISCONNECTED) {
-                mScreenshotService.unsync();
-                mWeatherService.unsync();
-                mNotificationService.unsync();
-                mMediaService.unsync();
-                mTimeService.unsync();
-                mDevice.disconnect();
-                mDevice.unbond();
-            }
-            mDevice = null;
-            editor.putString(MainActivity.PREFS_DEFAULT_LOC_NAME, "");
-        } else {
-            mDevice = mBleMngr.getDevice(macAddress);
-
-            String name = mDevice.getName_normalized();
-            try {
-                Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
-                answer.obj = name;
-                replyTo.send(answer);
-
-                replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
-            } catch (RemoteException | NullPointerException ignored) {}
-
-            editor.putString(MainActivity.PREFS_DEFAULT_LOC_NAME, name);
+    final void handleConnect() {
+        if (mBleMngr == null) {
+            mBleMngr = new AsteroidBleManager(getApplicationContext(), SynchronizationService.this);
+            mBleMngr.setConnectionObserver(this);
         }
+        if (mState == ConnectionState.STATUS_CONNECTED || mState == ConnectionState.STATUS_CONNECTING) return;
+
+        mPrefs = getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
+        String defaultDevMacAddr = mPrefs.getString(MainActivity.PREFS_DEFAULT_MAC_ADDR, "");
+        if (defaultDevMacAddr.equals("")) return;
+        String defaultLocalName = mPrefs.getString(MainActivity.PREFS_DEFAULT_LOC_NAME, "");
+        BluetoothDevice device = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(defaultDevMacAddr);
+        device.createBond();
+        mBleMngr.connect(device)
+                .useAutoConnect(true)
+                .timeout(100000)
+                .retry(3, 200)
+                .done(device1 -> Log.d(TAG, "Connected to " + device1.getName()))
+                .fail((device2, error) -> Log.e(TAG, "Failed to connect to " + device.getName() +
+                        " with error code: " + error))
+                .enqueue();
+    }
+
+    final void handleDisconnect() {
+        if (mBleMngr == null) return;
+        if (mState == ConnectionState.STATUS_DISCONNECTED) return;
+
+        bleServices.values().forEach(IService::unsync);
+        mBleMngr.abort();
+        mBleMngr.disconnect().enqueue();
+    }
+
+    final void handleSetDevice(BluetoothDevice device) {
+        SharedPreferences.Editor editor = mPrefs.edit();
+        Log.d(TAG, "handleSetDevice: " + device.toString());
+        editor.putString(MainActivity.PREFS_DEFAULT_MAC_ADDR, device.getAddress());
+        mDevice = device;
+        String name = mDevice.getName();
+        try {
+            Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
+            answer.obj = name;
+            replyTo.send(answer);
+            replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState));
+        } catch (RemoteException | NullPointerException ignored) {
+        }
+        editor.putString(MainActivity.PREFS_DEFAULT_LOC_NAME, name);
         editor.apply();
     }
 
-    void handleUpdate() {
-        if(mDevice != null) {
+    final void handleUpdateConnectionStatus() {
+        if (mDevice != null) {
             try {
-                Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
-                answer.obj = mDevice.getName_normalized();
-                replyTo.send(answer);
+                replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState));
+            } catch (RemoteException | NullPointerException ignored) {
+            }
+        }
+    }
 
-                replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState, 0));
+    final public void unsyncServices() {
+        bleServices.values().forEach(IService::unsync);
+        nonBleServices.forEach(IService::unsync);
+    }
 
-                mDevice.read(AsteroidUUIDS.BATTERY_UUID, new BleDevice.ReadWriteListener()
-                {
-                    @Override public void onEvent(ReadWriteEvent result)
-                    {
-                        if(result.wasSuccess())
-                            try {
-                                replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, result.data()[0], 0));
-                            } catch (RemoteException | NullPointerException ignored) {}
-                    }
-                });
-            } catch (RemoteException | NullPointerException ignored) {}
+    final public void syncServices() {
+        bleServices.values().forEach(IService::sync);
+        nonBleServices.forEach(IService::sync);
+    }
+
+    @Override
+    public final ConnectionState getConnectionState() {
+        return mState;
+    }
+
+    @Override
+    public final void send(UUID characteristic, byte[] data, IConnectivityService service) {
+        mBleMngr.send(characteristic, data);
+        Log.d(TAG, characteristic.toString() + " " + Arrays.toString(data));
+    }
+
+    @Override
+    public final void registerBleService(IConnectivityService service) {
+        bleServices.put(service.getServiceUUID(), service);
+        Log.d(TAG, "BLE Service registered: " + service.getServiceUUID());
+    }
+
+    @Override
+    public final void unregisterBleService(UUID serviceUUID) {
+        bleServices.remove(getServiceByUUID(serviceUUID));
+        Log.d(TAG, "BLE Service unregistered: " + serviceUUID);
+    }
+
+    @Override
+    public final void registerCallback(UUID characteristicUUID, IServiceCallback callback) {
+        mBleMngr.recvCallbacks.putIfAbsent(characteristicUUID, callback);
+    }
+
+    @Override
+    public final void unregisterCallback(UUID characteristicUUID) {
+        mBleMngr.recvCallbacks.remove(characteristicUUID);
+    }
+
+    @Override
+    public final IConnectivityService getServiceByUUID(UUID uuid) {
+        return bleServices.get(uuid);
+    }
+
+    @Override
+    public final HashMap<UUID, IConnectivityService> getServices() {
+        return bleServices;
+    }
+
+    @Override
+    public final void onDeviceConnected(@NonNull BluetoothDevice device) {
+        mState = ConnectionState.STATUS_CONNECTED;
+        updateNotification();
+    }
+
+    @Override
+    public void onDeviceFailedToConnect(@NonNull BluetoothDevice device, int reason) {
+        Log.d(TAG, "Failed to connect to " + device.getName() + ": " + reason);
+    }
+
+    @Override
+    public final void onDeviceReady(@NonNull BluetoothDevice device) {
+        mState = ConnectionState.STATUS_CONNECTED;
+        updateNotification();
+        syncServices();
+        AsteroidBleManager.BatteryLevelEvent bevent = new AsteroidBleManager.BatteryLevelEvent();
+        bevent.battery = batteryPercentage;
+        handleUpdateBatteryPercentage(bevent);
+    }
+
+    @Override
+    public final void onDeviceDisconnecting(@NonNull BluetoothDevice device) {
+        mState = ConnectionState.STATUS_CONNECTED;
+        updateNotification();
+    }
+
+    @Override
+    public final void onDeviceDisconnected(@NonNull BluetoothDevice device, int reason) {
+        mState = ConnectionState.STATUS_DISCONNECTED;
+        updateNotification();
+        unsyncServices();
+    }
+
+    @Override
+    public void onCreate() {
+        bleServices = new HashMap<>();
+        nonBleServices = new ArrayList<>();
+
+        mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Synchronization Service", NotificationManager.IMPORTANCE_LOW);
+            notificationChannel.setDescription("Connection status");
+            notificationChannel.setVibrationPattern(new long[]{0L});
+            notificationChannel.setShowBadge(false);
+            mNM.createNotificationChannel(notificationChannel);
+        }
+
+
+        mPrefs = getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
+        String defaultDevMacAddr = mPrefs.getString(MainActivity.PREFS_DEFAULT_MAC_ADDR, "");
+        String defaultLocalName = mPrefs.getString(MainActivity.PREFS_DEFAULT_LOC_NAME, "");
+
+        if (mBleMngr == null) {
+            mBleMngr = new AsteroidBleManager(getApplicationContext(), SynchronizationService.this);
+            mBleMngr.setConnectionObserver(this);
+        }
+
+        if (!(defaultDevMacAddr.equals(""))) {
+            mDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(defaultDevMacAddr);
+        }
+
+        if (nonBleServices.isEmpty())
+            nonBleServices.add(new SilentModeService(getApplicationContext()));
+
+        if (bleServices.isEmpty()) {
+            // Register Services
+            registerBleService(new MediaService(getApplicationContext(), this));
+            registerBleService(new NotificationService(getApplicationContext(), this));
+            registerBleService(new WeatherService(getApplicationContext(), this));
+            registerBleService(new ScreenshotService(getApplicationContext(), this));
+            registerBleService(new TimeService(getApplicationContext(), this));
+        }
+
+        handleConnect();
+        updateNotification();
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_STICKY;
+    }
+
+    private void updateNotification() {
+        handleUpdateConnectionStatus();
+        String status = getString(R.string.disconnected);
+        if (mDevice != null) {
+            if (mState == ConnectionState.STATUS_CONNECTING)
+                status = getString(R.string.connecting_formatted, mDevice.getName());
+            else if (mState == ConnectionState.STATUS_CONNECTED)
+                status = getString(R.string.connected_formatted, mDevice.getName());
+        }
+
+        if (mDevice != null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                    intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_stat_name)
+                    .setContentTitle(getText(R.string.app_name))
+                    .setContentText(status)
+                    .setContentIntent(contentIntent)
+                    .setOngoing(true)
+                    .setPriority(Notification.PRIORITY_MIN)
+                    .setShowWhen(false)
+                    .build();
+
+            mNM.notify(NOTIFICATION, notification);
+            startForeground(NOTIFICATION, notification);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        mBleMngr.disconnect();
+        mNM.cancel(NOTIFICATION);
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return mMessenger.getBinder();
+    }
+
+    @Override
+    public void onDeviceConnecting(@NonNull BluetoothDevice device) {
+        mState = ConnectionState.STATUS_CONNECTING;
+        updateNotification();
+    }
+
+    private void handleUnSetDevice() {
+        SharedPreferences.Editor editor = mPrefs.edit();
+        if (mState != ConnectionState.STATUS_DISCONNECTED) {
+            mBleMngr.disconnect().enqueue();
+        }
+        mDevice = null;
+        editor.putString(MainActivity.PREFS_DEFAULT_LOC_NAME, "");
+        editor.putString(MainActivity.PREFS_DEFAULT_MAC_ADDR, "");
+        editor.putString(MainActivity.PREFS_NAME, "");
+        editor.apply();
+    }
+
+    public void handleUpdateBatteryPercentage(AsteroidBleManager.BatteryLevelEvent battery) {
+        Log.d(TAG, "handleBattery: " + battery.battery + "%");
+        batteryPercentage = battery.battery;
+        try {
+            if (replyTo != null)
+                replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, batteryPercentage, 0));
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
     }
 
     static private class SynchronizationHandler extends Handler {
-        private SynchronizationService mService;
+        private final SynchronizationService mService;
 
         SynchronizationHandler(SynchronizationService service) {
             mService = service;
@@ -206,213 +370,22 @@ public class SynchronizationService extends Service implements BleDevice.StateLi
                     mService.handleDisconnect();
                     break;
                 case MSG_REQUEST_BATTERY_LIFE:
-                    mService.handleReqBattery();
+                    AsteroidBleManager.BatteryLevelEvent batteryLevelEvent = new AsteroidBleManager.BatteryLevelEvent();
+                    batteryLevelEvent.battery = mService.batteryPercentage;
+                    mService.handleUpdateBatteryPercentage(batteryLevelEvent);
                     break;
                 case MSG_SET_DEVICE:
-                    mService.handleSetDevice((String)msg.obj);
+                    mService.handleSetDevice((BluetoothDevice) msg.obj);
+                    break;
+                case MSG_UNSET_DEVICE:
+                    mService.handleUnSetDevice();
                     break;
                 case MSG_UPDATE:
-                    mService.handleUpdate();
+                    mService.handleUpdateConnectionStatus();
                     break;
                 default:
                     super.handleMessage(msg);
             }
-        }
-    }
-    final Messenger mMessenger = new Messenger(new SynchronizationHandler(this));
-
-    @Override
-    public void onCreate() {
-        mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "Synchronization Service", NotificationManager.IMPORTANCE_LOW);
-            notificationChannel.setDescription("Connection status");
-            notificationChannel.setVibrationPattern(new long[]{0L});
-            notificationChannel.setShowBadge(false);
-            mNM.createNotificationChannel(notificationChannel);
-        }
-
-        mBleMngr = get(getApplication());
-        BleManagerConfig cfg = new BleManagerConfig();
-        cfg.forceBondDialog = true;
-        cfg.taskTimeoutRequestFilter = new TaskTimeoutRequestFilter();
-        cfg.defaultScanFilter = new WatchesFilter();
-        cfg.enableCrashResolver = true;
-        cfg.bondFilter = new BondFilter();
-        cfg.alwaysUseAutoConnect = true;
-        cfg.useLeTransportForBonding = true;
-        if (BuildConfig.DEBUG)
-            cfg.loggingEnabled = true;
-        mBleMngr.setConfig(cfg);
-
-        mPrefs = getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
-        String defaultDevMacAddr = mPrefs.getString(MainActivity.PREFS_DEFAULT_MAC_ADDR, "");
-        String defaultLocalName = mPrefs.getString(MainActivity.PREFS_DEFAULT_LOC_NAME, "");
-
-        if(!defaultDevMacAddr.isEmpty()) {
-            if(!mBleMngr.hasDevice(defaultDevMacAddr))
-                mBleMngr.newDevice(defaultDevMacAddr, defaultLocalName);
-
-            mDevice = mBleMngr.getDevice(defaultDevMacAddr);
-            mDevice.setListener_State(SynchronizationService.this);
-
-            mWeatherService = new WeatherService(getApplicationContext(), mDevice);
-            mNotificationService = new NotificationService(getApplicationContext(), mDevice);
-            mMediaService = new MediaService(getApplicationContext(), mDevice);
-            mScreenshotService = new ScreenshotService(getApplicationContext(), mDevice);
-            mTimeService = new TimeService(getApplicationContext(), mDevice);
-            silentModeService = new SilentModeService(getApplicationContext());
-
-            mDevice.connect();
-        }
-
-        updateNotification();
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        return START_STICKY;
-    }
-
-    private void updateNotification() {
-        String status = getString(R.string.disconnected);
-        if(mDevice != null) {
-            if (mState == STATUS_CONNECTING)
-                status = getString(R.string.connecting_formatted, mDevice.getName_normalized());
-            else if (mState == STATUS_CONNECTED)
-                status = getString(R.string.connected_formatted, mDevice.getName_normalized());
-        }
-
-        if(mDevice != null) {
-            Intent intent = new Intent(this, MainActivity.class);
-            PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_stat_name)
-                .setContentTitle(getText(R.string.app_name))
-                .setContentText(status)
-                .setContentIntent(contentIntent)
-                .setOngoing(true)
-                .setPriority(Notification.PRIORITY_MIN)
-                .setShowWhen(false)
-                .build();
-
-            mNM.notify(NOTIFICATION, notification);
-            startForeground(NOTIFICATION, notification);
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        if(mDevice != null)
-            mDevice.disconnect();
-        mNM.cancel(NOTIFICATION);
-    }
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return mMessenger.getBinder();
-    }
-
-    /* Bluetooth events handling */
-    @Override
-    public void onEvent(StateEvent event) {
-        if (event.didEnter(BleDeviceState.INITIALIZED)) {
-            mState = STATUS_CONNECTED;
-            updateNotification();
-            try {
-                replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_CONNECTED, 0));
-            } catch (RemoteException | NullPointerException ignored) {}
-            mDevice.setMtu(256);
-
-            event.device().enableNotify(AsteroidUUIDS.BATTERY_UUID, new BleDevice.ReadWriteListener() {
-                @Override
-                public void onEvent(ReadWriteEvent e) {
-                    try {
-                        if (e.isNotification() && e.charUuid().equals(AsteroidUUIDS.BATTERY_UUID)) {
-                            byte[] data = e.data();
-                            replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, data[0], 0));
-                        }
-                    } catch(RemoteException | NullPointerException ignored) {}
-                }
-            });
-
-            if(mScreenshotService != null)
-                mScreenshotService.sync();
-            if (mWeatherService != null)
-                mWeatherService.sync();
-            if (mNotificationService != null)
-                mNotificationService.sync();
-            if (mMediaService != null)
-                mMediaService.sync();
-            if (mTimeService != null)
-                mTimeService.sync();
-            if (silentModeService != null)
-                silentModeService.onConnect();
-        } else if (event.didEnter(BleDeviceState.DISCONNECTED)) {
-            mState = STATUS_DISCONNECTED;
-            updateNotification();
-            try {
-                replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_DISCONNECTED, 0));
-            } catch (RemoteException | NullPointerException ignored) {}
-
-            if(mScreenshotService != null)
-                mScreenshotService.sync();
-            if (mWeatherService != null)
-                mWeatherService.unsync();
-            if (mNotificationService != null)
-                mNotificationService.unsync();
-            if (mMediaService != null)
-                mMediaService.unsync();
-            if (mTimeService != null)
-                mTimeService.unsync();
-            if (silentModeService != null)
-                silentModeService.onDisconnect();
-        } else if(event.didEnter(BleDeviceState.CONNECTING)) {
-            mState = STATUS_CONNECTING;
-            updateNotification();
-            try {
-                replyTo.send(Message.obtain(null, MSG_SET_STATUS, STATUS_CONNECTING, 0));
-            } catch (RemoteException | NullPointerException ignored) {}
-        }
-    }
-
-    private static final class WatchesFilter implements BleManagerConfig.ScanFilter
-    {
-        @Override
-        public Please onEvent(ScanEvent e)
-        {
-            return Please.acknowledgeIf(e.advertisedServices().contains(AsteroidUUIDS.SERVICE_UUID));
-        }
-    }
-
-    private static class TaskTimeoutRequestFilter implements BleNodeConfig.TaskTimeoutRequestFilter
-    {
-        static final double DEFAULT_TASK_TIMEOUT					= 12.5;
-        static final double BOND_TASK_TIMEOUT					= 60.0;
-        static final double DEFAULT_CRASH_RESOLVER_TIMEOUT		= 50.0;
-
-        private static final Please DEFAULT_RETURN_VALUE = Please.setTimeoutFor(Interval.secs(DEFAULT_TASK_TIMEOUT));
-
-        @Override public Please onEvent(TaskTimeoutRequestEvent e)
-        {
-            if(e.task() == BleTask.RESOLVE_CRASHES)
-                return Please.setTimeoutFor(Interval.secs(DEFAULT_CRASH_RESOLVER_TIMEOUT));
-            else if(e.task() == BleTask.BOND)
-                return Please.setTimeoutFor(Interval.secs(BOND_TASK_TIMEOUT));
-            else
-                return DEFAULT_RETURN_VALUE;
-        }
-    }
-
-    private static class BondFilter implements BleDeviceConfig.BondFilter
-    {
-        @Override public Please onEvent(StateChangeEvent e)    { return Please.doNothing(); }
-        @Override public Please onEvent(CharacteristicEvent e)
-        {
-            return Please.doNothing();
         }
     }
 }

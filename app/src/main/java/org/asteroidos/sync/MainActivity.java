@@ -1,5 +1,6 @@
 package org.asteroidos.sync;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -11,23 +12,20 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
+import android.os.ParcelUuid;
 import android.os.RemoteException;
+import android.util.Log;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.MenuItem;
-
-import com.idevicesinc.sweetblue.BleManager;
-import com.idevicesinc.sweetblue.BleManagerState;
-import com.idevicesinc.sweetblue.ManagerStateListener;
-import com.idevicesinc.sweetblue.utils.BluetoothEnabler;
-import com.idevicesinc.sweetblue.utils.Interval;
-
+import org.asteroidos.sync.asteroid.IAsteroidDevice;
 import org.asteroidos.sync.fragments.AppListFragment;
 import org.asteroidos.sync.fragments.DeviceDetailFragment;
 import org.asteroidos.sync.fragments.DeviceListFragment;
@@ -35,38 +33,71 @@ import org.asteroidos.sync.fragments.PositionPickerFragment;
 import org.asteroidos.sync.services.SynchronizationService;
 import org.asteroidos.sync.utils.AppInfo;
 import org.asteroidos.sync.utils.AppInfoHelper;
+import org.asteroidos.sync.utils.AsteroidUUIDS;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import static com.idevicesinc.sweetblue.BleManager.get;
+import no.nordicsemi.android.support.v18.scanner.BluetoothLeScannerCompat;
+import no.nordicsemi.android.support.v18.scanner.ScanCallback;
+import no.nordicsemi.android.support.v18.scanner.ScanFilter;
+import no.nordicsemi.android.support.v18.scanner.ScanResult;
+import no.nordicsemi.android.support.v18.scanner.ScanSettings;
 
-@SuppressWarnings( "deprecation" ) // Before upgrading to SweetBlue 3.0, we don't have an alternative to the deprecated StateListener
+import static android.os.ParcelUuid.fromString;
+
 public class MainActivity extends AppCompatActivity implements DeviceListFragment.OnDefaultDeviceSelectedListener,
         DeviceListFragment.OnScanRequestedListener, DeviceDetailFragment.OnDefaultDeviceUnselectedListener,
-        DeviceDetailFragment.OnConnectRequestedListener, BleManager.DiscoveryListener,
-        DeviceDetailFragment.OnAppSettingsClickedListener, DeviceDetailFragment.OnLocationSettingsClickedListener,
-        DeviceDetailFragment.OnUpdateListener {
-    private BleManager mBleMngr;
-    private DeviceListFragment mListFragment;
-    private DeviceDetailFragment mDetailFragment;
-    private Fragment mPreviousFragment;
-    Messenger mSyncServiceMessenger;
-    Intent mSyncServiceIntent;
-    final Messenger mDeviceDetailMessenger = new Messenger(new MainActivity.SynchronizationHandler(this));
-    int mStatus = SynchronizationService.STATUS_DISCONNECTED;
-
-    public static ArrayList<AppInfo> appInfoList;
+        DeviceDetailFragment.OnConnectRequestedListener, DeviceDetailFragment.OnAppSettingsClickedListener,
+        DeviceDetailFragment.OnLocationSettingsClickedListener, DeviceDetailFragment.OnUpdateListener {
 
     public static final String PREFS_NAME = "MainPreferences";
     public static final String PREFS_DEFAULT_MAC_ADDR = "defaultMacAddress";
     public static final String PREFS_DEFAULT_LOC_NAME = "defaultLocalName";
+    private static final String TAG = "MainActivity";
+    public static ArrayList<AppInfo> appInfoList;
+    final Messenger mDeviceDetailMessenger = new Messenger(new MainActivity.SynchronizationHandler(this));
+    public ParcelUuid asteroidUUID = fromString(AsteroidUUIDS.SERVICE_UUID.toString());
+    Messenger mSyncServiceMessenger;
+    /* Synchronization service events handling */
+    private final ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            mSyncServiceMessenger = new Messenger(service);
+            onUpdateRequested();
+        }
 
+        public void onServiceDisconnected(ComponentName className) {
+            mSyncServiceMessenger = null;
+        }
+    };
+    Intent mSyncServiceIntent;
+    IAsteroidDevice.ConnectionState mStatus = IAsteroidDevice.ConnectionState.STATUS_DISCONNECTED;
+    ScanSettings mSettings;
+    List<ScanFilter> mFilters;
+    private DeviceListFragment mListFragment;
+    public ScanCallback scanCallback = new ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, @NonNull ScanResult result) {
+            super.onScanResult(callbackType, result);
+
+            if (mListFragment == null) return;
+            mListFragment.deviceDiscovered(result.getDevice());
+            Log.d(TAG,"SCAN RESULT:" + result.getDevice().toString() + " Name:" + result.getDevice().getName());
+            ParcelUuid[] arr = result.getDevice().getUuids();
+        }
+    };
+    private DeviceDetailFragment mDetailFragment;
+    private Fragment mPreviousFragment;
+    private BluetoothLeScannerCompat mScanner;
     private SharedPreferences mPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mScanner = BluetoothLeScannerCompat.getScanner();
 
         mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String defaultDevMacAddr = mPrefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
@@ -78,25 +109,19 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         });
         appInfoRetrieval.start();
 
+        mSettings = new ScanSettings.Builder()
+                .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
+                .build();
+        mFilters = new ArrayList<>();
+        mFilters.add(new ScanFilter.Builder().setServiceUuid(asteroidUUID).build());
+        mScanner.startScan(mFilters, mSettings, scanCallback);
+
         /* Start and/or attach to the Synchronization Service */
         mSyncServiceIntent = new Intent(this, SynchronizationService.class);
         startService(mSyncServiceIntent);
 
-        BluetoothEnabler.start(this);
-        mBleMngr = get(getApplication());
-        mBleMngr.setListener_State(new ManagerStateListener() {
-            @Override
-            public void onEvent(BleManager.StateListener.StateEvent event) {
-                if(event.didExit(BleManagerState.SCANNING)) {
-                    if(mListFragment != null)        mListFragment.scanningStopped();
-                    else if(mDetailFragment != null) mDetailFragment.scanningStopped();
-                } else if(event.didEnter(BleManagerState.SCANNING)) {
-                    if(mListFragment != null)        mListFragment.scanningStarted();
-                    else if(mDetailFragment != null) mDetailFragment.scanningStarted();
-                }
-            }
-        });
-        mBleMngr.setListener_Discovery(this);
+        if (mListFragment != null)        mListFragment.scanningStarted();
+        else if (mDetailFragment != null) mDetailFragment.scanningStarted();
 
         if (savedInstanceState == null) {
             Fragment f;
@@ -117,14 +142,19 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mStatus != SynchronizationService.STATUS_CONNECTED)
+        if (mStatus != IAsteroidDevice.ConnectionState.STATUS_CONNECTED)
             stopService(mSyncServiceIntent);
     }
 
     /* Fragments switching */
     @Override
-    public void onDefaultDeviceSelected(String macAddress) {
+    public void onDefaultDeviceSelected(BluetoothDevice mDevice) {
+        mScanner.stopScan(scanCallback);
+        mListFragment.scanningStopped();
         mDetailFragment = new DeviceDetailFragment();
+
+        if (mListFragment != null)        mListFragment.scanningStopped();
+        else if (mDetailFragment != null) mDetailFragment.scanningStopped();
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -133,10 +163,11 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
         try {
             Message msg = Message.obtain(null, SynchronizationService.MSG_SET_DEVICE);
-            msg.obj = macAddress;
+            msg.obj = mDevice;
             msg.replyTo = mDeviceDetailMessenger;
             mSyncServiceMessenger.send(msg);
-        } catch (RemoteException ignored) {}
+        } catch (RemoteException ignored) {
+        }
 
         onConnectRequested();
 
@@ -145,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
     @Override
     public void onDefaultDeviceUnselected() {
+        onScanRequested();
         mListFragment = new DeviceListFragment();
 
         getSupportFragmentManager()
@@ -153,11 +185,12 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 .commit();
 
         try {
-            Message msg = Message.obtain(null, SynchronizationService.MSG_SET_DEVICE);
+            Message msg = Message.obtain(null, SynchronizationService.MSG_UNSET_DEVICE);
             msg.obj = "";
             msg.replyTo = mDeviceDetailMessenger;
             mSyncServiceMessenger.send(msg);
-        } catch (RemoteException ignored) {}
+        } catch (RemoteException ignored) {
+        }
 
         mDetailFragment = null;
         setTitle(R.string.app_name);
@@ -168,31 +201,22 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         try {
             Message msg = Message.obtain(null, SynchronizationService.MSG_UPDATE);
             msg.replyTo = mDeviceDetailMessenger;
-            if(mSyncServiceMessenger != null)
+            if (mSyncServiceMessenger != null)
                 mSyncServiceMessenger.send(msg);
-        } catch (RemoteException ignored) {}
+        } catch (RemoteException ignored) {
+        }
     }
-
-    /* Synchronization service events handling */
-    private ServiceConnection mConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName className,
-                                       IBinder service) {
-            mSyncServiceMessenger = new Messenger(service);
-            onUpdateRequested();
-        }
-
-        public void onServiceDisconnected(ComponentName className) {
-            mSyncServiceMessenger = null;
-        }
-    };
 
     @Override
     public void onConnectRequested() {
+        if (mScanner != null)
+            mScanner.stopScan(scanCallback);
         try {
             Message msg = Message.obtain(null, SynchronizationService.MSG_CONNECT);
             msg.replyTo = mDeviceDetailMessenger;
             mSyncServiceMessenger.send(msg);
-        } catch (RemoteException ignored) {}
+        } catch (RemoteException ignored) {
+        }
     }
 
     @Override
@@ -201,12 +225,13 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             Message msg = Message.obtain(null, SynchronizationService.MSG_DISCONNECT);
             msg.replyTo = mDeviceDetailMessenger;
             mSyncServiceMessenger.send(msg);
-        } catch (RemoteException ignored) {}
+        } catch (RemoteException ignored) {
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if(menuItem.getItemId() ==  android.R.id.home)
+        if (menuItem.getItemId() == android.R.id.home)
             onBackPressed();
 
         return (super.onOptionsItemSelected(menuItem));
@@ -215,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     @Override
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
-        if(fm.getBackStackEntryCount() > 0) {
+        if (fm.getBackStackEntryCount() > 0) {
             fm.popBackStack();
             setTitle(mPrefs.getString(PREFS_DEFAULT_LOC_NAME, ""));
             ActionBar ab = getSupportActionBar();
@@ -224,11 +249,12 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         } else
             finish();
         try {
-            mDetailFragment = (DeviceDetailFragment)mPreviousFragment;
+            mDetailFragment = (DeviceDetailFragment) mPreviousFragment;
         } catch (ClassCastException ignored1) {
             try {
-                mListFragment = (DeviceListFragment)mPreviousFragment;
-            } catch (ClassCastException ignored2) {}
+                mListFragment = (DeviceListFragment) mPreviousFragment;
+            } catch (ClassCastException ignored2) {
+            }
         }
     }
 
@@ -281,82 +307,49 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     }
 
     private void handleSetLocalName(String name) {
-        if(mDetailFragment != null)
+        if (mDetailFragment != null)
             mDetailFragment.setLocalName(name);
     }
 
-    private void handleSetStatus(int status) {
-        if(mDetailFragment != null) {
+    private void handleSetStatus(IAsteroidDevice.ConnectionState status) {
+        if (mDetailFragment != null) {
             mDetailFragment.setStatus(status);
-            if(status == SynchronizationService.STATUS_CONNECTED) {
-                try {
-                    Message batteryMsg = Message.obtain(null, SynchronizationService.MSG_REQUEST_BATTERY_LIFE);
-                    batteryMsg.replyTo = mDeviceDetailMessenger;
-                    mSyncServiceMessenger.send(batteryMsg);
-                } catch (RemoteException ignored) {}
-            }
             mStatus = status;
         }
-    }
-
-    private void handleBatteryPercentage(int percentage) {
-        if(mDetailFragment != null)
-            mDetailFragment.setBatteryPercentage(percentage);
-    }
-
-    static private class SynchronizationHandler extends Handler {
-        private MainActivity mActivity;
-
-        SynchronizationHandler(MainActivity activity) {
-            mActivity = activity;
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case SynchronizationService.MSG_SET_LOCAL_NAME:
-                    mActivity.handleSetLocalName((String)msg.obj);
-                    break;
-                case SynchronizationService.MSG_SET_STATUS:
-                    mActivity.handleSetStatus(msg.arg1);
-                    break;
-                case SynchronizationService.MSG_SET_BATTERY_PERCENTAGE:
-                    mActivity.handleBatteryPercentage(msg.arg1);
-                    break;
-                default:
-                    super.handleMessage(msg);
+        if (status == IAsteroidDevice.ConnectionState.STATUS_CONNECTED) {
+            try {
+                Message msg = Message.obtain(null, SynchronizationService.MSG_REQUEST_BATTERY_LIFE);
+                msg.replyTo = mDeviceDetailMessenger;
+                mSyncServiceMessenger.send(msg);
+            } catch (RemoteException ignored) {
             }
         }
     }
 
-    @Override
-    public void onEvent(BleManager.DiscoveryListener.DiscoveryEvent event) {
-        if (mListFragment == null) return;
-
-        if (event.was(BleManager.DiscoveryListener.LifeCycle.DISCOVERED))
-            mListFragment.deviceDiscovered(event.device());
-        else if (event.was(BleManager.DiscoveryListener.LifeCycle.UNDISCOVERED))
-            mListFragment.deviceUndiscovered(event.device());
+    private void handleSetBatteryPercentage(int percentage) {
+        if (mDetailFragment != null)
+            mDetailFragment.setBatteryPercentage(percentage);
     }
 
     @Override
     public void onScanRequested() {
-        mBleMngr.turnOn();
-        mBleMngr.undiscoverAll();
-        mBleMngr.startScan(Interval.secs(10.0));
+        //scanner.flushPendingScanResults(scanCallback); Todo: fix crash on subsequent call
+        mScanner.stopScan(scanCallback);
+        mScanner.startScan(mFilters, mSettings, scanCallback);
+
+        if (mListFragment != null)        mListFragment.scanningStarted();
+        else if (mDetailFragment != null) mDetailFragment.scanningStarted();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mBleMngr.onResume();
         bindService(mSyncServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mBleMngr.onPause();
         unbindService(mConnection);
     }
 
@@ -377,5 +370,30 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
+    }
+
+    static private class SynchronizationHandler extends Handler {
+        private final MainActivity mActivity;
+
+        SynchronizationHandler(MainActivity activity) {
+            mActivity = activity;
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SynchronizationService.MSG_SET_LOCAL_NAME:
+                    mActivity.handleSetLocalName((String) msg.obj);
+                    break;
+                case SynchronizationService.MSG_SET_STATUS:
+                    mActivity.handleSetStatus((IAsteroidDevice.ConnectionState) msg.obj);
+                    break;
+                case SynchronizationService.MSG_SET_BATTERY_PERCENTAGE:
+                    mActivity.handleSetBatteryPercentage(msg.arg1);
+                    break;
+                default:
+                    super.handleMessage(msg);
+            }
+        }
     }
 }

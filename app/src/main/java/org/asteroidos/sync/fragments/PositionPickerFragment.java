@@ -18,7 +18,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import org.asteroidos.sync.R;
-import org.asteroidos.sync.ble.WeatherService;
+import org.asteroidos.sync.connectivity.WeatherService;
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
