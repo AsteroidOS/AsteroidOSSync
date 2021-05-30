@@ -133,6 +133,7 @@ public class NLService extends NotificationListenerService {
         iconFromPackage.put("com.yahoo.mobile.client.android.weather", "logo-yahoo");
         iconFromPackage.put("de.number26.android", "ios-card");
         iconFromPackage.put("flipboard.app", "logo-rss");
+        iconFromPackage.put("im.vector.app", "ios-chatbubbles-outline");
         iconFromPackage.put("net.etuldan.sparss.floss", "logo-rss");
         iconFromPackage.put("net.frju.flym", "logo-rss");
         iconFromPackage.put("net.slideshare.mobile", "logo-linkedin");
