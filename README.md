@@ -40,7 +40,7 @@ AsteroidOS Sync
   * [Architecture of AsteroidOSSync](#architecture-of-asteroidossync) 
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
-  * [IRC](#IRC)
+  * [Matrix](#matrix)
 
 # About The Project 
 
@@ -88,9 +88,9 @@ See the [open issues](https://github.com/AsteroidOS/AsteroidOSSync/issues) for a
 
 AsteroidOS is driven by a vibrant community. We would love your help!
 
-### IRC
-General discussions around AsteroidOS happen on the #asteroid IRC channel on Freenode. Logs are available [here](https://log.asteroidos.org/). 
-If you don't have an IRC client, you can use [webchat](https://webchat.freenode.net/).
+### Matrix
+
+General discussions around AsteroidOS happen on the [#asteroid:matrix.org](https://matrix.to/#/#asteroid:matrix.org) channel on Matrix. Logs are available [here](https://log.asteroidos.org/).
 
 
 [contributors-shield]: https://img.shields.io/github/contributors/AsteroidOS/AsteroidOSSync.svg?style=flat-square
