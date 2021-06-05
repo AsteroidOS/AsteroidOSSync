@@ -1,5 +1,6 @@
 package org.asteroidos.sync;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.ParcelUuid;
@@ -114,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 .build();
         mFilters = new ArrayList<>();
         mFilters.add(new ScanFilter.Builder().setServiceUuid(asteroidUUID).build());
-        mScanner.startScan(mFilters, mSettings, scanCallback);
+        btEnableAndScan();
 
         /* Start and/or attach to the Synchronization Service */
         mSyncServiceIntent = new Intent(this, SynchronizationService.class);
@@ -333,12 +335,29 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
     @Override
     public void onScanRequested() {
-        //scanner.flushPendingScanResults(scanCallback); Todo: fix crash on subsequent call
-        mScanner.stopScan(scanCallback);
-        mScanner.startScan(mFilters, mSettings, scanCallback);
-
+        btEnableAndScan();
         if (mListFragment != null)        mListFragment.scanningStarted();
         else if (mDetailFragment != null) mDetailFragment.scanningStarted();
+    }
+
+    private void btEnableAndScan(){
+        BluetoothAdapter mBtAdapter;
+        mBtAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBtAdapter.isEnabled()){
+            mScanner.stopScan(scanCallback);
+            mScanner.startScan(mFilters, mSettings, scanCallback);
+        } else {
+            mBtAdapter.enable();
+            final Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(() -> {
+                try {
+                    mScanner.stopScan(scanCallback);
+                    mScanner.startScan(mFilters, mSettings, scanCallback);
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                }
+            }, 5000);
+        }
     }
 
     @Override
