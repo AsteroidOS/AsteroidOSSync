@@ -34,4 +34,7 @@
     <string name="intro_slide4_subtitle">Pa sincronizar los avisos col reló, da laude a AsteroidOS Sync nel menú de darréu:</string>
     <string name="dialer">Marcador</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="notification_type_ringtone">Timbre</string>
+    <string name="intro_phonestateslide_title">Teléfonu y contautos</string>
+    <string name="intro_phonestateslide_subtitle"></string>
 </resources>
