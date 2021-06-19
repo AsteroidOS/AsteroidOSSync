@@ -183,6 +183,15 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
         mMediaController = null;
     }
 
+    private void sendVolume(int volume) {
+        // Set real volume.
+        mVolume = volume;
+
+        byte[] data = new byte[1];
+        data[0] = (byte) mVolume;
+        mDevice.send(AsteroidUUIDS.MEDIA_VOLUME_CHAR, data, MediaService.this);
+    }
+
     private ContentObserver mVolumeChangeObserver = new ContentObserver(new Handler()) {
         // The last value of volume send to the watch.
         private int reportedVolume;
@@ -195,12 +204,7 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
 
                 if (reportedVolume != vol) {
                     reportedVolume = vol;
-                    // Set real volume.
-                    mVolume = reportedVolume;
-
-                    byte[] data = new byte[1];
-                    data[0] = (byte) mVolume;
-                    mDevice.send(AsteroidUUIDS.MEDIA_VOLUME_CHAR, data, MediaService.this);
+                    sendVolume(reportedVolume);
                 }
             }
         }
@@ -256,6 +260,9 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
                 mDevice.send(AsteroidUUIDS.MEDIA_TITLE_CHAR,
                         getTextAsBytes(metadata, MediaMetadata.METADATA_KEY_TITLE),
                         MediaService.this);
+
+                mVolume = (100 * mMediaController.getPlaybackInfo().getCurrentVolume()) / mMediaController.getPlaybackInfo().getMaxVolume();
+                sendVolume(mVolume);
             }
         }
 
