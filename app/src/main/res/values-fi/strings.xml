@@ -7,7 +7,7 @@
     <string name="one_found">Yksi kello löydetty</string>
     <string name="n_found">Löydettiin %d kelloa</string>
     <string name="intro_slideerror_subtitle">Tämä laite ei tue Bluetooth Low Energy ominaisuutta.</string>
-    <string name="disconnected">Ei yhteyttä</string>
+    <string name="disconnected">Ei yhdistetty</string>
     <string name="connected">Yhdistetty</string>
     <string name="connecting">Yhdistetään…</string>
     <string name="connected_formatted">Yhdistetty kohteeseen %s</string>
@@ -36,13 +36,13 @@
     <string name="synchronize_time">Synkronoi aika</string>
     <string name="explain_app_prefs">Sovellustesi ilmoitukset näkyvät tässä</string>
     <string name="notification_type_default">Oletus</string>
-    <string name="notification_type_no_notif">Ei ilmoitusta</string>
+    <string name="notification_type_no_notif">Ei ilmoituksia</string>
     <string name="notification_type_silent">Äänetön</string>
     <string name="notification_type_vibra">Värinä</string>
     <string name="notification_type_strong_vibra">Voimakas värinä</string>
     <string name="position_indicator">Sijainnin osoitin</string>
     <string name="use_this_area">Käytä tätä aluetta säälle</string>
-    <string name="app_icon">Sovellukuvake</string>
+    <string name="app_icon">Sovelluskuvake</string>
     <string name="intro_slide1_title">Tervetuloa</string>
     <string name="intro_slide1_subtitle">Tämä sovellus mahdollistaa Android-puhelimen ja AsteroidOS-kellon synkronoinnin. Se tarvitsee kuitenkin joitakin käyttöoikeuksia.</string>
     <string name="intro_slide2_title">Pääsy tiedostoihin</string>
@@ -50,7 +50,7 @@
     <string name="intro_slide3_title">Sijainti</string>
     <string name="intro_slide3_subtitle">Lähellä olevien Bluetooth Low Energy -laitteiden skannaamiseksi.</string>
     <string name="intro_slide5_title">Akun optimointi</string>
-    <string name="intro_slide5_subtitle">Salli tämän sovelluksen toimia taustalla kytkemällä pois AsteroidOS Sync:in \"Akun optimointi\" seuraavassa valikossa:</string>
+    <string name="intro_slide5_subtitle">Voit sallia tämän sovelluksen toimia taustalla kytkemällä pois AsteroidOS Sync:in \"Akun optimointi\" seuraavassa valikossa:</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy tuki</string>
     <string name="grant_permission">Myönnä oikeus</string>
     <string name="please_grant_permissions">Myönnä tämä oikeus</string>
@@ -60,7 +60,7 @@
     <string name="action_settings">Asetukset</string>
     <string name="title_activity_settings">Asetukset</string>
     <string name="switch_phone_notifications">Kytke puhelin äänettömälle kun se on liitettynä</string>
-    <string name="notification_silent_icon">äänettömät ilmoitukset kuvake</string>
+    <string name="notification_silent_icon">Äänettömien ilmoitusten kuvake</string>
     <string name="notification_type_ringtone">Soittoääni</string>
     <string name="dialer">Puhelin</string>
     <string name="show_calls_on_watch">Näytä saapuvat puhelut</string>
