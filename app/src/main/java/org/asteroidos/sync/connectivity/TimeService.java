@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.os.SystemClock;
 
 import org.asteroidos.sync.asteroid.IAsteroidDevice;
@@ -58,6 +59,13 @@ public class TimeService implements IConnectivityService, SharedPreferences.OnSh
 
     @Override
     public final void sync() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateTime();
+            }
+        }, 500);
 
         // Register a broadcast handler to use for the alarm Intent
         // Also listen for TIME_CHANGED and TIMEZONE_CHANGED events
