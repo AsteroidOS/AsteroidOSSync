@@ -106,6 +106,7 @@ public class AsteroidBleManager extends BleManager {
                 }
                 recvCallbacks.forEach((characteristic, callback) -> {
                     BluetoothGattCharacteristic characteristic1 = bluetoothGattService.getCharacteristic(characteristic);
+                    removeNotificationCallback(characteristic1);
                     setNotificationCallback(characteristic1).with((device, data) -> callback.call(data.getValue()));
                     enableNotifications(characteristic1).with((device, data) -> callback.call(data.getValue())).enqueue();
                 });
