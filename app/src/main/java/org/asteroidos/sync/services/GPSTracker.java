@@ -35,7 +35,7 @@ public class GPSTracker extends Service implements LocationListener {
                     .getSystemService(LOCATION_SERVICE);
 
             Criteria criteria = new Criteria();
-            criteria.setAccuracy(Criteria.ACCURACY_LOW);
+            criteria.setAccuracy(Criteria.ACCURACY_COARSE);
             criteria.setSpeedRequired(false);
             criteria.setAltitudeRequired(false);
             criteria.setBearingRequired(false);
