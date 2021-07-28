@@ -34,8 +34,8 @@
                     android:layout_height="20dp"
                     android:contentDescription="@string/connected_icon"
                     android:gravity="start"
-                    android:tint="?attr/colorControlNormal"
-                    android:src="@drawable/cloud_done" />
+                    android:src="@drawable/cloud_done"
+                    app:tint="?attr/colorControlNormal" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -51,8 +51,8 @@
                     android:layout_height="20dp"
                     android:contentDescription="@string/battery_info_icon"
                     android:gravity="end"
-                    android:tint="?attr/colorControlNormal"
-                    android:src="@drawable/battery_full" />
+                    android:src="@drawable/battery_full"
+                    app:tint="?attr/colorControlNormal" />
 
                 <TextView
                     android:id="@+id/info_battery"
@@ -89,9 +89,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_margin="16dp"
-                        android:tint="?attr/colorControlNormal"
                         android:contentDescription="@string/weather_icon"
-                        android:src="@drawable/weather" />
+                        android:src="@drawable/weather"
+                        card_view:tint="?attr/colorControlNormal" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -129,9 +129,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_margin="16dp"
-                        android:tint="?attr/colorControlNormal"
                         android:contentDescription="@string/finder_icon"
-                        android:src="@drawable/notifications" />
+                        android:src="@drawable/notifications"
+                        card_view:tint="?attr/colorControlNormal" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -169,9 +169,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_margin="16dp"
-                        android:tint="?attr/colorControlNormal"
                         android:contentDescription="@string/screenshot_icon"
-                        android:src="@drawable/image" />
+                        android:src="@drawable/image"
+                        card_view:tint="?attr/colorControlNormal" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -209,9 +209,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_margin="16dp"
-                        android:tint="?attr/colorControlNormal"
                         android:contentDescription="@string/settings_icon"
-                        android:src="@drawable/settings" />
+                        android:src="@drawable/settings"
+                        card_view:tint="?attr/colorControlNormal" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -246,9 +246,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_margin="16dp"
-                        android:tint="?attr/colorControlNormal"
                         android:contentDescription="@string/time_icon"
-                        android:src="@drawable/time" />
+                        android:src="@drawable/time"
+                        card_view:tint="?attr/colorControlNormal" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -290,9 +290,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_margin="16dp"
-                        android:tint="?attr/colorControlNormal"
                         android:contentDescription="@string/notification_silent_icon"
-                        android:src="@drawable/notifications_off" />
+                        android:src="@drawable/notifications_off"
+                        card_view:tint="?attr/colorControlNormal" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -333,9 +333,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:layout_margin="16dp"
-                        android:tint="?attr/colorControlNormal"
                         android:contentDescription="@string/intro_phonestateslide_title"
-                        android:src="@drawable/ic_ring_volume" />
+                        android:src="@drawable/ic_ring_volume"
+                        card_view:tint="?attr/colorControlNormal" />
 
                     <TextView
                         android:layout_width="wrap_content"
