@@ -34,13 +34,6 @@
     <string name="downloaded">S’ha baixat</string>
     <string name="screenshot">Captura de pantalla</string>
     <string name="synchronize_time">Sincronitzar l\'hora</string>
-    <string-array name="notification_types_array">
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-        <item/>
-    </string-array>
     <string name="explain_app_prefs">Les notificacions de les vostres aplicacions apareixeran aquí</string>
     <string name="notification_type_default">Predeterminat</string>
     <string name="notification_type_no_notif">Sense notificacions</string>
