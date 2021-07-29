@@ -62,7 +62,11 @@ public class PhoneStateReceiver extends BroadcastReceiver {
             Cursor cursor = cr.query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
             if (cursor != null) {
                 if(cursor.moveToFirst()) {
-                    contact = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME));
+                    try {
+                        contact = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.PhoneLookup.DISPLAY_NAME));
+                    } catch (IllegalArgumentException e){
+                        e.printStackTrace();
+                    }
                 }
                 cursor.close();
             }
