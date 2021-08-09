@@ -31,7 +31,7 @@ import org.asteroidos.sync.asteroid.IAsteroidDevice;
 import org.asteroidos.sync.fragments.AppListFragment;
 import org.asteroidos.sync.fragments.DeviceDetailFragment;
 import org.asteroidos.sync.fragments.DeviceListFragment;
-import org.asteroidos.sync.fragments.PositionPickerFragment;
+import org.asteroidos.sync.fragments.WeatherSettingsFragment;
 import org.asteroidos.sync.services.SynchronizationService;
 import org.asteroidos.sync.utils.AppInfo;
 import org.asteroidos.sync.utils.AppInfoHelper;
@@ -51,7 +51,7 @@ import static android.os.ParcelUuid.fromString;
 public class MainActivity extends AppCompatActivity implements DeviceListFragment.OnDefaultDeviceSelectedListener,
         DeviceListFragment.OnScanRequestedListener, DeviceDetailFragment.OnDefaultDeviceUnselectedListener,
         DeviceDetailFragment.OnConnectRequestedListener, DeviceDetailFragment.OnAppSettingsClickedListener,
-        DeviceDetailFragment.OnLocationSettingsClickedListener, DeviceDetailFragment.OnUpdateListener {
+        DeviceDetailFragment.OnWeatherSettingsClickedListener, DeviceDetailFragment.OnUpdateListener {
 
     public static final String PREFS_NAME = "MainPreferences";
     public static final String PREFS_DEFAULT_MAC_ADDR = "defaultMacAddress";
@@ -285,8 +285,8 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     }
 
     @Override
-    public void onLocationSettingsClicked() {
-        Fragment f = new PositionPickerFragment();
+    public void onWeatherSettingsClicked() {
+        Fragment f = new WeatherSettingsFragment();
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();

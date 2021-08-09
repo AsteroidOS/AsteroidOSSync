@@ -47,7 +47,8 @@ import github.vatsal.easyweather.retrofit.models.List;
 
 public class WeatherService implements IConnectivityService {
 
-    private static final String owmApiKey = "ffcb5a7ed134aac3d095fa628bc46c65";
+    public static final String PREFS_OWM_API_KEY = "owmApiKey";
+    public static final String PREFS_OWM_API_KEY_DEFAULT = "d2820c63d757912426d74a20e75fb3ce";
 
     public static final String PREFS_NAME = "WeatherPreferences";
     public static final String PREFS_LATITUDE = "latitude";
@@ -72,6 +73,8 @@ public class WeatherService implements IConnectivityService {
     private Float mLatitude;
     private Float mLongitude;
 
+    private String mOwmKey;
+
     public WeatherService(Context ctx, IAsteroidDevice device) {
         mDevice = device;
         mCtx = ctx;
@@ -81,6 +84,7 @@ public class WeatherService implements IConnectivityService {
         mSettings = mCtx.getSharedPreferences(PREFS_NAME, 0);
         mLatitude = mSettings.getFloat(PREFS_LATITUDE, PREFS_LATITUDE_DEFAULT);
         mLongitude = mSettings.getFloat(PREFS_LONGITUDE, PREFS_LONGITUDE_DEFAULT);
+        mOwmKey = mSettings.getString(PREFS_OWM_API_KEY, PREFS_OWM_API_KEY_DEFAULT);
     }
 
     @Override
@@ -162,8 +166,9 @@ public class WeatherService implements IConnectivityService {
     }
 
     private void updateWeather(float latitude, float longitude) {
+        mOwmKey = mSettings.getString(PREFS_OWM_API_KEY, PREFS_OWM_API_KEY_DEFAULT);
 
-        WeatherMap weatherMap = new WeatherMap(mCtx, owmApiKey);
+        WeatherMap weatherMap = new WeatherMap(mCtx, mOwmKey);
         weatherMap.getLocationForecast(String.valueOf(latitude), String.valueOf(longitude), new ForecastCallback() {
             @Override
             public void success(ForecastResponseModel response) {

@@ -71,7 +71,7 @@ public class DeviceDetailFragment extends Fragment {
     private DeviceDetailFragment.OnDefaultDeviceUnselectedListener mDeviceListener;
     private DeviceDetailFragment.OnConnectRequestedListener mConnectListener;
     private DeviceDetailFragment.OnAppSettingsClickedListener mAppSettingsListener;
-    private DeviceDetailFragment.OnLocationSettingsClickedListener mLocationSettingsListener;
+    private DeviceDetailFragment.OnWeatherSettingsClickedListener mWeatherSettingsListener;
     private DeviceDetailFragment.OnUpdateListener mUpdateListener;
 
 
@@ -118,7 +118,7 @@ public class DeviceDetailFragment extends Fragment {
         weatherCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mLocationSettingsListener.onLocationSettingsClicked();
+                mWeatherSettingsListener.onWeatherSettingsClicked();
             }
         });
 
@@ -277,11 +277,11 @@ public class DeviceDetailFragment extends Fragment {
             throw new ClassCastException(context.toString()
                     + " does not implement DeviceDetailFragment.OnAppSettingsClickedListener");
 
-        if (context instanceof DeviceDetailFragment.OnLocationSettingsClickedListener)
-            mLocationSettingsListener = (DeviceDetailFragment.OnLocationSettingsClickedListener) context;
+        if (context instanceof DeviceDetailFragment.OnWeatherSettingsClickedListener)
+            mWeatherSettingsListener = (DeviceDetailFragment.OnWeatherSettingsClickedListener) context;
         else
             throw new ClassCastException(context.toString()
-                    + " does not implement DeviceDetailFragment.OnLocationSettingsClickedListener");
+                    + " does not implement DeviceDetailFragment.OnWeatherSettingsClickedListener");
 
         if (context instanceof DeviceDetailFragment.OnUpdateListener)
             mUpdateListener = (DeviceDetailFragment.OnUpdateListener) context;
@@ -299,8 +299,8 @@ public class DeviceDetailFragment extends Fragment {
         void onAppSettingsClicked();
     }
 
-    public interface OnLocationSettingsClickedListener {
-        void onLocationSettingsClicked();
+    public interface OnWeatherSettingsClickedListener {
+        void onWeatherSettingsClicked();
     }
 
     public interface OnConnectRequestedListener {

@@ -69,4 +69,8 @@
     <string name="intro_phonestateslide_title">Phone &amp; Contacts</string>
     <string name="show_calls_on_watch">Display incoming calls</string>
     <string name="dialer">Dialer</string>
+    <string name="set_owm_api_key">Set custom OWM API Key</string>
+    <string name="OWM_API_KEY">OWM API Key</string>
+    <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
 </resources>

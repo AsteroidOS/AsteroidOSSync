@@ -68,4 +68,8 @@
     <string name="dialer">Telefon</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="intro_slideandroidgo_subtitle">Android Go ist nicht unterstützt, da es keinen Benachrichtigungszugriff erlaubt und Hintergrundprozesse einschränkt. Für Root-Nutzer besteht die Möglichkeit die \"ro.config.low_ram\" Variable in der build.prop Datei auf \"false\" zu setzen.</string>
+    <string name="apply">Bestätigen</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="OWM_API_KEY">OWM API Schlüssel</string>
+    <string name="set_owm_api_key">OWM API Schlüssel eingeben</string>
 </resources>
