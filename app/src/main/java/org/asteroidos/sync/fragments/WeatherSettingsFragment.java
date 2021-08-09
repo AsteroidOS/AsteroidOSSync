@@ -1,6 +1,7 @@
 package org.asteroidos.sync.fragments;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,11 +12,15 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 
 import org.asteroidos.sync.R;
 import org.asteroidos.sync.connectivity.WeatherService;
@@ -26,7 +31,7 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
-public class PositionPickerFragment extends Fragment {
+public class WeatherSettingsFragment extends Fragment {
     private MapView mMapView;
     private SharedPreferences mSettings;
     private Button mButton;
@@ -34,12 +39,15 @@ public class PositionPickerFragment extends Fragment {
     private SharedPreferences mWeatherSyncSettings;
     private CheckBox mWeatherSyncCheckBox;
 
+    private String mOwmKey;
+
     public static final int WEATHER_LOCATION_SYNC_PERMISSION_REQUEST = 1;
     public static final int WEATHER_LOCATION_PERMISSION_REQUEST = 2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
         mSettings = getContext().getSharedPreferences(WeatherService.PREFS_NAME, 0);
+        setHasOptionsMenu(true);
 
         return inflater.inflate(R.layout.fragment_position_picker, parent, false);
     }
@@ -49,6 +57,7 @@ public class PositionPickerFragment extends Fragment {
         float latitude = mSettings.getFloat(WeatherService.PREFS_LATITUDE, WeatherService.PREFS_LATITUDE_DEFAULT);
         float longitude = mSettings.getFloat(WeatherService.PREFS_LONGITUDE, WeatherService.PREFS_LONGITUDE_DEFAULT);
         float zoom = mSettings.getFloat(WeatherService.PREFS_ZOOM, WeatherService.PREFS_ZOOM_DEFAULT);
+        mOwmKey = mSettings.getString(WeatherService.PREFS_OWM_API_KEY, WeatherService.PREFS_OWM_API_KEY_DEFAULT);
 
         mMapView = view.findViewById(R.id.map);
         mMapView.setTileSource(TileSourceFactory.MAPNIK);
@@ -127,6 +136,40 @@ public class PositionPickerFragment extends Fragment {
     public void onPause() {
         super.onPause();
         mMapView.onPause();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.owm_position_picker_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.customApiKey){
+            View view = View.inflate(getActivity(), R.layout.dialog_api_key, null);
+            EditText editText = view.findViewById(R.id.apikey);
+            editText.setText(mOwmKey);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setPositiveButton(R.string.apply, (dialog, which) -> {
+                String apiKey = String.valueOf(editText.getText());
+                if (apiKey.equals(""))
+                    apiKey = WeatherService.PREFS_OWM_API_KEY_DEFAULT;
+
+                SharedPreferences.Editor editor = mWeatherSyncSettings.edit();
+                editor.putString(WeatherService.PREFS_OWM_API_KEY, apiKey);
+                editor.apply();
+                mOwmKey = apiKey;
+            });
+            builder.setNegativeButton(R.string.cancel, ((dialog, which) -> dialog.cancel()));
+            builder.setView(view);
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+
+        return (super.onOptionsItemSelected(menuItem));
     }
 
     private void handleLocationToggle(boolean enable) {
