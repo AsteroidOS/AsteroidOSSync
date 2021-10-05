@@ -40,13 +40,21 @@ public class AsteroidBleManager extends BleManager {
     }
 
     public final void send(UUID characteristic, byte[] data) {
-        writeCharacteristic(sendingCharacteristics.get(characteristic), data).enqueue();
+        writeCharacteristic(sendingCharacteristics.get(characteristic), data,
+                Objects.requireNonNull(sendingCharacteristics.get(characteristic)).getWriteType()).enqueue();
     }
 
     @NonNull
     @Override
     protected final BleManagerGattCallback getGattCallback() {
-        return new AsteroidBleManagerGattCallback();
+        return new AsteroidBleManagerGattCallback() {
+            @Override
+            protected void onServicesInvalidated() {
+                mSynchronizationService.unsyncServices();
+                batteryCharacteristic = null;
+                mGattServices.clear();
+            }
+        };
     }
 
     public final void abort() {
@@ -68,7 +76,7 @@ public class AsteroidBleManager extends BleManager {
         public int battery = 0;
     }
 
-    private class AsteroidBleManagerGattCallback extends BleManagerGattCallback {
+    private abstract class AsteroidBleManagerGattCallback extends BleManagerGattCallback {
 
         /* It is a constraint of the Bluetooth library that it is required to initialize
           the characteristics in the isRequiredServiceSupported() function. */
@@ -136,13 +144,6 @@ public class AsteroidBleManager extends BleManager {
             } catch (Exception e){
                 e.printStackTrace();
             }
-        }
-
-        @Override
-        protected final void onDeviceDisconnected() {
-            mSynchronizationService.unsyncServices();
-            batteryCharacteristic = null;
-            mGattServices.clear();
         }
     }
 }
