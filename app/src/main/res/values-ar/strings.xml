@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="generic_ok">موافق</string>
+    <string name="searching">بحث عن الساعات</string>
+    <string name="unknown_device">جهاز غير معروف</string>
+    <string name="nothing_found">لا يوجد ساعات</string>
+    <string name="one_found">وجدت ساعة واحدة</string>
+    <string name="n_found">وجدت %d ساعة</string>
+</resources>
