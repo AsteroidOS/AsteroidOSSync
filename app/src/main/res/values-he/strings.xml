@@ -69,4 +69,8 @@
     <string name="intro_phonestateslide_subtitle">כדי להציג שיחות נכנסות בשעון עם שם המתקשר.</string>
     <string name="intro_slideandroidgo_subtitle">אין תמיכה ב־Android Go כיוון שאינו מרשה גישה להתראות ומגביל שירותי רקע. ניתן לעקוף את זה דרך משתמש על (root) על ידי הגדרת הדגלון „ro.config.low_ram” בקובץ build.prod ל־„false”.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="OWM_API_KEY">מפתח API ל־OWM</string>
+    <string name="apply">החלה</string>
+    <string name="cancel">ביטול</string>
+    <string name="set_owm_api_key">הגדרת מפתח API משלך ל־OWM</string>
 </resources>
