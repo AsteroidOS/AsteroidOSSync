@@ -68,4 +68,8 @@
     <string name="one_found">एक घड्याळ सापडले</string>
     <string name="nothing_found">कोणतीही घड्याळे सापडली नाहीत</string>
     <string name="unknown_device">अज्ञात उपकरण</string>
+    <string name="set_owm_api_key">सानुकूल OWM API की सेट करा</string>
+    <string name="apply">लागू करा</string>
+    <string name="OWM_API_KEY">OWM API की</string>
+    <string name="cancel">रद्द करा</string>
 </resources>
