@@ -68,4 +68,8 @@
     <string name="intro_phonestateslide_subtitle">Gelen çağrıları saatte göstermek ve arayanın adını görüntülemek için.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go desteklenmiyor çünkü bildirim erişimine izin vermiyor ve arka plan süreçlerini kısıtlıyor. Kök kullanıcılar, build.prop dosyasındaki \"ro.config.low_ram\" bayrağını \"false\" yaparak geçici çözüm üretebilir.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="apply">Uygula</string>
+    <string name="set_owm_api_key">Özel OWM API anahtarı ayarla</string>
+    <string name="OWM_API_KEY">OWM API Anahtarı</string>
+    <string name="cancel">İptal</string>
 </resources>
