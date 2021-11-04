@@ -68,4 +68,8 @@
     <string name="generic_ok">OK</string>
     <string name="intro_slideandroidgo_subtitle">Android Go nu este suportat deoarece nu permite accesul la notificări și restricționează procesele din fundal. O soluție de rezolvare pentru utilizatorii root este să setați flag-ul \"ro.config.low_ram\" din fișierul build.prop la \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="cancel">Anulează</string>
+    <string name="set_owm_api_key">Setează cheie modificată OWM API</string>
+    <string name="apply">Aplică</string>
+    <string name="OWM_API_KEY">Cheie API OWM</string>
 </resources>
