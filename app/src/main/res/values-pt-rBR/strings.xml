@@ -38,7 +38,7 @@
     <string name="notification_type_default">Padrão</string>
     <string name="notification_type_no_notif">Sem notificações</string>
     <string name="notification_type_silent">Silenciar</string>
-    <string name="notification_type_vibra">Vibrações</string>
+    <string name="notification_type_vibra">Vibrar</string>
     <string name="notification_type_strong_vibra">Vibração forte</string>
     <string name="position_indicator">Indicador de posição</string>
     <string name="use_this_area">Usar esta área para o clima</string>
@@ -64,8 +64,12 @@
     <string name="notification_type_ringtone">Toque</string>
     <string name="dialer">Discador</string>
     <string name="show_calls_on_watch">Mostrar chamadas recebidas</string>
-    <string name="intro_phonestateslide_title">Telefone e Contatos</string>
+    <string name="intro_phonestateslide_title">Telefone e contatos</string>
     <string name="intro_phonestateslide_subtitle">Para mostrar as chamadas recebidas no relógio, e para exibir o nome do chamador.</string>
     <string name="intro_slideandroidgo_subtitle">O Android Go não é suportado pois ele não permite o acesso às notificações e restringe os processos em segundo plano. Uma solução alternativa para usuários root é definir o marcador \"ro.config.low_ram\" no arquivo build.prop como \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="set_owm_api_key">Definir chave API OWN personalizada</string>
+    <string name="OWM_API_KEY">Chave API OWM</string>
+    <string name="apply">Aplicar</string>
+    <string name="cancel">Cancelar</string>
 </resources>
