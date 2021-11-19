@@ -68,4 +68,8 @@
     <string name="show_calls_on_watch">Vis innkommende anrop</string>
     <string name="intro_slideandroidgo_subtitle">Android Go støttes ikke fordi det ikke tillater merknadstilgang og begrenser bakgrunnsprosesser. En fiks for rotbrukere er å sette \"ro.config.low_ram\"-flagget i build.prop-filen til \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="set_owm_api_key">Sett egendefinert OWM-API-nøkkel</string>
+    <string name="OWM_API_KEY">OWM-API-nøkkel</string>
+    <string name="apply">Bruk</string>
+    <string name="cancel">Avbryt</string>
 </resources>
