@@ -68,4 +68,8 @@
     <string name="intro_phonestateslide_subtitle">Pour afficher les appels entrants et le nom de l’appelant sur la montre.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go n\'est pas supporté car il ne donne pas accès aux notifications et restreint les processus d\'arrière-plan. Une solution pour les utilisateurs root serait de mettre l\'option \"ro.config.low_ram\" dans le fichier build.prop à \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="set_owm_api_key">Définir une clé API personnalisée pour OWM</string>
+    <string name="OWM_API_KEY">Clé d\'API OWM</string>
+    <string name="apply">Appliquer</string>
+    <string name="cancel">Annuler</string>
 </resources>
