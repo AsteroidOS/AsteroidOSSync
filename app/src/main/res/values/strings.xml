@@ -73,4 +73,6 @@
     <string name="OWM_API_KEY">OWM API Key</string>
     <string name="apply">Apply</string>
     <string name="cancel">Cancel</string>
+    <string name="location_disabled_message">In order to find watches the location service has to be enabled. Once paired you can safely disable it again.</string>
+    <string name="location_disabled_title">Location disabled</string>
 </resources>
