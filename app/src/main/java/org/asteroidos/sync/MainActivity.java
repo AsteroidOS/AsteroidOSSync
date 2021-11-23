@@ -1,5 +1,6 @@
 package org.asteroidos.sync;
 
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -16,9 +18,12 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.ParcelUuid;
 import android.os.RemoteException;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     final Messenger mDeviceDetailMessenger = new Messenger(new MainActivity.SynchronizationHandler(this));
     public ParcelUuid asteroidUUID = fromString(AsteroidUUIDS.SERVICE_UUID.toString());
     Messenger mSyncServiceMessenger;
+    ActivityResultLauncher<Intent> mLocationEnableActivityLauncher;
+    LocationManager mLocationManager;
     /* Synchronization service events handling */
     private final ServiceConnection mConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className,
@@ -116,7 +123,13 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 .build();
         mFilters = new ArrayList<>();
         mFilters.add(new ScanFilter.Builder().setServiceUuid(asteroidUUID).build());
-        btEnableAndScan();
+
+        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        mLocationEnableActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> btEnableAndScan()
+        );
+        btEnable();
 
         /* Start and/or attach to the Synchronization Service */
         mSyncServiceIntent = new Intent(this, SynchronizationService.class);
@@ -340,14 +353,30 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         else if (mDetailFragment != null) mDetailFragment.scanningStarted();
     }
 
-    private void btEnableAndScan(){
+    private void btEnable() {
         BluetoothAdapter mBtAdapter;
         mBtAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBtAdapter.isEnabled()){
-            mScanner.stopScan(scanCallback);
-            mScanner.startScan(mFilters, mSettings, scanCallback);
-        } else {
+        if (!mBtAdapter.isEnabled()) {
             mBtAdapter.enable();
+        }
+    }
+
+    private void btEnableAndScan() {
+        if (!mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) &&
+                !mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.location_disabled_title);
+            builder.setMessage(R.string.location_disabled_message);
+            builder.setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                mLocationEnableActivityLauncher.launch(intent);
+
+            });
+            builder.setNegativeButton(android.R.string.no, (dialog, which) -> this.finishAffinity());
+            builder.show();
+        } else {
+            btEnable();
+
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(() -> {
                 try {
