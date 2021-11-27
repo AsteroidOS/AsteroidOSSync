@@ -73,4 +73,6 @@
     <string name="apply">החלה</string>
     <string name="cancel">ביטול</string>
     <string name="set_owm_api_key">הגדרת מפתח API משלך ל־OWM</string>
+    <string name="location_disabled_title">המיקום מושבת</string>
+    <string name="location_disabled_message">כדי למצוא שעונים, יש להפעיל את שירות המיקום. לאחר הצימוד אפשר להשבית אותו שוב.</string>
 </resources>
