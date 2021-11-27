@@ -72,4 +72,6 @@
     <string name="OWM_API_KEY">OWM API raktas</string>
     <string name="apply">Taikyti</string>
     <string name="cancel">Atšaukti</string>
+    <string name="location_disabled_message">Norint rasti laikrodžius, turi būti įjungta vietos nustatymo paslauga. Suporavę laikrodį, galite jį vėl saugiai išjungti.</string>
+    <string name="location_disabled_title">Vietos nustatymas išjungtas</string>
 </resources>
