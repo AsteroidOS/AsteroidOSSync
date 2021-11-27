@@ -72,4 +72,6 @@
     <string name="apply">اعمال</string>
     <string name="cancel">لغو</string>
     <string name="OWM_API_KEY">کلید رابط برنامه‌نویسی OWM</string>
+    <string name="location_disabled_message">خدمت مکانی باید برای یافتن ساعت‌ها به کار افتاده باشد. پس از جفت شدن، می‌توانید دوباره از کار بیندازیدش.</string>
+    <string name="location_disabled_title">مکان از کار افتاده</string>
 </resources>
