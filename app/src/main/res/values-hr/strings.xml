@@ -72,4 +72,6 @@
     <string name="OWM_API_KEY">OWM API ključ</string>
     <string name="apply">Primijeni</string>
     <string name="cancel">Odustani</string>
+    <string name="location_disabled_message">Za pronalaženje satova, usluga lokacije mora biti aktivirana. Nakon uparivanja, usluga se slobodno može ponovo deaktivirati.</string>
+    <string name="location_disabled_title">Lokacija deaktivirana</string>
 </resources>
