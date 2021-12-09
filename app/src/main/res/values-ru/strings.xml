@@ -72,4 +72,6 @@
     <string name="set_owm_api_key">Установить пользовательский ключ API OWM</string>
     <string name="cancel">Отмена</string>
     <string name="apply">Применить</string>
+    <string name="location_disabled_message">Для поиска часов необходимо включить сервисы определения местоположения. После привязки устройства вы снова сможете их выключить.</string>
+    <string name="location_disabled_title">Служба определения местоположения выключена</string>
 </resources>
