@@ -72,4 +72,6 @@
     <string name="set_owm_api_key">Özel OWM API anahtarı ayarla</string>
     <string name="OWM_API_KEY">OWM API Anahtarı</string>
     <string name="cancel">İptal</string>
+    <string name="location_disabled_message">Saatleri bulmak için konum servisi etkinleştirilmelidir. Bir kez eşlediğinizde güvenle yeniden devre dışı bırakabilirsiniz.</string>
+    <string name="location_disabled_title">Konum devre dışı</string>
 </resources>
