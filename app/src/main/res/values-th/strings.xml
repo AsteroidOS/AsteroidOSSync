@@ -68,4 +68,10 @@
     <string name="unknown_device">ไม่รู้จักอุปกรณ์</string>
     <string name="searching">กำลังค้นหานาฬิกา</string>
     <string name="generic_ok">ตกลง</string>
+    <string name="location_disabled_title">ตำแหน่งปิดการใช้งาน</string>
+    <string name="set_owm_api_key">ตั้งค่าคีย์ OWM API ด้วยตัวเอง</string>
+    <string name="location_disabled_message">ในการค้นหานาฬิกาต้องเปิดใช้งานบริการระบุตำแหน่ง เมื่อจับคู่แล้ว คุณสามารถปิดใช้งานได้อย่างปลอดภัยอีกครั้ง</string>
+    <string name="apply">นำไปใช้</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="OWM_API_KEY">คีย์ OWM API</string>
 </resources>
