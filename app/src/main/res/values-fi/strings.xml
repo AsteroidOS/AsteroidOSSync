@@ -68,4 +68,10 @@
     <string name="intro_phonestateslide_subtitle">Soiton ja soittajan nimen kellolla näyttämisen vuoksi.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go ei ole tuettu koska se ei tue pääsyjä ilmoituksiin ja rajoittaa taustaprosesseja. Väliaikainen korjaus root-käyttäjille on asettaa \"ro.config.low_ram\" flag build.prop tiedostiossa \"false\" :seksi.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="set_owm_api_key">Aseta mukautettu OWM API avain</string>
+    <string name="OWM_API_KEY">OWM API Avain</string>
+    <string name="apply">Aseta</string>
+    <string name="cancel">Peruuta</string>
+    <string name="location_disabled_message">Löytääkseen kelloja sijaintipalvelu täytyy olla käytössä. Paritettuna voit turvallisesti poistaa sen käytöstä.</string>
+    <string name="location_disabled_title">Sijainti otettu pois käytöstä</string>
 </resources>
