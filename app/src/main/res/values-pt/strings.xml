@@ -69,4 +69,9 @@
     <string name="searching">A procurar relógios</string>
     <string name="generic_ok">OK</string>
     <string name="set_owm_api_key">Definir chave de API OWM personalizada</string>
+    <string name="location_disabled_message">Para encontrar relógios, o serviço de localização tem de estar ativado. Uma vez emparelhado, pode desativá-lo sem problema.</string>
+    <string name="location_disabled_title">Localização desativada</string>
+    <string name="OWM_API_KEY">Chave API OWM</string>
+    <string name="apply">Aplicar</string>
+    <string name="cancel">Cancelar</string>
 </resources>
