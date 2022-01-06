@@ -38,7 +38,7 @@
     <string name="notification_type_default">Standard</string>
     <string name="notification_type_no_notif">Ingen meddelse</string>
     <string name="notification_type_silent">Lydløs</string>
-    <string name="notification_type_vibra">Vibration</string>
+    <string name="notification_type_vibra">Vibrationer</string>
     <string name="notification_type_strong_vibra">Kraftig vibration</string>
     <string name="position_indicator">Positionsindikator</string>
     <string name="use_this_area">Brug dette område til vejrudsigt</string>
@@ -60,9 +60,11 @@
     <string name="action_settings">Indstillinger</string>
     <string name="title_activity_settings">Indstillinger</string>
     <string name="switch_phone_notifications">Sæt telefonen på lydløs når den er tilsluttet</string>
-    <string name="notification_silent_icon">notifikation lydløs-ikon</string>
+    <string name="notification_silent_icon">Lydløs-ikon for notifikation</string>
     <string name="notification_type_ringtone">Ringetone</string>
     <string name="show_calls_on_watch">Vis indgående opkald</string>
     <string name="intro_phonestateslide_title">Telefontilstand</string>
     <string name="intro_phonestateslide_subtitle">For at vise indgående opkald på uret.</string>
+    <string name="cancel">Afbryd</string>
+    <string name="location_disabled_title">Position afslået</string>
 </resources>
