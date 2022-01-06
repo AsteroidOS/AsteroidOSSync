@@ -72,4 +72,6 @@
     <string name="OWM_API_KEY">OWM-API-nøkkel</string>
     <string name="apply">Bruk</string>
     <string name="cancel">Avbryt</string>
+    <string name="location_disabled_title">Posisjon avskrudd</string>
+    <string name="location_disabled_message">Posisjonstjenesten må skrus på for å finne armbåndsur. Når paring er utført kan du skru det av igjen.</string>
 </resources>
