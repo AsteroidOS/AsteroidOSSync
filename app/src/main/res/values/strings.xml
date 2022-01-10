@@ -46,8 +46,8 @@
     <string name="intro_slide1_subtitle">This app lets you sync your Android phone with your AsteroidOS watch. But first, it needs some permissions.</string>
     <string name="intro_slide2_title">File access</string>
     <string name="intro_slide2_subtitle">To cache data and save screenshots of your watch.</string>
-    <string name="intro_slide3_title">Location</string>
-    <string name="intro_slide3_subtitle">To scan for nearby Bluetooth Low Energy devices.</string>
+    <string name="intro_slide3_title">Location &amp; Bluetooth</string>
+    <string name="intro_slide3_subtitle">To scan and connect to nearby Bluetooth Low Energy devices.</string>
     <string name="intro_slide4_title">Notifications</string>
     <string name="intro_slide4_subtitle">To sync notifications with your watch, allow \"AsteroidOS Sync\" in the following menu:</string>
     <string name="intro_slide5_title">Battery Optimization</string>
