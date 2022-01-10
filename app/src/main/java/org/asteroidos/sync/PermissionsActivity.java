@@ -59,16 +59,25 @@ public class PermissionsActivity extends MaterialIntroActivity {
             boolean externalStorageFragmentShown = (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED);
 
-            SlideFragment localizationFragment = new SlideFragmentBuilder()
+            SlideFragmentBuilder localizationFragmentBuilder = new SlideFragmentBuilder()
                     .backgroundColor(R.color.colorintroslide3)
                     .buttonsColor(R.color.colorintroslide3button)
                     .neededPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION})
                     .image(R.drawable.introslide3icon)
                     .title(getString(R.string.intro_slide3_title))
-                    .description(getString(R.string.intro_slide3_subtitle))
-                    .build();
+                    .description(getString(R.string.intro_slide3_subtitle));
+
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                localizationFragmentBuilder.neededPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.BLUETOOTH_CONNECT});
+            }
+            SlideFragment localizationFragment = localizationFragmentBuilder.build();
+
             boolean localizationFragmentShown = (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED);
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                localizationFragmentShown |= (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED);
+            }
 
             NotificationsSlide notificationFragment = new NotificationsSlide();
             notificationFragment.setContext(this);
