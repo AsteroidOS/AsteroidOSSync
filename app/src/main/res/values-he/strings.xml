@@ -48,8 +48,8 @@
     <string name="intro_slide1_subtitle">יישומון זה מאפשר לך לסנכרן את טלפון ה־Android שלך עם שעון ה־AsteroidOS שלך. אך תחילה, נדרשות הרשאות לכך.</string>
     <string name="intro_slide2_title">גישה לקבצים</string>
     <string name="intro_slide2_subtitle">לאחסון נתונים ושמירת צילומי מסך של השעון שלך.</string>
-    <string name="intro_slide3_title">מיקום</string>
-    <string name="intro_slide3_subtitle">לסריקת התקני Bluetooth עם צריכת אנרגיה נמוכה.</string>
+    <string name="intro_slide3_title">מיקום ו־Bluetooth</string>
+    <string name="intro_slide3_subtitle">לסריקה ולהתחברות להתקני Bluetooth קרובים עם צריכת אנרגיה נמוכה.</string>
     <string name="intro_slide5_title">מטוב סוללה</string>
     <string name="intro_slide5_subtitle">כדי לאפשר ליישומון זה לפעול ברקע, נא להשבית את „מטוב סוללה” עבור הסנכרון של AsteroidOS בתפריט הבא:</string>
     <string name="intro_slideerror_title">תמיכה בבלוטות׳ בצריכת אנרגיה נמוכה</string>
