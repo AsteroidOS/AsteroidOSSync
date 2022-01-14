@@ -50,7 +50,7 @@
     <string name="intro_slide3_title">Standort</string>
     <string name="intro_slide3_subtitle">Um nach Bluetooth-Geräten in der Nähe zu suchen.</string>
     <string name="intro_slide5_title">Batterieoptimierung</string>
-    <string name="intro_slide5_subtitle">Um diese App im Hintergrund laufen zu lassen, deaktivieren Sie bitte \"Batterieoptimierung\" für AsteroidOS Sync im folgenden Menü:</string>
+    <string name="intro_slide5_subtitle">Um diese App im Hintergrund laufen zu lassen, deaktiviere bitte \"Batterieoptimierung\" für AsteroidOS Sync im folgenden Menü:</string>
     <string name="intro_slideerror_title">Unterstützung für Bluetooth Low Energy</string>
     <string name="grant_permission">Erlaubnis erteilen</string>
     <string name="please_grant_permissions">Bitte diese Erlaubnis gewähren</string>
@@ -72,4 +72,6 @@
     <string name="cancel">Abbrechen</string>
     <string name="OWM_API_KEY">OWM API Schlüssel</string>
     <string name="set_owm_api_key">OWM API Schlüssel eingeben</string>
+    <string name="location_disabled_message">Um Uhren zu finden, muss der Ortungsdienst aktiviert sein. Nach der Kopplung kann er wieder sicher deaktiviert werden.</string>
+    <string name="location_disabled_title">Standortdienst deaktiviert</string>
 </resources>
