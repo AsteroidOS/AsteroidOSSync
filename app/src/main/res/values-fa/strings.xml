@@ -47,8 +47,8 @@
     <string name="intro_slide1_subtitle">این برنامه، اجازهٔ همگام‌سازی تلفن اندرویدی‌تان با ساعت استروید‌تان را می‌دهد. ولی نخست، به چند دسترسی نیاز دارد.</string>
     <string name="intro_slide2_title">دسترسی پرونده</string>
     <string name="intro_slide2_subtitle">برای ذخیره داده و ذخیرهٔ نماگرفت از ساعت‌تان.</string>
-    <string name="intro_slide3_title">موقعیت</string>
-    <string name="intro_slide3_subtitle">برای گشتن دستگاه‌های بلوتوث کم‌مصرف.</string>
+    <string name="intro_slide3_title">مکان و بلوتوث</string>
+    <string name="intro_slide3_subtitle">برای پویش و وصل شدن به دستگاه‌های بلوتوث کم‌مصرف.</string>
     <string name="intro_slide5_title">بهینه‌سازی باتری</string>
     <string name="intro_slide5_subtitle">برای اجازه به اجرای این برنامه در پس‌زمینه، لطفاً در فهرستی که خواهد آمد، «بهینه‌ساز باتری» را برای AsteroidOS Sync از کار بیندازید:</string>
     <string name="intro_slideerror_title">پشتیبانی بلوتوث کم‌مصرف</string>
