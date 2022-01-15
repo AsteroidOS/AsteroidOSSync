@@ -53,8 +53,8 @@
     <string name="intro_slide1_title">مرحبا</string>
     <string name="intro_slide2_title">الوصول إلى الملفات</string>
     <string name="intro_slide2_subtitle">لتخزين البيانات وحفظ لقطات الشاشة من ساعتك.</string>
-    <string name="intro_slide3_title">الموقع</string>
-    <string name="intro_slide3_subtitle">للبحث عن أجهزة Bluetooth منخفضة الطاقة القريبة.</string>
+    <string name="intro_slide3_title">الموقع والبلوتوث</string>
+    <string name="intro_slide3_subtitle">لفحص أجهزة Bluetooth Low Energy القريبة والاتصال بها.</string>
     <string name="intro_slide4_title">الإشعارات</string>
     <string name="intro_slide5_title">تحسين البطارية</string>
     <string name="intro_slideerror_title">دعم Bluetooth منخفض الطاقة</string>
