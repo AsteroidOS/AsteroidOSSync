@@ -44,8 +44,8 @@
     <string name="intro_slide1_subtitle">Ova aplikacija omogućava sinkroniziranje tvog Android telefona s tvojim AndroidOS satom. Kao prvo su joj potrebne neke dozvole.</string>
     <string name="intro_slide2_title">Pristup datotekama</string>
     <string name="intro_slide2_subtitle">Za međuspremanje podataka i za spremanje snimaka ekrana tvog sata.</string>
-    <string name="intro_slide3_title">Lokacija</string>
-    <string name="intro_slide3_subtitle">Za skeniranje obližnjih Bluetooth uređaja.</string>
+    <string name="intro_slide3_title">Lokacija i Bluetooth</string>
+    <string name="intro_slide3_subtitle">Za skeniranje i povezivanje na obližnje Bluetooth uređaje.</string>
     <string name="intro_slide4_title">Obavijesti</string>
     <string name="intro_slide4_subtitle">Za sinkronizaciju obavijesti s tvojim satom, dozvoli „AsteroidOS Sync” u sljedećem izborniku:</string>
     <string name="intro_slide5_title">Optimizacija baterije</string>
