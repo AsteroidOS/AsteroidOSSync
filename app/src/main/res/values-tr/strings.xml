@@ -48,7 +48,7 @@
     <string name="intro_slide2_title">Dosya erişimi</string>
     <string name="intro_slide2_subtitle">Veriyi önbelleğe almak ve saatinizin ekran görüntülerini kaydetmek için.</string>
     <string name="intro_slide3_title">Konum ve Bluetooth</string>
-    <string name="intro_slide3_subtitle">Yakındaki Bluetooth Düşük Enerji aygıtları taramak ve onlara bağlanmak için.</string>
+    <string name="intro_slide3_subtitle">Yakındaki Bluetooth Düşük Enerji aygıtları taramak ve bağlanmak için.</string>
     <string name="intro_slide5_title">Pil İyileştirmesi</string>
     <string name="intro_slide5_subtitle">Bu uygulamanın arka planda çalışması için lütfen takip eden menüde AsteroidOS Sync için \"Pil İyileştirmesi\"ni kapatın:</string>
     <string name="intro_slideerror_title">Bluetooth Düşük Enerji desteği</string>
