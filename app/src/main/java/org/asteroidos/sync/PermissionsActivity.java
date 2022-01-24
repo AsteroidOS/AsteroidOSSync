@@ -68,7 +68,7 @@ public class PermissionsActivity extends MaterialIntroActivity {
                     .description(getString(R.string.intro_slide3_subtitle));
 
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                localizationFragmentBuilder.neededPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.BLUETOOTH_CONNECT});
+                localizationFragmentBuilder.neededPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_SCAN});
             }
             SlideFragment localizationFragment = localizationFragmentBuilder.build();
 
@@ -77,6 +77,8 @@ public class PermissionsActivity extends MaterialIntroActivity {
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 localizationFragmentShown |= (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED);
+                localizationFragmentShown |= (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED);
             }
 
             NotificationsSlide notificationFragment = new NotificationsSlide();
