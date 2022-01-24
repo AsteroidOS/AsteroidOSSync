@@ -25,7 +25,7 @@
     <string name="phone_is_searching">Twój telefon szuka tego zegarka!</string>
     <string name="notifications_settings">Ustawienia powiadomień</string>
     <string name="intro_slide4_title">Powiadomienia</string>
-    <string name="intro_slide4_subtitle">Jeżeli chcesz synchronizować powiadomienia ze swoim zegarkiem, aplikacja musi otrzymać pozwolenie na dostęp do nich.</string>
+    <string name="intro_slide4_subtitle">Aby zsynchronizować powiadomienia z zegarkiem, włącz \"AsteroidOS Sync\" w następującym menu:</string>
     <string name="weather_settings">Ustawienia pogody</string>
     <string name="enter_city_name">Wpisz nazwę miasta:</string>
     <string name="unpair">Rozłącz</string>
@@ -47,8 +47,8 @@
     <string name="intro_slide1_subtitle">Ta aplikacja pozwoli ci zsynchronizować twój telefon z zegarkiem na systemie AsteroidOS. Ale najpierw potrzebujemy kilku pozwoleń.</string>
     <string name="intro_slide2_title">Dostęp do plików</string>
     <string name="intro_slide2_subtitle">Aby mieć w pamięci podręcznej dane i zapisywać zrzuty ekranu z zegarka.</string>
-    <string name="intro_slide3_title">Lokalizacja</string>
-    <string name="intro_slide3_subtitle">Aby skanowanie pobliskie urządzenia Bluetooth LE.</string>
+    <string name="intro_slide3_title">Lokalizacja i Bluetooth</string>
+    <string name="intro_slide3_subtitle">Do skanowania i łączenia się z pobliskimi urządzeniami Bluetooth Low Energy.</string>
     <string name="intro_slide5_title">Optymalizacja baterii</string>
     <string name="intro_slide5_subtitle">Aby pozwolić aplikacji działać w tle, wyłącz \"Optymalizacje baterii\" dla AsteroidOS Sync w tym menu:</string>
     <string name="intro_slideerror_title">Wsparcie dla Bluetooth LE</string>
@@ -68,4 +68,10 @@
     <string name="intro_phonestateslide_subtitle">Pokazuj polączenia przychodzące i imię dzwoniącego na zegarku.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go nie jest obsługiwany, ponieważ nie zezwala na dostęp do powiadomień i ogranicza procesy w tle. Obejściem problemu dla użytkowników z dostępem do uprawnień root jest ustawienie flagi „ro.config.low_ram” w pliku build.prop na wartość „false”.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="set_owm_api_key">Ustaw własny klucz API OWM</string>
+    <string name="OWM_API_KEY">Klucz API OWM</string>
+    <string name="apply">Zastosuj</string>
+    <string name="cancel">Anuluj</string>
+    <string name="location_disabled_message">Aby znaleźć inne zegarki, usługa lokalizacji musi być włączona. Po sparowaniu można ją bezpiecznie ponownie wyłączyć.</string>
+    <string name="location_disabled_title">Lokalizacja wyłączona</string>
 </resources>
