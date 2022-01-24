@@ -47,8 +47,8 @@
     <string name="intro_slide1_subtitle">你能使用此应用从 Android 手机同步 AstrroidOS 设备。不过首先这需要权限。</string>
     <string name="intro_slide2_title">文件访问</string>
     <string name="intro_slide2_subtitle">用于在缓存数据和保存截图。</string>
-    <string name="intro_slide3_title">位置</string>
-    <string name="intro_slide3_subtitle">用于扫描附近的 BLE 蓝牙设备。。</string>
+    <string name="intro_slide3_title">位置与蓝牙</string>
+    <string name="intro_slide3_subtitle">用于扫描并连接附近的 BLE 蓝牙设备。</string>
     <string name="intro_slide5_title">电池优化</string>
     <string name="intro_slide5_subtitle">为了保证AsteroidOS Sync可以时刻与手表连接。请在下面出现的菜单中为 AsteroidOS Sync 应用关闭 “电池优化” :</string>
     <string name="intro_slideerror_title">蓝牙低功耗支持</string>
@@ -68,4 +68,6 @@
     <string name="intro_phonestateslide_subtitle">为了在手表上显示来电信息和联系人姓名。</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="intro_slideandroidgo_subtitle">本应用不支持 Android Go 系统，因为 Android Go 禁止读取通知并且严格限制后台处理。根用户的变通方案是将 build.prop 文件中的“ro.config.low_ram”标志设置为“false”。</string>
+    <string name="location_disabled_title">定位服务已关</string>
+    <string name="location_disabled_message">要找到手表，必须打开定位服务。您可以在配对成功后再把定位服务关掉。</string>
 </resources>
