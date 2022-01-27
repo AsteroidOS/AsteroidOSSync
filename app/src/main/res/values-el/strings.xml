@@ -47,8 +47,8 @@
     <string name="intro_slide1_subtitle">Αυτή η εφαρμογή επιτρέπει το συγχρονισμό του Android με το AsteroidOS. Πρώτα χρειάζεται κάποιες άδειες.</string>
     <string name="intro_slide2_title">Πρόσβαση αρχείων</string>
     <string name="intro_slide2_subtitle">Για την αποθήκευση δεδομένων και στιγμιοτύπων οθόνης του ρολογιού.</string>
-    <string name="intro_slide3_title">Τοποθεσία</string>
-    <string name="intro_slide3_subtitle">Για την αναζήτηση κοντινών συσκευών με Bluetooth Χαμηλής Ενέργειας.</string>
+    <string name="intro_slide3_title">Τοποθεσία &amp; Bluetooth</string>
+    <string name="intro_slide3_subtitle">Για την αναζήτηση και σύνδεση σε κοντινές συσκευές με Bluetooth Χαμηλής Ενέργειας.</string>
     <string name="intro_slide5_title">Βελτίωση Μπαταρίας</string>
     <string name="intro_slide5_subtitle">Για να επιτρέψετε στην εφαρμογή να εκτελείται στο παρασκήνιο, παρακαλώ απενεργοποιήστε τη \"Βελτίωση Μπαταρίας\" του Συγχρονισμού AsteroidOS στο ακόλουθο μενού:</string>
     <string name="intro_slideerror_title">Υποστηρίζεται Bluetooth Χαμηλής Ενέργειας</string>
@@ -68,4 +68,10 @@
     <string name="intro_phonestateslide_subtitle">Για να εμφανίσετε εισερχόμενες κλήσεις στο ρολόι και για την εμφάνιση του ονόματος του καλούντος.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="intro_slideandroidgo_subtitle">Το Android Go δεν υποστηρίζεται επειδή δεν επιτρέπει την πρόσβαση στις ειδοποιήσεις και περιορίζει τις διαδικασίες παρασκηνίου. Μια λύση για τους χρήστες root είναι να ορίσετε τη σημαία \"ro.config.low_ram\" στο αρχείο build.prop σε \"false\".</string>
+    <string name="location_disabled_message">Για να βρείτε τα ρολόγια πρέπει να ενεργοποιήσετε την υπηρεσία εντοπισμού θέσης. Αφού γίνει η αντιστοίχιση, μπορείτε να την απενεργοποιήσετε ξανά με ασφάλεια.</string>
+    <string name="location_disabled_title">Η υπηρεσία εντοπισμού θέσης είναι απενεργοποιημένη</string>
+    <string name="OWM_API_KEY">Κλειδί OWM API</string>
+    <string name="set_owm_api_key">Ορισμός προσαρμοσμένου κλειδιού OWM API</string>
+    <string name="apply">Εφαρμογή</string>
+    <string name="cancel">Ακύρωση</string>
 </resources>
