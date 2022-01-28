@@ -47,8 +47,8 @@
     <string name="intro_slide1_subtitle">Это приложение позволяет синхронизировать ваш телефон на Android с часами на AsteroidOS. Для этого, приложению нужны некоторые разрешения.</string>
     <string name="intro_slide2_title">Доступ к файлам</string>
     <string name="intro_slide2_subtitle">Для кэширования данных и сохранения скриншотов ваших часов.</string>
-    <string name="intro_slide3_title">Местоположение</string>
-    <string name="intro_slide3_subtitle">Сканировать ближайшие Bluetooth LE устройства.</string>
+    <string name="intro_slide3_title">Местоположение и Bluetooth</string>
+    <string name="intro_slide3_subtitle">Сканировать и подключиться к ближайшим Bluetooth LE устройствам.</string>
     <string name="intro_slide5_title">Оптимизация батареи</string>
     <string name="intro_slide5_subtitle">Чтобы разрешить этому приложению работать в фоновом режиме, пожалуйста, отключите \"Оптимизацию батареи\" для AsteroidOS Sync в следующем меню:</string>
     <string name="intro_slideerror_title">Поддержка Bluetooth LE</string>
