@@ -1,6 +1,7 @@
 package org.asteroidos.sync;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -215,6 +216,7 @@ public class PermissionsActivity extends MaterialIntroActivity {
             return false;
         }
 
+        @SuppressLint("BatteryLife") // for ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
         @Override
         public void askForPermissions() {
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
