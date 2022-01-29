@@ -6,7 +6,7 @@
     <string name="unknown_device">Unknown Device</string>
     <string name="nothing_found">No watches found</string>
     <string name="one_found">Found one watch</string>
-    <string name="n_found">Found %d watches</string>
+    <string name="n_found">Found %d watches</string> <!-- TODO Replace with plural -->
     <string name="disconnected">Disconnected</string>
     <string name="connected">Connected</string>
     <string name="connecting">Connecting…</string>
