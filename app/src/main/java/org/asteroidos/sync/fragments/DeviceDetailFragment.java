@@ -59,8 +59,6 @@ public class DeviceDetailFragment extends Fragment {
     private SharedPreferences mCallStateSettings;
 
     private CheckBox mTimeSyncCheckBox;
-    private CheckBox mSilenceModeCheckBox;
-    private CheckBox mCallStateServiceCheckBox;
 
     private FloatingActionButton mFab;
 
@@ -168,7 +166,7 @@ public class DeviceDetailFragment extends Fragment {
         });
 
         mSilenceModeSettings = getActivity().getSharedPreferences(SilentModeService.PREFS_NAME, Context.MODE_PRIVATE);
-        mSilenceModeCheckBox = view.findViewById(R.id.SilentModeCheckBox);
+        CheckBox mSilenceModeCheckBox = view.findViewById(R.id.SilentModeCheckBox);
         mSilenceModeCheckBox.setChecked(mSilenceModeSettings.getBoolean(SilentModeService.PREF_RINGER, false));
         mSilenceModeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -180,7 +178,7 @@ public class DeviceDetailFragment extends Fragment {
         });
 
         mCallStateSettings = getActivity().getSharedPreferences(PhoneStateReceiver.PREFS_NAME, Context.MODE_PRIVATE);
-        mCallStateServiceCheckBox = view.findViewById(R.id.CallStateServiceCheckBox);
+        CheckBox mCallStateServiceCheckBox = view.findViewById(R.id.CallStateServiceCheckBox);
         mCallStateServiceCheckBox.setChecked(mCallStateSettings.getBoolean(PhoneStateReceiver.PREF_SEND_CALL_STATE, true));
         mCallStateServiceCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
