@@ -25,7 +25,7 @@
     <string name="phone_is_searching">Telefon hledá za vás!</string>
     <string name="notifications_settings">Nastavení oznamování</string>
     <string name="intro_slide4_title">Oznamování</string>
-    <string name="intro_slide4_subtitle">Aby byla synchronizována oznamování, je třeba v následující nabídce zapnout „Synchronizace AsteroidOS“:</string>
+    <string name="intro_slide4_subtitle">Aby byla synchronizována oznamování, je třeba v následující nabídce zapnout „AsteroidOS Sync“:</string>
     <string name="weather_settings">Nastavení počasí</string>
     <string name="enter_city_name">Zadejte název města:</string>
     <string name="unpair">Zrušit spárování</string>
@@ -53,8 +53,8 @@
     <string name="intro_slide1_subtitle">Tato aplikace umožňuje synchronizaci telefonu s Android s hodinkami s AsteroidOS. K tomu je třeba několik oprávnění.</string>
     <string name="intro_slide2_title">Přístup k souborům</string>
     <string name="intro_slide2_subtitle">Pro mezipaměť dat a ukládání snímků obrazovky vašich hodinek.</string>
-    <string name="intro_slide3_title">Umístění</string>
-    <string name="intro_slide3_subtitle">Pro skenování přítomnosti Bluetooth Low Energy zařízení poblíž.</string>
+    <string name="intro_slide3_title">Umístění a Bluetooth</string>
+    <string name="intro_slide3_subtitle">Pro skenování přítomnosti a připojení se k Bluetooth Low Energy zařízením poblíž.</string>
     <string name="synchronize_weather">Najít počasí automaticky</string>
     <string name="title_activity_settings_activity">Nastavení</string>
     <string name="action_settings">Nastavení</string>
@@ -68,4 +68,10 @@
     <string name="intro_phonestateslide_subtitle">Pro zobrazení příchozích hovorů na hodinkách a pro zobrazení jména volajícího.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go není podporován, protože neumožňuje přístup k upozorněním a omezuje procesy, spuštěné na pozadí. Obejití tohoto omezení pro uživatele s přístupovými právy na úrovni správce systému (root) je nastavit příznak „ro.config.low_ram“ v souboru build.prop na hodnotu „false“.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="cancel">Zrušit</string>
+    <string name="location_disabled_message">Pro vyhledání hodinek musí být povolena služba určování polohy. Po spárování ji můžete opět bezpečně vypnout.</string>
+    <string name="location_disabled_title">Určování polohy vypnuto</string>
+    <string name="set_owm_api_key">Nastavit vlastní klíč k OWM API</string>
+    <string name="OWM_API_KEY">Klíč k OWM API</string>
+    <string name="apply">Použít</string>
 </resources>
