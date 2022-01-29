@@ -54,13 +54,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-@SuppressWarnings({"FieldCanBeLocal"}) // For clarity, we prefer having NOTIFICATION as a top level field
+// For clarity, we prefer having NOTIFICATION as a top level field
 public class ScreenshotService implements IConnectivityService {
     private static final String NOTIFICATION_CHANNEL_ID = "screenshotservice_channel_id_01";
-    private int NOTIFICATION = 2726;
+    private final int NOTIFICATION = 2726;
 
-    private Context mCtx;
-    private IAsteroidDevice mDevice;
+    private final Context mCtx;
+    private final IAsteroidDevice mDevice;
 
     private ScreenshotReqReceiver mSReceiver;
 
@@ -71,7 +71,7 @@ public class ScreenshotService implements IConnectivityService {
     private byte[] totalData;
     private ScheduledExecutorService processUpdate;
 
-    private NotificationManager mNM;
+    private final NotificationManager mNM;
 
     public ScreenshotService(Context ctx, IAsteroidDevice device) {
         mDevice = device;
@@ -88,7 +88,7 @@ public class ScreenshotService implements IConnectivityService {
 
         device.registerCallback(AsteroidUUIDS.SCREENSHOT_CONTENT, data -> {
             if (data == null) return;
-            if (data.length != 4){
+            if (data.length != 4) {
                 mFirstNotify = false;
             }
             if (mFirstNotify) {
@@ -135,7 +135,7 @@ public class ScreenshotService implements IConnectivityService {
                     notificationIntent.setAction(Intent.ACTION_VIEW);
                     notificationIntent.setDataAndType(fileName, "image/*");
                     notificationIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    PendingIntent contentIntent = PendingIntent.getActivity(mCtx, 0, notificationIntent, 0);
+                    PendingIntent contentIntent = PendingIntent.getActivity(mCtx, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
                     notificationBuilder.setContentIntent(contentIntent);
                     mDownloading = false;
 
@@ -160,7 +160,8 @@ public class ScreenshotService implements IConnectivityService {
     public void unsync() {
         try {
             mCtx.unregisterReceiver(mSReceiver);
-        } catch (IllegalArgumentException ignored) {}
+        } catch (IllegalArgumentException ignored) {
+        }
     }
 
     private static int bytesToInt(byte[] b) {
@@ -187,7 +188,7 @@ public class ScreenshotService implements IConnectivityService {
             metaInfo.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/AsteroidOSSync");
             metaInfo.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis());
             metaInfo.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
-            Uri imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI , metaInfo);
+            Uri imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, metaInfo);
             assert imageUri != null;
             OutputStream out = resolver.openOutputStream(imageUri);
             assert out != null;
@@ -202,6 +203,7 @@ public class ScreenshotService implements IConnectivityService {
         } else {
             File directory = new File(dirStr);
             if (!directory.exists())
+                //noinspection ResultOfMethodCallIgnored
                 directory.mkdirs();
 
             try {
@@ -209,7 +211,7 @@ public class ScreenshotService implements IConnectivityService {
                 out.write(totalData);
                 out.close();
                 doMediaScan(fileName);
-            } catch(IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             uri = FileProvider.getUriForFile(mCtx, mCtx.getApplicationContext().getPackageName() + ".fileprovider", fileName);
@@ -217,9 +219,9 @@ public class ScreenshotService implements IConnectivityService {
         return uri;
     }
 
-    private void doMediaScan(File file){
+    private void doMediaScan(File file) {
         MediaScannerConnection.scanFile(mCtx,
-                new String[] { file.toString() }, null,
+                new String[]{file.toString()}, null,
                 (path, uri) -> {
                     Log.i("ExternalStorage", "Scanned " + path + ":");
                     Log.i("ExternalStorage", "-> uri=" + uri);
@@ -246,7 +248,6 @@ public class ScreenshotService implements IConnectivityService {
                 mFirstNotify = true;
                 mDownloading = true;
                 byte[] data = new byte[1];
-                data[0] = 0x0;
                 mDevice.send(AsteroidUUIDS.SCREENSHOT_REQUEST, data, ScreenshotService.this);
             }
         }
