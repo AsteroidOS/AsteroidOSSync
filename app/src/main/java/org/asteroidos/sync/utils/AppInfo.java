@@ -10,8 +10,12 @@ import androidx.annotation.NonNull;
 public class AppInfo
         implements Comparable<AppInfo>, Parcelable
 {
-    private String label, packageName;
-    private boolean system, installed, checked, disabled;
+    private final String label;
+    private final String packageName;
+    private final boolean system;
+    private final boolean installed;
+    private boolean checked;
+    private boolean disabled;
     public Bitmap icon;
 
     AppInfo(String packageName, String label, boolean system, boolean installed)

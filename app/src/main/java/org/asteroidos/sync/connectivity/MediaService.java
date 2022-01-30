@@ -62,8 +62,8 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
     public static final String PREFS_MEDIA_CONTROLLER_PACKAGE = "media_controller_package";
     public static final String PREFS_MEDIA_CONTROLLER_PACKAGE_DEFAULT = "default";
 
-    private Context mCtx;
-    private IAsteroidDevice mDevice;
+    private final Context mCtx;
+    private final IAsteroidDevice mDevice;
     private SharedPreferences mSettings;
 
     private MediaController mMediaController = null;
@@ -192,7 +192,7 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
         mDevice.send(AsteroidUUIDS.MEDIA_VOLUME_CHAR, data, MediaService.this);
     }
 
-    private ContentObserver mVolumeChangeObserver = new ContentObserver(new Handler()) {
+    private final ContentObserver mVolumeChangeObserver = new ContentObserver(new Handler()) {
         // The last value of volume send to the watch.
         private int reportedVolume;
 
@@ -213,7 +213,7 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
     /**
      * Callback for the MediaController.
      */
-    private MediaController.Callback mMediaCallback = new MediaController.Callback() {
+    private final MediaController.Callback mMediaCallback = new MediaController.Callback() {
 
         @Override
         public void onAudioInfoChanged(MediaController.PlaybackInfo playbackInfo) {

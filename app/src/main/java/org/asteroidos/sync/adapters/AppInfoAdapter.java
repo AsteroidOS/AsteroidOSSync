@@ -30,9 +30,10 @@ import java.util.List;
 public class AppInfoAdapter extends ArrayAdapter<AppInfo> {
     private final static String TAG = AppInfoAdapter.class.getSimpleName();
 
-    private Context context;
-    private ArrayList<AppInfo> items;
-    private int iconSize, layout;
+    private final Context context;
+    private final ArrayList<AppInfo> items;
+    private int iconSize;
+    private final int layout;
 
     public AppInfoAdapter(Context context, int layout, ArrayList<AppInfo> items) {
         super(context, layout, items);
@@ -135,7 +136,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> {
     }
 
     abstract class MyOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
-        String packageName;
+        final String packageName;
 
         MyOnItemSelectedListener(String packageName) {
             this.packageName = packageName;
@@ -144,7 +145,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> {
 
     private class SeenPackagesFilter extends Filter {
 
-        private List<String> seenPackages;
+        private final List<String> seenPackages;
 
         private SeenPackagesFilter(List<String> seenPackages) {
             this.seenPackages = seenPackages;

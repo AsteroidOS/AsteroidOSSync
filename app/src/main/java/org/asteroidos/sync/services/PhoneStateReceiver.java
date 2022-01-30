@@ -34,8 +34,8 @@ public class PhoneStateReceiver extends BroadcastReceiver {
     }
 
     static class CallStateService extends PhoneStateListener {
-        private Context context;
-        private SharedPreferences prefs;
+        private final Context context;
+        private final SharedPreferences prefs;
 
         @SuppressWarnings("deprecation") // TODO The default constructor is deprecated. Fix asap
         CallStateService(Context con) {

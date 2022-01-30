@@ -27,9 +27,9 @@ public class AsteroidBleManager extends BleManager {
     public static final String TAG = AsteroidBleManager.class.toString();
     @Nullable
     public BluetoothGattCharacteristic batteryCharacteristic;
-    SynchronizationService mSynchronizationService;
-    ArrayList<BluetoothGattService> mGattServices;
-    public HashMap<UUID, IServiceCallback> recvCallbacks;
+    final SynchronizationService mSynchronizationService;
+    final ArrayList<BluetoothGattService> mGattServices;
+    public final HashMap<UUID, IServiceCallback> recvCallbacks;
     public HashMap<UUID, BluetoothGattCharacteristic> sendingCharacteristics;
 
     public AsteroidBleManager(@NonNull final Context context, SynchronizationService syncService) {

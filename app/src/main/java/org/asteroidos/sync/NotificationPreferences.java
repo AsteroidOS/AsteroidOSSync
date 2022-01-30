@@ -21,7 +21,7 @@ public class NotificationPreferences {
         STRONG_VIBRATION(4),
         RINGTONE_VIBRATION(5);
 
-        private int value;
+        private final int value;
         NotificationOption(int value) {
             this.value = value;
         }
