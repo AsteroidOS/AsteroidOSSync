@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         mDetailFragment = new DeviceDetailFragment();
 
         if (mListFragment != null)        mListFragment.scanningStopped();
-        else if (mDetailFragment != null) mDetailFragment.scanningStopped();
+        else mDetailFragment.scanningStopped();
 
         getSupportFragmentManager()
                 .beginTransaction()

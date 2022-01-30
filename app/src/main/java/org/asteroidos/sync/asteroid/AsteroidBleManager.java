@@ -79,7 +79,7 @@ public class AsteroidBleManager extends BleManager {
         public final boolean isRequiredServiceSupported(@NonNull final BluetoothGatt gatt) {
             final BluetoothGattService batteryService = gatt.getService(AsteroidUUIDS.BATTERY_SERVICE_UUID);
 
-            boolean supported = true;
+            boolean supported;
 
             boolean notify = false;
             if (batteryService != null) {

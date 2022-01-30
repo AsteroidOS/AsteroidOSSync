@@ -30,7 +30,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -46,7 +45,6 @@ import org.asteroidos.sync.asteroid.IAsteroidDevice;
 import org.asteroidos.sync.connectivity.SilentModeService;
 import org.asteroidos.sync.connectivity.TimeService;
 import org.asteroidos.sync.services.PhoneStateReceiver;
-import org.asteroidos.sync.services.SynchronizationService;
 
 public class DeviceDetailFragment extends Fragment {
     private TextView mDisconnectedText;
@@ -133,12 +131,15 @@ public class DeviceDetailFragment extends Fragment {
         });
 
         CardView screenshotCard = view.findViewById(R.id.card_view3);
-        screenshotCard.setOnClickListener(view1 -> getActivity().sendBroadcast(new Intent("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER")));
+        if (getActivity() != null)
+            screenshotCard.setOnClickListener(view1 ->
+                    getActivity().sendBroadcast(new Intent("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER")));
 
         CardView notifSettCard = view.findViewById(R.id.card_view4);
         notifSettCard.setOnClickListener(view14 -> mAppSettingsListener.onAppSettingsClicked());
 
-        mTimeSyncSettings = getActivity().getSharedPreferences(TimeService.PREFS_NAME, 0);
+        if (getActivity() != null)
+            mTimeSyncSettings = getActivity().getSharedPreferences(TimeService.PREFS_NAME, 0);
 
         mTimeSyncCheckBox = view.findViewById(R.id.timeSyncCheckBox);
         mTimeSyncCheckBox.setChecked(mTimeSyncSettings.getBoolean(TimeService.PREFS_SYNC_TIME, TimeService.PREFS_SYNC_TIME_DEFAULT));
@@ -148,7 +149,8 @@ public class DeviceDetailFragment extends Fragment {
             editor.apply();
         });
 
-        mSilenceModeSettings = getActivity().getSharedPreferences(SilentModeService.PREFS_NAME, Context.MODE_PRIVATE);
+        if (getActivity() != null)
+            mSilenceModeSettings = getActivity().getSharedPreferences(SilentModeService.PREFS_NAME, Context.MODE_PRIVATE);
         CheckBox mSilenceModeCheckBox = view.findViewById(R.id.SilentModeCheckBox);
         mSilenceModeCheckBox.setChecked(mSilenceModeSettings.getBoolean(SilentModeService.PREF_RINGER, false));
         mSilenceModeCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -184,18 +186,19 @@ public class DeviceDetailFragment extends Fragment {
     }
 
     public void setLocalName(String name) {
-        getActivity().setTitle(name);
+        if (getActivity() != null)
+            getActivity().setTitle(name);
     }
 
     public void setStatus(IAsteroidDevice.ConnectionState status) {
         mStatus = status;
-        if (status == IAsteroidDevice.ConnectionState.STATUS_CONNECTED){
+        if (status == IAsteroidDevice.ConnectionState.STATUS_CONNECTED) {
             mDisconnectedPlaceholder.setVisibility(View.GONE);
             mConnectedContent.setVisibility(View.VISIBLE);
             mFab.setImageResource(R.drawable.bluetooth_disconnect);
             mConnected = true;
             setMenuVisibility(true);
-        } else if (status == IAsteroidDevice.ConnectionState.STATUS_DISCONNECTED){
+        } else if (status == IAsteroidDevice.ConnectionState.STATUS_DISCONNECTED) {
             mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
             mConnectedContent.setVisibility(View.GONE);
             mDisconnectedText.setText(R.string.disconnected);
@@ -280,6 +283,7 @@ public class DeviceDetailFragment extends Fragment {
 
     public interface OnConnectRequestedListener {
         void onConnectRequested();
+
         void onDisconnectRequested();
     }
 

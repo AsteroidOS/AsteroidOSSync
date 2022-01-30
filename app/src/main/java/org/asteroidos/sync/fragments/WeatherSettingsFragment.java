@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -47,7 +46,8 @@ public class WeatherSettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
-        mSettings = getContext().getSharedPreferences(WeatherService.PREFS_NAME, 0);
+        if (getContext() != null)
+            mSettings = getContext().getSharedPreferences(WeatherService.PREFS_NAME, 0);
         setHasOptionsMenu(true);
 
         return inflater.inflate(R.layout.fragment_position_picker, parent, false);
@@ -192,7 +192,7 @@ public class WeatherSettingsFragment extends Fragment {
             }
             case WEATHER_LOCATION_PERMISSION_REQUEST: {
                 if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED && getContext() != null) {
                     MyLocationNewOverlay mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(getContext()), mMapView);
                     mLocationOverlay.enableMyLocation();
                     mMapView.getOverlays().add(mLocationOverlay);
