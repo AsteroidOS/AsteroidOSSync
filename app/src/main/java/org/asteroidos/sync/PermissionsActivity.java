@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
@@ -149,7 +150,7 @@ public class PermissionsActivity extends MaterialIntroActivity {
 
         @Nullable
         @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             Bundle bundle = new Bundle();
             bundle.putInt("background_color", R.color.colorintroslide4);
             bundle.putInt("buttons_color", R.color.colorintroslide4button);
@@ -189,7 +190,7 @@ public class PermissionsActivity extends MaterialIntroActivity {
 
         @Nullable
         @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             Bundle bundle = new Bundle();
             bundle.putInt("background_color", R.color.colorintroslide5);
             bundle.putInt("buttons_color", R.color.colorintroslide5button);

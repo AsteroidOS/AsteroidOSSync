@@ -34,6 +34,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -169,7 +170,7 @@ public class DeviceDetailFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.device_detail_manu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -231,7 +232,7 @@ public class DeviceDetailFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof DeviceDetailFragment.OnDefaultDeviceUnselectedListener)
             mDeviceListener = (DeviceDetailFragment.OnDefaultDeviceUnselectedListener) context;
