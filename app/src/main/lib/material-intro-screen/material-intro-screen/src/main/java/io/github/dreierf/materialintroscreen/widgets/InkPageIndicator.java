@@ -603,7 +603,6 @@ public class InkPageIndicator extends View implements CustomViewPager.OnPageChan
         StartPredicate predicate;
 
         PendingStartAnimator(StartPredicate predicate) {
-            super();
             this.predicate = predicate;
             hasStarted = false;
         }

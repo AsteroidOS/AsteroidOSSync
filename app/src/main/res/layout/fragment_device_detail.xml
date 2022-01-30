@@ -7,6 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context="org.asteroidos.sync.fragments.DeviceDetailFragment"
     tools:ignore="MergeRootFrame">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,19 +18,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/detail_bottom_margin"
             android:paddingLeft="@dimen/detail_horizontal_margin"
-            android:paddingRight="@dimen/detail_horizontal_margin"
             android:paddingTop="@dimen/detail_top_margin"
+            android:paddingRight="@dimen/detail_horizontal_margin"
+            android:paddingBottom="@dimen/detail_bottom_margin"
             android:visibility="invisible"
             tools:ignore="ScrollViewSize">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
+                android:layout_marginBottom="16dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -76,9 +77,9 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:clickable="true"
+                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                card_view:cardCornerRadius="4dp"
-                android:focusable="true">
+                card_view:cardCornerRadius="4dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -115,9 +116,9 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:clickable="true"
+                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                card_view:cardCornerRadius="4dp"
-                android:focusable="true">
+                card_view:cardCornerRadius="4dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -147,42 +148,30 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_view3"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:clickable="true"
+                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                card_view:cardCornerRadius="4dp"
-                android:focusable="true">
+                app:cardCornerRadius="4dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/info_icon3"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_margin="16dp"
-                        android:contentDescription="@string/screenshot_icon"
-                        android:src="@drawable/image"
-                        card_view:tint="?attr/colorControlNormal" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/info_icon3"
+                    android:text="@string/grab_a_screenshot"
+                    android:textSize="16sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@+id/info_icon3"
-                        android:text="@string/grab_a_screenshot"
-                        android:textSize="16sp" />
-
-                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -193,9 +182,9 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:clickable="true"
+                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                card_view:cardCornerRadius="4dp"
-                android:focusable="true">
+                card_view:cardCornerRadius="4dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -251,8 +240,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toStartOf="@+id/timeSyncCheckBox"
                         android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/timeSyncCheckBox"
                         android:layout_toEndOf="@+id/info_icon5"
                         android:text="@string/synchronize_time"
                         android:textSize="16sp" />
@@ -294,8 +283,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toStartOf="@+id/SilentModeCheckBox"
                         android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/SilentModeCheckBox"
                         android:layout_toEndOf="@+id/info_icon6"
                         android:text="@string/switch_phone_notifications"
                         android:textSize="16sp" />
@@ -310,6 +299,7 @@
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
@@ -336,8 +326,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toStartOf="@+id/CallStateServiceCheckBox"
                         android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/CallStateServiceCheckBox"
                         android:layout_toEndOf="@+id/info_icon_callnotification"
                         android:text="@string/show_calls_on_watch"
                         android:textSize="16sp" />
@@ -354,35 +344,25 @@
             </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
-    <LinearLayout
-        android:id="@+id/device_disconnected_placeholder"
+
+
+    <TextView
+        android:id="@+id/info_disconnected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:contentDescription="@string/disconnected"
-            android:src="@drawable/cloud" />
-
-        <TextView
-            android:id="@+id/info_disconnected"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/disconnected"
-            android:textSize="17sp"
-            android:textColor="#999999"/>
-    </LinearLayout>
+        android:text="@string/disconnected"
+        android:textAlignment="center"
+        android:textColor="#999999"
+        android:textSize="17sp"
+        app:drawableTopCompat="@drawable/cloud" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:src="@drawable/bluetooth_connect"
         app:elevation="8dp"

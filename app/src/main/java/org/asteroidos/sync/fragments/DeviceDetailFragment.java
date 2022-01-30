@@ -50,7 +50,6 @@ public class DeviceDetailFragment extends Fragment {
     private TextView mDisconnectedText;
     private TextView mBatteryText;
 
-    private LinearLayout mDisconnectedPlaceholder;
     private LinearLayout mConnectedContent;
 
     private SharedPreferences mTimeSyncSettings;
@@ -106,7 +105,6 @@ public class DeviceDetailFragment extends Fragment {
         mBatteryText.setText(mBatteryPercentage + " %");
 
         mConnectedContent = view.findViewById(R.id.device_connected_content);
-        mDisconnectedPlaceholder = view.findViewById(R.id.device_disconnected_placeholder);
 
         CardView weatherCard = view.findViewById(R.id.card_view1);
         weatherCard.setOnClickListener(view12 ->
@@ -193,20 +191,20 @@ public class DeviceDetailFragment extends Fragment {
     public void setStatus(IAsteroidDevice.ConnectionState status) {
         mStatus = status;
         if (status == IAsteroidDevice.ConnectionState.STATUS_CONNECTED) {
-            mDisconnectedPlaceholder.setVisibility(View.GONE);
+            mDisconnectedText.setVisibility(View.GONE);
             mConnectedContent.setVisibility(View.VISIBLE);
             mFab.setImageResource(R.drawable.bluetooth_disconnect);
             mConnected = true;
             setMenuVisibility(true);
         } else if (status == IAsteroidDevice.ConnectionState.STATUS_DISCONNECTED) {
-            mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
+            mDisconnectedText.setVisibility(View.VISIBLE);
             mConnectedContent.setVisibility(View.GONE);
             mDisconnectedText.setText(R.string.disconnected);
             mFab.setImageResource(R.drawable.bluetooth_connect);
             mConnected = false;
             setMenuVisibility(true);
         } else if (status == IAsteroidDevice.ConnectionState.STATUS_CONNECTING) {
-            mDisconnectedPlaceholder.setVisibility(View.VISIBLE);
+            mDisconnectedText.setVisibility(View.VISIBLE);
             mConnectedContent.setVisibility(View.GONE);
             mDisconnectedText.setText(R.string.connecting);
             setMenuVisibility(true);
