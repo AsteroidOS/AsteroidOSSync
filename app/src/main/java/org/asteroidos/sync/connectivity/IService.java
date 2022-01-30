@@ -9,6 +9,6 @@ package org.asteroidos.sync.connectivity;
  * ({@link IService#unsync()}) is called when the watch is disconnected.
  */
 public interface IService {
-    public void sync();
-    public void unsync();
+    void sync();
+    void unsync();
 }
