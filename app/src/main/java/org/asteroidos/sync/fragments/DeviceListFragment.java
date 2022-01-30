@@ -38,7 +38,6 @@ import com.skyfishjy.library.RippleBackground;
 import org.asteroidos.sync.R;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class DeviceListFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     private LeDeviceListAdapter mLeDeviceListAdapter;
