@@ -61,11 +61,6 @@ public class AsteroidBleManager extends BleManager {
         cancelQueue();
     }
 
-    @Override
-    protected final void finalize() throws Throwable {
-        super.finalize();
-    }
-
     public final void setBatteryLevel(Data data) {
         BatteryLevelEvent batteryLevelEvent = new BatteryLevelEvent();
         batteryLevelEvent.battery = Objects.requireNonNull(data.getByte(0)).intValue();
