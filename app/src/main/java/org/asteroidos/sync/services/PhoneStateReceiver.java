@@ -37,6 +37,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
         private Context context;
         private SharedPreferences prefs;
 
+        @SuppressWarnings("deprecation") // TODO The default constructor is deprecated. Fix asap
         CallStateService(Context con) {
             context = con;
             prefs = con.getSharedPreferences(PREFS_NAME, Activity.MODE_PRIVATE);

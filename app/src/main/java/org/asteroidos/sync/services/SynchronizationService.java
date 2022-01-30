@@ -354,6 +354,7 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
     static private class SynchronizationHandler extends Handler {
         private final SynchronizationService mService;
 
+        @SuppressWarnings("deprecation") // TODO The default constructor is deprecated. Fix asap
         SynchronizationHandler(SynchronizationService service) {
             mService = service;
         }

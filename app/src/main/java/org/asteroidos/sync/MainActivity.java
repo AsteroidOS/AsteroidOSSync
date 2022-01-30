@@ -423,6 +423,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     static private class SynchronizationHandler extends Handler {
         private final MainActivity mActivity;
 
+        @SuppressWarnings("deprecation") // TODO The default constructor is deprecated. Fix asap
         SynchronizationHandler(MainActivity activity) {
             mActivity = activity;
         }
