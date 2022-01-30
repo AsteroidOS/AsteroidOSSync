@@ -144,7 +144,7 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
 
         LeDeviceListAdapter() {
             super();
-            mLeDevices = new ArrayList<BluetoothDevice>();
+            mLeDevices = new ArrayList<>();
             mInflator = requireActivity().getLayoutInflater();
         }
 
