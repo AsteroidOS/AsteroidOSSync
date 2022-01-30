@@ -26,7 +26,7 @@ public class AppInfoHelper
         ArrayList<AppInfo> list = new ArrayList<>();
         PackageManager pm = context.getPackageManager();
         List<PackageInfo> pinfoList = pm.getInstalledPackages(0);
-        Collections.sort(pinfoList, pInfoPackageNameComparator);
+        pinfoList.sort(pInfoPackageNameComparator);
         // list seemingly starts scrambled on 4.3
 
         for(PackageInfo pinfo : pinfoList)

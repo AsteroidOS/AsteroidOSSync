@@ -60,12 +60,7 @@ public class TimeService implements IConnectivityService, SharedPreferences.OnSh
     @Override
     public final void sync() {
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                updateTime();
-            }
-        }, 500);
+        handler.postDelayed(this::updateTime, 500);
 
         // Register a broadcast handler to use for the alarm Intent
         // Also listen for TIME_CHANGED and TIMEZONE_CHANGED events

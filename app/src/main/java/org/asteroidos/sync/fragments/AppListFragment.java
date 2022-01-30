@@ -37,10 +37,7 @@ public class AppListFragment extends Fragment {
         listView.setAdapter(adapter);
 
         placeholder = view.findViewById(R.id.no_notification_placeholder);
-        adapter.getFilter().filter("", new Filter.FilterListener() {
-            public void onFilterComplete(int count) {
-                placeholder.setVisibility(count == 0 ? View.VISIBLE : View.INVISIBLE);
-            }
-        });
+        adapter.getFilter().filter("", count ->
+                placeholder.setVisibility(count == 0 ? View.VISIBLE : View.INVISIBLE));
     }
 }

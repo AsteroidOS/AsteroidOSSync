@@ -83,44 +83,38 @@ public class WeatherSettingsFragment extends Fragment {
         }
 
         mButton = view.findViewById(R.id.positionPickerButton);
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IGeoPoint center = mMapView.getMapCenter();
+        mButton.setOnClickListener(v -> {
+            IGeoPoint center = mMapView.getMapCenter();
 
-                float latitude = (float) center.getLatitude();
-                float longitude = (float) center.getLongitude();
-                float zoom = (float) mMapView.getZoomLevelDouble();
+            float latitude1 = (float) center.getLatitude();
+            float longitude1 = (float) center.getLongitude();
+            float zoom1 = (float) mMapView.getZoomLevelDouble();
 
-                SharedPreferences.Editor editor = mSettings.edit();
-                editor.putFloat(WeatherService.PREFS_LATITUDE, latitude);
-                editor.putFloat(WeatherService.PREFS_LONGITUDE, longitude);
-                editor.putFloat(WeatherService.PREFS_ZOOM, zoom);
-                editor.apply();
+            SharedPreferences.Editor editor = mSettings.edit();
+            editor.putFloat(WeatherService.PREFS_LATITUDE, latitude1);
+            editor.putFloat(WeatherService.PREFS_LONGITUDE, longitude1);
+            editor.putFloat(WeatherService.PREFS_ZOOM, zoom1);
+            editor.apply();
 
-                // Update the Weather after changing it
-                getActivity().sendBroadcast(new Intent(WeatherService.WEATHER_SYNC_INTENT));
+            // Update the Weather after changing it
+            getActivity().sendBroadcast(new Intent(WeatherService.WEATHER_SYNC_INTENT));
 
-                getActivity().onBackPressed();
-            }
+            getActivity().onBackPressed();
         });
 
         mWeatherSyncSettings = getActivity().getSharedPreferences(WeatherService.PREFS_NAME, 0);
 
         mWeatherSyncCheckBox = view.findViewById(R.id.autoLocationPickerButton);
         mWeatherSyncCheckBox.setChecked(mWeatherSyncSettings.getBoolean(WeatherService.PREFS_SYNC_WEATHER, WeatherService.PREFS_SYNC_WEATHER_DEFAULT));
-        mWeatherSyncCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton ignored, boolean checked) {
-                if (ContextCompat.checkSelfPermission(getActivity(),
-                        Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                            WEATHER_LOCATION_SYNC_PERMISSION_REQUEST);
-                } else {
-                    handleLocationToggle(mWeatherSyncCheckBox.isChecked());
-                }
+        mWeatherSyncCheckBox.setOnCheckedChangeListener((ignored, checked) -> {
+            if (ContextCompat.checkSelfPermission(getActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        WEATHER_LOCATION_SYNC_PERMISSION_REQUEST);
+            } else {
+                handleLocationToggle(mWeatherSyncCheckBox.isChecked());
             }
         });
 
