@@ -47,6 +47,7 @@ public class AppInfo
         return system;
     }
     public int compareTo(@NonNull AppInfo appInfo) { return label.compareToIgnoreCase(appInfo.getLabel()); }
+    @NonNull
     public String toString()
     {
         return label + " : " + packageName;
