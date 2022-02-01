@@ -47,7 +47,7 @@
     <string name="intro_slide1_subtitle">Cette application vous permet de synchroniser votre téléphone Android avec votre montre AsteroidOS. Mais d\'abord, elle a besoin de quelques permissions.</string>
     <string name="intro_slide2_title">Accès aux fichiers</string>
     <string name="intro_slide2_subtitle">Pour mettre en cache les données et sauvegarder les captures d\'écran de votre montre.</string>
-    <string name="intro_slide3_title">Localisation</string>
+    <string name="intro_slide3_title">Localisation et Bluetooth</string>
     <string name="intro_slide3_subtitle">Rechercher des périphériques Bluetooth Low Energy à proximité.</string>
     <string name="intro_slide5_title">Optimisation de la batterie</string>
     <string name="intro_slide5_subtitle">Pour laisser cette application s\'exécuter en arrière-plan, veuillez désactiver l\'optimisation de la batterie pour AsteroidOS Sync dans le menu suivant :</string>
