@@ -22,8 +22,8 @@
     <string name="intro_slide5_title">Otimização da bateria</string>
     <string name="intro_slide4_subtitle">Para sincronizar notificações com o relógio, permita \"AsteroidOS Sync\" no seguinte menu:</string>
     <string name="intro_slide4_title">Notificações</string>
-    <string name="intro_slide3_subtitle">Para procurar por aparelhos Bluetooth de baixo consumo nas proximidades.</string>
-    <string name="intro_slide3_title">Localização</string>
+    <string name="intro_slide3_subtitle">Para procurar por e ligar a aparelhos de Bluetooth Low Energy próximos.</string>
+    <string name="intro_slide3_title">Localização &amp; Bluetooth</string>
     <string name="intro_slide2_subtitle">Para armazenar os dados em cache e guardar as capturas de ecrã do seu relógio.</string>
     <string name="intro_slide2_title">Acesso aos ficheiros</string>
     <string name="intro_slide1_subtitle">Esta app permite-lhe sincronizar o seu telemóvel Android com o seu relógio AsteroidOS. Mas primeiro, ela precisa de algumas permissões.</string>
