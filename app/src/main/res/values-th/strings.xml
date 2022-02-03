@@ -15,8 +15,8 @@
     <string name="intro_slide5_title">การเพิ่มประสิทธิภาพแบตเตอรี่</string>
     <string name="intro_slide4_subtitle">ในการซิงค์การแจ้งเตือนกับนาฬิกาของคุณให้อนุญาต \"AsteroidOS Sync\" ในเมนูต่อไปนี้:</string>
     <string name="intro_slide4_title">การแจ้งเตือน</string>
-    <string name="intro_slide3_subtitle">เพื่อสแกนหาอุปกรณ์ Bluetooth Low Energy ที่อยู่ใกล้เคียง</string>
-    <string name="intro_slide3_title">สถานที่</string>
+    <string name="intro_slide3_subtitle">เพื่อสแกนและเชื่อมต่ออุปกรณ์ Bluetooth Low Energy ที่อยู่ใกล้เคียง</string>
+    <string name="intro_slide3_title">สถานที่ &amp; Bluetooth</string>
     <string name="intro_slide2_subtitle">เพื่อแคชข้อมูลและบันทึกภาพหน้าจอของนาฬิกา</string>
     <string name="explain_app_prefs">การแจ้งเตือนจากแอพของคุณจะปรากฏที่นี่</string>
     <string name="notification_type_strong_vibra">การสั่นสะเทือนแบบแรง</string>
