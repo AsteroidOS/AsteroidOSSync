@@ -72,6 +72,6 @@
     <string name="OWM_API_KEY">Clé d\'API OWM</string>
     <string name="apply">Appliquer</string>
     <string name="cancel">Annuler</string>
-    <string name="location_disabled_message">Pour retrouver les montres, le service de localisation doit être activé. Une fois appairé, vous pouvez le désactiver à nouveau en toute sécurité.</string>
+    <string name="location_disabled_message">Pour trouver les montres, le service de localisation doit être activé. Une fois appairé, vous pouvez le désactiver à nouveau en toute sécurité.</string>
     <string name="location_disabled_title">Localisation désactivée</string>
 </resources>
