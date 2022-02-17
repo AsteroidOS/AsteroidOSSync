@@ -1,0 +1,5 @@
+0.22
+  * Custom OWM API Key setting 
+  * Android 12 bluetooth fixes
+  * Translation improvements
+  * Update dependencies
