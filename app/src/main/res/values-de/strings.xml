@@ -47,7 +47,7 @@
     <string name="intro_slide1_subtitle">Mit dieser Anwendung kannst du dein Android-Telefon mit deiner AsteroidOS-Uhr synchronisieren. Aber zuerst benötigst du einige Berechtigungen.</string>
     <string name="intro_slide2_title">Dateizugriff</string>
     <string name="intro_slide2_subtitle">Diese Berechtigung wird benötigt, um Daten zwischenzuspeichern und Screenshots deiner Uhr zu speichern.</string>
-    <string name="intro_slide3_title">Standort</string>
+    <string name="intro_slide3_title">Standort &amp; Bluetooth</string>
     <string name="intro_slide3_subtitle">Um nach Bluetooth-Geräten in der Nähe zu suchen.</string>
     <string name="intro_slide5_title">Batterieoptimierung</string>
     <string name="intro_slide5_subtitle">Um diese App im Hintergrund laufen zu lassen, deaktiviere bitte \"Batterieoptimierung\" für AsteroidOS Sync im folgenden Menü:</string>
