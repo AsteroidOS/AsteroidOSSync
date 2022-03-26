@@ -3,19 +3,19 @@ plugins {
 }
 
 android {
-    compileSdkVersion(31)
-    buildToolsVersion("30.0.2")
+    compileSdk = 31
+    buildToolsVersion = "30.0.3"
 
     defaultConfig {
-        applicationId("org.asteroidos.sync")
-        minSdkVersion(24)
-        targetSdkVersion(30)
-        versionCode(22)
-        versionName("0.22")
+        applicationId = "org.asteroidos.sync"
+        minSdk = 24
+        targetSdk = 30
+        versionCode = 22
+        versionName = "0.22"
     }
     buildTypes {
         named("release") {
-            minifyEnabled(false)
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
@@ -34,19 +34,20 @@ android {
         }
     }
 
-    lintOptions {
-        isCheckReleaseBuilds = false
-        disable("MissingTranslation")
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    lint {
+        checkReleaseBuilds = true
+        disable += "MissingTranslation"
     }
 }
 
 repositories {
     mavenCentral()
     maven("https://maven.google.com")
+    maven("https://jitpack.io")
 }
 
 dependencies {
@@ -56,7 +57,7 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.google.android.material:material:1.4.0")
-    implementation("github.vatsal.easyweather:library:1.0.0")
+    implementation("com.github.code-crusher:EasyWeather:1.2")
     implementation("com.google.code.gson:gson:2.8.8")
     implementation("org.osmdroid:osmdroid-android:6.1.6")
     implementation("no.nordicsemi.android.support.v18:scanner:1.5.1")
