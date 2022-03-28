@@ -1,19 +1,17 @@
-package org.asteroidos.sync.connectivity;
+package org.asteroidos.sync.connectivity
 
-import java.util.HashMap;
-import java.util.UUID;
+import org.asteroidos.sync.connectivity.IService
+import java.util.*
 
 /**
- * A connectivity service is a module that can exchange data with the watch. It has to implement {@link IService}
- * and additional functions regarding connectivity from {@link IConnectivityService}.
+ * A connectivity service is a module that can exchange data with the watch. It has to implement [IService]
+ * and additional functions regarding connectivity from [IConnectivityService].
  */
-public interface IConnectivityService extends IService {
-    enum Direction{
-        FROM_WATCH,
-        TO_WATCH
+interface IConnectivityService : IService {
+    enum class Direction {
+        FROM_WATCH, TO_WATCH
     }
 
-    HashMap<UUID, Direction> getCharacteristicUUIDs();
-
-    UUID getServiceUUID();
+    val characteristicUUIDs: HashMap<UUID, Direction>
+    val serviceUUID: UUID
 }
