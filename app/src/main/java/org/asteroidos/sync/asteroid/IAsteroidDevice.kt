@@ -1,32 +1,27 @@
-package org.asteroidos.sync.asteroid;
+package org.asteroidos.sync.asteroid
 
-import org.asteroidos.sync.connectivity.IConnectivityService;
-import org.asteroidos.sync.connectivity.IServiceCallback;
+import org.asteroidos.sync.connectivity.IConnectivityService
+import org.asteroidos.sync.connectivity.IServiceCallback
+import java.util.*
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-
-public interface IAsteroidDevice {
-    String name = "";
-    String macAddress = "";
-    int batteryPercentage = 0;
-    boolean bonded = false;
-
-    enum ConnectionState {
-        STATUS_CONNECTED,
-        STATUS_CONNECTING,
-        STATUS_DISCONNECTED
+interface IAsteroidDevice {
+    enum class ConnectionState {
+        STATUS_CONNECTED, STATUS_CONNECTING, STATUS_DISCONNECTED
     }
 
-    ConnectionState getConnectionState();
+    val connectionState: ConnectionState
+    fun send(characteristic: UUID?, data: ByteArray?, service: IConnectivityService?)
+    fun registerBleService(service: IConnectivityService?)
+    fun unregisterBleService(serviceUUID: UUID?)
+    fun registerCallback(characteristicUUID: UUID?, callback: IServiceCallback?)
+    fun unregisterCallback(characteristicUUID: UUID?)
+    fun getServiceByUUID(uuid: UUID?): IConnectivityService?
+    val services: HashMap<UUID?, IConnectivityService?>?
 
-    void send(UUID characteristic, byte[] data, IConnectivityService service);
-    void registerBleService(IConnectivityService service);
-    void unregisterBleService(UUID serviceUUID);
-    void registerCallback(UUID characteristicUUID, IServiceCallback callback);
-    void unregisterCallback(UUID characteristicUUID);
-
-    IConnectivityService getServiceByUUID(UUID uuid);
-    HashMap<UUID, IConnectivityService> getServices();
+    companion object {
+        const val name = ""
+        const val macAddress = ""
+        const val batteryPercentage = 0
+        const val bonded = false
+    }
 }
