@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    kotlin("android")
 }
 
 android {
@@ -62,4 +63,6 @@ dependencies {
     implementation("org.osmdroid:osmdroid-android:6.1.6")
     implementation("no.nordicsemi.android.support.v18:scanner:1.5.1")
     implementation("no.nordicsemi.android:ble:2.3.1")
+    implementation("androidx.core:core-ktx:+")
+    implementation(kotlin("stdlib-jdk7"))
 }
