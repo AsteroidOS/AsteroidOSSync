@@ -1,6 +1,7 @@
 package org.asteroidos.sync;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -211,6 +212,7 @@ public class PermissionsActivity extends MaterialIntroActivity {
                 return (pm != null && !pm.isIgnoringBatteryOptimizations(packageName));
         }
 
+        @SuppressLint("BatteryLife") // Ignore violation of play store content policy :P
         @Override
         public void askForPermissions() {
             Intent intent = new Intent();
