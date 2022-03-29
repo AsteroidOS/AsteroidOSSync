@@ -5,5 +5,4 @@
     <dimen name="detail_horizontal_margin">20dp</dimen>
     <dimen name="detail_top_margin">30dp</dimen>
     <dimen name="detail_bottom_margin">70dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
 </resources>
