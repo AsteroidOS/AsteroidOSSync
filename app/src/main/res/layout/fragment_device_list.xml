@@ -39,9 +39,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="40dp" >
 
-        <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <ListView xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/device_list"
             android:name="org.asteroidos.sync.DeviceListFragment"
             android:layout_width="match_parent"
