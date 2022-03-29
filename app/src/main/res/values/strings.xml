@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">AsteroidOS Sync</string>
+    <string name="app_name">AsteroidOS Sync</string>
     <string name="generic_ok">OK</string>
     <string name="searching">Searching for watches</string>
     <string name="unknown_device">Unknown Device</string>
