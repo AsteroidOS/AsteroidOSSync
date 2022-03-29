@@ -4,9 +4,10 @@
     <string name="searching">Пошук годинників</string>
     <string name="unknown_device">Невідомий пристрій</string>
     <plurals name="watches_found">
-        <item quantity="zero">Годинники, не знайдено</item>
-        <item quantity="one">Знайдено один годинник</item>
+        <item quantity="one">Знайдено %d годинник </item>
         <item quantity="other">%d годинника(-ів) знайдено</item>
+        <item quantity="many">знайдено багато годинників</item>
+        <item quantity="few">знайдено кілька годинників</item>
     </plurals>
     <string name="intro_slideerror_subtitle">Схоже, що Bluetooth Low Energy не підтримується на цьому пристрої.</string>
     <string name="disconnected">Від\'єднано</string>

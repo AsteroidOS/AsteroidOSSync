@@ -4,9 +4,10 @@
     <string name="searching">Vyhľadávanie hodiniek</string>
     <string name="unknown_device">Neznáme zariadenie</string>
     <plurals name="watches_found">
-        <item quantity="zero">Neboli nájdené žiadne hodinky</item>
         <item quantity="one">Nájdené jedny hodinky</item>
         <item quantity="other">Nájdené %d hodiniek</item>
+        <item quantity="few">Našlo sa málo hodiniek</item>
+        <item quantity="many">Nájdených veľa hodiniek</item>
     </plurals>
     <string name="disconnected">Odpojené</string>
     <string name="connected">Pripojené</string>

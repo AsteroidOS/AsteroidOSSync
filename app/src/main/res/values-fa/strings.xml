@@ -4,7 +4,7 @@
     <string name="searching">در جست‌وجوی ساعت‌ها</string>
     <string name="unknown_device">دستگاه ناشناخته</string>
     <plurals name="watches_found">
-        <item quantity="one">۱ ساعت پیدا شد</item>
+        <item quantity="one">%d ساعت پیدا شد</item>
         <item quantity="other">%d ساعت پیدا شد</item>
     </plurals>
     <string name="intro_slideerror_subtitle">این دستگاه از بلوتوث کم‌مصرف پشتیبانی نمی‌کند.</string>

@@ -61,9 +61,9 @@
     <string name="connected">Conectat</string>
     <string name="disconnected">Deconectat</string>
     <plurals name="watches_found">
-        <item quantity="zero">Nu s-au găsit ceasuri</item>
         <item quantity="one">S-a găsit un ceas</item>
         <item quantity="other">S-au găsit %d ceasuri</item>
+        <item quantity="few">Câteva ceasuri găsite </item>
     </plurals>
     <string name="unknown_device">Dispozitiv necunoscut</string>
     <string name="searching">Căutare ceasuri</string>

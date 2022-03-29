@@ -63,9 +63,10 @@
     <string name="connected">Prisijungta</string>
     <string name="disconnected">Atsijungta</string>
     <plurals name="watches_found">
-        <item quantity="zero">Jokie laikrodžiai nerasti</item>
-        <item quantity="one">Rastas vienas laikrodis</item>
+        <item quantity="one">Rastas %d laikrodis</item>
         <item quantity="other">Rasti %d laikrodžiai</item>
+        <item quantity="few">Rasta nedaug laikrodžių</item>
+        <item quantity="many">Rasta daug laikrodžių</item>
     </plurals>
     <string name="unknown_device">Nežinomas įrenginys</string>
     <string name="searching">Ieškoma laikrodžių</string>

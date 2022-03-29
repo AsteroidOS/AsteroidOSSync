@@ -4,7 +4,7 @@
     <string name="searching">Procurando relógios</string>
     <string name="unknown_device">Dispositivo desconhecido</string>
     <plurals name="watches_found">
-        <item quantity="one">Um relógio foi encontrado</item>
+        <item quantity="one">%d relógio encontrado</item>
         <item quantity="other">Encontrados %d relógios</item>
     </plurals>
     <string name="intro_slideerror_subtitle">Este dispositivo não suporta o Bluetooth de baixa energia.</string>

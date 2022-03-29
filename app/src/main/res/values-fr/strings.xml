@@ -4,9 +4,9 @@
     <string name="searching">Recherche de montres</string>
     <string name="unknown_device">Périphérique inconnu</string>
     <plurals name="watches_found">
-        <item quantity="zero">Aucune montre trouvée</item>
-        <item quantity="one">Une montre trouvée</item>
+        <item quantity="one">%d montre trouvée</item>
         <item quantity="other">%d montres trouvées</item>
+        <item quantity="many">Beaucoup de montres trouvées </item>
     </plurals>
     <string name="intro_slideerror_subtitle">Ce périphérique ne supporte pas le Bluetooth Low Energy.</string>
     <string name="disconnected">Déconnecté</string>

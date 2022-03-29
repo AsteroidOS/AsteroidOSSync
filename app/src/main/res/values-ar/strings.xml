@@ -4,7 +4,10 @@
     <string name="searching">بحث عن الساعات</string>
     <string name="unknown_device">جهاز غير معروف</string>
     <plurals name="watches_found">
+        <item quantity="many">تم العثور على العديد من الساعات </item>
         <item quantity="zero">لا يوجد ساعات</item>
+        <item quantity="two">وجدت ساعتين </item>
+        <item quantity="few">تم العثور على عدد قليل من الساعات</item>
         <item quantity="one">العثور على ساعة واحدة</item>
         <item quantity="other">تم العثور على %d ساعات</item>
     </plurals>
