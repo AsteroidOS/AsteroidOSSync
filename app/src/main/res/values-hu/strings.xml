@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">OK</string>
     <string name="searching">Órák keresése</string>
     <string name="unknown_device">Ismeretlen eszköz</string>
     <plurals name="watches_found">
@@ -18,7 +17,6 @@
     <string name="watch_finder">Óra kereső</string>
     <string name="notifications_settings">Értesítés beállítások</string>
     <string name="weather_settings">Időjárás beállítások</string>
-    <string name="enter_city_name">Írja be a város nevét:</string>
     <string name="unpair">Párosítás megszüntetése</string>
     <string name="downloading">Letöltés…</string>
     <string name="downloaded">Letöltés befejeződött</string>
@@ -57,9 +55,6 @@
     <string name="intro_slide3_subtitle">A közeli Bluetooth Low Energy eszközök keresése.</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy támogatás</string>
     <string name="intro_slideerror_subtitle">Ez az eszköz nem támogatja a Bluetooth Low Energyt.</string>
-    <string name="title_activity_settings_activity">Beállítások</string>
-    <string name="action_settings">Beállítások</string>
-    <string name="title_activity_settings">Beállítások</string>
     <string name="switch_phone_notifications">Telefon némítása amikor kapcsolódva van</string>
     <string name="notification_silent_icon">értesítés csendes ikon</string>
     <string name="notification_type_ringtone">Csengőhang</string>

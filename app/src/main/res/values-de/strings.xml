@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">OK</string>
     <string name="searching">Uhren werden gesucht</string>
     <string name="unknown_device">Unbekanntes Gerät</string>
     <plurals name="watches_found">
@@ -28,7 +27,6 @@
     <string name="intro_slide4_title">Mitteilungen</string>
     <string name="intro_slide4_subtitle">Um Mitteilungen mit deiner Uhr synchronisieren zu können, bitte „AsteroidOS Sync“ im folgenden Menü erlauben:</string>
     <string name="weather_settings">Wettereinstellungen</string>
-    <string name="enter_city_name">Namen der Stadt eingeben:</string>
     <string name="unpair">Kopplung aufheben</string>
     <string name="scanning">Suchen …</string>
     <string name="downloading">Wird heruntergeladen …</string>
@@ -58,9 +56,6 @@
     <string name="impassable_slide">Bitte diese Erlaubnis gewähren</string>
     <string name="synchronize_weather">Wetter automatisch ermitteln</string>
     <string name="switch_phone_notifications">Telefon stumm schalten, wenn verbunden</string>
-    <string name="title_activity_settings_activity">Einstellungen</string>
-    <string name="action_settings">Einstellungen</string>
-    <string name="title_activity_settings">Einstellungen</string>
     <string name="notification_silent_icon">Symbol für stille Benachrichtigung</string>
     <string name="notification_type_ringtone">Klingelton</string>
     <string name="intro_phonestateslide_subtitle">Um eingehende Anrufe und den Namen des Anrufers auf der Uhr anzuzeigen.</string>

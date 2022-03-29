@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">Feito</string>
     <string name="searching">Estase a procurar reloxos</string>
     <string name="unknown_device">Dispositivo descoñecido</string>
     <plurals name="watches_found">
@@ -25,7 +24,6 @@
     <string name="phone_is_searching">O teléfono móbil estache a procurar!</string>
     <string name="notifications_settings">Axustes das notificacións</string>
     <string name="weather_settings">Axustes da meteoroloxía</string>
-    <string name="enter_city_name">Insire o nome dunha cidade:</string>
     <string name="unpair">Desemparellar</string>
     <string name="scanning">Estase a escanear…</string>
     <string name="downloading">Estase a descarregar…</string>
@@ -57,9 +55,6 @@
     <string name="grant_permission">Outorgar permiso</string>
     <string name="please_grant_permissions">Por favor, outorga este permiso</string>
     <string name="impassable_slide">Por favor, outorga este permiso</string>
-    <string name="title_activity_settings_activity">Axustes</string>
-    <string name="action_settings">Axustes</string>
-    <string name="title_activity_settings">Axustes</string>
     <string name="switch_phone_notifications">Sileciar o teléfono cando está conectado</string>
     <string name="notification_silent_icon">Icona de silenciar</string>
     <string name="intro_slideandroidgo_subtitle">Non se admite Android Go porque non permite o acceso ás notificacións e restrinxe os procesos en segundo plano. Se conta con acceso «root», pódese definir a opción «ro.config.low_ram» do ficheiro build.prop como «false».</string>

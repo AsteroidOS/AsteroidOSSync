@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">OK</string>
     <string name="searching">Wyszukiwanie zegarków</string>
     <string name="unknown_device">Nieznane Urządzenie</string>
     <plurals name="watches_found">
@@ -30,7 +29,6 @@
     <string name="intro_slide4_title">Powiadomienia</string>
     <string name="intro_slide4_subtitle">Aby zsynchronizować powiadomienia z zegarkiem, włącz \"AsteroidOS Sync\" w następującym menu:</string>
     <string name="weather_settings">Ustawienia pogody</string>
-    <string name="enter_city_name">Wpisz nazwę miasta:</string>
     <string name="unpair">Rozłącz</string>
     <string name="scanning">Skanowanie…</string>
     <string name="downloading">Pobieranie…</string>
@@ -59,9 +57,6 @@
     <string name="please_grant_permissions">Proszę udzielić tych uprawnień</string>
     <string name="impassable_slide">Proszę udzielić tych uprawnień</string>
     <string name="synchronize_weather">Ustaw pogodę automatycznie</string>
-    <string name="title_activity_settings_activity">Ustawienia</string>
-    <string name="action_settings">Ustawienia</string>
-    <string name="title_activity_settings">Ustawienia</string>
     <string name="switch_phone_notifications">Wyciszenie telefonu po podłączeniu</string>
     <string name="notification_silent_icon">Ikona trybu cichego w powiadomieniach</string>
     <string name="notification_type_ringtone">Dzwonek</string>

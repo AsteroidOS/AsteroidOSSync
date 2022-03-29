@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">موافق</string>
     <string name="searching">بحث عن الساعات</string>
     <string name="unknown_device">جهاز غير معروف</string>
     <plurals name="watches_found">
@@ -39,7 +38,6 @@
     <string name="phone_is_searching">الهاتف يبحث عنك!</string>
     <string name="notifications_settings">إعدادات الاشعارات</string>
     <string name="weather_settings">إعدادات الطقس</string>
-    <string name="enter_city_name">أدخل اسم المدينة:</string>
     <string name="unpair">إلغاء الاقتران</string>
     <string name="scanning">يفحص…</string>
     <string name="downloading">جارى التحميل…</string>
@@ -68,9 +66,6 @@
     <string name="grant_permission">منح الإذن</string>
     <string name="please_grant_permissions">الرجاء منح هذا الإذن</string>
     <string name="impassable_slide">الرجاء منح هذا الإذن</string>
-    <string name="title_activity_settings_activity">الإعدادات</string>
-    <string name="action_settings">الإعدادات</string>
-    <string name="title_activity_settings">الإعدادات</string>
     <string name="switch_phone_notifications">كتم صوت الهاتف عند الاتصال</string>
     <string name="notification_silent_icon">أيقونة صامتة للإشعار</string>
     <string name="notification_type_ringtone">نغمة الرنين</string>

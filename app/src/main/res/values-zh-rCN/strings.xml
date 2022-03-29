@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">确认</string>
     <string name="searching">正在搜寻周围的手表</string>
     <string name="unknown_device">未知设备</string>
     <plurals name="watches_found">
@@ -27,7 +26,6 @@
     <string name="intro_slide4_title">通知</string>
     <string name="intro_slide4_subtitle">要同步通知，您需要在接下来的菜单中允许AsteroidOS 同步:</string>
     <string name="weather_settings">天气设置</string>
-    <string name="enter_city_name">请输入城市名称：</string>
     <string name="unpair">取消配对</string>
     <string name="scanning">正在扫描…</string>
     <string name="downloading">正在下载…</string>
@@ -56,9 +54,6 @@
     <string name="please_grant_permissions">请授予此权限</string>
     <string name="impassable_slide">请授予此权限</string>
     <string name="synchronize_weather">自动定位天气</string>
-    <string name="title_activity_settings_activity">设置</string>
-    <string name="action_settings">设置</string>
-    <string name="title_activity_settings">设置</string>
     <string name="switch_phone_notifications">连接时让手机静音</string>
     <string name="notification_silent_icon">通知静音图标</string>
     <string name="notification_type_ringtone">铃声</string>

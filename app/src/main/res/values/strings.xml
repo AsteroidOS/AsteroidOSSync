@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AsteroidOS Sync</string>
-    <string name="generic_ok">OK</string>
     <string name="searching">Searching for watches</string>
     <string name="unknown_device">Unknown Device</string>
     <plurals name="watches_found">
@@ -27,7 +26,6 @@
     <string name="phone_is_searching">The phone is searching for you!</string>
     <string name="notifications_settings">Notifications settings</string>
     <string name="weather_settings">Weather settings</string>
-    <string name="enter_city_name">Enter a city name:</string>
     <string name="unpair">Unpair</string>
     <string name="scanning">Scanning…</string>
     <string name="downloading">Downloading…</string>
@@ -61,9 +59,6 @@
     <string name="grant_permission">Grant permission</string>
     <string name="please_grant_permissions">Please grant this permission</string>
     <string name="impassable_slide">Please grant this permission</string>
-    <string name="title_activity_settings_activity">Settings</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_settings">Settings</string>
     <string name="switch_phone_notifications">Silence the phone when connected</string>
     <string name="notification_silent_icon">Notification Silent Icon</string>
     <string name="notification_type_ringtone">Ringtone</string>

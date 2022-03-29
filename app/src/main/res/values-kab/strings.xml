@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">IH</string>
     <string name="searching">Anadi n temrilin</string>
     <string name="unknown_device">Ibenk arussin</string>
     <plurals name="watches_found">
@@ -29,7 +28,6 @@
     <string name="intro_slide4_title">Alɣuten</string>
     <string name="intro_slide4_subtitle">"Akken ad tremdeḍ amtawi n ilɣuten, issefk ad tsirgeḍ  AsteroidOS Sync deg umuɣ-a."</string>
     <string name="weather_settings">Iɣewwaṛen n tegnawt</string>
-    <string name="enter_city_name">Sekcem isem n uɣrem:</string>
     <string name="unpair">Err d asuf</string>
     <string name="scanning">Asnirem…</string>
     <string name="downloading">Asider…</string>
@@ -64,8 +62,5 @@
     <string name="notification_type_ringtone">Teṭenṭunt</string>
     <string name="notification_silent_icon">Tignit n tsusmi n yilɣa</string>
     <string name="switch_phone_notifications">Tiliɣri teqqen s tsusmi</string>
-    <string name="title_activity_settings">Iɣewwaṛen</string>
-    <string name="action_settings">Iɣewwaṛen</string>
-    <string name="title_activity_settings_activity">Iɣewwaṛen</string>
     <string name="synchronize_weather">Adig awurman n tegnawt</string>
 </resources>

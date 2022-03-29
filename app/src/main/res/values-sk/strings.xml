@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">OK</string>
     <string name="searching">Vyhľadávanie hodiniek</string>
     <string name="unknown_device">Neznáme zariadenie</string>
     <plurals name="watches_found">
@@ -27,7 +26,6 @@
     <string name="phone_is_searching">Telefón vás vyhľadáva!</string>
     <string name="notifications_settings">Nastavenia oznámení</string>
     <string name="weather_settings">Nastavenie počasia</string>
-    <string name="enter_city_name">Zadajte názov mesta:</string>
     <string name="unpair">Zrušiť párovanie</string>
     <string name="scanning">Skenovanie…</string>
     <string name="downloading">Sťahovanie…</string>
@@ -59,9 +57,6 @@
     <string name="please_grant_permissions">Prosím udeľte toto povolenie</string>
     <string name="impassable_slide">Prosím udeľte toto povolenie</string>
     <string name="synchronize_weather">Vyhľadať počasie automaticky</string>
-    <string name="title_activity_settings_activity">Nastavenia</string>
-    <string name="action_settings">Nastavenia</string>
-    <string name="title_activity_settings">Nastavenia</string>
     <string name="switch_phone_notifications">Stlmiť telefón pri pripojení</string>
     <string name="notification_silent_icon">Ikona tichého oznámenia</string>
     <string name="notification_type_ringtone">Zvonenie</string>

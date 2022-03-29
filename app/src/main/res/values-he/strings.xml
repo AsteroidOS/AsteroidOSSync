@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">סנכרון AsteroidOS</string>
-    <string name="generic_ok">אישור</string>
     <string name="searching">חיפוש אחר שעונים</string>
     <string name="unknown_device">התקן לא ידוע</string>
     <plurals name="watches_found">
@@ -31,7 +30,6 @@
     <string name="intro_slide4_title">התרעות</string>
     <string name="intro_slide4_subtitle">כדי לסנכרן התרעות, עליך לאפשר את ה„סנכרון של AsteroidOS” בתפריט הבא:</string>
     <string name="weather_settings">הגדרות מזג האוויר</string>
-    <string name="enter_city_name">נא להזין שם עיר:</string>
     <string name="unpair">ביטול צימוד</string>
     <string name="scanning">סריקה…</string>
     <string name="downloading">הורדה…</string>
@@ -60,9 +58,6 @@
     <string name="please_grant_permissions">נא להעניק הרשאה זו</string>
     <string name="impassable_slide">נא להעניק הרשאה זו</string>
     <string name="synchronize_weather">איתור מזג האוויר אוטומטית</string>
-    <string name="title_activity_settings_activity">הגדרות</string>
-    <string name="action_settings">הגדרות</string>
-    <string name="title_activity_settings">הגדרות</string>
     <string name="switch_phone_notifications">השתקת הטלפון כשמחובר</string>
     <string name="notification_silent_icon">סמל השתקת התראות</string>
     <string name="notification_type_ringtone">צלצול</string>

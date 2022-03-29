@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">OK</string>
     <string name="searching">Etsitään kelloja</string>
     <string name="unknown_device">Tuntematon Laite</string>
     <plurals name="watches_found">
@@ -28,7 +27,6 @@
     <string name="intro_slide4_title">Ilmoitukset</string>
     <string name="intro_slide4_subtitle">Synkronoidaksesi ilmoitukset kellostasi, salli \"AsteroidOS Sync\" seuraavassa valikossa:</string>
     <string name="weather_settings">Sään asetukset</string>
-    <string name="enter_city_name">Syötä kaupunki:</string>
     <string name="unpair">Irroita</string>
     <string name="scanning">Etsitään…</string>
     <string name="downloading">Ladataan…</string>
@@ -57,9 +55,6 @@
     <string name="please_grant_permissions">Myönnä tämä oikeus</string>
     <string name="impassable_slide">Myönnä tämä oikeus</string>
     <string name="synchronize_weather">Paikallista sää automaattisesti</string>
-    <string name="title_activity_settings_activity">Asetukset</string>
-    <string name="action_settings">Asetukset</string>
-    <string name="title_activity_settings">Asetukset</string>
     <string name="switch_phone_notifications">Kytke puhelin äänettömälle kun se on liitettynä</string>
     <string name="notification_silent_icon">Äänettömien ilmoitusten kuvake</string>
     <string name="notification_type_ringtone">Soittoääni</string>

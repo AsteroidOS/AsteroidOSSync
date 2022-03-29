@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">OK</string>
     <string name="searching">A procurar relógios</string>
     <string name="unknown_device">Dispositivo desconhecido</string>
     <plurals name="watches_found">
@@ -18,7 +17,6 @@
     <string name="notifications_settings">Definições de notificações</string>
     <string name="intro_slide4_title">Notificações</string>
     <string name="weather_settings">Definições de tempo</string>
-    <string name="enter_city_name">Introduza o nome de uma cidade:</string>
     <string name="unpair">Desemparelhar</string>
     <string name="scanning">A procurar…</string>
     <string name="downloading">A transferir…</string>
@@ -57,9 +55,6 @@
     <string name="please_grant_permissions">Por favor conceda permissão</string>
     <string name="impassable_slide">Por favor conceda esta permissão</string>
     <string name="synchronize_weather">Sincronizar meteorologia automaticamente</string>
-    <string name="title_activity_settings_activity">Definições</string>
-    <string name="action_settings">Definições</string>
-    <string name="title_activity_settings">Definições</string>
     <string name="switch_phone_notifications">Silenciar o telefone quando conectado</string>
     <string name="notification_silent_icon">Ícone de notificação silenciosa</string>
     <string name="notification_type_ringtone">Toque de chamada</string>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="generic_ok">Ok</string>
+<resources>
     <string name="unknown_device">Onbekannten Apparat</string>
     <plurals name="watches_found">
         <item quantity="one">Eng Auer fonnt</item>
@@ -24,7 +24,6 @@
     <string name="phone_is_searching">Den Telefon sicht Dech!</string>
     <string name="notifications_settings">Notifikatiounsastellungen</string>
     <string name="weather_settings">Wiederastellungen</string>
-    <string name="enter_city_name">Numm vun der Stad aginn:</string>
     <string name="unpair">Pairing läschen</string>
     <string name="scanning">Scannen…</string>
     <string name="downloading">Gëtt rofgelueden…</string>

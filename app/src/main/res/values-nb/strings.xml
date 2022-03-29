@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">OK</string>
     <string name="searching">Søker etter armbåndsur</string>
     <string name="unknown_device">Ukjent enhet</string>
     <plurals name="watches_found">
@@ -28,7 +27,6 @@
     <string name="intro_slide4_title">Merknader</string>
     <string name="intro_slide4_subtitle">For å synkronisere merknader, må du tillate \"AsteroidOS-synkronisering\" i følgende meny:</string>
     <string name="weather_settings">Værinnstillinger</string>
-    <string name="enter_city_name">Skriv inn et bynavn:</string>
     <string name="unpair">Opphev parring</string>
     <string name="scanning">Skanner…</string>
     <string name="downloading">Laster ned…</string>
@@ -57,9 +55,6 @@
     <string name="please_grant_permissions">Innvilg denne tilgangen</string>
     <string name="impassable_slide">Innvilg denne tilgangen</string>
     <string name="synchronize_weather">Finn plassering for vær automatisk</string>
-    <string name="title_activity_settings_activity">Innstillinger</string>
-    <string name="action_settings">Innstillinger</string>
-    <string name="title_activity_settings">Innstillinger</string>
     <string name="switch_phone_notifications">Stille telefonen når den er tilkoblet</string>
     <string name="notification_silent_icon">Melding stille ikon</string>
     <string name="notification_type_ringtone">Ringetone</string>

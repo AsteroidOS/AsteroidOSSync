@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="searching">घड्याळे शोधत आहे</string>
-    <string name="generic_ok">ठीक आहे</string>
     <string name="dialer">डायलर</string>
     <string name="show_calls_on_watch">येणारे कॉल प्रदर्शित करा</string>
     <string name="intro_phonestateslide_title">फोन आणि संपर्क</string>
@@ -9,9 +8,6 @@
     <string name="notification_type_ringtone">रिंगटोन</string>
     <string name="notification_silent_icon">सूचना मूक चिन्ह</string>
     <string name="switch_phone_notifications">कनेक्ट केलेले असताना फोनवर मौन बाळगा</string>
-    <string name="title_activity_settings">सेटिंग्ज</string>
-    <string name="action_settings">सेटिंग्ज</string>
-    <string name="title_activity_settings_activity">सेटिंग्ज</string>
     <string name="impassable_slide">कृपया ही परवानगी द्या</string>
     <string name="please_grant_permissions">कृपया ही परवानगी द्या</string>
     <string name="grant_permission">परवानगी द्या</string>
@@ -45,7 +41,6 @@
     <string name="downloading">डाउनलोड करीत आहे…</string>
     <string name="scanning">स्कॅन करीत आहे…</string>
     <string name="unpair">अनपेअर करा</string>
-    <string name="enter_city_name">शहराचे नाव प्रविष्ट करा:</string>
     <string name="weather_settings">हवामान सेटिंग्ज</string>
     <string name="notifications_settings">सूचना सेटिंग्ज</string>
     <string name="phone_is_searching">फोन तुमचा शोध घेत आहे!</string>

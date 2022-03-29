@@ -7,9 +7,6 @@
     <string name="notification_type_ringtone">Nhạc chuông</string>
     <string name="notification_silent_icon">Biểu tượng tắt tiếng thông báo</string>
     <string name="switch_phone_notifications">Đặt điện thoại vào chế độ im lặng khi đã kết nối</string>
-    <string name="title_activity_settings">Cài đặt</string>
-    <string name="action_settings">Cài đặt</string>
-    <string name="title_activity_settings_activity">Cài đặt</string>
     <string name="impassable_slide">Vui lòng cấp quyền này</string>
     <string name="please_grant_permissions">Vui lòng cấp quyền này</string>
     <string name="grant_permission">Cấp quyền</string>
@@ -43,7 +40,6 @@
     <string name="downloading">Đang tải xuống…</string>
     <string name="scanning">Đang quét…</string>
     <string name="unpair">Huỷ ghép đôi</string>
-    <string name="enter_city_name">Nhập tên thành phố:</string>
     <string name="weather_settings">Cài đặt thời tiết</string>
     <string name="notifications_settings">Cài đặt thông báo</string>
     <string name="phone_is_searching">Điện thoại đang tìm kiếm bạn!</string>
@@ -67,5 +63,4 @@
     </plurals>
     <string name="unknown_device">Thiết bị không xác định</string>
     <string name="searching">Đang tìm kiếm đồng hồ</string>
-    <string name="generic_ok">OK</string>
 </resources>

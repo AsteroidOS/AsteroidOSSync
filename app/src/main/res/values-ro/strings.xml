@@ -7,9 +7,6 @@
     <string name="notification_type_ringtone">Ton de apel</string>
     <string name="notification_silent_icon">pictogramă notificare silențioasă</string>
     <string name="switch_phone_notifications">Telefon silențios când este conectat</string>
-    <string name="title_activity_settings">Setări</string>
-    <string name="action_settings">Setări</string>
-    <string name="title_activity_settings_activity">Setări</string>
     <string name="impassable_slide">Vă rugăm să acordați această permisiune</string>
     <string name="please_grant_permissions">Vă rugăm să acordați această permisiune</string>
     <string name="grant_permission">Acordă permisiune</string>
@@ -41,7 +38,6 @@
     <string name="downloading">Descarcă…</string>
     <string name="scanning">Scanare…</string>
     <string name="unpair">Neîmperecheat</string>
-    <string name="enter_city_name">Introduceți un nume de oraș:</string>
     <string name="weather_settings">Setări meteo</string>
     <string name="notifications_settings">Setările pentru notificări</string>
     <string name="phone_is_searching">Telefonul caută pentru tine!</string>
@@ -67,7 +63,6 @@
     </plurals>
     <string name="unknown_device">Dispozitiv necunoscut</string>
     <string name="searching">Căutare ceasuri</string>
-    <string name="generic_ok">OK</string>
     <string name="intro_slideandroidgo_subtitle">Android Go nu este suportat deoarece nu permite accesul la notificări și restricționează procesele din fundal. O soluție de rezolvare pentru utilizatorii root este să setați flag-ul \"ro.config.low_ram\" din fișierul build.prop la \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="cancel">Anulează</string>

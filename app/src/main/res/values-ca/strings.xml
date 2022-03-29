@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">D\'acord</string>
     <string name="searching">Cercant rellotges</string>
     <string name="unknown_device">Dispositiu desconegut</string>
     <plurals name="watches_found">
@@ -28,7 +27,6 @@
     <string name="intro_slide4_title">Notificacions</string>
     <string name="intro_slide4_subtitle">Per a sincronitzar notificacions amb el rellotge, activeu l’«AsteroidOS Sync» al menú següent:</string>
     <string name="weather_settings">Configuració del temps</string>
-    <string name="enter_city_name">Escriviu el nom d\'una ciutat:</string>
     <string name="unpair">Desaparella</string>
     <string name="scanning">S’està explorant…</string>
     <string name="downloading">S’està baixant…</string>
@@ -57,9 +55,6 @@
     <string name="please_grant_permissions">Si us plau, accepta el permís</string>
     <string name="impassable_slide">Si us plau, accepteu el permís</string>
     <string name="synchronize_weather">Localitzar clima automàticament</string>
-    <string name="title_activity_settings_activity">Configuració</string>
-    <string name="action_settings">Configuració</string>
-    <string name="title_activity_settings">Configuració</string>
     <string name="switch_phone_notifications">Silencia el telèfon quan es connecti</string>
     <string name="notification_silent_icon">icona de silenciar notificació</string>
     <string name="notification_type_ringtone">To de trucada</string>

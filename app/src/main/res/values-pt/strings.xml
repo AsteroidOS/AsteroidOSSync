@@ -9,9 +9,6 @@
     <string name="notification_type_ringtone">Toque de chamada</string>
     <string name="notification_silent_icon">Ícone de notificação silenciosa</string>
     <string name="switch_phone_notifications">Silenciar o telefone quando conectado</string>
-    <string name="title_activity_settings">Definições</string>
-    <string name="action_settings">Definições</string>
-    <string name="title_activity_settings_activity">Definições</string>
     <string name="synchronize_weather">Sincronizar meteorologia automaticamente</string>
     <string name="impassable_slide">Por favor conceda esta permissão</string>
     <string name="please_grant_permissions">Por favor conceda permissão</string>
@@ -43,7 +40,6 @@
     <string name="downloading">A transferir…</string>
     <string name="scanning">A procurar…</string>
     <string name="unpair">Desemparelhar</string>
-    <string name="enter_city_name">Introduza o nome de uma cidade:</string>
     <string name="weather_settings">Definições de tempo</string>
     <string name="notifications_settings">Definições de notificações</string>
     <string name="phone_is_searching">O teu telemóvel está à tua procura!</string>
@@ -68,7 +64,6 @@
     </plurals>
     <string name="unknown_device">Aparelho desconhecido</string>
     <string name="searching">A procurar relógios</string>
-    <string name="generic_ok">OK</string>
     <string name="set_owm_api_key">Definir chave de API OWM personalizada</string>
     <string name="location_disabled_message">Para encontrar relógios, o serviço de localização tem de estar ativado. Uma vez emparelhado, pode desativá-lo sem problema.</string>
     <string name="location_disabled_title">Localização desativada</string>

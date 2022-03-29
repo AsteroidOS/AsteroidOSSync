@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">TAMAM</string>
     <string name="searching">Saatler aranıyor</string>
     <string name="unknown_device">Bilinmeyen Aygıt</string>
     <plurals name="watches_found">
@@ -28,7 +27,6 @@
     <string name="intro_slide4_title">Bildirimler</string>
     <string name="intro_slide4_subtitle">Bildirimleri eşitlemek için takip eden menüde \"AsteroidOS Sync\"e izin verin:</string>
     <string name="weather_settings">Hava ayarları</string>
-    <string name="enter_city_name">Şehir adı gir:</string>
     <string name="unpair">Kaldır</string>
     <string name="scanning">Taranıyor…</string>
     <string name="downloading">İndiriliyor…</string>
@@ -57,9 +55,6 @@
     <string name="please_grant_permissions">Lütfen bu izni verin</string>
     <string name="impassable_slide">Lütfen bu izni verin</string>
     <string name="synchronize_weather">Hava durumunu kendiliğinden konumla</string>
-    <string name="title_activity_settings_activity">Ayarlar</string>
-    <string name="action_settings">Ayarlar</string>
-    <string name="title_activity_settings">Ayarlar</string>
     <string name="switch_phone_notifications">Telefon bağlıyken sessiz</string>
     <string name="notification_silent_icon">Bildirim Sessiz Simgesi</string>
     <string name="notification_type_ringtone">Zil sesi</string>

@@ -33,10 +33,8 @@
     <string name="finder_icon">ไอคอน Finder</string>
     <string name="intro_phonestateslide_subtitle">เพื่อแสดงสายเรียกเข้าบนนาฬิกาและสำหรับแสดงชื่อของผู้โทร</string>
     <string name="show_calls_on_watch">แสดงสายเรียกเข้า</string>
-    <string name="title_activity_settings_activity">การตั้งค่า</string>
     <string name="position_indicator">ตัวบ่งชี้ตำแหน่ง</string>
     <string name="unpair">เลิกจับคู่</string>
-    <string name="enter_city_name">ป้อนชื่อเมือง:</string>
     <string name="scanning">กำลังสแกน…</string>
     <string name="intro_phonestateslide_title">โทรศัพท์และที่อยู่ติดต่อ</string>
     <string name="intro_slide2_title">การเข้าถึงไฟล์</string>
@@ -54,8 +52,6 @@
     <string name="notification_type_default">ค่าเริ่มต้น</string>
     <string name="synchronize_weather">ค้นหาสภาพอากาศโดยอัตโนมัติ</string>
     <string name="synchronize_time">ซิงโครไนซ์เวลา</string>
-    <string name="title_activity_settings">การตั้งค่า</string>
-    <string name="action_settings">การตั้งค่า</string>
     <string name="connected_icon">ไอคอนเชื่อมต่อ</string>
     <string name="connecting_formatted">กำลังเชื่อมต่อกับ %s</string>
     <string name="connected_formatted">เชื่อมต่อกับ %s</string>
@@ -67,7 +63,6 @@
     </plurals>
     <string name="unknown_device">ไม่รู้จักอุปกรณ์</string>
     <string name="searching">กำลังค้นหานาฬิกา</string>
-    <string name="generic_ok">ตกลง</string>
     <string name="location_disabled_title">ตำแหน่งปิดการใช้งาน</string>
     <string name="set_owm_api_key">ตั้งค่าคีย์ OWM API ด้วยตัวเอง</string>
     <string name="location_disabled_message">ในการค้นหานาฬิกาต้องเปิดใช้งานบริการระบุตำแหน่ง เมื่อจับคู่แล้ว คุณสามารถปิดใช้งานได้อย่างปลอดภัยอีกครั้ง</string>

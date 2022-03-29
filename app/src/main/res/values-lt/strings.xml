@@ -9,9 +9,6 @@
     <string name="intro_phonestateslide_subtitle">Siekiant rodyti gaunamus skambučius laikrodyje ir skambinančiojo vardą.</string>
     <string name="notification_type_ringtone">Melodija</string>
     <string name="switch_phone_notifications">Nutildyti telefoną, kuomet prijungta</string>
-    <string name="title_activity_settings">Nustatymai</string>
-    <string name="action_settings">Nustatymai</string>
-    <string name="title_activity_settings_activity">Nustatymai</string>
     <string name="impassable_slide">Prašome suteikti šį leidimą</string>
     <string name="please_grant_permissions">Prašome suteikti šį leidimą</string>
     <string name="grant_permission">Suteikti leidimą</string>
@@ -43,7 +40,6 @@
     <string name="downloading">Siunčiama…</string>
     <string name="scanning">Skenuojama…</string>
     <string name="unpair">Atporuoti</string>
-    <string name="enter_city_name">Įveskite miesto pavadinimą:</string>
     <string name="weather_settings">Orų nustatymai</string>
     <string name="notifications_settings">Pranešimų nustatymai</string>
     <string name="phone_is_searching">Telefonas ieško jūsų!</string>
@@ -70,7 +66,6 @@
     </plurals>
     <string name="unknown_device">Nežinomas įrenginys</string>
     <string name="searching">Ieškoma laikrodžių</string>
-    <string name="generic_ok">Gerai</string>
     <string name="set_owm_api_key">Nustatyti pasirinktinį OWM API raktą</string>
     <string name="OWM_API_KEY">OWM API raktas</string>
     <string name="apply">Taikyti</string>

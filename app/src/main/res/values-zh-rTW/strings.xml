@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">確定</string>
     <string name="searching">掃描手錶中</string>
     <string name="unknown_device">不明的裝置</string>
     <plurals name="watches_found">
@@ -24,7 +23,6 @@
     <string name="phone_is_searching">手機正在找你!</string>
     <string name="notifications_settings">通知設定</string>
     <string name="weather_settings">天氣設定</string>
-    <string name="enter_city_name">輸入一個城市名稱:</string>
     <string name="unpair">解除配對</string>
     <string name="scanning">掃描中…</string>
     <string name="downloading">下載中…</string>
@@ -56,9 +54,6 @@
     <string name="please_grant_permissions">請授予此權限</string>
     <string name="impassable_slide">請授予此權限</string>
     <string name="synchronize_weather">自動定位天氣</string>
-    <string name="title_activity_settings_activity">設定</string>
-    <string name="action_settings">設定</string>
-    <string name="title_activity_settings">設定</string>
     <string name="switch_phone_notifications">連接時將手機靜音</string>
     <string name="notification_silent_icon">通知無聲圖示</string>
     <string name="intro_phonestateslide_subtitle">展示目前的來電，並將來電者顯示在錶面上。</string>

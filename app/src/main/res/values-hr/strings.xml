@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">U redu</string>
     <string name="searching">Traženje satova</string>
     <string name="unknown_device">Nepoznat uređaj</string>
     <plurals name="watches_found">
@@ -26,7 +25,6 @@
     <string name="phone_is_searching">Telefon te traži!</string>
     <string name="notifications_settings">Postavke obavijesti</string>
     <string name="weather_settings">Postavke za vremensku prognozu</string>
-    <string name="enter_city_name">Upiši ime grada:</string>
     <string name="unpair">Odspoji</string>
     <string name="scanning">Skeniranje …</string>
     <string name="downloading">Preuzimanje …</string>
@@ -58,9 +56,6 @@
     <string name="please_grant_permissions">Dozvoli ovo</string>
     <string name="impassable_slide">Dozvoli ovo</string>
     <string name="synchronize_weather">Automatski nađi vremensku prognozu</string>
-    <string name="title_activity_settings_activity">Postavke</string>
-    <string name="action_settings">Postavke</string>
-    <string name="title_activity_settings">Postavke</string>
     <string name="switch_phone_notifications">Utišaj telefon kad je povezan</string>
     <string name="notification_silent_icon">Ikona za bezvučno obavještavanje</string>
     <string name="notification_type_ringtone">Zvono</string>

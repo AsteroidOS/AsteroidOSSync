@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">D\'acuerdu</string>
     <string name="searching">Buscando relós</string>
     <string name="unknown_device">Preséu desconocíu</string>
     <plurals name="watches_found">
@@ -30,9 +29,6 @@
     <string name="grant_permission">Conceder</string>
     <string name="please_grant_permissions">Concede\'l permisu</string>
     <string name="impassable_slide">Concede\'l permisu</string>
-    <string name="title_activity_settings_activity">Axustes</string>
-    <string name="action_settings">Axustes</string>
-    <string name="title_activity_settings">Axustes</string>
     <string name="intro_slide4_subtitle">Pa sincronizar los avisos col reló, da laude a AsteroidOS Sync nel menú de darréu:</string>
     <string name="dialer">Marcador</string>
     <string name="intro_slideandroidgo_title">Android Go</string>

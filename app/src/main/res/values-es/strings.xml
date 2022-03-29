@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">Aceptar</string>
     <string name="searching">Buscando relojes</string>
     <string name="unknown_device">Dispositivo desconocido</string>
     <plurals name="watches_found">
@@ -28,7 +27,6 @@
     <string name="intro_slide4_title">Notificaciones</string>
     <string name="intro_slide4_subtitle">Para sincronizar las notificaciones con el reloj, active «AsteroidOS Sync» en el menú siguiente:</string>
     <string name="weather_settings">Configuración del tiempo</string>
-    <string name="enter_city_name">Escriba el nombre de una ciudad:</string>
     <string name="unpair">Desemparejar</string>
     <string name="scanning">Explorando…</string>
     <string name="downloading">Descargando…</string>
@@ -57,9 +55,6 @@
     <string name="please_grant_permissions">Conceda este permiso</string>
     <string name="impassable_slide">Conceda este permiso</string>
     <string name="synchronize_weather">Encontrar clima automáticamente</string>
-    <string name="title_activity_settings_activity">Configuración</string>
-    <string name="action_settings">Configuración</string>
-    <string name="title_activity_settings">Configuración</string>
     <string name="switch_phone_notifications">Silenciar teléfono mientras esté conectado</string>
     <string name="notification_silent_icon">Icono de silenciar notificaciones</string>
     <string name="notification_type_ringtone">Tono de llamada</string>

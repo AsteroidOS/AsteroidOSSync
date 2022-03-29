@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic_ok">OK</string>
     <string name="searching">Recherche de montres</string>
     <string name="unknown_device">Périphérique inconnu</string>
     <plurals name="watches_found">
@@ -29,7 +28,6 @@
     <string name="intro_slide4_title">Notifications</string>
     <string name="intro_slide4_subtitle">Pour synchroniser les notifications, veuillez autoriser AsteroidOS Sync dans le menu suivant :</string>
     <string name="weather_settings">Paramètres météo</string>
-    <string name="enter_city_name">Entrez le nom d\'une ville :</string>
     <string name="unpair">Dissocier</string>
     <string name="scanning">Scan en cours …</string>
     <string name="downloading">Téléchargement …</string>
@@ -58,9 +56,6 @@
     <string name="please_grant_permissions">Veuillez accorder cette permission</string>
     <string name="impassable_slide">Veuillez accorder cette permission</string>
     <string name="synchronize_weather">Localiser la météo automatiquement</string>
-    <string name="title_activity_settings_activity">Réglages</string>
-    <string name="action_settings">Réglages</string>
-    <string name="title_activity_settings">Réglages</string>
     <string name="switch_phone_notifications">Téléphone en sourdine quand connecté</string>
     <string name="notification_silent_icon">Icône de sourdine des notifications</string>
     <string name="notification_type_ringtone">Sonnerie</string>
