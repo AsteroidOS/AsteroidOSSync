@@ -1,5 +1,6 @@
 package io.github.dreierf.materialintroscreen.parallax;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -60,6 +61,7 @@ public class ParallaxRelativeLayout extends RelativeLayout implements Parallaxab
 
         LayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
+            @SuppressLint("CustomViewStyleable") // Ignore this, this library is going to be obsolete soon
             TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ParallaxLayout_Layout);
             parallaxFactor = typedArray.getFloat(R.styleable.ParallaxLayout_Layout_layout_parallaxFactor, parallaxFactor);
             typedArray.recycle();

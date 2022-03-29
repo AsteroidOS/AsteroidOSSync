@@ -1,5 +1,6 @@
 package io.github.dreierf.materialintroscreen.parallax;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import androidx.annotation.FloatRange;
@@ -61,6 +62,7 @@ public class ParallaxFrameLayout extends FrameLayout implements Parallaxable {
 
         LayoutParams(Context context, AttributeSet attributeSet) {
             super(context, attributeSet);
+            @SuppressLint("CustomViewStyleable") // Ignore this, this library is going to be obsolete soon
             TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.ParallaxLayout_Layout);
             parallaxFactor = typedArray.getFloat(R.styleable.ParallaxLayout_Layout_layout_parallaxFactor, parallaxFactor);
             typedArray.recycle();
