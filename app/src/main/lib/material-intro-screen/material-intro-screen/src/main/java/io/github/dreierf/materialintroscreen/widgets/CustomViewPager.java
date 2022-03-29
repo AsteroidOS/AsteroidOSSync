@@ -1579,6 +1579,7 @@ public class CustomViewPager extends ViewGroup {
                     int widthMode = MeasureSpec.AT_MOST;
                     int heightMode = MeasureSpec.AT_MOST;
                     boolean consumeVertical = vgrav == Gravity.TOP || vgrav == Gravity.BOTTOM;
+                    @SuppressLint("RtlHardcoded")
                     boolean consumeHorizontal = hgrav == Gravity.LEFT || hgrav == Gravity.RIGHT;
 
                     if (consumeVertical) {
@@ -1677,6 +1678,7 @@ public class CustomViewPager extends ViewGroup {
         }
     }
 
+    @SuppressLint("RtlHardcoded")
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         final int count = getChildCount();
@@ -1859,6 +1861,7 @@ public class CustomViewPager extends ViewGroup {
      * @param offset Value from [0, 1) indicating the offset from the page at position.
      * @param offsetPixels Value in pixels indicating the offset from position.
      */
+    @SuppressLint("RtlHardcoded") // Ignore hardcoding, library will be obsolete
     @CallSuper
     protected void onPageScrolled(int position, float offset, int offsetPixels) {
         // Offset any decor views if needed - keep them on-screen at all times.
