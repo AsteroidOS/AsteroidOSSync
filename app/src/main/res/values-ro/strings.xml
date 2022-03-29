@@ -60,9 +60,11 @@
     <string name="connecting">Se conectează…</string>
     <string name="connected">Conectat</string>
     <string name="disconnected">Deconectat</string>
-    <string name="n_found">S-au găsit %d ceasuri</string>
-    <string name="one_found">S-a găsit un ceas</string>
-    <string name="nothing_found">Nu s-au găsit ceasuri</string>
+    <plurals name="watches_found">
+        <item quantity="zero">Nu s-au găsit ceasuri</item>
+        <item quantity="one">S-a găsit un ceas</item>
+        <item quantity="other">S-au găsit %d ceasuri</item>
+    </plurals>
     <string name="unknown_device">Dispozitiv necunoscut</string>
     <string name="searching">Căutare ceasuri</string>
     <string name="generic_ok">OK</string>

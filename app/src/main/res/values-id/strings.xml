@@ -3,9 +3,9 @@
     <string name="generic_ok">OKE</string>
     <string name="searching">Mencari jam tangan</string>
     <string name="unknown_device">Perangkat tidak dikenal</string>
-    <string name="nothing_found">Jam tangan tidak ditemukan</string>
-    <string name="one_found">Ditemukan satu jam tangan</string>
-    <string name="n_found">Ditemukan %d jam tangan</string>
+    <plurals name="watches_found">
+        <item quantity="other">Ditemukan %d jam tangan</item>
+    </plurals>
     <string name="disconnected">Terputus</string>
     <string name="connected">Terhubung</string>
     <string name="connecting">Menghubungkan…</string>

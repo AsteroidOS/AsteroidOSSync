@@ -3,9 +3,11 @@
     <string name="generic_ok">IH</string>
     <string name="searching">Anadi n temrilin</string>
     <string name="unknown_device">Ibenk arussin</string>
-    <string name="nothing_found">Ulac tamrilt</string>
-    <string name="one_found">tattwaf temrilt</string>
-    <string name="n_found">%d n temrilin ttawfent</string>
+    <plurals name="watches_found">
+        <item quantity="zero">Ulac tamrilt</item>
+        <item quantity="one">tattwaf temrilt</item>
+        <item quantity="other">%d n temrilin ttawfent</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">Ibenk-agi ur yessefrak ara Tafasa meẓẓiyen Bluetooth.</string>
     <string name="disconnected">Ur iqqin ara</string>
     <string name="connected">iqqen</string>

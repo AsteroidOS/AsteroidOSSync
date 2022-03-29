@@ -3,9 +3,11 @@
     <string name="generic_ok">D\'acuerdu</string>
     <string name="searching">Buscando relós</string>
     <string name="unknown_device">Preséu desconocíu</string>
-    <string name="nothing_found">Nun s\'atoparon relós</string>
-    <string name="one_found">Atopóse un reló</string>
-    <string name="n_found">Atopáronse %d relós</string>
+    <plurals name="watches_found">
+        <item quantity="zero">Nun s\'atoparon relós</item>
+        <item quantity="one">Atopóse un reló</item>
+        <item quantity="other">Atopáronse %d relós</item>
+    </plurals>
     <string name="connecting">Conectando…</string>
     <string name="connecting_formatted">Coneutando con %s</string>
     <string name="settings_icon">Iconu d\'Axustes</string>

@@ -3,9 +3,10 @@
     <string name="generic_ok">Εντάξει</string>
     <string name="searching">Αναζήτηση για ρολόγια</string>
     <string name="unknown_device">Άγνωστη Συσκευή</string>
-    <string name="nothing_found">Δεν βρέθηκαν ρολόγια</string>
-    <string name="one_found">Βρέθηκε ένα ρολόι</string>
-    <string name="n_found">Βρέθηκαν %d ρολόγια</string>
+    <plurals name="watches_found">
+        <item quantity="one">Βρέθηκε ένα ρολόι</item>
+        <item quantity="other">Βρέθηκαν %d ρολόγια</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">Αυτή η συσκευή δεν υποστηρίζει Bluetooth Χαμηλής Ενέργειας.</string>
     <string name="disconnected">Αποσυνδέθηκε</string>
     <string name="connected">Συνδέθηκε</string>

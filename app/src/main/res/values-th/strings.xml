@@ -56,15 +56,15 @@
     <string name="synchronize_time">ซิงโครไนซ์เวลา</string>
     <string name="title_activity_settings">การตั้งค่า</string>
     <string name="action_settings">การตั้งค่า</string>
-    <string name="one_found">พบนาฬิกาหนึ่งเรือน</string>
     <string name="connected_icon">ไอคอนเชื่อมต่อ</string>
     <string name="connecting_formatted">กำลังเชื่อมต่อกับ %s</string>
     <string name="connected_formatted">เชื่อมต่อกับ %s</string>
     <string name="connecting">กำลังเชื่อมต่อ…</string>
     <string name="connected">เชื่อมต่อแล้ว</string>
     <string name="disconnected">ยุติการเชื่อมต่อ</string>
-    <string name="n_found">ค้นพบนาฬิกา %d เรือน</string>
-    <string name="nothing_found">ไม่พบนาฬิกา</string>
+    <plurals name="watches_found">
+        <item quantity="other">ค้นพบนาฬิกา %d เรือน</item>
+    </plurals>
     <string name="unknown_device">ไม่รู้จักอุปกรณ์</string>
     <string name="searching">กำลังค้นหานาฬิกา</string>
     <string name="generic_ok">ตกลง</string>

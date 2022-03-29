@@ -3,9 +3,11 @@
     <string name="generic_ok">موافق</string>
     <string name="searching">بحث عن الساعات</string>
     <string name="unknown_device">جهاز غير معروف</string>
-    <string name="nothing_found">لا يوجد ساعات</string>
-    <string name="one_found">العثور على ساعة واحدة</string>
-    <string name="n_found">تم العثور على %d ساعات</string>
+    <plurals name="watches_found">
+        <item quantity="zero">لا يوجد ساعات</item>
+        <item quantity="one">العثور على ساعة واحدة</item>
+        <item quantity="other">تم العثور على %d ساعات</item>
+    </plurals>
     <string name="weather_icon">أيقونة الطقس</string>
     <string name="settings_icon">أيقونة الإعدادات</string>
     <string name="grab_a_screenshot">احصل على لقطة شاشة</string>

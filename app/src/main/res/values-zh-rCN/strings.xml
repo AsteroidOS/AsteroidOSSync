@@ -3,9 +3,9 @@
     <string name="generic_ok">确认</string>
     <string name="searching">正在搜寻周围的手表</string>
     <string name="unknown_device">未知设备</string>
-    <string name="nothing_found">未找到手表</string>
-    <string name="one_found">找到 1 个手表</string>
-    <string name="n_found">找到 %d 个手表</string>
+    <plurals name="watches_found">
+        <item quantity="other">找到 %d 个手表</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">此设备不支持蓝牙低功耗 (BLE)。</string>
     <string name="disconnected">连接已断开</string>
     <string name="connected">已连接</string>

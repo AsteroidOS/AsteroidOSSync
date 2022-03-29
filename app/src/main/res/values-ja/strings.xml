@@ -3,9 +3,9 @@
     <string name="generic_ok">OK</string>
     <string name="searching">ウォッチを検索中</string>
     <string name="unknown_device">不明なデバイス</string>
-    <string name="nothing_found">ウォッチが見つかりません</string>
-    <string name="one_found">ウォッチが１つ見つかりました</string>
-    <string name="n_found">ウォッチが %d つ見つかりました</string>
+    <plurals name="watches_found">
+        <item quantity="other">ウォッチが %d つ見つかりました</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">このデバイスは Bluetooth 低消費電力がサポートされていません。</string>
     <string name="disconnected">切断しました</string>
     <string name="connected">接続しました</string>

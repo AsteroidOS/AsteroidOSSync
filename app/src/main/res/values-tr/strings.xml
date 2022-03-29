@@ -3,9 +3,10 @@
     <string name="generic_ok">TAMAM</string>
     <string name="searching">Saatler aranıyor</string>
     <string name="unknown_device">Bilinmeyen Aygıt</string>
-    <string name="nothing_found">Saat bulunamadı</string>
-    <string name="one_found">Bir saat bulundu</string>
-    <string name="n_found">%d saat bulundu</string>
+    <plurals name="watches_found">
+        <item quantity="one">Bir saat bulundu</item>
+        <item quantity="other">%d saat bulundu</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">Bu aygıt Bluetooth Düşük Enerji\'yi desteklemiyor.</string>
     <string name="disconnected">Bağlı değil</string>
     <string name="connected">Bağlı</string>

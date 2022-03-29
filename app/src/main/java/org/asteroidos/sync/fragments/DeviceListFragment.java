@@ -41,7 +41,6 @@ import com.skyfishjy.library.RippleBackground;
 import org.asteroidos.sync.R;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class DeviceListFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     private LeDeviceListAdapter mLeDeviceListAdapter;
@@ -94,12 +93,7 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
     public void scanningStopped() {
         mRippleBackground.stopRippleAnimation();
         int deviceCount = mLeDeviceListAdapter.getCount();
-        if (deviceCount == 0)
-            mSearchingText.setText(R.string.nothing_found);
-        else if (deviceCount == 1)
-            mSearchingText.setText(R.string.one_found);
-        else
-            mSearchingText.setText(getString(R.string.n_found, deviceCount));
+        mSearchingText.setText(getResources().getQuantityText(R.plurals.watches_found, deviceCount));
     }
 
     public void deviceDiscovered(BluetoothDevice dev) {

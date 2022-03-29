@@ -3,9 +3,10 @@
     <string name="generic_ok">D\'acord</string>
     <string name="searching">Cercant rellotges</string>
     <string name="unknown_device">Dispositiu desconegut</string>
-    <string name="nothing_found">No s\'ha trobat cap rellotge</string>
-    <string name="one_found">S\'ha trobat un rellotge</string>
-    <string name="n_found">S\'han trobat %d rellotges</string>
+    <plurals name="watches_found">
+        <item quantity="one">S\'ha trobat un rellotge</item>
+        <item quantity="other">S\'han trobat %d rellotges</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">Aquest dispositiu no admet el Bluetooth de baix consum.</string>
     <string name="disconnected">Desconnectat</string>
     <string name="connected">Connectat</string>

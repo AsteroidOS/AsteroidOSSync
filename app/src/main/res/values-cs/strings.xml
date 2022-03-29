@@ -3,9 +3,11 @@
     <string name="generic_ok">OK</string>
     <string name="searching">Hledání hodinek</string>
     <string name="unknown_device">Neznámé zařízení</string>
-    <string name="nothing_found">Nebyly nalezeny žádné hodinky</string>
-    <string name="one_found">Nalezeny jedny hodinky</string>
-    <string name="n_found">Nalezeno %d hodinek</string>
+    <plurals name="watches_found">
+        <item quantity="zero">Nebyly nalezeny žádné hodinky</item>
+        <item quantity="one">Nalezeny jedny hodinky</item>
+        <item quantity="other">Nalezeno %d hodinek</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">Toto zařízení nepodporuje úspornou (LE) technologie Bluetooth.</string>
     <string name="disconnected">Odpojeno</string>
     <string name="connected">Připojeno</string>

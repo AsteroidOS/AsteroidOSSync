@@ -3,9 +3,11 @@
     <string name="generic_ok">U redu</string>
     <string name="searching">Traženje satova</string>
     <string name="unknown_device">Nepoznat uređaj</string>
-    <string name="nothing_found">Sat nije pronađen</string>
-    <string name="one_found">Pronađen jedan sat</string>
-    <string name="n_found">Pronađeno satova: %d</string>
+    <plurals name="watches_found">
+        <item quantity="zero">Sat nije pronađen</item>
+        <item quantity="one">Pronađen jedan sat</item>
+        <item quantity="other">Pronađeno satova: %d</item>
+    </plurals>
     <string name="disconnected">Odspojen</string>
     <string name="connected">Spojen</string>
     <string name="connecting">Spajanje …</string>

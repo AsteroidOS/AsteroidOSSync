@@ -3,9 +3,10 @@
     <string name="generic_ok">OK</string>
     <string name="searching">Søker etter armbåndsur</string>
     <string name="unknown_device">Ukjent enhet</string>
-    <string name="nothing_found">Ingen armbåndsur funnet</string>
-    <string name="one_found">Fant én klokke</string>
-    <string name="n_found">Fant %d klokker</string>
+    <plurals name="watches_found">
+        <item quantity="one">Fant én klokke</item>
+        <item quantity="other">Fant %d klokker</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">Denne enheten har ikke støtte for lavenergi-Blåtann.</string>
     <string name="disconnected">Frakoblet</string>
     <string name="connected">Tilkoblet</string>

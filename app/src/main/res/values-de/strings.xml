@@ -3,9 +3,10 @@
     <string name="generic_ok">OK</string>
     <string name="searching">Uhren werden gesucht</string>
     <string name="unknown_device">Unbekanntes Gerät</string>
-    <string name="nothing_found">Keine Uhren gefunden</string>
-    <string name="one_found">Eine Uhr gefunden</string>
-    <string name="n_found">%d Uhren gefunden</string>
+    <plurals name="watches_found">
+        <item quantity="one">Eine Uhr gefunden</item>
+        <item quantity="other">%d Uhren gefunden</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">Dieses Gerät unterstützt kein Bluetooth Low Energy.</string>
     <string name="disconnected">Verbindung getrennt</string>
     <string name="connected">Verbunden</string>

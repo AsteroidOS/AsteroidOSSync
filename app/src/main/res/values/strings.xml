@@ -4,9 +4,11 @@
     <string name="generic_ok">OK</string>
     <string name="searching">Searching for watches</string>
     <string name="unknown_device">Unknown Device</string>
-    <string name="nothing_found">No watches found</string>
-    <string name="one_found">Found one watch</string>
-    <string name="n_found">Found %d watches</string>
+    <plurals name="watches_found">
+        <item quantity="zero">No watches found</item>
+        <item quantity="one">Found %d watch</item>
+        <item quantity="other">Found %d watches</item>
+    </plurals>
     <string name="disconnected">Disconnected</string>
     <string name="connected">Connected</string>
     <string name="connecting">Connecting…</string>

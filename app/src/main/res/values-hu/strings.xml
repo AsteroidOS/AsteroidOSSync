@@ -3,8 +3,10 @@
     <string name="generic_ok">OK</string>
     <string name="searching">Órák keresése</string>
     <string name="unknown_device">Ismeretlen eszköz</string>
-    <string name="nothing_found">Órák nem találhatóak</string>
-    <string name="one_found">Egy óra talált</string>
+    <plurals name="watches_found">
+        <item quantity="one">Egy óra talált</item>
+        <item quantity="other">%d óra talált</item>
+    </plurals>
     <string name="disconnected">A kapcsolat megszakadt</string>
     <string name="connected">Csatlakoztatva</string>
     <string name="connecting">Csatlakozás…</string>
@@ -40,7 +42,6 @@
     <string name="grant_permission">Engedély megadása</string>
     <string name="please_grant_permissions">Kérjük, adja meg ezt az engedélyt</string>
     <string name="impassable_slide">Kérjük, adja meg ezt az engedélyt</string>
-    <string name="n_found">%d óra talált</string>
     <string name="connected_formatted">Csatlakoztatva a következőhöz: %s</string>
     <string name="connecting_formatted">Csatlakozás a következőhöz:%s</string>
     <string name="connected_icon">Csatlakoztatva ikon</string>

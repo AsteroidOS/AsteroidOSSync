@@ -3,9 +3,11 @@
     <string name="generic_ok">OK</string>
     <string name="searching">Wyszukiwanie zegarków</string>
     <string name="unknown_device">Nieznane Urządzenie</string>
-    <string name="nothing_found">Nie znaleziono zegarków</string>
-    <string name="one_found">Znaleziono 1 zegarek</string>
-    <string name="n_found">Liczba znalezionych zegarków: %d</string>
+    <plurals name="watches_found">
+        <item quantity="zero">Nie znaleziono zegarków</item>
+        <item quantity="one">Znaleziono 1 zegarek</item>
+        <item quantity="other">Liczba znalezionych zegarków: %d</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">Wygląda na to, że Bluetooth Low Energy nie jest wspierany na tym urządzeniu.</string>
     <string name="disconnected">Rozłączono</string>
     <string name="connected">Połączono</string>

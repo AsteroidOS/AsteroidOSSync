@@ -3,9 +3,10 @@
     <string name="generic_ok">კარგი</string>
     <string name="searching">ეძებს საათები</string>
     <string name="unknown_device">უცნობი მოწყობილობა</string>
-    <string name="nothing_found">მაჯის საათი არ არის ნაპოვნი</string>
-    <string name="one_found">ნაპოვნია 1 მაჯის საათი</string>
-    <string name="n_found">ნაპოვნია %d მაჯის საათი</string>
+    <plurals name="watches_found">
+        <item quantity="one">ნაპოვნია 1 მაჯის საათი</item>
+        <item quantity="other">ნაპოვნია %d მაჯის საათი</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">ამ მოწყობილობას ბლუთუზი დაბალი ენერგიის (BLE) მხარდაჭერა არ გააჩნია.</string>
     <string name="disconnected">გათიშული</string>
     <string name="connected">დაკავშირებული</string>

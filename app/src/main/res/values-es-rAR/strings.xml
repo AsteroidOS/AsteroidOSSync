@@ -3,9 +3,10 @@
     <string name="generic_ok">Aceptar</string>
     <string name="searching">Buscando relojes</string>
     <string name="unknown_device">Dispositivo desconocido</string>
-    <string name="nothing_found">No se encontraron relojes</string>
-    <string name="one_found">Se encontró un reloj</string>
-    <string name="n_found">Se encontraron %d relojes</string>
+    <plurals name="watches_found">
+        <item quantity="one">Se encontró un reloj</item>
+        <item quantity="other">Se encontraron %d relojes</item>
+    </plurals>
     <string name="disconnected">Desconectado</string>
     <string name="connected">Conectado</string>
     <string name="connecting">Conectando…</string>

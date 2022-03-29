@@ -3,9 +3,9 @@
     <string name="generic_ok">確定</string>
     <string name="searching">掃描手錶中</string>
     <string name="unknown_device">不明的裝置</string>
-    <string name="nothing_found">未偵測到手錶</string>
-    <string name="one_found">偵測到 1 支手錶</string>
-    <string name="n_found">偵測到 %d 支手錶</string>
+    <plurals name="watches_found">
+        <item quantity="other">偵測到 %d 支手錶</item>
+    </plurals>
     <string name="disconnected">已中斷連線</string>
     <string name="connected">已連線</string>
     <string name="connecting">連線中…</string>

@@ -4,9 +4,11 @@
     <string name="generic_ok">אישור</string>
     <string name="searching">חיפוש אחר שעונים</string>
     <string name="unknown_device">התקן לא ידוע</string>
-    <string name="nothing_found">לא נמצאו שעונים</string>
-    <string name="one_found">נמצא שעון אחד</string>
-    <string name="n_found">נמצאו %d שעונים</string>
+    <plurals name="watches_found">
+        <item quantity="zero">לא נמצאו שעונים</item>
+        <item quantity="one">נמצא שעון אחד</item>
+        <item quantity="other">נמצאו %d שעונים</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">התקן זה אינו תומך ב־BLE ‏(Bluetooth בצריכת אנרגיה נמוכה).</string>
     <string name="disconnected">מנותק</string>
     <string name="connected">מחובר</string>

@@ -3,9 +3,10 @@
     <string name="generic_ok">قبول</string>
     <string name="searching">در جست‌وجوی ساعت‌ها</string>
     <string name="unknown_device">دستگاه ناشناخته</string>
-    <string name="nothing_found">ساعتی پیدا نشد</string>
-    <string name="one_found">۱ ساعت پیدا شد</string>
-    <string name="n_found">%d ساعت پیدا شد</string>
+    <plurals name="watches_found">
+        <item quantity="one">۱ ساعت پیدا شد</item>
+        <item quantity="other">%d ساعت پیدا شد</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">این دستگاه از بلوتوث کم‌مصرف پشتیبانی نمی‌کند.</string>
     <string name="disconnected">قطع‌شده</string>
     <string name="connected">وصل‌شده</string>

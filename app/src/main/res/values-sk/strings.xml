@@ -3,9 +3,11 @@
     <string name="generic_ok">OK</string>
     <string name="searching">Vyhľadávanie hodiniek</string>
     <string name="unknown_device">Neznáme zariadenie</string>
-    <string name="nothing_found">Neboli nájdené žiadne hodinky</string>
-    <string name="one_found">Nájdené jedny hodinky</string>
-    <string name="n_found">Nájdené %d hodiniek</string>
+    <plurals name="watches_found">
+        <item quantity="zero">Neboli nájdené žiadne hodinky</item>
+        <item quantity="one">Nájdené jedny hodinky</item>
+        <item quantity="other">Nájdené %d hodiniek</item>
+    </plurals>
     <string name="disconnected">Odpojené</string>
     <string name="connected">Pripojené</string>
     <string name="connecting">Pripájanie…</string>

@@ -62,9 +62,9 @@
     <string name="connecting">Đang kết nối…</string>
     <string name="connected">Đã kết nối</string>
     <string name="disconnected">Đã ngắt kết nối</string>
-    <string name="n_found">Đã tìm thấy %d đồng hồ</string>
-    <string name="one_found">Đã tìm thấy một đồng hồ</string>
-    <string name="nothing_found">Không tìm thấy đồng hồ nào</string>
+    <plurals name="watches_found">
+        <item quantity="other">Đã tìm thấy %d đồng hồ</item>
+    </plurals>
     <string name="unknown_device">Thiết bị không xác định</string>
     <string name="searching">Đang tìm kiếm đồng hồ</string>
     <string name="generic_ok">OK</string>

@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="generic_ok">Ok</string>
     <string name="unknown_device">Onbekannten Apparat</string>
-    <string name="nothing_found">Keng Aueren fonnt</string>
-    <string name="one_found">Eng Auer fonnt</string>
-    <string name="n_found">%d Aueren fonnt</string>
+    <plurals name="watches_found">
+        <item quantity="one">Eng Auer fonnt</item>
+        <item quantity="other">%d Aueren fonnt</item>
+    </plurals>
     <string name="connected">Verbonnen</string>
     <string name="connecting">Verbannen…</string>
     <string name="connected_formatted">Verbonnen mat %s</string>

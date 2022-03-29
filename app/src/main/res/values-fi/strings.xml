@@ -3,9 +3,10 @@
     <string name="generic_ok">OK</string>
     <string name="searching">Etsitään kelloja</string>
     <string name="unknown_device">Tuntematon Laite</string>
-    <string name="nothing_found">Kelloja ei löydetty</string>
-    <string name="one_found">Yksi kello löydetty</string>
-    <string name="n_found">Löydettiin %d kelloa</string>
+    <plurals name="watches_found">
+        <item quantity="one">Yksi kello löydetty</item>
+        <item quantity="other">Löydettiin %d kelloa</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">Tämä laite ei tue Bluetooth Low Energy ominaisuutta.</string>
     <string name="disconnected">Ei yhdistetty</string>
     <string name="connected">Yhdistetty</string>

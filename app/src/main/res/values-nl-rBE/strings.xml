@@ -3,9 +3,10 @@
     <string name="generic_ok">Oké</string>
     <string name="searching">Achter horloges aan het zoeken</string>
     <string name="unknown_device">Onbekend apparaat</string>
-    <string name="nothing_found">Geen horloges gevonden</string>
-    <string name="one_found">Één horloge gevonden</string>
-    <string name="n_found">%d horloges gevonden</string>
+    <plurals name="watches_found">
+        <item quantity="one">Één horloge gevonden</item>
+        <item quantity="other">%d horloges gevonden</item>
+    </plurals>
     <string name="disconnected">Niet verbonden</string>
     <string name="connected">Verbonden</string>
     <string name="connecting">Verbinden…</string>

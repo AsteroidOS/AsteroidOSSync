@@ -3,9 +3,10 @@
     <string name="generic_ok">OK</string>
     <string name="searching">Søger efter ure</string>
     <string name="unknown_device">Ukendt enhed</string>
-    <string name="nothing_found">Ingen ure fundet</string>
-    <string name="one_found">Et ur fundet</string>
-    <string name="n_found">%d ure fundet</string>
+    <plurals name="watches_found">
+        <item quantity="one">Et ur fundet</item>
+        <item quantity="other">%d ure fundet</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">Enheden understøtter ikke Bluetooth Low Energy.</string>
     <string name="disconnected">Afbrudt</string>
     <string name="connected">Forbundet</string>

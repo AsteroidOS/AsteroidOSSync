@@ -3,9 +3,11 @@
     <string name="generic_ok">ОК</string>
     <string name="searching">Идёт поиск часов</string>
     <string name="unknown_device">Неизвестное устройство</string>
-    <string name="nothing_found">Часы не найдены</string>
-    <string name="one_found">Одно устройство найдено</string>
-    <string name="n_found">Найдено %d устройств</string>
+    <plurals name="watches_found">
+        <item quantity="zero">Часы не найдены</item>
+        <item quantity="one">Одно устройство найдено</item>
+        <item quantity="other">Найдено %d устройств</item>
+    </plurals>
     <string name="intro_slideerror_subtitle">Это устройство не поддерживает Bluetooth Low Energy.</string>
     <string name="disconnected">Отключено</string>
     <string name="connected">Подключено</string>

@@ -64,9 +64,10 @@
     <string name="connecting">कनेक्ट करीत आहे…</string>
     <string name="connected">जोडलेले</string>
     <string name="disconnected">डिस्कनेक्ट केलेले</string>
-    <string name="n_found">%d घड्याळे सापडली</string>
-    <string name="one_found">एक घड्याळ सापडले</string>
-    <string name="nothing_found">कोणतीही घड्याळे सापडली नाहीत</string>
+    <plurals name="watches_found">
+        <item quantity="one">एक घड्याळ सापडले</item>
+        <item quantity="other">%d घड्याळे सापडली</item>
+    </plurals>
     <string name="unknown_device">अज्ञात उपकरण</string>
     <string name="set_owm_api_key">सानुकूल OWM API की सेट करा</string>
     <string name="apply">लागू करा</string>
