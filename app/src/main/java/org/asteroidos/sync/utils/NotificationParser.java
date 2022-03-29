@@ -231,15 +231,22 @@ public class NotificationParser {
         parseRemoteView(views);
     }
 
+    @SuppressLint("DiscouragedPrivateApi")
     @SuppressWarnings("unchecked")
-    @SuppressLint("PrivateApi")
-    private void parseRemoteView(RemoteViews views)
-    {
+    private void parseRemoteView(RemoteViews views) {
         try {
-            Class remoteViewsClass = RemoteViews.class;
-            Class baseActionClass = Class.forName("android.widget.RemoteViews$Action");
+            Class<RemoteViews> remoteViewsClass = RemoteViews.class;
+            @SuppressLint("PrivateApi")
+            Class<?> baseActionClass = Class.forName("android.widget.RemoteViews$Action");
 
-            Field actionsField = remoteViewsClass.getDeclaredField("mActions");
+            Field actionsField;
+            // TODO Before upgrading version code, ensure the below still works with the newer code
+            if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
+                //noinspection JavaReflectionMemberAccess
+                actionsField = remoteViewsClass.getDeclaredField("mActions");
+            } else {
+                return;
+            }
 
             actionsField.setAccessible(true);
 
