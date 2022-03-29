@@ -26,6 +26,7 @@ import org.asteroidos.sync.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AppInfoAdapter extends ArrayAdapter<AppInfo> {
     private final static String TAG = AppInfoAdapter.class.getSimpleName();
@@ -155,7 +156,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> {
             FilterResults results = new FilterResults();
             ArrayList<AppInfo> newValues = new ArrayList<>();
             for (AppInfo value : items) {
-                String packageName = value.getPackageName().toLowerCase();
+                String packageName = value.getPackageName().toLowerCase(Locale.getDefault());
                 if (seenPackages.contains(packageName))
                     newValues.add(value);
             }
