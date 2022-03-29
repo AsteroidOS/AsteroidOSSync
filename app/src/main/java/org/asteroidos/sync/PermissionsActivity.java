@@ -206,26 +206,19 @@ public class PermissionsActivity extends MaterialIntroActivity {
 
         @Override
         public boolean hasAnyPermissionsToGrant() {
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 String packageName = mCtx.getPackageName();
                 PowerManager pm = (PowerManager) mCtx.getSystemService(POWER_SERVICE);
                 return (pm != null && !pm.isIgnoringBatteryOptimizations(packageName));
-            }
-
-            return false;
         }
 
         @Override
         public void askForPermissions() {
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                Intent intent = new Intent();
-                String packageName = mCtx.getPackageName();
-                PowerManager pm = (PowerManager) mCtx.getSystemService(POWER_SERVICE);
-                intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-                intent.setData(Uri.parse("package:" + packageName));
-                getActivity().startActivityForResult(intent, BATTERYOPTIM_REQUEST);
-
-            }
+            Intent intent = new Intent();
+            String packageName = mCtx.getPackageName();
+            PowerManager pm = (PowerManager) mCtx.getSystemService(POWER_SERVICE);
+            intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            intent.setData(Uri.parse("package:" + packageName));
+            getActivity().startActivityForResult(intent, BATTERYOPTIM_REQUEST);
         }
 
         @Override
