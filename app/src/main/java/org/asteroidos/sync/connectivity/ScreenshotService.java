@@ -135,7 +135,12 @@ public class ScreenshotService implements IConnectivityService {
                     notificationIntent.setAction(Intent.ACTION_VIEW);
                     notificationIntent.setDataAndType(fileName, "image/*");
                     notificationIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    PendingIntent contentIntent = PendingIntent.getActivity(mCtx, 0, notificationIntent, 0);
+                    PendingIntent contentIntent = PendingIntent.getActivity(
+                            mCtx,
+                            0,
+                            notificationIntent,
+                            PendingIntent.FLAG_IMMUTABLE
+                    );
                     notificationBuilder.setContentIntent(contentIntent);
                     mDownloading = false;
 

@@ -78,7 +78,7 @@ public class TimeService implements IConnectivityService, SharedPreferences.OnSh
 
         // register an alarm to sync the time once a day
         Intent alarmIntent = new Intent(TIME_SYNC_INTENT);
-        alarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, 0);
+        alarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
         alarmMgr = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
         alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_DAY,
