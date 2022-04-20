@@ -23,8 +23,8 @@
     <string name="intro_slide5_title">बॅटरी ऑप्टिमायझेशन</string>
     <string name="intro_slide4_subtitle">आपल्या घड्याळासह सूचना संक्रमित करण्यासाठी, खालील मेनूमध्ये \"AsteroidOS Sync\" ला अनुमती द्या:</string>
     <string name="intro_slide4_title">सूचना</string>
-    <string name="intro_slide3_subtitle">जवळपासच्या ब्लूटूथ लो एनर्जी डिव्हाइसेस स्कॅन करण्यासाठी.</string>
-    <string name="intro_slide3_title">स्थान</string>
+    <string name="intro_slide3_subtitle">स्कॅन करण्यासाठी आणि जवळपासच्या ब्लूटूथ लो एनर्जी डिव्हाइसेसशी कनेक्ट करण्यासाठी.</string>
+    <string name="intro_slide3_title">स्थान आणि ब्लूटूथ</string>
     <string name="intro_slide2_subtitle">डेटा कॅश करण्यासाठी आणि आपल्या घड्याळाचे स्क्रीनशॉट्स सेव्ह करण्यासाठी.</string>
     <string name="intro_slide2_title">फाइल प्रवेश</string>
     <string name="intro_slide1_subtitle">हा अ‍ॅप आपल्याला आपला अ‍ॅन्ड्रोइड फोन आपल्या अ‍ॅस्टेरॉइडोस घड्याळासह संकालित करू देतो. परंतु प्रथम, त्यासाठी काही परवानग्या आवश्यक आहेत.</string>
@@ -72,4 +72,6 @@
     <string name="apply">लागू करा</string>
     <string name="OWM_API_KEY">OWM API की</string>
     <string name="cancel">रद्द करा</string>
+    <string name="location_disabled_title">स्थान अक्षम</string>
+    <string name="location_disabled_message">घड्याळे शोधण्यासाठी स्थान सेवा सक्षम करणे आवश्यक आहे. एकदा पेअर केल्यानंतर तुम्ही ते पुन्हा सुरक्षितपणे अक्षम करू शकता.</string>
 </resources>
