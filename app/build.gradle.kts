@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId = "org.asteroidos.sync"
         minSdk = 24
-        targetSdk = 30
+        targetSdk = 31
         versionCode = 22
         versionName = "0.22"
     }
