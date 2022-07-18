@@ -1,6 +1,7 @@
 package org.asteroidos.sync;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -215,6 +216,9 @@ public class PermissionsActivity extends MaterialIntroActivity {
             return false;
         }
 
+        // Ignore violation of play store content since
+        // we rely on it to get notifications while the phone is in sleep mode.
+        @SuppressLint("BatteryLife")
         @Override
         public void askForPermissions() {
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
