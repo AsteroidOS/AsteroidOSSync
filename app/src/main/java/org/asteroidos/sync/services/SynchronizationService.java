@@ -17,6 +17,7 @@
 
 package org.asteroidos.sync.services;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -27,6 +28,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -36,6 +38,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
 import org.asteroidos.sync.MainActivity;
@@ -57,7 +60,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import no.nordicsemi.android.ble.observer.ConnectionObserver;
 
@@ -98,6 +100,13 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         if (defaultDevMacAddr.equals("")) return;
         String defaultLocalName = mPrefs.getString(MainActivity.PREFS_DEFAULT_LOC_NAME, "");
         BluetoothDevice device = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(defaultDevMacAddr);
+
+       // TODO Review the below github issue for info regarding bluetooth device querying
+       // https://github.com/AsteroidOS/AsteroidOSSync/issues/164 Message 1
+       if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+           // https://github.com/AsteroidOS/AsteroidOSSync/issues/164 Message 2
+           return;
+        }
         device.createBond();
         mBleMngr.connect(device)
                 .useAutoConnect(true)
@@ -123,6 +132,13 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         Log.d(TAG, "handleSetDevice: " + device.toString());
         editor.putString(MainActivity.PREFS_DEFAULT_MAC_ADDR, device.getAddress());
         mDevice = device;
+
+        // TODO Review the below github issue for info regarding bluetooth device querying
+        // https://github.com/AsteroidOS/AsteroidOSSync/issues/164 Message 1
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            // https://github.com/AsteroidOS/AsteroidOSSync/issues/164 Message 2
+            return;
+        }
         String name = mDevice.getName();
         try {
             Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
@@ -205,6 +221,13 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
 
     @Override
     public void onDeviceFailedToConnect(@NonNull BluetoothDevice device, int reason) {
+
+        // TODO Review the below github issue for info regarding bluetooth device querying
+        // https://github.com/AsteroidOS/AsteroidOSSync/issues/164 Message 1
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            // https://github.com/AsteroidOS/AsteroidOSSync/issues/164 Message 2
+            return;
+        }
         Log.d(TAG, "Failed to connect to " + device.getName() + ": " + reason);
     }
 
@@ -285,6 +308,12 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         handleUpdateConnectionStatus();
         String status = getString(R.string.disconnected);
         if (mDevice != null) {
+            // TODO Review the below github issue for info regarding bluetooth device querying
+            // https://github.com/AsteroidOS/AsteroidOSSync/issues/164 Message 1
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                // https://github.com/AsteroidOS/AsteroidOSSync/issues/164 Message 2
+                return;
+            }
             if (mState == ConnectionState.STATUS_CONNECTING)
                 status = getString(R.string.connecting_formatted, mDevice.getName());
             else if (mState == ConnectionState.STATUS_CONNECTED)
