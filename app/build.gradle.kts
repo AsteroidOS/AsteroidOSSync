@@ -42,6 +42,7 @@ android {
         checkReleaseBuilds = true
         disable += "MissingTranslation"
     }
+    namespace = "org.asteroidos.sync"
 }
 
 repositories {
