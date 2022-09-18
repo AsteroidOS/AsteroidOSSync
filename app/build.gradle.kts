@@ -3,13 +3,13 @@ plugins {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = 33
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "org.asteroidos.sync"
         minSdk = 24
-        targetSdk = 31
+        targetSdk = 33
         versionCode = 22
         versionName = "0.22"
     }
