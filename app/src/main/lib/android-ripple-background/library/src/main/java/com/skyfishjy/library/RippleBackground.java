@@ -141,7 +141,7 @@ public class RippleBackground extends RelativeLayout{
             if (animatorList != null){
                 for (Animator anim : animatorList){
                     if(anim instanceof ObjectAnimator)
-                    ((ObjectAnimator) anim).setRepeatCount(ObjectAnimator.INFINITE);
+                      ((ObjectAnimator) anim).setRepeatCount(ObjectAnimator.INFINITE);
                 }
             }
             animatorSet.start();
