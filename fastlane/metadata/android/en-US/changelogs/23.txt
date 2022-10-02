@@ -1,0 +1,7 @@
+0.23
+  * Dependency updates
+  * Build system upgrades
+    * Groovy -> Kotlin (Thanks Doomsdayrs!)
+  * improved Android 13 support
+  * Translation improvements
+  * Fixed a potential crash in the notification parser (Thanks Dommsdayrs!)
