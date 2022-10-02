@@ -30,7 +30,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -45,7 +44,6 @@ import org.asteroidos.sync.asteroid.IAsteroidDevice;
 import org.asteroidos.sync.connectivity.SilentModeService;
 import org.asteroidos.sync.connectivity.TimeService;
 import org.asteroidos.sync.services.PhoneStateReceiver;
-import org.asteroidos.sync.services.SynchronizationService;
 
 public class DeviceDetailFragment extends Fragment {
     private TextView mDisconnectedText;
@@ -97,14 +95,11 @@ public class DeviceDetailFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         mFab = view.findViewById(R.id.fab);
-        mFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mConnected)
-                    mConnectListener.onDisconnectRequested();
-                else
-                    mConnectListener.onConnectRequested();
-            }
+        mFab.setOnClickListener(fabView -> {
+            if (mConnected)
+                mConnectListener.onDisconnectRequested();
+            else
+                mConnectListener.onConnectRequested();
         });
 
         mDisconnectedText = view.findViewById(R.id.info_disconnected);
@@ -115,80 +110,58 @@ public class DeviceDetailFragment extends Fragment {
         mDisconnectedPlaceholder = view.findViewById(R.id.device_disconnected_placeholder);
 
         CardView weatherCard = view.findViewById(R.id.card_view1);
-        weatherCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mWeatherSettingsListener.onWeatherSettingsClicked();
-            }
-        });
+        weatherCard.setOnClickListener(weatherCardView -> mWeatherSettingsListener.onWeatherSettingsClicked());
 
         CardView findCard = view.findViewById(R.id.card_view2);
-        findCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent iremove = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
-                iremove.putExtra("event", "removed");
-                iremove.putExtra("id", 0xa57e401d);
-                getActivity().sendBroadcast(iremove);
+        findCard.setOnClickListener(FindCardView -> {
+            Intent iremove = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
+            iremove.putExtra("event", "removed");
+            iremove.putExtra("id", 0xa57e401d);
+            getActivity().sendBroadcast(iremove);
 
-                Intent ipost = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
-                ipost.putExtra("event", "posted");
-                ipost.putExtra("packageName", "org.asteroidos.sync.findmywatch");
-                ipost.putExtra("id", 0xa57e401d);
-                ipost.putExtra("appName", getString(R.string.app_name));
-                ipost.putExtra("appIcon", "ios-watch-vibrating");
-                ipost.putExtra("summary", getString(R.string.watch_finder));
-                ipost.putExtra("body", getString(R.string.phone_is_searching));
-                getActivity().sendBroadcast(ipost);
-            }
+            Intent ipost = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
+            ipost.putExtra("event", "posted");
+            ipost.putExtra("packageName", "org.asteroidos.sync.findmywatch");
+            ipost.putExtra("id", 0xa57e401d);
+            ipost.putExtra("appName", getString(R.string.app_name));
+            ipost.putExtra("appIcon", "ios-watch-vibrating");
+            ipost.putExtra("summary", getString(R.string.watch_finder));
+            ipost.putExtra("body", getString(R.string.phone_is_searching));
+            getActivity().sendBroadcast(ipost);
         });
 
         CardView screenshotCard = view.findViewById(R.id.card_view3);
         screenshotCard.setOnClickListener(view1 -> getActivity().sendBroadcast(new Intent("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER")));
 
         CardView notifSettCard = view.findViewById(R.id.card_view4);
-        notifSettCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAppSettingsListener.onAppSettingsClicked();
-            }
-        });
+        notifSettCard.setOnClickListener(notifSettCardView -> mAppSettingsListener.onAppSettingsClicked());
 
         mTimeSyncSettings = getActivity().getSharedPreferences(TimeService.PREFS_NAME, 0);
 
         mTimeSyncCheckBox = view.findViewById(R.id.timeSyncCheckBox);
         mTimeSyncCheckBox.setChecked(mTimeSyncSettings.getBoolean(TimeService.PREFS_SYNC_TIME, TimeService.PREFS_SYNC_TIME_DEFAULT));
-        mTimeSyncCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton ignored, boolean checked) {
-                SharedPreferences.Editor editor = mTimeSyncSettings.edit();
-                editor.putBoolean(TimeService.PREFS_SYNC_TIME, mTimeSyncCheckBox.isChecked());
-                editor.apply();
-            }
+        mTimeSyncCheckBox.setOnCheckedChangeListener((ignored, checked) -> {
+            SharedPreferences.Editor editor = mTimeSyncSettings.edit();
+            editor.putBoolean(TimeService.PREFS_SYNC_TIME, checked);
+            editor.apply();
         });
 
         mSilenceModeSettings = getActivity().getSharedPreferences(SilentModeService.PREFS_NAME, Context.MODE_PRIVATE);
         mSilenceModeCheckBox = view.findViewById(R.id.SilentModeCheckBox);
         mSilenceModeCheckBox.setChecked(mSilenceModeSettings.getBoolean(SilentModeService.PREF_RINGER, false));
-        mSilenceModeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferences.Editor editor = mSilenceModeSettings.edit();
-                editor.putBoolean(SilentModeService.PREF_RINGER, isChecked);
-                editor.apply();
-            }
+        mSilenceModeCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            SharedPreferences.Editor editor = mSilenceModeSettings.edit();
+            editor.putBoolean(SilentModeService.PREF_RINGER, isChecked);
+            editor.apply();
         });
 
         mCallStateSettings = getActivity().getSharedPreferences(PhoneStateReceiver.PREFS_NAME, Context.MODE_PRIVATE);
         mCallStateServiceCheckBox = view.findViewById(R.id.CallStateServiceCheckBox);
         mCallStateServiceCheckBox.setChecked(mCallStateSettings.getBoolean(PhoneStateReceiver.PREF_SEND_CALL_STATE, true));
-        mCallStateServiceCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferences.Editor editor = mCallStateSettings.edit();
-                editor.putBoolean(PhoneStateReceiver.PREF_SEND_CALL_STATE, isChecked);
-                editor.apply();
-            }
+        mCallStateServiceCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            SharedPreferences.Editor editor = mCallStateSettings.edit();
+            editor.putBoolean(PhoneStateReceiver.PREF_SEND_CALL_STATE, isChecked);
+            editor.apply();
         });
 
         setStatus(mStatus);
