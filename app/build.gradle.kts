@@ -10,8 +10,8 @@ android {
         applicationId = "org.asteroidos.sync"
         minSdk = 24
         targetSdk = 33
-        versionCode = 23
-        versionName = "0.23"
+        versionCode = 24
+        versionName = "0.24"
     }
     buildTypes {
         named("release") {
