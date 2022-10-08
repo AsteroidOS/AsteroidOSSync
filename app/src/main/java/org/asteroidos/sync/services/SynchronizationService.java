@@ -98,15 +98,19 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         if (defaultDevMacAddr.equals("")) return;
         String defaultLocalName = mPrefs.getString(MainActivity.PREFS_DEFAULT_LOC_NAME, "");
         BluetoothDevice device = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(defaultDevMacAddr);
-        device.createBond();
-        mBleMngr.connect(device)
-                .useAutoConnect(true)
-                .timeout(100000)
-                .retry(3, 200)
-                .done(device1 -> Log.d(TAG, "Connected to " + device1.getName()))
-                .fail((device2, error) -> Log.e(TAG, "Failed to connect to " + device.getName() +
-                        " with error code: " + error))
-                .enqueue();
+        try {
+            device.createBond();
+            mBleMngr.connect(device)
+                    .useAutoConnect(true)
+                    .timeout(100000)
+                    .retry(3, 200)
+                    .done(device1 -> Log.d(TAG, "Connected to " + device1.getName()))
+                    .fail((device2, error) -> Log.e(TAG, "Failed to connect to " + device.getName() +
+                            " with error code: " + error))
+                    .enqueue();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
     }
 
     final void handleDisconnect() {
@@ -123,13 +127,13 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         Log.d(TAG, "handleSetDevice: " + device.toString());
         editor.putString(MainActivity.PREFS_DEFAULT_MAC_ADDR, device.getAddress());
         mDevice = device;
-        String name = mDevice.getName();
         try {
+            String name = mDevice.getName();
             Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
             answer.obj = name;
             replyTo.send(answer);
             replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState));
-        } catch (RemoteException | NullPointerException ignored) {
+        } catch (RemoteException | SecurityException | NullPointerException ignored) {
         }
         editor.putString(MainActivity.PREFS_DEFAULT_LOC_NAME, name);
         editor.apply();
@@ -205,7 +209,11 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
 
     @Override
     public void onDeviceFailedToConnect(@NonNull BluetoothDevice device, int reason) {
-        Log.d(TAG, "Failed to connect to " + device.getName() + ": " + reason);
+        try {
+            Log.d(TAG, "Failed to connect to " + device.getName() + ": " + reason);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -285,10 +293,14 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         handleUpdateConnectionStatus();
         String status = getString(R.string.disconnected);
         if (mDevice != null) {
-            if (mState == ConnectionState.STATUS_CONNECTING)
-                status = getString(R.string.connecting_formatted, mDevice.getName());
-            else if (mState == ConnectionState.STATUS_CONNECTED)
-                status = getString(R.string.connected_formatted, mDevice.getName());
+            try {
+                if (mState == ConnectionState.STATUS_CONNECTING)
+                    status = getString(R.string.connecting_formatted, mDevice.getName());
+                else if (mState == ConnectionState.STATUS_CONNECTED)
+                    status = getString(R.string.connected_formatted, mDevice.getName());
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            }
         }
 
         if (mDevice != null) {
