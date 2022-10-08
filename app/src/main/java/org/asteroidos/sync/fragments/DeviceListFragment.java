@@ -18,10 +18,8 @@
 
 package org.asteroidos.sync.fragments;
 
-import android.Manifest;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +30,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -199,13 +196,6 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
             }
 
             BluetoothDevice device = mLeDevices.get(i);
-
-            // TODO Review the below github issue for info regarding bluetooth device querying
-            // https://github.com/AsteroidOS/AsteroidOSSync/issues/164 Message 1
-            if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                // https://github.com/AsteroidOS/AsteroidOSSync/issues/164 Message 2
-                return view;
-            }
             final String deviceName = device.getName();
             if (deviceName != null && deviceName.length() > 0)
                 viewHolder.deviceName.setText(deviceName);

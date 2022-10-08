@@ -1,16 +1,13 @@
 package org.asteroidos.sync.asteroid;
 
-import android.Manifest;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 
 import org.asteroidos.sync.connectivity.IConnectivityService;
 import org.asteroidos.sync.connectivity.IServiceCallback;
@@ -129,13 +126,6 @@ public class AsteroidBleManager extends BleManager {
 
         @Override
         protected final void initialize() {
-
-            // TODO Review the below github issue for info regarding bluetooth device querying
-            // https://github.com/AsteroidOS/AsteroidOSSync/issues/164 Message 1
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                // https://github.com/AsteroidOS/AsteroidOSSync/issues/164 Message 2
-                return;
-            }
             beginAtomicRequestQueue()
                     .add(requestMtu(256) // Remember, GATT needs 3 bytes extra. This will allow packet size of 244 bytes.
                             .with((device, mtu) -> log(Log.INFO, "MTU set to " + mtu))
