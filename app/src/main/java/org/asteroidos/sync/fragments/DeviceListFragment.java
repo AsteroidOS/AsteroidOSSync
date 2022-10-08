@@ -196,11 +196,15 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
             }
 
             BluetoothDevice device = mLeDevices.get(i);
-            final String deviceName = device.getName();
-            if (deviceName != null && deviceName.length() > 0)
-                viewHolder.deviceName.setText(deviceName);
-            else
-                viewHolder.deviceName.setText(R.string.unknown_device);
+            try {
+                final String deviceName = device.getName();
+                if (deviceName != null && deviceName.length() > 0)
+                    viewHolder.deviceName.setText(deviceName);
+                else
+                    viewHolder.deviceName.setText(R.string.unknown_device);
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            }
 
             return view;
         }
