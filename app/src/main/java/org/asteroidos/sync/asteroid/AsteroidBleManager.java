@@ -1,13 +1,16 @@
 package org.asteroidos.sync.asteroid;
 
+import android.Manifest;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 
 import org.asteroidos.sync.connectivity.IConnectivityService;
 import org.asteroidos.sync.connectivity.IServiceCallback;
@@ -107,7 +110,7 @@ public class AsteroidBleManager extends BleManager {
                 });
                 Log.d(TAG, "UUID " + sendUuids);
 
-                for (UUID uuid: sendUuids) {
+                for (UUID uuid : sendUuids) {
                     BluetoothGattCharacteristic characteristic = bluetoothGattService.getCharacteristic(uuid);
                     sendingCharacteristics.put(uuid, characteristic);
                     bluetoothGattService.addCharacteristic(characteristic);
@@ -131,7 +134,7 @@ public class AsteroidBleManager extends BleManager {
                             .with((device, mtu) -> log(Log.INFO, "MTU set to " + mtu))
                             .fail((device, status) -> log(Log.WARN, "Requested MTU not supported: " + status)))
                     .done(device -> log(Log.INFO, "Target initialized"))
-                    .fail((device, status) -> Log.e("Init", device.getName() + " not initialized with error: " + status))
+                    .fail((device, status) -> Log.e("Init", device.getAddress() + " not initialized with error: " + status))
                     .enqueue();
 
             setNotificationCallback(batteryCharacteristic).with(((device, data) -> setBatteryLevel(data)));
