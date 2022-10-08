@@ -1,5 +1,6 @@
 package org.asteroidos.sync;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -8,8 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -28,6 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -92,7 +96,13 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
             if (mListFragment == null) return;
             mListFragment.deviceDiscovered(result.getDevice());
-            Log.d(TAG,"SCAN RESULT:" + result.getDevice().toString() + " Name:" + result.getDevice().getName());
+            if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    ActivityCompat.requestPermissions(getParent(), new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 225);
+                }
+                return;
+            }
+            Log.d(TAG, "SCAN RESULT:" + result.getDevice().toString() + " Name:" + result.getDevice().getName());
             ParcelUuid[] arr = result.getDevice().getUuids();
         }
     };
@@ -135,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         mSyncServiceIntent = new Intent(this, SynchronizationService.class);
         startService(mSyncServiceIntent);
 
-        if (mListFragment != null)        mListFragment.scanningStarted();
+        if (mListFragment != null) mListFragment.scanningStarted();
         else if (mDetailFragment != null) mDetailFragment.scanningStarted();
 
         if (savedInstanceState == null) {
@@ -168,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         mListFragment.scanningStopped();
         mDetailFragment = new DeviceDetailFragment();
 
-        if (mListFragment != null)        mListFragment.scanningStopped();
+        if (mListFragment != null) mListFragment.scanningStopped();
         else if (mDetailFragment != null) mDetailFragment.scanningStopped();
 
         getSupportFragmentManager()
@@ -349,7 +359,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     @Override
     public void onScanRequested() {
         btEnableAndScan();
-        if (mListFragment != null)        mListFragment.scanningStarted();
+        if (mListFragment != null) mListFragment.scanningStarted();
         else if (mDetailFragment != null) mDetailFragment.scanningStarted();
     }
 
@@ -357,6 +367,12 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         BluetoothAdapter mBtAdapter;
         mBtAdapter = BluetoothAdapter.getDefaultAdapter();
         if (!mBtAdapter.isEnabled()) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    ActivityCompat.requestPermissions(getParent(), new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 225);
+                }
+                return;
+            }
             mBtAdapter.enable();
         }
     }
