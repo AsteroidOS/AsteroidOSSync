@@ -1,0 +1,2 @@
+0.23
+  * Fixes an issue where watches could not be discovered on older Android versions.
