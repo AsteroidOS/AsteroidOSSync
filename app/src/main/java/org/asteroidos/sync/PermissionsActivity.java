@@ -57,8 +57,11 @@ public class PermissionsActivity extends MaterialIntroActivity {
                     .title(getString(R.string.intro_slide2_title))
                     .description(getString(R.string.intro_slide2_subtitle))
                     .build();
-            boolean externalStorageFragmentShown = (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED);
+                boolean externalStorageFragmentShown = false;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                externalStorageFragmentShown = (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED);
+            }
 
             SlideFragmentBuilder localizationFragmentBuilder = new SlideFragmentBuilder()
                     .backgroundColor(R.color.colorintroslide3)
