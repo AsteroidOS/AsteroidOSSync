@@ -75,4 +75,6 @@
     <string name="cancel">Cancel</string>
     <string name="location_disabled_message">In order to find watches the location service has to be enabled. Once paired you can safely disable it again.</string>
     <string name="location_disabled_title">Location disabled</string>
+    <string name="intro_slide6_title">Phone Notifications</string>
+    <string name="intro_slide6_subtitle">To show the current connection state of the watch.</string>
 </resources>
