@@ -85,6 +85,22 @@ public class PermissionsActivity extends MaterialIntroActivity {
                         Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED);
             }
 
+            boolean notificationsPermissionFragmentShown = false;
+                SlideFragment notificationsPermissionFragment = null;
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                SlideFragmentBuilder notificationsPermissionSlideBuilder = new SlideFragmentBuilder()
+                        .backgroundColor(R.color.colorintroslide3)
+                        .buttonsColor(R.color.colorintroslide3button)
+                        .neededPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS})
+                        .image(R.drawable.ic_notifications)
+                        .title(getString(R.string.intro_slide6_title))
+                        .description(getString(R.string.intro_slide6_subtitle));
+                notificationsPermissionSlideBuilder.neededPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS});
+                notificationsPermissionFragment = notificationsPermissionSlideBuilder.build();
+                notificationsPermissionFragmentShown = (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED);
+            }
+
             NotificationsSlide notificationFragment = new NotificationsSlide();
             notificationFragment.setContext(this);
             boolean notificationFragmentShown = notificationFragment.hasAnyPermissionsToGrant();
@@ -109,10 +125,11 @@ public class PermissionsActivity extends MaterialIntroActivity {
                             Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED);
 
             if (externalStorageFragmentShown || localizationFragmentShown ||
-                    notificationFragmentShown || batteryOptimFragmentShown || phoneStateFragmentShown) {
+                    notificationFragmentShown || notificationsPermissionFragmentShown || batteryOptimFragmentShown || phoneStateFragmentShown) {
                 addSlide(welcomeFragment);
                 if (externalStorageFragmentShown) addSlide(externalStorageFragment);
                 if (localizationFragmentShown) addSlide(localizationFragment);
+                if (notificationsPermissionFragmentShown && notificationsPermissionFragment != null) addSlide(notificationsPermissionFragment);
                 if (notificationFragmentShown) addSlide(notificationFragment);
                 if (batteryOptimFragmentShown) addSlide(batteryOptimFragment);
                 if (phoneStateFragmentShown) addSlide(phoneStateFragment);
