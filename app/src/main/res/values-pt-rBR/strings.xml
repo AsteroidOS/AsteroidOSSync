@@ -47,8 +47,8 @@
     <string name="intro_slide1_subtitle">Este app permite a você sincronizar seu celular Android com o relógio AsteroidOS. Mas primeiro ele precisa de algumas permissões.</string>
     <string name="intro_slide2_title">Acesso aos arquivos</string>
     <string name="intro_slide2_subtitle">Para fazer o cache de dados e salvar as capturas de tela de seu relógio.</string>
-    <string name="intro_slide3_title">Localização</string>
-    <string name="intro_slide3_subtitle">Para procurar nas proximidades por dispositivos Bluetooth de baixa energia.</string>
+    <string name="intro_slide3_title">Localização e Bluetooth</string>
+    <string name="intro_slide3_subtitle">Para procurar e conectar em dispositivos Bluetooth de baixa energia próximos.</string>
     <string name="intro_slide5_title">Otimização da bateria</string>
     <string name="intro_slide5_subtitle">Para deixar este aplicativo rodar em segundo plano, desabilite \"Battery Optimization\" para o AsteroidOS Sync no menu a seguir:</string>
     <string name="intro_slideerror_title">Suporte ao Bluetooth de baixa energia</string>
@@ -72,4 +72,6 @@
     <string name="OWM_API_KEY">Chave API OWM</string>
     <string name="apply">Aplicar</string>
     <string name="cancel">Cancelar</string>
+    <string name="location_disabled_message">Para poder encontrar relógios o serviço de localização tem que ser habilitado. Uma vez pareado você pode desabilitá-lo novamente.</string>
+    <string name="location_disabled_title">Localização desabilitada</string>
 </resources>
