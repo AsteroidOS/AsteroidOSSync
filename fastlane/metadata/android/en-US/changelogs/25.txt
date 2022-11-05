@@ -1,0 +1,3 @@
+0.25
+  * Fixes an issue where users are unable to grant the WRITE_EXTERNAL_STORAGE permission on newer Android versions.
+  * Fixes an issue where notifications could not be displayed on Android 13.
