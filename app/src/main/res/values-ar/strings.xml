@@ -16,7 +16,7 @@
     <string name="intro_slideandroidgo_subtitle">Android Go غير معتمد لأنه لا يسمح بالوصول إلى الإشعارات ويحد من عمليات الخلفية. الحل البديل للمستخدمين الجذر هو تعيين العلامة \"ro.config.low_ram\" في ملف build.prop إلى \"false\".</string>
     <string name="intro_slide5_subtitle">للسماح بتشغيل هذا التطبيق في الخلفية، يرجى تعطيل \"تحسين البطارية\" لمزامنة AsteroidOS في القائمة التالية:</string>
     <string name="intro_slide1_subtitle">يتيح لك هذا التطبيق مزامنة هاتفك الذي يعمل بنظام Android مع ساعة AsteroidOS. ولكن أولا، فإنه يحتاج إلى بعض الأذونات.</string>
-    <string name="intro_slide4_subtitle">لمزامنة الإشعارات مع ساعتك، اسمح ب \"مزامنة AsteroidOS\" في القائمة التالية:</string>
+    <string name="intro_slide4_subtitle">لمزامنة الإشعارات مع ساعتك، اسمح ب \"AsteroidOS Sync\" في القائمة التالية:</string>
     <string name="location_disabled_message">من أجل العثور على الساعات يجب تمكين خدمة الموقع. بمجرد الاقتران يمكنك تعطيله بأمان مرة أخرى.</string>
     <string name="location_disabled_title">تم تعطيل الموقع</string>
     <string name="set_owm_api_key">تعيين مفتاح API OWM مخصص</string>
