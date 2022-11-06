@@ -74,4 +74,6 @@
     <string name="intro_phonestateslide_title">الهاتف وجهات الاتصال</string>
     <string name="show_calls_on_watch">عرض المكالمات الواردة</string>
     <string name="dialer">الهاتف</string>
+    <string name="intro_slide6_title">إشعارات الهاتف</string>
+    <string name="intro_slide6_subtitle">لإظهار حالة الاتصال الحالية للساعة.</string>
 </resources>
