@@ -74,4 +74,6 @@
     <string name="set_owm_api_key">Nastavit vlastní klíč k OWM API</string>
     <string name="OWM_API_KEY">Klíč k OWM API</string>
     <string name="apply">Použít</string>
+    <string name="intro_slide6_title">Upozornění na telefon</string>
+    <string name="intro_slide6_subtitle">Pro zobrazení stávajícího stavu připojení hodinek.</string>
 </resources>
