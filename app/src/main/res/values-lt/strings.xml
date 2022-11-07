@@ -17,12 +17,12 @@
     <string name="grant_permission">Suteikti leidimą</string>
     <string name="intro_slideandroidgo_subtitle">Android Go nepalaikomas, nes jis neleidžia pasiekti pranešimų ir riboja foninius procesus. Sprendimas root vartotojams yra nustatyti ro.config.low_ram reikšmę faile build.prop į false.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
-    <string name="intro_slide3_title">Vieta</string>
+    <string name="intro_slide3_title">Vieta ir Bluetooth</string>
     <string name="intro_slide4_title">Pranešimai</string>
     <string name="intro_slide5_subtitle">Siekiant leisti šiai programai veikti fone, šiame meniu išjunkite AsteroidOS sinchronizacijos funkciją skiltyje baterijos optimizavimas:</string>
     <string name="intro_slide5_title">Baterijos optimizacija</string>
-    <string name="intro_slide4_subtitle">Siekiant sinchronizuoti pranešimus su laikrodžiu, šiame meniu leiskite AsteroidOS sinchronizaciją:</string>
-    <string name="intro_slide3_subtitle">Siekiant skenuoti netoliese esančius mažai energijos naudojančius Bluetooth įrenginius.</string>
+    <string name="intro_slide4_subtitle">Siekiant sinchronizuoti pranešimus su laikrodžiu, šiame meniu leiskite AsteroidOS Sync:</string>
+    <string name="intro_slide3_subtitle">Siekiant skenuoti ir prisijungti prie netoliese esančių mažai energijos naudojančių Bluetooth įrenginių.</string>
     <string name="intro_slide2_subtitle">Siekiant išsaugoti laikinuosius duomenis ir laikrodžio ekrano nuotraukas.</string>
     <string name="intro_slide2_title">Failų prieiga</string>
     <string name="intro_slide1_subtitle">Ši programa leidžia sinchronizuoti Android telefoną su AsteroidOS laikrodžiu. Tačiau pirmiausia reikia suteikti tam tikrus leidimus.</string>
@@ -74,4 +74,6 @@
     <string name="cancel">Atšaukti</string>
     <string name="location_disabled_message">Norint rasti laikrodžius, turi būti įjungta vietos nustatymo paslauga. Suporavę laikrodį, galite jį vėl saugiai išjungti.</string>
     <string name="location_disabled_title">Vietos nustatymas išjungtas</string>
+    <string name="intro_slide6_title">Telefono pranešimai</string>
+    <string name="intro_slide6_subtitle">Siekiant rodyti dabartinę laikrodžio ryšio būseną.</string>
 </resources>
