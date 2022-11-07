@@ -74,4 +74,6 @@
     <string name="apply">Применить</string>
     <string name="location_disabled_message">Для поиска часов необходимо включить сервисы определения местоположения. После привязки устройства вы снова сможете их выключить.</string>
     <string name="location_disabled_title">Служба определения местоположения выключена</string>
+    <string name="intro_slide6_title">Уведомления телефона</string>
+    <string name="intro_slide6_subtitle">Показывать текущее состояние соединения на часах.</string>
 </resources>
