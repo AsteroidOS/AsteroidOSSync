@@ -75,4 +75,6 @@
     <string name="set_owm_api_key">הגדרת מפתח API משלך ל־OWM</string>
     <string name="location_disabled_title">המיקום מושבת</string>
     <string name="location_disabled_message">כדי למצוא שעונים, יש להפעיל את שירות המיקום. לאחר הצימוד אפשר להשבית אותו שוב.</string>
+    <string name="intro_slide6_title">התראות בטלפון</string>
+    <string name="intro_slide6_subtitle">כדי להציג את מצב החיבורים הנוכחיים של השעון.</string>
 </resources>
