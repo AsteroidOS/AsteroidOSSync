@@ -47,8 +47,8 @@
     <string name="intro_slide1_subtitle">Esta aplicación le permite sincronizar el teléfono Android con un reloj AsteroidOS. Pero antes se necesitan algunos permisos.</string>
     <string name="intro_slide2_title">Acceso a archivos</string>
     <string name="intro_slide2_subtitle">Para almacenar datos y capturas de pantalla del reloj.</string>
-    <string name="intro_slide3_title">Ubicación</string>
-    <string name="intro_slide3_subtitle">Para detectar dispositivos Bluetooth de bajo consumo cercanos.</string>
+    <string name="intro_slide3_title">Ubicación y Bluetooth</string>
+    <string name="intro_slide3_subtitle">Para escanear y conectarse a dispositivos Bluetooth de baja energía cercanos.</string>
     <string name="intro_slide5_title">Optimización de batería</string>
     <string name="intro_slide5_subtitle">Para permitir que esta aplicación se ejecute en segundo plano, desactive la «Optimización de batería» para AsteroidOS Sync en el menú siguiente:</string>
     <string name="intro_slideerror_title">Compatibilidad con Bluetooth Low Energy</string>
