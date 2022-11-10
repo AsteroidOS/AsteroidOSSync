@@ -74,4 +74,6 @@
     <string name="set_owm_api_key">OWM API Schlüssel eingeben</string>
     <string name="location_disabled_message">Um Uhren zu finden, muss der Ortungsdienst aktiviert sein. Nach der Kopplung kann er wieder sicher deaktiviert werden.</string>
     <string name="location_disabled_title">Standortdienst deaktiviert</string>
+    <string name="intro_slide6_title">Telefon-Benachrichtigungen</string>
+    <string name="intro_slide6_subtitle">Zur Anzeige des aktuellen Verbindungsstatus der Uhr.</string>
 </resources>
