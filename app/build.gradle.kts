@@ -58,7 +58,7 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.google.android.material:material:1.6.1")
-    implementation("com.github.code-crusher:EasyWeather:1.2")
+    implementation("com.github.MagneFire:EasyWeather:1.3")
     implementation("com.google.code.gson:gson:2.9.1")
     implementation("org.osmdroid:osmdroid-android:6.1.14")
     implementation("no.nordicsemi.android.support.v18:scanner:1.6.0")
