@@ -45,8 +45,8 @@
     <string name="intro_slide1_subtitle">Esta aplicación permíteche sincroniza-lo teu teléfono móbil Android co teu reloxo do AsteroidOS. Pero primeiro precisaranse algúns permisos.</string>
     <string name="intro_slide2_title">Acceso a ficheiros</string>
     <string name="intro_slide2_subtitle">Para almacenar datos e capturas da pantalla do teu reloxo.</string>
-    <string name="intro_slide3_title">Localización</string>
-    <string name="intro_slide3_subtitle">Para detectares dispositivos Bluetooth de baixo consumo pretos.</string>
+    <string name="intro_slide3_title">Localización e Bluetooth</string>
+    <string name="intro_slide3_subtitle">Para dixitalizar e conectarse a dispositivos Bluetooth de baixo consumo próximos.</string>
     <string name="intro_slide4_title">Notificacións</string>
     <string name="intro_slide4_subtitle">Para sincroniza-las notificacións, activa o \"AsteroidOS Sync\" no seguinte menú:</string>
     <string name="intro_slide5_title">Optimización da bateria</string>
@@ -68,4 +68,12 @@
     <string name="intro_phonestateslide_subtitle">Para mostrar as chamadas entrantes no reloxo e o nome da persoa que chama.</string>
     <string name="notification_type_ringtone">Tono de chamada</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="intro_slide6_title">Notificacións telefónicas</string>
+    <string name="intro_slide6_subtitle">Para amosalo estado da conexión actual do reloxo.</string>
+    <string name="location_disabled_message">Para atopalos reloxos, hai que activalo servizo de localización. Unha vez vinculado, podes desactivalo de novo con seguridade.</string>
+    <string name="location_disabled_title">Localización desactivada</string>
+    <string name="set_owm_api_key">Establece a clave personalizada para API OWM</string>
+    <string name="OWM_API_KEY">Clave da API OWM</string>
+    <string name="apply">Aplicar</string>
+    <string name="cancel">Cancelar</string>
 </resources>
