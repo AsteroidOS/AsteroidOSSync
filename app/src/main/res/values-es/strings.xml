@@ -68,4 +68,12 @@
     <string name="intro_phonestateslide_subtitle">Para mostrar las llamadas entrantes en el reloj y para mostrar el nombre de la persona que llama.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="intro_slideandroidgo_subtitle">No se admite Android Go porque no permite el acceso a las notificaciones y restringe los procesos en segundo plano. Si se cuenta con acceso «root», se puede definir la opción «ro.config.low_ram» del archivo build.prop como «false».</string>
+    <string name="intro_slide6_title">Notificaciones telefónicas</string>
+    <string name="intro_slide6_subtitle">Para mostrar el estado actual de la conexión al reloj.</string>
+    <string name="location_disabled_title">Ubicación desactivada</string>
+    <string name="location_disabled_message">Para encontrar los relojes el servicio de localización tiene que estar activado. Una vez emparejado puedes volver a desactivarlo con seguridad.</string>
+    <string name="set_owm_api_key">Establecer la clave API de OWM personalizada</string>
+    <string name="OWM_API_KEY">Clave API de OWM</string>
+    <string name="apply">Aplicar</string>
+    <string name="cancel">Cancelar</string>
 </resources>
