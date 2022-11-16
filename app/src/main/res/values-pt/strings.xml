@@ -74,4 +74,6 @@
     <string name="OWM_API_KEY">Chave API OWM</string>
     <string name="apply">Aplicar</string>
     <string name="cancel">Cancelar</string>
+    <string name="intro_slide6_title">Notificações de telefone</string>
+    <string name="intro_slide6_subtitle">Para mostrar o estado atual da ligação do relógio.</string>
 </resources>
