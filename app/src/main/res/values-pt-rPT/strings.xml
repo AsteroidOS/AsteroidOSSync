@@ -46,8 +46,8 @@
     <string name="intro_slide1_subtitle">Esta aplicação permite-lhe sincronizar o seu telemóvel Android com o seu relógio AsteroidOS. Mas primeiro, ela precisa de algumas permissões.</string>
     <string name="intro_slide2_title">Acesso aos ficheiros</string>
     <string name="intro_slide2_subtitle">Para armazenar os dados em cache e guardar as capturas de ecrã do seu relógio.</string>
-    <string name="intro_slide3_title">Localização</string>
-    <string name="intro_slide3_subtitle">Para procurar por dispositivos Bluetooth de baixo consumo nas proximidades.</string>
+    <string name="intro_slide3_title">Localização &amp; Bluetooth</string>
+    <string name="intro_slide3_subtitle">Para procurar por e ligar a aparelhos de Bluetooth Low Energy próximos.</string>
     <string name="intro_slide4_subtitle">Para sincronizar notificações com o relógio, permita \"AsteroidOS Sync\" no seguinte menu:</string>
     <string name="intro_slide5_title">Otimização da bateria</string>
     <string name="intro_slide5_subtitle">Para permitir que esta aplicação seja executada em segundo plano, por favor desative \"Otimização de bateria\" para o AsteroidOS Sync no menu seguinte:</string>
@@ -68,4 +68,12 @@
     <string name="intro_phonestateslide_subtitle">Para mostrar as chamadas a receber no relógio e para exibir o nome do chamador.</string>
     <string name="intro_slideandroidgo_subtitle">O Android Go não é suportado, porque não permite o acesso às notificações e restringe os processos em segundo plano. Uma solução alternativa para utilizadores root é definir o marcador \"ro.config.low_ram\" no ficheiro build.prop como \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="intro_slide6_title">Notificações de telefone</string>
+    <string name="intro_slide6_subtitle">Para mostrar o estado atual da ligação do relógio.</string>
+    <string name="location_disabled_title">Localização desativada</string>
+    <string name="apply">Aplicar</string>
+    <string name="set_owm_api_key">Definir chave de API OWM personalizada</string>
+    <string name="OWM_API_KEY">Chave API OWM</string>
+    <string name="cancel">Cancelar</string>
+    <string name="location_disabled_message">Para encontrar relógios, o serviço de localização tem de estar ativado. Uma vez emparelhado, pode desativá-lo sem problema.</string>
 </resources>
