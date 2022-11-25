@@ -6,7 +6,7 @@
     <string name="nothing_found">시계를 찾을 수 없음</string>
     <string name="one_found">시계를 하나 찾음</string>
     <string name="n_found">%d개의 시계를 찾음</string>
-    <string name="disconnected">연결 해제 됨</string>
+    <string name="disconnected">연결 해제됨</string>
     <string name="connected">연결됨</string>
     <string name="connecting">연결하는 중…</string>
     <string name="connected_formatted">%s에 연결됨</string>
@@ -44,8 +44,8 @@
     <string name="intro_slide1_subtitle">이 앱은 당신의 Android 휴대전화를 AsteroidOS 시계와 동기화 할 수 있게 합니다. 하지만 우선, 일부 권한이 필요합니다.</string>
     <string name="intro_slide2_title">파일 접근</string>
     <string name="intro_slide2_subtitle">사용할 데이터를 미리 불러오거나 시계의 스크린샷을 저장하기 위해 필요.</string>
-    <string name="intro_slide3_title">위치 정보</string>
-    <string name="intro_slide3_subtitle">근처 블루투스 저전력 장치를 검색하기 위해 필요.</string>
+    <string name="intro_slide3_title">위치 및 블루투스</string>
+    <string name="intro_slide3_subtitle">근처 블루투스 저전력 장치를 스캔하고 연결합니다.</string>
     <string name="intro_slide4_title">알림</string>
     <string name="intro_slide4_subtitle">알림을 시계와 동기화 하고 싶다면, 다음 메뉴에서 “AsteroidOS 동기화”를 허용하세요:</string>
     <string name="intro_slide5_title">배터리 최적화</string>
@@ -68,4 +68,12 @@
     <string name="intro_phonestateslide_subtitle">시계에 발신전화와 발신자 이름 표시.</string>
     <string name="intro_slideandroidgo_subtitle">안드로이드 고는 알림 액세스를 허용하지 않고 백그라운드 프로세스를 제한하므로 지원되지 않습니다. 루트 사용자를 위한 해결 방법은 build.prop 파일의 \"ro.config.low_ram\"플래그를 \"false\"로 설정하는 것입니다.</string>
     <string name="intro_slideandroidgo_title">안드로이드 고</string>
+    <string name="location_disabled_message">시계를 찾으려면 위치 서비스를 활성화해야 합니다. 페어링되면 안전하게 다시 비활성화할 수 있습니다.</string>
+    <string name="intro_slide6_title">전화 알림</string>
+    <string name="intro_slide6_subtitle">시계의 현재 연결 상태를 표시합니다.</string>
+    <string name="location_disabled_title">위치 비활성화됨</string>
+    <string name="set_owm_api_key">커스텀 OWM API 키 설정</string>
+    <string name="OWM_API_KEY">OWM API 키</string>
+    <string name="apply">적용</string>
+    <string name="cancel">취소</string>
 </resources>
