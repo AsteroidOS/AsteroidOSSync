@@ -21,8 +21,8 @@
     <string name="intro_slide5_title">Tối ưu hoá pin</string>
     <string name="intro_slide4_subtitle">Để đồng bộ thông báo với đồng hồ của bạn, hãy cho phép \"AsteroidOS Sync\" ở menu tiếp theo:</string>
     <string name="intro_slide4_title">Thông báo</string>
-    <string name="intro_slide3_subtitle">Để quét các thiết bị Bluetooth Low Energy lân cận.</string>
-    <string name="intro_slide3_title">Vị trí</string>
+    <string name="intro_slide3_subtitle">Để quét và kết nối tới các thiết bị Bluetooth năng lượng thấp lân cận.</string>
+    <string name="intro_slide3_title">Vị trí &amp; Bluetooth</string>
     <string name="intro_slide2_subtitle">Để lưu dữ liệu vào bộ nhớ đệm và lưu ảnh chụp màn hình đồng hồ của bạn.</string>
     <string name="intro_slide2_title">Truy cập tệp</string>
     <string name="intro_slide1_subtitle">Ứng dụng này để cho bạn đồng bộ điện thoại Android của bạn với đồng hồ AsteroidOS. Nhưng trước tiên, ứng dụng cần một số quyền.</string>
@@ -68,4 +68,12 @@
     <string name="unknown_device">Thiết bị không xác định</string>
     <string name="searching">Đang tìm kiếm đồng hồ</string>
     <string name="generic_ok">OK</string>
+    <string name="intro_slide6_title">Thông báo cuộc gọi</string>
+    <string name="cancel">Bỏ</string>
+    <string name="intro_slide6_subtitle">Để hiển thị trạng thái kết nối hiện giờ của đồng hồ.</string>
+    <string name="location_disabled_title">Đã tắt Vị trí</string>
+    <string name="location_disabled_message">Để tìm đồng hồ, dịch vụ định vị phải được bật lên. Sau khi ghép nối, bạn có thể tắt lại một cách an toàn.</string>
+    <string name="set_owm_api_key">Đặt mã khoá tự chọn OWM API</string>
+    <string name="OWM_API_KEY">Mã khoá OWM API</string>
+    <string name="apply">Áp dụng</string>
 </resources>
