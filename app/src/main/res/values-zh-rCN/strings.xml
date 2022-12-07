@@ -74,4 +74,6 @@
     <string name="OWM_API_KEY">OWM 的 API 密钥</string>
     <string name="apply">应用</string>
     <string name="cancel">取消</string>
+    <string name="intro_slide6_title">电话通知</string>
+    <string name="intro_slide6_subtitle">显示手表当前的连接状态。</string>
 </resources>
