@@ -74,4 +74,6 @@
     <string name="cancel">Cancelar</string>
     <string name="location_disabled_message">Para poder encontrar relógios o serviço de localização tem que ser habilitado. Uma vez pareado você pode desabilitá-lo novamente.</string>
     <string name="location_disabled_title">Localização desabilitada</string>
+    <string name="intro_slide6_title">Notificações do telefone</string>
+    <string name="intro_slide6_subtitle">Para mostrar o estado atual de conexão do relógio.</string>
 </resources>
