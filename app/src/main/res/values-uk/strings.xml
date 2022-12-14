@@ -47,7 +47,7 @@
     <string name="intro_slide1_subtitle">Цей додаток дозволяє синхронізувати ваш телефон Android із вашим годинником AsteroidOS. Але, йому потрібні деякі дозволи.</string>
     <string name="intro_slide2_title">Доступ до файлів</string>
     <string name="intro_slide2_subtitle">Щоб кешувати дані та зберігати скріншоти на вашому годиннику.</string>
-    <string name="intro_slide3_title">Місцезнаходження</string>
+    <string name="intro_slide3_title">Місцезнаходження &amp; Bluetooth</string>
     <string name="intro_slide3_subtitle">Сканувати та з\'єднуватись з найближчими Bluetooth LE пристроями.</string>
     <string name="intro_slide5_title">Оптимізація акумулятора</string>
     <string name="intro_slide5_subtitle">Щоб ця програма працювала у фоновому режимі, вимкніть \"Оптимізація акумулятора\" для AsteroidOS Sunc в наступному меню:</string>
