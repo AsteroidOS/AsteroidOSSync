@@ -74,4 +74,6 @@
     <string name="cancel">Avbryt</string>
     <string name="location_disabled_title">Posisjon avskrudd</string>
     <string name="location_disabled_message">Posisjonstjenesten må skrus på for å finne armbåndsur. Når paring er utført kan du skru det av igjen.</string>
+    <string name="intro_slide6_title">Telefonmerknader</string>
+    <string name="intro_slide6_subtitle">For å vise nåværende tilkoblingsstatus for klokken.</string>
 </resources>
