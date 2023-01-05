@@ -1,0 +1,2 @@
+0.26
+  * Fixes an issue where the weather information could not be synced.
