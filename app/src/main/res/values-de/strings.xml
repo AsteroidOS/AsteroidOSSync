@@ -7,7 +7,7 @@
     <string name="one_found">Eine Uhr gefunden</string>
     <string name="n_found">%d Uhren gefunden</string>
     <string name="intro_slideerror_subtitle">Dieses Gerät unterstützt kein Bluetooth Low Energy.</string>
-    <string name="disconnected">Verbindung getrennt</string>
+    <string name="disconnected">Getrennt</string>
     <string name="connected">Verbunden</string>
     <string name="connecting">Verbindung wird hergestellt …</string>
     <string name="connected_formatted">Verbunden mit %s</string>
@@ -48,7 +48,7 @@
     <string name="intro_slide2_title">Dateizugriff</string>
     <string name="intro_slide2_subtitle">Diese Berechtigung wird benötigt, um Daten zwischenzuspeichern und Screenshots deiner Uhr zu speichern.</string>
     <string name="intro_slide3_title">Standort &amp; Bluetooth</string>
-    <string name="intro_slide3_subtitle">Um nach Bluetooth-Geräten in der Nähe zu suchen.</string>
+    <string name="intro_slide3_subtitle">Um Bluetooth-Geräte in der Nähe zu suchen und verbinden.</string>
     <string name="intro_slide5_title">Batterieoptimierung</string>
     <string name="intro_slide5_subtitle">Um diese App im Hintergrund laufen zu lassen, deaktiviere bitte \"Batterieoptimierung\" für AsteroidOS Sync im folgenden Menü:</string>
     <string name="intro_slideerror_title">Unterstützung für Bluetooth Low Energy</string>
