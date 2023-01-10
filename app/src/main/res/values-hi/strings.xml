@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="generic_ok">ठीक है</string>
+    <string name="disconnected">डिस्कनेक्टेड है</string>
+    <string name="n_found">%d घड़ियाँ मिलीं</string>
+    <string name="unknown_device">अज्ञात यन्त्र</string>
+    <string name="nothing_found">कोई घड़ियाँ नहीं मिलीं</string>
+    <string name="connected">कनेक्टेड</string>
+    <string name="connecting">जुड़ रहा है…</string>
+    <string name="connected_formatted">%s से जुड़ा है</string>
+    <string name="searching">घड़ियों की खोज की जा रही है</string>
+    <string name="one_found">एक घड़ी मिली</string>
+</resources>
