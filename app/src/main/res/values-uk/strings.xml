@@ -71,7 +71,7 @@
     <string name="intro_slide6_title">Повідомлення телефону</string>
     <string name="intro_slide6_subtitle">Показати поточний стан підключення годинника.</string>
     <string name="location_disabled_title">Місцезнаходження вимкнено</string>
-    <string name="OWM_API_KEY">OWM API ключ</string>
+    <string name="OWM_API_KEY">API-ключ OWM</string>
     <string name="apply">Застосувати</string>
     <string name="cancel">Скасувати</string>
     <string name="set_owm_api_key">Встановіть власний ключ OWM API</string>
