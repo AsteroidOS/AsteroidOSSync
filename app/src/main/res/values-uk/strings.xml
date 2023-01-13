@@ -47,14 +47,14 @@
     <string name="intro_slide1_subtitle">Цей застосунок дозволяє синхронізувати ваш телефон Android із вашим годинником AsteroidOS. Але спочатку, йому потрібні деякі дозволи.</string>
     <string name="intro_slide2_title">Дозвіл до файлу</string>
     <string name="intro_slide2_subtitle">Для кешування даних і збереження скріншотів годинника.</string>
-    <string name="intro_slide3_title">Розташування й Bluetooth</string>
+    <string name="intro_slide3_title">Розташування та Bluetooth</string>
     <string name="intro_slide3_subtitle">Сканувати та з\'єднуватись з найближчими Bluetooth LE пристроями.</string>
     <string name="intro_slide5_title">Оптимізація батареї</string>
     <string name="intro_slide5_subtitle">Щоб цей застосунок працював у фоновому режимі, вимкніть \"Оптимізація батареї\" для AsteroidOS Sync в наступному меню:</string>
     <string name="intro_slideerror_title">Підтримка Bluetooth LE</string>
     <string name="grant_permission">Надати дозвіл</string>
-    <string name="please_grant_permissions">Будь ласка, надайте цей дозвіл</string>
-    <string name="impassable_slide">Будь ласка, надайте цей доступ</string>
+    <string name="please_grant_permissions">Будь ласка, надайте дозвіл</string>
+    <string name="impassable_slide">Будь ласка, надайте дозвіл</string>
     <string name="synchronize_weather">Автоматично визначати позицію для погоди</string>
     <string name="title_activity_settings_activity">Налаштування</string>
     <string name="action_settings">Налаштування</string>
