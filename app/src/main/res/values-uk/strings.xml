@@ -59,7 +59,7 @@
     <string name="title_activity_settings_activity">Налаштування</string>
     <string name="action_settings">Налаштування</string>
     <string name="title_activity_settings">Налаштування</string>
-    <string name="switch_phone_notifications">Вимкнення звуку телефону під час підключення</string>
+    <string name="switch_phone_notifications">Заглушувати телефон під час з\'єднання</string>
     <string name="notification_silent_icon">Значок беззвучних сповіщень</string>
     <string name="notification_type_ringtone">Мелодія дзвінка</string>
     <string name="dialer">Телефон</string>
