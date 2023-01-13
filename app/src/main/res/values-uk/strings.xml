@@ -45,7 +45,7 @@
     <string name="app_icon">Значок застосунку</string>
     <string name="intro_slide1_title">Ласкаво просимо</string>
     <string name="intro_slide1_subtitle">Цей застосунок дозволяє синхронізувати ваш телефон Android із вашим годинником AsteroidOS. Але спочатку, йому потрібні деякі дозволи.</string>
-    <string name="intro_slide2_title">Доступ до файлів</string>
+    <string name="intro_slide2_title">Дозвіл до файлу</string>
     <string name="intro_slide2_subtitle">Для кешування даних і збереження скріншотів годинника.</string>
     <string name="intro_slide3_title">Місцезнаходження &amp; Bluetooth</string>
     <string name="intro_slide3_subtitle">Сканувати та з\'єднуватись з найближчими Bluetooth LE пристроями.</string>
