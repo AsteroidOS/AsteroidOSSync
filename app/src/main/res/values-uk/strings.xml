@@ -59,7 +59,7 @@
     <string name="title_activity_settings_activity">Налаштування</string>
     <string name="action_settings">Налаштування</string>
     <string name="title_activity_settings">Налаштування</string>
-    <string name="switch_phone_notifications">Заглушувати телефон під час з\'єднання</string>
+    <string name="switch_phone_notifications">Вимкнути звук телефон під час з\'єднання</string>
     <string name="notification_silent_icon">Значок беззвучних сповіщень</string>
     <string name="notification_type_ringtone">Мелодія дзвінка</string>
     <string name="dialer">Телефон</string>
@@ -74,6 +74,6 @@
     <string name="OWM_API_KEY">API-ключ OWM</string>
     <string name="apply">Застосувати</string>
     <string name="cancel">Скасувати</string>
-    <string name="set_owm_api_key">Встановіть власний ключ OWM API</string>
+    <string name="set_owm_api_key">Встановити користувацький ключ API OWM</string>
     <string name="location_disabled_message">Щоб знайти годинник, необхідно ввімкнути службу місцезнаходження. Після створення пари ви можете безпечно вимкнути його знову.</string>
 </resources>
