@@ -102,9 +102,15 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
             device.createBond();
             mBleMngr.connect(device)
                     .useAutoConnect(true)
-                    .timeout(100000)
+                    .timeout(100 * 1000)
                     .retry(3, 200)
-                    .done(device1 -> Log.d(TAG, "Connected to " + device1.getName()))
+                    .done(device1 -> {
+                        Log.d(TAG, "Connected to " + device1.getName());
+			// Now we read the current values of the GATT characteristics,
+			// _after_ the connection has been fully established, to avoid
+			// connection failures on Android 12 and later.
+                        mBleMngr.readCharacteristics();
+                    })
                     .fail((device2, error) -> Log.e(TAG, "Failed to connect to " + device.getName() +
                             " with error code: " + error))
                     .enqueue();
