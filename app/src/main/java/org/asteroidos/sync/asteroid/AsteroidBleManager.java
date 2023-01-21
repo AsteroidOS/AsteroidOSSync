@@ -79,6 +79,10 @@ public class AsteroidBleManager extends BleManager {
         public int battery = 0;
     }
 
+    public final void readCharacteristics() {
+        readCharacteristic(batteryCharacteristic).with(((device, data) -> setBatteryLevel(data))).enqueue();
+    }
+
     private abstract class AsteroidBleManagerGattCallback extends BleManagerGattCallback {
 
         /* It is a constraint of the Bluetooth library that it is required to initialize
@@ -119,7 +123,7 @@ public class AsteroidBleManager extends BleManager {
                     BluetoothGattCharacteristic characteristic1 = bluetoothGattService.getCharacteristic(characteristic);
                     removeNotificationCallback(characteristic1);
                     setNotificationCallback(characteristic1).with((device, data) -> callback.call(data.getValue()));
-                    enableNotifications(characteristic1).with((device, data) -> callback.call(data.getValue())).enqueue();
+                    enableNotifications(characteristic1).enqueue();
                 });
             }
 
@@ -138,7 +142,14 @@ public class AsteroidBleManager extends BleManager {
                     .enqueue();
 
             setNotificationCallback(batteryCharacteristic).with(((device, data) -> setBatteryLevel(data)));
-            readCharacteristic(batteryCharacteristic).with(((device, data) -> setBatteryLevel(data))).enqueue();
+	    // Do not call readCharacteristic(batteryCharacteristic) here.
+	    // Otherwise, on Android 12 and later, the BLE bond to the watch
+	    // is lost, and communication no longer works. Arguably, reading
+	    // and writing should not be done in initialize(), since it is
+	    // part of the BLE manager's connect() request. Instead, do those
+	    // IO operations _after_ that request finishes (-> read the
+	    // characteristic in the SynchronizationService class, which is
+	    // where the BLE manager's connect() function is called).
             enableNotifications(batteryCharacteristic).enqueue();
 
             // Let all services know that we are connected.
