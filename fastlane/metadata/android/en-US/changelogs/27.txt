@@ -1,0 +1,4 @@
+0.27
+  * Improved Android 12+ support (Thanks dv1!)
+    * The Bluetooth connection process has been improved.
+  * Translation improvements
