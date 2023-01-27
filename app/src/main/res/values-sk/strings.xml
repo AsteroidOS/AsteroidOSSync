@@ -44,8 +44,8 @@
     <string name="intro_slide1_subtitle">Táto aplikácia vám umožňuje synchronizovať váš telefón Android s hodinkami AsteroidOS. Ale najprv potrebuje niekoľko povolení.</string>
     <string name="intro_slide2_title">Prístup k súborom</string>
     <string name="intro_slide2_subtitle">Ak chcete do vyrovnávacej pamäte ukladať dáta a ukladať snímky obrazovky vašich hodiniek.</string>
-    <string name="intro_slide3_title">Umiestnenie</string>
-    <string name="intro_slide3_subtitle">Ak chcete skenovať zariadenia Bluetooth s nízkou energiou v okolí.</string>
+    <string name="intro_slide3_title">Umiestnenie a Bluetooth</string>
+    <string name="intro_slide3_subtitle">Ak chcete vyhľadať a pripojiť sa k zariadeniu Bluetooth LE v okolí.</string>
     <string name="intro_slide4_title">Oznámenia</string>
     <string name="intro_slide4_subtitle">Ak chcete synchronizovať oznámenia s hodinkami, povoľte \"AsteroidOS Sync\" v nasledujúcom menu:</string>
     <string name="intro_slide5_title">Optimalizácia spotreby batérie</string>
@@ -68,4 +68,12 @@
     <string name="show_calls_on_watch">Zobraziť prichádzajúce hovory</string>
     <string name="intro_slideandroidgo_subtitle">Android Go je nepodporovaný, pretože neumožňuje prístup k upozorneniam a obmedzuje procesy na pozadí. Alternatívne riešenie pre používateľov s root je nastaviť parameter \"ro.config.low_ram\" v súbore build.prop na \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="intro_slide6_title">Upozornenia z telefónu</string>
+    <string name="intro_slide6_subtitle">Pre zobrazenie aktuálneho stavu pripojenia hodiniek.</string>
+    <string name="OWM_API_KEY">Kľúč k OWM API</string>
+    <string name="set_owm_api_key">Nastaviť vlastný kľúč k OWM API</string>
+    <string name="apply">Použiť</string>
+    <string name="cancel">Zrušiť</string>
+    <string name="location_disabled_message">Na vyhľadávanie hodiniek musí byť povolená služba určovania polohy. Po spárovaní ju môžete opäť spokojne vypnúť.</string>
+    <string name="location_disabled_title">Určovanie polohy vypnuté</string>
 </resources>
