@@ -47,7 +47,7 @@
     <string name="intro_slide3_title">위치 및 블루투스</string>
     <string name="intro_slide3_subtitle">근처 블루투스 저에너지 장치를 스캔하고 연결합니다.</string>
     <string name="intro_slide4_title">알림</string>
-    <string name="intro_slide4_subtitle">알림을 시계와 동기화 하고 싶다면, 다음 메뉴에서 “AsteroidOS 동기화”를 허용하세요:</string>
+    <string name="intro_slide4_subtitle">알림을 시계와 동기화 하고 싶다면, 다음 메뉴에서 “AsteroidOS Sync”를 허용하세요:</string>
     <string name="intro_slide5_title">배터리 최적화</string>
     <string name="intro_slide5_subtitle">이 앱을 백그라운드에서 동작하게 허용하려면, 다음 메뉴에서 AsteroidOS 동기화의 “배터리 최적화”를 비활성화하세요:</string>
     <string name="intro_slideerror_title">블루투스 저전력 지원</string>
