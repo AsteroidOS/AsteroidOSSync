@@ -117,7 +117,7 @@ public class NotificationParser {
             summary = "";
 
         List<NotificationCompat.MessagingStyle.Message> messagesDescending = new ArrayList<>(messagingStyle.getMessages());
-        Collections.sort(messagesDescending, (m1, m2) -> (int) (m2.getTimestamp() - m1.getTimestamp()));
+        messagesDescending.sort((m1, m2) -> (int) (m2.getTimestamp() - m1.getTimestamp()));
 
         StringBuilder sb = new StringBuilder();
         body = "";
