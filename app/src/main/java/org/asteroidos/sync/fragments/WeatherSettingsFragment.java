@@ -23,12 +23,16 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,6 +49,7 @@ import org.asteroidos.sync.connectivity.WeatherService;
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
@@ -80,7 +85,7 @@ public class WeatherSettingsFragment extends Fragment {
         mMapView = view.findViewById(R.id.map);
         mMapView.setTileSource(TileSourceFactory.MAPNIK);
         mMapView.setMultiTouchControls(true);
-        mMapView.setBuiltInZoomControls(false);
+        mMapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
         mMapView.setZoomRounding(true);
         mMapView.setMaxZoomLevel(13.0);
         mMapView.setMinZoomLevel(5.0);
@@ -94,7 +99,7 @@ public class WeatherSettingsFragment extends Fragment {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     WEATHER_LOCATION_PERMISSION_REQUEST);
         } else {
-            MyLocationNewOverlay mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(getContext()),mMapView);
+            MyLocationNewOverlay mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(getContext()), mMapView);
             mLocationOverlay.enableMyLocation();
             mMapView.getOverlays().add(mLocationOverlay);
         }
@@ -145,7 +150,7 @@ public class WeatherSettingsFragment extends Fragment {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         mMapView.onResume();
     }
@@ -164,7 +169,7 @@ public class WeatherSettingsFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == R.id.customApiKey){
+        if (menuItem.getItemId() == R.id.customApiKey) {
             View view = View.inflate(getActivity(), R.layout.dialog_api_key, null);
             EditText editText = view.findViewById(R.id.apikey);
             editText.setText(mOwmKey);
@@ -195,7 +200,7 @@ public class WeatherSettingsFragment extends Fragment {
         editor.putBoolean(WeatherService.PREFS_SYNC_WEATHER, enable);
         editor.apply();
         mButton.setVisibility(enable ? View.INVISIBLE : View.VISIBLE);
-        getActivity().sendBroadcast(new  Intent(WeatherService.WEATHER_SYNC_INTENT));
+        getActivity().sendBroadcast(new Intent(WeatherService.WEATHER_SYNC_INTENT));
     }
 
     @Override
