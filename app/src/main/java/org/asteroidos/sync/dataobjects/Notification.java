@@ -22,8 +22,8 @@ import java.nio.charset.StandardCharsets;
 
 public class Notification {
     String packageName, appName, appIcon, summary, body, vibration = "";
-    MsgType msgType = null;
-    int id = 0;
+    MsgType msgType;
+    int id;
 
     public Notification(MsgType msgType, String packageName, int id, String appName, String appIcon, String summary, String body, String vibration) {
         this.msgType = msgType;
