@@ -1,5 +1,6 @@
 package org.asteroidos.sync.utils;
 
+// TODO Handle dubious copyright
 // copied from https://github.com/jensstein/oandbackup, used under MIT license
 
 import android.graphics.Bitmap;
