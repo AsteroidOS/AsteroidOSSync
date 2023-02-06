@@ -139,11 +139,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String defaultDevMacAddr = mPrefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
 
-        Thread appInfoRetrieval = new Thread(new Runnable() {
-            public void run() {
-                appInfoList = AppInfoHelper.getPackageInfo(MainActivity.this);
-            }
-        });
+        Thread appInfoRetrieval = new Thread(() -> appInfoList = AppInfoHelper.getPackageInfo(MainActivity.this));
         appInfoRetrieval.start();
 
         mSettings = new ScanSettings.Builder()
