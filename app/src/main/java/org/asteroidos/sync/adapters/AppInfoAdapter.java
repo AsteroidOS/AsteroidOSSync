@@ -137,7 +137,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> {
     }
 
     abstract class MyOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
-        String packageName;
+        final String packageName;
 
         MyOnItemSelectedListener(String packageName) {
             this.packageName = packageName;
