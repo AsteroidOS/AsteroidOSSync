@@ -56,6 +56,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
         private SharedPreferences prefs;
 
         CallStateService(Context con) {
+            super();
             context = con;
             prefs = con.getSharedPreferences(PREFS_NAME, Activity.MODE_PRIVATE);
         }
