@@ -458,6 +458,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         private final MainActivity mActivity;
 
         SynchronizationHandler(MainActivity activity) {
+            super(Looper.getMainLooper());
             mActivity = activity;
         }
 
