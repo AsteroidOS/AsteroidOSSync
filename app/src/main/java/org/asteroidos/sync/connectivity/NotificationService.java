@@ -35,9 +35,9 @@ import java.util.UUID;
 public class NotificationService implements IConnectivityService {
 
     public static final String TAG = NotificationService.class.toString();
-    private Context mCtx;
-    private IAsteroidDevice mDevice;
-    private NotificationReceiver mNReceiver;
+    private final Context mCtx;
+    private final IAsteroidDevice mDevice;
+    private final NotificationReceiver mNReceiver;
 
     public NotificationService(Context ctx, IAsteroidDevice device) {
         this.mDevice = device;

@@ -52,8 +52,8 @@ public class PhoneStateReceiver extends BroadcastReceiver {
     }
 
     static class CallStateService extends PhoneStateListener {
-        private Context context;
-        private SharedPreferences prefs;
+        private final Context context;
+        private final SharedPreferences prefs;
 
         CallStateService(Context con) {
             super();

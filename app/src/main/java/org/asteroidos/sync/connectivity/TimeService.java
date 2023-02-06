@@ -42,10 +42,10 @@ public class TimeService implements IConnectivityService, SharedPreferences.OnSh
     public static final boolean PREFS_SYNC_TIME_DEFAULT = true;
     public static final String TIME_SYNC_INTENT = "org.asteroidos.sync.TIME_SYNC_REQUEST_LISTENER";
 
-    private IAsteroidDevice mDevice;
-    private Context mCtx;
+    private final IAsteroidDevice mDevice;
+    private final Context mCtx;
 
-    private SharedPreferences mTimeSyncSettings;
+    private final SharedPreferences mTimeSyncSettings;
 
     private TimeSyncReqReceiver mSReceiver;
     private PendingIntent alarmPendingIntent;

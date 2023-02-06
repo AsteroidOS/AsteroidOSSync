@@ -6,72 +6,74 @@ package org.asteroidos.sync.utils;
 import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
-public class AppInfo
-        implements Comparable<AppInfo>, Parcelable
-{
-    private String label, packageName;
-    private boolean system, installed, checked, disabled;
+public class AppInfo implements Comparable<AppInfo>, Parcelable {
+
+    private final String label, packageName;
+    private final boolean system, installed;
+    private boolean checked, disabled;
+
     public Bitmap icon;
 
-    AppInfo(String packageName, String label, boolean system, boolean installed)
-    {
+    AppInfo(String packageName, String label, boolean system, boolean installed) {
         this.label = label;
         this.packageName = packageName;
         this.system = system;
         this.installed = installed;
     }
-    public String getPackageName()
-    {
+
+    public String getPackageName() {
         return packageName;
     }
-    public String getLabel()
-    {
+
+    public String getLabel() {
         return label;
     }
 
-    public void setDisabled(boolean disabled)
-    {
+    public void setDisabled(boolean disabled) {
         this.disabled = disabled;
     }
-    public boolean isDisabled()
-    {
+
+    public boolean isDisabled() {
         return disabled;
     }
-    public boolean isSystem()
-    {
+
+    public boolean isSystem() {
         return system;
     }
-    public int compareTo(@NonNull AppInfo appInfo) { return label.compareToIgnoreCase(appInfo.getLabel()); }
-    public String toString()
-    {
+
+    public int compareTo(@NonNull AppInfo appInfo) {
+        return label.compareToIgnoreCase(appInfo.getLabel());
+    }
+
+    public String toString() {
         return label + " : " + packageName;
     }
-    public int describeContents()
-    {
+
+    public int describeContents() {
         return 0;
     }
-    public void writeToParcel(Parcel out, int flags)
-    {
+
+    public void writeToParcel(Parcel out, int flags) {
         out.writeString(label);
         out.writeString(packageName);
-        out.writeBooleanArray(new boolean[] {system, installed, checked});
+        out.writeBooleanArray(new boolean[]{system, installed, checked});
         out.writeParcelable(icon, flags);
     }
-    public static final Parcelable.Creator<AppInfo> CREATOR = new Parcelable.Creator<AppInfo>()
-    {
-        public AppInfo createFromParcel(Parcel in)
-        {
-            return new AppInfo (in);
+
+    public static final Parcelable.Creator<AppInfo> CREATOR = new Parcelable.Creator<AppInfo>() {
+        public AppInfo createFromParcel(Parcel in) {
+            return new AppInfo(in);
         }
-        public AppInfo[] newArray(int size)
-        {
+
+        public AppInfo[] newArray(int size) {
             return new AppInfo[size];
         }
     };
-    private AppInfo(Parcel in)
-    {
+
+    private AppInfo(Parcel in) {
         label = in.readString();
         packageName = in.readString();
         boolean[] bools = new boolean[4];
