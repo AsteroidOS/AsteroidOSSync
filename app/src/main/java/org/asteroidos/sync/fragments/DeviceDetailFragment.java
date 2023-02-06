@@ -56,10 +56,6 @@ public class DeviceDetailFragment extends Fragment {
     private SharedPreferences mSilenceModeSettings;
     private SharedPreferences mCallStateSettings;
 
-    private CheckBox mTimeSyncCheckBox;
-    private CheckBox mSilenceModeCheckBox;
-    private CheckBox mCallStateServiceCheckBox;
-
     private FloatingActionButton mFab;
 
     private boolean mConnected = false;
@@ -138,7 +134,7 @@ public class DeviceDetailFragment extends Fragment {
 
         mTimeSyncSettings = getActivity().getSharedPreferences(TimeService.PREFS_NAME, 0);
 
-        mTimeSyncCheckBox = view.findViewById(R.id.timeSyncCheckBox);
+        CheckBox mTimeSyncCheckBox = view.findViewById(R.id.timeSyncCheckBox);
         mTimeSyncCheckBox.setChecked(mTimeSyncSettings.getBoolean(TimeService.PREFS_SYNC_TIME, TimeService.PREFS_SYNC_TIME_DEFAULT));
         mTimeSyncCheckBox.setOnCheckedChangeListener((ignored, checked) -> {
             SharedPreferences.Editor editor = mTimeSyncSettings.edit();
@@ -147,7 +143,7 @@ public class DeviceDetailFragment extends Fragment {
         });
 
         mSilenceModeSettings = getActivity().getSharedPreferences(SilentModeService.PREFS_NAME, Context.MODE_PRIVATE);
-        mSilenceModeCheckBox = view.findViewById(R.id.SilentModeCheckBox);
+        CheckBox mSilenceModeCheckBox = view.findViewById(R.id.SilentModeCheckBox);
         mSilenceModeCheckBox.setChecked(mSilenceModeSettings.getBoolean(SilentModeService.PREF_RINGER, false));
         mSilenceModeCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             SharedPreferences.Editor editor = mSilenceModeSettings.edit();
@@ -156,7 +152,7 @@ public class DeviceDetailFragment extends Fragment {
         });
 
         mCallStateSettings = getActivity().getSharedPreferences(PhoneStateReceiver.PREFS_NAME, Context.MODE_PRIVATE);
-        mCallStateServiceCheckBox = view.findViewById(R.id.CallStateServiceCheckBox);
+        CheckBox mCallStateServiceCheckBox = view.findViewById(R.id.CallStateServiceCheckBox);
         mCallStateServiceCheckBox.setChecked(mCallStateSettings.getBoolean(PhoneStateReceiver.PREF_SEND_CALL_STATE, true));
         mCallStateServiceCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             SharedPreferences.Editor editor = mCallStateSettings.edit();
