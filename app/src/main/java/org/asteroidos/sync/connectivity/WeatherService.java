@@ -133,7 +133,7 @@ public class WeatherService implements IConnectivityService {
                     // We don't have a valid Location yet
                     // Use the old location until we have a new one, recheck in 2 Minutes
                     Handler handler = new Handler();
-                    handler.postDelayed(() -> updateWeather(), 1000 * 60 * 2);
+                    handler.postDelayed(this::updateWeather, 1000 * 60 * 2);
                     return;
                 }
             }
