@@ -18,7 +18,6 @@
 
 package org.asteroidos.sync.services;
 
-import android.annotation.TargetApi;
 import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -27,7 +26,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Handler;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
