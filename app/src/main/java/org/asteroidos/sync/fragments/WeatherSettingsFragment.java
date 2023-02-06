@@ -205,7 +205,7 @@ public class WeatherSettingsFragment extends Fragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case WEATHER_LOCATION_SYNC_PERMISSION_REQUEST: {
                 // If request is cancelled, the result arrays are empty.
