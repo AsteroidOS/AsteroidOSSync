@@ -19,7 +19,6 @@
 package org.asteroidos.sync.utils;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Notification;
 import android.graphics.Typeface;
 import android.os.Build;
