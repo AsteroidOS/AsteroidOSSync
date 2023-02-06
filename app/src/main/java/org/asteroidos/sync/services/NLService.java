@@ -208,7 +208,6 @@ public class NLService extends NotificationListenerService {
     }
 
     @Override
-    @TargetApi(Build.VERSION_CODES.N)
     public void onListenerDisconnected() {
         listenerConnected = false;
         // Notification listener disconnected - requesting rebind

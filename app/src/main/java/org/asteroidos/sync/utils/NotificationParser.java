@@ -35,7 +35,6 @@ public class NotificationParser {
         getExtraBigData(notification);
     }
 
-    @TargetApi(value = Build.VERSION_CODES.JELLY_BEAN)
     private boolean tryParseNatively(Notification notification)
     {
         Bundle extras = notification.extras;
@@ -130,7 +129,6 @@ public class NotificationParser {
         return true;
     }
 
-    @TargetApi(value = Build.VERSION_CODES.JELLY_BEAN)
     private boolean parseInboxNotification(Bundle extras)
     {
         CharSequence summaryTextSequence = extras.getCharSequence(Notification.EXTRA_SUMMARY_TEXT);
@@ -214,7 +212,6 @@ public class NotificationParser {
         parseRemoteView(views);
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void getExtraBigData(Notification notification) {
         RemoteViews views;
         try {
