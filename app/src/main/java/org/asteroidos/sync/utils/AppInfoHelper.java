@@ -50,11 +50,7 @@ public class AppInfoHelper
 
         for(PackageInfo pinfo : pinfoList)
         {
-            boolean isSystem = false;
-            if((pinfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0)
-            {
-                isSystem = true;
-            }
+            boolean isSystem = (pinfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
             Bitmap icon = null;
             Drawable apkIcon = pm.getApplicationIcon(pinfo.applicationInfo);
             try
