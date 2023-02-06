@@ -117,12 +117,7 @@ public class NotificationParser {
             summary = "";
 
         List<NotificationCompat.MessagingStyle.Message> messagesDescending = new ArrayList<>(messagingStyle.getMessages());
-        Collections.sort(messagesDescending, new Comparator<NotificationCompat.MessagingStyle.Message>() {
-            @Override
-            public int compare(NotificationCompat.MessagingStyle.Message m1, NotificationCompat.MessagingStyle.Message m2) {
-                return (int) (m2.getTimestamp() - m1.getTimestamp());
-            }
-        });
+        Collections.sort(messagesDescending, (m1, m2) -> (int) (m2.getTimestamp() - m1.getTimestamp()));
 
         StringBuilder sb = new StringBuilder();
         body = "";
