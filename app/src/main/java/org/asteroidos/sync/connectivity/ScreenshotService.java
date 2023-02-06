@@ -57,10 +57,10 @@ import java.util.concurrent.TimeUnit;
 
 public class ScreenshotService implements IConnectivityService {
     private static final String NOTIFICATION_CHANNEL_ID = "screenshotservice_channel_id_01";
-    private int NOTIFICATION = 2726;
+    private final int NOTIFICATION = 2726;
 
-    private Context mCtx;
-    private IAsteroidDevice mDevice;
+    private final Context mCtx;
+    private final IAsteroidDevice mDevice;
 
     private ScreenshotReqReceiver mSReceiver;
 
@@ -71,7 +71,7 @@ public class ScreenshotService implements IConnectivityService {
     private byte[] totalData;
     private ScheduledExecutorService processUpdate;
 
-    private NotificationManager mNM;
+    private final NotificationManager mNM;
 
     public ScreenshotService(Context ctx, IAsteroidDevice device) {
         mDevice = device;

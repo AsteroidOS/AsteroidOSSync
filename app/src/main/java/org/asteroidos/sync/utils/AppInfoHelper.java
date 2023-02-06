@@ -87,11 +87,5 @@ public class AppInfoHelper
         }
         return list;
     }
-    private static Comparator<PackageInfo> pInfoPackageNameComparator = new Comparator<PackageInfo>()
-    {
-        public int compare(PackageInfo p1, PackageInfo p2)
-        {
-            return p1.packageName.compareToIgnoreCase(p2.packageName);
-        }
-    };
+    private static final Comparator<PackageInfo> pInfoPackageNameComparator = (p1, p2) -> p1.packageName.compareToIgnoreCase(p2.packageName);
 }

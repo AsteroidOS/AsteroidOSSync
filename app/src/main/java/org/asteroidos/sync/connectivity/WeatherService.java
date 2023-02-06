@@ -62,9 +62,9 @@ public class WeatherService implements IConnectivityService {
     public static final boolean PREFS_SYNC_WEATHER_DEFAULT = false;
     public static final String WEATHER_SYNC_INTENT = "org.asteroidos.sync.WEATHER_SYNC_REQUEST_LISTENER";
 
-    private IAsteroidDevice mDevice;
-    private Context mCtx;
-    private SharedPreferences mSettings;
+    private final IAsteroidDevice mDevice;
+    private final Context mCtx;
+    private final SharedPreferences mSettings;
 
     private WeatherSyncReqReceiver mSReceiver;
     private PendingIntent mAlarmPendingIntent;
