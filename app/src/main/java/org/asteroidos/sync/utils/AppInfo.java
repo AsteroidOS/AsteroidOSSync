@@ -48,6 +48,7 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
         return label.compareToIgnoreCase(appInfo.getLabel());
     }
 
+    @NonNull
     public String toString() {
         return label + " : " + packageName;
     }
