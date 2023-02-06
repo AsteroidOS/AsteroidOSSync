@@ -39,6 +39,8 @@ import androidx.core.content.ContextCompat;
 
 import org.asteroidos.sync.services.NLService;
 
+import java.util.ArrayList;
+
 import io.github.dreierf.materialintroscreen.MaterialIntroActivity;
 import io.github.dreierf.materialintroscreen.SlideFragment;
 import io.github.dreierf.materialintroscreen.SlideFragmentBuilder;
@@ -59,105 +61,116 @@ public class PermissionsActivity extends MaterialIntroActivity {
 
         if (hasBLE) {
             if (!isLowRamDevice) {
-            SlideFragment welcomeFragment = new SlideFragmentBuilder()
-                    .backgroundColor(R.color.colorintroslide1)
-                    .buttonsColor(R.color.colorintroslide1button)
-                    .image(R.drawable.introslide1icon)
-                    .title(getString(R.string.intro_slide1_title))
-                    .description(getString(R.string.intro_slide1_subtitle))
-                    .build();
+                SlideFragment welcomeFragment = new SlideFragmentBuilder()
+                        .backgroundColor(R.color.colorintroslide1)
+                        .buttonsColor(R.color.colorintroslide1button)
+                        .image(R.drawable.introslide1icon)
+                        .title(getString(R.string.intro_slide1_title))
+                        .description(getString(R.string.intro_slide1_subtitle))
+                        .build();
 
-            SlideFragment externalStorageFragment = new SlideFragmentBuilder()
-                    .backgroundColor(R.color.colorintroslide2)
-                    .buttonsColor(R.color.colorintroslide2button)
-                    .neededPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE})
-                    .image(R.drawable.introslide2icon)
-                    .title(getString(R.string.intro_slide2_title))
-                    .description(getString(R.string.intro_slide2_subtitle))
-                    .build();
+                SlideFragment externalStorageFragment = new SlideFragmentBuilder()
+                        .backgroundColor(R.color.colorintroslide2)
+                        .buttonsColor(R.color.colorintroslide2button)
+                        .neededPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE})
+                        .image(R.drawable.introslide2icon)
+                        .title(getString(R.string.intro_slide2_title))
+                        .description(getString(R.string.intro_slide2_subtitle))
+                        .build();
                 boolean externalStorageFragmentShown = false;
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                externalStorageFragmentShown = (ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED);
-            }
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                    externalStorageFragmentShown = (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED);
+                }
 
-            SlideFragmentBuilder localizationFragmentBuilder = new SlideFragmentBuilder()
-                    .backgroundColor(R.color.colorintroslide3)
-                    .buttonsColor(R.color.colorintroslide3button)
-                    .neededPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION})
-                    .image(R.drawable.introslide3icon)
-                    .title(getString(R.string.intro_slide3_title))
-                    .description(getString(R.string.intro_slide3_subtitle));
+                ArrayList<String> permissions = new ArrayList<>();
+                permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
 
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                localizationFragmentBuilder.neededPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_SCAN});
-            }
-            SlideFragment localizationFragment = localizationFragmentBuilder.build();
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    permissions.add(Manifest.permission.BLUETOOTH_CONNECT);
+                    permissions.add(Manifest.permission.BLUETOOTH_SCAN);
+                }
 
-            boolean localizationFragmentShown = (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED);
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                localizationFragmentShown |= (ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED);
-                localizationFragmentShown |= (ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED);
-            }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                    permissions.add(Manifest.permission.NEARBY_WIFI_DEVICES);
+                }
 
-            boolean notificationsPermissionFragmentShown = false;
-                SlideFragment notificationsPermissionFragment = null;
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                SlideFragmentBuilder notificationsPermissionSlideBuilder = new SlideFragmentBuilder()
+                SlideFragmentBuilder localizationFragmentBuilder = new SlideFragmentBuilder()
                         .backgroundColor(R.color.colorintroslide3)
                         .buttonsColor(R.color.colorintroslide3button)
-                        .neededPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS})
-                        .image(R.drawable.ic_notifications)
-                        .title(getString(R.string.intro_slide6_title))
-                        .description(getString(R.string.intro_slide6_subtitle));
-                notificationsPermissionSlideBuilder.neededPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS});
-                notificationsPermissionFragment = notificationsPermissionSlideBuilder.build();
-                notificationsPermissionFragmentShown = (ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED);
-            }
+                        .neededPermissions(permissions.toArray(new String[]{}))
+                        .image(R.drawable.introslide3icon)
+                        .title(getString(R.string.intro_slide3_title))
+                        .description(getString(R.string.intro_slide3_subtitle));
 
-            NotificationsSlide notificationFragment = new NotificationsSlide();
-            notificationFragment.setContext(this);
-            boolean notificationFragmentShown = notificationFragment.hasAnyPermissionsToGrant();
 
-            BatteryOptimSlide batteryOptimFragment = new BatteryOptimSlide();
-            batteryOptimFragment.setContext(this);
-            boolean batteryOptimFragmentShown = batteryOptimFragment.hasAnyPermissionsToGrant();
+                SlideFragment localizationFragment = localizationFragmentBuilder.build();
 
-            SlideFragment phoneStateFragment = new SlideFragmentBuilder()
-                                        .backgroundColor(R.color.colorintroslide2)
-                                        .buttonsColor(R.color.colorintroslide2button)
-                                        .neededPermissions(new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_CONTACTS})
-                                        .image(R.drawable.ic_ring_volume)
-                                        .title(getString(R.string.intro_phonestateslide_title))
-                                        .description(getString(R.string.intro_phonestateslide_subtitle))
-                                        .build();
-            boolean phoneStateFragmentShown = (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) ||
-                    (ContextCompat.checkSelfPermission(this,
-                            Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) ||
-                    (ContextCompat.checkSelfPermission(this,
-                            Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED);
+                boolean localizationFragmentShown = (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED);
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    localizationFragmentShown |= (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED);
+                    localizationFragmentShown |= (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED);
+                }
 
-            if (externalStorageFragmentShown || localizationFragmentShown ||
-                    notificationFragmentShown || notificationsPermissionFragmentShown || batteryOptimFragmentShown || phoneStateFragmentShown) {
-                addSlide(welcomeFragment);
-                if (externalStorageFragmentShown) addSlide(externalStorageFragment);
-                if (localizationFragmentShown) addSlide(localizationFragment);
-                if (notificationsPermissionFragmentShown && notificationsPermissionFragment != null) addSlide(notificationsPermissionFragment);
-                if (notificationFragmentShown) addSlide(notificationFragment);
-                if (batteryOptimFragmentShown) addSlide(batteryOptimFragment);
-                if (phoneStateFragmentShown) addSlide(phoneStateFragment);
-            } else
-                startMainActivity();
-        } else {
+                boolean notificationsPermissionFragmentShown = false;
+                SlideFragment notificationsPermissionFragment = null;
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    SlideFragmentBuilder notificationsPermissionSlideBuilder = new SlideFragmentBuilder()
+                            .backgroundColor(R.color.colorintroslide3)
+                            .buttonsColor(R.color.colorintroslide3button)
+                            .neededPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS})
+                            .image(R.drawable.ic_notifications)
+                            .title(getString(R.string.intro_slide6_title))
+                            .description(getString(R.string.intro_slide6_subtitle));
+                    notificationsPermissionSlideBuilder.neededPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS});
+                    notificationsPermissionFragment = notificationsPermissionSlideBuilder.build();
+                    notificationsPermissionFragmentShown = (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED);
+                }
+
+                NotificationsSlide notificationFragment = new NotificationsSlide();
+                notificationFragment.setContext(this);
+                boolean notificationFragmentShown = notificationFragment.hasAnyPermissionsToGrant();
+
+                BatteryOptimSlide batteryOptimFragment = new BatteryOptimSlide();
+                batteryOptimFragment.setContext(this);
+                boolean batteryOptimFragmentShown = batteryOptimFragment.hasAnyPermissionsToGrant();
+
+                SlideFragment phoneStateFragment = new SlideFragmentBuilder()
+                        .backgroundColor(R.color.colorintroslide2)
+                        .buttonsColor(R.color.colorintroslide2button)
+                        .neededPermissions(new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_CONTACTS})
+                        .image(R.drawable.ic_ring_volume)
+                        .title(getString(R.string.intro_phonestateslide_title))
+                        .description(getString(R.string.intro_phonestateslide_subtitle))
+                        .build();
+                boolean phoneStateFragmentShown = (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) ||
+                        (ContextCompat.checkSelfPermission(this,
+                                Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) ||
+                        (ContextCompat.checkSelfPermission(this,
+                                Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED);
+
+                if (externalStorageFragmentShown || localizationFragmentShown ||
+                        notificationFragmentShown || notificationsPermissionFragmentShown || batteryOptimFragmentShown || phoneStateFragmentShown) {
+                    addSlide(welcomeFragment);
+                    if (externalStorageFragmentShown) addSlide(externalStorageFragment);
+                    if (localizationFragmentShown) addSlide(localizationFragment);
+                    if (notificationsPermissionFragmentShown && notificationsPermissionFragment != null)
+                        addSlide(notificationsPermissionFragment);
+                    if (notificationFragmentShown) addSlide(notificationFragment);
+                    if (batteryOptimFragmentShown) addSlide(batteryOptimFragment);
+                    if (phoneStateFragmentShown) addSlide(phoneStateFragment);
+                } else
+                    startMainActivity();
+            } else {
                 addSlide(new AndroidGoSlide());
             }
         } else {
-                addSlide(new BLENotSupportedSlide());
+            addSlide(new BLENotSupportedSlide());
         }
     }
 
