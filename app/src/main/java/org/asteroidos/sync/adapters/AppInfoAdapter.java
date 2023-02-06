@@ -1,5 +1,6 @@
 package org.asteroidos.sync.adapters;
 
+// TODO Handle dubious copyright
 // copied from https://github.com/jensstein/oandbackup, used under MIT license
 
 import android.content.Context;
