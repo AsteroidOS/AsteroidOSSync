@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     private static final String TAG = "MainActivity";
     public static ArrayList<AppInfo> appInfoList;
     final Messenger mDeviceDetailMessenger = new Messenger(new MainActivity.SynchronizationHandler(this));
-    public ParcelUuid asteroidUUID = fromString(AsteroidUUIDS.SERVICE_UUID.toString());
+    public final ParcelUuid asteroidUUID = fromString(AsteroidUUIDS.SERVICE_UUID.toString());
     Messenger mSyncServiceMessenger;
     ActivityResultLauncher<Intent> mLocationEnableActivityLauncher;
     LocationManager mLocationManager;
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     ScanSettings mSettings;
     List<ScanFilter> mFilters;
     private DeviceListFragment mListFragment;
-    public ScanCallback scanCallback = new ScanCallback() {
+    public final ScanCallback scanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, @NonNull ScanResult result) {
             super.onScanResult(callbackType, result);
