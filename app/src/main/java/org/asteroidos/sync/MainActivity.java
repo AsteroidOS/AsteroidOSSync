@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 }
                 return;
             }
-            Log.d(TAG, "SCAN RESULT:" + result.getDevice().toString() + " Name:" + result.getDevice().getName());
+            Log.d(TAG, "SCAN RESULT:" + result.getDevice() + " Name:" + result.getDevice().getName());
             ParcelUuid[] arr = result.getDevice().getUuids();
         }
     };

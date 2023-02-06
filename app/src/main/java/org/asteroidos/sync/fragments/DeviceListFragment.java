@@ -114,13 +114,13 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
         if (context instanceof OnDefaultDeviceSelectedListener)
             mDeviceListener = (OnDefaultDeviceSelectedListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceListFragment.OnDeviceSelectedListener");
 
         if (context instanceof OnScanRequestedListener)
             mScanListener = (OnScanRequestedListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceListFragment.OnScanRequestedListener");
     }
 
