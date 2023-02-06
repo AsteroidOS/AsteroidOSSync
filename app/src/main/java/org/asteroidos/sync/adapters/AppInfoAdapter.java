@@ -136,7 +136,7 @@ public class AppInfoAdapter extends ArrayAdapter<AppInfo> {
         Spinner spinner;
     }
 
-    abstract class MyOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
+    abstract static class MyOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
         final String packageName;
 
         MyOnItemSelectedListener(String packageName) {
