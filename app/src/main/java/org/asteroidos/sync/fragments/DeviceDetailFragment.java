@@ -114,7 +114,7 @@ public class DeviceDetailFragment extends Fragment {
             Intent iremove = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
             iremove.putExtra("event", "removed");
             iremove.putExtra("id", 0xa57e401d);
-            getActivity().sendBroadcast(iremove);
+            requireActivity().sendBroadcast(iremove);
 
             Intent ipost = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
             ipost.putExtra("event", "posted");
@@ -124,16 +124,16 @@ public class DeviceDetailFragment extends Fragment {
             ipost.putExtra("appIcon", "ios-watch-vibrating");
             ipost.putExtra("summary", getString(R.string.watch_finder));
             ipost.putExtra("body", getString(R.string.phone_is_searching));
-            getActivity().sendBroadcast(ipost);
+            requireActivity().sendBroadcast(ipost);
         });
 
         CardView screenshotCard = view.findViewById(R.id.card_view3);
-        screenshotCard.setOnClickListener(view1 -> getActivity().sendBroadcast(new Intent("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER")));
+        screenshotCard.setOnClickListener(view1 -> requireActivity().sendBroadcast(new Intent("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER")));
 
         CardView notifSettCard = view.findViewById(R.id.card_view4);
         notifSettCard.setOnClickListener(notifSettCardView -> mAppSettingsListener.onAppSettingsClicked());
 
-        mTimeSyncSettings = getActivity().getSharedPreferences(TimeService.PREFS_NAME, 0);
+        mTimeSyncSettings = requireActivity().getSharedPreferences(TimeService.PREFS_NAME, 0);
 
         CheckBox mTimeSyncCheckBox = view.findViewById(R.id.timeSyncCheckBox);
         mTimeSyncCheckBox.setChecked(mTimeSyncSettings.getBoolean(TimeService.PREFS_SYNC_TIME, TimeService.PREFS_SYNC_TIME_DEFAULT));
@@ -143,7 +143,7 @@ public class DeviceDetailFragment extends Fragment {
             editor.apply();
         });
 
-        mSilenceModeSettings = getActivity().getSharedPreferences(SilentModeService.PREFS_NAME, Context.MODE_PRIVATE);
+        mSilenceModeSettings = requireActivity().getSharedPreferences(SilentModeService.PREFS_NAME, Context.MODE_PRIVATE);
         CheckBox mSilenceModeCheckBox = view.findViewById(R.id.SilentModeCheckBox);
         mSilenceModeCheckBox.setChecked(mSilenceModeSettings.getBoolean(SilentModeService.PREF_RINGER, false));
         mSilenceModeCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -152,7 +152,7 @@ public class DeviceDetailFragment extends Fragment {
             editor.apply();
         });
 
-        mCallStateSettings = getActivity().getSharedPreferences(PhoneStateReceiver.PREFS_NAME, Context.MODE_PRIVATE);
+        mCallStateSettings = requireActivity().getSharedPreferences(PhoneStateReceiver.PREFS_NAME, Context.MODE_PRIVATE);
         CheckBox mCallStateServiceCheckBox = view.findViewById(R.id.CallStateServiceCheckBox);
         mCallStateServiceCheckBox.setChecked(mCallStateSettings.getBoolean(PhoneStateReceiver.PREF_SEND_CALL_STATE, true));
         mCallStateServiceCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -179,7 +179,7 @@ public class DeviceDetailFragment extends Fragment {
     }
 
     public void setLocalName(String name) {
-        getActivity().setTitle(name);
+        requireActivity().setTitle(name);
     }
 
     public void setStatus(IAsteroidDevice.ConnectionState status) {
