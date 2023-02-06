@@ -231,31 +231,31 @@ public class DeviceDetailFragment extends Fragment {
         if (context instanceof DeviceDetailFragment.OnDefaultDeviceUnselectedListener)
             mDeviceListener = (DeviceDetailFragment.OnDefaultDeviceUnselectedListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceDetailFragment.OnDefaultDeviceUnselectedListener");
 
         if (context instanceof DeviceDetailFragment.OnConnectRequestedListener)
             mConnectListener = (DeviceDetailFragment.OnConnectRequestedListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceDetailFragment.OnConnectRequestedListener");
 
         if (context instanceof DeviceDetailFragment.OnAppSettingsClickedListener)
             mAppSettingsListener = (DeviceDetailFragment.OnAppSettingsClickedListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceDetailFragment.OnAppSettingsClickedListener");
 
         if (context instanceof DeviceDetailFragment.OnWeatherSettingsClickedListener)
             mWeatherSettingsListener = (DeviceDetailFragment.OnWeatherSettingsClickedListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceDetailFragment.OnWeatherSettingsClickedListener");
 
         if (context instanceof DeviceDetailFragment.OnUpdateListener)
             mUpdateListener = (DeviceDetailFragment.OnUpdateListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceDetailFragment.onUpdateListener");
     }
 
