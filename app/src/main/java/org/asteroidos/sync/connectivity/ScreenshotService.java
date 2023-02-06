@@ -18,6 +18,7 @@
 
 package org.asteroidos.sync.connectivity;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -194,14 +195,14 @@ public class ScreenshotService implements IConnectivityService {
             metaInfo.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
             Uri imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI , metaInfo);
             assert imageUri != null;
+            @SuppressLint("Recycle")
             OutputStream out = resolver.openOutputStream(imageUri);
-            assert out != null;
-            try {
+            try (out) {
+                assert out != null;
                 out.write(totalData);
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             } finally {
-                out.close();
                 uri = imageUri;
             }
         } else {
