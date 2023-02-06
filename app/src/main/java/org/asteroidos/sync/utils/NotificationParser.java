@@ -131,10 +131,10 @@ public class NotificationParser {
         for (NotificationCompat.MessagingStyle.Message message : messagesDescending)
         {
             String sender;
-            if (message.getSender() == null)
-                sender = formatCharSequence(messagingStyle.getUserDisplayName());
+            if (message.getPerson() == null)
+                sender = formatCharSequence(messagingStyle.getUser().getName());
             else
-                sender = formatCharSequence(message.getSender());
+                sender = formatCharSequence(message.getPerson().getName());
 
             sb.append(sender);
             sb.append(": ");
