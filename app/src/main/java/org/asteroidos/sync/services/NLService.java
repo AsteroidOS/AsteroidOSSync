@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
@@ -37,6 +38,7 @@ import org.asteroidos.sync.utils.NotificationParser;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class NLService extends NotificationListenerService {
     private NLServiceReceiver nlServiceReceiver;
@@ -159,11 +161,11 @@ public class NLService extends NotificationListenerService {
         String packageName = sbn.getPackageName();
 
         String[] allowedOngoingApps = {"com.google.android.apps.maps", "org.thoughtcrime.securesms"};
-        if((notification.priority < Notification.PRIORITY_DEFAULT) ||
-           ((notification.flags & Notification.FLAG_ONGOING_EVENT) != 0
-            && !Arrays.asList(allowedOngoingApps).contains(packageName)) ||
-           (NotificationCompat.getLocalOnly(notification)) ||
-           (NotificationCompat.isGroupSummary(notification)))
+        if ((notification.priority < Notification.PRIORITY_DEFAULT) ||
+                ((notification.flags & Notification.FLAG_ONGOING_EVENT) != 0
+                        && !Arrays.asList(allowedOngoingApps).contains(packageName)) ||
+                (NotificationCompat.getLocalOnly(notification)) ||
+                (NotificationCompat.isGroupSummary(notification)))
             return;
 
         NotificationParser notifParser = new NotificationParser(notification);
@@ -177,16 +179,17 @@ public class NLService extends NotificationListenerService {
             final PackageManager pm = getApplicationContext().getPackageManager();
             ApplicationInfo ai = pm.getApplicationInfo(packageName, 0);
             appName = pm.getApplicationLabel(ai).toString();
-        } catch (PackageManager.NameNotFoundException ignored) {}
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
 
-        if(summary == null) summary = "";
-        else                summary = summary.trim();
-        if(body == null) body = "";
-        else                body = body.trim();
-        if(packageName == null) packageName = "";
-        if(appIcon == null) appIcon = "";
+        if (summary == null) summary = "";
+        else summary = summary.trim();
+        if (body == null) body = "";
+        else body = body.trim();
+        if (packageName == null) packageName = "";
+        if (appIcon == null) appIcon = "";
 
-        Intent i = new  Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
+        Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
         i.putExtra("event", "posted");
         i.putExtra("packageName", packageName);
         i.putExtra("id", id);
@@ -225,9 +228,16 @@ public class NLService extends NotificationListenerService {
             if (intent.getStringExtra("command").equals("refresh")) {
                 Handler handler = new Handler();
                 handler.postDelayed(() -> {
-                    while (!listenerConnected);
+                    while (!listenerConnected) {
+                        // Sleep the spin
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            Thread.onSpinWait();
+                        }else {
+                            // Will not delay here, as we can cause the entire UI to freeze
+                        }
+                    }
                     StatusBarNotification[] notifs = getActiveNotifications();
-                    for(StatusBarNotification notif : notifs)
+                    for (StatusBarNotification notif : notifs)
                         onNotificationPosted(notif);
                 }, 500);
             }
