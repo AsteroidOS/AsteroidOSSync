@@ -69,7 +69,7 @@ public class WeatherSettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
-        mSettings = getContext().getSharedPreferences(WeatherService.PREFS_NAME, 0);
+        mSettings = requireActivity().getSharedPreferences(WeatherService.PREFS_NAME, 0);
         setHasOptionsMenu(true);
 
         return inflater.inflate(R.layout.fragment_position_picker, parent, false);
@@ -92,14 +92,14 @@ public class WeatherSettingsFragment extends Fragment {
         mMapView.getController().setZoom(zoom);
         mMapView.getController().setCenter(new GeoPoint(latitude, longitude));
 
-        if (ContextCompat.checkSelfPermission(getActivity(),
+        if (ContextCompat.checkSelfPermission(requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(),
+            ActivityCompat.requestPermissions(requireActivity(),
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     WEATHER_LOCATION_PERMISSION_REQUEST);
         } else {
-            MyLocationNewOverlay mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(getContext()), mMapView);
+            MyLocationNewOverlay mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(requireContext()), mMapView);
             mLocationOverlay.enableMyLocation();
             mMapView.getOverlays().add(mLocationOverlay);
         }
@@ -194,7 +194,7 @@ public class WeatherSettingsFragment extends Fragment {
         editor.putBoolean(WeatherService.PREFS_SYNC_WEATHER, enable);
         editor.apply();
         mButton.setVisibility(enable ? View.INVISIBLE : View.VISIBLE);
-        getActivity().sendBroadcast(new Intent(WeatherService.WEATHER_SYNC_INTENT));
+        requireActivity().sendBroadcast(new Intent(WeatherService.WEATHER_SYNC_INTENT));
     }
 
     @Override
@@ -215,7 +215,7 @@ public class WeatherSettingsFragment extends Fragment {
             case WEATHER_LOCATION_PERMISSION_REQUEST: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    MyLocationNewOverlay mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(getContext()), mMapView);
+                    MyLocationNewOverlay mLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(requireContext()), mMapView);
                     mLocationOverlay.enableMyLocation();
                     mMapView.getOverlays().add(mLocationOverlay);
                 }
