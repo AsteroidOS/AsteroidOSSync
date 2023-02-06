@@ -64,7 +64,7 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
         out.writeParcelable(icon, flags);
     }
 
-    public static final Parcelable.Creator<AppInfo> CREATOR = new Parcelable.Creator<AppInfo>() {
+    public static final Parcelable.Creator<AppInfo> CREATOR = new Parcelable.Creator<>() {
         public AppInfo createFromParcel(Parcel in) {
             return new AppInfo(in);
         }
