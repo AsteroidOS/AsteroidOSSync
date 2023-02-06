@@ -101,7 +101,6 @@ public class AsteroidBleManager extends BleManager {
         public final boolean isRequiredServiceSupported(@NonNull final BluetoothGatt gatt) {
             final BluetoothGattService batteryService = gatt.getService(AsteroidUUIDS.BATTERY_SERVICE_UUID);
 
-            boolean supported = true;
 
             boolean notify = false;
             if (batteryService != null) {
@@ -137,8 +136,7 @@ public class AsteroidBleManager extends BleManager {
                 });
             }
 
-            supported = (batteryCharacteristic != null && notify);
-            return supported;
+            return (batteryCharacteristic != null && notify);
         }
 
         @Override
@@ -152,20 +150,20 @@ public class AsteroidBleManager extends BleManager {
                     .enqueue();
 
             setNotificationCallback(batteryCharacteristic).with(((device, data) -> setBatteryLevel(data)));
-	    // Do not call readCharacteristic(batteryCharacteristic) here.
-	    // Otherwise, on Android 12 and later, the BLE bond to the watch
-	    // is lost, and communication no longer works. Arguably, reading
-	    // and writing should not be done in initialize(), since it is
-	    // part of the BLE manager's connect() request. Instead, do those
-	    // IO operations _after_ that request finishes (-> read the
-	    // characteristic in the SynchronizationService class, which is
-	    // where the BLE manager's connect() function is called).
+            // Do not call readCharacteristic(batteryCharacteristic) here.
+            // Otherwise, on Android 12 and later, the BLE bond to the watch
+            // is lost, and communication no longer works. Arguably, reading
+            // and writing should not be done in initialize(), since it is
+            // part of the BLE manager's connect() request. Instead, do those
+            // IO operations _after_ that request finishes (-> read the
+            // characteristic in the SynchronizationService class, which is
+            // where the BLE manager's connect() function is called).
             enableNotifications(batteryCharacteristic).enqueue();
 
             // Let all services know that we are connected.
             try {
                 mSynchronizationService.syncServices();
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
