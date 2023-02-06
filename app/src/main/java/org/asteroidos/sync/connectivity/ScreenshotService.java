@@ -251,7 +251,6 @@ public class ScreenshotService implements IConnectivityService {
                 mFirstNotify = true;
                 mDownloading = true;
                 byte[] data = new byte[1];
-                data[0] = 0x0;
                 mDevice.send(AsteroidUUIDS.SCREENSHOT_REQUEST, data, ScreenshotService.this);
             }
         }
