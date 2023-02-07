@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    kotlin("android")
 }
 
 android {
@@ -53,6 +54,9 @@ repositories {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     testImplementation("junit:junit:4.13.2")
     implementation("androidx.appcompat:appcompat:1.6.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")

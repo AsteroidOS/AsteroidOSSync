@@ -29,12 +29,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
-import android.os.Messenger;
-import android.os.RemoteException;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -53,6 +48,8 @@ import org.asteroidos.sync.connectivity.ScreenshotService;
 import org.asteroidos.sync.connectivity.SilentModeService;
 import org.asteroidos.sync.connectivity.TimeService;
 import org.asteroidos.sync.connectivity.WeatherService;
+import org.asteroidos.sync.viewmodel.base.SynchronizationServiceModel;
+import org.asteroidos.sync.viewmodel.impl.SynchronizationServiceModelImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,7 +72,6 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
     public static final int MSG_UNSET_DEVICE = 9;
 
     private static final String NOTIFICATION_CHANNEL_ID = "synchronizationservice_channel_id_01";
-    final Messenger mMessenger = new Messenger(new SynchronizationHandler(this));
     private final int NOTIFICATION = 2725;
     public BluetoothDevice mDevice;
     public int batteryPercentage = 0;
@@ -83,16 +79,18 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
     List<IService> nonBleServices;
     private NotificationManager mNM;
     private ConnectionState mState = ConnectionState.STATUS_DISCONNECTED;
-    private Messenger replyTo;
     private SharedPreferences mPrefs;
     private AsteroidBleManager mBleMngr;
+
+    private final SynchronizationServiceModel model = new SynchronizationServiceModelImpl();
 
     final void handleConnect() {
         if (mBleMngr == null) {
             mBleMngr = new AsteroidBleManager(getApplicationContext(), SynchronizationService.this);
             mBleMngr.setConnectionObserver(this);
         }
-        if (mState == ConnectionState.STATUS_CONNECTED || mState == ConnectionState.STATUS_CONNECTING) return;
+        if (mState == ConnectionState.STATUS_CONNECTED || mState == ConnectionState.STATUS_CONNECTING)
+            return;
 
         mPrefs = getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
         String defaultDevMacAddr = mPrefs.getString(MainActivity.PREFS_DEFAULT_MAC_ADDR, "");
@@ -107,9 +105,9 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
                     .retry(3, 200)
                     .done(device1 -> {
                         Log.d(TAG, "Connected to " + device1.getName());
-			// Now we read the current values of the GATT characteristics,
-			// _after_ the connection has been fully established, to avoid
-			// connection failures on Android 12 and later.
+                        // Now we read the current values of the GATT characteristics,
+                        // _after_ the connection has been fully established, to avoid
+                        // connection failures on Android 12 and later.
                         mBleMngr.readCharacteristics();
                     })
                     .fail((device2, error) -> Log.e(TAG, "Failed to connect to " + device.getName() +
@@ -136,11 +134,8 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         mDevice = device;
         try {
             String name = mDevice.getName();
-            Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
-            answer.obj = name;
-            replyTo.send(answer);
-            replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState));
-        } catch (RemoteException | SecurityException | NullPointerException ignored) {
+            model.setLocalName(name);
+        } catch (SecurityException | NullPointerException ignored) {
         }
         editor.putString(MainActivity.PREFS_DEFAULT_LOC_NAME, name);
         editor.apply();
@@ -148,10 +143,7 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
 
     final void handleUpdateConnectionStatus() {
         if (mDevice != null) {
-            try {
-                replyTo.send(Message.obtain(null, MSG_SET_STATUS, mState));
-            } catch (RemoteException | NullPointerException ignored) {
-            }
+            model.setConnectionState(mState);
         }
     }
 
@@ -289,6 +281,13 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
 
         handleConnect();
         updateNotification();
+
+        model.onConnectRequested(this::handleConnect);
+        model.onDisconnectRequested(this::handleDisconnect);
+        model.onBatteryLifeRequested(this::handleUpdateBatteryPercentageRequest);
+        model.onDeviceSetRequested(this::handleSetDevice);
+        model.onDeviceUnsetRequested(this::handleUnSetDevice);
+        model.onDeviceUpdateRequested(this::handleUpdateConnectionStatus);
     }
 
     @Override
@@ -338,7 +337,7 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
 
     @Override
     public IBinder onBind(Intent intent) {
-        return mMessenger.getBinder();
+        return null;
     }
 
     @Override
@@ -359,53 +358,15 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         editor.apply();
     }
 
+    public void handleUpdateBatteryPercentageRequest() {
+        AsteroidBleManager.BatteryLevelEvent batteryLevelEvent = new AsteroidBleManager.BatteryLevelEvent();
+        batteryLevelEvent.battery = batteryPercentage;
+        handleUpdateBatteryPercentage(batteryLevelEvent);
+    }
+
     public void handleUpdateBatteryPercentage(AsteroidBleManager.BatteryLevelEvent battery) {
         Log.d(TAG, "handleBattery: " + battery.battery + "%");
         batteryPercentage = battery.battery;
-        try {
-            if (replyTo != null)
-                replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, batteryPercentage, 0));
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
-
-    static private class SynchronizationHandler extends Handler {
-        private final SynchronizationService mService;
-
-        SynchronizationHandler(SynchronizationService service) {
-            super(Looper.getMainLooper());
-            mService = service;
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            mService.replyTo = msg.replyTo;
-
-            switch (msg.what) {
-                case MSG_CONNECT:
-                    mService.handleConnect();
-                    break;
-                case MSG_DISCONNECT:
-                    mService.handleDisconnect();
-                    break;
-                case MSG_REQUEST_BATTERY_LIFE:
-                    AsteroidBleManager.BatteryLevelEvent batteryLevelEvent = new AsteroidBleManager.BatteryLevelEvent();
-                    batteryLevelEvent.battery = mService.batteryPercentage;
-                    mService.handleUpdateBatteryPercentage(batteryLevelEvent);
-                    break;
-                case MSG_SET_DEVICE:
-                    mService.handleSetDevice((BluetoothDevice) msg.obj);
-                    break;
-                case MSG_UNSET_DEVICE:
-                    mService.handleUnSetDevice();
-                    break;
-                case MSG_UPDATE:
-                    mService.handleUpdateConnectionStatus();
-                    break;
-                default:
-                    super.handleMessage(msg);
-            }
-        }
+        model.setBatteryPercentage(batteryPercentage);
     }
 }
