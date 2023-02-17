@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2016 - Florent Revest <revestflo@gmail.com>
+ * AsteroidOSSync
+ * Copyright (c) 2023 AsteroidOS
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,10 +42,10 @@ public class TimeService implements IConnectivityService, SharedPreferences.OnSh
     public static final boolean PREFS_SYNC_TIME_DEFAULT = true;
     public static final String TIME_SYNC_INTENT = "org.asteroidos.sync.TIME_SYNC_REQUEST_LISTENER";
 
-    private IAsteroidDevice mDevice;
-    private Context mCtx;
+    private final IAsteroidDevice mDevice;
+    private final Context mCtx;
 
-    private SharedPreferences mTimeSyncSettings;
+    private final SharedPreferences mTimeSyncSettings;
 
     private TimeSyncReqReceiver mSReceiver;
     private PendingIntent alarmPendingIntent;
@@ -60,12 +61,7 @@ public class TimeService implements IConnectivityService, SharedPreferences.OnSh
     @Override
     public final void sync() {
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                updateTime();
-            }
-        }, 500);
+        handler.postDelayed(this::updateTime, 500);
 
         // Register a broadcast handler to use for the alarm Intent
         // Also listen for TIME_CHANGED and TIMEZONE_CHANGED events

@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2019 - Justus Tartz <git@jrtberlin.de>
+ * AsteroidOSSync
+ * Copyright (c) 2023 AsteroidOS
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,16 +28,14 @@ public class SilentModeService implements SharedPreferences.OnSharedPreferenceCh
     public static final String PREFS_NAME = "AppPreferences";
     public static final String PREF_RINGER = "PhoneRingModeOnConnection";
     private static final String PREF_ORIG_RINGER = "OriginalRingMode";
-    private SharedPreferences prefs;
+    private final SharedPreferences prefs;
     private Boolean notificationPref;
-    private Context context;
-    private AudioManager am;
+    private final AudioManager am;
 
     public SilentModeService(Context con) {
         prefs = con.getSharedPreferences(PREFS_NAME, Activity.MODE_PRIVATE);
-        context = con;
         prefs.registerOnSharedPreferenceChangeListener(this);
-        am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        am = (AudioManager) con.getSystemService(Context.AUDIO_SERVICE);
 
     }
 

@@ -1,5 +1,24 @@
+/*
+ * AsteroidOSSync
+ * Copyright (c) 2023 AsteroidOS
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.asteroidos.sync.utils;
 
+// TODO Handle dubious copyright
 // copied from https://github.com/jensstein/oandbackup, used under MIT license
 
 import android.content.Context;
@@ -13,7 +32,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -26,16 +44,12 @@ public class AppInfoHelper
         ArrayList<AppInfo> list = new ArrayList<>();
         PackageManager pm = context.getPackageManager();
         List<PackageInfo> pinfoList = pm.getInstalledPackages(0);
-        Collections.sort(pinfoList, pInfoPackageNameComparator);
+        pinfoList.sort(pInfoPackageNameComparator);
         // list seemingly starts scrambled on 4.3
 
         for(PackageInfo pinfo : pinfoList)
         {
-            boolean isSystem = false;
-            if((pinfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0)
-            {
-                isSystem = true;
-            }
+            boolean isSystem = (pinfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
             Bitmap icon = null;
             Drawable apkIcon = pm.getApplicationIcon(pinfo.applicationInfo);
             try
@@ -68,11 +82,5 @@ public class AppInfoHelper
         }
         return list;
     }
-    private static Comparator<PackageInfo> pInfoPackageNameComparator = new Comparator<PackageInfo>()
-    {
-        public int compare(PackageInfo p1, PackageInfo p2)
-        {
-            return p1.packageName.compareToIgnoreCase(p2.packageName);
-        }
-    };
+    private static final Comparator<PackageInfo> pInfoPackageNameComparator = (p1, p2) -> p1.packageName.compareToIgnoreCase(p2.packageName);
 }

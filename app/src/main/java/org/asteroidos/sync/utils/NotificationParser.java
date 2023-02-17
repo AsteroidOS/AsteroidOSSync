@@ -1,7 +1,24 @@
+/*
+ * AsteroidOSSync
+ * Copyright (c) 2023 AsteroidOS
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.asteroidos.sync.utils;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Notification;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -14,8 +31,6 @@ import android.widget.RemoteViews;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 // Originally from https://github.com/matejdro/PebbleNotificationCenter-Android written by Matej Drobnič under the terms of the GPLv3
@@ -35,7 +50,6 @@ public class NotificationParser {
         getExtraBigData(notification);
     }
 
-    @TargetApi(value = Build.VERSION_CODES.JELLY_BEAN)
     private boolean tryParseNatively(Notification notification)
     {
         Bundle extras = notification.extras;
@@ -101,12 +115,7 @@ public class NotificationParser {
             summary = "";
 
         List<NotificationCompat.MessagingStyle.Message> messagesDescending = new ArrayList<>(messagingStyle.getMessages());
-        Collections.sort(messagesDescending, new Comparator<NotificationCompat.MessagingStyle.Message>() {
-            @Override
-            public int compare(NotificationCompat.MessagingStyle.Message m1, NotificationCompat.MessagingStyle.Message m2) {
-                return (int) (m2.getTimestamp() - m1.getTimestamp());
-            }
-        });
+        messagesDescending.sort((m1, m2) -> (int) (m2.getTimestamp() - m1.getTimestamp()));
 
         StringBuilder sb = new StringBuilder();
         body = "";
@@ -114,10 +123,10 @@ public class NotificationParser {
         for (NotificationCompat.MessagingStyle.Message message : messagesDescending)
         {
             String sender;
-            if (message.getSender() == null)
-                sender = formatCharSequence(messagingStyle.getUserDisplayName());
+            if (message.getPerson() == null)
+                sender = formatCharSequence(messagingStyle.getUser().getName());
             else
-                sender = formatCharSequence(message.getSender());
+                sender = formatCharSequence(message.getPerson().getName());
 
             sb.append(sender);
             sb.append(": ");
@@ -130,7 +139,6 @@ public class NotificationParser {
         return true;
     }
 
-    @TargetApi(value = Build.VERSION_CODES.JELLY_BEAN)
     private boolean parseInboxNotification(Bundle extras)
     {
         CharSequence summaryTextSequence = extras.getCharSequence(Notification.EXTRA_SUMMARY_TEXT);
@@ -214,7 +222,6 @@ public class NotificationParser {
         parseRemoteView(views);
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void getExtraBigData(Notification notification) {
         RemoteViews views;
         try {

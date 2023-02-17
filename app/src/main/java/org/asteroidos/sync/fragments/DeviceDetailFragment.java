@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2016 - Florent Revest <revestflo@gmail.com>
- *                      Doug Koellmer <dougkoellmer@hotmail.com>
+ * AsteroidOSSync
+ * Copyright (c) 2023 AsteroidOS
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,6 +33,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -55,10 +56,6 @@ public class DeviceDetailFragment extends Fragment {
     private SharedPreferences mTimeSyncSettings;
     private SharedPreferences mSilenceModeSettings;
     private SharedPreferences mCallStateSettings;
-
-    private CheckBox mTimeSyncCheckBox;
-    private CheckBox mSilenceModeCheckBox;
-    private CheckBox mCallStateServiceCheckBox;
 
     private FloatingActionButton mFab;
 
@@ -117,7 +114,7 @@ public class DeviceDetailFragment extends Fragment {
             Intent iremove = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
             iremove.putExtra("event", "removed");
             iremove.putExtra("id", 0xa57e401d);
-            getActivity().sendBroadcast(iremove);
+            requireActivity().sendBroadcast(iremove);
 
             Intent ipost = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
             ipost.putExtra("event", "posted");
@@ -127,18 +124,18 @@ public class DeviceDetailFragment extends Fragment {
             ipost.putExtra("appIcon", "ios-watch-vibrating");
             ipost.putExtra("summary", getString(R.string.watch_finder));
             ipost.putExtra("body", getString(R.string.phone_is_searching));
-            getActivity().sendBroadcast(ipost);
+            requireActivity().sendBroadcast(ipost);
         });
 
         CardView screenshotCard = view.findViewById(R.id.card_view3);
-        screenshotCard.setOnClickListener(view1 -> getActivity().sendBroadcast(new Intent("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER")));
+        screenshotCard.setOnClickListener(view1 -> requireActivity().sendBroadcast(new Intent("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER")));
 
         CardView notifSettCard = view.findViewById(R.id.card_view4);
         notifSettCard.setOnClickListener(notifSettCardView -> mAppSettingsListener.onAppSettingsClicked());
 
-        mTimeSyncSettings = getActivity().getSharedPreferences(TimeService.PREFS_NAME, 0);
+        mTimeSyncSettings = requireActivity().getSharedPreferences(TimeService.PREFS_NAME, 0);
 
-        mTimeSyncCheckBox = view.findViewById(R.id.timeSyncCheckBox);
+        CheckBox mTimeSyncCheckBox = view.findViewById(R.id.timeSyncCheckBox);
         mTimeSyncCheckBox.setChecked(mTimeSyncSettings.getBoolean(TimeService.PREFS_SYNC_TIME, TimeService.PREFS_SYNC_TIME_DEFAULT));
         mTimeSyncCheckBox.setOnCheckedChangeListener((ignored, checked) -> {
             SharedPreferences.Editor editor = mTimeSyncSettings.edit();
@@ -146,8 +143,8 @@ public class DeviceDetailFragment extends Fragment {
             editor.apply();
         });
 
-        mSilenceModeSettings = getActivity().getSharedPreferences(SilentModeService.PREFS_NAME, Context.MODE_PRIVATE);
-        mSilenceModeCheckBox = view.findViewById(R.id.SilentModeCheckBox);
+        mSilenceModeSettings = requireActivity().getSharedPreferences(SilentModeService.PREFS_NAME, Context.MODE_PRIVATE);
+        CheckBox mSilenceModeCheckBox = view.findViewById(R.id.SilentModeCheckBox);
         mSilenceModeCheckBox.setChecked(mSilenceModeSettings.getBoolean(SilentModeService.PREF_RINGER, false));
         mSilenceModeCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             SharedPreferences.Editor editor = mSilenceModeSettings.edit();
@@ -155,8 +152,8 @@ public class DeviceDetailFragment extends Fragment {
             editor.apply();
         });
 
-        mCallStateSettings = getActivity().getSharedPreferences(PhoneStateReceiver.PREFS_NAME, Context.MODE_PRIVATE);
-        mCallStateServiceCheckBox = view.findViewById(R.id.CallStateServiceCheckBox);
+        mCallStateSettings = requireActivity().getSharedPreferences(PhoneStateReceiver.PREFS_NAME, Context.MODE_PRIVATE);
+        CheckBox mCallStateServiceCheckBox = view.findViewById(R.id.CallStateServiceCheckBox);
         mCallStateServiceCheckBox.setChecked(mCallStateSettings.getBoolean(PhoneStateReceiver.PREF_SEND_CALL_STATE, true));
         mCallStateServiceCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             SharedPreferences.Editor editor = mCallStateSettings.edit();
@@ -168,7 +165,7 @@ public class DeviceDetailFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.device_detail_manu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -182,7 +179,7 @@ public class DeviceDetailFragment extends Fragment {
     }
 
     public void setLocalName(String name) {
-        getActivity().setTitle(name);
+        requireActivity().setTitle(name);
     }
 
     public void setStatus(IAsteroidDevice.ConnectionState status) {
@@ -230,36 +227,36 @@ public class DeviceDetailFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof DeviceDetailFragment.OnDefaultDeviceUnselectedListener)
             mDeviceListener = (DeviceDetailFragment.OnDefaultDeviceUnselectedListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceDetailFragment.OnDefaultDeviceUnselectedListener");
 
         if (context instanceof DeviceDetailFragment.OnConnectRequestedListener)
             mConnectListener = (DeviceDetailFragment.OnConnectRequestedListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceDetailFragment.OnConnectRequestedListener");
 
         if (context instanceof DeviceDetailFragment.OnAppSettingsClickedListener)
             mAppSettingsListener = (DeviceDetailFragment.OnAppSettingsClickedListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceDetailFragment.OnAppSettingsClickedListener");
 
         if (context instanceof DeviceDetailFragment.OnWeatherSettingsClickedListener)
             mWeatherSettingsListener = (DeviceDetailFragment.OnWeatherSettingsClickedListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceDetailFragment.OnWeatherSettingsClickedListener");
 
         if (context instanceof DeviceDetailFragment.OnUpdateListener)
             mUpdateListener = (DeviceDetailFragment.OnUpdateListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceDetailFragment.onUpdateListener");
     }
 

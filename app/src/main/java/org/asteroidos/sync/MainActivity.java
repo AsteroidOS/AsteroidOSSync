@@ -1,4 +1,24 @@
+/*
+ * AsteroidOSSync
+ * Copyright (c) 2023 AsteroidOS
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.asteroidos.sync;
+
+import static android.os.ParcelUuid.fromString;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -17,10 +37,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
-import android.os.Message;
-import android.os.Messenger;
 import android.os.ParcelUuid;
-import android.os.RemoteException;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
@@ -35,6 +52,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.asteroidos.sync.asteroid.IAsteroidDevice;
 import org.asteroidos.sync.fragments.AppListFragment;
@@ -45,6 +63,8 @@ import org.asteroidos.sync.services.SynchronizationService;
 import org.asteroidos.sync.utils.AppInfo;
 import org.asteroidos.sync.utils.AppInfoHelper;
 import org.asteroidos.sync.utils.AsteroidUUIDS;
+import org.asteroidos.sync.viewmodel.base.MainActivityViewModel;
+import org.asteroidos.sync.viewmodel.impl.MainActivityViewModelImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +74,6 @@ import no.nordicsemi.android.support.v18.scanner.ScanCallback;
 import no.nordicsemi.android.support.v18.scanner.ScanFilter;
 import no.nordicsemi.android.support.v18.scanner.ScanResult;
 import no.nordicsemi.android.support.v18.scanner.ScanSettings;
-
-import static android.os.ParcelUuid.fromString;
 
 public class MainActivity extends AppCompatActivity implements DeviceListFragment.OnDefaultDeviceSelectedListener,
         DeviceListFragment.OnScanRequestedListener, DeviceDetailFragment.OnDefaultDeviceUnselectedListener,
@@ -67,21 +85,17 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     public static final String PREFS_DEFAULT_LOC_NAME = "defaultLocalName";
     private static final String TAG = "MainActivity";
     public static ArrayList<AppInfo> appInfoList;
-    final Messenger mDeviceDetailMessenger = new Messenger(new MainActivity.SynchronizationHandler(this));
-    public ParcelUuid asteroidUUID = fromString(AsteroidUUIDS.SERVICE_UUID.toString());
-    Messenger mSyncServiceMessenger;
+    public final ParcelUuid asteroidUUID = fromString(AsteroidUUIDS.SERVICE_UUID.toString());
     ActivityResultLauncher<Intent> mLocationEnableActivityLauncher;
     LocationManager mLocationManager;
     /* Synchronization service events handling */
     private final ServiceConnection mConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
-            mSyncServiceMessenger = new Messenger(service);
             onUpdateRequested();
         }
 
         public void onServiceDisconnected(ComponentName className) {
-            mSyncServiceMessenger = null;
         }
     };
     Intent mSyncServiceIntent;
@@ -89,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     ScanSettings mSettings;
     List<ScanFilter> mFilters;
     private DeviceListFragment mListFragment;
-    public ScanCallback scanCallback = new ScanCallback() {
+    public final ScanCallback scanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, @NonNull ScanResult result) {
             super.onScanResult(callbackType, result);
@@ -102,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 }
                 return;
             }
-            Log.d(TAG, "SCAN RESULT:" + result.getDevice().toString() + " Name:" + result.getDevice().getName());
+            Log.d(TAG, "SCAN RESULT:" + result.getDevice() + " Name:" + result.getDevice().getName());
             ParcelUuid[] arr = result.getDevice().getUuids();
         }
     };
@@ -110,22 +124,23 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     private Fragment mPreviousFragment;
     private BluetoothLeScannerCompat mScanner;
     private SharedPreferences mPrefs;
+    MainActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        viewModel = new ViewModelProvider(this).get(MainActivityViewModelImpl.class);
+        viewModel.onWatchLocalNameChanged(this::handleSetLocalName);
+        viewModel.onWatchConnectionStateChanged(this::handleSetStatus);
+        viewModel.onWatchBatteryPercentageChanged(this::handleSetBatteryPercentage);
 
         mScanner = BluetoothLeScannerCompat.getScanner();
 
         mPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String defaultDevMacAddr = mPrefs.getString(PREFS_DEFAULT_MAC_ADDR, "");
 
-        Thread appInfoRetrieval = new Thread(new Runnable() {
-            public void run() {
-                appInfoList = AppInfoHelper.getPackageInfo(MainActivity.this);
-            }
-        });
+        Thread appInfoRetrieval = new Thread(() -> appInfoList = AppInfoHelper.getPackageInfo(MainActivity.this));
         appInfoRetrieval.start();
 
         mSettings = new ScanSettings.Builder()
@@ -179,20 +194,14 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         mDetailFragment = new DeviceDetailFragment();
 
         if (mListFragment != null) mListFragment.scanningStopped();
-        else if (mDetailFragment != null) mDetailFragment.scanningStopped();
+        else mDetailFragment.scanningStopped();
 
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.flContainer, mDetailFragment)
                 .commit();
 
-        try {
-            Message msg = Message.obtain(null, SynchronizationService.MSG_SET_DEVICE);
-            msg.obj = mDevice;
-            msg.replyTo = mDeviceDetailMessenger;
-            mSyncServiceMessenger.send(msg);
-        } catch (RemoteException ignored) {
-        }
+        viewModel.onDefaultDeviceSelected(mDevice);
 
         onConnectRequested();
 
@@ -209,13 +218,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 .replace(R.id.flContainer, mListFragment)
                 .commit();
 
-        try {
-            Message msg = Message.obtain(null, SynchronizationService.MSG_UNSET_DEVICE);
-            msg.obj = "";
-            msg.replyTo = mDeviceDetailMessenger;
-            mSyncServiceMessenger.send(msg);
-        } catch (RemoteException ignored) {
-        }
+        viewModel.requestUnsetDevice();
 
         mDetailFragment = null;
         setTitle(R.string.app_name);
@@ -223,35 +226,19 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
 
     @Override
     public void onUpdateRequested() {
-        try {
-            Message msg = Message.obtain(null, SynchronizationService.MSG_UPDATE);
-            msg.replyTo = mDeviceDetailMessenger;
-            if (mSyncServiceMessenger != null)
-                mSyncServiceMessenger.send(msg);
-        } catch (RemoteException ignored) {
-        }
+        viewModel.requestUpdate();
     }
 
     @Override
     public void onConnectRequested() {
         if (mScanner != null)
             mScanner.stopScan(scanCallback);
-        try {
-            Message msg = Message.obtain(null, SynchronizationService.MSG_CONNECT);
-            msg.replyTo = mDeviceDetailMessenger;
-            mSyncServiceMessenger.send(msg);
-        } catch (RemoteException ignored) {
-        }
+        viewModel.requestConnect();
     }
 
     @Override
     public void onDisconnectRequested() {
-        try {
-            Message msg = Message.obtain(null, SynchronizationService.MSG_DISCONNECT);
-            msg.replyTo = mDeviceDetailMessenger;
-            mSyncServiceMessenger.send(msg);
-        } catch (RemoteException ignored) {
-        }
+        viewModel.requestDisconnect();
     }
 
     @Override
@@ -342,12 +329,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             mStatus = status;
         }
         if (status == IAsteroidDevice.ConnectionState.STATUS_CONNECTED) {
-            try {
-                Message msg = Message.obtain(null, SynchronizationService.MSG_REQUEST_BATTERY_LIFE);
-                msg.replyTo = mDeviceDetailMessenger;
-                mSyncServiceMessenger.send(msg);
-            } catch (RemoteException ignored) {
-            }
+            viewModel.requestBatteryLevel();
         }
     }
 
@@ -418,7 +400,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         getDelegate().onConfigurationChanged(newConfig);
         int currentNightMode = newConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK;
@@ -434,30 +416,5 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
-    }
-
-    static private class SynchronizationHandler extends Handler {
-        private final MainActivity mActivity;
-
-        SynchronizationHandler(MainActivity activity) {
-            mActivity = activity;
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case SynchronizationService.MSG_SET_LOCAL_NAME:
-                    mActivity.handleSetLocalName((String) msg.obj);
-                    break;
-                case SynchronizationService.MSG_SET_STATUS:
-                    mActivity.handleSetStatus((IAsteroidDevice.ConnectionState) msg.obj);
-                    break;
-                case SynchronizationService.MSG_SET_BATTERY_PERCENTAGE:
-                    mActivity.handleSetBatteryPercentage(msg.arg1);
-                    break;
-                default:
-                    super.handleMessage(msg);
-            }
-        }
     }
 }

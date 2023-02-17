@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2016 - Florent Revest <revestflo@gmail.com>
+ * AsteroidOSSync
+ * Copyright (c) 2023 AsteroidOS
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +18,7 @@
 
 package org.asteroidos.sync.connectivity;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -54,13 +56,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-@SuppressWarnings({"FieldCanBeLocal"}) // For clarity, we prefer having NOTIFICATION as a top level field
 public class ScreenshotService implements IConnectivityService {
     private static final String NOTIFICATION_CHANNEL_ID = "screenshotservice_channel_id_01";
-    private int NOTIFICATION = 2726;
+    private final int NOTIFICATION = 2726;
 
-    private Context mCtx;
-    private IAsteroidDevice mDevice;
+    private final Context mCtx;
+    private final IAsteroidDevice mDevice;
 
     private ScreenshotReqReceiver mSReceiver;
 
@@ -71,7 +72,7 @@ public class ScreenshotService implements IConnectivityService {
     private byte[] totalData;
     private ScheduledExecutorService processUpdate;
 
-    private NotificationManager mNM;
+    private final NotificationManager mNM;
 
     public ScreenshotService(Context ctx, IAsteroidDevice device) {
         mDevice = device;
@@ -194,14 +195,14 @@ public class ScreenshotService implements IConnectivityService {
             metaInfo.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
             Uri imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI , metaInfo);
             assert imageUri != null;
+            @SuppressLint("Recycle")
             OutputStream out = resolver.openOutputStream(imageUri);
-            assert out != null;
-            try {
+            try (out) {
+                assert out != null;
                 out.write(totalData);
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             } finally {
-                out.close();
                 uri = imageUri;
             }
         } else {
@@ -251,7 +252,6 @@ public class ScreenshotService implements IConnectivityService {
                 mFirstNotify = true;
                 mDownloading = true;
                 byte[] data = new byte[1];
-                data[0] = 0x0;
                 mDevice.send(AsteroidUUIDS.SCREENSHOT_REQUEST, data, ScreenshotService.this);
             }
         }

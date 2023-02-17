@@ -1,11 +1,29 @@
+/*
+ * AsteroidOSSync
+ * Copyright (c) 2023 AsteroidOS
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.asteroidos.sync.dataobjects;
 
 import java.nio.charset.StandardCharsets;
 
 public class Notification {
     String packageName, appName, appIcon, summary, body, vibration = "";
-    MsgType msgType = null;
-    int id = 0;
+    final MsgType msgType;
+    final int id;
 
     public Notification(MsgType msgType, String packageName, int id, String appName, String appIcon, String summary, String body, String vibration) {
         this.msgType = msgType;

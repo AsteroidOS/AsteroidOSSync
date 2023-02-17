@@ -1,16 +1,31 @@
+/*
+ * AsteroidOSSync
+ * Copyright (c) 2023 AsteroidOS
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.asteroidos.sync.asteroid;
 
-import android.Manifest;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 
 import org.asteroidos.sync.connectivity.IConnectivityService;
 import org.asteroidos.sync.connectivity.IServiceCallback;
@@ -30,9 +45,9 @@ public class AsteroidBleManager extends BleManager {
     public static final String TAG = AsteroidBleManager.class.toString();
     @Nullable
     public BluetoothGattCharacteristic batteryCharacteristic;
-    SynchronizationService mSynchronizationService;
-    ArrayList<BluetoothGattService> mGattServices;
-    public HashMap<UUID, IServiceCallback> recvCallbacks;
+    final SynchronizationService mSynchronizationService;
+    final ArrayList<BluetoothGattService> mGattServices;
+    public final HashMap<UUID, IServiceCallback> recvCallbacks;
     public HashMap<UUID, BluetoothGattCharacteristic> sendingCharacteristics;
 
     public AsteroidBleManager(@NonNull final Context context, SynchronizationService syncService) {
@@ -64,11 +79,6 @@ public class AsteroidBleManager extends BleManager {
         cancelQueue();
     }
 
-    @Override
-    protected final void finalize() throws Throwable {
-        super.finalize();
-    }
-
     public final void setBatteryLevel(Data data) {
         BatteryLevelEvent batteryLevelEvent = new BatteryLevelEvent();
         batteryLevelEvent.battery = Objects.requireNonNull(data.getByte(0)).intValue();
@@ -91,7 +101,6 @@ public class AsteroidBleManager extends BleManager {
         public final boolean isRequiredServiceSupported(@NonNull final BluetoothGatt gatt) {
             final BluetoothGattService batteryService = gatt.getService(AsteroidUUIDS.BATTERY_SERVICE_UUID);
 
-            boolean supported = true;
 
             boolean notify = false;
             if (batteryService != null) {
@@ -127,8 +136,7 @@ public class AsteroidBleManager extends BleManager {
                 });
             }
 
-            supported = (batteryCharacteristic != null && notify);
-            return supported;
+            return (batteryCharacteristic != null && notify);
         }
 
         @Override
@@ -142,20 +150,20 @@ public class AsteroidBleManager extends BleManager {
                     .enqueue();
 
             setNotificationCallback(batteryCharacteristic).with(((device, data) -> setBatteryLevel(data)));
-	    // Do not call readCharacteristic(batteryCharacteristic) here.
-	    // Otherwise, on Android 12 and later, the BLE bond to the watch
-	    // is lost, and communication no longer works. Arguably, reading
-	    // and writing should not be done in initialize(), since it is
-	    // part of the BLE manager's connect() request. Instead, do those
-	    // IO operations _after_ that request finishes (-> read the
-	    // characteristic in the SynchronizationService class, which is
-	    // where the BLE manager's connect() function is called).
+            // Do not call readCharacteristic(batteryCharacteristic) here.
+            // Otherwise, on Android 12 and later, the BLE bond to the watch
+            // is lost, and communication no longer works. Arguably, reading
+            // and writing should not be done in initialize(), since it is
+            // part of the BLE manager's connect() request. Instead, do those
+            // IO operations _after_ that request finishes (-> read the
+            // characteristic in the SynchronizationService class, which is
+            // where the BLE manager's connect() function is called).
             enableNotifications(batteryCharacteristic).enqueue();
 
             // Let all services know that we are connected.
             try {
                 mSynchronizationService.syncServices();
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

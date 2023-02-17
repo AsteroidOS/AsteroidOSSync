@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2016 - Florent Revest <revestflo@gmail.com>
- *                      Doug Koellmer <dougkoellmer@hotmail.com>
+ * AsteroidOSSync
+ * Copyright (c) 2023 AsteroidOS
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -109,18 +110,18 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnDefaultDeviceSelectedListener)
             mDeviceListener = (OnDefaultDeviceSelectedListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceListFragment.OnDeviceSelectedListener");
 
         if (context instanceof OnScanRequestedListener)
             mScanListener = (OnScanRequestedListener) context;
         else
-            throw new ClassCastException(context.toString()
+            throw new ClassCastException(context
                     + " does not implement DeviceListFragment.OnScanRequestedListener");
     }
 
@@ -144,7 +145,7 @@ public class DeviceListFragment extends Fragment implements View.OnClickListener
 
         LeDeviceListAdapter() {
             super();
-            mLeDevices = new ArrayList<BluetoothDevice>();
+            mLeDevices = new ArrayList<>();
             mInflator = requireActivity().getLayoutInflater();
         }
 

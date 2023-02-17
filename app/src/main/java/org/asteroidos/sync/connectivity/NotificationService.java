@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2016 - Florent Revest <revestflo@gmail.com>
+ * AsteroidOSSync
+ * Copyright (c) 2023 AsteroidOS
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,9 +35,9 @@ import java.util.UUID;
 public class NotificationService implements IConnectivityService {
 
     public static final String TAG = NotificationService.class.toString();
-    private Context mCtx;
-    private IAsteroidDevice mDevice;
-    private NotificationReceiver mNReceiver;
+    private final Context mCtx;
+    private final IAsteroidDevice mDevice;
+    private final NotificationReceiver mNReceiver;
 
     public NotificationService(Context ctx, IAsteroidDevice device) {
         this.mDevice = device;

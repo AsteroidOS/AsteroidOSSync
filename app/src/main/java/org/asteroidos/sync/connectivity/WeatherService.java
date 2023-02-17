@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2016 - Florent Revest <revestflo@gmail.com>
+ * AsteroidOSSync
+ * Copyright (c) 2023 AsteroidOS
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -61,9 +62,9 @@ public class WeatherService implements IConnectivityService {
     public static final boolean PREFS_SYNC_WEATHER_DEFAULT = false;
     public static final String WEATHER_SYNC_INTENT = "org.asteroidos.sync.WEATHER_SYNC_REQUEST_LISTENER";
 
-    private IAsteroidDevice mDevice;
-    private Context mCtx;
-    private SharedPreferences mSettings;
+    private final IAsteroidDevice mDevice;
+    private final Context mCtx;
+    private final SharedPreferences mSettings;
 
     private WeatherSyncReqReceiver mSReceiver;
     private PendingIntent mAlarmPendingIntent;
@@ -132,12 +133,7 @@ public class WeatherService implements IConnectivityService {
                     // We don't have a valid Location yet
                     // Use the old location until we have a new one, recheck in 2 Minutes
                     Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            updateWeather();
-                        }
-                    }, 1000 * 60 * 2);
+                    handler.postDelayed(this::updateWeather, 1000 * 60 * 2);
                     return;
                 }
             }
