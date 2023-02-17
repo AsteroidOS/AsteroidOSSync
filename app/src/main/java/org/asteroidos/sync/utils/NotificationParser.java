@@ -248,7 +248,7 @@ public class NotificationParser {
 
             Field actionsField;
             // TODO Before upgrading version code, ensure the below still works with the newer code
-            if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
+            if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.TIRAMISU) {
                 //noinspection JavaReflectionMemberAccess
                 actionsField = remoteViewsClass.getDeclaredField("mActions");
             } else {
