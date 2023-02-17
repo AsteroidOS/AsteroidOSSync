@@ -1,6 +1,6 @@
 package org.asteroidos.sync.adapters;
 
-// TODO Handle dubious copyright
+// TODO MIT license in GPL project, consider rewriting class
 // copied from https://github.com/jensstein/oandbackup, used under MIT license
 
 import android.content.Context;
