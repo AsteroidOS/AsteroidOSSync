@@ -3,12 +3,12 @@
     <string name="generic_ok">კარგი</string>
     <string name="searching">ეძებს საათები</string>
     <string name="unknown_device">უცნობი მოწყობილობა</string>
-    <string name="nothing_found">მაჯის საათი არ არის ნაპოვნი</string>
+    <string name="nothing_found">საათი ვერ ვიპოვე</string>
     <string name="one_found">ნაპოვნია 1 მაჯის საათი</string>
     <string name="n_found">ნაპოვნია %d მაჯის საათი</string>
     <string name="intro_slideerror_subtitle">ამ მოწყობილობას ბლუთუზი დაბალი ენერგიის (BLE) მხარდაჭერა არ გააჩნია.</string>
-    <string name="disconnected">გათიშული</string>
-    <string name="connected">დაკავშირებული</string>
+    <string name="disconnected">გათიშულია</string>
+    <string name="connected">დაკავშირებულია</string>
     <string name="connecting">დამაკავშირებელი…</string>
     <string name="connected_formatted">დაკავშირებული %s</string>
     <string name="connecting_formatted">დამაკავშირებელი %s</string>
@@ -51,8 +51,8 @@
     <string name="intro_slideerror_title">Bluetooth Low Energy-ს მხარდაჭერა</string>
     <string name="intro_slide5_subtitle">ნება ამ app აწარმოებს ფონზე, გთხოვთ გამორთოთ \"ბატარეის ოპტიმიზაცია\" For AsteroidOS Sync შემდეგ მენიუში:</string>
     <string name="intro_slide5_title">ელემენტის ოპტიმიზაცია</string>
-    <string name="intro_slide3_subtitle">ახლო Bluetooth Low Energy მოწყობილებების ძებნა.</string>
-    <string name="intro_slide3_title">ადგილმდებარეობა</string>
+    <string name="intro_slide3_subtitle">ბლუთუზის დაბალი ენერგიის მომხმარებელი მოწყობილობების აღმოჩენა და მათთან მიერთება.</string>
+    <string name="intro_slide3_title">მდებარეობა და ბლუთუზი</string>
     <string name="intro_slide2_subtitle">მონაცემების ქეშირებასა და თქვენი საათების სქრინშოთების შესანახად.</string>
     <string name="intro_slide2_title">ფაილებზე წვდომა</string>
     <string name="intro_slide1_subtitle">ეს აპლიკაცია თქვენი ანდროიდ ტელეფონისა და AsteroidOS-ზე მომუშავე საათების სინქრონიზირების საშუალებას გაძლევთ, ამისათვის აპლიკაციას ზოგიერთი ნებართვა სჭირდება.</string>
