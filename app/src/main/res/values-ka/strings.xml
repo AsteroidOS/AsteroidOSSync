@@ -7,7 +7,7 @@
     <string name="one_found">ნაპოვნია 1 მაჯის საათი</string>
     <string name="n_found">ნაპოვნია %d მაჯის საათი</string>
     <string name="intro_slideerror_subtitle">ამ მოწყობილობას ბლუთუზი დაბალი ენერგიის (BLE) მხარდაჭერა არ გააჩნია.</string>
-    <string name="disconnected">გათიშულია</string>
+    <string name="disconnected">გათიშული</string>
     <string name="connected">დაკავშირებულია</string>
     <string name="connecting">დამაკავშირებელი…</string>
     <string name="connected_formatted">დაკავშირებული %s</string>
