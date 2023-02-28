@@ -17,7 +17,7 @@
     <string name="finder_icon">Finder ikon</string>
     <string name="settings_icon">Inställningar ikon</string>
     <string name="weather_icon">Väder ikon</string>
-    <string name="disconnected">Icke ansluten</string>
+    <string name="disconnected">Frånkopplad</string>
     <string name="time_icon">Tid ikon</string>
     <string name="find_my_watch">Hitta min klocka</string>
     <string name="watch_finder">Klockhittare</string>
