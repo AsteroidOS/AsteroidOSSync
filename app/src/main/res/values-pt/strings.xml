@@ -39,8 +39,8 @@
     <string name="explain_app_prefs">As notificações das aplicações irão aparecer aqui</string>
     <string name="synchronize_time">Sincronizar data e hora</string>
     <string name="screenshot">Captura de ecrã</string>
-    <string name="downloaded">Transferido</string>
-    <string name="downloading">A transferir…</string>
+    <string name="downloaded">Descarregado</string>
+    <string name="downloading">A descarregar…</string>
     <string name="scanning">A procurar…</string>
     <string name="unpair">Desemparelhar</string>
     <string name="enter_city_name">Introduza o nome de uma cidade:</string>
