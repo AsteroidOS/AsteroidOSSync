@@ -59,7 +59,7 @@ public class AsteroidBleManager extends BleManager {
 
     public final void send(UUID characteristic, byte[] data) {
         writeCharacteristic(sendingCharacteristics.get(characteristic), data,
-                Objects.requireNonNull(sendingCharacteristics.get(characteristic)).getWriteType()).enqueue();
+                Objects.requireNonNull(sendingCharacteristics.get(characteristic)).getWriteType()).split().enqueue();
     }
 
     @NonNull
