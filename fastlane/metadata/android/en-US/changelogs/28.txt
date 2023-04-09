@@ -1,0 +1,5 @@
+0.28
+  * Android 13 connection improvements (Thanks perillamint!)
+  * Android 13 permission improvements (Thanks Doomsdayrs!)
+  * Code quality improvements (Thanks Doomsdayrs!)
+  * Translation improvements
