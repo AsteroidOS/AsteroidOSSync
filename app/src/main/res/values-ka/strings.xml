@@ -7,7 +7,7 @@
     <string name="one_found">ნაპოვნია 1 მაჯის საათი</string>
     <string name="n_found">ნაპოვნია %d მაჯის საათი</string>
     <string name="intro_slideerror_subtitle">ამ მოწყობილობას ბლუთუზი დაბალი ენერგიის (BLE) მხარდაჭერა არ გააჩნია.</string>
-    <string name="disconnected">გათიშული</string>
+    <string name="disconnected">გათიშულია</string>
     <string name="connected">დაკავშირებულია</string>
     <string name="connecting">დამაკავშირებელი…</string>
     <string name="connected_formatted">დაკავშირებული %s</string>
@@ -68,4 +68,12 @@
     <string name="synchronize_weather">ამინდისთვის ადგილმდებარეობიდ ავტომატურად დადგენა</string>
     <string name="intro_slideandroidgo_subtitle">Android Go არ არის მხარდაჭერილი, რადგან ის არ იძლევა შეტყობინებას ხელმისაწვდომობას და ზღუდავს ფონურ პროცესებს. სამუშაო root მომხმარებლებს არის მითითებული \" ro.config.low_ram \" დროშა build.დასაცავად ფაილი \"ცრუ\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="intro_slide6_title">ტელეფონის გაფრთხილებები</string>
+    <string name="location_disabled_title">მდებარეობა გამორთულია</string>
+    <string name="intro_slide6_subtitle">საათთან მიერთების მიმდინარე მდგომარეობის საჩვენებლად.</string>
+    <string name="cancel">გაუქმება</string>
+    <string name="set_owm_api_key">OWM API-ის გასაღების ხელით მითითება</string>
+    <string name="OWM_API_KEY">OWM API გასაღები</string>
+    <string name="location_disabled_message">საათის საპოვნელად მდებარეობის ჩართვა აუცილებელია. დაწყვილების შემდეგ მისი გამორთვა უსაფრთხოა.</string>
+    <string name="apply">გადატარება</string>
 </resources>
