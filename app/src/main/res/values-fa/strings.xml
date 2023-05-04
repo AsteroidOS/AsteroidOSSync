@@ -8,7 +8,7 @@
     <string name="n_found">%d ساعت پیدا شد</string>
     <string name="intro_slideerror_subtitle">این دستگاه از بلوتوث کم‌مصرف پشتیبانی نمی‌کند.</string>
     <string name="disconnected">قطع‌شده</string>
-    <string name="connected">وصل</string>
+    <string name="connected">وصل شده</string>
     <string name="connecting">در حال اتصال…</string>
     <string name="connected_formatted">وصل شده به %s</string>
     <string name="connecting_formatted">در حال اتصال به %s</string>
