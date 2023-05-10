@@ -47,8 +47,8 @@
     <string name="intro_slide1_subtitle">Dette programmet lar deg synkronisere din Android-enhet med din AsteroidOS-klokke. Først trenger det noen tilganger.</string>
     <string name="intro_slide2_title">Filtilgang</string>
     <string name="intro_slide2_subtitle">For å hurtiglagre og lagre skjermavbildninger av din klokke.</string>
-    <string name="intro_slide3_title">Plassering</string>
-    <string name="intro_slide3_subtitle">For å se etter lavenergi-Blåtannsenheter i nærheten.</string>
+    <string name="intro_slide3_title">Plassering og Blåtann</string>
+    <string name="intro_slide3_subtitle">For å se etter og koble til lavenergi-Blåtannsenheter i nærheten.</string>
     <string name="intro_slide5_title">Batterioptimalisering</string>
     <string name="intro_slide5_subtitle">For å la denne appen kjøre i bakgrunnen, kan du deaktivere \"Batterioptimalisering\" for AsteroidOS Sync i følgende meny:</string>
     <string name="intro_slideerror_title">Lavenergi-Blåtannsstøtte</string>
