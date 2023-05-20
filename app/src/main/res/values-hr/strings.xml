@@ -48,8 +48,8 @@
     <string name="intro_slide3_subtitle">Za skeniranje i povezivanje na obližnje Bluetooth uređaje.</string>
     <string name="intro_slide4_title">Obavijesti</string>
     <string name="intro_slide4_subtitle">Za sinkronizaciju obavijesti s tvojim satom, dozvoli „AsteroidOS Sync” u sljedećem izborniku:</string>
-    <string name="intro_slide5_title">Optimizacija baterije</string>
-    <string name="intro_slide5_subtitle">Da bi aplikacija radila u pozadini, isključi „Optimizacija baterije” za AsteroidOS Sync u sljedećem izborniku:</string>
+    <string name="intro_slide5_title">Optimiranje baterije</string>
+    <string name="intro_slide5_subtitle">Da bi aplikacija radila u pozadini, deaktiviraj „Optimiranje baterije” za AsteroidOS Sync u sljedećem izborniku:</string>
     <string name="intro_slideerror_title">Podrška za Bluetooth Low Energy</string>
     <string name="intro_slideerror_subtitle">Ovaj uređaj ne podržava Bluetooth Low Energy.</string>
     <string name="grant_permission">Dozvoli</string>
@@ -72,6 +72,8 @@
     <string name="OWM_API_KEY">OWM API ključ</string>
     <string name="apply">Primijeni</string>
     <string name="cancel">Odustani</string>
-    <string name="location_disabled_message">Za pronalaženje satova, usluga lokacije mora biti aktivirana. Nakon uparivanja, usluga se slobodno može ponovo deaktivirati.</string>
+    <string name="location_disabled_message">Za pronalaženje satova usluga lokacije mora biti aktivirana. Nakon uparivanja se usluga slobodno može ponovo deaktivirati.</string>
     <string name="location_disabled_title">Lokacija deaktivirana</string>
+    <string name="intro_slide6_title">Telefonske obavijesti</string>
+    <string name="intro_slide6_subtitle">Za prikaz aktualnog stanja veze sata.</string>
 </resources>
