@@ -23,7 +23,7 @@
     <string name="OWM_API_KEY">مفتاح OWM API</string>
     <string name="apply">تطبيق</string>
     <string name="cancel">إلغاء</string>
-    <string name="disconnected">انقطع الاتصال</string>
+    <string name="disconnected">غير متصل</string>
     <string name="connected">متصل</string>
     <string name="connecting">توصيل…</string>
     <string name="connected_formatted">متصل بـ %s</string>
