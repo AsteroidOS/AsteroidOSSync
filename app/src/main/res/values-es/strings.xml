@@ -35,7 +35,7 @@
     <string name="screenshot">Captura de pantalla</string>
     <string name="synchronize_time">Sincronizar la hora</string>
     <string name="notification_type_default">Predeterminado</string>
-    <string name="notification_type_no_notif">No hay notificaciones</string>
+    <string name="notification_type_no_notif">Sin notificación</string>
     <string name="notification_type_silent">Silenciosa</string>
     <string name="notification_type_vibra">Vibraciones</string>
     <string name="notification_type_strong_vibra">Vibración fuerte</string>
