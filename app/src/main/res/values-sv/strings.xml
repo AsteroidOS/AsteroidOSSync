@@ -17,13 +17,13 @@
     <string name="finder_icon">Finder ikon</string>
     <string name="settings_icon">Inställningar ikon</string>
     <string name="weather_icon">Väder ikon</string>
-    <string name="disconnected">Frånkopplad</string>
+    <string name="disconnected">Koppla ifrån</string>
     <string name="time_icon">Tid ikon</string>
     <string name="find_my_watch">Hitta min klocka</string>
     <string name="watch_finder">Klockhittare</string>
     <string name="phone_is_searching">Telefonen söker efter dig!</string>
     <string name="notifications_settings">Aviseringsinställningar</string>
-    <string name="weather_settings">Väderinställningar</string>
+    <string name="weather_settings">Väder inställningar</string>
     <string name="enter_city_name">Ange ett stadsnamn:</string>
     <string name="scanning">Letar efter…</string>
     <string name="unpair">Koppla bort</string>
