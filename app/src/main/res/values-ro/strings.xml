@@ -20,7 +20,7 @@
     <string name="intro_slide4_subtitle">Pentru a sincroniza notificările cu ceasul, permite \"AsteroidOS Sync\" în meniul următor:</string>
     <string name="intro_slide4_title">Notificări</string>
     <string name="intro_slide3_subtitle">Pentru a scana dispozitivele Bluetooth Low Energy din apropiere.</string>
-    <string name="intro_slide3_title">Locaţie</string>
+    <string name="intro_slide3_title">Locaţie &amp; Bluetooth</string>
     <string name="intro_slide2_subtitle">Pentru a memora date și de a salva capturi de ecran ale ceasului.</string>
     <string name="intro_slide2_title">Acces la fișiere</string>
     <string name="intro_slide1_subtitle">Această aplicație vă permite să sincronizați telefonul Android cu ceasul AsteroidOS. Dar mai întâi, are nevoie de permisiuni.</string>
@@ -72,4 +72,8 @@
     <string name="set_owm_api_key">Setează cheie modificată OWM API</string>
     <string name="apply">Aplică</string>
     <string name="OWM_API_KEY">Cheie API OWM</string>
+    <string name="intro_slide6_title">Notificari Telefon</string>
+    <string name="location_disabled_title">Locatie oprita</string>
+    <string name="location_disabled_message">Pentru a se gasii ceasuri serviciul de locatie trebuie pornit. Odata conectat puteti sa il stingeti in siguranta din nou</string>
+    <string name="intro_slide6_subtitle">Pentru a arata statutul de conectare a ceasului</string>
 </resources>
