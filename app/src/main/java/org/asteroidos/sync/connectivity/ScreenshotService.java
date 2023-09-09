@@ -154,19 +154,25 @@ public class ScreenshotService implements IConnectivityService {
 
     @Override
     public void sync() {
-        mSReceiver = new ScreenshotReqReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER");
-        mCtx.registerReceiver(mSReceiver, filter);
+        if (mSReceiver == null) {
+            mSReceiver = new ScreenshotReqReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER");
+            mCtx.registerReceiver(mSReceiver, filter);
 
-        mDownloading = false;
+            mDownloading = false;
+        }
     }
 
     @Override
     public void unsync() {
-        try {
-            mCtx.unregisterReceiver(mSReceiver);
-        } catch (IllegalArgumentException ignored) {}
+        if (mSReceiver != null) {
+            try {
+                mCtx.unregisterReceiver(mSReceiver);
+            } catch (IllegalArgumentException ignored) {
+            }
+            mSReceiver = null;
+        }
     }
 
     private static int bytesToInt(byte[] b) {

@@ -156,32 +156,37 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
 
     @Override
     public void sync() {
-        mCtx.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, mVolumeChangeObserver);
-        try {
-            mMediaSessionManager = (MediaSessionManager) mCtx.getSystemService(Context.MEDIA_SESSION_SERVICE);
-            List<MediaController> controllers = mMediaSessionManager.getActiveSessions(new ComponentName(mCtx, NLService.class));
-            Handler handler = new Handler(Looper.getMainLooper());
-            handler.post(() -> {
-                onActiveSessionsChanged(controllers);
-                mMediaSessionManager.addOnActiveSessionsChangedListener(this, new ComponentName(mCtx, NLService.class));
-            });
-        } catch (SecurityException e) {
-            Log.w(TAG, "No Notification Access");
+        if (mMediaSessionManager == null) {
+            mCtx.getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, mVolumeChangeObserver);
+            try {
+                mMediaSessionManager = (MediaSessionManager) mCtx.getSystemService(Context.MEDIA_SESSION_SERVICE);
+                List<MediaController> controllers = mMediaSessionManager.getActiveSessions(new ComponentName(mCtx, NLService.class));
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(() -> {
+                    onActiveSessionsChanged(controllers);
+                    mMediaSessionManager.addOnActiveSessionsChangedListener(this, new ComponentName(mCtx, NLService.class));
+                });
+            } catch (SecurityException e) {
+                Log.w(TAG, "No Notification Access");
+            }
         }
     }
 
     @Override
     public final void unsync() {
-        mCtx.getContentResolver().unregisterContentObserver(mVolumeChangeObserver);
+        if (mMediaSessionManager != null) {
+            mCtx.getContentResolver().unregisterContentObserver(mVolumeChangeObserver);
 
-        if(mMediaSessionManager != null)
             mMediaSessionManager.removeOnActiveSessionsChangedListener(this);
+            mMediaSessionManager = null;
+        }
         if (mMediaController != null) {
             try {
                 mMediaController.unregisterCallback(mMediaCallback);
-            } catch(IllegalArgumentException ignored) {}
+            } catch (IllegalArgumentException ignored) {
+            }
+            mMediaController = null;
         }
-        mMediaController = null;
     }
 
     private void sendVolume(int volume) {

@@ -37,30 +37,36 @@ public class NotificationService implements IConnectivityService {
     public static final String TAG = NotificationService.class.toString();
     private final Context mCtx;
     private final IAsteroidDevice mDevice;
-    private final NotificationReceiver mNReceiver;
+    private NotificationReceiver mNReceiver;
 
     public NotificationService(Context ctx, IAsteroidDevice device) {
         this.mDevice = device;
         this.mCtx = ctx;
-        mNReceiver = new NotificationReceiver();
     }
 
     @Override
     public void sync() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("org.asteroidos.sync.NOTIFICATION_LISTENER");
-        mCtx.registerReceiver(mNReceiver, filter);
+        if (mNReceiver == null) {
+            IntentFilter filter = new IntentFilter();
+            filter.addAction("org.asteroidos.sync.NOTIFICATION_LISTENER");
+            mNReceiver = new NotificationReceiver();
+            mCtx.registerReceiver(mNReceiver, filter);
 
-        Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER_SERVICE");
-        i.putExtra("command", "refresh");
-        mCtx.sendBroadcast(i);
+            Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER_SERVICE");
+            i.putExtra("command", "refresh");
+            mCtx.sendBroadcast(i);
+        }
     }
 
     @Override
     public void unsync() {
-        try {
-            mCtx.unregisterReceiver(mNReceiver);
-        } catch (IllegalArgumentException ignored) {}
+        if (mNReceiver != null) {
+            try {
+                mCtx.unregisterReceiver(mNReceiver);
+            } catch (IllegalArgumentException ignored) {
+            }
+            mNReceiver = null;
+        }
     }
 
     @Override
