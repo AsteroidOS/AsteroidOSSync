@@ -90,32 +90,40 @@ public class WeatherService implements IConnectivityService {
 
     @Override
     public void sync() {
-        updateWeather();
+        if (mSReceiver == null) {
+            updateWeather();
 
-        // Register a broadcast handler to use for the alarm Intent
-        mSReceiver = new WeatherSyncReqReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(WEATHER_SYNC_INTENT);
-        mCtx.registerReceiver(mSReceiver, filter);
+            // Register a broadcast handler to use for the alarm Intent
+            mSReceiver = new WeatherSyncReqReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(WEATHER_SYNC_INTENT);
 
-        // Fire update intent every 30 Minutes to update Weather
-        Intent alarmIntent = new Intent(WEATHER_SYNC_INTENT);
-        mAlarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
-        mAlarmMgr = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
-        mAlarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_HALF_HOUR,
-                AlarmManager.INTERVAL_HALF_HOUR, mAlarmPendingIntent);
+            mCtx.registerReceiver(mSReceiver, filter);
+            // Fire update intent every 30 Minutes to update Weather
+            Intent alarmIntent = new Intent(WEATHER_SYNC_INTENT);
+            mAlarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
+            mAlarmMgr = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
+            mAlarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_HALF_HOUR,
+                    AlarmManager.INTERVAL_HALF_HOUR, mAlarmPendingIntent);
+        }
     }
 
     @Override
     public void unsync() {
-        try {
-            mCtx.unregisterReceiver(mSReceiver);
-        } catch (IllegalArgumentException ignored) {}
+        if (mSReceiver != null) {
+            try {
+                mCtx.unregisterReceiver(mSReceiver);
+                mSReceiver = null;
+            } catch (IllegalArgumentException ignored) {
+            }
 
-        if (mAlarmMgr != null) {
-            mAlarmMgr.cancel(mAlarmPendingIntent);
+            if (mAlarmMgr != null) {
+                mAlarmMgr.cancel(mAlarmPendingIntent);
+            }
+            mSReceiver = null;
         }
+
     }
 
     private void updateWeather() {

@@ -60,25 +60,27 @@ public class TimeService implements IConnectivityService, SharedPreferences.OnSh
 
     @Override
     public final void sync() {
-        Handler handler = new Handler();
-        handler.postDelayed(this::updateTime, 500);
+        if (mSReceiver == null) {
+            Handler handler = new Handler();
+            handler.postDelayed(this::updateTime, 500);
 
-        // Register a broadcast handler to use for the alarm Intent
-        // Also listen for TIME_CHANGED and TIMEZONE_CHANGED events
-        mSReceiver = new TimeSyncReqReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(TIME_SYNC_INTENT);
-        filter.addAction(Intent.ACTION_TIME_CHANGED);
-        filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-        mCtx.registerReceiver(mSReceiver, filter);
+            // Register a broadcast handler to use for the alarm Intent
+            // Also listen for TIME_CHANGED and TIMEZONE_CHANGED events
+            mSReceiver = new TimeSyncReqReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(TIME_SYNC_INTENT);
+            filter.addAction(Intent.ACTION_TIME_CHANGED);
+            filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
+            mCtx.registerReceiver(mSReceiver, filter);
 
-        // register an alarm to sync the time once a day
-        Intent alarmIntent = new Intent(TIME_SYNC_INTENT);
-        alarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
-        alarmMgr = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
-        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_DAY,
-                AlarmManager.INTERVAL_DAY, alarmPendingIntent);
+            // register an alarm to sync the time once a day
+            Intent alarmIntent = new Intent(TIME_SYNC_INTENT);
+            alarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
+            alarmMgr = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
+            alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_DAY,
+                    AlarmManager.INTERVAL_DAY, alarmPendingIntent);
+        }
     }
 
     @Override
@@ -102,11 +104,15 @@ public class TimeService implements IConnectivityService, SharedPreferences.OnSh
     }
 
     public final void unsync() {
-        try {
-            mCtx.unregisterReceiver(mSReceiver);
-        } catch (IllegalArgumentException ignored) {}
-        if (alarmMgr!= null) {
-            alarmMgr.cancel(alarmPendingIntent);
+        if (mSReceiver != null) {
+            try {
+                mCtx.unregisterReceiver(mSReceiver);
+                mSReceiver = null;
+            } catch (IllegalArgumentException ignored) {
+            }
+            if (alarmMgr != null) {
+                alarmMgr.cancel(alarmPendingIntent);
+            }
         }
     }
 
