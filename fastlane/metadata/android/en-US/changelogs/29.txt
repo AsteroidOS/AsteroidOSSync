@@ -1,0 +1,3 @@
+0.29
+  * Fixes a bug that could cause stability issues (Thanks argosphil!)
+  * Translation improvements
