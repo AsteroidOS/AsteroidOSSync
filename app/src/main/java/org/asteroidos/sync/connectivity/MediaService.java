@@ -164,7 +164,9 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(() -> {
                     onActiveSessionsChanged(controllers);
-                    mMediaSessionManager.addOnActiveSessionsChangedListener(this, new ComponentName(mCtx, NLService.class));
+                    if (mMediaSessionManager != null) {
+                        mMediaSessionManager.addOnActiveSessionsChangedListener(this, new ComponentName(mCtx, NLService.class));
+                    }
                 });
             } catch (SecurityException e) {
                 Log.w(TAG, "No Notification Access");
