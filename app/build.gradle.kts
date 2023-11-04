@@ -62,5 +62,5 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.osmdroid:osmdroid-android:6.1.16")
     implementation("no.nordicsemi.android.support.v18:scanner:1.6.0")
-    implementation("no.nordicsemi.android:ble:2.6.0")
+    implementation("no.nordicsemi.android:ble:2.7.2")
 }
