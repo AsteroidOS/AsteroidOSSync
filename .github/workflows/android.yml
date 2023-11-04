@@ -26,6 +26,12 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
+    - name: Archive linter results
+      uses: actions/upload-artifact@v3
+      with:
+        name: lint-result.html
+        path: app/build/reports/lint-results-debug.html
+
     - name: Archive debug.apk
       uses: actions/upload-artifact@v3
       with:
