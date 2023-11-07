@@ -44,10 +44,11 @@ public class SilentModeService implements SharedPreferences.OnSharedPreferenceCh
         if (notificationPref == null) {
             notificationPref = prefs.getBoolean(PREF_RINGER, false);
 
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt(PREF_ORIG_RINGER, am.getRingerMode());
+            editor.apply();
+
             if (notificationPref) {
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putInt(PREF_ORIG_RINGER, am.getRingerMode());
-                editor.apply();
                 am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
             }
         }
