@@ -49,7 +49,7 @@
     <string name="intro_slide1_subtitle">Deze app biedt je de mogelijkheid je Android-telefoon te synchroniseren met je AsteroidOS-horloge, maar eerst heeft ze een aantal toestemmingen nodig.</string>
     <string name="intro_slide2_title">Toegang tot bestanden</string>
     <string name="intro_slide2_subtitle">Om gegevens in het cachegeheugen op te slaan, en schermafdrukken van je horloge te maken.</string>
-    <string name="intro_slide3_title">Locatie</string>
+    <string name="intro_slide3_title">Locatie &amp; Bluetooth</string>
     <string name="intro_slide3_subtitle">Om te scannen naar nabije Bluetooth Low Energy-apparaten.</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy-ondersteuning</string>
     <string name="grant_permission">Toestemming geven</string>
