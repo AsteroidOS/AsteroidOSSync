@@ -1,2 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="generic_ok">OK</string>
+    <string name="searching">Cercante horologios</string>
+    <string name="unknown_device">Apparato incognite</string>
+    <string name="nothing_found">Necun horologios trovate</string>
+    <string name="n_found">%d horologios trovate</string>
+    <string name="connecting">Connectente…</string>
+    <string name="connected_icon">Icone de connexion</string>
+    <string name="battery_info_icon">Icone de information del batteria</string>
+    <string name="screenshot_icon">Icone del captura de schermo</string>
+    <string name="finder_icon">Icone del cercator</string>
+    <string name="settings_icon">Icone de parametros</string>
+    <string name="weather_icon">Icone del tempore</string>
+    <string name="find_my_watch">Trova mi horologio</string>
+    <string name="watch_finder">Cercator de horologio</string>
+    <string name="notifications_settings">Parametros del notificationes</string>
+    <string name="enter_city_name">Insere un nomine de citate:</string>
+    <string name="screenshot">Captura de schermo</string>
+    <string name="synchronize_time">Synchronisar le hora</string>
+    <string name="notification_type_default">Predeterminate</string>
+    <string name="notification_type_silent">Silentiose</string>
+    <string name="downloading">Discargante…</string>
+    <string name="one_found">Un horologio trovate</string>
+    <string name="weather_settings">Parametros del tempore</string>
+    <string name="downloaded">Discargate</string>
+    <string name="time_icon">Icone del hora</string>
+    <string name="grab_a_screenshot">Facer un captura de schermo</string>
+</resources>
