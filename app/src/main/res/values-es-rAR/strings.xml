@@ -34,7 +34,7 @@
     <string name="notification_type_default">Predeterminado</string>
     <string name="notification_type_no_notif">Sin notificaciones</string>
     <string name="notification_type_silent">Silencio</string>
-    <string name="notification_type_vibra">Vibrar</string>
+    <string name="notification_type_vibra">Vibraciones</string>
     <string name="notification_type_strong_vibra">Vibrar fuerte</string>
     <string name="explain_app_prefs">Las notificaciones de tus apps aparecerán aquí</string>
     <string name="position_indicator">Indicador de posición</string>
@@ -44,8 +44,8 @@
     <string name="intro_slide1_subtitle">Esta app te permite sincronizar tu teléfono Android con tu reloj AsteroidOS. Primero, necesitaremos algunos permisos.</string>
     <string name="intro_slide2_title">Acceso a archivos</string>
     <string name="intro_slide2_subtitle">Para guardar datos en caché y capturas de la pantalla de tu reloj.</string>
-    <string name="intro_slide3_title">Ubicación</string>
-    <string name="intro_slide3_subtitle">Para buscar dispositivos con la función Bluetooth Low Energy.</string>
+    <string name="intro_slide3_title">Ubicación y Bluetooth</string>
+    <string name="intro_slide3_subtitle">Para buscar y conectarse a dispositivos cercanos mediante Bluetooth Low Energy.</string>
     <string name="intro_slide4_title">Notificaciones</string>
     <string name="intro_slide4_subtitle">Para sincronizar notificaciones con tu reloj, activa \"AsteroidOS Sync\" en el siguiente menú:</string>
     <string name="intro_slide5_title">Optimización de la batería</string>
@@ -59,7 +59,21 @@
     <string name="title_activity_settings_activity">Ajustes</string>
     <string name="action_settings">Ajustes</string>
     <string name="title_activity_settings">Ajustes</string>
-    <string name="switch_phone_notifications">Silenciar teléfono mientras conectado</string>
+    <string name="switch_phone_notifications">Silenciar el teléfono mientras está conectado</string>
     <string name="notification_silent_icon">Ícono de notificación silenciada</string>
     <string name="notification_type_ringtone">Tono de llamada</string>
+    <string name="intro_slide6_title">Notificaciones del teléfono</string>
+    <string name="intro_slide6_subtitle">Para mostrar el estado de conexión actual del reloj.</string>
+    <string name="intro_phonestateslide_subtitle">Para mostrar las llamadas entrantes en el reloj y para mostrar el nombre de quien llama.</string>
+    <string name="intro_phonestateslide_title">Teléfono y contactos</string>
+    <string name="dialer">Marcador</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="location_disabled_title">Ubicación desactivada</string>
+    <string name="apply">Aplicar</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go no es compatible porque no permite el acceso a las notificaciones y restringe los procesos en segundo plano. Una solución para superusuarios es establecer la opción \"ro.config.low_ram\" del archivo build.prop en \"false\".</string>
+    <string name="OWM_API_KEY">Clave API OWM</string>
+    <string name="cancel">Cancelar</string>
+    <string name="show_calls_on_watch">Mostrar llamadas entrantes</string>
+    <string name="set_owm_api_key">Establecer clave API OWM personalizada</string>
+    <string name="location_disabled_message">El servicio de ubicación debe estar activado para buscar relojes. Una vez que hayas emparejado los dispositivos, podrás desactivarlo de nuevo.</string>
 </resources>
