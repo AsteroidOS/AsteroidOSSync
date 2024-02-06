@@ -26,4 +26,17 @@
     <string name="downloaded">Discargate</string>
     <string name="time_icon">Icone del hora</string>
     <string name="grab_a_screenshot">Facer un captura de schermo</string>
+    <string name="intro_slide1_title">Benvenite</string>
+    <string name="intro_slide2_title">Accesso a files</string>
+    <string name="intro_slide3_title">Location e Bluetooth</string>
+    <string name="intro_slide4_title">Notificationes</string>
+    <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="grant_permission">Conceder permission</string>
+    <string name="title_activity_settings_activity">Parametros</string>
+    <string name="action_settings">Parametros</string>
+    <string name="title_activity_settings">Parametros</string>
+    <string name="intro_phonestateslide_title">Telephono e contactos</string>
+    <string name="apply">Applicar</string>
+    <string name="cancel">Cancellar</string>
+    <string name="location_disabled_title">Location disactivate</string>
 </resources>
