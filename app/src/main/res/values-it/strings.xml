@@ -68,12 +68,12 @@
     <string name="show_calls_on_watch">Mostra chiamate in arrivo</string>
     <string name="intro_slideandroidgo_subtitle">Android Go non è supportato perché non consente l\'accesso alle notifiche e limita i processi in background. Una soluzione alternativa per gli utenti root è impostare il flag \"ro.config.low_ram\" nel file build.prop su \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
-    <string name="apply">Conferma</string>
+    <string name="apply">Applica</string>
     <string name="intro_slide6_subtitle">Per mostare l\'attuale stato di connesione dell\'orologio.</string>
-    <string name="cancel">Cancella</string>
+    <string name="cancel">Annulla</string>
     <string name="intro_slide6_title">Notifiche del telefono</string>
-    <string name="location_disabled_message">Per trovare gli orologi il servizio di posizione deve essere attivo. Una volta associato l\'orologio, si può disattivare di nuovo.</string>
-    <string name="location_disabled_title">Posizione disabilitata</string>
+    <string name="location_disabled_message">Per trovare gli orologi il servizio di posizione deve essere attivato. Una volta abbinato all\'orologio lo potrai tranquillamente disattivare di nuovo.</string>
+    <string name="location_disabled_title">Posizione disattivata</string>
     <string name="OWM_API_KEY">Chiave API OWM</string>
-    <string name="set_owm_api_key">Imposta chiave API OWM</string>
+    <string name="set_owm_api_key">Imposta la chiave API per OWM</string>
 </resources>
