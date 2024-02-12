@@ -46,7 +46,7 @@
     <string name="intro_slide2_title">Accesso ai file</string>
     <string name="intro_slide2_subtitle">Per salvare dati e salvare screenshot del tuo orologio.</string>
     <string name="intro_slide3_title">Posizione e Bluetooth</string>
-    <string name="intro_slide3_subtitle">Per ricercare dispositivi Bluetooth Low Energy nelle vicinanze.</string>
+    <string name="intro_slide3_subtitle">Per ricercare e collegarsi ai dispositivi Bluetooth Low Energy nelle vicinanze.</string>
     <string name="intro_slide5_title">Ottimizzazione batteria</string>
     <string name="intro_slide5_subtitle">Per far funzionare questa app in background, disabilita \"ottimizzazione della batteria\" per AsteroidOS Sync nel seguente menu:</string>
     <string name="intro_slideerror_title">Supporto Bluetooth Low Energy</string>
@@ -74,4 +74,6 @@
     <string name="intro_slide6_title">Notifiche del telefono</string>
     <string name="location_disabled_message">Per trovare gli orologi il servizio di posizione deve essere attivo. Una volta associato l\'orologio, si può disattivare di nuovo.</string>
     <string name="location_disabled_title">Posizione disabilitata</string>
+    <string name="OWM_API_KEY">Chiave API OWM</string>
+    <string name="set_owm_api_key">Imposta chiave API OWM</string>
 </resources>
