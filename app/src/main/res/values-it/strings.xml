@@ -74,6 +74,6 @@
     <string name="intro_slide6_title">Notifiche del telefono</string>
     <string name="location_disabled_message">Per trovare gli orologi il servizio di posizione deve essere attivato. Una volta abbinato all\'orologio lo potrai tranquillamente disattivare di nuovo.</string>
     <string name="location_disabled_title">Posizione disattivata</string>
-    <string name="OWM_API_KEY">Chiave API OWM</string>
+    <string name="OWM_API_KEY">Chiave API per OWM</string>
     <string name="set_owm_api_key">Imposta la chiave API per OWM</string>
 </resources>
