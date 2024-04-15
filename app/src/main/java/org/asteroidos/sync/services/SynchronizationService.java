@@ -48,6 +48,7 @@ import org.asteroidos.sync.connectivity.IConnectivityService;
 import org.asteroidos.sync.connectivity.IService;
 import org.asteroidos.sync.connectivity.IServiceCallback;
 import org.asteroidos.sync.connectivity.MediaService;
+import org.asteroidos.sync.connectivity.NetworkService;
 import org.asteroidos.sync.connectivity.NotificationService;
 import org.asteroidos.sync.connectivity.ScreenshotService;
 import org.asteroidos.sync.connectivity.SilentModeService;
@@ -172,7 +173,11 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
 
     @Override
     public final void send(UUID characteristic, byte[] data, IConnectivityService service) {
-        mBleMngr.send(characteristic, data);
+        if (data.length < 244) {
+            mBleMngr.send(characteristic, data);
+        } else {
+            Log.i(TAG, "Could not send too large message");
+        }
         Log.d(TAG, characteristic.toString() + " " + Arrays.toString(data));
     }
 
@@ -285,6 +290,7 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
             registerBleService(new WeatherService(getApplicationContext(), this));
             registerBleService(new ScreenshotService(getApplicationContext(), this));
             registerBleService(new TimeService(getApplicationContext(), this));
+            registerBleService(new NetworkService(getApplicationContext(), this));
         }
 
         handleConnect();

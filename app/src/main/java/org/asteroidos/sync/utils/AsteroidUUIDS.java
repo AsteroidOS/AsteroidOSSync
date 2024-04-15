@@ -58,4 +58,8 @@ public class AsteroidUUIDS {
     public static final UUID NOTIFICATION_SERVICE_UUID  = UUID.fromString("00009071-0000-0000-0000-00A57E401D05");
     public static final UUID NOTIFICATION_UPDATE_CHAR   = UUID.fromString("00009001-0000-0000-0000-00A57E401D05");
     public static final UUID NOTIFICATION_FEEDBACK_CHAR = UUID.fromString("00009002-0000-0000-0000-00A57E401D05");
+    // Network Service
+    public static final UUID NETWORK_SERVICE_UUID       = UUID.fromString("00001071-0000-0000-0000-00A57E401D05");
+    public static final UUID NETWORK_RX_CHAR            = UUID.fromString("00001001-0000-0000-0000-00A57E401D05");
+    public static final UUID NETWORK_TX_CHAR            = UUID.fromString("00001002-0000-0000-0000-00A57E401D05");
 }

@@ -12,6 +12,12 @@ android {
         targetSdk = 33
         versionCode = 29
         versionName = "0.29"
+        ndk {
+            abiFilters.add("x86")
+            abiFilters.add("x86_64")
+            abiFilters.add("armeabi")
+            abiFilters.add("arm64-v8a")
+        }
     }
     buildTypes {
         named("release") {
@@ -30,6 +36,9 @@ android {
                 srcDir("src/main/lib/android-ripple-background/library/src/main/res/")
                 srcDir("src/main/lib/material-intro-screen/material-intro-screen/src/main/res/")
                 srcDir("src/main/lib/powerampapi/poweramp_api_lib/res/")
+            }
+            jniLibs {
+                srcDir("src/main/jniLibs/")
             }
         }
     }

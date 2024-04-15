@@ -116,6 +116,9 @@ public class AsteroidBleManager extends BleManager {
 
             for (IConnectivityService service : mSynchronizationService.getServices().values()) {
                 BluetoothGattService bluetoothGattService = gatt.getService(service.getServiceUUID());
+                if (bluetoothGattService == null)
+                    continue;
+
                 List<UUID> sendUuids = new ArrayList<>();
                 service.getCharacteristicUUIDs().forEach((uuid, direction) -> {
                     if (direction == IConnectivityService.Direction.TO_WATCH)
