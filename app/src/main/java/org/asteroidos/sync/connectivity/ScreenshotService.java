@@ -203,14 +203,9 @@ public class ScreenshotService implements IConnectivityService {
             assert imageUri != null;
             @SuppressLint("Recycle")
             OutputStream out = resolver.openOutputStream(imageUri);
-            try (out) {
                 assert out != null;
                 out.write(totalData);
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            } finally {
                 uri = imageUri;
-            }
         } else {
             File directory = new File(dirStr);
             if (!directory.exists())
