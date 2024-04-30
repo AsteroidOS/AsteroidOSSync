@@ -12,6 +12,16 @@ android {
         targetSdk = 33
         versionCode = 29
         versionName = "0.29"
+        ndk.abiFilters.clear()
+        ndk.abiFilters.add("arm64-v8a")
+        ndk.abiFilters.add("armeabi-v7a")
+        ndk.abiFilters.add("x86")
+        ndk.abiFilters.add("x86_64")
+        externalNativeBuild {
+            cmake {
+                cppFlags += ""
+            }
+        }
     }
     buildTypes {
         named("release") {
@@ -31,6 +41,9 @@ android {
                 srcDir("src/main/lib/material-intro-screen/material-intro-screen/src/main/res/")
                 srcDir("src/main/lib/powerampapi/poweramp_api_lib/res/")
             }
+            jniLibs {
+                srcDir("src/main/cpp/lib")
+            }
         }
     }
 
@@ -43,6 +56,12 @@ android {
         disable += "MissingTranslation"
     }
     namespace = "org.asteroidos.sync"
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
+    }
 }
 
 repositories {

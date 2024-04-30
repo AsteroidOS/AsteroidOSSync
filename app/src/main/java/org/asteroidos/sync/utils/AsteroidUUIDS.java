@@ -58,4 +58,9 @@ public class AsteroidUUIDS {
     public static final UUID NOTIFICATION_SERVICE_UUID  = UUID.fromString("00009071-0000-0000-0000-00A57E401D05");
     public static final UUID NOTIFICATION_UPDATE_CHAR   = UUID.fromString("00009001-0000-0000-0000-00A57E401D05");
     public static final UUID NOTIFICATION_FEEDBACK_CHAR = UUID.fromString("00009002-0000-0000-0000-00A57E401D05");
+
+    // SlirpService
+    public static final UUID SLIRP_SERVICE_UUID         = UUID.fromString("0000A071-0000-0000-0000-00A57E401D05");
+    public static final UUID SLIRP_OUTGOING_CHAR        = UUID.fromString("0000A001-0000-0000-0000-00A57E401D05");
+    public static final UUID SLIRP_INCOMING_CHAR        = UUID.fromString("0000A002-0000-0000-0000-00A57E401D05");
 }
