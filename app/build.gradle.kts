@@ -14,9 +14,6 @@ android {
         versionName = "0.29"
         ndk.abiFilters.clear()
         ndk.abiFilters.add("arm64-v8a")
-        ndk.abiFilters.add("armeabi-v7a")
-        ndk.abiFilters.add("x86")
-        ndk.abiFilters.add("x86_64")
         externalNativeBuild {
             cmake {
                 cppFlags += ""
@@ -42,7 +39,7 @@ android {
                 srcDir("src/main/lib/powerampapi/poweramp_api_lib/res/")
             }
             jniLibs {
-                srcDir("src/main/cpp/lib")
+                srcDir("/work/android-root/lib")
             }
         }
     }
@@ -82,4 +79,5 @@ dependencies {
     implementation("org.osmdroid:osmdroid-android:6.1.16")
     implementation("no.nordicsemi.android.support.v18:scanner:1.6.0")
     implementation("no.nordicsemi.android:ble:2.7.2")
+    implementation("com.google.guava:guava:33.1.0-android")
 }

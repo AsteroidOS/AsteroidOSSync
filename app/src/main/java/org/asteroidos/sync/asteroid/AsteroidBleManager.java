@@ -50,7 +50,7 @@ public class AsteroidBleManager extends BleManager {
     public final HashMap<UUID, IServiceCallback> recvCallbacks;
     public HashMap<UUID, BluetoothGattCharacteristic> sendingCharacteristics;
 
-    private int currentMtu = 244;
+    private int currentMtu = 247;
 
     public AsteroidBleManager(@NonNull final Context context, SynchronizationService syncService) {
         super(context);
@@ -162,7 +162,7 @@ public class AsteroidBleManager extends BleManager {
         @Override
         protected final void initialize() {
             beginAtomicRequestQueue()
-                    .add(requestMtu(517)
+                    .add(requestMtu(currentMtu)
                             .with((device, mtu) -> log(Log.INFO, "MTU set to " + mtu))
                             .fail((device, status) -> log(Log.WARN, "Requested MTU not supported: " + status)))
                     .done(device -> log(Log.INFO, "Target initialized"))

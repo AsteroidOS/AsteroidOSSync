@@ -48,12 +48,12 @@ import org.asteroidos.sync.connectivity.IConnectivityService;
 import org.asteroidos.sync.connectivity.IService;
 import org.asteroidos.sync.connectivity.IServiceCallback;
 import org.asteroidos.sync.connectivity.MediaService;
-import org.asteroidos.sync.connectivity.NotificationService;
 import org.asteroidos.sync.connectivity.ScreenshotService;
 import org.asteroidos.sync.connectivity.SilentModeService;
 import org.asteroidos.sync.connectivity.SlirpService;
 import org.asteroidos.sync.connectivity.TimeService;
 import org.asteroidos.sync.connectivity.WeatherService;
+import org.asteroidos.sync.dbus.DBusNotificationService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -281,17 +281,20 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
             mDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(defaultDevMacAddr);
         }
 
-        if (nonBleServices.isEmpty())
-            nonBleServices.add(new SilentModeService(getApplicationContext()));
+        SlirpService slirpService = new SlirpService(getApplicationContext(), this);
 
         if (bleServices.isEmpty()) {
             // Register Services
             registerBleService(new MediaService(getApplicationContext(), this));
-            registerBleService(new NotificationService(getApplicationContext(), this));
             registerBleService(new WeatherService(getApplicationContext(), this));
             registerBleService(new ScreenshotService(getApplicationContext(), this));
             registerBleService(new TimeService(getApplicationContext(), this));
-            registerBleService(new SlirpService(getApplicationContext(), this));
+            registerBleService(slirpService);
+        }
+
+        if (nonBleServices.isEmpty()) {
+            nonBleServices.add(new SilentModeService(getApplicationContext()));
+            nonBleServices.add(new DBusNotificationService(getApplicationContext(), slirpService));
         }
 
         handleConnect();

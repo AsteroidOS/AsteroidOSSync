@@ -14,6 +14,17 @@ project("sync")
 
 add_subdirectory(libslirp)
 
+find_program(BASH bash)
+
+set(ENV{ANDROID_NDK_HOME} ${CMAKE_ANDROID_NDK})
+set(ENV{ABI} ${CMAKE_ANDROID_ARCH_ABI})
+execute_process(COMMAND ${BASH} ${CMAKE_CURRENT_SOURCE_DIR}/build_depends.sh)
+
+link_directories(/tmp/android-root/lib/${CMAKE_ANDROID_ARCH_ABI})
+include_directories(/tmp/android-root/include)
+
+set(ENV{PKG_CONFIG_PATH} /tmp/android-root/lib/${CMAKE_ANDROID_ARCH_ABI}/pkgconfig)
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.

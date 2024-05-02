@@ -166,6 +166,8 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
                     onActiveSessionsChanged(controllers);
                     if (mMediaSessionManager != null) {
                         mMediaSessionManager.addOnActiveSessionsChangedListener(this, new ComponentName(mCtx, NLService.class));
+                    } else {
+                        Log.e("MediaSessionManager", "missing MediaSessionManager");
                     }
                 });
             } catch (SecurityException e) {

@@ -33,11 +33,17 @@ import android.service.notification.StatusBarNotification;
 
 import androidx.core.app.NotificationCompat;
 
+import com.google.common.hash.HashFunction;
+import com.google.common.hash.Hashing;
+
 import org.asteroidos.sync.utils.NotificationParser;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class NLService extends NotificationListenerService {
@@ -157,7 +163,7 @@ public class NLService extends NotificationListenerService {
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
-        Notification notification = sbn.getNotification();
+        final Notification notification = sbn.getNotification();
         String packageName = sbn.getPackageName();
 
         String[] allowedOngoingApps = {"com.google.android.apps.maps", "org.thoughtcrime.securesms"};
@@ -171,7 +177,7 @@ public class NLService extends NotificationListenerService {
         NotificationParser notifParser = new NotificationParser(notification);
         String summary = notifParser.summary;
         String body = notifParser.body;
-        int id = sbn.getId();
+        String key = sbn.getKey();
         String appIcon = iconFromPackage.get(packageName);
 
         String appName = "";
@@ -192,7 +198,7 @@ public class NLService extends NotificationListenerService {
         Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
         i.putExtra("event", "posted");
         i.putExtra("packageName", packageName);
-        i.putExtra("id", id);
+        i.putExtra("key", key);
         i.putExtra("appName", appName);
         i.putExtra("appIcon", appIcon);
         i.putExtra("summary", summary);
@@ -205,7 +211,7 @@ public class NLService extends NotificationListenerService {
     public void onNotificationRemoved(StatusBarNotification sbn) {
         Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
         i.putExtra("event", "removed");
-        i.putExtra("id", sbn.getId());
+        i.putExtra("key", sbn.getKey());
         sendBroadcast(i);
     }
 
@@ -225,7 +231,7 @@ public class NLService extends NotificationListenerService {
     class NLServiceReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getStringExtra("command").equals("refresh")) {
+            if (Objects.equals(intent.getStringExtra("command"), "refresh")) {
                 Handler handler = new Handler();
                 handler.postDelayed(() -> {
                     while (!listenerConnected) {
@@ -240,6 +246,11 @@ public class NLService extends NotificationListenerService {
                     for (StatusBarNotification notif : notifs)
                         onNotificationPosted(notif);
                 }, 500);
+            } else if (Objects.equals(intent.getStringExtra("command"), "dismiss")) {
+                String key = intent.getStringExtra("key");
+                if (key != null) {
+                    new Handler().post(() -> cancelNotification(key));
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 #include <jni.h>
 #include <stdlib.h>
+//#include <arpa/inet.h>
 
 #include "libslirp/src/libvdeslirp.h"
 
@@ -46,14 +47,14 @@ JNIEXPORT void JNICALL Java_org_asteroidos_sync_connectivity_SlirpService_finali
     env->SetLongField(thisObject, fid, 0L);
 }
 
-JNIEXPORT long JNICALL Java_org_asteroidos_sync_connectivity_SlirpService_vdeRecv
+JNIEXPORT jlong JNICALL Java_org_asteroidos_sync_connectivity_SlirpService_vdeRecv
         (JNIEnv* env, jobject thisObject, jobject dbb, jlong offset, jlong count) {
 
     void *buf = reinterpret_cast<char *>(env->GetDirectBufferAddress(dbb)) + offset;
     return vdeslirp_recv(GET_MYSLIRP(env, thisObject), buf, count);
 }
 
-JNIEXPORT long JNICALL Java_org_asteroidos_sync_connectivity_SlirpService_vdeSend
+JNIEXPORT jlong JNICALL Java_org_asteroidos_sync_connectivity_SlirpService_vdeSend
         (JNIEnv* env, jobject thisObject, jobject dbb, jlong offset, jlong count) {
 
     void *buf = reinterpret_cast<char *>(env->GetDirectBufferAddress(dbb)) + offset;
@@ -73,6 +74,33 @@ JNIEXPORT jobject JNICALL Java_org_asteroidos_sync_connectivity_SlirpService_get
     env->SetIntField(ret, field_fd, fd);
 
     return ret;
+}
+
+JNIEXPORT jint JNICALL Java_org_asteroidos_sync_connectivity_SlirpService_vdeAddUnixFwd
+        (JNIEnv* env, jobject thisObject, jstring path, jstring ip, jint port) {
+    const char *c_path = env->GetStringUTFChars(path, nullptr);
+    const char *c_ip = env->GetStringUTFChars(ip, nullptr);
+
+    struct in_addr addr{ inet_addr(c_ip) };
+    int rv = vdeslirp_add_unixfwd(GET_MYSLIRP(env, thisObject), const_cast<char *>(c_path), &addr, port);
+
+    env->ReleaseStringUTFChars(path, c_path);
+    env->ReleaseStringUTFChars(ip, c_ip);
+
+    return rv;
+}
+
+JNIEXPORT jint JNICALL Java_org_asteroidos_sync_connectivity_SlirpService_vdeAddFwd
+        (JNIEnv* env, jobject thisObject, jboolean udp, jstring hostip, jint hostport, jstring ip, jint port) {
+    const char *c_hostip = env->GetStringUTFChars(hostip, nullptr);
+    const char *c_ip = env->GetStringUTFChars(ip, nullptr);
+
+    int rv = vdeslirp_add_fwd(GET_MYSLIRP(env, thisObject), udp, (struct in_addr){inet_addr(c_hostip) }, hostport, (struct in_addr){inet_addr(c_ip) }, port);
+
+    env->ReleaseStringUTFChars(hostip, c_hostip);
+    env->ReleaseStringUTFChars(ip, c_ip);
+
+    return rv;
 }
 
 }
