@@ -19,7 +19,10 @@ package org.asteroidos.sync.media
 
 import androidx.media3.common.Player
 import org.asteroidos.sync.connectivity.IService
+import org.freedesktop.dbus.annotations.DBusIgnore
 
 interface IMediaService : IService, Player.Listener {
+    @DBusIgnore
+
     fun onReset()
 }

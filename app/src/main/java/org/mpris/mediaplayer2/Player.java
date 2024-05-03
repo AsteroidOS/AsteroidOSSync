@@ -39,7 +39,7 @@ public interface Player extends DBusInterface {
     public void setShuffle(boolean _property);
 
     @DBusBoundProperty(name = "Metadata", access = Access.READ)
-    public Map<String, Variant> getMetadata();
+    public Map<String, Variant<?>> getMetadata();
 
     @DBusBoundProperty(name = "Volume", access = Access.READ)
     public double getVolume();

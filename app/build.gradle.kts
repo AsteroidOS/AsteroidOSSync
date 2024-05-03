@@ -70,6 +70,7 @@ android {
 
 repositories {
     mavenCentral()
+    maven("https://oss.sonatype.org/content/repositories/snapshots/")
     maven("https://maven.google.com")
     maven("https://jitpack.io")
 }
@@ -87,11 +88,12 @@ dependencies {
     implementation("no.nordicsemi.android.support.v18:scanner:1.6.0")
     implementation("no.nordicsemi.android:ble:2.7.2")
     implementation("com.google.guava:guava:33.1.0-android")
-    implementation("com.github.hypfvieh:dbus-java-core:5.0.0")
-    implementation("com.github.hypfvieh:dbus-java-transport-tcp:5.0.0")
     implementation("androidx.media3:media3-session:1.3.1")
     implementation("androidx.media3:media3-common:1.3.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1-Beta")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.8.1-Beta")
+    api(fileTree("src/main/libs") { include("*.jar") })
 
+    compileOnly("org.slf4j:slf4j-api:2.0.7")
+    implementation("uk.uuid.slf4j:slf4j-android:2.0.7-0")
 }

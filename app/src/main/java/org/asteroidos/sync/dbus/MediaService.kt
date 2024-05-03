@@ -18,20 +18,13 @@
 package org.asteroidos.sync.dbus
 
 import android.content.Context
-import android.media.AudioManager
-import android.os.Build
 import android.os.Handler
-import android.os.HandlerThread
-import android.os.Message
-import android.util.Log
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player.*
 import com.google.common.collect.Lists
 import com.google.common.hash.Hashing
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.android.asCoroutineDispatcher
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import org.asteroidos.sync.media.IMediaService
 import org.asteroidos.sync.media.MediaSupervisor
 import org.freedesktop.dbus.DBusPath
@@ -42,14 +35,17 @@ import org.mpris.MediaPlayer2
 import org.mpris.mediaplayer2.Player
 import java.nio.charset.Charset
 import java.util.Collections
+import java.util.Date
 
 class MediaService(private val mCtx: Context, private val supervisor: MediaSupervisor, private val connectionProvider: IDBusConnectionProvider) : IMediaService, MediaPlayer2, Player {
     private val mNReceiver: NotificationService.NotificationReceiver? = null
     private val hashing = Hashing.goodFastHash(64)
 
+    private val busSuffix = Hashing.murmur3_32_fixed(42).hashLong(Date().time).toString()
+
     override fun sync() {
         connectionProvider.acquireDBusConnection { connection: DBusConnection ->
-            connection.requestBusName("org.mpris.MediaPlayer2.AsteroidOSSync")
+            connection.requestBusName("org.mpris.MediaPlayer2.x$busSuffix")
             connection.exportObject("/org/mpris/MediaPlayer2", this@MediaService)
         }
     }
@@ -57,13 +53,13 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
     override fun unsync() {
         connectionProvider.acquireDBusConnection { connection: DBusConnection ->
             connection.unExportObject("/org/mpris/MediaPlayer2")
-            connection.releaseBusName("org.mpris.MediaPlayer2.AsteroidOSSync")
+            connection.releaseBusName("org.mpris.MediaPlayer2.x$busSuffix")
         }
     }
 
     override fun onReset() {
         connectionProvider.acquireDBusConnection { connection: DBusConnection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("Metadata", Variant(metadata)) as Map<String, Variant<*>>?, Collections.emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("Metadata", Variant(metadata, "a{sv}")) as Map<String, Variant<*>>?, emptyList<String>()))
         }
     }
 
@@ -95,79 +91,78 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         return "Android"
     }
 
-    override fun getSupportedUriSchemes(): List<String> {
-        return emptyList()
-    }
+    override fun getSupportedUriSchemes(): List<String> = emptyList<String>()
 
-    override fun getSupportedMimeTypes(): List<String> {
-        return emptyList()
-    }
+    override fun getSupportedMimeTypes(): List<String> = emptyList<String>()
 
     override fun Raise() {}
     override fun Quit() {}
     override fun getPlaybackStatus(): String {
-        var status = "Stopped"
-        val controller = supervisor.mediaController
-        if (controller != null) {
-            runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
-                if (controller.isPlaying) status = "Playing" else if (controller.playbackState == STATE_READY && !controller.playWhenReady) status = "Paused"
-            }
+        val controller = supervisor.mediaController ?: return "Stopped"
+        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isPlaying) return@runBlocking "Playing" else if (controller.playbackState == STATE_READY && !controller.playWhenReady) return@runBlocking "Paused" else return@runBlocking "Stopped"
         }
-        Log.i("MediaService", "Status: $status")
-        return status
     }
 
     override fun getLoopStatus(): String {
-        val controller = supervisor.mediaController
-        return if (controller != null) {
-            Handler(controller.applicationLooper).run {
-                when (controller.repeatMode) {
-                    REPEAT_MODE_ALL -> "Playlist"
-                    REPEAT_MODE_ONE -> "Track"
-                    REPEAT_MODE_OFF -> "None"
-                    else -> throw IllegalStateException("Unexpected value: " + controller.repeatMode)
-                }
+        val controller = supervisor.mediaController ?: return "None"
+        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            return@runBlocking when (controller.repeatMode) {
+                REPEAT_MODE_ALL -> "Playlist"
+                REPEAT_MODE_ONE -> "Track"
+                REPEAT_MODE_OFF -> "None"
+                else -> throw IllegalStateException("Unexpected value: ${controller.repeatMode}")
             }
-        } else "None"
+        }
     }
 
     override fun setLoopStatus(_property: String) {
-        val controller = supervisor.mediaController
-        if (controller != null
-                && controller.isCommandAvailable(COMMAND_SET_REPEAT_MODE)) {
-            Handler(controller.applicationLooper).run {
-                when (_property) {
-                    "None" -> controller.repeatMode = REPEAT_MODE_OFF
-                    "Track" -> controller.repeatMode = REPEAT_MODE_ONE
-                    "Playlist" -> controller.repeatMode = REPEAT_MODE_ALL
+        val controller = supervisor.mediaController ?: return
+        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_SET_REPEAT_MODE)) {
+                controller.repeatMode = when (_property) {
+                    "None" -> REPEAT_MODE_OFF
+                    "Track" -> REPEAT_MODE_ONE
+                    "Playlist" -> REPEAT_MODE_ALL
+                    else -> throw IllegalStateException("Unexpected value: $_property")
                 }
             }
         }
     }
 
     override fun getRate(): Double {
-        val controller = supervisor.mediaController
-        return controller?.playbackParameters?.speed?.toDouble() ?: 1.0
+        val controller = supervisor.mediaController ?: return 1.0
+        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            return@runBlocking controller.playbackParameters.speed.toDouble()
+        }
     }
 
     override fun setRate(_property: Double) {
-        val controller = supervisor.mediaController
-        if (controller != null
-                && controller.isCommandAvailable(COMMAND_SET_SPEED_AND_PITCH)) {
-            controller.setPlaybackSpeed(_property.toFloat())
+        val controller = supervisor.mediaController ?: return
+        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_SET_SPEED_AND_PITCH)) {
+                controller.setPlaybackSpeed(_property.toFloat())
+            }
         }
     }
 
     override fun isShuffle(): Boolean {
-        val controller = supervisor.mediaController
-        return controller?.shuffleModeEnabled ?: false
+        val controller = supervisor.mediaController ?: return false
+        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_SET_SHUFFLE_MODE)) {
+                return@runBlocking controller.shuffleModeEnabled
+            } else {
+                return@runBlocking false
+            }
+        }
     }
 
     override fun setShuffle(_property: Boolean) {
-        val controller = supervisor.mediaController
-        if (controller != null
-                && controller.isCommandAvailable(COMMAND_SET_SHUFFLE_MODE)) {
-            controller.shuffleModeEnabled = _property
+        val controller = supervisor.mediaController ?: return
+        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_SET_SHUFFLE_MODE)) {
+                controller.shuffleModeEnabled = _property
+            }
         }
     }
 
@@ -178,34 +173,35 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         return DBusPath("/" + packageName.replace('.', '/') + "/" + mediaId)
     }
 
-    override fun getMetadata(): Map<String, Variant<*>> {
-        val controller = supervisor.mediaController
-        if (controller == null || controller.currentMediaItem == null) return Collections.singletonMap<String, Variant<*>>("mpris:trackid", Variant(DBusPath("/org/mpris/MediaPlayer2/TrackList/NoTrack")))
-        var result: Map<String, Variant<*>>
-        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
-            result = java.util.Map.of(
-                    "mpris:trackid", Variant(currentMediaIdObjectPath),
-                    "mpris:length", Variant(controller.contentDuration * 1000)
-            )
-        }
-        return result
-    }
-
     private val currentMediaIdObjectPath get() = mediaToPath(supervisor.mediaController?.connectedToken?.packageName ?: "", supervisor.mediaController?.currentMediaItem)
+
+    override fun getMetadata(): Map<String, Variant<*>> {
+        val dummy = Collections.singletonMap<String, Variant<*>>("mpris:trackid", Variant(DBusPath("/org/mpris/MediaPlayer2/TrackList/NoTrack")))
+
+        val controller = supervisor.mediaController ?: return dummy
+        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.currentMediaItem != null) {
+                return@runBlocking java.util.Map.of(
+                        "mpris:trackid", Variant(currentMediaIdObjectPath),
+                        "mpris:length", Variant(controller.contentDuration * 1000)
+                )
+            } else {
+                return@runBlocking dummy
+            }
+        }
+    }
 
     override fun getVolume(): Double {
         // TODO:XXX:
-        var result: Double
         val controller = supervisor.mediaController ?: return 0.0
-        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
-            result = controller.volume.toDouble()
+        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            return@runBlocking controller.volume.toDouble()
         }
-        return result
     }
 
     override fun setVolume(_property: Double) {
-        val controller = supervisor.mediaController
-        if (controller != null) {
+        val controller = supervisor.mediaController ?: return
+        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             if (controller.isCommandAvailable(COMMAND_SET_VOLUME)) {
                 controller.volume = _property.toFloat()
             }
@@ -213,10 +209,14 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
     }
 
     override fun getPosition(): Long {
-        val controller = supervisor.mediaController
-        return if (controller != null && controller.isCommandAvailable(COMMAND_GET_CURRENT_MEDIA_ITEM)) {
-            controller.currentPosition * 1000L
-        } else 0L
+        val controller = supervisor.mediaController ?: return 0L
+        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_GET_CURRENT_MEDIA_ITEM)) {
+                return@runBlocking controller.currentPosition * 1000L
+            } else {
+                return@runBlocking 0L
+            }
+        }
     }
 
     override fun getMinimumRate(): Double {
@@ -229,113 +229,116 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
 
     override fun canGoNext(): Boolean {
         val controller = supervisor.mediaController ?: return false
-        var result: Boolean
-        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
-            result = controller.isCommandAvailable(COMMAND_SEEK_TO_NEXT_MEDIA_ITEM) && controller.hasNextMediaItem()
+        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            return@runBlocking controller.isCommandAvailable(COMMAND_SEEK_TO_NEXT_MEDIA_ITEM) && controller.hasNextMediaItem()
         }
-        return result
     }
 
     override fun canGoPrevious(): Boolean {
         val controller = supervisor.mediaController ?: return false
-        var result: Boolean
-        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
-            result = controller.isCommandAvailable(COMMAND_SEEK_TO_PREVIOUS_MEDIA_ITEM) && controller.hasPreviousMediaItem()
+        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            return@runBlocking controller.isCommandAvailable(COMMAND_SEEK_TO_PREVIOUS_MEDIA_ITEM) && controller.hasPreviousMediaItem()
         }
-        return result
     }
 
     override fun canPlay(): Boolean {
         val controller = supervisor.mediaController ?: return false
-        var result: Boolean
-        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
-            result = controller.isCommandAvailable(COMMAND_PLAY_PAUSE)
+        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            return@runBlocking controller.isCommandAvailable(COMMAND_PLAY_PAUSE)
         }
-        return result
     }
 
     override fun canPause(): Boolean {
         val controller = supervisor.mediaController ?: return false
-        var result: Boolean
-        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
-            result = controller.isCommandAvailable(COMMAND_PLAY_PAUSE)
+        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            return@runBlocking controller.isCommandAvailable(COMMAND_PLAY_PAUSE)
         }
-        return result
     }
 
     override fun canSeek(): Boolean {
         val controller = supervisor.mediaController ?: return false
-        var result: Boolean
-        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
-            result = controller.isCommandAvailable(COMMAND_SEEK_IN_CURRENT_MEDIA_ITEM)
-                    && controller.isCurrentMediaItemSeekable
+        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            return@runBlocking controller.isCommandAvailable(COMMAND_SEEK_IN_CURRENT_MEDIA_ITEM) && controller.isCurrentMediaItemSeekable
         }
-        return result
     }
 
-    override fun canControl(): Boolean = true
+    override fun canControl(): Boolean = supervisor.mediaController != null
 
     override fun Next() {
-        val controller = supervisor.mediaController
-        if (controller != null && controller.isCommandAvailable(COMMAND_SEEK_TO_NEXT_MEDIA_ITEM)) {
-            controller.seekToNextMediaItem()
+        val controller = supervisor.mediaController ?: return
+        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_SEEK_TO_NEXT_MEDIA_ITEM)) {
+                controller.seekToNextMediaItem()
+            }
         }
     }
 
     override fun Previous() {
-        val controller = supervisor.mediaController
-        if (controller != null && controller.isCommandAvailable(COMMAND_SEEK_TO_PREVIOUS_MEDIA_ITEM)) {
-            controller.seekToPreviousMediaItem()
+        val controller = supervisor.mediaController ?: return
+        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_SEEK_TO_PREVIOUS_MEDIA_ITEM)) {
+                controller.seekToPreviousMediaItem()
+            }
         }
     }
 
     override fun Pause() {
-        val controller = supervisor.mediaController
-        if (controller != null && controller.isCommandAvailable(COMMAND_PLAY_PAUSE)) {
-            controller.pause()
+        val controller = supervisor.mediaController ?: return
+        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_PLAY_PAUSE)) {
+                controller.pause()
+            }
         }
     }
 
     override fun PlayPause() {
-        val controller = supervisor.mediaController
-        if (controller != null && controller.isCommandAvailable(COMMAND_PLAY_PAUSE)) {
-            if (controller.isPlaying) {
-                controller.pause()
-            } else {
-                controller.play()
+        val controller = supervisor.mediaController ?: return
+        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_PLAY_PAUSE)) {
+                if (controller.isPlaying) {
+                    controller.pause()
+                } else {
+                    controller.play()
+                }
             }
         }
-        Log.i("MediaService", "PlayPause: ${controller != null}, ${controller?.isCommandAvailable(COMMAND_PLAY_PAUSE) ?: false}")
     }
 
     override fun Stop() {
-        val controller = supervisor.mediaController
-        if (controller != null && controller.isCommandAvailable(COMMAND_STOP)) {
-            controller.stop()
+        val controller = supervisor.mediaController ?: return
+        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_STOP)) {
+                controller.stop()
+            } else {
+                controller.pause()
+            }
         }
     }
 
     override fun Play() {
-        val controller = supervisor.mediaController
-        if (controller != null && controller.isCommandAvailable(COMMAND_PLAY_PAUSE)) {
-            controller.play()
+        val controller = supervisor.mediaController ?: return
+        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_PLAY_PAUSE)) {
+                controller.play()
+            }
         }
-        Log.i("MediaService", "Play: ${controller != null}, ${controller?.isCommandAvailable(COMMAND_PLAY_PAUSE) ?: false}")
     }
 
     override fun Seek(Offset: Long) {
-        val controller = supervisor.mediaController
-        if (controller != null && controller.isCommandAvailable(COMMAND_SEEK_IN_CURRENT_MEDIA_ITEM)
-                && controller.isCurrentMediaItemSeekable) {
-            controller.seekTo(controller.currentPosition + Offset / 1000L)
+        val controller = supervisor.mediaController ?: return
+        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_SEEK_IN_CURRENT_MEDIA_ITEM)) {
+                controller.seekTo(controller.currentPosition + Offset / 1000L)
+            }
         }
     }
 
     override fun SetPosition(TrackId: DBusPath, Position: Long) {
-        val controller = supervisor.mediaController
-        if (controller != null && controller.isCommandAvailable(COMMAND_SEEK_IN_CURRENT_MEDIA_ITEM)
-                && controller.isCurrentMediaItemSeekable) {
-            controller.seekTo(Position / 1000L)
+        val controller = supervisor.mediaController ?: return
+        runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isCommandAvailable(COMMAND_SEEK_IN_CURRENT_MEDIA_ITEM)) {
+                controller.seekTo(Position / 1000L)
+            }
         }
     }
 
@@ -353,31 +356,31 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
 
     override fun onIsPlayingChanged(isPlaying: Boolean) {
         connectionProvider.acquireDBusConnection { connection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("PlaybackStatus", Variant(playbackStatus)) as Map<String, Variant<*>>?, Collections.emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("PlaybackStatus", Variant(playbackStatus)) as Map<String, Variant<*>>?, emptyList()))
         }
     }
 
     override fun onPlayWhenReadyChanged(playWhenReady: Boolean, reason: Int) {
         connectionProvider.acquireDBusConnection { connection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("PlaybackStatus", Variant(playbackStatus)) as Map<String, Variant<*>>?, Collections.emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("PlaybackStatus", Variant(playbackStatus)) as Map<String, Variant<*>>?, emptyList()))
         }
     }
 
     override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
         connectionProvider.acquireDBusConnection { connection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("Metadata", Variant(metadata)) as Map<String, Variant<*>>?, Collections.emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("Metadata", Variant(metadata, "a{sv}")) as Map<String, Variant<*>>?, emptyList()))
         }
     }
 
     override fun onPlaybackStateChanged(playbackState: Int) {
         connectionProvider.acquireDBusConnection { connection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("PlaybackStatus", Variant(playbackStatus)) as Map<String, Variant<*>>?, Collections.emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("PlaybackStatus", Variant(playbackStatus)) as Map<String, Variant<*>>?, emptyList()))
         }
     }
 
     override fun onVolumeChanged(volume: Float) {
         connectionProvider.acquireDBusConnection { connection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("Volume", Variant(playbackStatus)) as Map<String, Variant<*>>?, Collections.emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("Volume", Variant(playbackStatus)) as Map<String, Variant<*>>?, emptyList()))
         }
     }
 
@@ -391,7 +394,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
                     "CanSeek", Variant(canSeek()),
                     "CanControl", Variant(canControl()),
             )
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", map, Collections.emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", map, emptyList()))
         }
     }
 }

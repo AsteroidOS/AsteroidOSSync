@@ -24,7 +24,6 @@ import android.content.IntentFilter
 import android.util.Log
 import com.google.common.collect.BiMap
 import com.google.common.collect.HashBiMap
-import com.google.common.hash.Hashing
 import org.asteroidos.sync.NotificationPreferences
 import org.asteroidos.sync.NotificationPreferences.NotificationOption
 import org.asteroidos.sync.services.INotificationHandler
@@ -130,9 +129,5 @@ class NotificationService(private val mCtx: Context, private val connectionProvi
         override fun onReceive(context: Context, intent: Intent) {
             postNotification(context, intent)
         }
-    }
-
-    companion object {
-        private val murmur32 = Hashing.murmur3_32_fixed(0)
     }
 }
