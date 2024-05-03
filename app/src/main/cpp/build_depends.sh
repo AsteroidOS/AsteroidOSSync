@@ -118,7 +118,7 @@ EOF.
 +++ meson.build        2024-04-27 11:44:38.569868768 +0200
 @@ -2170 +2170 @@
 -  libiconv = dependency('iconv')
-+  libiconv = [cc.find_library('iconv', required : true, dirs : ['/work/android-root/lib'])]
++  libiconv = [cc.find_library('iconv', required : true, dirs : ['${PREFIX}/lib/${ABI}'])]
 EOF.
 
 

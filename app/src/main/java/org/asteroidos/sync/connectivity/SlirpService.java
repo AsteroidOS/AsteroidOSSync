@@ -21,24 +21,35 @@ package org.asteroidos.sync.connectivity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Message;
 import android.system.Os;
 import android.system.OsConstants;
 import android.system.StructPollfd;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import org.asteroidos.sync.asteroid.IAsteroidDevice;
 import org.asteroidos.sync.dbus.IDBusConnectionCallback;
 import org.asteroidos.sync.dbus.IDBusConnectionProvider;
 import org.asteroidos.sync.utils.AsteroidUUIDS;
-import org.freedesktop.dbus.DBusConnection;
+import org.freedesktop.dbus.connections.SASL;
+import org.freedesktop.dbus.connections.impl.AndroidDBusConnectionBuilder;
+import org.freedesktop.dbus.connections.impl.DBusConnection;
+import org.freedesktop.dbus.connections.impl.DBusConnectionBuilder;
 import org.freedesktop.dbus.exceptions.DBusException;
 
 import java.io.FileDescriptor;
+import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.function.Consumer;
+
+import kotlin.ParameterName;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class SlirpService implements IConnectivityService, IDBusConnectionProvider {
 
@@ -58,29 +69,9 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
 
     private final ByteBuffer tx = ByteBuffer.allocateDirect(1500);
 
-    private final Consumer<IDBusConnectionCallback> dBusConnectionRunnable = dBusConnectionCallback -> {
-        DBusConnection connection = null;
-        try {
-            synchronized (DBusConnection.class) {
-                connection = DBusConnection.getConnection("tcp:host=127.0.0.1,bind=*,port=55556,family=ipv4");
-                try {
-                    Log.i("SlirpService", "D-Bus connection acquired: " + connection.getAddress().toString());
-                } catch (ParseException e) {
-                    Log.i("SlirpService", "D-Bus connection acquired");
-                }
-            }
-        } catch (Throwable e) {
-            Log.e("SlirpService", "Failed to connect to D-Bus", e);
-        }
-        if (connection != null) {
-            try {
-                dBusConnectionCallback.handleConnection(connection);
-            } catch (Throwable e) {
-                Log.e("SlirpService", "An error occurred in a D-Bus callback", e);
-            }
-        }
-    };
+    private final Consumer<IDBusConnectionCallback> dBusConnectionRunnable;
 
+    private DBusConnection dBusConnection = null;
 
     public SlirpService(Context ctx, IAsteroidDevice device) {
         mDevice = device;
@@ -88,7 +79,46 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
 
         dBusHandlerThread = new HandlerThread("D-Bus Connection");
         dBusHandlerThread.start();
-        dBusHandler = new Handler(dBusHandlerThread.getLooper());
+        dBusHandler = new Handler(dBusHandlerThread.getLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                switch (msg.arg1) {
+                    case 0 -> {
+                        if (dBusConnection == null)
+                            break;
+
+                        dBusConnection.disconnect();
+                        dBusConnection = null;
+                    }
+                    case 1 -> {
+                        if (dBusConnection != null)
+                            break;
+
+                        try {
+                            dBusConnection = AndroidDBusConnectionBuilder
+                                    .forAddress((String) msg.obj).build();
+                        } catch (DBusException e) {
+                            Log.e("SlirpService", "Failed to establish a D-Bus connection", e);
+                        }
+                    }
+                }
+            }
+        };
+
+        dBusConnectionRunnable = dBusConnectionCallback -> {
+            final Message message = new Message();
+            message.arg1 = 1;
+            message.obj = "tcp:host=127.0.0.1,bind=*,port=55556,family=ipv4";
+            dBusHandler.sendMessage(message);
+
+            try {
+                dBusConnectionCallback.handleConnection(dBusConnection);
+            } catch (DBusException e) {
+                Log.e("SlirpService", "D-Bus error", e);
+            } catch (Throwable e) {
+                Log.w("SlirpService", "Runtime error in D-Bus callback", e);
+            }
+        };
 
         slirpThread = new Thread(() -> {
             FileDescriptor fd = getVdeFd();
@@ -107,7 +137,7 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
                         long read = vdeRecv(rx, 0, mtu - 3);
                         assert read <= (mtu - 3);
                         if (read > 0) {
-                            Log.d("SlirpService", "Received " + read + " bytes");
+//                            Log.d("SlirpService", "Received " + read + " bytes");
                             byte[] data = new byte[(int) read];
                             rx.get(data);
                             mDevice.send(AsteroidUUIDS.SLIRP_OUTGOING_CHAR, data, SlirpService.this);
@@ -132,6 +162,7 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
                 tx.clear();
                 tx.put(data);
                 vdeSend(tx, 0, data.length);
+//                Log.d("SlirpService", "Sent " + data.length + " bytes");
             }
         });
 
@@ -189,15 +220,6 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
         return AsteroidUUIDS.SLIRP_SERVICE_UUID;
     }
 
-    public void acquireDBusConnection(IDBusConnectionCallback dBusConnectionCallback) {
-        dBusHandler.post(() -> dBusConnectionRunnable.accept(dBusConnectionCallback));
-    }
-
-    @Override
-    public void acquireDBusConnectionLater(IDBusConnectionCallback dBusConnectionCallback, long delay) {
-        dBusHandler.postDelayed(() -> dBusConnectionRunnable.accept(dBusConnectionCallback), delay);
-    }
-
     @SuppressWarnings({"unused", "FieldMayBeFinal"}) // used internally by the JNI part
     private long mySlirp = 0;
 
@@ -214,4 +236,14 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
     private native long vdeSend(ByteBuffer buffer, long offset, long count);
 
     private native FileDescriptor getVdeFd();
+
+    @Override
+    public void acquireDBusConnection(@NonNull Function1<? super DBusConnection, Unit> dBusConnectionConsumer) {
+        dBusHandler.post(() -> dBusConnectionRunnable.accept(dBusConnectionConsumer::invoke));
+    }
+
+    @Override
+    public void acquireDBusConnectionLater(@NonNull Function1<? super DBusConnection, Unit> dBusConnectionConsumer, long delay) {
+        dBusHandler.postDelayed(() -> dBusConnectionRunnable.accept(dBusConnectionConsumer::invoke), delay);
+    }
 }

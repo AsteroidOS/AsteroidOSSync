@@ -1,19 +1,22 @@
 plugins {
     id("com.android.application")
+    kotlin("android")
 }
 
 android {
-    compileSdk = 33
-    buildToolsVersion = "30.0.3"
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "org.asteroidos.sync"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 29
         versionName = "0.29"
         ndk.abiFilters.clear()
         ndk.abiFilters.add("arm64-v8a")
+        ndk.abiFilters.add("armeabi-v7a")
+        ndk.abiFilters.add("x86")
+        ndk.abiFilters.add("x86_64")
         externalNativeBuild {
             cmake {
                 cppFlags += ""
@@ -39,7 +42,7 @@ android {
                 srcDir("src/main/lib/powerampapi/poweramp_api_lib/res/")
             }
             jniLibs {
-                srcDir("/work/android-root/lib")
+                srcDir("/tmp/android-root/lib")
             }
         }
     }
@@ -48,6 +51,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
     lint {
         checkReleaseBuilds = true
         disable += "MissingTranslation"
@@ -80,4 +87,11 @@ dependencies {
     implementation("no.nordicsemi.android.support.v18:scanner:1.6.0")
     implementation("no.nordicsemi.android:ble:2.7.2")
     implementation("com.google.guava:guava:33.1.0-android")
+    implementation("com.github.hypfvieh:dbus-java-core:5.0.0")
+    implementation("com.github.hypfvieh:dbus-java-transport-tcp:5.0.0")
+    implementation("androidx.media3:media3-session:1.3.1")
+    implementation("androidx.media3:media3-common:1.3.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1-Beta")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.8.1-Beta")
+
 }
