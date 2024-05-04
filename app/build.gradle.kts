@@ -76,7 +76,7 @@ repositories {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation(kotlin("reflect"))
     testImplementation("junit:junit:4.13.2")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
@@ -92,8 +92,8 @@ dependencies {
     implementation("androidx.media3:media3-common:1.3.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1-Beta")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.8.1-Beta")
-    api(fileTree("src/main/libs") { include("*.jar") })
-
-    compileOnly("org.slf4j:slf4j-api:2.0.7")
     implementation("uk.uuid.slf4j:slf4j-android:2.0.7-0")
+    compileOnly("org.slf4j:slf4j-api:2.0.7")
+
+    api(fileTree("libs") { include("*.jar") })
 }

@@ -41,10 +41,6 @@ class NotificationService(private val mCtx: Context, private val connectionProvi
     private val mapping: BiMap<String, UInt32> = HashBiMap.create()
     private var mNReceiver: NotificationReceiver? = null
 
-    init {
-        connectionProvider.acquireDBusConnectionLater({ notify: DBusConnection -> Log.w("DBusNotificationService", Arrays.toString(notify.names)) }, 1000)
-    }
-
     override fun postNotification(context: Context, intent: Intent) {
         val event = intent.getStringExtra("event")
         if (event == "posted") {
