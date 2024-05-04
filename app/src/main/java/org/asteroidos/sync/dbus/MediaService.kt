@@ -206,13 +206,17 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         // TODO:XXX:
         val controller = supervisor.mediaController ?: return 0.0
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
-            return@runBlocking controller.volume.toDouble()
+            if (controller.isCommandAvailable(COMMAND_GET_DEVICE_VOLUME)) {
+                return@runBlocking (controller.deviceVolume - controller.deviceInfo.minVolume).toDouble() / controller.deviceInfo.maxVolume
+            } else {
+                return@runBlocking 1.0
+            }
         }
     } set(_property) {
         val controller = supervisor.mediaController ?: return
         runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
-            if (controller.isCommandAvailable(COMMAND_SET_VOLUME)) {
-                controller.volume = _property.toFloat()
+            if (controller.isCommandAvailable(COMMAND_SET_DEVICE_VOLUME_WITH_FLAGS)) {
+                controller.setDeviceVolume(controller.deviceInfo.minVolume + ((controller.deviceInfo.maxVolume - controller.deviceInfo.minVolume) * _property).toInt(), 0)
             }
         }
     }
@@ -415,7 +419,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         }
     }
 
-    override fun onVolumeChanged(volume: Float) {
+    override fun onDeviceVolumeChanged(volume: Int, muted: Boolean) {
         connectionProvider.acquireDBusConnection { connection ->
             connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", getProperties("org.mpris.MediaPlayer2.Player", Optional.of(listOf("Volume"))), listOf()))
         }
