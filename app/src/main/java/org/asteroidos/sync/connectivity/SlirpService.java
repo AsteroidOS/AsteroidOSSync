@@ -38,6 +38,7 @@ import org.freedesktop.dbus.connections.impl.DBusConnection;
 import org.freedesktop.dbus.exceptions.DBusException;
 
 import java.io.FileDescriptor;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.UUID;
@@ -81,8 +82,14 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
             public void handleMessage(@NonNull Message msg) {
                 switch (msg.arg1) {
                     case DBUS_HANDLER_MSG_OPEN -> {
-                        if (dBusConnection != null)
-                            break;
+                        if (dBusConnection != null) {
+                            try {
+                                dBusConnection.connect();
+                            } catch (IOException e) {
+                                Log.e("SlirpService", "Failed to establish a D-Bus connection", e);
+                            }
+                            return;
+                        }
 
                         try {
                             dBusConnection = AndroidDBusConnectionBuilder
@@ -189,6 +196,10 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
 
     @Override
     public void sync() {
+        final Message message = new Message();
+        message.arg1 = DBUS_HANDLER_MSG_OPEN;
+        message.obj = "tcp:host=127.0.0.1,bind=*,port=55556,family=ipv4";
+        dBusHandler.sendMessage(message);
     }
 
     @Override
