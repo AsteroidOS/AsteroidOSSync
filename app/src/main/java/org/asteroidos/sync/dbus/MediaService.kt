@@ -29,11 +29,13 @@ import org.asteroidos.sync.media.IMediaService
 import org.asteroidos.sync.media.MediaSupervisor
 import org.freedesktop.dbus.DBusPath
 import org.freedesktop.dbus.connections.impl.DBusConnection
+import org.freedesktop.dbus.exceptions.DBusException
 import org.freedesktop.dbus.interfaces.Properties.PropertiesChanged
 import org.freedesktop.dbus.types.Variant
 import org.mpris.MediaPlayer2
 import org.mpris.mediaplayer2.Player
 import java.nio.charset.Charset
+import java.util.Arrays
 import java.util.Collections
 import java.util.Date
 
@@ -41,7 +43,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
     private val mNReceiver: NotificationService.NotificationReceiver? = null
     private val hashing = Hashing.goodFastHash(64)
 
-    private val busSuffix = Hashing.murmur3_32_fixed(42).hashLong(Date().time).toString()
+    private val busSuffix = "x" + Hashing.murmur3_32_fixed(42).hashLong(Date().time).toString()
 
     override fun sync() {
         connectionProvider.acquireDBusConnection { connection: DBusConnection ->
@@ -59,52 +61,52 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
 
     override fun onReset() {
         connectionProvider.acquireDBusConnection { connection: DBusConnection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("Metadata", Variant(metadata, "a{sv}")) as Map<String, Variant<*>>?, emptyList<String>()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("Metadata", Variant(getMetadata(), "a{sv}")) as Map<String, Variant<*>>?, listOf()))
         }
     }
 
-    override fun canQuit(): Boolean {
+    fun canQuit(): Boolean {
         return false
     }
 
-    override fun isFullscreen(): Boolean {
+    fun isFullscreen(): Boolean {
         return false
     }
 
-    override fun setFullscreen(_property: Boolean) {
+    fun setFullscreen(_property: Boolean) {
     }
 
-    override fun canSetFullscreen(): Boolean {
+    fun canSetFullscreen(): Boolean {
         return false
     }
 
-    override fun canRaise(): Boolean {
+    fun canRaise(): Boolean {
         return false
     }
 
-    override fun hasTrackList(): Boolean {
+    fun hasTrackList(): Boolean {
         // TODO: Track List!!! :grin:
         return false
     }
 
-    override fun getIdentity(): String {
+    fun getIdentity(): String {
         return "Android"
     }
 
-    override fun getSupportedUriSchemes(): List<String> = emptyList<String>()
+    fun getSupportedUriSchemes(): List<String> = listOf()
 
-    override fun getSupportedMimeTypes(): List<String> = emptyList<String>()
+    fun getSupportedMimeTypes(): List<String> = listOf()
 
     override fun Raise() {}
     override fun Quit() {}
-    override fun getPlaybackStatus(): String {
+    fun getPlaybackStatus(): String {
         val controller = supervisor.mediaController ?: return "Stopped"
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             if (controller.isPlaying) return@runBlocking "Playing" else if (controller.playbackState == STATE_READY && !controller.playWhenReady) return@runBlocking "Paused" else return@runBlocking "Stopped"
         }
     }
 
-    override fun getLoopStatus(): String {
+    fun getLoopStatus(): String {
         val controller = supervisor.mediaController ?: return "None"
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             return@runBlocking when (controller.repeatMode) {
@@ -116,7 +118,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         }
     }
 
-    override fun setLoopStatus(_property: String) {
+    fun setLoopStatus(_property: String) {
         val controller = supervisor.mediaController ?: return
         runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             if (controller.isCommandAvailable(COMMAND_SET_REPEAT_MODE)) {
@@ -130,14 +132,14 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         }
     }
 
-    override fun getRate(): Double {
+    fun getRate(): Double {
         val controller = supervisor.mediaController ?: return 1.0
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             return@runBlocking controller.playbackParameters.speed.toDouble()
         }
     }
 
-    override fun setRate(_property: Double) {
+    fun setRate(_property: Double) {
         val controller = supervisor.mediaController ?: return
         runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             if (controller.isCommandAvailable(COMMAND_SET_SPEED_AND_PITCH)) {
@@ -146,7 +148,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         }
     }
 
-    override fun isShuffle(): Boolean {
+    fun isShuffle(): Boolean {
         val controller = supervisor.mediaController ?: return false
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             if (controller.isCommandAvailable(COMMAND_SET_SHUFFLE_MODE)) {
@@ -157,7 +159,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         }
     }
 
-    override fun setShuffle(_property: Boolean) {
+    fun setShuffle(_property: Boolean) {
         val controller = supervisor.mediaController ?: return
         runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             if (controller.isCommandAvailable(COMMAND_SET_SHUFFLE_MODE)) {
@@ -175,7 +177,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
 
     private val currentMediaIdObjectPath get() = mediaToPath(supervisor.mediaController?.connectedToken?.packageName ?: "", supervisor.mediaController?.currentMediaItem)
 
-    override fun getMetadata(): Map<String, Variant<*>> {
+    fun getMetadata(): Map<String, Variant<*>> {
         val dummy = Collections.singletonMap<String, Variant<*>>("mpris:trackid", Variant(DBusPath("/org/mpris/MediaPlayer2/TrackList/NoTrack")))
 
         val controller = supervisor.mediaController ?: return dummy
@@ -191,7 +193,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         }
     }
 
-    override fun getVolume(): Double {
+    fun getVolume(): Double {
         // TODO:XXX:
         val controller = supervisor.mediaController ?: return 0.0
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
@@ -199,7 +201,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         }
     }
 
-    override fun setVolume(_property: Double) {
+    fun setVolume(_property: Double) {
         val controller = supervisor.mediaController ?: return
         runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             if (controller.isCommandAvailable(COMMAND_SET_VOLUME)) {
@@ -208,7 +210,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         }
     }
 
-    override fun getPosition(): Long {
+    fun getPosition(): Long {
         val controller = supervisor.mediaController ?: return 0L
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             if (controller.isCommandAvailable(COMMAND_GET_CURRENT_MEDIA_ITEM)) {
@@ -219,50 +221,50 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         }
     }
 
-    override fun getMinimumRate(): Double {
+    fun getMinimumRate(): Double {
         return .25
     }
 
-    override fun getMaximumRate(): Double {
+    fun getMaximumRate(): Double {
         return 2.0
     }
 
-    override fun canGoNext(): Boolean {
+    fun canGoNext(): Boolean {
         val controller = supervisor.mediaController ?: return false
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             return@runBlocking controller.isCommandAvailable(COMMAND_SEEK_TO_NEXT_MEDIA_ITEM) && controller.hasNextMediaItem()
         }
     }
 
-    override fun canGoPrevious(): Boolean {
+    fun canGoPrevious(): Boolean {
         val controller = supervisor.mediaController ?: return false
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             return@runBlocking controller.isCommandAvailable(COMMAND_SEEK_TO_PREVIOUS_MEDIA_ITEM) && controller.hasPreviousMediaItem()
         }
     }
 
-    override fun canPlay(): Boolean {
+    fun canPlay(): Boolean {
         val controller = supervisor.mediaController ?: return false
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             return@runBlocking controller.isCommandAvailable(COMMAND_PLAY_PAUSE)
         }
     }
 
-    override fun canPause(): Boolean {
+    fun canPause(): Boolean {
         val controller = supervisor.mediaController ?: return false
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             return@runBlocking controller.isCommandAvailable(COMMAND_PLAY_PAUSE)
         }
     }
 
-    override fun canSeek(): Boolean {
+    fun canSeek(): Boolean {
         val controller = supervisor.mediaController ?: return false
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             return@runBlocking controller.isCommandAvailable(COMMAND_SEEK_IN_CURRENT_MEDIA_ITEM) && controller.isCurrentMediaItemSeekable
         }
     }
 
-    override fun canControl(): Boolean = supervisor.mediaController != null
+    fun canControl(): Boolean = supervisor.mediaController != null
 
     override fun Next() {
         val controller = supervisor.mediaController ?: return
@@ -346,6 +348,75 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
 
     override fun getObjectPath() = "/org/mpris/MediaPlayer2"
 
+    @Suppress("UNCHECKED_CAST")
+    override fun <A : Any?> Get(p0: String?, p1: String?): A {
+        return when (p1) {
+            "CanQuit" -> canQuit() as A
+            "Fullscreen" -> isFullscreen() as A
+            "CanSetFullscreen" -> canSetFullscreen() as A
+            "CanRaise" -> canRaise() as A
+            "HasTrackList" -> hasTrackList() as A
+            "Identity" -> getIdentity() as A
+            "SupportedUriSchemes" -> getSupportedUriSchemes() as A
+            "SupportedMimeTypes" -> getSupportedMimeTypes() as A
+            "PlaybackStatus" -> getPlaybackStatus() as A
+            "LoopStatus" -> getLoopStatus() as A
+            "Rate" -> getRate() as A
+            "Shuffle" -> isShuffle() as A
+            "Metadata" -> getMetadata() as A
+            "Volume" -> getVolume() as A
+            "Position" -> getPosition() as A
+            "MinimumRate" -> getMinimumRate() as A
+            "MaximumRate" -> getMaximumRate() as A
+            "CanGoNext" -> canGoNext() as A
+            "CanGoPrevious" -> canGoPrevious() as A
+            "CanPlay" -> canPlay() as A
+            "CanPause" -> canPause() as A
+            "CanSeek" -> canSeek() as A
+            "CanControl" -> canControl() as A
+            else -> throw DBusException("cannot get $p1")
+        }
+    }
+
+    override fun <A : Any?> Set(p0: String?, p1: String?, p2: A) {
+        when (p1) {
+            else -> throw DBusException("cannot set $p1")
+        }
+    }
+
+    override fun GetAll(p0: String?): MutableMap<String, Variant<*>> {
+        return when (p0) {
+            "org.mpris.MediaPlayer2" -> mutableMapOf(
+                    "CanQuit" to Variant(canQuit(), "b"),
+                    "Fullscreen" to Variant(isFullscreen(), "b"),
+                    "CanSetFullscreen" to Variant(canSetFullscreen(), "b"),
+                    "CanRaise" to Variant(canRaise(), "b"),
+                    "HasTrackList" to Variant(hasTrackList(), "b"),
+                    "Identity" to Variant(getIdentity(), "s"),
+                    "SupportedUriSchemes" to Variant(getSupportedUriSchemes(), "as"),
+                    "SupportedMimeTypes" to Variant(getSupportedMimeTypes(), "as"),
+            )
+            "org.mpris.MediaPlayer2.Player" -> mutableMapOf(
+                    "PlaybackStatus" to Variant(getPlaybackStatus(), "s"),
+                    "LoopStatus" to Variant(getLoopStatus(), "s"),
+                    "Rate" to Variant(getRate(), "d"),
+                    "Shuffle" to Variant(isShuffle(), "b"),
+                    "Metadata" to Variant(getMetadata(), "a{sv}"),
+                    "Volume" to Variant(getVolume(), "d"),
+                    "Position" to Variant(getPosition(), "x"),
+                    "MinimumRate" to Variant(getMinimumRate(), "d"),
+                    "MaximumRate" to Variant(getMaximumRate(), "d"),
+                    "CanGoNext" to Variant(canGoNext(), "b"),
+                    "CanGoPrevious" to Variant(canGoPrevious(), "b"),
+                    "CanPlay" to Variant(canPlay(), "b"),
+                    "CanPause" to Variant(canPause(), "b"),
+                    "CanSeek" to Variant(canSeek(), "b"),
+                    "CanControl" to Variant(canControl(), "b"),
+            )
+            else -> mutableMapOf()
+        }
+    }
+
     override fun isRemote(): Boolean = false
 
     override fun onPositionDiscontinuity(oldPosition: PositionInfo, newPosition: PositionInfo, reason: Int) {
@@ -356,31 +427,31 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
 
     override fun onIsPlayingChanged(isPlaying: Boolean) {
         connectionProvider.acquireDBusConnection { connection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("PlaybackStatus", Variant(playbackStatus)) as Map<String, Variant<*>>?, emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("PlaybackStatus", Variant(getPlaybackStatus())) as Map<String, Variant<*>>?, listOf()))
         }
     }
 
     override fun onPlayWhenReadyChanged(playWhenReady: Boolean, reason: Int) {
         connectionProvider.acquireDBusConnection { connection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("PlaybackStatus", Variant(playbackStatus)) as Map<String, Variant<*>>?, emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("PlaybackStatus", Variant(getPlaybackStatus())) as Map<String, Variant<*>>?, listOf()))
         }
     }
 
     override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
         connectionProvider.acquireDBusConnection { connection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("Metadata", Variant(metadata, "a{sv}")) as Map<String, Variant<*>>?, emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("Metadata", Variant(getMetadata(), "a{sv}")) as Map<String, Variant<*>>?, listOf()))
         }
     }
 
     override fun onPlaybackStateChanged(playbackState: Int) {
         connectionProvider.acquireDBusConnection { connection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("PlaybackStatus", Variant(playbackStatus)) as Map<String, Variant<*>>?, emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("PlaybackStatus", Variant(getPlaybackStatus())) as Map<String, Variant<*>>?, listOf()))
         }
     }
 
     override fun onVolumeChanged(volume: Float) {
         connectionProvider.acquireDBusConnection { connection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("Volume", Variant(playbackStatus)) as Map<String, Variant<*>>?, emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", Collections.singletonMap("Volume", Variant(getPlaybackStatus())) as Map<String, Variant<*>>?, listOf()))
         }
     }
 
@@ -394,7 +465,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
                     "CanSeek", Variant(canSeek()),
                     "CanControl", Variant(canControl()),
             )
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", map, emptyList()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", map, listOf()))
         }
     }
 }
