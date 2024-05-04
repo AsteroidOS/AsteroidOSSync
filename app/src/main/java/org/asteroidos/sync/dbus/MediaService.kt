@@ -48,9 +48,10 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
     private val mNReceiver: NotificationService.NotificationReceiver? = null
     private val hashing = Hashing.goodFastHash(64)
 
-    private val busSuffix = "x" + Hashing.murmur3_32_fixed(42).hashLong(Date().time).toString()
+    private lateinit var busSuffix: String
 
     override fun sync() {
+        busSuffix = "x" + Hashing.murmur3_32_fixed(42).hashLong(Date().time).toString()
         connectionProvider.acquireDBusConnection { connection: DBusConnection ->
             connection.requestBusName("org.mpris.MediaPlayer2.x$busSuffix")
             connection.exportObject("/org/mpris/MediaPlayer2", this@MediaService)
@@ -404,7 +405,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
 
     override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
         connectionProvider.acquireDBusConnection { connection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", getProperties("org.mpris.MediaPlayer2.Player", Optional.of(listOf("Metadata"))), listOf()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", getProperties("org.mpris.MediaPlayer2.Player", Optional.of(listOf("Metadata", "PlaybackStatus"))), listOf()))
         }
     }
 

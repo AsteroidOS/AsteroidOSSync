@@ -33,21 +33,16 @@ import org.asteroidos.sync.asteroid.IAsteroidDevice;
 import org.asteroidos.sync.dbus.IDBusConnectionCallback;
 import org.asteroidos.sync.dbus.IDBusConnectionProvider;
 import org.asteroidos.sync.utils.AsteroidUUIDS;
-import org.freedesktop.dbus.connections.SASL;
 import org.freedesktop.dbus.connections.impl.AndroidDBusConnectionBuilder;
 import org.freedesktop.dbus.connections.impl.DBusConnection;
-import org.freedesktop.dbus.connections.impl.DBusConnectionBuilder;
 import org.freedesktop.dbus.exceptions.DBusException;
 
 import java.io.FileDescriptor;
-import java.io.IOException;
-import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-import kotlin.ParameterName;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
@@ -73,6 +68,8 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
 
     private DBusConnection dBusConnection = null;
 
+    private final int DBUS_HANDLER_MSG_OPEN = 1;
+
     public SlirpService(Context ctx, IAsteroidDevice device) {
         mDevice = device;
         mCtx = ctx;
@@ -83,14 +80,7 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
             @Override
             public void handleMessage(@NonNull Message msg) {
                 switch (msg.arg1) {
-                    case 0 -> {
-                        if (dBusConnection == null)
-                            break;
-
-                        dBusConnection.disconnect();
-                        dBusConnection = null;
-                    }
-                    case 1 -> {
+                    case DBUS_HANDLER_MSG_OPEN -> {
                         if (dBusConnection != null)
                             break;
 
@@ -106,10 +96,10 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
         };
 
         dBusConnectionRunnable = dBusConnectionCallback -> {
-            final Message message = new Message();
-            message.arg1 = 1;
-            message.obj = "tcp:host=127.0.0.1,bind=*,port=55556,family=ipv4";
-            dBusHandler.sendMessage(message);
+            if (dBusConnection == null) {
+                Log.e("SlirpService", "D-Bus connection not ready yet");
+                return;
+            }
 
             try {
                 dBusConnectionCallback.handleConnection(dBusConnection);
@@ -132,21 +122,22 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
                         continue;
                     }
 
-                    synchronized (SlirpService.this) {
-                        rx.clear();
-                        long read = vdeRecv(rx, 0, mtu - 3);
-                        assert read <= (mtu - 3);
-                        if (read > 0) {
+                    rx.clear();
+                    long read;
+                    synchronized (rx) {
+                        read = vdeRecv(rx, 0, mtu - 3);
+                    }
+                    assert read <= (mtu - 3);
+                    if (read > 0) {
 //                            Log.d("SlirpService", "Received " + read + " bytes");
-                            byte[] data = new byte[(int) read];
-                            rx.get(data);
-                            mDevice.send(AsteroidUUIDS.SLIRP_OUTGOING_CHAR, data, SlirpService.this);
-                        } else {
-                            Log.e("SlirpService", "Read error: " + read);
-                        }
+                        byte[] data = new byte[(int) read];
+                        rx.get(data);
+                        mDevice.send(AsteroidUUIDS.SLIRP_OUTGOING_CHAR, data, SlirpService.this);
+                    } else {
+                        Log.e("SlirpService", "Read error: " + read);
                     }
                 } catch (Exception e) {
-                    Log.e("SlirpService", "Poller exception", e);
+                    Log.e("SlirpService", "Not ready yet", e);
                 }
             }
         });
@@ -158,15 +149,20 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
         mDevice.registerCallback(AsteroidUUIDS.SLIRP_INCOMING_CHAR, data -> {
             resetMtu();
 
-            synchronized (SlirpService.this) {
-                tx.clear();
-                tx.put(data);
+            tx.clear();
+            tx.put(data);
+            synchronized (tx) {
                 vdeSend(tx, 0, data.length);
-//                Log.d("SlirpService", "Sent " + data.length + " bytes");
             }
+//                Log.d("SlirpService", "Sent " + data.length + " bytes");
         });
 
         slirpThread.start();
+
+        final Message message = new Message();
+        message.arg1 = DBUS_HANDLER_MSG_OPEN;
+        message.obj = "tcp:host=127.0.0.1,bind=*,port=55556,family=ipv4";
+        dBusHandler.sendMessage(message);
     }
 
     private void startNative(int mtu) {
@@ -178,13 +174,15 @@ public class SlirpService implements IConnectivityService, IDBusConnectionProvid
     }
 
     private void resetMtu() {
-        synchronized (SlirpService.this) {
+        synchronized (rx) {
             int newMtu = mDevice.getMtu();
             if (mtu != newMtu) {
                 mtu = newMtu;
 
-                finalizeNative();
-                startNative(mtu - 3);
+                synchronized (tx) {
+                    finalizeNative();
+                    startNative(mtu - 3);
+                }
             }
         }
     }
