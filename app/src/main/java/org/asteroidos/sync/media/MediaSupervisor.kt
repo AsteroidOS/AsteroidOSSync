@@ -31,14 +31,11 @@ import androidx.media3.session.MediaController
 import androidx.media3.session.SessionToken
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.guava.await
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.asteroidos.sync.connectivity.IService
-import org.asteroidos.sync.services.NLService
-import java.util.Objects
+import org.asteroidos.sync.dbus.DBusNotificationListenerService
 
 class MediaSupervisor(private val mCtx: Context) : IService, OnActiveSessionsChangedListener {
 
@@ -76,6 +73,7 @@ class MediaSupervisor(private val mCtx: Context) : IService, OnActiveSessionsCha
                 mediaControllerPackageName = mediaController.connectedToken?.packageName
             }
         } else {
+            this@MediaSupervisor.mediaController?.removeListener(mMediaCallback!!)
             mediaControllerPackageName = null
             mediaController = null
             mMediaCallback!!.onReset()
@@ -86,11 +84,11 @@ class MediaSupervisor(private val mCtx: Context) : IService, OnActiveSessionsCha
         if (mMediaSessionManager == null) {
             try {
                 mMediaSessionManager = mCtx.getSystemService(Context.MEDIA_SESSION_SERVICE) as MediaSessionManager
-                val controllers = mMediaSessionManager?.getActiveSessions(ComponentName(mCtx, NLService::class.java))
+                val controllers = mMediaSessionManager?.getActiveSessions(ComponentName(mCtx, DBusNotificationListenerService::class.java))
                 val handler = Handler(Looper.getMainLooper())
                 handler.post {
                     onActiveSessionsChanged(controllers)
-                    mMediaSessionManager?.addOnActiveSessionsChangedListener(this, ComponentName(mCtx, NLService::class.java))
+                    mMediaSessionManager?.addOnActiveSessionsChangedListener(this, ComponentName(mCtx, DBusNotificationListenerService::class.java))
                 }
             } catch (e: SecurityException) {
                 Log.w(TAG, "No Notification Access")

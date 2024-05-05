@@ -15,12 +15,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.asteroidos.sync.dbus
+package org.asteroidos.sync.utils
 
-import org.asteroidos.sync.connectivity.IService
-import org.freedesktop.dbus.connections.impl.DBusConnection
+import android.content.Context
+import java.util.Properties
 
-interface IDBusConnectionProvider : IService {
-    fun acquireDBusConnection(dBusConnectionConsumer: (connection: DBusConnection) -> Unit)
-    fun acquireDBusConnectionLater(dBusConnectionConsumer: (connection: DBusConnection) -> Unit, delay: Long)
+class IconToPackageMapper(val context: Context) {
+
+    private val mapping = Properties()
+
+    private val defaultIcon: String
+
+    init {
+        mapping.load(context.assets.open("icons.properties"))
+        defaultIcon = mapping.getProperty("default")
+    }
+
+    fun iconForPackage(pkg: String): String {
+        return mapping.getProperty(pkg, defaultIcon)
+    }
+
 }

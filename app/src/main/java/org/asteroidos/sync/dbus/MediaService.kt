@@ -20,7 +20,9 @@ package org.asteroidos.sync.dbus
 import android.content.Context
 import android.os.Build
 import android.os.Handler
+import android.util.Log
 import androidx.media3.common.MediaItem
+import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player.*
 import com.google.common.base.Optional
 import com.google.common.collect.Lists
@@ -45,24 +47,39 @@ import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.memberProperties
 
 class MediaService(private val mCtx: Context, private val supervisor: MediaSupervisor, private val connectionProvider: IDBusConnectionProvider) : IMediaService, MediaPlayer2, Player {
-    private val mNReceiver: NotificationService.NotificationReceiver? = null
     private val hashing = Hashing.goodFastHash(64)
 
-    private lateinit var busSuffix: String
+    private var busSuffix: String? = null
 
     override fun sync() {
-        busSuffix = "x" + Hashing.murmur3_32_fixed(42).hashLong(Date().time).toString()
-        connectionProvider.acquireDBusConnection { connection: DBusConnection ->
+        if (busSuffix != null) {
+            Log.w("MediaService", "Already in sync")
+            return
+        }
+        busSuffix = Hashing.murmur3_32_fixed(42).hashLong(Date().time).toString()
+//        busSuffix = "asteroid-os-sync"
+        connectionProvider.sync()
+        connectionProvider.acquireDBusConnectionLater({ connection: DBusConnection ->
             connection.requestBusName("org.mpris.MediaPlayer2.x$busSuffix")
             connection.exportObject("/org/mpris/MediaPlayer2", this@MediaService)
-        }
+
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", getProperties("org.mpris.MediaPlayer2.Player", Optional.absent()), listOf()))
+
+            Log.i("MediaService", "Registered with D-Bus")
+        }, 500)
     }
 
     override fun unsync() {
+        if (busSuffix == null) {
+            Log.w("MediaService", "Already in de-sync")
+            return
+        }
         connectionProvider.acquireDBusConnection { connection: DBusConnection ->
             connection.unExportObject("/org/mpris/MediaPlayer2")
             connection.releaseBusName("org.mpris.MediaPlayer2.x$busSuffix")
         }
+        connectionProvider.unsync()
+        busSuffix = null
     }
 
     @MyDBusProperty("org.mpris.MediaPlayer2")
@@ -99,9 +116,16 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
     @MyDBusProperty("org.mpris.MediaPlayer2.Player")
     val PlaybackStatus: String get() {
         val controller = supervisor.mediaController ?: return "Stopped"
-        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
-            if (controller.isPlaying) return@runBlocking "Playing" else if (controller.playbackState == STATE_READY && !controller.playWhenReady) return@runBlocking "Paused" else return@runBlocking "Stopped"
+        val ret = runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+            if (controller.isPlaying)
+                return@runBlocking "Playing"
+            else if (controller.playbackState == STATE_READY && !controller.playWhenReady)
+                return@runBlocking "Paused"
+            else
+                return@runBlocking "Stopped"
         }
+        Log.i("MediaService", "Get playback status: $ret")
+        return ret
     }
 
     @MyDBusProperty("org.mpris.MediaPlayer2.Player")
@@ -177,7 +201,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         val dummy = Collections.singletonMap<String, Variant<*>>("mpris:trackid", Variant(DBusPath("/org/mpris/MediaPlayer2/TrackList/NoTrack")))
 
         val controller = supervisor.mediaController ?: return dummy
-        return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
+        val metadata = runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             if (controller.currentMediaItem != null) {
                 val metadata = mutableMapOf<String, Variant<*>>(
                         "mpris:trackid" to Variant(currentMediaIdObjectPath),
@@ -199,15 +223,22 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
                 return@runBlocking dummy
             }
         }
+        Log.i("MediaService", "GetMetadata: " + if (metadata["mpris:trackid"] == dummy["mpris:trackid"]) "dummy" else "available")
+        return metadata
     }
+
+    @Volatile
+    private var volCached = -1
 
     @MyDBusProperty("org.mpris.MediaPlayer2.Player")
     var Volume: Double get() {
-        // TODO:XXX:
         val controller = supervisor.mediaController ?: return 0.0
         return runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             if (controller.isCommandAvailable(COMMAND_GET_DEVICE_VOLUME)) {
-                return@runBlocking (controller.deviceVolume - controller.deviceInfo.minVolume).toDouble() / controller.deviceInfo.maxVolume
+                if (volCached < 0) {
+                    volCached = controller.deviceVolume
+                }
+                return@runBlocking (volCached - controller.deviceInfo.minVolume).toDouble() / controller.deviceInfo.maxVolume
             } else {
                 return@runBlocking 1.0
             }
@@ -216,7 +247,8 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
         val controller = supervisor.mediaController ?: return
         runBlocking(Handler(controller.applicationLooper).asCoroutineDispatcher()) {
             if (controller.isCommandAvailable(COMMAND_SET_DEVICE_VOLUME_WITH_FLAGS)) {
-                controller.setDeviceVolume(controller.deviceInfo.minVolume + ((controller.deviceInfo.maxVolume - controller.deviceInfo.minVolume) * _property).toInt(), 0)
+                val vol = controller.deviceInfo.minVolume + ((controller.deviceInfo.maxVolume - controller.deviceInfo.minVolume) * _property).toInt()
+                controller.setDeviceVolume(vol, 0)
             }
         }
     }
@@ -409,7 +441,13 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
 
     override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
         connectionProvider.acquireDBusConnection { connection ->
-            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", getProperties("org.mpris.MediaPlayer2.Player", Optional.of(listOf("Metadata", "PlaybackStatus"))), listOf()))
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", getProperties("org.mpris.MediaPlayer2.Player", Optional.of(listOf("Metadata"))), listOf()))
+        }
+    }
+
+    override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
+        connectionProvider.acquireDBusConnection { connection ->
+            connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", getProperties("org.mpris.MediaPlayer2.Player", Optional.of(listOf("Metadata"))), listOf()))
         }
     }
 
@@ -420,6 +458,7 @@ class MediaService(private val mCtx: Context, private val supervisor: MediaSuper
     }
 
     override fun onDeviceVolumeChanged(volume: Int, muted: Boolean) {
+        volCached = volume
         connectionProvider.acquireDBusConnection { connection ->
             connection.sendMessage(PropertiesChanged(objectPath, "org.mpris.MediaPlayer2.Player", getProperties("org.mpris.MediaPlayer2.Player", Optional.of(listOf("Volume"))), listOf()))
         }

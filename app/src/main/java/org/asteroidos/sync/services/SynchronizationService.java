@@ -52,8 +52,9 @@ import org.asteroidos.sync.connectivity.SilentModeService;
 import org.asteroidos.sync.connectivity.SlirpService;
 import org.asteroidos.sync.connectivity.TimeService;
 import org.asteroidos.sync.connectivity.WeatherService;
+import org.asteroidos.sync.dbus.DBusConnector;
+import org.asteroidos.sync.dbus.IDBusConnectionProvider;
 import org.asteroidos.sync.dbus.MediaService;
-import org.asteroidos.sync.dbus.NotificationService;
 import org.asteroidos.sync.media.MediaSupervisor;
 
 import java.util.ArrayList;
@@ -282,21 +283,21 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
             mDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(defaultDevMacAddr);
         }
 
-        SlirpService slirpService = new SlirpService(getApplicationContext(), this);
-
         if (bleServices.isEmpty()) {
             // Register Services
             registerBleService(new WeatherService(getApplicationContext(), this));
             registerBleService(new ScreenshotService(getApplicationContext(), this));
             registerBleService(new TimeService(getApplicationContext(), this));
-            registerBleService(slirpService);
+            registerBleService(new SlirpService(getApplicationContext(), this));
         }
+
+        final IDBusConnectionProvider mediaDBusConnector = new DBusConnector(SlirpService.SLIRP_DBUS_ADDRESS);
 
         if (nonBleServices.isEmpty()) {
             nonBleServices.add(new SilentModeService(getApplicationContext()));
-            nonBleServices.add(new NotificationService(getApplicationContext(), slirpService));
+//            nonBleServices.add(mediaDBusConnector);
             MediaSupervisor supervisor = new MediaSupervisor(getApplicationContext());
-            MediaService service = new MediaService(getApplicationContext(), supervisor, slirpService);
+            MediaService service = new MediaService(getApplicationContext(), supervisor, mediaDBusConnector);
             supervisor.setMMediaCallback(service);
             nonBleServices.add(service);
             nonBleServices.add(supervisor);

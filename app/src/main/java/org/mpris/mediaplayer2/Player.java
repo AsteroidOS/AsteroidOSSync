@@ -8,6 +8,7 @@ import org.freedesktop.dbus.annotations.DBusProperty;
 import org.freedesktop.dbus.annotations.DBusProperty.Access;
 import org.freedesktop.dbus.exceptions.DBusException;
 import org.freedesktop.dbus.interfaces.DBusInterface;
+import org.freedesktop.dbus.interfaces.Properties;
 import org.freedesktop.dbus.messages.DBusSignal;
 import org.freedesktop.dbus.types.Variant;
 
@@ -30,7 +31,7 @@ import org.freedesktop.dbus.types.Variant;
 @DBusProperty(name = "CanPause", type = Boolean.class, access = Access.READ)
 @DBusProperty(name = "CanSeek", type = Boolean.class, access = Access.READ)
 @DBusProperty(name = "CanControl", type = Boolean.class, access = Access.READ)
-public interface Player extends DBusInterface {
+public interface Player extends DBusInterface, Properties {
 
 
     public void Next();
