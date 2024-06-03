@@ -74,4 +74,6 @@
     <string name="apply">套用</string>
     <string name="cancel">取消</string>
     <string name="OWM_API_KEY">OWM API 金鑰</string>
+    <string name="location_disabled_message">為了找到手錶，必須啟用定位服務。配對後，你可以安全地再次停用它。</string>
+    <string name="set_owm_api_key">設定自訂 OWM API 金鑰</string>
 </resources>
