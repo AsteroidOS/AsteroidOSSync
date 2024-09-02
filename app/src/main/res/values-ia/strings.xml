@@ -39,4 +39,5 @@
     <string name="apply">Applicar</string>
     <string name="cancel">Cancellar</string>
     <string name="location_disabled_title">Location disactivate</string>
+    <string name="app_icon">Icone de application</string>
 </resources>
