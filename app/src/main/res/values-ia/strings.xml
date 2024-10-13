@@ -51,4 +51,5 @@
     <string name="notification_type_vibra">Vibrationes</string>
     <string name="notification_type_strong_vibra">Vibration forte</string>
     <string name="explain_app_prefs">Le notificationes de tu applicationes apparera hic</string>
+    <string name="use_this_area">Usar iste localisation pro le tempore</string>
 </resources>
