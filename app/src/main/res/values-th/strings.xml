@@ -74,4 +74,6 @@
     <string name="apply">นำไปใช้</string>
     <string name="cancel">ยกเลิก</string>
     <string name="OWM_API_KEY">คีย์ OWM API</string>
+    <string name="intro_slide6_title">การแจ้งเตือนโทรศัพท์</string>
+    <string name="intro_slide6_subtitle">เพื่อแสดงสถานะการเชื่อมต่อปัจจุบันของนาฬิกา</string>
 </resources>
