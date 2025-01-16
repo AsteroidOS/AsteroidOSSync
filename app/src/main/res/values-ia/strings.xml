@@ -39,4 +39,17 @@
     <string name="apply">Applicar</string>
     <string name="cancel">Cancellar</string>
     <string name="location_disabled_title">Location disactivate</string>
+    <string name="app_icon">Icone de application</string>
+    <string name="disconnected">Disconnectite</string>
+    <string name="connected">Connectite</string>
+    <string name="connected_formatted">Connectite a %s</string>
+    <string name="connecting_formatted">Connectente a %s</string>
+    <string name="phone_is_searching">Le telephono te sta cercante!</string>
+    <string name="scanning">Scannante…</string>
+    <string name="synchronize_weather">Localisar le tempore automaticamente</string>
+    <string name="notification_type_no_notif">Sin notificationes</string>
+    <string name="notification_type_vibra">Vibrationes</string>
+    <string name="notification_type_strong_vibra">Vibration forte</string>
+    <string name="explain_app_prefs">Le notificationes de tu applicationes apparera hic</string>
+    <string name="use_this_area">Usar iste localisation pro le tempore</string>
 </resources>

@@ -6,8 +6,8 @@
     <string name="nothing_found">未偵測到手錶</string>
     <string name="one_found">偵測到 1 支手錶</string>
     <string name="n_found">偵測到 %d 支手錶</string>
-    <string name="disconnected">已中斷連線</string>
-    <string name="connected">已連線</string>
+    <string name="disconnected">已斷開連接</string>
+    <string name="connected">已連接</string>
     <string name="connecting">連線中…</string>
     <string name="connected_formatted">已連線至 %s</string>
     <string name="connecting_formatted">正在連線至 %s</string>
@@ -44,8 +44,8 @@
     <string name="intro_slide1_subtitle">這個程式可以使您的Android手機與AsteroidOS手錶保持同步。首先，它需要一些權限。</string>
     <string name="intro_slide2_title">檔案存取</string>
     <string name="intro_slide2_subtitle">用於佔存資料和儲存螢幕截圖。</string>
-    <string name="intro_slide3_title">位置</string>
-    <string name="intro_slide3_subtitle">用於掃喵鄰近低耗電藍芽裝置。</string>
+    <string name="intro_slide3_title">位置和藍牙</string>
+    <string name="intro_slide3_subtitle">用於掃描並連接到鄰近的低功耗藍牙裝置。</string>
     <string name="intro_slide4_title">通知</string>
     <string name="intro_slide4_subtitle">要同步通知，您需要在接下來的選單中允許AsteroidOS Sync存取通知:</string>
     <string name="intro_slide5_title">電池最佳化</string>
@@ -68,4 +68,12 @@
     <string name="notification_type_ringtone">鈴聲</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="intro_phonestateslide_title">電話與聯繫方式</string>
+    <string name="intro_slide6_title">電話通知</string>
+    <string name="intro_slide6_subtitle">用於顯示手錶目前的連線狀態。</string>
+    <string name="location_disabled_title">位置已停用</string>
+    <string name="apply">套用</string>
+    <string name="cancel">取消</string>
+    <string name="OWM_API_KEY">OWM API 金鑰</string>
+    <string name="location_disabled_message">為了找到手錶，必須啟用定位服務。配對後，你可以安全地再次停用它。</string>
+    <string name="set_owm_api_key">設定自訂 OWM API 金鑰</string>
 </resources>
