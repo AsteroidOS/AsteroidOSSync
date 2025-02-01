@@ -43,6 +43,7 @@ public interface IAsteroidDevice {
     void unregisterBleService(UUID serviceUUID);
     void registerCallback(UUID characteristicUUID, IServiceCallback callback);
     void unregisterCallback(UUID characteristicUUID);
+    int getMtu();
 
     IConnectivityService getServiceByUUID(UUID uuid);
     HashMap<UUID, IConnectivityService> getServices();
