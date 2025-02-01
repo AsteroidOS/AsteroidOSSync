@@ -74,4 +74,6 @@
     <string name="cancel">रद्द करा</string>
     <string name="location_disabled_title">स्थान अक्षम</string>
     <string name="location_disabled_message">घड्याळे शोधण्यासाठी स्थान सेवा सक्षम करणे आवश्यक आहे. एकदा पेअर केल्यानंतर तुम्ही ते पुन्हा सुरक्षितपणे अक्षम करू शकता.</string>
+    <string name="intro_slide6_subtitle">घड्याळाची वर्तमान कनेक्शन स्थिती दर्शविण्यासाठी.</string>
+    <string name="intro_slide6_title">फोन सूचना</string>
 </resources>
