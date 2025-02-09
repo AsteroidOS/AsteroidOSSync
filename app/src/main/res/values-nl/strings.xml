@@ -19,9 +19,9 @@
     <string name="settings_icon">Instellingenpictogram</string>
     <string name="weather_icon">Weerpictogram</string>
     <string name="time_icon">Tijdpictogram</string>
-    <string name="grab_a_screenshot">Neem een schermafdruk</string>
+    <string name="grab_a_screenshot">Maak een schermafdruk</string>
     <string name="find_my_watch">Vind mijn horloge</string>
-    <string name="watch_finder">Horlogevinder</string>
+    <string name="watch_finder">Vind je smartwatch</string>
     <string name="phone_is_searching">De telefoon is naar je op zoek!</string>
     <string name="notifications_settings">Meldingsinstellingen</string>
     <string name="intro_slide4_title">Meldingen</string>
@@ -73,4 +73,7 @@
     <string name="location_disabled_message">De locatiedienst moet aanstaan om horloges te vinden. Na het pairen kan je het veilig weer uitzetten.</string>
     <string name="location_disabled_title">Locatie uitgeschakeld</string>
     <string name="apply">Toepassen</string>
+    <string name="OWM_API_KEY">OWM API-sleutel</string>
+    <string name="set_owm_api_key">Aangepaste OWM API-sleutel instellen</string>
+    <string name="cancel">Annuleren</string>
 </resources>
