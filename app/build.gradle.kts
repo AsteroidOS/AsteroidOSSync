@@ -3,15 +3,15 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "org.asteroidos.sync"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 33
         versionCode = 29
-        versionName = "0.29"
+        versionName = "0.29.1"
     }
     buildTypes {
         named("release") {
@@ -35,8 +35,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_9
+        targetCompatibility = JavaVersion.VERSION_1_9
     }
     lint {
         checkReleaseBuilds = true
@@ -57,7 +57,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.android.material:material:1.11.0")
     implementation("com.github.MagneFire:EasyWeather:1.3")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.osmdroid:osmdroid-android:6.1.16")
