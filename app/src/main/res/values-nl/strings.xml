@@ -19,9 +19,9 @@
     <string name="settings_icon">Instellingenpictogram</string>
     <string name="weather_icon">Weerpictogram</string>
     <string name="time_icon">Tijdpictogram</string>
-    <string name="grab_a_screenshot">Neem een schermafdruk</string>
+    <string name="grab_a_screenshot">Maak een schermafdruk</string>
     <string name="find_my_watch">Vind mijn horloge</string>
-    <string name="watch_finder">Horlogevinder</string>
+    <string name="watch_finder">Vind je smartwatch</string>
     <string name="phone_is_searching">De telefoon is naar je op zoek!</string>
     <string name="notifications_settings">Meldingsinstellingen</string>
     <string name="intro_slide4_title">Meldingen</string>
@@ -50,7 +50,7 @@
     <string name="intro_slide2_title">Toegang tot bestanden</string>
     <string name="intro_slide2_subtitle">Om gegevens in het cachegeheugen op te slaan, en schermafdrukken van je horloge te maken.</string>
     <string name="intro_slide3_title">Locatie &amp; Bluetooth</string>
-    <string name="intro_slide3_subtitle">Om te scannen naar nabije Bluetooth Low Energy-apparaten.</string>
+    <string name="intro_slide3_subtitle">Om te scannen naar en verbinden met nabije Bluetooth Low Energy-apparaten.</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy-ondersteuning</string>
     <string name="grant_permission">Toestemming geven</string>
     <string name="please_grant_permissions">Gelieve deze toestemming te geven</string>
@@ -68,4 +68,12 @@
     <string name="show_calls_on_watch">Toon inkomende oproepen</string>
     <string name="intro_slideandroidgo_subtitle">Android Go wordt niet ondersteund omdat daarop geen toegang tot meldingen is en achtergrondprocessen te veel worden beperkt. Rootgebruikers kunnen dit omzeilen door de optie \'ro.config.low_ram\' in build.prop in te stellen op \'false\'.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="intro_slide6_title">Telefoon notificaties</string>
+    <string name="intro_slide6_subtitle">Om de huidige verbindingsstatus van het horloge te tonen.</string>
+    <string name="location_disabled_message">De locatiedienst moet aanstaan om horloges te vinden. Na het pairen kan je het veilig weer uitzetten.</string>
+    <string name="location_disabled_title">Locatie uitgeschakeld</string>
+    <string name="apply">Toepassen</string>
+    <string name="OWM_API_KEY">OWM API-sleutel</string>
+    <string name="set_owm_api_key">Aangepaste OWM API-sleutel instellen</string>
+    <string name="cancel">Annuleren</string>
 </resources>
