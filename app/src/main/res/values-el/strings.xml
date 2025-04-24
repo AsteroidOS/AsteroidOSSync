@@ -74,4 +74,6 @@
     <string name="set_owm_api_key">Ορισμός προσαρμοσμένου κλειδιού OWM API</string>
     <string name="apply">Εφαρμογή</string>
     <string name="cancel">Ακύρωση</string>
+    <string name="intro_slide6_title">Ειδοποιήσεις τηλεφώνου</string>
+    <string name="intro_slide6_subtitle">Για να εμφανίσετε την τρέχουσα κατάσταση σύνδεσης του ρολογιού.</string>
 </resources>
