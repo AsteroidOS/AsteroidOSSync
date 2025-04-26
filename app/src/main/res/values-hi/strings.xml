@@ -29,7 +29,7 @@
     <string name="action_settings">सेटिंग्स</string>
     <string name="title_activity_settings">सेटिंग्स</string>
     <string name="show_calls_on_watch">आने वाली कॉल प्रदर्शित करें</string>
-    <string name="intro_slide6_title">फ़ोन सूचनाएं</string>
+    <string name="intro_slide6_title">फ़ोन/डिवाइस सूचनाएँ</string>
     <string name="location_disabled_title">लोकेशन बंद है</string>
     <string name="cancel">कैंसिल</string>
     <string name="battery_info_icon">बैटरी जानकारी का चिह्न</string>
@@ -44,10 +44,10 @@
     <string name="notification_type_strong_vibra">मजबूत कंपन</string>
     <string name="use_this_area">मौसम के लिए इस क्षेत्र का प्रयोग करें</string>
     <string name="explain_app_prefs">आपके ऐप्लिकेशन के नोटिफ़िकेशन यहां दिखाई देंगे</string>
-    <string name="intro_slide1_subtitle">यह ऐप आपको अपने Android फ़ोन को अपनी AsteroidOS घड़ी के साथ सिंक करने देता है। लेकिन पहले, इसे कुछ अनुमतियों की आवश्यकता है।</string>
+    <string name="intro_slide1_subtitle">यह ऐप डिवाइस को आपके AsteroidOS वॉच से कनेक्ट करता है। सबसे पहले इसे कुछ अनुमतियों की आवश्यकता होती है।</string>
     <string name="intro_slide2_subtitle">डेटा कैश करने और अपनी घड़ी के स्क्रीनशॉट को सहेजने के लिए |</string>
     <string name="intro_slide3_subtitle">स्कैन करने और आस-पास के ब्लूटूथ कम ऊर्जा उपकरणों से कनेक्ट करने के लिए।</string>
-    <string name="intro_slide5_subtitle">इस ऐप को पृष्ठभूमि में चलाने के लिए, कृपया निम्न मेनू में \"AsteroidOS Sync\" के लिए \"बैटरी ऑप्टिमाइज़ेशन\" को अक्षम करें:</string>
+    <string name="intro_slide5_subtitle">संचार सुनिश्चित करने के लिए, आप इस ऐप को हमेशा पृष्ठभूमि में चलने की अनुमति दे सकते हैं:</string>
     <string name="intro_slide6_subtitle">घड़ी की वर्तमान कनेक्शन स्थिति दिखाने के लिए।</string>
     <string name="phone_is_searching">फ़ोन आपको खोज रहा है!</string>
     <string name="watch_finder">घड़ी खोजक</string>
@@ -71,7 +71,7 @@
     <string name="location_disabled_message">घड़ियाँ खोजने के लिए स्थान सेवा को सक्षम करना होगा। एक बार पेयर हो जाने पर आप इसे फिर से सुरक्षित रूप से अक्षम कर सकते हैं।</string>
     <string name="apply">लागू करें</string>
     <string name="dialer">डायलर</string>
-    <string name="intro_phonestateslide_subtitle">घड़ी पर इनकमिंग कॉल दिखाने के लिए, और कॉल करने वाले का नाम प्रदर्शित करने के लिए।</string>
+    <string name="intro_phonestateslide_subtitle">घड़ी पर इनकमिंग कॉल दिखाने के लिए।</string>
     <string name="intro_phonestateslide_title">फोन और कॉन्टेक्ट्स</string>
     <string name="intro_slideandroidgo_subtitle">Android Go समर्थित नहीं है क्योंकि यह सूचना एक्सेस की अनुमति नहीं देता है और बैकग्राउंड प्रोसेस को प्रतिबंधित करता है। रूट उपयोगकर्ताओं के लिए एक समाधान build.prop फ़ाइल में \"ro.config.low_ram\" फ़्लैग को \"false\" पर सेट करना है।</string>
     <string name="set_owm_api_key">कस्टम OWM API कुंजी सेट करें</string>
