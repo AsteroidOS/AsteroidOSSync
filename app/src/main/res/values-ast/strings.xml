@@ -36,5 +36,5 @@
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="notification_type_ringtone">Timbre</string>
     <string name="intro_phonestateslide_title">Teléfonu y contautos</string>
-    <string name="intro_phonestateslide_subtitle"></string>
+    <string name="intro_phonestateslide_subtitle"/>
 </resources>
