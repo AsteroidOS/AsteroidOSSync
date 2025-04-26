@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="generic_ok">Ok</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic_ok">Ok</string>
     <string name="unknown_device">Onbekannten Apparat</string>
     <string name="nothing_found">Keng Aueren fonnt</string>
     <string name="one_found">Eng Auer fonnt</string>
@@ -47,4 +48,4 @@
     <string name="intro_slideerror_title">Ennerstëtzung fir Bluetooth Low Energy</string>
     <string name="grant_permission">Erlaabnes erdeelen</string>
     <string name="synchronize_weather">Wieder automatesch sichen</string>
-    </resources>
+</resources>
