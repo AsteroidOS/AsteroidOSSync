@@ -51,7 +51,7 @@
     <string name="intro_slide4_title">Notifications</string>
     <string name="intro_slide4_subtitle">To sync notifications with your watch, allow \"AsteroidOS Sync\" in the following menu:</string>
     <string name="intro_slide5_title">Battery Optimization</string>
-    <string name="intro_slide5_subtitle">To let this app run in the background, please disable \"Battery Optimization\" for AsteroidOS Sync in the following menu:</string>
+    <string name="intro_slide5_subtitle">To ensure communication, you can allow this app to always run in the background:</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy support</string>
     <string name="intro_slideerror_subtitle">This device does not support Bluetooth Low Energy.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
@@ -75,6 +75,6 @@
     <string name="cancel">Cancel</string>
     <string name="location_disabled_message">In order to find watches the location service has to be enabled. Once paired you can safely disable it again.</string>
     <string name="location_disabled_title">Location disabled</string>
-    <string name="intro_slide6_title">Phone Notifications</string>
+    <string name="intro_slide6_title">Phone/device Notifications</string>
     <string name="intro_slide6_subtitle">To show the current connection state of the watch.</string>
 </resources>
