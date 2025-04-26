@@ -43,7 +43,7 @@
     <string name="use_this_area">Use this area for weather</string>
     <string name="app_icon">Application icon</string>
     <string name="intro_slide1_title">Welcome</string>
-    <string name="intro_slide1_subtitle">This app connects the device to your AsteroidOS watch.\\nFirst it needs some permissions.</string>
+    <string name="intro_slide1_subtitle">This app connects the device to your AsteroidOS watch. First it needs some permissions.</string>
     <string name="intro_slide2_title">File access</string>
     <string name="intro_slide2_subtitle">To cache data and save screenshots of your watch.</string>
     <string name="intro_slide3_title">Location &amp; Bluetooth</string>
@@ -65,7 +65,7 @@
     <string name="switch_phone_notifications">Silence the phone when connected</string>
     <string name="notification_silent_icon">Notification Silent Icon</string>
     <string name="notification_type_ringtone">Ringtone</string>
-    <string name="intro_phonestateslide_subtitle">To show incoming calls on the watch, and for displaying the name of the caller.</string>
+    <string name="intro_phonestateslide_subtitle">To show incoming calls on the watch.</string>
     <string name="intro_phonestateslide_title">Phone &amp; Contacts</string>
     <string name="show_calls_on_watch">Display incoming calls</string>
     <string name="dialer">Dialer</string>
