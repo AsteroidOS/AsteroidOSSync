@@ -43,7 +43,7 @@
     <string name="use_this_area">Use this area for weather</string>
     <string name="app_icon">Application icon</string>
     <string name="intro_slide1_title">Welcome</string>
-    <string name="intro_slide1_subtitle">This app lets you sync your Android phone with your AsteroidOS watch. But first, it needs some permissions.</string>
+    <string name="intro_slide1_subtitle">This app connects the device to your AsteroidOS watch.\\nFirst it needs some permissions.</string>
     <string name="intro_slide2_title">File access</string>
     <string name="intro_slide2_subtitle">To cache data and save screenshots of your watch.</string>
     <string name="intro_slide3_title">Location &amp; Bluetooth</string>
