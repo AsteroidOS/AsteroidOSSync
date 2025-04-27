@@ -44,13 +44,13 @@
     <string name="use_this_area">استفاده از این ناحیه برای آب‌وهوا</string>
     <string name="app_icon">نقشک برنامه</string>
     <string name="intro_slide1_title">خوش آمدید</string>
-    <string name="intro_slide1_subtitle">این کاره، اجازهٔ همگام‌سازی تلفن اندرویدیتان با ساعت استرویدتان را می‌دهد. ولی نخست، به چند دسترسی نیاز دارد.</string>
+    <string name="intro_slide1_subtitle">این کاره افزاره را به ساعت استرویدتان وصل می‌کند. نخست نیاز به چند اجازه دارد.</string>
     <string name="intro_slide2_title">دسترسی پرونده</string>
     <string name="intro_slide2_subtitle">برای انبارش داده و ذخیرهٔ نماگرفت از ساعتتان.</string>
     <string name="intro_slide3_title">مکان و بلوتوث</string>
     <string name="intro_slide3_subtitle">برای پویش و وصل شدن به دستگاه‌های بلوتوث کم‌مصرف.</string>
     <string name="intro_slide5_title">بهینه‌سازی باتری</string>
-    <string name="intro_slide5_subtitle">برای اجازه به اجرای این کاره در پس‌زمینه، لطفاً در فهرستی که خواهد آمد «بهینه‌ساز باتری» را برای AsteroidOS Sync از کار بیندازید:</string>
+    <string name="intro_slide5_subtitle">برای اطمینان از ارتباط، می‌توانید اجازه دهید کاره همواره در پس‌زمینه اجرا شود:</string>
     <string name="intro_slideerror_title">پشتیبانی بلوتوث کم‌مصرف</string>
     <string name="grant_permission">اعطای دسترسی</string>
     <string name="please_grant_permissions">لطفاً این دسترسی را اعطا کنید</string>
@@ -65,7 +65,7 @@
     <string name="dialer">شماره‌گیر</string>
     <string name="show_calls_on_watch">نمایش تماس‌های ورودی</string>
     <string name="intro_phonestateslide_title">تلفن و آشنایان</string>
-    <string name="intro_phonestateslide_subtitle">برای نمایش تماس‌های ورودی روی ساعت و نشان دادن نام تماس گیرنده.</string>
+    <string name="intro_phonestateslide_subtitle">برای نمایش تماس‌های ورودی روی ساعت.</string>
     <string name="intro_slideandroidgo_subtitle">از آن‌چا که اندروید گو اجازهٔ دسترسی به آگاهی‌ها را نداده و فرایندهای پس‌زمینه را محدود می‌کند، پشتیبانی نمی‌شود. یک راه دور زدن برای کاربران ریشه‌ای، تنظیم پرچم ro.config.low_ram در پروندهٔ build.prop به false است.</string>
     <string name="intro_slideandroidgo_title">اندروید گو</string>
     <string name="set_owm_api_key">تنظیم کلید سفارشی رابط برنامه‌نویسی OWM</string>
@@ -74,6 +74,6 @@
     <string name="OWM_API_KEY">کلید رابط برنامه‌نویسی OWM</string>
     <string name="location_disabled_message">خدمت مکانی باید برای یافتن ساعت‌ها به کار افتاده باشد. پس از جفت شدن، می‌توانید دوباره از کار بیندازیدش.</string>
     <string name="location_disabled_title">مکان از کار افتاده</string>
-    <string name="intro_slide6_title">آگاهی‌های تلفن</string>
+    <string name="intro_slide6_title">آگاهی‌های تلفن یا افزاره</string>
     <string name="intro_slide6_subtitle">برای نمایش وضعیت اتّصال کنونی ساعت.</string>
 </resources>
