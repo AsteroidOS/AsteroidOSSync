@@ -44,13 +44,13 @@
     <string name="use_this_area">Diesen Ort für Wetterinformationen nutzen</string>
     <string name="app_icon">Anwendungssymbol</string>
     <string name="intro_slide1_title">Willkommen</string>
-    <string name="intro_slide1_subtitle">Mit dieser Anwendung kannst du dein Android-Telefon mit deiner AsteroidOS-Uhr synchronisieren. Aber zuerst benötigst du einige Berechtigungen.</string>
+    <string name="intro_slide1_subtitle">Diese App verbindet das Gerät mit deiner AsteroidOS-Uhr. Aber zuerst benötigt sie einige Berechtigungen.</string>
     <string name="intro_slide2_title">Dateizugriff</string>
     <string name="intro_slide2_subtitle">Diese Berechtigung wird benötigt, um Daten zwischenzuspeichern und Screenshots deiner Uhr zu speichern.</string>
     <string name="intro_slide3_title">Standort &amp; Bluetooth</string>
     <string name="intro_slide3_subtitle">Um Bluetooth-Geräte in der Nähe zu suchen und verbinden.</string>
     <string name="intro_slide5_title">Batterieoptimierung</string>
-    <string name="intro_slide5_subtitle">Um diese App im Hintergrund laufen zu lassen, deaktiviere bitte \"Batterieoptimierung\" für AsteroidOS Sync im folgenden Menü:</string>
+    <string name="intro_slide5_subtitle">Um die Kommunikation sicherzustellen, kannst du zulassen, dass diese App immer im Hintergrund ausgeführt wird:</string>
     <string name="intro_slideerror_title">Unterstützung für Bluetooth Low Energy</string>
     <string name="grant_permission">Erlaubnis erteilen</string>
     <string name="please_grant_permissions">Bitte diese Erlaubnis gewähren</string>
@@ -62,7 +62,7 @@
     <string name="title_activity_settings">Einstellungen</string>
     <string name="notification_silent_icon">Symbol für stille Benachrichtigung</string>
     <string name="notification_type_ringtone">Klingelton</string>
-    <string name="intro_phonestateslide_subtitle">Um eingehende Anrufe und den Namen des Anrufers auf der Uhr anzuzeigen.</string>
+    <string name="intro_phonestateslide_subtitle">Um eingehende Anrufe auf der Uhr anzuzeigen.</string>
     <string name="intro_phonestateslide_title">Telefon und Kontakte</string>
     <string name="show_calls_on_watch">Zeige eingehende Anrufe</string>
     <string name="dialer">Telefon</string>
@@ -74,6 +74,6 @@
     <string name="set_owm_api_key">OWM API Schlüssel eingeben</string>
     <string name="location_disabled_message">Um Uhren zu finden, muss der Ortungsdienst aktiviert sein. Nach der Kopplung kann er wieder sicher deaktiviert werden.</string>
     <string name="location_disabled_title">Standortdienst deaktiviert</string>
-    <string name="intro_slide6_title">Telefon-Benachrichtigungen</string>
+    <string name="intro_slide6_title">Telefon-/Gerätebenachrichtigungen</string>
     <string name="intro_slide6_subtitle">Zur Anzeige des aktuellen Verbindungsstatus der Uhr.</string>
 </resources>
