@@ -45,13 +45,13 @@
     <string name="use_this_area">שימוש בשטח זה למזג אוויר</string>
     <string name="app_icon">סמל יישומון</string>
     <string name="intro_slide1_title">ברוך בואך</string>
-    <string name="intro_slide1_subtitle">יישומון זה מאפשר לך לסנכרן את טלפון ה־Android שלך עם שעון ה־AsteroidOS שלך. אך תחילה, נדרשות הרשאות לכך.</string>
+    <string name="intro_slide1_subtitle">יישומון זה מחבר את המכשיר שלך לשעון ה־AsteroidOS שלך. תחילה, נדרשות הרשאות לכך.</string>
     <string name="intro_slide2_title">גישה לקבצים</string>
     <string name="intro_slide2_subtitle">לאחסון נתונים ושמירת צילומי מסך של השעון שלך.</string>
     <string name="intro_slide3_title">מיקום ו־Bluetooth</string>
     <string name="intro_slide3_subtitle">לסריקה ולהתחברות להתקני Bluetooth קרובים עם צריכת אנרגיה נמוכה.</string>
     <string name="intro_slide5_title">מטוב סוללה</string>
-    <string name="intro_slide5_subtitle">כדי לאפשר ליישומון זה לפעול ברקע, נא להשבית את „מטוב סוללה” עבור הסנכרון של AsteroidOS בתפריט הבא:</string>
+    <string name="intro_slide5_subtitle">כדי לוודא תקשורת, כדאי לאפשר ליישומון הזה לרוץ ברקע תמיד:</string>
     <string name="intro_slideerror_title">תמיכה בבלוטות׳ בצריכת אנרגיה נמוכה</string>
     <string name="grant_permission">הענקת הרשאות</string>
     <string name="please_grant_permissions">נא להעניק הרשאה זו</string>
@@ -66,7 +66,7 @@
     <string name="dialer">חייגן</string>
     <string name="show_calls_on_watch">הצגת שיחות נכנסות</string>
     <string name="intro_phonestateslide_title">טלפון ואנשי קשר</string>
-    <string name="intro_phonestateslide_subtitle">כדי להציג שיחות נכנסות בשעון עם שם המתקשר.</string>
+    <string name="intro_phonestateslide_subtitle">כדי להציג שיחות נכנסות.</string>
     <string name="intro_slideandroidgo_subtitle">אין תמיכה ב־Android Go כיוון שאינו מרשה גישה להתראות ומגביל שירותי רקע. ניתן לעקוף את זה דרך משתמש על (root) על ידי הגדרת הדגלון „ro.config.low_ram” בקובץ build.prod ל־„false”.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="OWM_API_KEY">מפתח API ל־OWM</string>
@@ -75,6 +75,6 @@
     <string name="set_owm_api_key">הגדרת מפתח API משלך ל־OWM</string>
     <string name="location_disabled_title">המיקום מושבת</string>
     <string name="location_disabled_message">כדי למצוא שעונים, יש להפעיל את שירות המיקום. לאחר הצימוד אפשר להשבית אותו שוב.</string>
-    <string name="intro_slide6_title">התראות בטלפון</string>
+    <string name="intro_slide6_title">התראות בטלפון/מכשיר</string>
     <string name="intro_slide6_subtitle">כדי להציג את מצב החיבורים הנוכחיים של השעון.</string>
 </resources>
