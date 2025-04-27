@@ -43,7 +43,7 @@
     <string name="use_this_area">Utilizar esta área para a meteorologia</string>
     <string name="app_icon">Ícone da aplicação</string>
     <string name="intro_slide1_title">Bem-vindo</string>
-    <string name="intro_slide1_subtitle">Esta aplicação permite-lhe sincronizar o seu telemóvel Android com o seu relógio AsteroidOS. Mas primeiro, ela precisa de algumas permissões.</string>
+    <string name="intro_slide1_subtitle">Esta app liga o dispositivo ao seu relógio AsteroidOS. Antes de tudo, necessita de permissões.</string>
     <string name="intro_slide2_title">Acesso aos ficheiros</string>
     <string name="intro_slide2_subtitle">Para armazenar os dados em cache e guardar as capturas de ecrã do seu relógio.</string>
     <string name="intro_slide3_title">Localização &amp; Bluetooth</string>
@@ -65,10 +65,10 @@
     <string name="dialer">Marcador</string>
     <string name="show_calls_on_watch">Exibir chamadas a receber</string>
     <string name="intro_phonestateslide_title">Telefone &amp; Contactos</string>
-    <string name="intro_phonestateslide_subtitle">Para mostrar as chamadas a receber no relógio e para exibir o nome do chamador.</string>
+    <string name="intro_phonestateslide_subtitle">Para mostrar as chamadas a receber no relógio.</string>
     <string name="intro_slideandroidgo_subtitle">O Android Go não é suportado, porque não permite o acesso às notificações e restringe os processos em segundo plano. Uma solução alternativa para utilizadores root é definir o marcador \"ro.config.low_ram\" no ficheiro build.prop como \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
-    <string name="intro_slide6_title">Notificações de telefone</string>
+    <string name="intro_slide6_title">Notificações de telefone/dispositivo</string>
     <string name="intro_slide6_subtitle">Para mostrar o estado atual da ligação do relógio.</string>
     <string name="location_disabled_title">Localização desativada</string>
     <string name="apply">Aplicar</string>
