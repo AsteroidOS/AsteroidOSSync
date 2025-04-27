@@ -65,7 +65,7 @@
     <string name="dialer">Vytáčení</string>
     <string name="show_calls_on_watch">Zobrazovat příchozí hovory</string>
     <string name="intro_phonestateslide_title">Telefon a kontakty</string>
-    <string name="intro_phonestateslide_subtitle">Pro zobrazení příchozích hovorů na hodinkách a pro zobrazení jména volajícího.</string>
+    <string name="intro_phonestateslide_subtitle">Pro zobrazení příchozích hovorů na hodinkách.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go není podporován, protože neumožňuje přístup k upozorněním a omezuje procesy, spuštěné na pozadí. Obejití tohoto omezení pro uživatele s přístupovými právy na úrovni správce systému (root) je nastavit příznak „ro.config.low_ram“ v souboru build.prop na hodnotu „false“.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="cancel">Zrušit</string>
