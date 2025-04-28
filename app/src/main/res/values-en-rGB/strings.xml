@@ -22,7 +22,7 @@
     <string name="intro_slide3_title">Location &amp; Bluetooth</string>
     <string name="intro_slide2_subtitle">To cache data and save screenshots of your watch.</string>
     <string name="intro_slide2_title">File access</string>
-    <string name="intro_slide1_subtitle">This app lets you sync your Android phone with your AsteroidOS watch. But first, it needs some permissions.</string>
+    <string name="intro_slide1_subtitle">This app connects the device to your AsteroidOS watch. First, it needs some permissions.</string>
     <string name="intro_slide1_title">Welcome</string>
     <string name="intro_slideerror_subtitle">This device does not support Bluetooth Low Energy.</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy support</string>
@@ -37,7 +37,7 @@
     <string name="cancel">Cancel</string>
     <string name="apply">Apply</string>
     <string name="OWM_API_KEY">OWM API Key</string>
-    <string name="intro_slide6_title">Phone Notifications</string>
+    <string name="intro_slide6_title">Phone/device Notifications</string>
     <string name="location_disabled_title">Location disabled</string>
     <string name="synchronize_time">Synchronise time</string>
     <string name="show_calls_on_watch">Display incoming calls</string>
@@ -69,11 +69,11 @@
     <string name="grab_a_screenshot">Grab a screenshot</string>
     <string name="finder_icon">Finder icon</string>
     <string name="screenshot_icon">Screenshot icon</string>
-    <string name="intro_slide5_subtitle">To let this app run in the background, please disable \"Battery Optimisation\" for AsteroidOS Sync in the following menu:</string>
+    <string name="intro_slide5_subtitle">To ensure communication, you can allow this app to always run in the background:</string>
     <string name="position_indicator">Position Indicator</string>
     <string name="notification_type_silent">Silent</string>
     <string name="intro_slide5_title">Battery Optimisation</string>
-    <string name="intro_phonestateslide_subtitle">To show incoming calls on the watch, and for displaying the name of the caller.</string>
+    <string name="intro_phonestateslide_subtitle">To show incoming calls on the watch.</string>
     <string name="connecting">Connecting…</string>
     <string name="n_found">Found %d watches</string>
 </resources>
