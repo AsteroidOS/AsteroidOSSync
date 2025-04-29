@@ -44,13 +44,13 @@
     <string name="use_this_area">Используйте эту область для погоды</string>
     <string name="app_icon">Значок приложения</string>
     <string name="intro_slide1_title">Добро пожаловать</string>
-    <string name="intro_slide1_subtitle">Это приложение позволяет синхронизировать ваш телефон на Android с часами на AsteroidOS. Для этого, приложению нужны некоторые разрешения.</string>
+    <string name="intro_slide1_subtitle">Это приложение подключает устройство к вашим часам AsteroidsOS. Для этого, приложению нужны некоторые разрешения.</string>
     <string name="intro_slide2_title">Доступ к файлам</string>
     <string name="intro_slide2_subtitle">Для кэширования данных и сохранения скриншотов ваших часов.</string>
     <string name="intro_slide3_title">Местоположение и Bluetooth</string>
     <string name="intro_slide3_subtitle">Сканировать и подключиться к ближайшим Bluetooth LE устройствам.</string>
     <string name="intro_slide5_title">Оптимизация батареи</string>
-    <string name="intro_slide5_subtitle">Чтобы разрешить этому приложению работать в фоновом режиме, пожалуйста, отключите \"Оптимизацию батареи\" для AsteroidOS Sync в следующем меню:</string>
+    <string name="intro_slide5_subtitle">Чтобы обеспечить связь, вы можете разрешить этому приложению всегда работать в фоновом режиме:</string>
     <string name="intro_slideerror_title">Поддержка Bluetooth LE</string>
     <string name="grant_permission">Выдать разрешение</string>
     <string name="please_grant_permissions">Пожалуйста, дайте это разрешение</string>
@@ -65,7 +65,7 @@
     <string name="dialer">Номеронабиратель</string>
     <string name="show_calls_on_watch">Показывать входящие звонки</string>
     <string name="intro_phonestateslide_title">Телефон и контакты</string>
-    <string name="intro_phonestateslide_subtitle">Чтобы показать входящие звонки на часах, и для отображения имени звонящего.</string>
+    <string name="intro_phonestateslide_subtitle">Для отображения входящих вызовов на часах.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go не поддерживается, поскольку он не разрешает доступ к уведомлениям и ограничивает фоновые процессы. Обходной путь для пользователей root - установить для флага \"ro.config.low_ram\" в файле build.prop значение \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="OWM_API_KEY">Ключ API OWM</string>
@@ -74,6 +74,6 @@
     <string name="apply">Применить</string>
     <string name="location_disabled_message">Для поиска часов необходимо включить сервисы определения местоположения. После привязки устройства вы снова сможете их выключить.</string>
     <string name="location_disabled_title">Служба определения местоположения выключена</string>
-    <string name="intro_slide6_title">Уведомления телефона</string>
+    <string name="intro_slide6_title">Уведомлениe по телефону/устройству</string>
     <string name="intro_slide6_subtitle">Показывать текущее состояние соединения на часах.</string>
 </resources>
