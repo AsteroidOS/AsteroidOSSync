@@ -41,7 +41,7 @@
     <string name="use_this_area">Použite túto oblasť na počasie</string>
     <string name="app_icon">Ikona aplikácie</string>
     <string name="intro_slide1_title">Vitajte</string>
-    <string name="intro_slide1_subtitle">Táto aplikácia vám umožňuje synchronizovať váš telefón Android s hodinkami AsteroidOS. Ale najprv potrebuje niekoľko povolení.</string>
+    <string name="intro_slide1_subtitle">Táto aplikácia sa pripája s hodinkami AsteroidOS. Ale najprv potrebuje niekoľko povolení.</string>
     <string name="intro_slide2_title">Prístup k súborom</string>
     <string name="intro_slide2_subtitle">Ak chcete do vyrovnávacej pamäte ukladať dáta a ukladať snímky obrazovky vašich hodiniek.</string>
     <string name="intro_slide3_title">Umiestnenie a Bluetooth</string>
