@@ -50,7 +50,7 @@
     <string name="intro_slide3_subtitle">Para procurar por e ligar a aparelhos de Bluetooth Low Energy próximos.</string>
     <string name="intro_slide4_subtitle">Para sincronizar notificações com o relógio, permita \"AsteroidOS Sync\" no seguinte menu:</string>
     <string name="intro_slide5_title">Otimização da bateria</string>
-    <string name="intro_slide5_subtitle">Para permitir que esta aplicação seja executada em segundo plano, por favor desative \"Otimização de bateria\" para o AsteroidOS Sync no menu seguinte:</string>
+    <string name="intro_slide5_subtitle">Para garantir a comunicação, pode permitir que esta app seja sempre executada em segundo plano:</string>
     <string name="intro_slideerror_title">Este dispositivo suporta Bluetooth de baixa energia</string>
     <string name="grant_permission">Conceda permissão</string>
     <string name="please_grant_permissions">Por favor conceda permissão</string>
