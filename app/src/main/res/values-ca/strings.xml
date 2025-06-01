@@ -65,6 +65,10 @@
     <string name="dialer">Marcador</string>
     <string name="show_calls_on_watch">Visibilitat de trucades entrants</string>
     <string name="intro_phonestateslide_title">Telèfon i contactes</string>
-    <string name="intro_phonestateslide_subtitle">Per a veure les trucades entrants i el nom de qui truca al rellotge.</string>
+    <string name="intro_phonestateslide_subtitle">Per a veure les trucades entrants al rellotge.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="intro_slide6_subtitle">Per a mostrar l’estat actual de la connexió al rellotge.</string>
+    <string name="intro_slide6_title">Notificacions del telèfon/dispositiu</string>
+    <string name="apply">Aplica</string>
+    <string name="cancel">Cancel·la</string>
 </resources>
