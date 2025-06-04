@@ -5,7 +5,7 @@
     <string name="n_found">%d घड़ियाँ मिलीं</string>
     <string name="unknown_device">अज्ञात डिवाइस</string>
     <string name="nothing_found">कोई घड़ियाँ नहीं मिलीं</string>
-    <string name="connected">कनेक्ट हुआ</string>
+    <string name="connected">कोनेक्टिड</string>
     <string name="connecting">कनेक्ट हो रहा है…</string>
     <string name="connected_formatted">%s से कनेक्ट किया गया</string>
     <string name="searching">घड़ियों की खोज की जा रही है</string>
