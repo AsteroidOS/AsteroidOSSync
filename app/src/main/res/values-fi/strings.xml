@@ -44,13 +44,13 @@
     <string name="use_this_area">Käytä tätä aluetta säälle</string>
     <string name="app_icon">Sovelluskuvake</string>
     <string name="intro_slide1_title">Tervetuloa</string>
-    <string name="intro_slide1_subtitle">Tämän sovelluksen avulla voit synkronoida Android-puhelimesi AsteroidOS-kellosi kanssa. Mutta ensin se tarvitsee joitain käyttöoikeuksia.</string>
+    <string name="intro_slide1_subtitle">Tämän sovelluksen avulla voit synkronoida Android-puhelimesi AsteroidOS-kellosi kanssa, mutta ensin se tarvitsee joitain käyttöoikeuksia.</string>
     <string name="intro_slide2_title">Pääsy tiedostoihin</string>
     <string name="intro_slide2_subtitle">Tiedostojen säilömiseksi välimuistiin ja kellon kuvakaappauksien tallentamiseksi.</string>
     <string name="intro_slide3_title">Sijainti ja Bluetooth</string>
     <string name="intro_slide3_subtitle">Skannataksesi ja muodostaaksesi yhteyden lähellä oleviin Bluetooth Low Energy -laitteisiin.</string>
     <string name="intro_slide5_title">Akun optimointi</string>
-    <string name="intro_slide5_subtitle">Jotta tämä sovellus toimisi taustalla, sinun on poistettava AsteroidOS Syncin \"Akun optimointi\" käytöstä seuraavasta valikosta:</string>
+    <string name="intro_slide5_subtitle">Jatkuvan kommunikoinnin varmistamiseksi, voit antaa sovellukselle luvan pysyä käynnissä taustalla:</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy tuki</string>
     <string name="grant_permission">Myönnä käyttöoikeus</string>
     <string name="please_grant_permissions">Myönnä tämä käyttöoikeus</string>
@@ -65,7 +65,7 @@
     <string name="dialer">Numeron valitsin</string>
     <string name="show_calls_on_watch">Näytä saapuvat puhelut</string>
     <string name="intro_phonestateslide_title">Puhelin ja yhteystiedot</string>
-    <string name="intro_phonestateslide_subtitle">Saapuvien puhelujen näyttäminen kellossa ja soittajan nimen näyttäminen.</string>
+    <string name="intro_phonestateslide_subtitle">Saapuvien puheluiden näyttäminen kellossa.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go ei ole tuettu koska se ei tue pääsyjä ilmoituksiin ja rajoittaa taustaprosesseja. Väliaikainen korjaus root-käyttäjille on asettaa \"ro.config.low_ram\" flag build.prop tiedostiossa \"false\" :seksi.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="set_owm_api_key">Aseta mukautettu OWM API avain</string>
@@ -74,6 +74,6 @@
     <string name="cancel">Peruuta</string>
     <string name="location_disabled_message">Kellojen löytäminen edellyttää, että paikannuspalvelu on käytössä. Kun pariliitos on muodostettu, voit turvallisesti poistaa sen käytöstä uudelleen.</string>
     <string name="location_disabled_title">Sijainti poistettu käytöstä</string>
-    <string name="intro_slide6_title">Puhelin-ilmoitukset</string>
+    <string name="intro_slide6_title">Puhelin/laite-ilmoitukset</string>
     <string name="intro_slide6_subtitle">Kellon nykyisen yhteystilan näyttäminen.</string>
 </resources>
