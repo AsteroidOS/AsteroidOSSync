@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="generic_ok">قوۊل</string>
+    <string name="searching">من پیتینیڌن ساعتا</string>
+    <string name="unknown_device">دسگا نشناخته</string>
 </resources>
