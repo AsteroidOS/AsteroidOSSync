@@ -72,7 +72,7 @@
     <string name="intro_slide6_subtitle">Per mostare l\'attuale stato di connesione dell\'orologio.</string>
     <string name="cancel">Annulla</string>
     <string name="intro_slide6_title">Notifiche del telefono/dispositivo</string>
-    <string name="location_disabled_message">Per trovare orologi il servizio di posizione deve essere attivato. Una volta abbinato all\'orologio potrai tranquillamente disattivarlo.</string>
+    <string name="location_disabled_message">Per trovare orologi il servizio di posizione deve essere attivo. Una volta abbinato all\'orologio potrai tranquillamente disattivarlo.</string>
     <string name="location_disabled_title">Posizione disattivata</string>
     <string name="OWM_API_KEY">Chiave API per OWM</string>
     <string name="set_owm_api_key">Imposta la chiave API per OWM</string>
