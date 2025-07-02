@@ -19,7 +19,7 @@
     <string name="settings_icon">Icona impostazioni</string>
     <string name="weather_icon">Icona meteo</string>
     <string name="time_icon">Icona ora</string>
-    <string name="grab_a_screenshot">Esegui una cattura schermo</string>
+    <string name="grab_a_screenshot">Esegui cattura schermo</string>
     <string name="find_my_watch">Trova il mio orologio</string>
     <string name="watch_finder">Ricerca orologio</string>
     <string name="phone_is_searching">Il telefono ti sta cercando!</string>
@@ -44,9 +44,9 @@
     <string name="intro_slide1_title">Benvenuto</string>
     <string name="intro_slide1_subtitle">Questa app connette il tuo dispositivo con il tuo orologio AsteroidOS. Prima ha bisogno di alcune autorizzazioni.</string>
     <string name="intro_slide2_title">Accesso ai file</string>
-    <string name="intro_slide2_subtitle">Per salvare dati e salvare screenshot del tuo orologio.</string>
+    <string name="intro_slide2_subtitle">Per memorizzare i dati nella cache e salvare le catture schermo del tuo orologio.</string>
     <string name="intro_slide3_title">Posizione e Bluetooth</string>
-    <string name="intro_slide3_subtitle">Per ricercare e collegarsi ai dispositivi Bluetooth Low Energy nelle vicinanze.</string>
+    <string name="intro_slide3_subtitle">Per scansionare e collegarsi ai dispositivi Bluetooth Low Energy nelle vicinanze.</string>
     <string name="intro_slide5_title">Ottimizzazione batteria</string>
     <string name="intro_slide5_subtitle">Per garantire la comunicazione, puoi consentire a questa app di essere sempre in esecuzione in background:</string>
     <string name="intro_slideerror_title">Supporto Bluetooth Low Energy</string>
@@ -55,7 +55,7 @@
     <string name="impassable_slide">Si prega di consentire l\'autorizzazione</string>
     <string name="notification_type_default">Predefinito</string>
     <string name="use_this_area">Utilizza questa zona per il meteo</string>
-    <string name="synchronize_weather">Individua automaticamente il meteo</string>
+    <string name="synchronize_weather">Individua automaticamente località meteo</string>
     <string name="title_activity_settings_activity">Impostazioni</string>
     <string name="action_settings">Impostazioni</string>
     <string name="title_activity_settings">Impostazioni</string>
