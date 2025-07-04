@@ -419,16 +419,20 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
         }
     }
 
+    private boolean isBound = false;
+
     @Override
     protected void onResume() {
         super.onResume();
-        bindService(mSyncServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
+        isBound = bindService(mSyncServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unbindService(mConnection);
+        if (isBound) {
+            unbindService(mConnection);
+        }
     }
 
     @Override
