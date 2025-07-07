@@ -45,12 +45,12 @@
     <string name="app_icon">Ikona aplikace</string>
     <string name="intro_slide1_title">Vítejte</string>
     <string name="intro_slide5_title">Optimalizace spotřeby energie</string>
-    <string name="intro_slide5_subtitle">Aby tato aplikace mohla zůstat spuštěná na pozadí, prosím vypněte v následující nabídce „Optimalizaci spotřeby energie“ pro AsteroidOS Sync:</string>
+    <string name="intro_slide5_subtitle">Pro zajištění komunikace můžete povolit aplikaci vždy běžet na pozadí:</string>
     <string name="intro_slideerror_title">Podpora Bluetooth Low Energy</string>
     <string name="grant_permission">Udělit oprávnění</string>
     <string name="please_grant_permissions">Prosíme udělte toto oprávnění</string>
     <string name="impassable_slide">Prosíme udělte toto oprávnění</string>
-    <string name="intro_slide1_subtitle">Tato aplikace umožňuje synchronizaci telefonu s Android s hodinkami s AsteroidOS. K tomu je třeba několik oprávnění.</string>
+    <string name="intro_slide1_subtitle">Tato aplikace spojí zařízení s vašimi hodinkami s AsteroidOS. K tomu je třeba několik oprávnění.</string>
     <string name="intro_slide2_title">Přístup k souborům</string>
     <string name="intro_slide2_subtitle">Pro mezipaměť dat a ukládání snímků obrazovky vašich hodinek.</string>
     <string name="intro_slide3_title">Umístění a Bluetooth</string>
@@ -74,6 +74,6 @@
     <string name="set_owm_api_key">Nastavit vlastní klíč k OWM API</string>
     <string name="OWM_API_KEY">Klíč k OWM API</string>
     <string name="apply">Použít</string>
-    <string name="intro_slide6_title">Upozornění na telefon</string>
+    <string name="intro_slide6_title">Upozornění na telefon/zařízení</string>
     <string name="intro_slide6_subtitle">Pro zobrazení stávajícího stavu připojení hodinek.</string>
 </resources>
