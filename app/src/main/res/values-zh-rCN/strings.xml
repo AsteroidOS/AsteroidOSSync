@@ -44,7 +44,7 @@
     <string name="use_this_area">使用此地区的天气</string>
     <string name="app_icon">应用程序图标</string>
     <string name="intro_slide1_title">欢迎</string>
-    <string name="intro_slide1_subtitle">这款应用能将设备连接到您的 AsteroidOS 设备，不过首先需要获取一些权限。</string>
+    <string name="intro_slide1_subtitle">这款应用能将设备连接到您的 AsteroidOS 设备，不过首先需要授予一些权限。</string>
     <string name="intro_slide2_title">文件访问</string>
     <string name="intro_slide2_subtitle">用于在缓存数据和保存截图。</string>
     <string name="intro_slide3_title">位置与蓝牙</string>
@@ -65,7 +65,7 @@
     <string name="dialer">拨号</string>
     <string name="show_calls_on_watch">来电提醒</string>
     <string name="intro_phonestateslide_title">来电与联系人</string>
-    <string name="intro_phonestateslide_subtitle">为了在手表上显示来电。</string>
+    <string name="intro_phonestateslide_subtitle">为了在手表上显示来电信息。</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="intro_slideandroidgo_subtitle">本应用不支持 Android Go 系统，因为 Android Go 禁止读取通知并且严格限制后台处理。根用户的变通方案是将 build.prop 文件中的“ro.config.low_ram”标志设置为“false”。</string>
     <string name="location_disabled_title">定位服务已关</string>
@@ -74,6 +74,6 @@
     <string name="OWM_API_KEY">OWM 的 API 密钥</string>
     <string name="apply">应用</string>
     <string name="cancel">取消</string>
-    <string name="intro_slide6_title">电话通知</string>
+    <string name="intro_slide6_title">电话/设备通知</string>
     <string name="intro_slide6_subtitle">显示手表当前的连接状态。</string>
 </resources>
