@@ -49,7 +49,7 @@
     <string name="intro_slide4_title">Oznámenia</string>
     <string name="intro_slide4_subtitle">Ak chcete synchronizovať oznámenia s hodinkami, povoľte \"AsteroidOS Sync\" v nasledujúcom menu:</string>
     <string name="intro_slide5_title">Optimalizácia spotreby batérie</string>
-    <string name="intro_slide5_subtitle">Ak chcete túto aplikáciu nechať bežať v pozadí, prosím vypnite položku \"Optimalizácia batérie\" pre AsteroidOS Sync v nasledujúcom menu:</string>
+    <string name="intro_slide5_subtitle">Ak chcete zabezpečiť komunikáciu, môžete povoliť, aby táto aplikácia vždy bežala na pozadí:</string>
     <string name="intro_slideerror_title">Podpora Bluetooth Low Energy</string>
     <string name="intro_slideerror_subtitle">Toto zariadenie nepodporuje technológiu Bluetooth Low Energy.</string>
     <string name="grant_permission">Udeliť povolenie</string>
@@ -62,13 +62,13 @@
     <string name="switch_phone_notifications">Stlmiť telefón pri pripojení</string>
     <string name="notification_silent_icon">Ikona tichého oznámenia</string>
     <string name="notification_type_ringtone">Zvonenie</string>
-    <string name="intro_phonestateslide_subtitle">Zobrazenie prichádzajúcich hovorov a meno volajúceho na hodinkách.</string>
+    <string name="intro_phonestateslide_subtitle">Zobrazenie prichádzajúcich hovorov na hodinkách.</string>
     <string name="dialer">Číselník</string>
     <string name="intro_phonestateslide_title">Telefón a Kontakty</string>
     <string name="show_calls_on_watch">Zobraziť prichádzajúce hovory</string>
     <string name="intro_slideandroidgo_subtitle">Android Go je nepodporovaný, pretože neumožňuje prístup k upozorneniam a obmedzuje procesy na pozadí. Alternatívne riešenie pre používateľov s root je nastaviť parameter \"ro.config.low_ram\" v súbore build.prop na \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
-    <string name="intro_slide6_title">Upozornenia z telefónu</string>
+    <string name="intro_slide6_title">Upozornenia na telefón/zariadenie</string>
     <string name="intro_slide6_subtitle">Pre zobrazenie aktuálneho stavu pripojenia hodiniek.</string>
     <string name="OWM_API_KEY">Kľúč k OWM API</string>
     <string name="set_owm_api_key">Nastaviť vlastný kľúč k OWM API</string>
