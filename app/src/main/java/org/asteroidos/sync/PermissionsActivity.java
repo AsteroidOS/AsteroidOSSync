@@ -38,7 +38,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import org.asteroidos.sync.services.NLService;
+import org.asteroidos.sync.dbus.DBusNotificationListenerService;
 
 import java.util.ArrayList;
 
@@ -219,7 +219,7 @@ public class PermissionsActivity extends MaterialIntroActivity {
 
         @Override
         public boolean hasAnyPermissionsToGrant() {
-            ComponentName cn = new ComponentName(mCtx, NLService.class);
+            ComponentName cn = new ComponentName(mCtx, DBusNotificationListenerService.class);
             String flat = Settings.Secure.getString(mCtx.getContentResolver(), "enabled_notification_listeners");
             return (flat == null || !flat.contains(cn.flattenToString()));
         }
