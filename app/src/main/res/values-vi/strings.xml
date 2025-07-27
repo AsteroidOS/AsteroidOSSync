@@ -3,7 +3,7 @@
     <string name="dialer">Quay số</string>
     <string name="show_calls_on_watch">Hiển thị các cuộc gọi đến</string>
     <string name="intro_phonestateslide_title">Điện thoại &amp; Danh bạ</string>
-    <string name="intro_phonestateslide_subtitle">Để hiện các cuộc gọi đến trên đồng hồ, và để hiển thị tên người gọi.</string>
+    <string name="intro_phonestateslide_subtitle">Để hiện các cuộc gọi đến trên đồng hồ.</string>
     <string name="notification_type_ringtone">Nhạc chuông</string>
     <string name="notification_silent_icon">Biểu tượng tắt tiếng thông báo</string>
     <string name="switch_phone_notifications">Đặt điện thoại vào chế độ im lặng khi đã kết nối</string>
@@ -17,7 +17,7 @@
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="intro_slideerror_subtitle">Thiết bị này không hỗ trợ Bluetooth Low Energy.</string>
     <string name="intro_slideerror_title">Hỗ trợ Bluetooth Low Energy</string>
-    <string name="intro_slide5_subtitle">Để cho ứng dụng này chạy trong nền, vui lòng tắt \"Tối ưu hoá pin\" cho AsteroidOS Sync ở menu tiếp theo:</string>
+    <string name="intro_slide5_subtitle">Để ứng dụng có thể kết nối một cách thuận lợi, bạn có thể cho ứng dụng luôn chạy ở tiền cảnh:</string>
     <string name="intro_slide5_title">Tối ưu hoá pin</string>
     <string name="intro_slide4_subtitle">Để đồng bộ thông báo với đồng hồ của bạn, hãy cho phép \"AsteroidOS Sync\" ở menu tiếp theo:</string>
     <string name="intro_slide4_title">Thông báo</string>
@@ -25,7 +25,7 @@
     <string name="intro_slide3_title">Vị trí &amp; Bluetooth</string>
     <string name="intro_slide2_subtitle">Để lưu dữ liệu vào bộ nhớ đệm và lưu ảnh chụp màn hình đồng hồ của bạn.</string>
     <string name="intro_slide2_title">Truy cập tệp</string>
-    <string name="intro_slide1_subtitle">Ứng dụng này để cho bạn đồng bộ điện thoại Android của bạn với đồng hồ AsteroidOS. Nhưng trước tiên, ứng dụng cần một số quyền.</string>
+    <string name="intro_slide1_subtitle">Ứng dụng này để cho bạn đồng bộ điện thoại Android của bạn với đồng hồ AsteroidOS. Trước tiên, ứng dụng cần một số quyền.</string>
     <string name="intro_slide1_title">Chào mừng</string>
     <string name="app_icon">Biểu tượng ứng dụng</string>
     <string name="use_this_area">Sử dụng khu vực này để lấy thời tiết</string>
@@ -68,7 +68,7 @@
     <string name="unknown_device">Thiết bị không xác định</string>
     <string name="searching">Đang tìm kiếm đồng hồ</string>
     <string name="generic_ok">OK</string>
-    <string name="intro_slide6_title">Thông báo cuộc gọi</string>
+    <string name="intro_slide6_title">Thông báo cuộc gọi đến máy</string>
     <string name="cancel">Bỏ</string>
     <string name="intro_slide6_subtitle">Để hiển thị trạng thái kết nối hiện giờ của đồng hồ.</string>
     <string name="location_disabled_title">Đã tắt Vị trí</string>
