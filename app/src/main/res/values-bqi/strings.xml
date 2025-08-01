@@ -54,4 +54,8 @@
     <string name="position_indicator">نشووݩ گر جاگه</string>
     <string name="use_this_area">و کار گرؽڌن ای وولات سی او وو هوا</string>
     <string name="location_disabled_title">جاگه ز کار وسته</string>
+    <string name="one_found">1 ساعت جۊرست</string>
+    <string name="disconnected">قت وابیڌه</string>
+    <string name="connected">منپیز وابیڌه</string>
+    <string name="connecting">هونی منپیز ابۊ…</string>
 </resources>
