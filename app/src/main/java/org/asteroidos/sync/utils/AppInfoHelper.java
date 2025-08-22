@@ -31,6 +31,8 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 
+import org.asteroidos.sync.R; 
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -65,12 +67,25 @@ public class AppInfoHelper
                                 "icon for %s had invalid height or width (h: %d w: %d)",
                                 pinfo.packageName, src.getHeight(), src.getWidth()));
                     }
-                }
-                else {
-                    icon = Bitmap.createBitmap(apkIcon.getIntrinsicWidth(), apkIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                    Canvas canvas = new Canvas(icon);
-                    apkIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-                    apkIcon.draw(canvas);
+                } else {
+                    if (apkIcon.getIntrinsicWidth() <= 0 || apkIcon.getIntrinsicHeight() <= 0) {
+                        Log.e("BitmapDebug", "Invalid dimensions! Width or height is not positive.");
+                        // Handle the error appropriately:
+                        // - Return a default bitmap
+                        // - Skip this bitmap creation
+                        // - Throw a custom exception with more context
+                        // - etc.
+                        apkIcon = context.getResources().getDrawable(R.drawable.introslide1icon);
+                        icon = Bitmap.createBitmap(apkIcon.getIntrinsicWidth(), apkIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                        Canvas canvas = new Canvas(icon);
+                        apkIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                        apkIcon.draw(canvas);
+                    } else {
+                        icon = Bitmap.createBitmap(apkIcon.getIntrinsicWidth(), apkIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                        Canvas canvas = new Canvas(icon);
+                        apkIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                        apkIcon.draw(canvas);
+                    }
                 }
             } catch(ClassCastException ignored) {}
             AppInfo appInfo = new AppInfo(pinfo.packageName,
