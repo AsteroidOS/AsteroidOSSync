@@ -44,13 +44,13 @@
     <string name="use_this_area">Utiliser cette localisation pour la météo</string>
     <string name="app_icon">Icône de l\'application</string>
     <string name="intro_slide1_title">Bienvenue</string>
-    <string name="intro_slide1_subtitle">Cette application vous permet de synchroniser votre téléphone Android avec votre montre AsteroidOS. Mais d\'abord, elle a besoin de quelques permissions.</string>
+    <string name="intro_slide1_subtitle">Cette app connecte l’appareil à votre montre AsteroidOS. Tout d’abord, elle a besoin de certaines autorisations.</string>
     <string name="intro_slide2_title">Accès aux fichiers</string>
     <string name="intro_slide2_subtitle">Mettre en cache les données et sauvegarder les captures d\'écran de votre montre.</string>
     <string name="intro_slide3_title">Localisation et Bluetooth</string>
     <string name="intro_slide3_subtitle">Rechercher des périphériques Bluetooth Low Energy à proximité.</string>
     <string name="intro_slide5_title">Optimisation de la batterie</string>
-    <string name="intro_slide5_subtitle">Pour laisser cette application s\'exécuter en arrière-plan, veuillez désactiver l\'optimisation de la batterie pour AsteroidOS Sync dans le menu suivant :</string>
+    <string name="intro_slide5_subtitle">Pour assurer la communication, vous pouvez autoriser cette application à toujours fonctionner en arrière-plan :</string>
     <string name="intro_slideerror_title">Support du Bluetooth Low Energy</string>
     <string name="grant_permission">Accorder la permission</string>
     <string name="please_grant_permissions">Veuillez accorder cette permission</string>
@@ -65,7 +65,7 @@
     <string name="show_calls_on_watch">Afficher les appels entrants</string>
     <string name="dialer">Clavier</string>
     <string name="intro_phonestateslide_title">Téléphone et contacts</string>
-    <string name="intro_phonestateslide_subtitle">Afficher les appels entrants et le nom de l’appelant sur la montre.</string>
+    <string name="intro_phonestateslide_subtitle">Pour afficher les appels entrants sur la montre.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go n\'est pas supporté car il ne donne pas accès aux notifications et restreint les processus d\'arrière-plan. Une solution pour les utilisateurs root serait de mettre l\'option \"ro.config.low_ram\" dans le fichier build.prop à \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="set_owm_api_key">Définir une clé API personnalisée pour OWM</string>
@@ -74,6 +74,6 @@
     <string name="cancel">Annuler</string>
     <string name="location_disabled_message">Pour trouver les montres, le service de localisation doit être activé. Une fois appairé, vous pouvez le désactiver à nouveau en toute sécurité.</string>
     <string name="location_disabled_title">Localisation désactivée</string>
-    <string name="intro_slide6_title">Notifications du téléphone</string>
+    <string name="intro_slide6_title">Notifications téléphone/appareil</string>
     <string name="intro_slide6_subtitle">Afficher l\'état actuel de la connexion de la montre.</string>
 </resources>
