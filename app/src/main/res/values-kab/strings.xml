@@ -62,8 +62,8 @@
     <string name="notification_type_ringtone">Teṭenṭunt</string>
     <string name="notification_silent_icon">Tignit n tsusmi n yilɣa</string>
     <string name="switch_phone_notifications">Tiliɣri teqqen s tsusmi</string>
-    <string name="title_activity_settings">Iɣewwaṛen</string>
-    <string name="action_settings">Iɣewwaṛen</string>
-    <string name="title_activity_settings_activity">Iɣewwaṛen</string>
+    <string name="title_activity_settings">Iɣewwaren</string>
+    <string name="action_settings">Iɣewwaren</string>
+    <string name="title_activity_settings_activity">Iɣewwaren</string>
     <string name="synchronize_weather">Adig awurman n tegnawt</string>
 </resources>
