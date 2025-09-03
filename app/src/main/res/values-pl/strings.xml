@@ -44,7 +44,7 @@
     <string name="use_this_area">Użyj tego obszaru do pogody</string>
     <string name="app_icon">Ikona aplikacji</string>
     <string name="intro_slide1_title">Witaj</string>
-    <string name="intro_slide1_subtitle">Ta aplikacja pozwoli ci zsynchronizować twój telefon z zegarkiem na systemie AsteroidOS. Ale najpierw potrzebujemy kilku pozwoleń.</string>
+    <string name="intro_slide1_subtitle">Ta aplikacja łączy się z urządzeniem do zegarka z systemem AsteroidOS. Ale najpierw potrzebujemy kilku pozwoleń.</string>
     <string name="intro_slide2_title">Dostęp do plików</string>
     <string name="intro_slide2_subtitle">Aby mieć w pamięci podręcznej dane i zapisywać zrzuty ekranu z zegarka.</string>
     <string name="intro_slide3_title">Lokalizacja i Bluetooth</string>
@@ -65,7 +65,7 @@
     <string name="show_calls_on_watch">Pokaż połączenia przychodzące</string>
     <string name="intro_phonestateslide_title">Telefon i Kontakty</string>
     <string name="dialer">Wybieranie numeru</string>
-    <string name="intro_phonestateslide_subtitle">Pokazuj polączenia przychodzące i imię dzwoniącego na zegarku.</string>
+    <string name="intro_phonestateslide_subtitle">Pokazuj polączenia przychodzące.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go nie jest obsługiwany, ponieważ nie zezwala na dostęp do powiadomień i ogranicza procesy w tle. Obejściem problemu dla użytkowników z dostępem do uprawnień root jest ustawienie flagi „ro.config.low_ram” w pliku build.prop na wartość „false”.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="set_owm_api_key">Ustaw własny klucz API OWM</string>
@@ -74,6 +74,6 @@
     <string name="cancel">Anuluj</string>
     <string name="location_disabled_message">Aby znaleźć inne zegarki, usługa lokalizacji musi być włączona. Po sparowaniu można ją bezpiecznie ponownie wyłączyć.</string>
     <string name="location_disabled_title">Lokalizacja wyłączona</string>
-    <string name="intro_slide6_title">Powiadomienia na telefonie</string>
+    <string name="intro_slide6_title">Powiadomienia na telefonie/urządzeniu</string>
     <string name="intro_slide6_subtitle">Pokazuje aktualny stan połączenia zegarka.</string>
 </resources>
