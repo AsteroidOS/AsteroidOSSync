@@ -50,7 +50,7 @@
     <string name="intro_slide3_title">Lokalizacja i Bluetooth</string>
     <string name="intro_slide3_subtitle">Do skanowania i łączenia się z pobliskimi urządzeniami Bluetooth Low Energy.</string>
     <string name="intro_slide5_title">Optymalizacja baterii</string>
-    <string name="intro_slide5_subtitle">Aby pozwolić aplikacji działać w tle, wyłącz \"Optymalizacje baterii\" dla AsteroidOS Sync w tym menu:</string>
+    <string name="intro_slide5_subtitle">Aby zapewnić komunikację, możesz zezwolić tej aplikacji na ciągłe działanie w tle:</string>
     <string name="intro_slideerror_title">Wsparcie dla Bluetooth LE</string>
     <string name="grant_permission">Zezwolenie na udzielenie</string>
     <string name="please_grant_permissions">Proszę udzielić tych uprawnień</string>
