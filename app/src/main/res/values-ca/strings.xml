@@ -44,13 +44,13 @@
     <string name="use_this_area">Utilitza aquesta àrea per al temps</string>
     <string name="app_icon">Icona de l\'aplicació</string>
     <string name="intro_slide1_title">Us donem la benvinguda</string>
-    <string name="intro_slide1_subtitle">Aquesta aplicació us permet sincronitzar aquest dispositiu Android amb un rellotge AsteriodOS. Abans, però, cal que accepteu alguns permisos.</string>
+    <string name="intro_slide1_subtitle">Aquesta aplicació connecta el dispositiu al vostre rellotge AsteroidOS. Abans, però, cal que accepteu alguns permisos.</string>
     <string name="intro_slide2_title">Accés a fitxers</string>
     <string name="intro_slide2_subtitle">Per a desar memòria cau i captures de pantalla del rellotge.</string>
-    <string name="intro_slide3_title">Ubicació</string>
-    <string name="intro_slide3_subtitle">Per a cercar dispositius Bluetooth de baix consum a prop.</string>
+    <string name="intro_slide3_title">Ubicació i Bluetooth</string>
+    <string name="intro_slide3_subtitle">Per a cercar i connectar dispositius Bluetooth de baix consum a prop.</string>
     <string name="intro_slide5_title">Optimització de bateria</string>
-    <string name="intro_slide5_subtitle">Per a permetre que aquesta aplicació funcioni en segon pla, desactiveu «Optimització de la bateria» per a l’AsteroidOS Sync al menú següent:</string>
+    <string name="intro_slide5_subtitle">Per garantir la comunicació, podeu permetre que aquesta aplicació s\'executi sempre en segon pla:</string>
     <string name="intro_slideerror_title">Suport de Bluetooth de baix consum</string>
     <string name="grant_permission">Donar permisos</string>
     <string name="please_grant_permissions">Si us plau, accepta el permís</string>
@@ -60,7 +60,7 @@
     <string name="action_settings">Configuració</string>
     <string name="title_activity_settings">Configuració</string>
     <string name="switch_phone_notifications">Silencia el telèfon quan es connecti</string>
-    <string name="notification_silent_icon">icona de silenciar notificació</string>
+    <string name="notification_silent_icon">Icona de silenciar notificació</string>
     <string name="notification_type_ringtone">To de trucada</string>
     <string name="dialer">Marcador</string>
     <string name="show_calls_on_watch">Visibilitat de trucades entrants</string>
@@ -71,4 +71,9 @@
     <string name="intro_slide6_title">Notificacions del telèfon/dispositiu</string>
     <string name="apply">Aplica</string>
     <string name="cancel">Cancel·la</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go no és compatible perquè no permet l\'accés a notificacions i restringeix els processos en segon pla. Una solució alternativa per als usuaris root és establir l\'opció \"ro.config.low_ram\" al fitxer build.prop com a \"false\".</string>
+    <string name="set_owm_api_key">Establiu la vostra clau de l\'API OWM</string>
+    <string name="OWM_API_KEY">Clau de l\'API OWM</string>
+    <string name="location_disabled_message">Per trobar rellotges, cal activar el servei de localització. Un cop vinculat, podeu tornar a desactivar-lo de manera segura.</string>
+    <string name="location_disabled_title">Ubicació desactivada</string>
 </resources>
