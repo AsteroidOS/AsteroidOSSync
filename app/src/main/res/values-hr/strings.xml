@@ -41,7 +41,7 @@
     <string name="use_this_area">Koristi ovo područje za vremensku prognozu</string>
     <string name="app_icon">Ikona aplikacije</string>
     <string name="intro_slide1_title">Pozdrav</string>
-    <string name="intro_slide1_subtitle">Ova aplikacija omogućava sinkroniziranje tvog Android telefona s tvojim AndroidOS satom. Kao prvo su joj potrebne neke dozvole.</string>
+    <string name="intro_slide1_subtitle">Ova aplikacija povezuje uređaj s tvojim AndroidOS satom. Najprije treba neke dozvole.</string>
     <string name="intro_slide2_title">Pristup datotekama</string>
     <string name="intro_slide2_subtitle">Za međuspremanje podataka i za spremanje snimaka ekrana tvog sata.</string>
     <string name="intro_slide3_title">Lokacija i Bluetooth</string>
@@ -49,7 +49,7 @@
     <string name="intro_slide4_title">Obavijesti</string>
     <string name="intro_slide4_subtitle">Za sinkronizaciju obavijesti s tvojim satom, dozvoli „AsteroidOS Sync” u sljedećem izborniku:</string>
     <string name="intro_slide5_title">Optimiranje baterije</string>
-    <string name="intro_slide5_subtitle">Da bi aplikacija radila u pozadini, deaktiviraj „Optimiranje baterije” za AsteroidOS Sync u sljedećem izborniku:</string>
+    <string name="intro_slide5_subtitle">Za osiguravanje komunikacije, možeš dozvoliti ovoj aplikaciji da uvijek radi u pozadini:</string>
     <string name="intro_slideerror_title">Podrška za Bluetooth Low Energy</string>
     <string name="intro_slideerror_subtitle">Ovaj uređaj ne podržava Bluetooth Low Energy.</string>
     <string name="grant_permission">Dozvoli</string>
@@ -65,7 +65,7 @@
     <string name="dialer">Birač</string>
     <string name="show_calls_on_watch">Prikaži dolazne pozive</string>
     <string name="intro_phonestateslide_title">Telefon i kontakti</string>
-    <string name="intro_phonestateslide_subtitle">Za prikaz dolaznih poziva na satu i za prikaz imena pozivatelja.</string>
+    <string name="intro_phonestateslide_subtitle">Za prikaz dolaznih poziva na satu.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go nije podržan, jer ne dopušta pristup obavijestima i ograničava pozadinske procese. Zaobilazno rješenje za root korisnike je postavljanje upozorenja „ro.config.low_ram” u datoteci build.prop na „false”.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="set_owm_api_key">Postavi prilagođeni OWM APIključ</string>
@@ -74,6 +74,6 @@
     <string name="cancel">Odustani</string>
     <string name="location_disabled_message">Za pronalaženje satova usluga lokacije mora biti aktivirana. Nakon uparivanja se usluga slobodno može ponovo deaktivirati.</string>
     <string name="location_disabled_title">Lokacija deaktivirana</string>
-    <string name="intro_slide6_title">Telefonske obavijesti</string>
+    <string name="intro_slide6_title">Obavijesti telefona/uređaja</string>
     <string name="intro_slide6_subtitle">Za prikaz aktualnog stanja veze sata.</string>
 </resources>
