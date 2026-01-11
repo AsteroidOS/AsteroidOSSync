@@ -46,11 +46,11 @@
     <string name="intro_slide2_title">Akses berkas</string>
     <string name="intro_slide2_subtitle">Untuk cache data dan menyimpan tangkapan layar jam tangan Anda.</string>
     <string name="intro_slide3_title">Lokasi</string>
-    <string name="intro_slide3_subtitle">Untuk memindai perangkat Bluetooth Rendah Energi di sekitar.</string>
+    <string name="intro_slide3_subtitle">Untuk memindai dan terhubung ke perangkat Bluetooth Low Energy di sekitar.</string>
     <string name="intro_slide4_title">Notifikasi</string>
     <string name="intro_slide4_subtitle">Untuk menyinkronkan notifikasi dengan jam tangan Anda, mengizinkan \"AsteroidOS Sync\" di menu berikut:</string>
     <string name="intro_slide5_title">Optimisasi Baterai</string>
-    <string name="intro_slide5_subtitle">Agar aplikasi ini berjalan di latar belakang, nonaktifkan \"Pengoptimalan Baterai\" untuk AsteroidOS Sync di menu berikut:</string>
+    <string name="intro_slide5_subtitle">Untuk memastikan komunikasi, Anda dapat mengizinkan aplikasi ini untuk selalu berjalan di latar belakang:</string>
     <string name="intro_slideerror_title">Dukungan Bluetooth Rendah Energi</string>
     <string name="intro_slideerror_subtitle">Perangkat ini tidak mendukung Bluetooth Rendah Energi.</string>
     <string name="grant_permission">Memberikan izin</string>
@@ -65,7 +65,15 @@
     <string name="dialer">Pemanggil</string>
     <string name="show_calls_on_watch">Tampilkan panggilan masuk</string>
     <string name="intro_phonestateslide_title">Telepon &amp; Kontak</string>
-    <string name="intro_phonestateslide_subtitle">Untuk menampilkan panggilan masuk di jam tangan, dan untuk menampilkan nama penelepon.</string>
+    <string name="intro_phonestateslide_subtitle">Untuk menampilkan panggilan masuk di jam tangan.</string>
     <string name="intro_slideandroidgo_subtitle">Android Go tidak didukung karena tidak mengizinkan akses notifikasi dan membatasi proses latar belakang. Solusi untuk pengguna root adalah menyetel flag \"ro.config.low_ram\" di file build.prop ke \"false\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
+    <string name="set_owm_api_key">Tetapkan Kunci API OWM kustom</string>
+    <string name="OWM_API_KEY">Kunci API OWM</string>
+    <string name="apply">Terapkan</string>
+    <string name="cancel">Batal</string>
+    <string name="location_disabled_message">Untuk dapat menemukan jam tangan, layanan lokasi harus diaktifkan. Setelah dipasangkan, Anda dapat menonaktifkannya kembali dengan aman.</string>
+    <string name="location_disabled_title">Lokasi dinonaktifkan</string>
+    <string name="intro_slide6_title">Notifikasi ponsel/perangkat</string>
+    <string name="intro_slide6_subtitle">Untuk menampilkan status koneksi jam tangan saat ini.</string>
 </resources>
