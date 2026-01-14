@@ -57,7 +57,7 @@
     <string name="switch_phone_notifications">Tysta telefonen när den är ansluten</string>
     <string name="notification_silent_icon">Avisering tyst ikon</string>
     <string name="notification_type_ringtone">Ringsignal</string>
-    <string name="intro_phonestateslide_subtitle">För att visa inkommande samtal på klockan, och för att visa namnet på den som ringer.</string>
+    <string name="intro_phonestateslide_subtitle">För att visa inkommande samtal på klockan.</string>
     <string name="cancel">Avbryt</string>
     <string name="downloaded">Nerladdad</string>
     <string name="intro_phonestateslide_title">Telefon &amp; Kontakter</string>
@@ -68,12 +68,12 @@
     <string name="apply">Tillämpa</string>
     <string name="location_disabled_message">För att hitta klockor måste platstjänsten vara aktiverad. När du väl har parat den kan du säkert inaktivera den igen.</string>
     <string name="location_disabled_title">Plats inaktiverad</string>
-    <string name="intro_slide6_title">Telefonaviseringar</string>
+    <string name="intro_slide6_title">Telefon/enhetsaviseringar</string>
     <string name="intro_slide6_subtitle">För att visa klockans aktuella anslutningsstatus.</string>
     <string name="grab_a_screenshot">Ta en skärmdump</string>
     <string name="downloading">Laddar ned…</string>
     <string name="position_indicator">Positionsindikator</string>
-    <string name="intro_slide1_subtitle">Denna app låter dig synkronisera din Android-telefon med din AsteroidOS-klocka. Men först behöver den några behörigheter.</string>
-    <string name="intro_slide5_subtitle">För att låta den här appen köras i bakgrunden, inaktivera \"Batterioptimering\" för AsteroidOS Sync i följande meny:</string>
+    <string name="intro_slide1_subtitle">Den här appen ansluter enheten till din AsteroidOS-klocka. Först behöver den vissa behörigheter.</string>
+    <string name="intro_slide5_subtitle">För att säkerställa kommunikation så kan du tillåta att den här appen alltid körs i bakgrunden:</string>
     <string name="intro_slideandroidgo_subtitle">Android Go stöds inte eftersom det inte tillåter aviseringsåtkomst och begränsar bakgrundsprocesser. En lösning för root-användare är att ställa in \"ro.config.low_ram\"-flaggan i build.prop-filen till \"false\".</string>
 </resources>
