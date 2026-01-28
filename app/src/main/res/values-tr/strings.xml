@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic_ok">TAMAM</string>
-    <string name="searching">Saatler aranıyor</string>
+    <string name="searching">Saat aranıyor</string>
     <string name="unknown_device">Bilinmeyen Aygıt</string>
     <string name="nothing_found">Saat bulunamadı</string>
     <string name="one_found">Bir saat bulundu</string>
@@ -26,8 +26,8 @@
     <string name="notifications_settings">Bildirim ayarları</string>
     <string name="intro_slide4_title">Bildirimler</string>
     <string name="intro_slide4_subtitle">Bildirimleri eşitlemek için takip eden menüde \"AsteroidOS Sync\"e izin verin:</string>
-    <string name="weather_settings">Hava ayarları</string>
-    <string name="enter_city_name">Şehir adı gir:</string>
+    <string name="weather_settings">Hava durumu ayarları</string>
+    <string name="enter_city_name">Şehir adı girin:</string>
     <string name="unpair">Kaldır</string>
     <string name="scanning">Taranıyor…</string>
     <string name="downloading">İndiriliyor…</string>
@@ -49,30 +49,30 @@
     <string name="intro_slide2_subtitle">Veriyi önbelleğe almak ve saatinizin ekran görüntülerini kaydetmek için.</string>
     <string name="intro_slide3_title">Konum ve Bluetooth</string>
     <string name="intro_slide3_subtitle">Yakındaki Bluetooth Düşük Enerji aygıtları taramak ve bağlanmak için.</string>
-    <string name="intro_slide5_title">Pil İyileştirmesi</string>
-    <string name="intro_slide5_subtitle">İletişimi sağlamak için bu uygulamanın her zaman arka planda çalışmasına izin verebilirsiniz:</string>
+    <string name="intro_slide5_title">Pil Optimizasyonu</string>
+    <string name="intro_slide5_subtitle">İletişimin sağlandığından emin olmak için bu uygulamanın her zaman arka planda çalışmasına izin verebilirsiniz:</string>
     <string name="intro_slideerror_title">Bluetooth Düşük Enerji desteği</string>
     <string name="grant_permission">İzin ver</string>
     <string name="please_grant_permissions">Lütfen bu izni verin</string>
     <string name="impassable_slide">Lütfen bu izni verin</string>
-    <string name="synchronize_weather">Hava durumunu kendiliğinden konumla</string>
+    <string name="synchronize_weather">Hava durumu için konumu otomatik bul</string>
     <string name="title_activity_settings_activity">Ayarlar</string>
     <string name="action_settings">Ayarlar</string>
     <string name="title_activity_settings">Ayarlar</string>
-    <string name="switch_phone_notifications">Telefon bağlıyken sessiz</string>
+    <string name="switch_phone_notifications">Bağlıyken telefonu sessize al</string>
     <string name="notification_silent_icon">Bildirim Sessiz Simgesi</string>
     <string name="notification_type_ringtone">Zil sesi</string>
     <string name="dialer">Çevirici</string>
     <string name="show_calls_on_watch">Gelen çağrıları göster</string>
     <string name="intro_phonestateslide_title">Telefon ve Kişiler</string>
     <string name="intro_phonestateslide_subtitle">Gelen çağrıları saatte göstermek için.</string>
-    <string name="intro_slideandroidgo_subtitle">Android Go desteklenmiyor çünkü bildirim erişimine izin vermiyor ve arka plan süreçlerini kısıtlıyor. Kök kullanıcılar, build.prop dosyasındaki \"ro.config.low_ram\" bayrağını \"false\" yaparak geçici çözüm üretebilir.</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go, bildirim erişimine izin vermediği ve arka plan işlemlerini kısıtladığı için desteklenmemektedir. Kök erişimi olan kullanıcılar, build.prop dosyasındaki \"ro.config.low_ram\" bayrağını \"false\" yaparak bu sorunu aşabilirler.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="apply">Uygula</string>
     <string name="set_owm_api_key">Özel OWM API anahtarı ayarla</string>
     <string name="OWM_API_KEY">OWM API Anahtarı</string>
     <string name="cancel">İptal</string>
-    <string name="location_disabled_message">Saatleri bulmak için konum servisi etkinleştirilmelidir. Bir kez eşlediğinizde güvenle yeniden devre dışı bırakabilirsiniz.</string>
+    <string name="location_disabled_message">Saat bulabilmek için konum servisi etkinleştirilmelidir. Bir kez eşlediğinizde güvenle yeniden devre dışı bırakabilirsiniz.</string>
     <string name="location_disabled_title">Konum devre dışı</string>
     <string name="intro_slide6_title">Telefon/Aygıt Bildirimleri</string>
     <string name="intro_slide6_subtitle">Saatin geçerli bağlantı durumunu göstermek için.</string>
