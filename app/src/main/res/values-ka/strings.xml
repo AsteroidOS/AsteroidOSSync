@@ -38,7 +38,7 @@
     <string name="dialer">მრეკავი</string>
     <string name="show_calls_on_watch">გამოჩნდეს შემომავალი ზარები</string>
     <string name="intro_phonestateslide_title">ტელეფონი და კონტაქტები</string>
-    <string name="intro_phonestateslide_subtitle">იმისათვის, რომ ნახოთ შემომავალი ზარები watch, და ჩვენებისას სახელი აბონენტის.</string>
+    <string name="intro_phonestateslide_subtitle">იმისათვის, რომ შემომავალი ზარები საათზე დაინახოთ.</string>
     <string name="notification_type_ringtone">ზარის მელოდია</string>
     <string name="notification_silent_icon">შეტყობინება Silent Icon</string>
     <string name="switch_phone_notifications">დუმილი ტელეფონი, როდესაც უკავშირდება</string>
@@ -49,13 +49,13 @@
     <string name="please_grant_permissions">გთხოვთ მიანიჭოთ ეს უფლება</string>
     <string name="grant_permission">უფლების მინიჭება</string>
     <string name="intro_slideerror_title">Bluetooth Low Energy-ს მხარდაჭერა</string>
-    <string name="intro_slide5_subtitle">ნება ამ app აწარმოებს ფონზე, გთხოვთ გამორთოთ \"ბატარეის ოპტიმიზაცია\" For AsteroidOS Sync შემდეგ მენიუში:</string>
+    <string name="intro_slide5_subtitle">იმისათვის, რომ კავშირი ყოველთვის გქონდეთ, შეგიძლიათ, ამ აპს უფლება მისცეთ, ყოველთვის იყოს ფონურად გაშვებული:</string>
     <string name="intro_slide5_title">ელემენტის ოპტიმიზაცია</string>
     <string name="intro_slide3_subtitle">ბლუთუზის დაბალი ენერგიის მომხმარებელი მოწყობილობების აღმოჩენა და მათთან მიერთება.</string>
     <string name="intro_slide3_title">მდებარეობა და ბლუთუზი</string>
     <string name="intro_slide2_subtitle">მონაცემების ქეშირებასა და თქვენი საათების სქრინშოთების შესანახად.</string>
     <string name="intro_slide2_title">ფაილებზე წვდომა</string>
-    <string name="intro_slide1_subtitle">ეს აპლიკაცია თქვენი ანდროიდ ტელეფონისა და AsteroidOS-ზე მომუშავე საათების სინქრონიზირების საშუალებას გაძლევთ, ამისათვის აპლიკაციას ზოგიერთი ნებართვა სჭირდება.</string>
+    <string name="intro_slide1_subtitle">ეს აპი მოწყობილობას თქვენს AsteroidOS-ის საათთან დააკავშირებს. მას, ჯერ, რამდენიმე წვდომა სჭირდება.</string>
     <string name="intro_slide1_title">მოგესალმებით</string>
     <string name="app_icon">აპლიკაციის იკონა</string>
     <string name="use_this_area">გამოიყენეთ ეს ადგილი ამინდისთვის</string>
@@ -68,7 +68,7 @@
     <string name="synchronize_weather">ამინდისთვის ადგილმდებარეობიდ ავტომატურად დადგენა</string>
     <string name="intro_slideandroidgo_subtitle">Android Go არ არის მხარდაჭერილი, რადგან ის არ იძლევა შეტყობინებას ხელმისაწვდომობას და ზღუდავს ფონურ პროცესებს. სამუშაო root მომხმარებლებს არის მითითებული \" ro.config.low_ram \" დროშა build.დასაცავად ფაილი \"ცრუ\".</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
-    <string name="intro_slide6_title">ტელეფონის გაფრთხილებები</string>
+    <string name="intro_slide6_title">ტელეფონის/მოწყობილობის გაფრთხილებები</string>
     <string name="location_disabled_title">მდებარეობა გამორთულია</string>
     <string name="intro_slide6_subtitle">საათთან მიერთების მიმდინარე მდგომარეობის საჩვენებლად.</string>
     <string name="cancel">გაუქმება</string>
