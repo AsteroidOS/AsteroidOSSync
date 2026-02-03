@@ -58,4 +58,22 @@
     <string name="disconnected">قت وابیڌه</string>
     <string name="connected">منپیز وابیڌه</string>
     <string name="connecting">هونی منپیز ابۊ…</string>
+    <string name="notification_type_strong_vibra">دک خردن قلوه</string>
+    <string name="intro_slide1_subtitle">ای برنومه دسگا ن و ساعت AsteroidOS ایسا منپیز اکونه. ٱول ی قرده ز موجوزا ن اخو.</string>
+    <string name="intro_slide2_subtitle">سی کش کردن داده یل وو زفت کردن شؽوات بلگه ز ساعت تووݩ.</string>
+    <string name="intro_slide3_subtitle">سی اسکن وو منپیز وابیڌن و دسگایل بۊلۊتۊس کم مسرف.</string>
+    <string name="intro_slide4_subtitle">سی هوم گوم کردن وارسۊویا وا ساعت تووݩ، AsteroidOS Sync ن من نومگهی ک ایاهه موجاز کۊنین:</string>
+    <string name="intro_slide5_subtitle">سی اتمینووݩ ز منپیز، ترین هیلین ک برنومه هی من پس زمینه ره بوۊفته:</string>
+    <string name="intro_slideandroidgo_subtitle">ز اوچو ک ٱندروید گو نؽله و وارسۊویا دسرسی داشته بۊ وو فرایندا پس زمینه ن مئدۊد اکونه، لادراری نؽبۊ. ی ره داور زیڌن سی منتورووݩ وا دسرسی رۊت، سامووݩ پرچم ro.config.low_ram من فایل build.prop و false هڌ.</string>
+    <string name="intro_phonestateslide_subtitle">سی نشووݩ داڌن زنگا و من ٱوۊڌنی ری ساعت.</string>
+    <string name="intro_phonestateslide_title">تیلیفووݩ وو هومدنگووݩ</string>
+    <string name="show_calls_on_watch">نشووݩ داڌن زنگا و من ٱوۊڌنی</string>
+    <string name="dialer">شوماره گر</string>
+    <string name="set_owm_api_key">سامووݩ کیلیت سفارشی رابت برنومه نویسی OWM</string>
+    <string name="OWM_API_KEY">کیلیت رابت برنومه نویسی OWM</string>
+    <string name="apply">ائمال</string>
+    <string name="cancel">لقو</string>
+    <string name="location_disabled_message">خدمت جاگهی سی جوستن ساعتا و کار وسته. بئڌ جوفت وابیڌن، ترین دووارته ز کار ونینس.</string>
+    <string name="intro_slide6_title">وارسۊویا تیلیفووݩ یا دسگا</string>
+    <string name="intro_slide6_subtitle">سی نشووݩ داڌن منپیز هیم سکویی ساعت.</string>
 </resources>
