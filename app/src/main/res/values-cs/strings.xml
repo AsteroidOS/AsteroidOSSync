@@ -3,7 +3,7 @@
     <string name="generic_ok">OK</string>
     <string name="searching">Hledání hodinek</string>
     <string name="unknown_device">Neznámé zařízení</string>
-    <string name="nothing_found">Nebyly nalezeny žádné hodinky</string>
+    <string name="nothing_found">Nenalezeny žádné hodinky</string>
     <string name="one_found">Nalezeny jedny hodinky</string>
     <string name="n_found">Nalezeno %d hodinek</string>
     <string name="intro_slideerror_subtitle">Toto zařízení nepodporuje úspornou (LE) technologie Bluetooth.</string>
@@ -13,10 +13,10 @@
     <string name="connected_formatted">Připojeno k %s</string>
     <string name="connecting_formatted">Připojování k %s</string>
     <string name="connected_icon">Ikona připojeno</string>
-    <string name="battery_info_icon">Ikona informace o akumulátoru</string>
+    <string name="battery_info_icon">Ikona informací o akumulátoru</string>
     <string name="screenshot_icon">Ikona zachycení snímku obrazovky</string>
     <string name="finder_icon">Ikona hledání</string>
-    <string name="settings_icon">Ikona nastavení</string>
+    <string name="settings_icon">Ikona Nastavení</string>
     <string name="weather_icon">Ikona počasí</string>
     <string name="time_icon">Ikona času</string>
     <string name="grab_a_screenshot">Pořídit snímek obrazovky</string>
