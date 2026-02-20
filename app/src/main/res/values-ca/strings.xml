@@ -36,7 +36,7 @@
     <string name="synchronize_time">Sincronitzar l\'hora</string>
     <string name="explain_app_prefs">Les notificacions de les vostres aplicacions apareixeran aquí</string>
     <string name="notification_type_default">Predeterminat</string>
-    <string name="notification_type_no_notif">Sense notificacions</string>
+    <string name="notification_type_no_notif">Cap notificacions</string>
     <string name="notification_type_silent">Silenciosa</string>
     <string name="notification_type_vibra">Vibracions</string>
     <string name="notification_type_strong_vibra">Vibració forta</string>
