@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="generic_ok">D’acòrdi</string>
+    <string name="searching">Recèrca de relòtges</string>
+    <string name="unknown_device">Aparelh desconegut</string>
+    <string name="connecting_formatted">Connexion a %s</string>
+    <string name="notification_type_silent">Silenciós</string>
+    <string name="intro_slide5_title">Optimizacion de batariá</string>
 </resources>
