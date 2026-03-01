@@ -58,4 +58,22 @@
     <string name="intro_slide5_subtitle">Per assegurar la comunicacion, podètz autorizar aquesta aplicacion a foncionar totjorn en rèireplan :</string>
     <string name="intro_slideerror_title">Compatibilitat Bluetooth febla energia</string>
     <string name="intro_slideerror_subtitle">Aqueste aparelh pren pas en carga lo Bluetooth febla energia.</string>
+    <string name="intro_slideandroidgo_subtitle">Android Go es pas pres en carga perque permet pas l\'accès a las notificacions e restrenh los processus en rèireplan. Una solucion pels utilizaires root es de definir l\'indicador « ro.config.low_ram » a « false » dins lo fichièr build.prop.</string>
+    <string name="grant_permission">Acordar la permission</string>
+    <string name="please_grant_permissions">Mercé d’acordar aquesta permission</string>
+    <string name="impassable_slide">Mercé d’acordar aquesta permission</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="title_activity_settings">Paramètres</string>
+    <string name="switch_phone_notifications">Silenciar lo telefòn quand es connectat</string>
+    <string name="notification_silent_icon">Icòna de notificacions silenciosas</string>
+    <string name="notification_type_ringtone">Sonoriá</string>
+    <string name="intro_phonestateslide_subtitle">Per mostrar las sonadas dintrantas sus la mòstra.</string>
+    <string name="intro_phonestateslide_title">Telefòn e contactes</string>
+    <string name="show_calls_on_watch">Mostrar las sonadas dintrantas</string>
+    <string name="dialer">Clavièr</string>
+    <string name="set_owm_api_key">Definir una clau d’API OWM personala</string>
+    <string name="OWM_API_KEY">Clau d’API OWM</string>
+    <string name="location_disabled_message">Per trobar de mòstras, lo servici de localizacion deu èsser activat. Un còp apariadas, lo podètz desactivar tornarmai en tota seguretat.</string>
+    <string name="intro_slide6_title">Notificacions del telefòn/aparelh</string>
+    <string name="intro_slide6_subtitle">Per mostrar l’estat actual de connexion de la mòstra.</string>
 </resources>
