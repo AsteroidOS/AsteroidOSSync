@@ -41,7 +41,7 @@
     <string name="use_this_area">Usar esta zona para el clima</string>
     <string name="app_icon">Ícono de aplicación</string>
     <string name="intro_slide1_title">Bienvenido</string>
-    <string name="intro_slide1_subtitle">Esta app te permite sincronizar tu teléfono Android con tu reloj AsteroidOS. Primero, necesitaremos algunos permisos.</string>
+    <string name="intro_slide1_subtitle">Esta aplicacion conecta tu dispositivo comn tu reloj AsteroidOS. Pero primero, necesitamos algunos permisos.</string>
     <string name="intro_slide2_title">Acceso a archivos</string>
     <string name="intro_slide2_subtitle">Para guardar datos en caché y capturas de la pantalla de tu reloj.</string>
     <string name="intro_slide3_title">Ubicación y Bluetooth</string>
@@ -49,7 +49,7 @@
     <string name="intro_slide4_title">Notificaciones</string>
     <string name="intro_slide4_subtitle">Para sincronizar notificaciones con tu reloj, activa \"AsteroidOS Sync\" en el siguiente menú:</string>
     <string name="intro_slide5_title">Optimización de la batería</string>
-    <string name="intro_slide5_subtitle">Para permitir que esta aplicación se ejecute en segundo plano, desactiva la \"Optimización de batería\" para AsteroidOS Sync en el menú siguiente:</string>
+    <string name="intro_slide5_subtitle">Para permitir que esta aplicación se ejecute en segundo plano, desactiva la \"Optimización de batería\" para AsteroidOS Sync en el siguiente menú:</string>
     <string name="intro_slideerror_title">Soporte para Bluetooth Low Energy</string>
     <string name="intro_slideerror_subtitle">Este dispositivo no soporta Bluetooth Low Energy.</string>
     <string name="grant_permission">Otorgar permiso</string>
