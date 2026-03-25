@@ -50,6 +50,8 @@ public class AsteroidBleManager extends BleManager {
     public final HashMap<UUID, IServiceCallback> recvCallbacks;
     public HashMap<UUID, BluetoothGattCharacteristic> sendingCharacteristics;
 
+    private int currentMtu = 247;
+
     public AsteroidBleManager(@NonNull final Context context, SynchronizationService syncService) {
         super(context);
         mSynchronizationService = syncService;
@@ -85,6 +87,10 @@ public class AsteroidBleManager extends BleManager {
         mSynchronizationService.handleUpdateBatteryPercentage(batteryLevelEvent);
     }
 
+    public int getCurrentMtu() {
+        return currentMtu;
+    }
+
     public static class BatteryLevelEvent {
         public int battery = 0;
     }
@@ -93,10 +99,21 @@ public class AsteroidBleManager extends BleManager {
         readCharacteristic(batteryCharacteristic).with(((device, data) -> setBatteryLevel(data))).enqueue();
     }
 
+    @Override
+    protected boolean shouldClearCacheWhenDisconnected() {
+        return true;
+    }
+
     private abstract class AsteroidBleManagerGattCallback extends BleManagerGattCallback {
 
+        @Override
+        protected void onMtuChanged(@NonNull BluetoothGatt gatt, int mtu) {
+            Log.d(TAG, "MTU negotiated to " + mtu);
+            currentMtu = mtu;
+        }
+
         /* It is a constraint of the Bluetooth library that it is required to initialize
-          the characteristics in the isRequiredServiceSupported() function. */
+                  the characteristics in the isRequiredServiceSupported() function. */
         @Override
         public final boolean isRequiredServiceSupported(@NonNull final BluetoothGatt gatt) {
             final BluetoothGattService batteryService = gatt.getService(AsteroidUUIDS.BATTERY_SERVICE_UUID);
@@ -116,6 +133,9 @@ public class AsteroidBleManager extends BleManager {
 
             for (IConnectivityService service : mSynchronizationService.getServices().values()) {
                 BluetoothGattService bluetoothGattService = gatt.getService(service.getServiceUUID());
+                if (bluetoothGattService == null)
+                    continue;
+
                 List<UUID> sendUuids = new ArrayList<>();
                 service.getCharacteristicUUIDs().forEach((uuid, direction) -> {
                     if (direction == IConnectivityService.Direction.TO_WATCH)
@@ -142,7 +162,7 @@ public class AsteroidBleManager extends BleManager {
         @Override
         protected final void initialize() {
             beginAtomicRequestQueue()
-                    .add(requestMtu(256) // Remember, GATT needs 3 bytes extra. This will allow packet size of 244 bytes.
+                    .add(requestMtu(currentMtu)
                             .with((device, mtu) -> log(Log.INFO, "MTU set to " + mtu))
                             .fail((device, status) -> log(Log.WARN, "Requested MTU not supported: " + status)))
                     .done(device -> log(Log.INFO, "Target initialized"))

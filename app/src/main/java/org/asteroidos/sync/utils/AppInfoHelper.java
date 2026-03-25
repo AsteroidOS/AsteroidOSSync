@@ -67,10 +67,14 @@ public class AppInfoHelper
                     }
                 }
                 else {
-                    icon = Bitmap.createBitmap(apkIcon.getIntrinsicWidth(), apkIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                    Canvas canvas = new Canvas(icon);
-                    apkIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-                    apkIcon.draw(canvas);
+                    if (apkIcon.getIntrinsicWidth() <= 0 || apkIcon.getIntrinsicHeight() <= 0)
+                        icon = Bitmap.createBitmap(144, 144, Bitmap.Config.ARGB_8888);
+                    else {
+                        icon = Bitmap.createBitmap(apkIcon.getIntrinsicWidth(), apkIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                        Canvas canvas = new Canvas(icon);
+                        apkIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                        apkIcon.draw(canvas);
+                    }
                 }
             } catch(ClassCastException ignored) {}
             AppInfo appInfo = new AppInfo(pinfo.packageName,
