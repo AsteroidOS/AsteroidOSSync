@@ -43,10 +43,10 @@
     <string name="position_indicator">Positie-indicator</string>
     <string name="use_this_area">Gebruik dit gebied voor weer</string>
     <string name="intro_slide5_title">Batterijoptimalisatie</string>
-    <string name="intro_slide5_subtitle">Om deze app in de achtergrond te kunnen uitvoeren moet je ‘Batterijoptimalisatie’ voor AsteroidOS-synchronisatie in het volgende menu uitschakelen:</string>
+    <string name="intro_slide5_subtitle">Om communicatie te garanderen, kun je toestaan dat deze app altijd op de achtergrond wordt uitgevoerd:</string>
     <string name="app_icon">Toepassingspictogram</string>
     <string name="intro_slide1_title">Welkom</string>
-    <string name="intro_slide1_subtitle">Deze app biedt je de mogelijkheid je Android-telefoon te synchroniseren met je AsteroidOS-horloge, maar eerst heeft ze een aantal toestemmingen nodig.</string>
+    <string name="intro_slide1_subtitle">Deze app verbindt het apparaat met je AsteroidOS-horloge. Eerst heeft ze een aantal toestemmingen nodig.</string>
     <string name="intro_slide2_title">Toegang tot bestanden</string>
     <string name="intro_slide2_subtitle">Om gegevens in het cachegeheugen op te slaan, en schermafdrukken van je horloge te maken.</string>
     <string name="intro_slide3_title">Locatie &amp; Bluetooth</string>
@@ -63,12 +63,12 @@
     <string name="notification_silent_icon">pictogram stille melding</string>
     <string name="notification_type_ringtone">Beltoon</string>
     <string name="intro_phonestateslide_title">Telefoon en Contacten</string>
-    <string name="intro_phonestateslide_subtitle">Om inkomende gesprekken en de naam van de beller op het horloge te laten zien.</string>
+    <string name="intro_phonestateslide_subtitle">Om inkomende gesprekken op het horloge te laten zien.</string>
     <string name="dialer">Kiezer</string>
     <string name="show_calls_on_watch">Toon inkomende oproepen</string>
     <string name="intro_slideandroidgo_subtitle">Android Go wordt niet ondersteund omdat daarop geen toegang tot meldingen is en achtergrondprocessen te veel worden beperkt. Rootgebruikers kunnen dit omzeilen door de optie \'ro.config.low_ram\' in build.prop in te stellen op \'false\'.</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
-    <string name="intro_slide6_title">Telefoon notificaties</string>
+    <string name="intro_slide6_title">Telefoon-/apparaatmeldingen</string>
     <string name="intro_slide6_subtitle">Om de huidige verbindingsstatus van het horloge te tonen.</string>
     <string name="location_disabled_message">De locatiedienst moet aanstaan om horloges te vinden. Na het pairen kan je het veilig weer uitzetten.</string>
     <string name="location_disabled_title">Locatie uitgeschakeld</string>
