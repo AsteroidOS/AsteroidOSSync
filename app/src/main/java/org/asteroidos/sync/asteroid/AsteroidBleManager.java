@@ -40,8 +40,30 @@ import java.util.UUID;
 
 import no.nordicsemi.android.ble.BleManager;
 import no.nordicsemi.android.ble.data.Data;
+import no.nordicsemi.android.ble.data.DataSplitter;
 
 public class AsteroidBleManager extends BleManager {
+    // Android's BluetoothGatt.writeCharacteristic() rejects any value longer
+    // than the maximum GATT attribute length (512 bytes) since Android 13,
+    // throwing IllegalArgumentException. The default MTU-based splitter chunks
+    // at MTU - 3 bytes, which is 514 when the system negotiates the maximum MTU
+    // of 517 (as on the Pixel 8), exceeding the limit and crashing the app on
+    // the first long notification. Cap each chunk at 512 bytes regardless of
+    // the negotiated MTU. The watch reassembles the message from the chunks, so
+    // a smaller chunk size has no effect other than splitting into more writes.
+    private static final int MAX_ATTRIBUTE_LENGTH = 512;
+
+    private static final DataSplitter CAPPED_SPLITTER = (message, index, maxLength) -> {
+        final int size = Math.min(maxLength, MAX_ATTRIBUTE_LENGTH);
+        final int offset = index * size;
+        if (offset >= message.length)
+            return null;
+        final int length = Math.min(size, message.length - offset);
+        final byte[] chunk = new byte[length];
+        System.arraycopy(message, offset, chunk, 0, length);
+        return chunk;
+    };
+
     public static final String TAG = AsteroidBleManager.class.toString();
     @Nullable
     public BluetoothGattCharacteristic batteryCharacteristic;
@@ -59,7 +81,7 @@ public class AsteroidBleManager extends BleManager {
 
     public final void send(UUID characteristic, byte[] data) {
         writeCharacteristic(sendingCharacteristics.get(characteristic), data,
-                Objects.requireNonNull(sendingCharacteristics.get(characteristic)).getWriteType()).split().enqueue();
+                Objects.requireNonNull(sendingCharacteristics.get(characteristic)).getWriteType()).split(CAPPED_SPLITTER).enqueue();
     }
 
     @NonNull
