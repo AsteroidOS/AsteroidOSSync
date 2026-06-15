@@ -88,8 +88,14 @@ public class AsteroidBleManager extends BleManager {
     }
 
     public final void send(UUID characteristic, byte[] data) {
-        writeCharacteristic(sendingCharacteristics.get(characteristic), data,
-                Objects.requireNonNull(sendingCharacteristics.get(characteristic)).getWriteType()).split(CAPPED_SPLITTER).enqueue();
+        if (sendingCharacteristics == null)
+            return;
+        BluetoothGattCharacteristic gattCharacteristic = sendingCharacteristics.get(characteristic);
+        if (gattCharacteristic == null) {
+            Log.w(TAG, "No writable characteristic for " + characteristic + "; dropping write");
+            return;
+        }
+        writeCharacteristic(gattCharacteristic, data, gattCharacteristic.getWriteType()).split(CAPPED_SPLITTER).enqueue();
     }
 
     @NonNull

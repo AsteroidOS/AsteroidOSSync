@@ -205,6 +205,14 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
 
     @Override
     public final void send(UUID characteristic, byte[] data, IConnectivityService service) {
+        // Services are driven by broadcasts, observers, alarms and network
+        // callbacks that fire independently of the BLE link. Dropping sends while
+        // disconnected avoids crashing in the BLE layer when there is no
+        // characteristic / connection to write to.
+        if (mBleMngr == null || mState != ConnectionState.STATUS_CONNECTED) {
+            Log.w(TAG, "Dropping send to " + characteristic + ": not connected");
+            return;
+        }
         mBleMngr.send(characteristic, data);
         Log.d(TAG, characteristic.toString() + " " + Arrays.toString(data));
     }
