@@ -18,6 +18,7 @@
 
 package org.asteroidos.sync.services;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -25,11 +26,13 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -111,12 +114,23 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         }
     };
 
+    public static boolean hasBluetoothConnectPermission(Context context) {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.S
+                || ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT)
+                        == PackageManager.PERMISSION_GRANTED;
+    }
+
     final void handleConnect() {
         if (mBleMngr == null) {
             mBleMngr = new AsteroidBleManager(getApplicationContext(), SynchronizationService.this);
             mBleMngr.setConnectionObserver(this);
         }
         if (mState == ConnectionState.STATUS_CONNECTED || mState == ConnectionState.STATUS_CONNECTING) return;
+        if (mBleMngr.getConnectionState() != BluetoothProfile.STATE_DISCONNECTED) return;
+        if (!hasBluetoothConnectPermission(this)) {
+            Log.w(TAG, "BLUETOOTH_CONNECT not granted, cannot connect");
+            return;
+        }
 
         // A new connection attempt overrides any previously requested disconnect.
         mUserInitiatedDisconnect = false;
@@ -368,6 +382,9 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        updateNotification();
+        if (!mUserInitiatedDisconnect)
+            handleConnect();
         return START_STICKY;
     }
 
@@ -385,30 +402,46 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
             }
         }
 
-        if (mDevice != null) {
-            Intent intent = new Intent(this, MainActivity.class);
-            PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                    intent, PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_IMMUTABLE);
+        // Always promote to a foreground service immediately. When the service is
+        // launched with startForegroundService() (e.g. from boot autostart on
+        // Android 8+), startForeground() must be called within a few seconds or
+        // the system kills the process with an ANR, so this must not be gated on
+        // a device being set.
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_IMMUTABLE);
 
-            Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_stat_name)
-                    .setContentTitle(getText(R.string.app_name))
-                    .setContentText(status)
-                    .setContentIntent(contentIntent)
-                    .setOngoing(true)
-                    .setPriority(Notification.PRIORITY_MIN)
-                    .setShowWhen(false)
-                    .build();
+        Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_stat_name)
+                .setContentTitle(getText(R.string.app_name))
+                .setContentText(status)
+                .setContentIntent(contentIntent)
+                .setOngoing(true)
+                .setPriority(Notification.PRIORITY_MIN)
+                .setShowWhen(false)
+                .build();
 
-            mNM.notify(NOTIFICATION, notification);
+        mNM.notify(NOTIFICATION, notification);
+        if (!hasBluetoothConnectPermission(this)) {
+            Log.w(TAG, "BLUETOOTH_CONNECT not granted, not promoting to foreground");
+            return;
+        }
+        try {
             startForeground(NOTIFICATION, notification);
+        } catch (SecurityException e) {
+            Log.e(TAG, "Could not promote to foreground", e);
         }
     }
 
     @Override
     public void onDestroy() {
+        mUserInitiatedDisconnect = true;
+        mReconnectHandler.removeCallbacksAndMessages(null);
         unregisterReceiver(mBtStateReceiver);
-        mBleMngr.disconnect();
+        // disconnect() only queues a request; it must be enqueued to actually run,
+        // otherwise the GATT connection is leaked when the service is destroyed.
+        if (mBleMngr != null)
+            mBleMngr.disconnect().enqueue();
         mNM.cancel(NOTIFICATION);
     }
 
