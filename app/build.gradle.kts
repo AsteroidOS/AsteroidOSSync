@@ -25,6 +25,7 @@ android {
                 srcDir("src/main/lib/android-ripple-background/library/src/main/java/")
                 srcDir("src/main/lib/material-intro-screen/material-intro-screen/src/main/java/")
                 srcDir("src/main/lib/powerampapi/poweramp_api_lib/src/")
+                srcDir("src/main/lib/easyweather/src/main/java/")
             }
             res {
                 srcDir("src/main/lib/android-ripple-background/library/src/main/res/")
@@ -48,7 +49,6 @@ android {
 repositories {
     mavenCentral()
     maven("https://maven.google.com")
-    maven("https://jitpack.io")
 }
 
 dependencies {
@@ -58,7 +58,11 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.google.android.material:material:1.9.0")
-    implementation("com.github.MagneFire:EasyWeather:1.3")
+    // EasyWeather is vendored under src/main/lib/easyweather (see its README);
+    // these are the runtime dependencies it needs, from Maven Central.
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.osmdroid:osmdroid-android:6.1.16")
     implementation("no.nordicsemi.android.support.v18:scanner:1.6.0")
