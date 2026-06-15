@@ -30,6 +30,7 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import androidx.core.content.ContextCompat;
 
 import org.asteroidos.sync.asteroid.IAsteroidDevice;
 import org.asteroidos.sync.services.GPSTracker;
@@ -98,7 +99,7 @@ public class WeatherService implements IConnectivityService {
             IntentFilter filter = new IntentFilter();
             filter.addAction(WEATHER_SYNC_INTENT);
 
-            mCtx.registerReceiver(mSReceiver, filter);
+            ContextCompat.registerReceiver(mCtx, mSReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
             // Fire update intent every 30 Minutes to update Weather
             Intent alarmIntent = new Intent(WEATHER_SYNC_INTENT);
             mAlarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE);

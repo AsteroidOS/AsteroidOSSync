@@ -23,6 +23,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
+import androidx.core.content.ContextCompat;
+
 import org.asteroidos.sync.NotificationPreferences;
 import org.asteroidos.sync.asteroid.IAsteroidDevice;
 import org.asteroidos.sync.dataobjects.Notification;
@@ -50,7 +52,7 @@ public class NotificationService implements IConnectivityService {
             IntentFilter filter = new IntentFilter();
             filter.addAction("org.asteroidos.sync.NOTIFICATION_LISTENER");
             mNReceiver = new NotificationReceiver();
-            mCtx.registerReceiver(mNReceiver, filter);
+            ContextCompat.registerReceiver(mCtx, mNReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
 
             Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER_SERVICE");
             i.putExtra("command", "refresh");

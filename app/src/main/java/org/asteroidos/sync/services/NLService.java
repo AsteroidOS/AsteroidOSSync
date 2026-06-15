@@ -32,6 +32,7 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import org.asteroidos.sync.utils.NotificationParser;
 
@@ -54,7 +55,7 @@ public class NLService extends NotificationListenerService {
         nlServiceReceiver = new NLServiceReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction("org.asteroidos.sync.NOTIFICATION_LISTENER_SERVICE");
-        registerReceiver(nlServiceReceiver, filter);
+        ContextCompat.registerReceiver(this, nlServiceReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
 
         iconFromPackage = new Hashtable<>();
         iconFromPackage.put("code.name.monkey.retromusic", "ios-musical-notes");

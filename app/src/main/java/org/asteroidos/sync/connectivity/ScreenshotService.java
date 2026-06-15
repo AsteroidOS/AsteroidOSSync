@@ -38,6 +38,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import org.asteroidos.sync.R;
@@ -179,7 +180,7 @@ public class ScreenshotService implements IConnectivityService {
             mSReceiver = new ScreenshotReqReceiver();
             IntentFilter filter = new IntentFilter();
             filter.addAction("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER");
-            mCtx.registerReceiver(mSReceiver, filter);
+            ContextCompat.registerReceiver(mCtx, mSReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
 
             mDownloading = false;
         }
