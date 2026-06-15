@@ -26,8 +26,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 
@@ -44,6 +44,9 @@ public class NLService extends NotificationListenerService {
     private NLServiceReceiver nlServiceReceiver;
     private Map<String, String> iconFromPackage;
     private volatile boolean listenerConnected = false;
+    // A refresh was requested before the listener was connected; honour it as
+    // soon as onListenerConnected() fires instead of busy-waiting.
+    private volatile boolean refreshPending = false;
 
     @Override
     public void onCreate() {
@@ -219,27 +222,37 @@ public class NLService extends NotificationListenerService {
     @Override
     public void onListenerConnected() {
         listenerConnected = true;
+        if (refreshPending) {
+            refreshPending = false;
+            pushActiveNotifications();
+        }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    private void pushActiveNotifications() {
+        if (!listenerConnected) return;
+        try {
+            StatusBarNotification[] notifs = getActiveNotifications();
+            for (StatusBarNotification notif : notifs)
+                onNotificationPosted(notif);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
     class NLServiceReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getStringExtra("command").equals("refresh")) {
-                Handler handler = new Handler();
-                handler.postDelayed(() -> {
-                    while (!listenerConnected) {
-                        // Sleep the spin
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                            Thread.onSpinWait();
-                        }else {
-                            // Will not delay here, as we can cause the entire UI to freeze
-                        }
-                    }
-                    StatusBarNotification[] notifs = getActiveNotifications();
-                    for (StatusBarNotification notif : notifs)
-                        onNotificationPosted(notif);
-                }, 500);
+            if ("refresh".equals(intent.getStringExtra("command"))) {
+                if (listenerConnected) {
+                    // Give freshly posted notifications a moment to settle, then
+                    // push them from the main thread.
+                    new Handler(Looper.getMainLooper())
+                            .postDelayed(NLService.this::pushActiveNotifications, 500);
+                } else {
+                    // Defer until the listener connects instead of busy-waiting,
+                    // which previously froze the main thread (ANR).
+                    refreshPending = true;
+                }
             }
         }
     }
