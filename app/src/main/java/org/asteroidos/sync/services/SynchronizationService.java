@@ -357,29 +357,37 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
             }
         }
 
-        if (mDevice != null) {
-            Intent intent = new Intent(this, MainActivity.class);
-            PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                    intent, PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_IMMUTABLE);
+        // Always promote to a foreground service immediately. When the service is
+        // launched with startForegroundService() (e.g. from boot autostart on
+        // Android 8+), startForeground() must be called within a few seconds or
+        // the system kills the process with an ANR, so this must not be gated on
+        // a device being set.
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_IMMUTABLE);
 
-            Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_stat_name)
-                    .setContentTitle(getText(R.string.app_name))
-                    .setContentText(status)
-                    .setContentIntent(contentIntent)
-                    .setOngoing(true)
-                    .setPriority(Notification.PRIORITY_MIN)
-                    .setShowWhen(false)
-                    .build();
+        Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_stat_name)
+                .setContentTitle(getText(R.string.app_name))
+                .setContentText(status)
+                .setContentIntent(contentIntent)
+                .setOngoing(true)
+                .setPriority(Notification.PRIORITY_MIN)
+                .setShowWhen(false)
+                .build();
 
-            mNM.notify(NOTIFICATION, notification);
-            startForeground(NOTIFICATION, notification);
-        }
+        mNM.notify(NOTIFICATION, notification);
+        startForeground(NOTIFICATION, notification);
     }
 
     @Override
     public void onDestroy() {
-        mBleMngr.disconnect();
+        mUserInitiatedDisconnect = true;
+        mReconnectHandler.removeCallbacksAndMessages(null);
+        // disconnect() only queues a request; it must be enqueued to actually run,
+        // otherwise the GATT connection is leaked when the service is destroyed.
+        if (mBleMngr != null)
+            mBleMngr.disconnect().enqueue();
         mNM.cancel(NOTIFICATION);
     }
 
