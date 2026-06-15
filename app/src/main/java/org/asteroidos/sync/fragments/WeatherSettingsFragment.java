@@ -118,7 +118,7 @@ public class WeatherSettingsFragment extends Fragment {
             editor.apply();
 
             // Update the Weather after changing it
-            getActivity().sendBroadcast(new Intent(WeatherService.WEATHER_SYNC_INTENT));
+            getActivity().sendBroadcast(new Intent(WeatherService.WEATHER_SYNC_INTENT).setPackage(getActivity().getPackageName()));
 
             getActivity().onBackPressed();
         });
@@ -193,7 +193,7 @@ public class WeatherSettingsFragment extends Fragment {
         editor.putBoolean(WeatherService.PREFS_SYNC_WEATHER, enable);
         editor.apply();
         mButton.setVisibility(enable ? View.INVISIBLE : View.VISIBLE);
-        requireActivity().sendBroadcast(new Intent(WeatherService.WEATHER_SYNC_INTENT));
+        requireActivity().sendBroadcast(new Intent(WeatherService.WEATHER_SYNC_INTENT).setPackage(requireActivity().getPackageName()));
     }
 
     @Override
