@@ -152,6 +152,13 @@ public class AsteroidBleManager extends BleManager {
 
             for (IConnectivityService service : mSynchronizationService.getServices().values()) {
                 BluetoothGattService bluetoothGattService = gatt.getService(service.getServiceUUID());
+                // A flaky reconnect can return a partial GATT table. Skipping a
+                // missing service avoids a NullPointerException here that would
+                // abort the whole connection and trap us in a retry loop.
+                if (bluetoothGattService == null) {
+                    Log.w(TAG, "Service not exposed by watch, skipping: " + service.getServiceUUID());
+                    continue;
+                }
                 List<UUID> sendUuids = new ArrayList<>();
                 service.getCharacteristicUUIDs().forEach((uuid, direction) -> {
                     if (direction == IConnectivityService.Direction.TO_WATCH)
@@ -161,11 +168,13 @@ public class AsteroidBleManager extends BleManager {
 
                 for (UUID uuid : sendUuids) {
                     BluetoothGattCharacteristic characteristic = bluetoothGattService.getCharacteristic(uuid);
-                    sendingCharacteristics.put(uuid, characteristic);
-                    bluetoothGattService.addCharacteristic(characteristic);
+                    if (characteristic != null)
+                        sendingCharacteristics.put(uuid, characteristic);
                 }
                 recvCallbacks.forEach((characteristic, callback) -> {
                     BluetoothGattCharacteristic characteristic1 = bluetoothGattService.getCharacteristic(characteristic);
+                    if (characteristic1 == null)
+                        return;
                     removeNotificationCallback(characteristic1);
                     setNotificationCallback(characteristic1).with((device, data) -> callback.call(data.getValue()));
                     enableNotifications(characteristic1).enqueue();
