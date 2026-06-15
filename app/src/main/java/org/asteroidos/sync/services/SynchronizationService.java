@@ -26,6 +26,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -120,6 +121,11 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
                         == PackageManager.PERMISSION_GRANTED;
     }
 
+    private BluetoothAdapter getBluetoothAdapter() {
+        BluetoothManager bm = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        return bm != null ? bm.getAdapter() : null;
+    }
+
     final void handleConnect() {
         if (mBleMngr == null) {
             mBleMngr = new AsteroidBleManager(getApplicationContext(), SynchronizationService.this);
@@ -139,7 +145,9 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         mPrefs = getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
         String defaultDevMacAddr = mPrefs.getString(MainActivity.PREFS_DEFAULT_MAC_ADDR, "");
         if (defaultDevMacAddr.equals("")) return;
-        BluetoothDevice device = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(defaultDevMacAddr);
+        BluetoothAdapter adapter = getBluetoothAdapter();
+        if (adapter == null) return;
+        BluetoothDevice device = adapter.getRemoteDevice(defaultDevMacAddr);
         try {
             // Only initiate bonding when the device is not already bonded. Calling
             // createBond() on every connect races the bonding state machine against
@@ -358,7 +366,9 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         }
 
         if (!(defaultDevMacAddr.equals(""))) {
-            mDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(defaultDevMacAddr);
+            BluetoothAdapter adapter = getBluetoothAdapter();
+            if (adapter != null)
+                mDevice = adapter.getRemoteDevice(defaultDevMacAddr);
         }
 
         if (nonBleServices.isEmpty())
