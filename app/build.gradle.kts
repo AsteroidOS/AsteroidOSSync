@@ -3,8 +3,7 @@ plugins {
 }
 
 android {
-    compileSdk = 33
-    buildToolsVersion = "30.0.3"
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "org.asteroidos.sync"
@@ -46,25 +45,22 @@ android {
     namespace = "org.asteroidos.sync"
 }
 
-repositories {
-    mavenCentral()
-    maven("https://maven.google.com")
-}
-
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     testImplementation("junit:junit:4.13.2")
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.android.material:material:1.12.0")
     // EasyWeather is vendored under src/main/lib/easyweather (see its README);
     // these are the runtime dependencies it needs, from Maven Central.
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-    implementation("com.google.code.gson:gson:2.10.1")
-    implementation("org.osmdroid:osmdroid-android:6.1.16")
+    implementation("com.google.code.gson:gson:2.11.0")
+    implementation("org.osmdroid:osmdroid-android:6.1.20")
+    // Nordic BLE libraries are intentionally kept pinned: the connection
+    // lifecycle was carefully tuned against this version.
     implementation("no.nordicsemi.android.support.v18:scanner:1.6.0")
     implementation("no.nordicsemi.android:ble:2.7.2")
 }
