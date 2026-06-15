@@ -121,6 +121,12 @@ public class WeatherService implements IConnectivityService {
             if (mAlarmMgr != null) {
                 mAlarmMgr.cancel(mAlarmPendingIntent);
             }
+            // Release the location listener; otherwise a pending single-update
+            // request outlives the disconnect.
+            if (mGPS != null) {
+                mGPS.stopUsingGPS();
+                mGPS = null;
+            }
             mSReceiver = null;
         }
 
