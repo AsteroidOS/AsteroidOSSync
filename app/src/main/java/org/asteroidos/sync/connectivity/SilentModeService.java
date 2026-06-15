@@ -44,8 +44,17 @@ public class SilentModeService implements SharedPreferences.OnSharedPreferenceCh
         if (notificationPref == null) {
             notificationPref = prefs.getBoolean(PREF_RINGER, false);
 
+            int currentRinger = am.getRingerMode();
+            // If silence-on-connect is enabled and the phone is already silent,
+            // a previous session was almost certainly killed before unsync()
+            // could restore the ringer. Recording SILENT as the "original" mode
+            // would leave the user permanently muted, so fall back to NORMAL.
+            if (notificationPref && currentRinger == AudioManager.RINGER_MODE_SILENT) {
+                currentRinger = AudioManager.RINGER_MODE_NORMAL;
+            }
+
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putInt(PREF_ORIG_RINGER, am.getRingerMode());
+            editor.putInt(PREF_ORIG_RINGER, currentRinger);
             editor.apply();
 
             if (notificationPref) {
