@@ -59,6 +59,9 @@ import java.util.concurrent.TimeUnit;
 public class ScreenshotService implements IConnectivityService {
     private static final String NOTIFICATION_CHANNEL_ID = "screenshotservice_channel_id_01";
     private final int NOTIFICATION = 2726;
+    // Sanity ceiling for an announced screenshot size; a real watch screenshot
+    // is a few tens of KB. Anything larger is treated as a corrupt header.
+    private static final int MAX_SCREENSHOT_SIZE = 10 * 1024 * 1024;
 
     private final Context mCtx;
     private final IAsteroidDevice mDevice;
@@ -94,6 +97,14 @@ public class ScreenshotService implements IConnectivityService {
             }
             if (mFirstNotify) {
                 size = bytesToInt(data);
+                // Guard against a corrupt or oversized header that would
+                // otherwise throw NegativeArraySizeException / OutOfMemoryError.
+                if (size <= 0 || size > MAX_SCREENSHOT_SIZE) {
+                    mFirstNotify = true;
+                    mDownloading = false;
+                    totalData = null;
+                    return;
+                }
                 totalData = new byte[size];
                 mFirstNotify = false;
                 progress = 0;
@@ -111,12 +122,22 @@ public class ScreenshotService implements IConnectivityService {
                     mNM.notify(NOTIFICATION, notification);
                 }, 0, 1, TimeUnit.SECONDS);
             } else {
-                if (data.length + progress <= totalData.length)
-                    System.arraycopy(data, 0, totalData, progress, data.length);
-                progress += data.length;
+                // A data chunk arrived without a preceding header; ignore it
+                // rather than crash on a null buffer.
+                if (totalData == null) return;
 
-                if (size == progress) {
-                    processUpdate.shutdown();
+                // Clamp to the remaining buffer so a desynced/oversized stream
+                // can never overflow the array nor push progress past size (which
+                // would leave the progress executor running forever).
+                int remaining = totalData.length - progress;
+                int toCopy = Math.min(data.length, remaining);
+                if (toCopy > 0) {
+                    System.arraycopy(data, 0, totalData, progress, toCopy);
+                    progress += toCopy;
+                }
+
+                if (progress >= size) {
+                    stopProcessUpdate();
                     NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mCtx, NOTIFICATION_CHANNEL_ID)
                             .setContentTitle(mCtx.getText(R.string.screenshot))
                             .setLocalOnly(true);
@@ -172,6 +193,16 @@ public class ScreenshotService implements IConnectivityService {
             } catch (IllegalArgumentException ignored) {
             }
             mSReceiver = null;
+        }
+        // A disconnect mid-download must not leave the progress executor running.
+        stopProcessUpdate();
+        mDownloading = false;
+    }
+
+    private void stopProcessUpdate() {
+        if (processUpdate != null) {
+            processUpdate.shutdown();
+            processUpdate = null;
         }
     }
 
