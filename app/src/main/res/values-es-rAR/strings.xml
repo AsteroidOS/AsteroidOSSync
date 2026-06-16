@@ -62,9 +62,9 @@
     <string name="switch_phone_notifications">Silenciar el teléfono mientras está conectado</string>
     <string name="notification_silent_icon">Ícono de notificación silenciada</string>
     <string name="notification_type_ringtone">Tono de llamada</string>
-    <string name="intro_slide6_title">Notificaciones del teléfono</string>
+    <string name="intro_slide6_title">Notificaciones del teléfono/dispositivo</string>
     <string name="intro_slide6_subtitle">Para mostrar el estado de conexión actual del reloj.</string>
-    <string name="intro_phonestateslide_subtitle">Para mostrar las llamadas entrantes en el reloj y para mostrar el nombre de quien llama.</string>
+    <string name="intro_phonestateslide_subtitle">Para mostrar las llamadas entrantes en el reloj.</string>
     <string name="intro_phonestateslide_title">Teléfono y contactos</string>
     <string name="dialer">Marcador</string>
     <string name="intro_slideandroidgo_title">Android Go</string>
