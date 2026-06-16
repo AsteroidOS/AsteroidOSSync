@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    alias(libs.plugins.android.application)
 }
 
 android {
@@ -47,19 +47,17 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    testImplementation("junit:junit:4.13.2")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation("com.google.android.material:material:1.12.0")
+    testImplementation(libs.junit)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.cardview)
+    implementation(libs.material)
     // EasyWeather is vendored under src/main/lib/easyweather (see its README);
     // these are the runtime dependencies it needs, from Maven Central.
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-    implementation("com.google.code.gson:gson:2.11.0")
-    implementation("org.osmdroid:osmdroid-android:6.1.20")
-    // Nordic BLE libraries are intentionally kept pinned: the connection
-    // lifecycle was carefully tuned against this version.
-    implementation("no.nordicsemi.android.support.v18:scanner:1.6.0")
-    implementation("no.nordicsemi.android:ble:2.7.2")
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.gson)
+    implementation(libs.osmdroid.android)
+    implementation(libs.nordic.scanner)
+    implementation(libs.nordic.ble)
 }
