@@ -53,6 +53,14 @@ public class AsteroidBleManager extends BleManager {
     // a smaller chunk size has no effect other than splitting into more writes.
     private static final int MAX_ATTRIBUTE_LENGTH = 512;
 
+    // Request the largest ATT_MTU the BLE spec allows (517 bytes) at connection
+    // time. A bigger MTU means fewer, larger GATT writes and notifications, so
+    // syncs (notifications, screenshots, weather) transfer faster. This is only
+    // safe because CAPPED_SPLITTER above clamps every write to the 512-byte
+    // attribute limit no matter what MTU the system negotiates; the peer always
+    // falls back to a smaller MTU if it can't support the maximum.
+    private static final int GATT_MAX_MTU = 517;
+
     private static final DataSplitter CAPPED_SPLITTER = (message, index, maxLength) -> {
         final int size = Math.min(maxLength, MAX_ATTRIBUTE_LENGTH);
         final int offset = index * size;
@@ -164,7 +172,7 @@ public class AsteroidBleManager extends BleManager {
         @Override
         protected final void initialize() {
             beginAtomicRequestQueue()
-                    .add(requestMtu(256) // Remember, GATT needs 3 bytes extra. This will allow packet size of 244 bytes.
+                    .add(requestMtu(GATT_MAX_MTU)
                             .with((device, mtu) -> log(Log.INFO, "MTU set to " + mtu))
                             .fail((device, status) -> log(Log.WARN, "Requested MTU not supported: " + status)))
                     .done(device -> log(Log.INFO, "Target initialized"))
