@@ -107,6 +107,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
                 i.putExtra("body", number);
                 i.putExtra("vibration", "ringtone");
 
+                i.setPackage(context.getPackageName());
                 context.sendBroadcast(i);
             }
         }
@@ -115,6 +116,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
             Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
             i.putExtra("event", "removed");
             i.putExtra("id", 56345);
+            i.setPackage(context.getPackageName());
             context.sendBroadcast(i);
         }
     }

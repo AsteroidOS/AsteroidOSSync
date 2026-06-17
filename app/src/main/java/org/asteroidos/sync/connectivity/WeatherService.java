@@ -102,6 +102,7 @@ public class WeatherService implements IConnectivityService {
             ContextCompat.registerReceiver(mCtx, mSReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
             // Fire update intent every 30 Minutes to update Weather
             Intent alarmIntent = new Intent(WEATHER_SYNC_INTENT);
+            alarmIntent.setPackage(mCtx.getPackageName());
             mAlarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
             mAlarmMgr = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
             mAlarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,

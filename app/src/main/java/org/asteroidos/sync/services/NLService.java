@@ -202,6 +202,7 @@ public class NLService extends NotificationListenerService {
         i.putExtra("summary", summary);
         i.putExtra("body", body);
 
+        i.setPackage(getPackageName());
         sendBroadcast(i);
     }
 
@@ -210,6 +211,7 @@ public class NLService extends NotificationListenerService {
         Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
         i.putExtra("event", "removed");
         i.putExtra("id", sbn.getId());
+        i.setPackage(getPackageName());
         sendBroadcast(i);
     }
 

@@ -56,6 +56,7 @@ public class NotificationService implements IConnectivityService {
 
             Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER_SERVICE");
             i.putExtra("command", "refresh");
+            i.setPackage(mCtx.getPackageName());
             mCtx.sendBroadcast(i);
         }
     }
