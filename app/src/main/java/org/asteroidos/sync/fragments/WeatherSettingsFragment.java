@@ -23,6 +23,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Location;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -76,9 +77,26 @@ public class WeatherSettingsFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        float latitude = mSettings.getFloat(WeatherService.PREFS_LATITUDE, WeatherService.PREFS_LATITUDE_DEFAULT);
-        float longitude = mSettings.getFloat(WeatherService.PREFS_LONGITUDE, WeatherService.PREFS_LONGITUDE_DEFAULT);
         float zoom = mSettings.getFloat(WeatherService.PREFS_ZOOM, WeatherService.PREFS_ZOOM_DEFAULT);
+        float latitude;
+        float longitude;
+        if (mSettings.contains(WeatherService.PREFS_LATITUDE) && mSettings.contains(WeatherService.PREFS_LONGITUDE)) {
+            latitude = mSettings.getFloat(WeatherService.PREFS_LATITUDE, WeatherService.PREFS_LATITUDE_DEFAULT);
+            longitude = mSettings.getFloat(WeatherService.PREFS_LONGITUDE, WeatherService.PREFS_LONGITUDE_DEFAULT);
+        } else {
+            // No location chosen yet: center on the device's current location
+            // rather than the default city.
+            Location location = WeatherService.getLastKnownLocation(requireContext());
+            if (location != null) {
+                latitude = (float) location.getLatitude();
+                longitude = (float) location.getLongitude();
+                if (zoom < 10.0f)
+                    zoom = 10.0f;
+            } else {
+                latitude = mSettings.getFloat(WeatherService.PREFS_LATITUDE, WeatherService.PREFS_LATITUDE_DEFAULT);
+                longitude = mSettings.getFloat(WeatherService.PREFS_LONGITUDE, WeatherService.PREFS_LONGITUDE_DEFAULT);
+            }
+        }
         mOwmKey = mSettings.getString(WeatherService.PREFS_OWM_API_KEY, WeatherService.PREFS_OWM_API_KEY_DEFAULT);
 
         mMapView = view.findViewById(R.id.map);
