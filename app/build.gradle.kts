@@ -1,15 +1,14 @@
 plugins {
-    id("com.android.application")
+    alias(libs.plugins.android.application)
 }
 
 android {
-    compileSdk = 33
-    buildToolsVersion = "30.0.3"
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "org.asteroidos.sync"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 29
         versionName = "0.29"
     }
@@ -25,6 +24,7 @@ android {
                 srcDir("src/main/lib/android-ripple-background/library/src/main/java/")
                 srcDir("src/main/lib/material-intro-screen/material-intro-screen/src/main/java/")
                 srcDir("src/main/lib/powerampapi/poweramp_api_lib/src/")
+                srcDir("src/main/lib/easyweather/src/main/java/")
             }
             res {
                 srcDir("src/main/lib/android-ripple-background/library/src/main/res/")
@@ -45,22 +45,19 @@ android {
     namespace = "org.asteroidos.sync"
 }
 
-repositories {
-    mavenCentral()
-    maven("https://maven.google.com")
-    maven("https://jitpack.io")
-}
-
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    testImplementation("junit:junit:4.13.2")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("com.github.MagneFire:EasyWeather:1.3")
-    implementation("com.google.code.gson:gson:2.10.1")
-    implementation("org.osmdroid:osmdroid-android:6.1.16")
-    implementation("no.nordicsemi.android.support.v18:scanner:1.6.0")
-    implementation("no.nordicsemi.android:ble:2.7.2")
+    testImplementation(libs.junit)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.cardview)
+    implementation(libs.material)
+    // EasyWeather is vendored under src/main/lib/easyweather (see its README);
+    // these are the runtime dependencies it needs, from Maven Central.
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.gson)
+    implementation(libs.osmdroid.android)
+    implementation(libs.nordic.scanner)
+    implementation(libs.nordic.ble)
 }

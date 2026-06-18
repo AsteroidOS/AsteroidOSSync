@@ -53,6 +53,14 @@ public class AsteroidBleManager extends BleManager {
     // a smaller chunk size has no effect other than splitting into more writes.
     private static final int MAX_ATTRIBUTE_LENGTH = 512;
 
+    // Request the largest ATT_MTU the BLE spec allows (517 bytes) at connection
+    // time. A bigger MTU means fewer, larger GATT writes and notifications, so
+    // syncs (notifications, screenshots, weather) transfer faster. This is only
+    // safe because CAPPED_SPLITTER above clamps every write to the 512-byte
+    // attribute limit no matter what MTU the system negotiates; the peer always
+    // falls back to a smaller MTU if it can't support the maximum.
+    private static final int GATT_MAX_MTU = 517;
+
     private static final DataSplitter CAPPED_SPLITTER = (message, index, maxLength) -> {
         final int size = Math.min(maxLength, MAX_ATTRIBUTE_LENGTH);
         final int offset = index * size;
@@ -80,8 +88,14 @@ public class AsteroidBleManager extends BleManager {
     }
 
     public final void send(UUID characteristic, byte[] data) {
-        writeCharacteristic(sendingCharacteristics.get(characteristic), data,
-                Objects.requireNonNull(sendingCharacteristics.get(characteristic)).getWriteType()).split(CAPPED_SPLITTER).enqueue();
+        if (sendingCharacteristics == null)
+            return;
+        BluetoothGattCharacteristic gattCharacteristic = sendingCharacteristics.get(characteristic);
+        if (gattCharacteristic == null) {
+            Log.w(TAG, "No writable characteristic for " + characteristic + "; dropping write");
+            return;
+        }
+        writeCharacteristic(gattCharacteristic, data, gattCharacteristic.getWriteType()).split(CAPPED_SPLITTER).enqueue();
     }
 
     @NonNull
@@ -138,6 +152,13 @@ public class AsteroidBleManager extends BleManager {
 
             for (IConnectivityService service : mSynchronizationService.getServices().values()) {
                 BluetoothGattService bluetoothGattService = gatt.getService(service.getServiceUUID());
+                // A flaky reconnect can return a partial GATT table. Skipping a
+                // missing service avoids a NullPointerException here that would
+                // abort the whole connection and trap us in a retry loop.
+                if (bluetoothGattService == null) {
+                    Log.w(TAG, "Service not exposed by watch, skipping: " + service.getServiceUUID());
+                    continue;
+                }
                 List<UUID> sendUuids = new ArrayList<>();
                 service.getCharacteristicUUIDs().forEach((uuid, direction) -> {
                     if (direction == IConnectivityService.Direction.TO_WATCH)
@@ -147,11 +168,13 @@ public class AsteroidBleManager extends BleManager {
 
                 for (UUID uuid : sendUuids) {
                     BluetoothGattCharacteristic characteristic = bluetoothGattService.getCharacteristic(uuid);
-                    sendingCharacteristics.put(uuid, characteristic);
-                    bluetoothGattService.addCharacteristic(characteristic);
+                    if (characteristic != null)
+                        sendingCharacteristics.put(uuid, characteristic);
                 }
                 recvCallbacks.forEach((characteristic, callback) -> {
                     BluetoothGattCharacteristic characteristic1 = bluetoothGattService.getCharacteristic(characteristic);
+                    if (characteristic1 == null)
+                        return;
                     removeNotificationCallback(characteristic1);
                     setNotificationCallback(characteristic1).with((device, data) -> callback.call(data.getValue()));
                     enableNotifications(characteristic1).enqueue();
@@ -164,7 +187,7 @@ public class AsteroidBleManager extends BleManager {
         @Override
         protected final void initialize() {
             beginAtomicRequestQueue()
-                    .add(requestMtu(256) // Remember, GATT needs 3 bytes extra. This will allow packet size of 244 bytes.
+                    .add(requestMtu(GATT_MAX_MTU)
                             .with((device, mtu) -> log(Log.INFO, "MTU set to " + mtu))
                             .fail((device, status) -> log(Log.WARN, "Requested MTU not supported: " + status)))
                     .done(device -> log(Log.INFO, "Target initialized"))
