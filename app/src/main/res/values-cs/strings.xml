@@ -6,7 +6,7 @@
     <string name="nothing_found">Nenalezeny žádné hodinky</string>
     <string name="one_found">Nalezeny jedny hodinky</string>
     <string name="n_found">Nalezeno %d hodinek</string>
-    <string name="intro_slideerror_subtitle">Toto zařízení nepodporuje úspornou (LE) technologie Bluetooth.</string>
+    <string name="intro_slideerror_subtitle">Toto zařízení nepodporuje úspornou (LE) technologii Bluetooth.</string>
     <string name="disconnected">Odpojeno</string>
     <string name="connected">Připojeno</string>
     <string name="connecting">Připojování…</string>
