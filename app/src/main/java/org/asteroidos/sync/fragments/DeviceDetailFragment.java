@@ -114,6 +114,7 @@ public class DeviceDetailFragment extends Fragment {
             Intent iremove = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
             iremove.putExtra("event", "removed");
             iremove.putExtra("id", 0xa57e401d);
+            iremove.setPackage(requireActivity().getPackageName());
             requireActivity().sendBroadcast(iremove);
 
             Intent ipost = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
@@ -124,11 +125,13 @@ public class DeviceDetailFragment extends Fragment {
             ipost.putExtra("appIcon", "ios-watch-vibrating");
             ipost.putExtra("summary", getString(R.string.watch_finder));
             ipost.putExtra("body", getString(R.string.phone_is_searching));
+            ipost.setPackage(requireActivity().getPackageName());
             requireActivity().sendBroadcast(ipost);
         });
 
         CardView screenshotCard = view.findViewById(R.id.card_view3);
-        screenshotCard.setOnClickListener(view1 -> requireActivity().sendBroadcast(new Intent("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER")));
+        screenshotCard.setOnClickListener(view1 -> requireActivity().sendBroadcast(
+                new Intent("org.asteroidos.sync.SCREENSHOT_REQUEST_LISTENER").setPackage(requireActivity().getPackageName())));
 
         CardView notifSettCard = view.findViewById(R.id.card_view4);
         notifSettCard.setOnClickListener(notifSettCardView -> mAppSettingsListener.onAppSettingsClicked());

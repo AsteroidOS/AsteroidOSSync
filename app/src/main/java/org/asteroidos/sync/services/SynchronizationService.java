@@ -25,6 +25,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -82,10 +83,20 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
     HashMap<UUID, IConnectivityService> bleServices;
     List<IService> nonBleServices;
     private NotificationManager mNM;
-    private ConnectionState mState = ConnectionState.STATUS_DISCONNECTED;
+    private volatile ConnectionState mState = ConnectionState.STATUS_DISCONNECTED;
     private Messenger replyTo;
     private SharedPreferences mPrefs;
     private AsteroidBleManager mBleMngr;
+    // Set when the user (or app teardown) explicitly asked to disconnect, so we
+    // do not fight that intent by automatically reconnecting.
+    private volatile boolean mUserInitiatedDisconnect = false;
+    private final Handler mReconnectHandler = new Handler(Looper.getMainLooper());
+    private static final long RECONNECT_DELAY_MS = 3000;
+
+    private BluetoothAdapter getBluetoothAdapter() {
+        BluetoothManager bm = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        return bm != null ? bm.getAdapter() : null;
+    }
 
     final void handleConnect() {
         if (mBleMngr == null) {
@@ -94,14 +105,27 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         }
         if (mState == ConnectionState.STATUS_CONNECTED || mState == ConnectionState.STATUS_CONNECTING) return;
 
+        // A new connection attempt overrides any previously requested disconnect.
+        mUserInitiatedDisconnect = false;
+        mReconnectHandler.removeCallbacksAndMessages(null);
+
         mPrefs = getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
         String defaultDevMacAddr = mPrefs.getString(MainActivity.PREFS_DEFAULT_MAC_ADDR, "");
         if (defaultDevMacAddr.equals("")) return;
-        String defaultLocalName = mPrefs.getString(MainActivity.PREFS_DEFAULT_LOC_NAME, "");
-        BluetoothDevice device = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(defaultDevMacAddr);
+        BluetoothAdapter adapter = getBluetoothAdapter();
+        if (adapter == null) return;
+        BluetoothDevice device = adapter.getRemoteDevice(defaultDevMacAddr);
         try {
-            device.createBond();
+            // Only initiate bonding when the device is not already bonded. Calling
+            // createBond() on every connect races the bonding state machine against
+            // the GATT connection and is a known cause of error 133 / failed service
+            // discovery (the "I have to forget and re-pair" symptom). When already
+            // bonded, encryption is re-established automatically on connect.
+            if (device.getBondState() == BluetoothDevice.BOND_NONE)
+                device.createBond();
             mBleMngr.connect(device)
+                    // autoConnect lets the OS reconnect in the background when the
+                    // watch comes back into range (power efficient, survives Doze).
                     .useAutoConnect(true)
                     .timeout(100 * 1000)
                     .retry(3, 200)
@@ -120,10 +144,27 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         }
     }
 
+    // Re-establish the connection after an unexpected link loss. Gated on the
+    // user-initiated flag and the current state so we never reconnect against the
+    // user's wishes or double-connect while the stack is already (re)connecting.
+    private void scheduleReconnect() {
+        if (mUserInitiatedDisconnect || mDevice == null) return;
+        mReconnectHandler.removeCallbacksAndMessages(null);
+        mReconnectHandler.postDelayed(() -> {
+            if (mUserInitiatedDisconnect) return;
+            if (mState == ConnectionState.STATUS_CONNECTED || mState == ConnectionState.STATUS_CONNECTING)
+                return;
+            Log.d(TAG, "Attempting to reconnect after link loss");
+            handleConnect();
+        }, RECONNECT_DELAY_MS);
+    }
+
     final void handleDisconnect() {
         if (mBleMngr == null) return;
         if (mState == ConnectionState.STATUS_DISCONNECTED) return;
 
+        mUserInitiatedDisconnect = true;
+        mReconnectHandler.removeCallbacksAndMessages(null);
         bleServices.values().forEach(IService::unsync);
         mBleMngr.abort();
         mBleMngr.disconnect().enqueue();
@@ -172,6 +213,14 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
 
     @Override
     public final void send(UUID characteristic, byte[] data, IConnectivityService service) {
+        // Services are driven by broadcasts, observers, alarms and network
+        // callbacks that fire independently of the BLE link. Dropping sends while
+        // disconnected avoids crashing in the BLE layer when there is no
+        // characteristic / connection to write to.
+        if (mBleMngr == null || mState != ConnectionState.STATUS_CONNECTED) {
+            Log.w(TAG, "Dropping send to " + characteristic + ": not connected");
+            return;
+        }
         mBleMngr.send(characteristic, data);
         Log.d(TAG, characteristic.toString() + " " + Arrays.toString(data));
     }
@@ -244,6 +293,12 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         mState = ConnectionState.STATUS_DISCONNECTED;
         updateNotification();
         unsyncServices();
+        // Only a clean, locally requested disconnect should be left alone; any
+        // other reason (link loss, timeout, peer terminated) means we lost the
+        // watch unexpectedly and should try to get it back.
+        if (reason != ConnectionObserver.REASON_SUCCESS
+                && reason != ConnectionObserver.REASON_TERMINATE_LOCAL_HOST)
+            scheduleReconnect();
     }
 
     @Override
@@ -272,7 +327,9 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         }
 
         if (!(defaultDevMacAddr.equals(""))) {
-            mDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(defaultDevMacAddr);
+            BluetoothAdapter adapter = getBluetoothAdapter();
+            if (adapter != null)
+                mDevice = adapter.getRemoteDevice(defaultDevMacAddr);
         }
 
         if (nonBleServices.isEmpty())
@@ -310,29 +367,37 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
             }
         }
 
-        if (mDevice != null) {
-            Intent intent = new Intent(this, MainActivity.class);
-            PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                    intent, PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_IMMUTABLE);
+        // Always promote to a foreground service immediately. When the service is
+        // launched with startForegroundService() (e.g. from boot autostart on
+        // Android 8+), startForeground() must be called within a few seconds or
+        // the system kills the process with an ANR, so this must not be gated on
+        // a device being set.
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_IMMUTABLE);
 
-            Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_stat_name)
-                    .setContentTitle(getText(R.string.app_name))
-                    .setContentText(status)
-                    .setContentIntent(contentIntent)
-                    .setOngoing(true)
-                    .setPriority(Notification.PRIORITY_MIN)
-                    .setShowWhen(false)
-                    .build();
+        Notification notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_stat_name)
+                .setContentTitle(getText(R.string.app_name))
+                .setContentText(status)
+                .setContentIntent(contentIntent)
+                .setOngoing(true)
+                .setPriority(Notification.PRIORITY_MIN)
+                .setShowWhen(false)
+                .build();
 
-            mNM.notify(NOTIFICATION, notification);
-            startForeground(NOTIFICATION, notification);
-        }
+        mNM.notify(NOTIFICATION, notification);
+        startForeground(NOTIFICATION, notification);
     }
 
     @Override
     public void onDestroy() {
-        mBleMngr.disconnect();
+        mUserInitiatedDisconnect = true;
+        mReconnectHandler.removeCallbacksAndMessages(null);
+        // disconnect() only queues a request; it must be enqueued to actually run,
+        // otherwise the GATT connection is leaked when the service is destroyed.
+        if (mBleMngr != null)
+            mBleMngr.disconnect().enqueue();
         mNM.cancel(NOTIFICATION);
     }
 
@@ -348,6 +413,8 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
     }
 
     private void handleUnSetDevice() {
+        mUserInitiatedDisconnect = true;
+        mReconnectHandler.removeCallbacksAndMessages(null);
         SharedPreferences.Editor editor = mPrefs.edit();
         if (mState != ConnectionState.STATUS_DISCONNECTED) {
             mBleMngr.disconnect().enqueue();

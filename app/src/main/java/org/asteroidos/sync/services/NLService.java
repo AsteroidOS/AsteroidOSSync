@@ -26,12 +26,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import org.asteroidos.sync.utils.NotificationParser;
 
@@ -44,6 +45,9 @@ public class NLService extends NotificationListenerService {
     private NLServiceReceiver nlServiceReceiver;
     private Map<String, String> iconFromPackage;
     private volatile boolean listenerConnected = false;
+    // A refresh was requested before the listener was connected; honour it as
+    // soon as onListenerConnected() fires instead of busy-waiting.
+    private volatile boolean refreshPending = false;
 
     @Override
     public void onCreate() {
@@ -51,7 +55,7 @@ public class NLService extends NotificationListenerService {
         nlServiceReceiver = new NLServiceReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction("org.asteroidos.sync.NOTIFICATION_LISTENER_SERVICE");
-        registerReceiver(nlServiceReceiver, filter);
+        ContextCompat.registerReceiver(this, nlServiceReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
 
         iconFromPackage = new Hashtable<>();
         iconFromPackage.put("code.name.monkey.retromusic", "ios-musical-notes");
@@ -198,6 +202,7 @@ public class NLService extends NotificationListenerService {
         i.putExtra("summary", summary);
         i.putExtra("body", body);
 
+        i.setPackage(getPackageName());
         sendBroadcast(i);
     }
 
@@ -206,6 +211,7 @@ public class NLService extends NotificationListenerService {
         Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
         i.putExtra("event", "removed");
         i.putExtra("id", sbn.getId());
+        i.setPackage(getPackageName());
         sendBroadcast(i);
     }
 
@@ -219,27 +225,37 @@ public class NLService extends NotificationListenerService {
     @Override
     public void onListenerConnected() {
         listenerConnected = true;
+        if (refreshPending) {
+            refreshPending = false;
+            pushActiveNotifications();
+        }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    private void pushActiveNotifications() {
+        if (!listenerConnected) return;
+        try {
+            StatusBarNotification[] notifs = getActiveNotifications();
+            for (StatusBarNotification notif : notifs)
+                onNotificationPosted(notif);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
     class NLServiceReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getStringExtra("command").equals("refresh")) {
-                Handler handler = new Handler();
-                handler.postDelayed(() -> {
-                    while (!listenerConnected) {
-                        // Sleep the spin
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                            Thread.onSpinWait();
-                        }else {
-                            // Will not delay here, as we can cause the entire UI to freeze
-                        }
-                    }
-                    StatusBarNotification[] notifs = getActiveNotifications();
-                    for (StatusBarNotification notif : notifs)
-                        onNotificationPosted(notif);
-                }, 500);
+            if ("refresh".equals(intent.getStringExtra("command"))) {
+                if (listenerConnected) {
+                    // Give freshly posted notifications a moment to settle, then
+                    // push them from the main thread.
+                    new Handler(Looper.getMainLooper())
+                            .postDelayed(NLService.this::pushActiveNotifications, 500);
+                } else {
+                    // Defer until the listener connects instead of busy-waiting,
+                    // which previously froze the main thread (ANR).
+                    refreshPending = true;
+                }
             }
         }
     }

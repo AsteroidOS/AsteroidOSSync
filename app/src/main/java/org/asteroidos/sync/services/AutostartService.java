@@ -22,6 +22,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 
 import org.asteroidos.sync.MainActivity;
 
@@ -36,7 +37,15 @@ public class AutostartService extends BroadcastReceiver {
 
             if (defaultDevMacAddr.length() > 0) {
                 Intent mSyncServiceIntent = new Intent(context, SynchronizationService.class);
-                context.startService(mSyncServiceIntent);
+                // On Android 8+ a background context (such as a boot broadcast)
+                // is not allowed to start a plain background service; doing so
+                // throws IllegalStateException and the watch silently never
+                // reconnects after a reboot. The service promotes itself to the
+                // foreground, so start it accordingly.
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                    context.startForegroundService(mSyncServiceIntent);
+                else
+                    context.startService(mSyncServiceIntent);
             }
         }
     }

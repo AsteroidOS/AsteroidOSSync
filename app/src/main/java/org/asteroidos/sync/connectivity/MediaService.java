@@ -76,7 +76,7 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
         mDevice = device;
         mCtx = ctx;
         device.registerCallback(AsteroidUUIDS.MEDIA_COMMANDS_CHAR, (data) -> {
-            if (data == null) return;
+            if (data == null || data.length < 1) return;
             if (mMediaController != null) {
                 boolean isPoweramp = mSettings.getString(PREFS_MEDIA_CONTROLLER_PACKAGE, PREFS_MEDIA_CONTROLLER_PACKAGE_DEFAULT)
                         .equals(PowerampAPI.PACKAGE_NAME);
@@ -115,7 +115,7 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
                         }
                         break;
                     case MEDIA_COMMAND_VOLUME:
-                        if (mMediaController.getPlaybackInfo() != null) {
+                        if (data.length >= 2 && mMediaController.getPlaybackInfo() != null) {
                             if (data[1] != mVolume) {
                                 int delta = Math.abs(mVolume - data[1]);
                                 int deviceDelta = 100 / mMediaController.getPlaybackInfo().getMaxVolume();
@@ -200,15 +200,16 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
         mDevice.send(AsteroidUUIDS.MEDIA_VOLUME_CHAR, data, MediaService.this);
     }
 
-    private final ContentObserver mVolumeChangeObserver = new ContentObserver(new Handler()) {
+    private final ContentObserver mVolumeChangeObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
         // The last value of volume send to the watch.
         private int reportedVolume;
 
         @Override
         public void onChange(boolean selfChange) {
             super.onChange(selfChange);
-            if (mMediaController != null && mMediaController.getPlaybackInfo() != null) {
-                int vol = (100 * mMediaController.getPlaybackInfo().getCurrentVolume()) / mMediaController.getPlaybackInfo().getMaxVolume();
+            MediaController.PlaybackInfo info = mMediaController != null ? mMediaController.getPlaybackInfo() : null;
+            if (info != null && info.getMaxVolume() > 0) {
+                int vol = (100 * info.getCurrentVolume()) / info.getMaxVolume();
 
                 if (reportedVolume != vol) {
                     reportedVolume = vol;
@@ -269,8 +270,12 @@ public class MediaService implements IConnectivityService,  MediaSessionManager.
                         getTextAsBytes(metadata, MediaMetadata.METADATA_KEY_TITLE),
                         MediaService.this);
 
-                mVolume = (100 * mMediaController.getPlaybackInfo().getCurrentVolume()) / mMediaController.getPlaybackInfo().getMaxVolume();
-                sendVolume(mVolume);
+                MediaController controller = mMediaController;
+                MediaController.PlaybackInfo info = controller != null ? controller.getPlaybackInfo() : null;
+                if (info != null && info.getMaxVolume() > 0) {
+                    mVolume = (100 * info.getCurrentVolume()) / info.getMaxVolume();
+                    sendVolume(mVolume);
+                }
             }
         }
 

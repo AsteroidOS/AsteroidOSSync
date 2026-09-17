@@ -22,6 +22,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +44,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     public final ParcelUuid asteroidUUID = fromString(AsteroidUUIDS.SERVICE_UUID.toString());
     Messenger mSyncServiceMessenger;
     ActivityResultLauncher<Intent> mLocationEnableActivityLauncher;
+    ActivityResultLauncher<Intent> mBtEnableLauncher;
     LocationManager mLocationManager;
     /* Synchronization service events handling */
     private final ServiceConnection mConnection = new ServiceConnection() {
@@ -116,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             mListFragment.deviceDiscovered(result.getDevice());
             if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    ActivityCompat.requestPermissions(getParent(), new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 225);
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 225);
                 }
                 return;
             }
@@ -128,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     private Fragment mPreviousFragment;
     private BluetoothLeScannerCompat mScanner;
     private SharedPreferences mPrefs;
+    private OnBackPressedCallback mBackCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,6 +157,17 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> btEnableAndScan()
         );
+        mBtEnableLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> btEnableAndScan()
+        );
+        mBackCallback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                handleBack();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, mBackCallback);
         btEnable();
 
         /* Start and/or attach to the Synchronization Service */
@@ -271,13 +286,12 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId() == android.R.id.home)
-            onBackPressed();
+            getOnBackPressedDispatcher().onBackPressed();
 
         return (super.onOptionsItemSelected(menuItem));
     }
 
-    @Override
-    public void onBackPressed() {
+    private void handleBack() {
         FragmentManager fm = getSupportFragmentManager();
         if (fm.getBackStackEntryCount() > 0) {
             fm.popBackStack();
@@ -285,15 +299,19 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
             ActionBar ab = getSupportActionBar();
             if (ab != null)
                 ab.setDisplayHomeAsUpEnabled(false);
-        } else
-            finish();
-        try {
-            mDetailFragment = (DeviceDetailFragment) mPreviousFragment;
-        } catch (ClassCastException ignored1) {
             try {
-                mListFragment = (DeviceListFragment) mPreviousFragment;
-            } catch (ClassCastException ignored2) {
+                mDetailFragment = (DeviceDetailFragment) mPreviousFragment;
+            } catch (ClassCastException ignored1) {
+                try {
+                    mListFragment = (DeviceListFragment) mPreviousFragment;
+                } catch (ClassCastException ignored2) {
+                }
             }
+        } else {
+            // Nothing left on the back stack: hand control back to the platform
+            // default (finishing the activity) via the dispatcher.
+            mBackCallback.setEnabled(false);
+            getOnBackPressedDispatcher().onBackPressed();
         }
     }
 
@@ -378,16 +396,19 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
     }
 
     private void btEnable() {
-        BluetoothAdapter mBtAdapter;
-        mBtAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (!mBtAdapter.isEnabled()) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    ActivityCompat.requestPermissions(getParent(), new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 225);
-                }
+        BluetoothManager btManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        BluetoothAdapter btAdapter = btManager != null ? btManager.getAdapter() : null;
+        if (btAdapter == null) return; // device has no Bluetooth
+        if (!btAdapter.isEnabled()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 225);
                 return;
             }
-            mBtAdapter.enable();
+            // BluetoothAdapter.enable() is deprecated and a no-op since Android
+            // 13 (apps can no longer silently toggle Bluetooth), so ask the user
+            // to enable it instead.
+            mBtEnableLauncher.launch(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE));
         }
     }
 
@@ -445,9 +466,10 @@ public class MainActivity extends AppCompatActivity implements DeviceListFragmen
                 break;
         }
 
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(getIntent());
+        // Recreate the activity to apply the new theme. This is the modern
+        // equivalent of the previous finish()/startActivity() restart and keeps
+        // the task and back stack intact instead of tearing them down.
+        recreate();
     }
 
     static private class SynchronizationHandler extends Handler {
