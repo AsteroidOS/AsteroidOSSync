@@ -11,7 +11,7 @@
     <string name="intro_slideandroidgo_title">Android Go</string>
     <string name="intro_slideerror_subtitle">อุปกรณ์นี้ไม่สนับสนุน Bluetooth Low Energy</string>
     <string name="intro_slideerror_title">สนับสนุน Bluetooth Low Energy</string>
-    <string name="intro_slide5_subtitle">หากต้องการให้แอปนี้ทำงานในพื้นหลังโปรดปิด \"การเพิ่มประสิทธิภาพแบตเตอรี่\" สำหรับ AsteroidOS Sync ในเมนูต่อไปนี้:</string>
+    <string name="intro_slide5_subtitle">เพื่อให้การสื่อสารเป็นไปอย่างต่อเนื่อง คุณสามารถอนุญาตให้แอปนี้ทำงานในเบื้องหลังได้ตลอดเวลา:</string>
     <string name="intro_slide5_title">การเพิ่มประสิทธิภาพแบตเตอรี่</string>
     <string name="intro_slide4_subtitle">ในการซิงค์การแจ้งเตือนกับนาฬิกาของคุณให้อนุญาต \"AsteroidOS Sync\" ในเมนูต่อไปนี้:</string>
     <string name="intro_slide4_title">การแจ้งเตือน</string>
@@ -31,7 +31,7 @@
     <string name="weather_icon">ไอคอนสภาพอากาศ</string>
     <string name="settings_icon">ไอคอนการตั้งค่า</string>
     <string name="finder_icon">ไอคอน Finder</string>
-    <string name="intro_phonestateslide_subtitle">เพื่อแสดงสายเรียกเข้าบนนาฬิกาและสำหรับแสดงชื่อของผู้โทร</string>
+    <string name="intro_phonestateslide_subtitle">เพื่อแสดงสายเรียกเข้าบนนาฬิกา</string>
     <string name="show_calls_on_watch">แสดงสายเรียกเข้า</string>
     <string name="title_activity_settings_activity">การตั้งค่า</string>
     <string name="position_indicator">ตัวบ่งชี้ตำแหน่ง</string>
@@ -40,7 +40,7 @@
     <string name="scanning">กำลังสแกน…</string>
     <string name="intro_phonestateslide_title">โทรศัพท์และที่อยู่ติดต่อ</string>
     <string name="intro_slide2_title">การเข้าถึงไฟล์</string>
-    <string name="intro_slide1_subtitle">แอพนี้ให้คุณซิงค์โทรศัพท์ Android กับนาฬิกา AsteroidOS แต่ก่อนอื่นต้องมีการอนุญาต</string>
+    <string name="intro_slide1_subtitle">แอพนี้จะเชื่อมต่ออุปกรณ์เข้ากับนาฬิกา AsteroidOS ของคุณ โดยจำเป็นต้องได้รับสิทธิ์การเข้าถึงบางประการก่อน</string>
     <string name="intro_slide1_title">ยินดีต้อนรับ</string>
     <string name="app_icon">ไอคอนแอปพลิเคชัน</string>
     <string name="use_this_area">ใช้พื้นที่นี้สำหรับสภาพอากาศ</string>
@@ -74,6 +74,6 @@
     <string name="apply">นำไปใช้</string>
     <string name="cancel">ยกเลิก</string>
     <string name="OWM_API_KEY">คีย์ OWM API</string>
-    <string name="intro_slide6_title">การแจ้งเตือนโทรศัพท์</string>
+    <string name="intro_slide6_title">การแจ้งเตือนโทรศัพท์/อุปกรณ์</string>
     <string name="intro_slide6_subtitle">เพื่อแสดงสถานะการเชื่อมต่อปัจจุบันของนาฬิกา</string>
 </resources>
