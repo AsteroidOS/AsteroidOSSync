@@ -18,6 +18,7 @@
 
 package org.asteroidos.sync.connectivity;
 
+import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -25,11 +26,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.os.Handler;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import org.asteroidos.sync.asteroid.IAsteroidDevice;
 import org.asteroidos.sync.services.GPSTracker;
@@ -59,7 +64,7 @@ public class WeatherService implements IConnectivityService {
     public static final String PREFS_ZOOM = "zoom";
     public static final float PREFS_ZOOM_DEFAULT = (float) 7.0;
     public static final String PREFS_SYNC_WEATHER = "syncWeather";
-    public static final boolean PREFS_SYNC_WEATHER_DEFAULT = false;
+    public static final boolean PREFS_SYNC_WEATHER_DEFAULT = true;
     public static final String WEATHER_SYNC_INTENT = "org.asteroidos.sync.WEATHER_SYNC_REQUEST_LISTENER";
 
     private final IAsteroidDevice mDevice;
@@ -98,9 +103,10 @@ public class WeatherService implements IConnectivityService {
             IntentFilter filter = new IntentFilter();
             filter.addAction(WEATHER_SYNC_INTENT);
 
-            mCtx.registerReceiver(mSReceiver, filter);
+            ContextCompat.registerReceiver(mCtx, mSReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
             // Fire update intent every 30 Minutes to update Weather
             Intent alarmIntent = new Intent(WEATHER_SYNC_INTENT);
+            alarmIntent.setPackage(mCtx.getPackageName());
             mAlarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
             mAlarmMgr = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
             mAlarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
@@ -121,12 +127,47 @@ public class WeatherService implements IConnectivityService {
             if (mAlarmMgr != null) {
                 mAlarmMgr.cancel(mAlarmPendingIntent);
             }
+            // Release the location listener; otherwise a pending single-update
+            // request outlives the disconnect.
+            if (mGPS != null) {
+                mGPS.stopUsingGPS();
+                mGPS = null;
+            }
             mSReceiver = null;
         }
 
     }
 
+    /**
+     * Best-effort current location from the cached last-known fix of every
+     * enabled provider. The app already holds location permission for BLE
+     * scanning, so this lets weather default to where the user actually is.
+     * Returns null if permission is missing or no fix is cached.
+     */
+    @Nullable
+    public static Location getLastKnownLocation(Context ctx) {
+        if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            return null;
+        LocationManager lm = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
+        if (lm == null)
+            return null;
+        Location best = null;
+        try {
+            for (String provider : lm.getProviders(true)) {
+                Location location = lm.getLastKnownLocation(provider);
+                if (location == null)
+                    continue;
+                if (best == null || location.getTime() > best.getTime())
+                    best = location;
+            }
+        } catch (SecurityException ignored) {
+        }
+        return best;
+    }
+
     private void updateWeather() {
+        boolean persistLocation = true;
         if (mSettings.getBoolean(PREFS_SYNC_WEATHER, PREFS_SYNC_WEATHER_DEFAULT)) {
             if (mGPS == null) {
                 mGPS = new GPSTracker(mCtx);
@@ -134,15 +175,22 @@ public class WeatherService implements IConnectivityService {
             // Check if GPS enabled
             mGPS.updateLocation();
             if (mGPS.canGetLocation()) {
-                mLatitude = (float) mGPS.getLatitude();
-                mLongitude = (float) mGPS.getLongitude();
+                float latitude = (float) mGPS.getLatitude();
+                float longitude = (float) mGPS.getLongitude();
                 mGPS.gotLocation();
-                if(isNearNull(mLatitude) && isNearNull(mLongitude) ) {
-                    // We don't have a valid Location yet
-                    // Use the old location until we have a new one, recheck in 2 Minutes
-                    Handler handler = new Handler();
-                    handler.postDelayed(this::updateWeather, 1000 * 60 * 2);
-                    return;
+                if (!isNearNull(latitude) || !isNearNull(longitude)) {
+                    mLatitude = latitude;
+                    mLongitude = longitude;
+                } else {
+                    // The single-update fix never arrives while we only run as a connectedDevice
+                    // foreground service (background for location on Android 10+).
+                    Location lastKnown = getLastKnownLocation(mCtx);
+                    if (lastKnown != null) {
+                        mLatitude = (float) lastKnown.getLatitude();
+                        mLongitude = (float) lastKnown.getLongitude();
+                    } else {
+                        Log.w("WeatherService", "No location fix yet, reusing the last synced one");
+                    }
                 }
             }
             // } else {
@@ -154,15 +202,32 @@ public class WeatherService implements IConnectivityService {
                 mGPS.stopUsingGPS();
                 mGPS = null;
             }
-            mLatitude = mSettings.getFloat(PREFS_LATITUDE, PREFS_LATITUDE_DEFAULT);
-            mLongitude = mSettings.getFloat(PREFS_LONGITUDE, PREFS_LONGITUDE_DEFAULT);
+            if (mSettings.contains(PREFS_LATITUDE) && mSettings.contains(PREFS_LONGITUDE)) {
+                mLatitude = mSettings.getFloat(PREFS_LATITUDE, PREFS_LATITUDE_DEFAULT);
+                mLongitude = mSettings.getFloat(PREFS_LONGITUDE, PREFS_LONGITUDE_DEFAULT);
+            } else {
+                // No location picked yet: default to the device's current location
+                // instead of a hard-coded city. Don't persist it, so weather keeps
+                // following the device until the user explicitly picks a location.
+                Location location = getLastKnownLocation(mCtx);
+                if (location != null) {
+                    mLatitude = (float) location.getLatitude();
+                    mLongitude = (float) location.getLongitude();
+                } else {
+                    mLatitude = PREFS_LATITUDE_DEFAULT;
+                    mLongitude = PREFS_LONGITUDE_DEFAULT;
+                }
+                persistLocation = false;
+            }
         }
         updateWeather(mLatitude, mLongitude);
 
-        SharedPreferences.Editor editor = mSettings.edit();
-        editor.putFloat(WeatherService.PREFS_LATITUDE, mLatitude);
-        editor.putFloat(WeatherService.PREFS_LONGITUDE, mLongitude);
-        editor.apply();
+        if (persistLocation) {
+            SharedPreferences.Editor editor = mSettings.edit();
+            editor.putFloat(WeatherService.PREFS_LATITUDE, mLatitude);
+            editor.putFloat(WeatherService.PREFS_LONGITUDE, mLongitude);
+            editor.apply();
+        }
     }
 
     private boolean isNearNull(float coord) {

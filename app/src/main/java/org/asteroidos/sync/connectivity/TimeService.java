@@ -28,6 +28,8 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.SystemClock;
 
+import androidx.core.content.ContextCompat;
+
 import org.asteroidos.sync.asteroid.IAsteroidDevice;
 import org.asteroidos.sync.utils.AsteroidUUIDS;
 
@@ -71,10 +73,11 @@ public class TimeService implements IConnectivityService, SharedPreferences.OnSh
             filter.addAction(TIME_SYNC_INTENT);
             filter.addAction(Intent.ACTION_TIME_CHANGED);
             filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-            mCtx.registerReceiver(mSReceiver, filter);
+            ContextCompat.registerReceiver(mCtx, mSReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
 
             // register an alarm to sync the time once a day
             Intent alarmIntent = new Intent(TIME_SYNC_INTENT);
+            alarmIntent.setPackage(mCtx.getPackageName());
             alarmPendingIntent = PendingIntent.getBroadcast(mCtx, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE);
             alarmMgr = (AlarmManager) mCtx.getSystemService(Context.ALARM_SERVICE);
             alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
