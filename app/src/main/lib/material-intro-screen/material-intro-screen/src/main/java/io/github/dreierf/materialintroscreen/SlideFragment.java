@@ -146,6 +146,14 @@ public class SlideFragment extends ParallaxFragment {
             }
         }
 
+        // Keep coarse location in the request even if it was already granted:
+        // Android 12+ also requires it when upgrading from approximate to precise.
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S
+                && notGrantedPermissions.contains(android.Manifest.permission.ACCESS_FINE_LOCATION)
+                && !notGrantedPermissions.contains(android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            notGrantedPermissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+
         String[] permissionsToGrant = removeEmptyAndNullStrings(notGrantedPermissions);
         ActivityCompat.requestPermissions(getActivity(), permissionsToGrant, PERMISSIONS_REQUEST_CODE);
     }

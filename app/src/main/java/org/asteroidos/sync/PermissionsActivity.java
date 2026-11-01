@@ -85,6 +85,8 @@ public class PermissionsActivity extends MaterialIntroActivity {
                 }
 
                 ArrayList<String> permissions = new ArrayList<>();
+                // Android 12+ requires coarse and fine location to be requested together.
+                permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
                 permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
 
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
