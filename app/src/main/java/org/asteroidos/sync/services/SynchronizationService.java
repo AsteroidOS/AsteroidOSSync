@@ -134,8 +134,9 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
         Log.d(TAG, "handleSetDevice: " + device.toString());
         editor.putString(MainActivity.PREFS_DEFAULT_MAC_ADDR, device.getAddress());
         mDevice = device;
+        String name = null;
         try {
-            String name = mDevice.getName();
+            name = mDevice.getName();
             Message answer = Message.obtain(null, MSG_SET_LOCAL_NAME);
             answer.obj = name;
             replyTo.send(answer);
