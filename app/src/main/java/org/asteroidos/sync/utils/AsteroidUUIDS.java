@@ -59,7 +59,7 @@ public class AsteroidUUIDS {
     public static final UUID NOTIFICATION_UPDATE_CHAR   = UUID.fromString("00009001-0000-0000-0000-00A57E401D05");
     public static final UUID NOTIFICATION_FEEDBACK_CHAR = UUID.fromString("00009002-0000-0000-0000-00A57E401D05");
 
-    // Find Phone Service (High Hex range to avoid future upstream collision)
+    // Find Phone Service
     public static final UUID FINDPHONE_SERVICE_UUID     = UUID.fromString("0000F071-0000-0000-0000-00A57E401D05");
     public static final UUID FINDPHONE_RING_CHAR        = UUID.fromString("0000F001-0000-0000-0000-00A57E401D05");
 }
