@@ -51,6 +51,7 @@ import org.asteroidos.sync.connectivity.MediaService;
 import org.asteroidos.sync.connectivity.NotificationService;
 import org.asteroidos.sync.connectivity.ScreenshotService;
 import org.asteroidos.sync.connectivity.SilentModeService;
+import org.asteroidos.sync.connectivity.FindPhoneService;
 import org.asteroidos.sync.connectivity.TimeService;
 import org.asteroidos.sync.connectivity.WeatherService;
 
@@ -285,6 +286,7 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
             registerBleService(new WeatherService(getApplicationContext(), this));
             registerBleService(new ScreenshotService(getApplicationContext(), this));
             registerBleService(new TimeService(getApplicationContext(), this));
+            registerBleService(new FindPhoneService(getApplicationContext(), this));
         }
 
         handleConnect();
