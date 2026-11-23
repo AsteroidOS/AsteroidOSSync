@@ -49,7 +49,7 @@
     <string name="intro_slide4_title">Notificaciones</string>
     <string name="intro_slide4_subtitle">Para sincronizar notificaciones con tu reloj, activa \"AsteroidOS Sync\" en el siguiente menú:</string>
     <string name="intro_slide5_title">Optimización de la batería</string>
-    <string name="intro_slide5_subtitle">Para permitir que esta aplicación se ejecute en segundo plano, desactiva la \"Optimización de batería\" para AsteroidOS Sync en el siguiente menú:</string>
+    <string name="intro_slide5_subtitle">para asegurar la comunicación, permita que esta app funcione siempre en segundo plano:</string>
     <string name="intro_slideerror_title">Soporte para Bluetooth Low Energy</string>
     <string name="intro_slideerror_subtitle">Este dispositivo no soporta Bluetooth Low Energy.</string>
     <string name="grant_permission">Otorgar permiso</string>
