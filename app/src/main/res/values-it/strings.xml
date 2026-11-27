@@ -11,6 +11,7 @@
     <string name="connected">Connesso</string>
     <string name="connecting">Collegamento in corso…</string>
     <string name="connected_formatted">Connesso a %s</string>
+    <string name="connected_battery_formatted">Connesso a %1$s (batteria %2$d%%)</string>
     <string name="connecting_formatted">Mi sto collegando con %s</string>
     <string name="connected_icon">Icona connessa</string>
     <string name="battery_info_icon">Icona stato batteria</string>

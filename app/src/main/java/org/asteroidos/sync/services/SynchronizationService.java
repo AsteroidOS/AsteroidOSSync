@@ -78,7 +78,7 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
     final Messenger mMessenger = new Messenger(new SynchronizationHandler(this));
     private final int NOTIFICATION = 2725;
     public BluetoothDevice mDevice;
-    public int batteryPercentage = 0;
+    public int batteryPercentage = -1;
     HashMap<UUID, IConnectivityService> bleServices;
     List<IService> nonBleServices;
     private NotificationManager mNM;
@@ -130,6 +130,7 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
     }
 
     final void handleSetDevice(BluetoothDevice device) {
+        batteryPercentage = -1;
         SharedPreferences.Editor editor = mPrefs.edit();
         Log.d(TAG, "handleSetDevice: " + device.toString());
         editor.putString(MainActivity.PREFS_DEFAULT_MAC_ADDR, device.getAddress());
@@ -241,6 +242,7 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
 
     @Override
     public final void onDeviceDisconnected(@NonNull BluetoothDevice device, int reason) {
+        batteryPercentage = -1;
         mState = ConnectionState.STATUS_DISCONNECTED;
         updateNotification();
         unsyncServices();
@@ -298,13 +300,21 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
 
     private void updateNotification() {
         handleUpdateConnectionStatus();
+        showNotification();
+    }
+
+    private void showNotification() {
         String status = getString(R.string.disconnected);
         if (mDevice != null) {
             try {
                 if (mState == ConnectionState.STATUS_CONNECTING)
                     status = getString(R.string.connecting_formatted, mDevice.getName());
-                else if (mState == ConnectionState.STATUS_CONNECTED)
-                    status = getString(R.string.connected_formatted, mDevice.getName());
+                else if (mState == ConnectionState.STATUS_CONNECTED) {
+                    if (batteryPercentage >= 0)
+                        status = getString(R.string.connected_battery_formatted, mDevice.getName(), batteryPercentage);
+                    else
+                        status = getString(R.string.connected_formatted, mDevice.getName());
+                }
             } catch (SecurityException e) {
                 e.printStackTrace();
             }
@@ -321,6 +331,7 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
                     .setContentText(status)
                     .setContentIntent(contentIntent)
                     .setOngoing(true)
+                    .setOnlyAlertOnce(true)
                     .setPriority(Notification.PRIORITY_MIN)
                     .setShowWhen(false)
                     .build();
@@ -343,11 +354,13 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
 
     @Override
     public void onDeviceConnecting(@NonNull BluetoothDevice device) {
+        batteryPercentage = -1;
         mState = ConnectionState.STATUS_CONNECTING;
         updateNotification();
     }
 
     private void handleUnSetDevice() {
+        batteryPercentage = -1;
         SharedPreferences.Editor editor = mPrefs.edit();
         if (mState != ConnectionState.STATUS_DISCONNECTED) {
             mBleMngr.disconnect().enqueue();
@@ -360,8 +373,13 @@ public class SynchronizationService extends Service implements IAsteroidDevice, 
     }
 
     public void handleUpdateBatteryPercentage(AsteroidBleManager.BatteryLevelEvent battery) {
+        if (battery.battery < 0 || battery.battery > 100) return;
         Log.d(TAG, "handleBattery: " + battery.battery + "%");
+        boolean changed = batteryPercentage != battery.battery;
         batteryPercentage = battery.battery;
+        // Do not broadcast connection status here: MainActivity responds to it
+        // by requesting the cached battery value, which would create a loop.
+        if (changed && mState == ConnectionState.STATUS_CONNECTED) showNotification();
         try {
             if (replyTo != null)
                 replyTo.send(Message.obtain(null, MSG_SET_BATTERY_PERCENTAGE, batteryPercentage, 0));
