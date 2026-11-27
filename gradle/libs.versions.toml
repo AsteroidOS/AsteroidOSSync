@@ -1,0 +1,32 @@
+[versions]
+agp = "8.5.2"
+appcompat = "1.7.0"
+cardview = "1.0.0"
+material = "1.12.0"
+retrofit = "2.11.0"
+okhttpLogging = "4.12.0"
+gson = "2.11.0"
+osmdroid = "6.1.20"
+# Nordic BLE libraries are intentionally pinned: the connection lifecycle was
+# carefully tuned against these versions.
+nordicScanner = "1.6.0"
+nordicBle = "2.7.2"
+junit = "4.13.2"
+
+[libraries]
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+# Runtime dependencies of the vendored EasyWeather library
+# (see app/src/main/lib/easyweather/README.md).
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpLogging" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+osmdroid-android = { group = "org.osmdroid", name = "osmdroid-android", version.ref = "osmdroid" }
+nordic-scanner = { group = "no.nordicsemi.android.support.v18", name = "scanner", version.ref = "nordicScanner" }
+nordic-ble = { group = "no.nordicsemi.android", name = "ble", version.ref = "nordicBle" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }

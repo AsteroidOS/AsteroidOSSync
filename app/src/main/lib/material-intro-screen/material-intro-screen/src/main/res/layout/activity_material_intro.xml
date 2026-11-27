@@ -22,8 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:orientation="vertical"
-        android:paddingTop="32dp"
-        app:layout_behavior="io.github.dreierf.materialintroscreen.MoveUpBehaviour">
+        android:paddingTop="32dp">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_message"

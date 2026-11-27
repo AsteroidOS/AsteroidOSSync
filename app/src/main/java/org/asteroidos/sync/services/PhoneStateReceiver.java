@@ -27,7 +27,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
-import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
 import org.asteroidos.sync.R;
@@ -37,57 +36,56 @@ import static android.telephony.TelephonyManager.ACTION_PHONE_STATE_CHANGED;
 
 public class PhoneStateReceiver extends BroadcastReceiver {
 
-    TelephonyManager telephony;
     public static final String PREFS_NAME = "PhoneStatePreference";
     public static final String PREF_SEND_CALL_STATE = "PhoneCallNotificationForwarding";
 
     public void onReceive(Context context, Intent intent) {
-        if (Objects.equals(intent.getAction(), ACTION_PHONE_STATE_CHANGED)){
-            CallStateService callStateService = new CallStateService(context);
-            telephony = (TelephonyManager) context
-                    .getSystemService(Context.TELEPHONY_SERVICE);
-            assert telephony != null;
-            telephony.listen(callStateService, PhoneStateListener.LISTEN_CALL_STATE);
+        if (Objects.equals(intent.getAction(), ACTION_PHONE_STATE_CHANGED)) {
+            // Read the call state straight from the broadcast extras. The
+            // previous implementation created a new PhoneStateListener on every
+            // PHONE_STATE broadcast and registered it via telephony.listen()
+            // without ever unregistering it. Because PHONE_STATE fires several
+            // times per call (ringing/offhook/idle) and the receiver instance is
+            // discarded after onReceive(), listeners accumulated, leaking and
+            // delivering duplicate ring notifications to the watch.
+            String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+            if (state == null) return;
+
+            CallStateService handler = new CallStateService(context);
+            if (TelephonyManager.EXTRA_STATE_RINGING.equals(state)) {
+                handler.startRinging(intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER));
+            } else if (TelephonyManager.EXTRA_STATE_IDLE.equals(state)
+                    || TelephonyManager.EXTRA_STATE_OFFHOOK.equals(state)) {
+                handler.stopRinging();
+            }
         }
     }
 
-    static class CallStateService extends PhoneStateListener {
+    static class CallStateService {
         private final Context context;
         private final SharedPreferences prefs;
 
         CallStateService(Context con) {
-            super();
             context = con;
             prefs = con.getSharedPreferences(PREFS_NAME, Activity.MODE_PRIVATE);
         }
 
-        @Override
-        public void onCallStateChanged(int state, String incomingNumber) {
-            switch (state) {
-                case TelephonyManager.CALL_STATE_IDLE:
-                case TelephonyManager.CALL_STATE_OFFHOOK:
-                    stopRinging();
-                    break;
-                case TelephonyManager.CALL_STATE_RINGING:
-                    startRinging(incomingNumber);
-                    break;
-            }
-        }
-
         private String getContact(String number) {
+            if (number == null) return null;
             String contact = null;
             ContentResolver cr = context.getContentResolver();
             Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
             Cursor cursor = cr.query(uri, new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME}, null, null, null);
             if (cursor != null) {
-                if(cursor.moveToFirst()) {
-                    try {
+                try {
+                    if (cursor.moveToFirst()) {
                         contact = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.PhoneLookup.DISPLAY_NAME));
-                    } catch (IllegalArgumentException e){
-                        e.printStackTrace();
                     }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } finally {
+                    cursor.close();
                 }
-                cursor.close();
             }
             return contact;
         }
@@ -109,6 +107,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
                 i.putExtra("body", number);
                 i.putExtra("vibration", "ringtone");
 
+                i.setPackage(context.getPackageName());
                 context.sendBroadcast(i);
             }
         }
@@ -117,6 +116,7 @@ public class PhoneStateReceiver extends BroadcastReceiver {
             Intent i = new Intent("org.asteroidos.sync.NOTIFICATION_LISTENER");
             i.putExtra("event", "removed");
             i.putExtra("id", 56345);
+            i.setPackage(context.getPackageName());
             context.sendBroadcast(i);
         }
     }

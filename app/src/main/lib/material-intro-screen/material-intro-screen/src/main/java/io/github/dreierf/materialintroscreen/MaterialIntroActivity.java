@@ -33,6 +33,7 @@ import io.github.dreierf.materialintroscreen.listeners.scrollListeners.ParallaxS
 import io.github.dreierf.materialintroscreen.widgets.InkPageIndicator;
 import io.github.dreierf.materialintroscreen.widgets.OverScrollViewPager;
 import io.github.dreierf.materialintroscreen.widgets.SwipeableViewPager;
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,6 +74,13 @@ public abstract class MaterialIntroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                moveBack();
+            }
+        });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
@@ -144,11 +152,6 @@ public abstract class MaterialIntroActivity extends AppCompatActivity {
         }
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @Override
-    public void onBackPressed() {
-        moveBack();
     }
 
     @Override
@@ -420,13 +423,9 @@ public abstract class MaterialIntroActivity extends AppCompatActivity {
     }
 
     private void showError(String error) {
-        Snackbar.make(coordinatorLayout, error, Snackbar.LENGTH_SHORT).setCallback(new Snackbar.Callback() {
-            @Override
-            public void onDismissed(Snackbar snackbar, int event) {
-                navigationView.setTranslationY(0f);
-                super.onDismissed(snackbar, event);
-            }
-        }).show();
+        Snackbar.make(coordinatorLayout, error, Snackbar.LENGTH_SHORT)
+                .setAnchorView(navigationView)
+                .show();
     }
 
     private Integer getBackgroundColor(int position, float positionOffset) {
