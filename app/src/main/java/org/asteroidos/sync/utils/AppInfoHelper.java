@@ -31,8 +31,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 
-import org.asteroidos.sync.R; 
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -68,24 +66,17 @@ public class AppInfoHelper
                                 pinfo.packageName, src.getHeight(), src.getWidth()));
                     }
                 } else {
-                    if (apkIcon.getIntrinsicWidth() <= 0 || apkIcon.getIntrinsicHeight() <= 0) {
-                        Log.e("BitmapDebug", "Invalid dimensions! Width or height is not positive.");
-                        // Handle the error appropriately:
-                        // - Return a default bitmap
-                        // - Skip this bitmap creation
-                        // - Throw a custom exception with more context
-                        // - etc.
-                        apkIcon = context.getResources().getDrawable(R.drawable.introslide1icon);
-                        icon = Bitmap.createBitmap(apkIcon.getIntrinsicWidth(), apkIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                        Canvas canvas = new Canvas(icon);
-                        apkIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-                        apkIcon.draw(canvas);
-                    } else {
-                        icon = Bitmap.createBitmap(apkIcon.getIntrinsicWidth(), apkIcon.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                        Canvas canvas = new Canvas(icon);
-                        apkIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-                        apkIcon.draw(canvas);
-                    }
+                    // Drawables without intrinsic dimensions (such as ColorDrawable) return -1.
+                    // Fall back to a default 48dp size to ensure valid bounds.
+                    int fallbackSize = Math.max(1, Math.round(48 * context.getResources().getDisplayMetrics().density));
+                    int width = apkIcon.getIntrinsicWidth();
+                    int height = apkIcon.getIntrinsicHeight();
+                    if (width <= 0) width = fallbackSize;
+                    if (height <= 0) height = fallbackSize;
+                    icon = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(icon);
+                    apkIcon.setBounds(0, 0, width, height);
+                    apkIcon.draw(canvas);
                 }
             } catch(ClassCastException ignored) {}
             AppInfo appInfo = new AppInfo(pinfo.packageName,
